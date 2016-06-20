@@ -1,0 +1,4 @@
+[portal]
+DBusName=org.freedesktop.impl.portal.desktop.gtk
+Interfaces=org.freedesktop.portal.FileChooser;org.freedesktop.portal.AppChooser
+UseIn=gnome
