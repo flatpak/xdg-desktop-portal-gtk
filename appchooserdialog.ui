@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <!-- interface-requires gtk+ 3.22 -->
+  <template class="AppChooserDialog" parent="GtkWindow">
+    <property name="type-hint">dialog</property>
+    <property name="resizable">0</property>
+    <child type="titlebar">
+      <object class="GtkHeaderBar" id="titlebar">
+        <property name="visible">1</property>
+        <property name="title" translatable="yes">Open With</property>
+        <child>
+          <object class="GtkButton" id="cancel_button">
+            <property name="visible">1</property>
+            <property name="label" translatable="yes">_Cancel</property>
+            <property name="use_underline">1</property>
+            <signal name="clicked" handler="button_clicked"/>
+          </object>
+          <packing>
+            <property name="pack-type">start</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="accept_button">
+            <property name="visible">1</property>
+            <property name="sensitive">0</property>
+            <property name="label" translatable="yes">_Open</property>
+            <property name="use_underline">1</property>
+            <signal name="clicked" handler="button_clicked"/>
+            <style>
+              <class name="suggested-action"/>
+            </style>
+          </object>
+          <packing>
+            <property name="pack-type">end</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkToggleButton" id="search_button">
+            <property name="visible">1</property>
+            <signal name="toggled" handler="search_toggled"/>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">1</property>
+                <property name="icon-name">edit-find-symbolic</property>
+                <property name="icon-size">1</property>
+              </object>
+            </child>
+            <style>
+              <class name="image-button"/>
+            </style>
+          </object>
+          <packing>
+            <property name="pack-type">end</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="GtkBox">
+        <property name="visible">1</property>
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkStack" id="stack">
+            <property name="visible">1</property>
+            <property name="transition-type">crossfade</property>
+            <child>
+              <object class="GtkBox">
+                <property name="visible">1</property>
+                <property name="orientation">horizontal</property>
+                <child>
+                  <object class="GtkLabel" id="heading">
+                    <property name="visible">1</property>
+                    <property name="label">Select application to open "Foo"</property>
+                    <property name="margin-top">15</property>
+                    <property name="margin-bottom">15</property>
+                    <property name="margin-start">20</property>
+                    <property name="margin-end">20</property>
+                  </object>
+                </child>
+              </object>>
+              <packing>
+                <property name="name">heading</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSearchEntry" id="search_entry">
+                <property name="visible">1</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <property name="margin-top">10</property>
+                <property name="margin-bottom">10</property>
+                <property name="margin-start">40</property>
+                <property name="margin-end">40</property>
+                <signal name="search-changed" handler="search_changed"/>
+                <signal name="stop-search" handler="stop_search"/>
+              </object>
+              <packing>
+                <property name="name">search</property>
+              </packing>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkScrolledWindow" id="scrolled_window">
+            <property name="visible">1</property>
+            <property name="expand">1</property>
+            <property name="hscrollbar-policy">never</property>
+            <property name="vscrollbar-policy">never</property>
+            <child>
+              <object class="GtkListBox" id="list">
+                <property name="visible">1</property>
+                <property name="selection-mode">none</property>
+                <signal name="row-activated" handler="row_activated"/>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

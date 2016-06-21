@@ -1,0 +1,3 @@
+row.with-border:not(:last-child) {
+  border-bottom: 1px solid alpha(black, 0.33);
+}
