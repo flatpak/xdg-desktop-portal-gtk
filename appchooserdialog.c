@@ -12,12 +12,15 @@ struct _AppChooserDialog {
   GtkWindow parent;
 
   GtkWidget *scrolled_window;
-  GtkWidget *list;
-  GtkWidget *open_button;
+  GtkWidget *titlebar;
+  GtkWidget *cancel_button;
   GtkWidget *search_button;
-  GtkWidget *more;
+  GtkWidget *accept_button;
+  GtkWidget *heading;
   GtkWidget *stack;
   GtkWidget *search_entry;
+  GtkWidget *list;
+  GtkWidget *more;
 
   GtkWidget *selected;
 };
@@ -78,7 +81,7 @@ row_activated (GtkListBox *list,
       dialog->selected = row;
       if (dialog->selected)
         app_chooser_row_set_selected (APP_CHOOSER_ROW (dialog->selected), TRUE);
-      gtk_widget_set_sensitive (dialog->open_button, dialog->selected != NULL);
+      gtk_widget_set_sensitive (dialog->accept_button, dialog->selected != NULL);
     }
 }
 
@@ -90,7 +93,7 @@ button_clicked (GtkWidget *button,
 
   gtk_widget_hide (GTK_WIDGET (dialog));
 
-  if (button == dialog->open_button && dialog->selected)
+  if (button == dialog->accept_button && dialog->selected)
     info = app_chooser_row_get_info (APP_CHOOSER_ROW (dialog->selected));
 
   g_signal_emit (dialog, signals[DONE], 0, info);
@@ -185,11 +188,14 @@ app_chooser_dialog_class_init (AppChooserDialogClass *class)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/freedesktop/portal/desktop/gtk/appchooserdialog.ui");
   gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, scrolled_window);
-  gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, list);
-  gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, open_button);
-  gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, stack);
-  gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, search_entry);
+  gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, titlebar);
+  gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, cancel_button);
   gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, search_button);
+  gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, accept_button);
+  gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, stack);
+  gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, heading);
+  gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, search_entry);
+  gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, list);
   gtk_widget_class_bind_template_callback (widget_class, row_activated);
   gtk_widget_class_bind_template_callback (widget_class, button_clicked);
   gtk_widget_class_bind_template_callback (widget_class, search_toggled);
@@ -198,7 +204,11 @@ app_chooser_dialog_class_init (AppChooserDialogClass *class)
 }
 
 AppChooserDialog *
-app_chooser_dialog_new (const char **choices)
+app_chooser_dialog_new (const char **choices,
+                        const char *cancel_label,
+                        const char *accept_label,
+                        const char *title,
+                        const char *heading)
 {
   AppChooserDialog *dialog;
   int n_choices;
@@ -216,11 +226,15 @@ app_chooser_dialog_new (const char **choices)
 
   dialog = g_object_new (app_chooser_dialog_get_type (), NULL);
 
+  gtk_button_set_label (GTK_BUTTON (dialog->cancel_button), cancel_label);
+  gtk_button_set_label (GTK_BUTTON (dialog->accept_button), accept_label);
+  gtk_header_bar_set_title (GTK_HEADER_BAR (dialog->titlebar), title);
+  gtk_label_set_label (GTK_LABEL (dialog->heading), heading);
+
   n_choices = g_strv_length ((char **)choices);
   for (i = 0; i < n_choices; i++)
     {
-      g_autofree char *desktop_id = g_strconcat (choices[i], ".desktop", NULL);
-      g_autoptr(GAppInfo) info = G_APP_INFO (g_desktop_app_info_new (desktop_id));
+      g_autoptr(GAppInfo) info = G_APP_INFO (g_desktop_app_info_new (choices[i]));
       GtkWidget *row;
 
       row = GTK_WIDGET (app_chooser_row_new (info));
