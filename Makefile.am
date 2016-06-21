@@ -26,6 +26,18 @@ servicedir = $(DBUS_SERVICE_DIR)
 service_in_files = org.freedesktop.impl.portal.desktop.gtk.service.in
 service_DATA = org.freedesktop.impl.portal.desktop.gtk.service
 
+resource_files = $(shell $(GLIB_COMPILE_RESOURCES) --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/xdg-desktop-portal-gtk.gresource.xml)
+
+resources.h: xdg-desktop-portal-gtk.gresource.xml
+	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) $< \
+		--target=$@ --sourcedir=$(srcdir) --c-name _xdg_desktop --generate-header
+
+resources.c: xdg-desktop-portal-gtk.gresource.xml
+	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) $< \
+		--target=$@ --sourcedir=$(srcdir) --c-name _xdg_desktop --generate-source
+
+EXTRA_DIST = xdg-desktop-portal-gtk.gresource.xml
+
 xdg_desktop_portal_gtk_SOURCES = \
 	xdg-desktop-portal-gtk.c	\
 	xdg-desktop-portal-gtk.h	\
@@ -33,8 +45,28 @@ xdg_desktop_portal_gtk_SOURCES = \
 	filechooser.c			\
 	appchooser.h			\
 	appchooser.c			\
+	appchooserrow.h			\
+	appchooserrow.c			\
+	appchooserdialog.h		\
+	appchooserdialog.c		\
+	resources.c			\
 	$(dbus_built_sources)		\
 	$(NULL)
 
 xdg_desktop_portal_gtk_LDADD = $(BASE_LIBS) $(GTK_LIBS)
 xdg_desktop_portal_gtk_CFLAGS = $(BASE_CFLAGS) $(GTK_CFLAGS)
+
+if FALSE
+bin_PROGRAMS = test
+
+test_SOURCES = \
+	appchooserdialog.h	\
+	appchooserdialog.c	\
+	appchooserrow.h		\
+	appchooserrow.c		\
+	resources.c		\
+	test.c
+
+test_LDADD = $(BASE_LIBS) $(GTK_LIBS)
+test_CFLAGS = $(BASE_CFLAGS) $(GTK_CFLAGS)
+endif
