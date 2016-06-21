@@ -15,6 +15,8 @@
 
 #include "xdg-desktop-portal-dbus.h"
 
+#include "appchooserdialog.h"
+
 #ifdef GDK_WINDOWING_X11
 #include <gdk/gdkx.h>
 #endif
@@ -131,13 +133,13 @@ handle_app_chooser_response (GtkDialog *dialog,
 }
 
 static gboolean
-handle_app_chooser_open_uri (XdpAppChooser *object,
-                             GDBusMethodInvocation *invocation,
-                             const gchar *arg_sender,
-                             const gchar *arg_app_id,
-                             const gchar *arg_parent_window,
-                             const gchar *arg_uri,
-                             GVariant *arg_options)
+handle_open_uri (XdpAppChooser *object,
+                 GDBusMethodInvocation *invocation,
+                 const gchar *arg_sender,
+                 const gchar *arg_app_id,
+                 const gchar *arg_parent_window,
+                 const gchar *arg_uri,
+                 GVariant *arg_options)
 {
   XdpAppChooser *chooser = XDP_APP_CHOOSER (g_dbus_method_invocation_get_user_data (invocation));
   GtkWidget *dialog;
@@ -199,12 +201,87 @@ handle_app_chooser_open_uri (XdpAppChooser *object,
   return TRUE;
 }
 
+static void
+send_response2 (AppDialogHandle *handle,
+                const char *chosen)
+{
+  GVariantBuilder opt_builder;
+
+  g_variant_builder_init (&opt_builder, G_VARIANT_TYPE_VARDICT);
+  
+  g_dbus_connection_emit_signal (g_dbus_interface_skeleton_get_connection (handle->base.skeleton),
+                                 "org.freedesktop.portal.Desktop",
+                                 "/org/freedesktop/portal/desktop",
+                                 "org.freedesktop.portal.AppChooser",
+                                 "ChooseApplicationResponse",
+                                 g_variant_new ("(sous@a{sv})",
+                                                handle->base.sender,
+                                                handle->base.id,
+                                                handle->response,
+                                                chosen,
+                                                g_variant_builder_end (&opt_builder)),
+                                 NULL);
+
+  app_dialog_handle_close (handle);
+}
+
+static void
+handle_app_chooser_done (GtkDialog *dialog,
+                         GAppInfo *info,
+                         gpointer data)
+{
+  AppDialogHandle *handle = data;
+  char *chosen;
+
+  if (info != NULL)
+    {
+      handle->response = 0;
+      chosen = g_strdup (g_app_info_get_id (info));
+      if (g_str_has_suffix (chosen, ".desktop"))
+        chosen[strlen(chosen) - strlen (".desktop")] = 0;
+    }
+  else
+    {
+      handle->response = 1;
+      chosen = g_strdup ("");
+    }
+
+  send_response2 (handle, chosen);
+  g_free (chosen);
+}
+
 static gboolean
-handle_app_chooser_close (XdpAppChooser *object,
+handle_choose_application (XdpAppChooser *object,
                            GDBusMethodInvocation *invocation,
-                           const gchar *arg_sender,
-                           const gchar *arg_app_id,
-                           const gchar *arg_handle)
+                           const char *arg_sender,
+                           const char *arg_app_id,
+                           const char *arg_parent_window,
+                           const char **choices,
+                           GVariant *arg_options)
+{
+  XdpAppChooser *chooser = XDP_APP_CHOOSER (g_dbus_method_invocation_get_user_data (invocation));
+  GtkWidget *dialog;
+  AppDialogHandle *handle;
+
+  dialog = GTK_WIDGET (app_chooser_dialog_new (choices));
+
+  handle = app_dialog_handle_new (arg_app_id, arg_sender, dialog, G_DBUS_INTERFACE_SKELETON (object));
+
+  g_signal_connect (dialog, "done", G_CALLBACK (handle_app_chooser_done), handle);
+
+  gtk_window_present (GTK_WINDOW (dialog));
+
+  xdp_app_chooser_complete_choose_application (chooser, invocation, handle->base.id);
+
+  return TRUE;
+}
+
+static gboolean
+handle_close (XdpAppChooser *object,
+              GDBusMethodInvocation *invocation,
+              const gchar *arg_sender,
+              const gchar *arg_app_id,
+              const gchar *arg_handle)
 {
   AppDialogHandle *handle;
 
@@ -235,8 +312,9 @@ app_chooser_init (GDBusConnection *bus,
 
   helper = G_DBUS_INTERFACE_SKELETON (xdp_app_chooser_skeleton_new ());
 
-  g_signal_connect (helper, "handle-open-uri", G_CALLBACK (handle_app_chooser_open_uri), NULL);
-  g_signal_connect (helper, "handle-close", G_CALLBACK (handle_app_chooser_close), NULL);
+  g_signal_connect (helper, "handle-open-uri", G_CALLBACK (handle_open_uri), NULL);
+  g_signal_connect (helper, "handle-choose-application", G_CALLBACK (handle_choose_application), NULL);
+  g_signal_connect (helper, "handle-close", G_CALLBACK (handle_close), NULL);
 
 
   if (!g_dbus_interface_skeleton_export (helper,
