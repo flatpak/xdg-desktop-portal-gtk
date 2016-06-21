@@ -24,6 +24,7 @@
 #include "xdg-desktop-portal-gtk.h"
 #include "filechooser.h"
 #include "appchooser.h"
+#include "print.h"
 
 
 static GMainLoop *loop = NULL;
@@ -65,6 +66,12 @@ on_bus_acquired (GDBusConnection *connection,
     }
 
   if (!app_chooser_init (connection, &error))
+    {
+      g_warning ("error: %s\n", error->message);
+      g_clear_error (&error);
+    }
+
+  if (!print_init (connection, &error))
     {
       g_warning ("error: %s\n", error->message);
       g_clear_error (&error);

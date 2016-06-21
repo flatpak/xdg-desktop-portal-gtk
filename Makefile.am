@@ -17,6 +17,7 @@ $(dbus_built_sources): Makefile.am
 	--generate-c-code xdg-desktop-portal-dbus		\
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.FileChooser.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.AppChooser.xml \
+	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Print.xml \
 	$(NULL)
 
 %.service: %.service.in config.log
@@ -50,6 +51,8 @@ xdg_desktop_portal_gtk_SOURCES = \
 	appchooserdialog.h		\
 	appchooserdialog.c		\
 	resources.c			\
+	print.h				\
+	print.c				\
 	$(dbus_built_sources)		\
 	$(NULL)
 
