@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<gresources>
+  <gresource prefix='/org/freedesktop/portal/desktop/gtk'>
+    <file>appchooserdialog.ui</file>
+    <file>appchooserrow.ui</file>
+    <file>appchooserdialog.css</file>
+  </gresource>
+</gresources>
+
