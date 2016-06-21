@@ -245,5 +245,7 @@ app_chooser_init (GDBusConnection *bus,
                                          error))
     return FALSE;
 
+  g_debug ("providing %s", g_dbus_interface_skeleton_get_info (helper)->name);
+
   return TRUE;
 }
