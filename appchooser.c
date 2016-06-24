@@ -130,6 +130,8 @@ handle_choose_application (XdpAppChooser *object,
   const char *accept_label;
   const char *title;
   const char *heading;
+  const char *latest_chosen_id;
+  gint latest_chosen_count;
 
   if (!g_variant_lookup (arg_options, "cancel_label", "&s", &cancel_label))
     cancel_label = "_Cancel";
@@ -139,8 +141,10 @@ handle_choose_application (XdpAppChooser *object,
     title = "Open With";
   if (!g_variant_lookup (arg_options, "heading", "&s", &heading))
     heading = "Select application";
+  if (!g_variant_lookup (arg_options, "latest-choice", "&s", &latest_chosen_id))
+    latest_chosen_id = NULL;
 
-  dialog = GTK_WIDGET (app_chooser_dialog_new (choices, cancel_label, accept_label, title, heading));
+  dialog = GTK_WIDGET (app_chooser_dialog_new (choices, latest_chosen_id, cancel_label, accept_label, title, heading));
 
   handle = app_dialog_handle_new (arg_app_id, arg_sender, dialog, G_DBUS_INTERFACE_SKELETON (object));
 
