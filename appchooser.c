@@ -131,10 +131,8 @@ handle_choose_application (XdpAppChooser *object,
   const char *title;
   const char *heading;
 
-  if (!g_variant_lookup (arg_options, "cancel_label", "&s", &cancel_label))
-    cancel_label = "_Cancel";
   if (!g_variant_lookup (arg_options, "accept_label", "&s", &accept_label))
-    accept_label = "_Open";
+    accept_label = "_Select";
   if (!g_variant_lookup (arg_options, "title", "&s", &title))
     title = "Open With";
   if (!g_variant_lookup (arg_options, "heading", "&s", &heading))
