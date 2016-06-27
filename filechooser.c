@@ -266,6 +266,8 @@ handle_file_chooser_open (XdpFileChooser *object,
   if (!g_variant_lookup (arg_options, "accept_label", "&s", &accept_label))
     accept_label = "_Open";
 
+  cancel_label = "_Cancel";
+
   dialog = gtk_file_chooser_dialog_new (arg_title, GTK_WINDOW (fake_parent), action,
                                         cancel_label, GTK_RESPONSE_CANCEL,
                                         accept_label, GTK_RESPONSE_OK,
