@@ -263,8 +263,6 @@ handle_file_chooser_open (XdpFileChooser *object,
   else if (strcmp (method_name, "OpenFiles") == 0)
     multiple = TRUE;
 
-  if (!g_variant_lookup (arg_options, "cancel_label", "&s", &cancel_label))
-    cancel_label = "_Cancel";
   if (!g_variant_lookup (arg_options, "accept_label", "&s", &accept_label))
     accept_label = "_Open";
 
@@ -289,16 +287,19 @@ handle_file_chooser_open (XdpFileChooser *object,
         }
       g_variant_iter_free (iter);
     }
-  if (g_variant_lookup (arg_options, "current_name", "&s", &current_name))
-    gtk_file_chooser_set_current_name (GTK_FILE_CHOOSER (dialog), current_name);
-  /* TODO: is this useful ?
-   * In a sandboxed situation, the current folder and current file
-   * are likely in the fuse filesystem
-   */
-  if (g_variant_lookup (arg_options, "current_folder", "&ay", &path))
-    gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dialog), path);
-  if (g_variant_lookup (arg_options, "current_file", "&ay", &path))
-    gtk_file_chooser_select_filename (GTK_FILE_CHOOSER (dialog), path);
+  if (strcmp (method_name, "SaveFile") == 0)
+    {
+      if (g_variant_lookup (arg_options, "current_name", "&s", &current_name))
+        gtk_file_chooser_set_current_name (GTK_FILE_CHOOSER (dialog), current_name);
+      /* TODO: is this useful ?
+       * In a sandboxed situation, the current folder and current file
+       * are likely in the fuse filesystem
+       */
+      if (g_variant_lookup (arg_options, "current_folder", "&ay", &path))
+        gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dialog), path);
+      if (g_variant_lookup (arg_options, "current_file", "&ay", &path))
+        gtk_file_chooser_select_filename (GTK_FILE_CHOOSER (dialog), path);
+    }
 
   g_object_unref (fake_parent);
 
