@@ -35,6 +35,8 @@ typedef struct {
   GSList *uris;
 
   gboolean allow_write;
+
+  GHashTable *choices;
 } FileDialogHandle;
 
 static FileDialogHandle *
@@ -51,6 +53,7 @@ dialog_handle_new (const char *app_id,
 
   handle->dialog = g_object_ref (dialog);
   handle->allow_write = TRUE;
+  handle->choices = g_hash_table_new (g_str_hash, g_str_equal);
 
   dialog_handle_register (&handle->base);
 
@@ -70,6 +73,8 @@ file_dialog_handle_free (FileDialogHandle *handle)
   g_object_unref (handle->dialog);
 
   g_slist_free_full (handle->uris, g_free);
+  g_hash_table_unref (handle->choices);
+
   g_free (handle);
 }
 
@@ -93,6 +98,23 @@ dialog_handler_emit_response (FileDialogHandle *handle,
 }
 
 static void
+add_choices (FileDialogHandle *handle,
+             GVariantBuilder *builder)
+{
+  GVariantBuilder choices;
+  GHashTableIter iter;
+  const char *id;
+  const char *selected;
+
+  g_variant_builder_init (&choices, G_VARIANT_TYPE ("a(ss)"));
+  g_hash_table_iter_init (&iter, handle->choices);
+  while (g_hash_table_iter_next (&iter, (gpointer *)&id, (gpointer *)&selected))
+    g_variant_builder_add (&choices, "(ss)", id, selected);
+
+  g_variant_builder_add (builder, "{sv}", "choices", g_variant_builder_end (&choices));
+}
+
+static void
 send_response (FileDialogHandle *handle)
 {
   GVariantBuilder opt_builder;
@@ -100,6 +122,9 @@ send_response (FileDialogHandle *handle)
 
   g_variant_builder_init (&opt_builder, G_VARIANT_TYPE_VARDICT);
   g_variant_builder_add (&opt_builder, "{sv}", "writable", g_variant_new_variant (g_variant_new_boolean (handle->allow_write)));
+
+  add_choices (handle, &opt_builder);
+
   options = g_variant_builder_end (&opt_builder);
 
   if (handle->action == GTK_FILE_CHOOSER_ACTION_SAVE ||
@@ -223,6 +248,89 @@ read_only_toggled (GtkToggleButton *button, gpointer user_data)
   handle->allow_write = !gtk_toggle_button_get_active (button);
 }
 
+static void
+choice_changed (GtkComboBox *combo,
+                FileDialogHandle *handle)
+{
+  const char *id;
+  const char *selected;
+
+  id = (const char *)g_object_get_data (G_OBJECT (combo), "choice-id");
+  selected = gtk_combo_box_get_active_id (combo);
+  g_hash_table_replace (handle->choices, (gpointer)id, (gpointer)selected);
+}
+
+static void
+choice_toggled (GtkToggleButton *toggle,
+                FileDialogHandle *handle)
+{
+  const char *id;
+  const char *selected;
+
+  id = (const char *)g_object_get_data (G_OBJECT (toggle), "choice-id");
+  selected = gtk_toggle_button_get_active (toggle) ? "true" : "false";
+  g_hash_table_replace (handle->choices, (gpointer)id, (gpointer)selected);
+}
+
+static GtkWidget *
+deserialize_choice (GVariant *choice,
+                    FileDialogHandle *handle)
+{
+  GtkWidget *widget;
+  const char *choice_id;
+  const char *label;
+  const char *selected;
+  GVariant *choices;
+  int i;
+
+  g_variant_get (choice, "(&s&s@a(ss)&s)", &choice_id, &label, &choices, &selected);
+
+  if (g_variant_n_children (choices) > 0)
+    {
+      GtkWidget *box;
+      GtkWidget *combo;
+
+      box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+      gtk_container_add (GTK_CONTAINER (box), gtk_label_new (label));
+
+      combo = gtk_combo_box_text_new ();
+      g_object_set_data_full (G_OBJECT (combo), "choice-id", g_strdup (choice_id), g_free);
+      gtk_container_add (GTK_CONTAINER (box), combo);
+
+      for (i = 0; i < g_variant_n_children (choices); i++)
+        {
+          const char *id;
+          const char *text;
+
+          g_variant_get_child (choices, i, "(&s&s)", &id, &text);
+          gtk_combo_box_text_append (GTK_COMBO_BOX_TEXT (combo), id, text);
+        }
+
+      if (strcmp (selected, "") == 0)
+        g_variant_get_child (choices, 0, "(&s&s)", &selected, NULL);
+
+      g_signal_connect (combo, "changed", G_CALLBACK (choice_changed), handle);
+      gtk_combo_box_set_active_id (GTK_COMBO_BOX (combo), selected);
+
+      widget = box;
+    }
+  else
+    {
+      GtkWidget *check;
+
+      check = gtk_check_button_new_with_label (label);
+      g_object_set_data_full (G_OBJECT (check), "choice-id", g_strdup (choice_id), g_free);
+      g_signal_connect (check, "toggled", G_CALLBACK (choice_toggled), handle);
+      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check), g_strcmp0 (selected, "true") == 0);
+
+      widget = check;
+    }
+
+  gtk_widget_show_all (widget);
+
+  return widget;
+}
+
 static gboolean
 handle_file_chooser_open (XdpFileChooser *object,
                           GDBusMethodInvocation *invocation,
@@ -245,6 +353,7 @@ handle_file_chooser_open (XdpFileChooser *object,
   GVariantIter *iter;
   const char *current_name;
   const char *path;
+  g_autoptr (GVariant) choices = NULL;
 
   method_name = g_dbus_method_invocation_get_method_name (invocation);
 
@@ -274,6 +383,29 @@ handle_file_chooser_open (XdpFileChooser *object,
                                         NULL);
   gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
   gtk_file_chooser_set_select_multiple (GTK_FILE_CHOOSER (dialog), multiple);
+
+  handle = dialog_handle_new (arg_app_id, arg_sender, dialog, G_DBUS_INTERFACE_SKELETON (chooser));
+
+  handle->dialog = dialog;
+  handle->action = action;
+  handle->multiple = multiple;
+
+  choices = g_variant_lookup_value (arg_options, "choices", G_VARIANT_TYPE ("a(ssa(ss)s)"));
+  if (choices)
+    {
+      int i;
+      GtkWidget *box;
+
+      box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
+      gtk_widget_show (box);
+      for (i = 0; i < g_variant_n_children (choices); i++)
+        {
+          GVariant *value = g_variant_get_child_value (choices, i);
+          gtk_container_add (GTK_CONTAINER (box), deserialize_choice (value, handle));
+        }
+
+      gtk_file_chooser_set_extra_widget (GTK_FILE_CHOOSER (dialog), box);
+    }
 
   if (g_variant_lookup (arg_options, "filters", "a(sa(us))", &iter))
     {
@@ -320,12 +452,6 @@ handle_file_chooser_open (XdpFileChooser *object,
     g_warning ("Unhandled parent window type %s\n", arg_parent_window);
 
   gtk_file_chooser_set_do_overwrite_confirmation (GTK_FILE_CHOOSER (dialog), TRUE);
-
-  handle = dialog_handle_new (arg_app_id, arg_sender, dialog, G_DBUS_INTERFACE_SKELETON (chooser));
-
-  handle->dialog = dialog;
-  handle->action = action;
-  handle->multiple = multiple;
 
   g_signal_connect (G_OBJECT (dialog), "response",
                     G_CALLBACK (handle_file_chooser_open_response), handle);
