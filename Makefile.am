@@ -1,3 +1,5 @@
+SUBDIRS = po
+
 NULL =
 
 libexec_PROGRAMS = \
@@ -42,6 +44,9 @@ resources.c: xdg-desktop-portal-gtk.gresource.xml
 
 EXTRA_DIST = xdg-desktop-portal-gtk.gresource.xml
 
+DISTCLEANFILES = \
+	$(NULL)
+
 xdg_desktop_portal_gtk_SOURCES = \
 	xdg-desktop-portal-gtk.c	\
 	xdg-desktop-portal-gtk.h	\
@@ -65,6 +70,10 @@ xdg_desktop_portal_gtk_SOURCES = \
 
 xdg_desktop_portal_gtk_LDADD = $(BASE_LIBS) $(GTK_LIBS)
 xdg_desktop_portal_gtk_CFLAGS = $(BASE_CFLAGS) $(GTK_CFLAGS)
+xdg_desktop_portal_gtk_CPPFLAGS = \
+	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\" \
+	-DLOCALEDIR=\"$(localedir)\" \
+	$(NULL)
 
 if FALSE
 bin_PROGRAMS = test
