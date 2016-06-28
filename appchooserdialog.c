@@ -205,6 +205,7 @@ app_chooser_dialog_class_init (AppChooserDialogClass *class)
 
 AppChooserDialog *
 app_chooser_dialog_new (const char **choices,
+                        const char *default_id,
                         const char *cancel_label,
                         const char *accept_label,
                         const char *title,
@@ -242,6 +243,9 @@ app_chooser_dialog_new (const char **choices,
       gtk_list_box_insert (GTK_LIST_BOX (dialog->list), row, -1);
     }
 
+  if (default_id != NULL)
+    app_chooser_dialog_set_selected (dialog, default_id);
+
   if (n_choices > 4)
     {
       GtkWidget *row;
@@ -261,4 +265,27 @@ app_chooser_dialog_new (const char **choices,
     }
 
   return dialog;
+}
+
+void
+app_chooser_dialog_set_selected (AppChooserDialog *dialog,
+                                 const char *choice_id)
+{
+  AppChooserRow *row = NULL;
+  GAppInfo *info = NULL;
+  g_autoptr(GList) choices = NULL;
+  GList *l = NULL;
+
+  choices = gtk_container_get_children (GTK_CONTAINER (dialog->list));
+  for (l = choices; l != NULL; l = g_list_next (l))
+    {
+      row = APP_CHOOSER_ROW (l->data);
+      info = app_chooser_row_get_info (row);
+
+      if (g_strcmp0 (choice_id, g_app_info_get_id (info)) == 0)
+        {
+          g_signal_emit_by_name (GTK_LIST_BOX (dialog->list), "row-activated", row, dialog);
+          break;
+        }
+    }
 }
