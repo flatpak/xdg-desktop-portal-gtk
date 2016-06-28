@@ -35,6 +35,8 @@
 #include <gio/gdesktopappinfo.h>
 #include <gio/gunixfdlist.h>
 
+#include <glib/gi18n.h>
+
 #include "xdg-desktop-portal-dbus.h"
 
 #ifdef GDK_WINDOWING_X11
@@ -393,9 +395,9 @@ handle_file_chooser_open (XdpFileChooser *object,
     multiple = TRUE;
 
   if (!g_variant_lookup (arg_options, "accept_label", "&s", &accept_label))
-    accept_label = "_Open";
+    accept_label = _("_Open");
 
-  cancel_label = "_Cancel";
+  cancel_label = _("_Cancel");
 
   dialog = gtk_file_chooser_dialog_new (arg_title, GTK_WINDOW (fake_parent), action,
                                         cancel_label, GTK_RESPONSE_CANCEL,

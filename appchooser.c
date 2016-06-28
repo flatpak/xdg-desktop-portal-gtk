@@ -33,6 +33,8 @@
 #include <gio/gdesktopappinfo.h>
 #include <gio/gunixfdlist.h>
 
+#include <glib/gi18n.h>
+
 #include "xdg-desktop-portal-dbus.h"
 
 #include "appchooserdialog.h"
@@ -154,11 +156,11 @@ handle_choose_application (XdpAppChooser *object,
   gint latest_chosen_count;
 
   if (!g_variant_lookup (arg_options, "accept_label", "&s", &accept_label))
-    accept_label = "_Select";
+    accept_label = _("_Select");
   if (!g_variant_lookup (arg_options, "title", "&s", &title))
-    title = "Open With";
+    title = _("Open With");
   if (!g_variant_lookup (arg_options, "heading", "&s", &heading))
-    heading = "Select application";
+    heading = _("Select application");
   if (!g_variant_lookup (arg_options, "latest-choice", "&s", &latest_chosen_id))
     latest_chosen_id = NULL;
 
