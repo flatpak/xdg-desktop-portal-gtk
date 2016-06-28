@@ -25,6 +25,7 @@
 #include "filechooser.h"
 #include "appchooser.h"
 #include "print.h"
+#include "screenshot.h"
 
 
 static GMainLoop *loop = NULL;
@@ -72,6 +73,12 @@ on_bus_acquired (GDBusConnection *connection,
     }
 
   if (!print_init (connection, &error))
+    {
+      g_warning ("error: %s\n", error->message);
+      g_clear_error (&error);
+    }
+
+  if (!screenshot_init (connection, &error))
     {
       g_warning ("error: %s\n", error->message);
       g_clear_error (&error);

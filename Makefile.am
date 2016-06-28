@@ -18,6 +18,8 @@ $(dbus_built_sources): Makefile.am
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.FileChooser.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.AppChooser.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Print.xml \
+	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Screenshot.xml \
+	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.gnome.Shell.Screenshot.xml \
 	$(NULL)
 
 %.service: %.service.in config.log
@@ -50,6 +52,10 @@ xdg_desktop_portal_gtk_SOURCES = \
 	appchooserrow.c			\
 	appchooserdialog.h		\
 	appchooserdialog.c		\
+	screenshot.h			\
+	screenshot.c			\
+	screenshotdialog.h		\
+	screenshotdialog.c		\
 	resources.c			\
 	print.h				\
 	print.c				\
