@@ -164,6 +164,8 @@ handle_choose_application (XdpAppChooser *object,
   if (!g_variant_lookup (arg_options, "latest-choice", "&s", &latest_chosen_id))
     latest_chosen_id = NULL;
 
+  cancel_label = _("_Cancel");
+
   dialog = GTK_WIDGET (app_chooser_dialog_new (choices, latest_chosen_id, cancel_label, accept_label, title, heading));
 
   handle = app_dialog_handle_new (arg_app_id, arg_sender, dialog, G_DBUS_INTERFACE_SKELETON (object));
