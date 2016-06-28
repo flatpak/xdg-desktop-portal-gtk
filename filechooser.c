@@ -260,43 +260,75 @@ choice_changed (GtkComboBox *combo,
   g_hash_table_replace (handle->choices, (gpointer)id, (gpointer)selected);
 }
 
+static void
+choice_toggled (GtkToggleButton *toggle,
+                FileDialogHandle *handle)
+{
+  const char *id;
+  const char *selected;
+
+  id = (const char *)g_object_get_data (G_OBJECT (toggle), "choice-id");
+  selected = gtk_toggle_button_get_active (toggle) ? "true" : "false";
+  g_hash_table_replace (handle->choices, (gpointer)id, (gpointer)selected);
+}
+
 static GtkWidget *
 deserialize_choice (GVariant *choice,
                     FileDialogHandle *handle)
 {
+  GtkWidget *widget;
   const char *choice_id;
   const char *label;
   const char *selected;
-  GtkWidget *box, *combo;
   GVariant *choices;
   int i;
 
   g_variant_get (choice, "(&s&s@a(ss)&s)", &choice_id, &label, &choices, &selected);
 
-  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
-  gtk_container_add (GTK_CONTAINER (box), gtk_label_new (label));
-  combo = gtk_combo_box_text_new ();
-  g_object_set_data_full (G_OBJECT (combo), "choice-id", g_strdup (choice_id), g_free);
-  gtk_container_add (GTK_CONTAINER (box), combo);
-
-  for (i = 0; i < g_variant_n_children (choices); i++)
+  if (g_variant_n_children (choices) > 0)
     {
-      const char *id;
-      const char *text;
+      GtkWidget *box;
+      GtkWidget *combo;
 
-      g_variant_get_child (choices, i, "(&s&s)", &id, &text);
-      gtk_combo_box_text_append (GTK_COMBO_BOX_TEXT (combo), id, text);
+      box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+      gtk_container_add (GTK_CONTAINER (box), gtk_label_new (label));
+
+      combo = gtk_combo_box_text_new ();
+      g_object_set_data_full (G_OBJECT (combo), "choice-id", g_strdup (choice_id), g_free);
+      gtk_container_add (GTK_CONTAINER (box), combo);
+
+      for (i = 0; i < g_variant_n_children (choices); i++)
+        {
+          const char *id;
+          const char *text;
+
+          g_variant_get_child (choices, i, "(&s&s)", &id, &text);
+          gtk_combo_box_text_append (GTK_COMBO_BOX_TEXT (combo), id, text);
+        }
+
+      if (strcmp (selected, "") == 0)
+        g_variant_get_child (choices, 0, "(&s&s)", &selected, NULL);
+
+      g_signal_connect (combo, "changed", G_CALLBACK (choice_changed), handle);
+      gtk_combo_box_set_active_id (GTK_COMBO_BOX (combo), selected);
+
+      widget = box;
+    }
+  else
+    {
+      GtkWidget *check;
+
+      check = gtk_check_button_new_with_label (label);
+      g_object_set_data_full (G_OBJECT (check), "choice-id", g_strdup (choice_id), g_free);
+      g_signal_connect (check, "toggled", G_CALLBACK (choice_toggled), handle);
+      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check), g_strcmp0 (selected, "true") == 0);
+
+      widget = check;
     }
 
-  if (strcmp (selected, "") == 0)
-    g_variant_get_child (choices, 0, "(&s&s)", &selected, NULL);
+  gtk_widget_show_all (widget);
 
-  g_signal_connect (combo, "changed", G_CALLBACK (choice_changed), handle);
-  gtk_combo_box_set_active_id (GTK_COMBO_BOX (combo), selected);
-
-  gtk_widget_show_all (box);
-
-  return box;
+  return widget;
 }
 
 static gboolean
@@ -364,7 +396,7 @@ handle_file_chooser_open (XdpFileChooser *object,
       int i;
       GtkWidget *box;
 
-      box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+      box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
       gtk_widget_show (box);
       for (i = 0; i < g_variant_n_children (choices); i++)
         {
