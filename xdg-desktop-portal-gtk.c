@@ -44,7 +44,7 @@
 #include <gdk/gdkx.h>
 #endif
 
-#include "xdg-desktop-portal-gtk.h"
+#include "request.h"
 #include "filechooser.h"
 #include "appchooser.h"
 #include "print.h"
@@ -122,49 +122,6 @@ on_name_lost (GDBusConnection *connection,
               gpointer         user_data)
 {
   g_main_loop_quit (loop);
-}
-
-DialogHandle *
-dialog_handle_find (const char *arg_sender,
-                    const char *arg_app_id,
-                    const char *arg_handle,
-                    GType skel_type)
-{
-  DialogHandle *handle;
-
-  handle = g_hash_table_lookup (outstanding_handles, arg_handle);
-
-  if (handle != NULL &&
-      (/* App is unconfined */
-       strcmp (arg_app_id, "") == 0 ||
-       /* or same app */
-       strcmp (handle->app_id, arg_app_id) == 0) &&
-      g_type_check_instance_is_a ((GTypeInstance *)handle->skeleton, skel_type))
-    return handle;
-
-  return NULL;
-}
-
-void
-dialog_handle_register (DialogHandle *handle)
-{
-  guint32 r;
-
-  r = g_random_int ();
-  do
-    {
-      g_free (handle->id);
-      handle->id = g_strdup_printf ("/org/freedesktop/portal/desktop/%u", r);
-    }
-  while (g_hash_table_lookup (outstanding_handles, handle->id) != NULL);
-
-  g_hash_table_insert (outstanding_handles, handle->id, handle);
-}
-
-void
-dialog_handle_unregister (DialogHandle *handle)
-{
-  g_hash_table_remove (outstanding_handles, handle->id);
 }
 
 int
