@@ -21,7 +21,6 @@ $(dbus_built_sources): Makefile.am
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.AppChooser.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Print.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Screenshot.xml \
-	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Request.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.gnome.Shell.Screenshot.xml \
 	$(NULL)
 

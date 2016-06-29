@@ -153,7 +153,6 @@ handle_choose_application (XdpAppChooser *object,
   const char *title;
   const char *heading;
   const char *latest_chosen_id;
-  gint latest_chosen_count;
 
   if (!g_variant_lookup (arg_options, "accept_label", "&s", &accept_label))
     accept_label = _("_Select");
