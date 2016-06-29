@@ -26,6 +26,15 @@ if test "x$GCC" = "xyes"; then
   esac
 fi
 
+# i18n stuff
+GETTEXT_PACKAGE=xdg-desktop-portal-gtk
+AC_SUBST(GETTEXT_PACKAGE)
+AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE",
+                   [The prefix for our gettext translation domains.])
+
+AM_GNU_GETTEXT([external])
+AM_GNU_GETTEXT_VERSION(0.18.3)
+
 PKG_PROG_PKG_CONFIG([0.24])
 
 AC_ARG_WITH(dbus_service_dir,
@@ -44,5 +53,6 @@ AC_SUBST(GTK_LIBS)
 
 AC_CONFIG_FILES([
 Makefile
+po/Makefile.in
 ])
 AC_OUTPUT

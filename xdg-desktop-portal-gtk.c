@@ -35,6 +35,9 @@
 #include <gio/gdesktopappinfo.h>
 #include <gio/gunixfdlist.h>
 
+#include <glib/gi18n.h>
+#include <locale.h>
+
 #include "xdg-desktop-portal-dbus.h"
 
 #ifdef GDK_WINDOWING_X11
@@ -173,6 +176,9 @@ main (int argc, char *argv[])
   GOptionContext *context;
 
   setlocale (LC_ALL, "");
+  bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
+  bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+  textdomain (GETTEXT_PACKAGE);
 
   /* Avoid even loading gvfs to avoid accidental confusion */
   g_setenv ("GIO_USE_VFS", "local", TRUE);
