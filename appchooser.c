@@ -161,18 +161,9 @@ handle_choose_application (XdpImplAppChooser *object,
   if (!g_variant_lookup (arg_options, "latest-choice", "&s", &latest_chosen_id))
     latest_chosen_id = NULL;
 
-<<<<<<< 7daf0a843f9d42eccdaed07f987b22086e12c8b6
   cancel_label = _("_Cancel");
 
   dialog = GTK_WIDGET (app_chooser_dialog_new (choices, latest_chosen_id, cancel_label, accept_label, title, heading));
-=======
-  dialog = GTK_WIDGET (app_chooser_dialog_new (choices,
-                                               latest_chosen_id,
-                                               cancel_label,
-                                               accept_label,
-                                               title,
-                                               heading));
->>>>>>> Implement the new backend api
 
   handle = g_new0 (AppDialogHandle, 1);
   handle->impl = object;
