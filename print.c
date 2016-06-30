@@ -36,11 +36,12 @@
 #endif
 
 #include "print.h"
-#include "xdg-desktop-portal-gtk.h"
+#include "request.h"
 
 typedef struct {
-  DialogHandle base;
-
+  XdpImplPrint *impl;
+  GDBusMethodInvocation *invocation;
+  Request *request;
   GtkWidget *dialog;
 
   char *filename;
@@ -48,36 +49,15 @@ typedef struct {
 
 } PrintDialogHandle;
 
-static PrintDialogHandle *
-print_dialog_handle_new (const char *app_id,
-                         const char *sender,
-                         const char *filename,
-                         GtkWidget *dialog,
-                         GDBusInterfaceSkeleton *skeleton)
-{
-  PrintDialogHandle *handle = g_new0 (PrintDialogHandle, 1);
-
-  handle->base.app_id = g_strdup (app_id);
-  handle->base.sender = g_strdup (sender);
-  handle->base.skeleton = g_object_ref (skeleton);
-  handle->filename = g_strdup (filename);
-  handle->dialog = g_object_ref (dialog);
-  dialog_handle_register (&handle->base);
-
-  /* TODO: Track lifetime of sender and close handle */
-
-  return handle;
-}
-
 static void
-print_dialog_handle_free (PrintDialogHandle *handle)
+print_dialog_handle_free (gpointer data)
 {
-  dialog_handle_unregister (&handle->base);
-  g_free (handle->base.app_id);
-  g_free (handle->base.sender);
-  g_free (handle->filename);
-  g_object_unref (handle->base.skeleton);
+  PrintDialogHandle *handle = data;
+
+  g_object_unref (handle->request);
   g_object_unref (handle->dialog);
+  g_free (handle->filename);
+
   g_free (handle);
 }
 
@@ -94,18 +74,14 @@ send_response (PrintDialogHandle *handle)
   GVariantBuilder opt_builder;
 
   g_variant_builder_init (&opt_builder, G_VARIANT_TYPE_VARDICT);
-  
-  g_dbus_connection_emit_signal (g_dbus_interface_skeleton_get_connection (handle->base.skeleton),
-                                 "org.freedesktop.portal.Desktop",
-                                 "/org/freedesktop/portal/desktop",
-                                 "org.freedesktop.impl.portal.Print",
-                                 "PrintFileResponse",
-                                 g_variant_new ("(sou@a{sv})",
-                                                handle->base.sender,
-                                                handle->base.id,
-                                                handle->response,
-                                                g_variant_builder_end (&opt_builder)),
-                                 NULL);
+
+  if (handle->request->exported)
+    request_unexport (handle->request);
+
+  xdp_impl_print_complete_print_file (handle->impl,
+                                      handle->invocation,
+                                      handle->response,
+                                      g_variant_builder_end (&opt_builder));
 
   print_dialog_handle_close (handle);
 }
@@ -168,19 +144,40 @@ handle_print_dialog_response (GtkDialog *dialog,
 }
 
 static gboolean
-handle_print_file (XdpPrint *object,
+handle_close (XdpImplRequest *object,
+              GDBusMethodInvocation *invocation,
+              PrintDialogHandle *handle)
+{
+  xdp_impl_print_complete_print_file (handle->impl, handle->invocation, 2, NULL);
+  print_dialog_handle_close (handle);
+
+  if (handle->request->exported)
+    request_unexport (handle->request);
+
+  xdp_impl_request_complete_close (object, invocation);
+
+  return TRUE;
+}
+
+static gboolean
+handle_print_file (XdpImplPrint *object,
                    GDBusMethodInvocation *invocation,
-                   const gchar *arg_sender,
-                   const gchar *arg_app_id,
-                   const gchar *arg_parent_window,
-                   const gchar *arg_title,
-                   const gchar *arg_filename,
+                   const char *arg_handle,
+                   const char *arg_app_id,
+                   const char *arg_parent_window,
+                   const char *arg_title,
+                   const char *arg_filename,
                    GVariant *arg_options)
 {
-  XdpPrint *print = XDP_PRINT (g_dbus_method_invocation_get_user_data (invocation));
+  g_autoptr(Request) request = NULL;
+  const char *sender;
   GtkWidget *dialog;
   GdkWindow *foreign_parent = NULL;
   PrintDialogHandle *handle;
+
+  sender = g_dbus_method_invocation_get_sender (invocation);
+
+  request = request_new (sender, arg_app_id, arg_handle);
 
  #ifdef GDK_WINDOWING_X11
   if (g_str_has_prefix (arg_parent_window, "x11:"))
@@ -199,7 +196,14 @@ handle_print_file (XdpPrint *object,
   dialog = gtk_print_unix_dialog_new (arg_title, NULL);
   gtk_print_unix_dialog_set_manual_capabilities (GTK_PRINT_UNIX_DIALOG (dialog), 0);
 
-  handle = print_dialog_handle_new (arg_app_id, arg_sender, arg_filename, dialog, G_DBUS_INTERFACE_SKELETON (object));
+  handle = g_new0 (PrintDialogHandle, 1);
+  handle->impl = object;
+  handle->invocation = invocation;
+  handle->request = g_object_ref (request);
+  handle->dialog = g_object_ref (dialog);
+  handle->filename = g_strdup (arg_filename);
+
+  g_signal_connect (request, "handle-close", G_CALLBACK (handle_close), handle);
 
   g_signal_connect (dialog, "response", G_CALLBACK (handle_print_dialog_response), handle);
 
@@ -210,34 +214,7 @@ handle_print_file (XdpPrint *object,
 
   gtk_widget_show (dialog);
 
-  xdp_print_complete_print_file (print, invocation, handle->base.id);
-
-  return TRUE;
-}
-
-static gboolean
-handle_print_close (XdpPrint *object,
-                    GDBusMethodInvocation *invocation,
-                    const gchar *arg_sender,
-                    const gchar *arg_app_id,
-                    const gchar *arg_handle)
-{
-  PrintDialogHandle *handle;
-
-  handle = (PrintDialogHandle *)dialog_handle_find (arg_sender, arg_app_id, arg_handle,
-                                                    XDP_TYPE_PRINT_SKELETON);
-
-  if (handle != NULL)
-    {
-      print_dialog_handle_close (handle);
-      xdp_print_complete_close (object, invocation);
-    }
-  else
-    {
-      g_dbus_method_invocation_return_dbus_error (invocation,
-                                                  "org.freedesktop.Flatpak.Error.NotFound",
-                                                  "No such handle");
-    }
+  request_export (request, g_dbus_method_invocation_get_connection (invocation));
 
   return TRUE;
 }
@@ -248,11 +225,9 @@ print_init (GDBusConnection *bus,
 {
   GDBusInterfaceSkeleton *helper;
 
-  helper = G_DBUS_INTERFACE_SKELETON (xdp_print_skeleton_new ());
+  helper = G_DBUS_INTERFACE_SKELETON (xdp_impl_print_skeleton_new ());
 
   g_signal_connect (helper, "handle-print-file", G_CALLBACK (handle_print_file), NULL);
-  g_signal_connect (helper, "handle-close", G_CALLBACK (handle_print_close), NULL);
-
 
   if (!g_dbus_interface_skeleton_export (helper,
                                          bus,

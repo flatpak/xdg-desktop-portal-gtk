@@ -15,13 +15,23 @@ BUILT_SOURCES = $(dbus_built_sources)
 $(dbus_built_sources): Makefile.am
 	$(AM_V_GEN) $(GDBUS_CODEGEN)			\
 	--interface-prefix org.freedesktop.impl.portal.	\
-	--c-namespace Xdp			\
-	--generate-c-code xdg-desktop-portal-dbus		\
+	--c-namespace XdpImpl				\
+	--generate-c-code xdg-desktop-portal-dbus	\
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.FileChooser.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.AppChooser.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Print.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Screenshot.xml \
-	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.gnome.Shell.Screenshot.xml \
+	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Request.xml \
+	$(NULL)
+
+shell_built_sources = shell-dbus.c shell-dbus.h
+BUILT_SOURCES += $(shell_built_sources)
+
+$(shell_built_sources): Makefile.am
+	$(AM_V_GEN) $(GDBUS_CODEGEN)			\
+	--interface-prefix org.freedesktop.impl.portal.	\
+	--generate-c-code shell-dbus	\
+	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.gnome.Shell.Screenshot.xml	\
 	$(NULL)
 
 %.service: %.service.in config.log
@@ -48,7 +58,8 @@ DISTCLEANFILES = \
 
 xdg_desktop_portal_gtk_SOURCES = \
 	xdg-desktop-portal-gtk.c	\
-	xdg-desktop-portal-gtk.h	\
+	request.h			\
+	request.c			\
 	filechooser.h			\
 	filechooser.c			\
 	appchooser.h			\
@@ -65,6 +76,7 @@ xdg_desktop_portal_gtk_SOURCES = \
 	print.h				\
 	print.c				\
 	$(dbus_built_sources)		\
+	$(shell_built_sources)		\
 	$(NULL)
 
 xdg_desktop_portal_gtk_LDADD = $(BASE_LIBS) $(GTK_LIBS)
