@@ -17,11 +17,12 @@ $(dbus_built_sources): Makefile.am
 	--interface-prefix org.freedesktop.impl.portal.	\
 	--c-namespace XdpImpl				\
 	--generate-c-code xdg-desktop-portal-dbus	\
+	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Request.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.FileChooser.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.AppChooser.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Print.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Screenshot.xml \
-	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Request.xml \
+	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Notification.xml \
 	$(NULL)
 
 shell_built_sources = shell-dbus.c shell-dbus.h
@@ -29,9 +30,9 @@ BUILT_SOURCES += $(shell_built_sources)
 
 $(shell_built_sources): Makefile.am
 	$(AM_V_GEN) $(GDBUS_CODEGEN)			\
-	--interface-prefix org.freedesktop.impl.portal.	\
 	--generate-c-code shell-dbus	\
-	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.gnome.Shell.Screenshot.xml	\
+	$(DESKTOP_PORTAL_INTERFACES_DIR)/org.gnome.Shell.Screenshot.xml	\
+	$(top_srcdir)/org.gtk.Notifications.xml				\
 	$(NULL)
 
 %.service: %.service.in config.log
@@ -51,7 +52,11 @@ resources.c: xdg-desktop-portal-gtk.gresource.xml
 	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) $< \
 		--target=$@ --sourcedir=$(srcdir) --c-name _xdg_desktop --generate-source
 
-EXTRA_DIST = xdg-desktop-portal-gtk.gresource.xml
+EXTRA_DIST = \
+	xdg-desktop-portal-gtk.gresource.xml	\
+	org.gtk.Notifications.xml		\
+	$(NULL)
+
 
 DISTCLEANFILES = \
 	$(NULL)
@@ -64,6 +69,8 @@ xdg_desktop_portal_gtk_SOURCES = \
 	filechooser.c			\
 	appchooser.h			\
 	appchooser.c			\
+	notification.h			\
+	notification.c			\
 	appchooserrow.h			\
 	appchooserrow.c			\
 	appchooserdialog.h		\
