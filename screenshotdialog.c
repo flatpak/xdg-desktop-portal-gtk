@@ -99,7 +99,7 @@ screenshot_dialog_new (const char *app_id,
 
   pixbuf = gdk_pixbuf_new_from_file_at_scale (filename, 500, 400, TRUE, &error);
   if (error)
-    g_print ("%s\n", error->message);
+    g_warning ("Failed to load screenshot %s: %s", filename, error->message);
 
   gtk_image_set_from_pixbuf (GTK_IMAGE (dialog->image), pixbuf);
 
