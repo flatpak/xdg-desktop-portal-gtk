@@ -120,7 +120,6 @@ send_response (FileDialogHandle *handle)
   if (handle->request->exported)
     request_unexport (handle->request);
 
-g_print ("completing OpenFile call\n");
   xdp_impl_file_chooser_complete_open_file (handle->impl,
                                             handle->invocation,
                                             handle->response,
@@ -178,18 +177,15 @@ file_chooser_response (GtkWidget *widget,
     case GTK_RESPONSE_DELETE_EVENT:
       handle->response = 2;
       handle->uris = NULL;
-      g_print ("response: 2\n");
       break;
 
     case GTK_RESPONSE_CANCEL:
       handle->response = 1;
       handle->uris = NULL;
-      g_print ("response: 1\n");
       break;
 
     case GTK_RESPONSE_OK:
       handle->response = 0;
-      g_print ("response: 0\n");
       handle->uris = gtk_file_chooser_get_uris (GTK_FILE_CHOOSER (widget));
       break;
     }
@@ -293,7 +289,6 @@ handle_close (XdpImplRequest *object,
               GDBusMethodInvocation *invocation,
               FileDialogHandle *handle)
 {
-g_print ("Close called\n");
   xdp_impl_file_chooser_complete_open_file (handle->impl, handle->invocation, 2, NULL);
   file_dialog_handle_close (handle);
 
@@ -330,7 +325,6 @@ handle_open (XdpImplFileChooser *object,
   const char *path;
   g_autoptr (GVariant) choices = NULL;
 
-g_print ("OpenFile called\n");
   method_name = g_dbus_method_invocation_get_method_name (invocation);
   sender = g_dbus_method_invocation_get_sender (invocation);
 

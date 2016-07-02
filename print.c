@@ -130,7 +130,6 @@ handle_print_dialog_response (GtkDialog *dialog,
           }
         else
           {
-            g_print ("send %s to printer\n", handle->filename);
             gtk_print_job_send (job, NULL, NULL, NULL); //TODO: wait ?
           }
         g_object_unref (job);
