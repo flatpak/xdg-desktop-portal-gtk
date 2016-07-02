@@ -37,6 +37,7 @@
 
 #include "print.h"
 #include "request.h"
+#include "utils.h"
 
 typedef struct {
   XdpImplPrint *impl;
@@ -230,7 +231,7 @@ print_init (GDBusConnection *bus,
 
   if (!g_dbus_interface_skeleton_export (helper,
                                          bus,
-                                         "/org/freedesktop/portal/desktop",
+                                         DESKTOP_PORTAL_OBJECT_PATH,
                                          error))
     return FALSE;
 

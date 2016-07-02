@@ -63,6 +63,7 @@ DISTCLEANFILES = \
 
 xdg_desktop_portal_gtk_SOURCES = \
 	xdg-desktop-portal-gtk.c	\
+	utils.h				\
 	request.h			\
 	request.c			\
 	filechooser.h			\

@@ -45,6 +45,7 @@
 
 #include "filechooser.h"
 #include "request.h"
+#include "utils.h"
 
 typedef struct {
   XdpImplFileChooser *impl;
@@ -468,7 +469,7 @@ file_chooser_init (GDBusConnection *bus,
 
   if (!g_dbus_interface_skeleton_export (helper,
                                          bus,
-                                         "/org/freedesktop/portal/desktop",
+                                         DESKTOP_PORTAL_OBJECT_PATH,
                                          error))
     return FALSE;
 

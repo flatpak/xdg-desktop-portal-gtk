@@ -24,6 +24,7 @@
 
 #include "appchooser.h"
 #include "request.h"
+#include "utils.h"
 
 #include <string.h>
 
@@ -196,7 +197,7 @@ app_chooser_init (GDBusConnection *bus,
 
   if (!g_dbus_interface_skeleton_export (helper,
                                          bus,
-                                         "/org/freedesktop/portal/desktop",
+                                         DESKTOP_PORTAL_OBJECT_PATH,
                                          error))
     return FALSE;
 

@@ -20,6 +20,7 @@
 
 #include "notification.h"
 #include "request.h"
+#include "utils.h"
 
 /* org.gtk.Notifications support. This is easy, since we can
  * just pass the calls through unseen, and gnome-shell does
@@ -509,7 +510,7 @@ notification_init (GDBusConnection *bus,
 
   if (!g_dbus_interface_skeleton_export (helper,
                                          bus,
-                                         "/org/freedesktop/portal/desktop",
+                                         DESKTOP_PORTAL_OBJECT_PATH,
                                          error))
     return FALSE;
 
