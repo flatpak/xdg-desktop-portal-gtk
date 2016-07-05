@@ -35,6 +35,7 @@ $(shell_built_sources): Makefile.am
 	$(DBUS_INTERFACES_DIR)/org.gnome.Shell.Screenshot.xml	\
 	$(top_srcdir)/org.gtk.Notifications.xml				\
 	$(top_srcdir)/org.gnome.SessionManager.xml			\
+	$(top_srcdir)/org.freedesktop.ScreenSaver.xml			\
 	$(NULL)
 
 %.service: %.service.in config.log
@@ -58,6 +59,7 @@ EXTRA_DIST = \
 	xdg-desktop-portal-gtk.gresource.xml	\
 	org.gtk.Notifications.xml		\
 	org.gnome.SessionManager.xml		\
+	org.freedesktop.ScreenSaver.xml		\
 	$(NULL)
 
 

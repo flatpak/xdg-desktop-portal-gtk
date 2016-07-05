@@ -1,0 +1,38 @@
+<node name='/org/freedesktop/ScreenSaver'>
+  <interface name='org.freedesktop.ScreenSaver'>
+    <method name='Lock'/>
+    <method name='SimulateUserActivity'/>
+    <method name='GetActive'>
+      <arg type='b' direction='out'/>
+    </method>
+    <method name='GetActiveTime'>
+      <arg name='seconds' type='u' direction='out'/>
+    </method>
+    <method name='GetSessionIdleTime'>
+      <arg name='seconds' type='u' direction='out'/>
+    </method>
+    <method name='SetActive'>
+      <arg type='b' direction='out'/>
+      <arg name='e' type='b' direction='in'/>
+    </method>
+    <method name='Inhibit'>
+      <arg name='application_name' type='s' direction='in'/>
+      <arg name='reason_for_inhibit' type='s' direction='in'/>
+      <arg name='cookie' type='u' direction='out'/>
+    </method>
+    <method name='UnInhibit'>
+      <arg name='cookie' type='u' direction='in'/>
+    </method>
+    <method name='Throttle'>
+      <arg name='application_name' type='s' direction='in'/>
+      <arg name='reason_for_inhibit' type='s' direction='in'/>
+      <arg name='cookie' type='u' direction='out'/>
+    </method>
+    <method name='UnThrottle'>
+      <arg name='cookie' type='u' direction='in'/>
+    </method>
+    <signal name='ActiveChanged'>
+      <arg type='b'/>
+    </signal>
+  </interface>
+</node>
