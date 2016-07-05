@@ -23,6 +23,7 @@ $(dbus_built_sources): Makefile.am
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Print.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Screenshot.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Notification.xml \
+	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Inhibit.xml \
 	$(NULL)
 
 shell_built_sources = shell-dbus.c shell-dbus.h
@@ -33,6 +34,8 @@ $(shell_built_sources): Makefile.am
 	--generate-c-code shell-dbus	\
 	$(DBUS_INTERFACES_DIR)/org.gnome.Shell.Screenshot.xml	\
 	$(top_srcdir)/org.gtk.Notifications.xml				\
+	$(top_srcdir)/org.gnome.SessionManager.xml			\
+	$(top_srcdir)/org.freedesktop.ScreenSaver.xml			\
 	$(NULL)
 
 %.service: %.service.in config.log
@@ -55,6 +58,8 @@ resources.c: xdg-desktop-portal-gtk.gresource.xml
 EXTRA_DIST = \
 	xdg-desktop-portal-gtk.gresource.xml	\
 	org.gtk.Notifications.xml		\
+	org.gnome.SessionManager.xml		\
+	org.freedesktop.ScreenSaver.xml		\
 	$(NULL)
 
 
@@ -72,6 +77,8 @@ xdg_desktop_portal_gtk_SOURCES = \
 	appchooser.c			\
 	notification.h			\
 	notification.c			\
+	inhibit.h			\
+	inhibit.c			\
 	appchooserrow.h			\
 	appchooserrow.c			\
 	appchooserdialog.h		\

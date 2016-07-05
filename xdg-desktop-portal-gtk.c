@@ -50,6 +50,7 @@
 #include "print.h"
 #include "screenshot.h"
 #include "notification.h"
+#include "inhibit.h"
 
 
 static GMainLoop *loop = NULL;
@@ -109,6 +110,12 @@ on_bus_acquired (GDBusConnection *connection,
     }
 
   if (!notification_init (connection, &error))
+    {
+      g_warning ("error: %s\n", error->message);
+      g_clear_error (&error);
+    }
+
+  if (!inhibit_init (connection, &error))
     {
       g_warning ("error: %s\n", error->message);
       g_clear_error (&error);
