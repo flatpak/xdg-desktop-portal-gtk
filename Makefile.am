@@ -31,7 +31,7 @@ BUILT_SOURCES += $(shell_built_sources)
 $(shell_built_sources): Makefile.am
 	$(AM_V_GEN) $(GDBUS_CODEGEN)			\
 	--generate-c-code shell-dbus	\
-	$(DESKTOP_PORTAL_INTERFACES_DIR)/org.gnome.Shell.Screenshot.xml	\
+	$(DBUS_INTERFACES_DIR)/org.gnome.Shell.Screenshot.xml	\
 	$(top_srcdir)/org.gtk.Notifications.xml				\
 	$(NULL)
 
