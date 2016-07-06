@@ -334,13 +334,17 @@ handle_open (XdpImplFileChooser *object,
   fake_parent = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   g_object_ref_sink (fake_parent);
 
-  action = GTK_FILE_CHOOSER_ACTION_OPEN;
-  multiple = FALSE;
-
   if (strcmp (method_name, "SaveFile") == 0)
-    action = GTK_FILE_CHOOSER_ACTION_SAVE;
-  else if (strcmp (method_name, "OpenFiles") == 0)
-    multiple = TRUE;
+    {
+      action = GTK_FILE_CHOOSER_ACTION_SAVE;
+      multiple = FALSE;
+    }
+  else
+    {
+      action = GTK_FILE_CHOOSER_ACTION_OPEN;
+      if (!g_variant_lookup (arg_options, "multiple", "b", &multiple))
+        multiple = FALSE;
+    }
 
   if (!g_variant_lookup (arg_options, "accept_label", "&s", &accept_label))
     accept_label = _("_Open");
@@ -464,7 +468,6 @@ file_chooser_init (GDBusConnection *bus,
   helper = G_DBUS_INTERFACE_SKELETON (xdp_impl_file_chooser_skeleton_new ());
 
   g_signal_connect (helper, "handle-open-file", G_CALLBACK (handle_open), NULL);
-  g_signal_connect (helper, "handle-open-files", G_CALLBACK (handle_open), NULL);
   g_signal_connect (helper, "handle-save-file", G_CALLBACK (handle_open), NULL);
 
   if (!g_dbus_interface_skeleton_export (helper,
