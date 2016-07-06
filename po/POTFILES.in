@@ -1,6 +1,6 @@
 # List of source files containing translatable strings.
-appchooser.c
-appchooserdialog.ui
-filechooser.c
-screenshotdialog.c
-screenshotdialog.ui
+src/appchooser.c
+src/appchooserdialog.ui
+src/filechooser.c
+src/screenshotdialog.c
+src/screenshotdialog.ui
