@@ -8,6 +8,7 @@
 
 #include "xdg-desktop-portal-dbus.h"
 #include "shell-dbus.h"
+#include "utils.h"
 
 #include "inhibit.h"
 #include "request.h"
@@ -219,8 +220,8 @@ handle_inhibit_fdo (XdpImplInhibit *object,
   if ((arg_flags & ~INHIBIT_IDLE) != 0)
     {
       g_dbus_method_invocation_return_error (invocation,
-                                             G_IO_ERROR,
-                                             G_IO_ERROR_FAILED,
+                                             XDG_DESKTOP_PORTAL_ERROR,
+                                             XDG_DESKTOP_PORTAL_ERROR_FAILED,
                                              "Inhibiting other than idle not supported");
       return TRUE;
     }
