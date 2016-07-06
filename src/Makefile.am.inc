@@ -48,6 +48,7 @@ libexec_PROGRAMS = \
 xdg_desktop_portal_gtk_SOURCES = \
 	src/xdg-desktop-portal-gtk.c	        \
 	src/utils.h				\
+	src/utils.c				\
 	src/request.h			        \
 	src/request.c			        \
 	src/filechooser.h			\

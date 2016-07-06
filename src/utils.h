@@ -21,3 +21,17 @@
 #pragma once
 
 #define DESKTOP_PORTAL_OBJECT_PATH "/org/freedesktop/portal/desktop"
+
+typedef enum {
+  XDG_DESKTOP_PORTAL_ERROR_FAILED     = 0,
+  XDG_DESKTOP_PORTAL_ERROR_INVALID_ARGUMENT,
+  XDG_DESKTOP_PORTAL_ERROR_NOT_FOUND,
+  XDG_DESKTOP_PORTAL_ERROR_EXISTS,
+  XDG_DESKTOP_PORTAL_ERROR_NOT_ALLOWED,
+  XDG_DESKTOP_PORTAL_ERROR_CANCELLED,
+  XDG_DESKTOP_PORTAL_ERROR_WINDOW_DESTROYED
+} XdgDesktopPortalErrorEnum;
+
+#define XDG_DESKTOP_PORTAL_ERROR xdg_desktop_portal_error_quark ()
+
+GQuark  xdg_desktop_portal_error_quark (void);
