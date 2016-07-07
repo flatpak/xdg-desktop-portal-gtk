@@ -1,11 +1,12 @@
 dbus_built_sources = src/xdg-desktop-portal-dbus.c src/xdg-desktop-portal-dbus.h
 BUILT_SOURCES += $(dbus_built_sources)
 
-$(dbus_built_sources): Makefile.am
+$(dbus_built_sources): src/Makefile.am.inc
 	$(AM_V_GEN) $(GDBUS_CODEGEN)			\
 	--interface-prefix org.freedesktop.impl.portal.	\
 	--c-namespace XdpImpl				\
 	--generate-c-code src/xdg-desktop-portal-dbus	\
+	--annotate "org.freedesktop.impl.portal.Print.PrintFile()" "org.gtk.GDBus.C.UnixFD" "true" \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Request.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.FileChooser.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.AppChooser.xml \
@@ -18,7 +19,7 @@ $(dbus_built_sources): Makefile.am
 shell_built_sources = src/shell-dbus.c src/shell-dbus.h
 BUILT_SOURCES += $(shell_built_sources)
 
-$(shell_built_sources): Makefile.am
+$(shell_built_sources): src/Makefile.am.inc
 	$(AM_V_GEN) $(GDBUS_CODEGEN)			                \
 	--generate-c-code src/shell-dbus	                        \
 	$(top_srcdir)/data/org.gnome.Shell.Screenshot.xml	        \
@@ -70,6 +71,8 @@ xdg_desktop_portal_gtk_SOURCES = \
 	src/resources.c			        \
 	src/print.h				\
 	src/print.c				\
+        src/gtkbackports.h                      \
+        src/gtkbackports.c                      \
 	$(dbus_built_sources)		        \
 	$(shell_built_sources)		        \
 	$(NULL)
