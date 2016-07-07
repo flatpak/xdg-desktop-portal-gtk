@@ -46,6 +46,8 @@
 #include "filechooser.h"
 #include "request.h"
 #include "utils.h"
+#include "gtkbackports.h"
+
 
 typedef struct {
   XdpImplFileChooser *impl;
@@ -127,40 +129,6 @@ send_response (FileDialogHandle *handle)
                                             g_variant_builder_end (&opt_builder));
 
   file_dialog_handle_close (handle);
-}
-
-GtkFileFilter *
-gtk_file_filter_from_gvariant (GVariant *variant)
-{
-  GtkFileFilter *filter;
-  GVariantIter *iter;
-  const char *name;
-  int type;
-  char *tmp;
-
-  filter = gtk_file_filter_new ();
-
-  g_variant_get (variant, "(&sa(us))", &name, &iter);
-
-  gtk_file_filter_set_name (filter, name);
-
-  while (g_variant_iter_next (iter, "(u&s)", &type, &tmp))
-    {
-      switch (type)
-        {
-        case 0:
-          gtk_file_filter_add_pattern (filter, tmp);
-          break;
-        case 1:
-          gtk_file_filter_add_mime_type (filter, tmp);
-          break;
-        default:
-          break;
-       }
-    }
-  g_variant_iter_free (iter);
-
-  return filter;
 }
 
 static void
@@ -392,7 +360,7 @@ handle_open (XdpImplFileChooser *object,
         {
           GtkFileFilter *filter;
 
-          filter = gtk_file_filter_from_gvariant (variant);
+          filter = gtk_file_filter_new_from_gvariant (variant);
           gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (dialog), filter);
           g_variant_unref (variant);
         }
