@@ -123,10 +123,16 @@ send_response (FileDialogHandle *handle)
   if (handle->request->exported)
     request_unexport (handle->request);
 
-  xdp_impl_file_chooser_complete_open_file (handle->impl,
-                                            handle->invocation,
-                                            handle->response,
-                                            g_variant_builder_end (&opt_builder));
+  if (handle->action == GTK_FILE_CHOOSER_ACTION_OPEN)
+    xdp_impl_file_chooser_complete_open_file (handle->impl,
+                                              handle->invocation,
+                                              handle->response,
+                                              g_variant_builder_end (&opt_builder));
+  else
+    xdp_impl_file_chooser_complete_save_file (handle->impl,
+                                              handle->invocation,
+                                              handle->response,
+                                              g_variant_builder_end (&opt_builder));
 
   file_dialog_handle_close (handle);
 }
@@ -258,7 +264,20 @@ handle_close (XdpImplRequest *object,
               GDBusMethodInvocation *invocation,
               FileDialogHandle *handle)
 {
-  xdp_impl_file_chooser_complete_open_file (handle->impl, handle->invocation, 2, NULL);
+  GVariantBuilder opt_builder;
+
+  g_variant_builder_init (&opt_builder, G_VARIANT_TYPE_VARDICT);
+
+  if (handle->action == GTK_FILE_CHOOSER_ACTION_OPEN)
+    xdp_impl_file_chooser_complete_open_file (handle->impl,
+                                              handle->invocation,
+                                              2,
+                                              g_variant_builder_end (&opt_builder));
+  else
+    xdp_impl_file_chooser_complete_save_file (handle->impl,
+                                              handle->invocation,
+                                              2,
+                                              g_variant_builder_end (&opt_builder));
   file_dialog_handle_close (handle);
 
   if (handle->request->exported)
