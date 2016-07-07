@@ -28,6 +28,7 @@
 #include <gtk/gtkunixprint.h>
 
 #include <gio/gio.h>
+#include <gio/gunixfdlist.h>
 
 #include "xdg-desktop-portal-dbus.h"
 
@@ -39,14 +40,113 @@
 #include "request.h"
 #include "utils.h"
 
+#include "gtkbackports.h"
+
+typedef struct {
+  char *app_id;
+  GtkPageSetup *page_setup;
+  GtkPrintSettings *settings;
+  GtkPrinter *printer;
+  guint timeout_id;
+  guint32 token;
+} PrintParams;
+
+static GHashTable *print_params;
+
+static void
+print_params_free (gpointer data)
+{
+  PrintParams *params = data;
+
+  g_hash_table_remove (print_params, GUINT_TO_POINTER (params->token));
+
+  g_free (params->app_id);
+  g_object_unref (params->page_setup);
+  g_object_unref (params->settings);
+  g_object_unref (params->printer);
+
+  g_free (params);
+}
+
+static void
+ensure_print_params (void)
+{
+  if (print_params)
+    return;
+
+  print_params = g_hash_table_new (g_direct_hash, g_direct_equal);
+}
+
+static gboolean
+print_params_timeout (gpointer data)
+{
+  print_params_free (data);
+  g_debug ("Removing print params, now %d", g_hash_table_size (print_params));
+  return G_SOURCE_REMOVE;
+}
+
+static PrintParams *
+print_params_new (const char *app_id,
+                  GtkPageSetup *page_setup,
+                  GtkPrintSettings *settings,
+                  GtkPrinter *printer)
+{
+  PrintParams *params;
+  guint32 r;
+
+  ensure_print_params ();
+
+  params = g_new0 (PrintParams, 1);
+  params->app_id = g_strdup (app_id);
+  params->page_setup = g_object_ref (page_setup);
+  params->settings = g_object_ref (settings);
+  params->printer = g_object_ref (printer);
+
+  do {
+    r = g_random_int ();
+  } while (r == 0 || g_hash_table_lookup (print_params, GUINT_TO_POINTER (r)) != NULL);
+
+  params->token = r;
+  g_hash_table_insert (print_params, GUINT_TO_POINTER (r), params);
+
+  g_debug ("Remembering print params for %s, token %u, now %d",
+           params->app_id, params->token,
+           g_hash_table_size (print_params));
+
+  params->timeout_id = g_timeout_add_seconds (300, print_params_timeout, params);
+
+  return params;
+}
+
+static PrintParams *
+get_print_params (const char *app_id,
+                  guint32 token)
+{
+  PrintParams *params;
+
+  params = (PrintParams *)g_hash_table_lookup (print_params, GUINT_TO_POINTER (token));
+  if (params == NULL)
+    return NULL;
+
+  if (strcmp (params->app_id, app_id) != 0)
+    return NULL;
+
+  g_source_remove (params->timeout_id);
+  g_hash_table_remove (print_params, GUINT_TO_POINTER (token));
+
+  return params;
+}
+
 typedef struct {
   XdpImplPrint *impl;
   GDBusMethodInvocation *invocation;
   Request *request;
   GtkWidget *dialog;
 
-  char *filename;
+  int fd;
   int response;
+
+  PrintParams *params;
 
 } PrintDialogHandle;
 
@@ -57,7 +157,7 @@ print_dialog_handle_free (gpointer data)
 
   g_object_unref (handle->request);
   g_object_unref (handle->dialog);
-  g_free (handle->filename);
+  close (handle->fd);
 
   g_free (handle);
 }
@@ -69,28 +169,230 @@ print_dialog_handle_close (PrintDialogHandle *handle)
   print_dialog_handle_free (handle);
 }
 
+static gboolean
+print_file (int fd,
+            const char *app_id,
+            GtkPrinter *printer,
+            GtkPrintSettings *settings,
+            GtkPageSetup *page_setup,
+            GError **error)
+{
+  g_autoptr(GtkPrintJob) job = NULL;
+  g_autofree char *title = NULL;
+
+  title = g_strdup_printf ("Document from %s", app_id);
+
+  job = gtk_print_job_new (title, printer, settings, page_setup);
+
+  if (!gtk_print_job_set_source_fd (job, fd, error))
+    return FALSE;
+
+  gtk_print_job_send (job, NULL, NULL, NULL);
+
+  return TRUE;
+}
+
 static void
-send_response (PrintDialogHandle *handle)
+handle_print_response (GtkDialog *dialog,
+                       gint response,
+                       gpointer data)
+{
+  PrintDialogHandle *handle = data;
+  g_autoptr(GError) error = NULL;
+
+  switch (response)
+    {
+    default:
+      g_warning ("Unexpected response: %d", response);
+      /* Fall through */
+    case GTK_RESPONSE_DELETE_EVENT:
+      handle->response = 2;
+      break;
+
+    case GTK_RESPONSE_CANCEL:
+      handle->response = 1;
+      break;
+
+    case GTK_RESPONSE_OK:
+      {
+        GtkPrinter *printer;
+        g_autoptr(GtkPrintSettings) settings = NULL;
+        GtkPageSetup *page_setup;
+
+        printer = gtk_print_unix_dialog_get_selected_printer (GTK_PRINT_UNIX_DIALOG (handle->dialog));
+        settings = gtk_print_unix_dialog_get_settings (GTK_PRINT_UNIX_DIALOG (handle->dialog));
+        page_setup = gtk_print_unix_dialog_get_page_setup (GTK_PRINT_UNIX_DIALOG (handle->dialog));
+;
+        if (!print_file (handle->fd,
+                         handle->request->app_id,
+                         printer,
+                         settings,
+                         page_setup,
+                         &error))
+          handle->response = 2;
+        else
+          handle->response = 0;
+      }
+      break;
+    }
+
+  if (handle->request->exported)
+    request_unexport (handle->request);
+
+  if (error)
+    {
+      g_dbus_method_invocation_take_error (handle->invocation, error);
+    }
+  else
+    {
+      GVariantBuilder opt_builder;
+
+      g_variant_builder_init (&opt_builder, G_VARIANT_TYPE_VARDICT);
+      xdp_impl_print_complete_print (handle->impl,
+                                     handle->invocation,
+                                     NULL,
+                                     handle->response,
+                                     g_variant_builder_end (&opt_builder));
+    }
+
+  print_dialog_handle_close (handle);
+}
+
+static gboolean
+handle_close (XdpImplRequest *object,
+              GDBusMethodInvocation *invocation,
+              PrintDialogHandle *handle)
+{
+  xdp_impl_print_complete_print (handle->impl, handle->invocation, NULL, 2, NULL);
+  print_dialog_handle_close (handle);
+
+  if (handle->request->exported)
+    request_unexport (handle->request);
+
+  xdp_impl_request_complete_close (object, invocation);
+
+  return TRUE;
+}
+
+static gboolean
+handle_print (XdpImplPrint *object,
+              GDBusMethodInvocation *invocation,
+              GUnixFDList *fd_list,
+              const char *arg_handle,
+              const char *arg_app_id,
+              const char *arg_parent_window,
+              const char *arg_title,
+              GVariant *arg_fd_in,
+              GVariant *arg_options)
+{
+  g_autoptr(Request) request = NULL;
+  const char *sender;
+  GtkWidget *dialog;
+  GdkWindow *foreign_parent = NULL;
+  PrintDialogHandle *handle;
+  guint32 token = 0;
+  PrintParams *params;
+  int idx, fd;
+
+  g_variant_get (arg_fd_in, "h", &idx);
+  fd = g_unix_fd_list_get (fd_list, idx, NULL);
+
+  g_variant_lookup (arg_options, "token", "u", &token);
+  params = get_print_params (arg_app_id, token);
+  if (params)
+    {
+      GVariantBuilder opt_builder;
+
+      print_file (fd,
+                  params->app_id,
+                  params->printer,
+                  params->settings,
+                  params->page_setup,
+                  NULL);
+
+      print_params_free (params);
+
+      g_variant_builder_init (&opt_builder, G_VARIANT_TYPE_VARDICT);
+      xdp_impl_print_complete_print (object,
+                                     invocation,
+                                     NULL,
+                                     0,
+                                     g_variant_builder_end (&opt_builder));
+      return TRUE;
+    }
+
+  sender = g_dbus_method_invocation_get_sender (invocation);
+  request = request_new (sender, arg_app_id, arg_handle);
+
+ #ifdef GDK_WINDOWING_X11
+  if (g_str_has_prefix (arg_parent_window, "x11:"))
+    {
+      int xid;
+
+      if (sscanf (arg_parent_window, "x11:%x", &xid) != 1)
+        g_warning ("invalid xid");
+      else
+        foreign_parent = gdk_x11_window_foreign_new_for_display (gdk_display_get_default (), xid);
+    }
+#endif
+  else
+    g_warning ("Unhandled parent window type %s", arg_parent_window);
+
+  dialog = gtk_print_unix_dialog_new (arg_title, NULL);
+  gtk_print_unix_dialog_set_manual_capabilities (GTK_PRINT_UNIX_DIALOG (dialog), 0);
+
+  handle = g_new0 (PrintDialogHandle, 1);
+  handle->impl = object;
+  handle->invocation = invocation;
+  handle->request = g_object_ref (request);
+  handle->dialog = g_object_ref (dialog);
+  handle->fd = fd;
+
+  g_signal_connect (request, "handle-close", G_CALLBACK (handle_close), handle);
+
+  g_signal_connect (dialog, "response", G_CALLBACK (handle_print_response), handle);
+
+  gtk_widget_realize (dialog);
+
+  if (foreign_parent)
+    gdk_window_set_transient_for (gtk_widget_get_window (dialog), foreign_parent);
+
+  request_export (request, g_dbus_method_invocation_get_connection (invocation));
+
+  gtk_widget_show (dialog);
+
+  return TRUE;
+}
+
+static void
+send_prepare_print_response (PrintDialogHandle *handle)
 {
   GVariantBuilder opt_builder;
 
   g_variant_builder_init (&opt_builder, G_VARIANT_TYPE_VARDICT);
 
+  if (handle->response == 0)
+    {
+      g_variant_builder_add (&opt_builder, "{sv}", "settings", gtk_print_settings_to_gvariant (handle->params->settings));
+      g_variant_builder_add (&opt_builder, "{sv}", "page-setup", gtk_page_setup_to_gvariant (handle->params->page_setup));
+      g_variant_builder_add (&opt_builder, "{sv}", "token", g_variant_new_uint32 (handle->params->token));
+    }
+
   if (handle->request->exported)
     request_unexport (handle->request);
 
-  xdp_impl_print_complete_print_file (handle->impl,
-                                      handle->invocation,
-                                      handle->response,
-                                      g_variant_builder_end (&opt_builder));
+  xdp_impl_print_complete_prepare_print (handle->impl,
+                                         handle->invocation,
+                                         handle->response,
+                                         g_variant_builder_end (&opt_builder));
 
   print_dialog_handle_close (handle);
 }
 
 static void
-handle_print_dialog_response (GtkDialog *dialog,
-                              gint response,
-                              gpointer data)
+handle_prepare_print_response (GtkDialog *dialog,
+                               gint response,
+                               gpointer data)
 {
   PrintDialogHandle *handle = data;
 
@@ -109,77 +411,43 @@ handle_print_dialog_response (GtkDialog *dialog,
 
     case GTK_RESPONSE_OK:
       {
-        GtkPageSetup *setup;
-        GtkPrintSettings *settings;
-        GtkPrinter *printer;
-        GtkPrintJob *job;
-        GError *error = NULL;
-
-        setup = gtk_print_unix_dialog_get_page_setup (GTK_PRINT_UNIX_DIALOG (handle->dialog));
-        settings = gtk_print_unix_dialog_get_settings (GTK_PRINT_UNIX_DIALOG (handle->dialog));
-        printer = gtk_print_unix_dialog_get_selected_printer (GTK_PRINT_UNIX_DIALOG (handle->dialog))
-;
-        job = gtk_print_job_new ("", //TODO send title along
-                                 printer, settings, setup);
-        g_clear_object (&settings);
-
-        if (!gtk_print_job_set_source_file (job, handle->filename, &error))
-          {
-            // TODO report error;
-            g_warning ("printing failed: %s\n", error->message);
-            g_error_free (error);
-          }
-        else
-          {
-            gtk_print_job_send (job, NULL, NULL, NULL); //TODO: wait ?
-          }
-        g_object_unref (job);
-
         handle->response = 0;
+
+        handle->params = print_params_new (handle->request->app_id,
+                                           gtk_print_unix_dialog_get_page_setup (GTK_PRINT_UNIX_DIALOG (handle->dialog)),
+                                           gtk_print_unix_dialog_get_settings (GTK_PRINT_UNIX_DIALOG (handle->dialog)),
+                                           gtk_print_unix_dialog_get_selected_printer (GTK_PRINT_UNIX_DIALOG (handle->dialog)));
       }
       break;
     }
 
-  send_response (handle);
+  send_prepare_print_response (handle);
 }
 
 static gboolean
-handle_close (XdpImplRequest *object,
-              GDBusMethodInvocation *invocation,
-              PrintDialogHandle *handle)
-{
-  xdp_impl_print_complete_print_file (handle->impl, handle->invocation, 2, NULL);
-  print_dialog_handle_close (handle);
-
-  if (handle->request->exported)
-    request_unexport (handle->request);
-
-  xdp_impl_request_complete_close (object, invocation);
-
-  return TRUE;
-}
-
-static gboolean
-handle_print_file (XdpImplPrint *object,
-                   GDBusMethodInvocation *invocation,
-                   const char *arg_handle,
-                   const char *arg_app_id,
-                   const char *arg_parent_window,
-                   const char *arg_title,
-                   const char *arg_filename,
-                   GVariant *arg_options)
+handle_prepare_print (XdpImplPrint *object,
+                      GDBusMethodInvocation *invocation,
+                      const char *arg_handle,
+                      const char *arg_app_id,
+                      const char *arg_parent_window,
+                      const char *arg_title,
+                      GVariant *arg_settings,
+                      GVariant *arg_page_setup,
+                      GVariant *arg_options)
 {
   g_autoptr(Request) request = NULL;
   const char *sender;
   GtkWidget *dialog;
   GdkWindow *foreign_parent = NULL;
   PrintDialogHandle *handle;
+  GtkPrintSettings *settings;
+  GtkPageSetup *page_setup;
 
   sender = g_dbus_method_invocation_get_sender (invocation);
 
   request = request_new (sender, arg_app_id, arg_handle);
 
- #ifdef GDK_WINDOWING_X11
+#ifdef GDK_WINDOWING_X11
   if (g_str_has_prefix (arg_parent_window, "x11:"))
     {
       int xid;
@@ -191,21 +459,29 @@ handle_print_file (XdpImplPrint *object,
     }
 #endif
   else
-    g_warning ("Unhandled parent window type %s\n", arg_parent_window);
+    g_warning ("Unhandled parent window type %s", arg_parent_window);
+
+  settings = gtk_print_settings_new_from_gvariant (arg_settings);
+  page_setup = gtk_page_setup_new_from_gvariant (arg_page_setup);
 
   dialog = gtk_print_unix_dialog_new (arg_title, NULL);
   gtk_print_unix_dialog_set_manual_capabilities (GTK_PRINT_UNIX_DIALOG (dialog), 0);
+  gtk_print_unix_dialog_set_embed_page_setup (GTK_PRINT_UNIX_DIALOG (dialog), TRUE);
+  gtk_print_unix_dialog_set_settings (GTK_PRINT_UNIX_DIALOG (dialog), settings);
+  gtk_print_unix_dialog_set_page_setup (GTK_PRINT_UNIX_DIALOG (dialog), page_setup);
+
+  g_object_unref (settings);
+  g_object_unref (page_setup);
 
   handle = g_new0 (PrintDialogHandle, 1);
   handle->impl = object;
   handle->invocation = invocation;
   handle->request = g_object_ref (request);
   handle->dialog = g_object_ref (dialog);
-  handle->filename = g_strdup (arg_filename);
 
   g_signal_connect (request, "handle-close", G_CALLBACK (handle_close), handle);
 
-  g_signal_connect (dialog, "response", G_CALLBACK (handle_print_dialog_response), handle);
+  g_signal_connect (dialog, "response", G_CALLBACK (handle_prepare_print_response), handle);
 
   gtk_widget_realize (dialog);
 
@@ -227,7 +503,8 @@ print_init (GDBusConnection *bus,
 
   helper = G_DBUS_INTERFACE_SKELETON (xdp_impl_print_skeleton_new ());
 
-  g_signal_connect (helper, "handle-print-file", G_CALLBACK (handle_print_file), NULL);
+  g_signal_connect (helper, "handle-print", G_CALLBACK (handle_print), NULL);
+  g_signal_connect (helper, "handle-prepare-print", G_CALLBACK (handle_prepare_print), NULL);
 
   if (!g_dbus_interface_skeleton_export (helper,
                                          bus,

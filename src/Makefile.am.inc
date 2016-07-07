@@ -6,7 +6,7 @@ $(dbus_built_sources): src/Makefile.am.inc
 	--interface-prefix org.freedesktop.impl.portal.	\
 	--c-namespace XdpImpl				\
 	--generate-c-code src/xdg-desktop-portal-dbus	\
-	--annotate "org.freedesktop.impl.portal.Print.PrintFile()" "org.gtk.GDBus.C.UnixFD" "true" \
+	--annotate "org.freedesktop.impl.portal.Print.Print()" "org.gtk.GDBus.C.UnixFD" "true" \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Request.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.FileChooser.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.AppChooser.xml \
