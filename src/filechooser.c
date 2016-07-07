@@ -283,6 +283,7 @@ handle_open (XdpImplFileChooser *object,
   const gchar *sender;
   GtkFileChooserAction action;
   gboolean multiple;
+  gboolean modal;
   GtkWidget *dialog;
   GdkWindow *foreign_parent = NULL;
   GtkWidget *fake_parent;
@@ -314,6 +315,9 @@ handle_open (XdpImplFileChooser *object,
         multiple = FALSE;
     }
 
+  if (!g_variant_lookup (arg_options, "modal", "b", &modal))
+    modal = FALSE;
+
   if (!g_variant_lookup (arg_options, "accept_label", "&s", &accept_label))
     accept_label = _("_Open");
 
@@ -323,6 +327,8 @@ handle_open (XdpImplFileChooser *object,
                                         cancel_label, GTK_RESPONSE_CANCEL,
                                         accept_label, GTK_RESPONSE_OK,
                                         NULL);
+  gtk_window_set_modal (GTK_WINDOW (dialog), modal);
+
   gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
   gtk_file_chooser_set_select_multiple (GTK_FILE_CHOOSER (dialog), multiple);
 
@@ -398,7 +404,7 @@ handle_open (XdpImplFileChooser *object,
     }
 #endif
   else
-    g_warning ("Unhandled parent window type %s\n", arg_parent_window);
+    g_warning ("Unhandled parent window type %s", arg_parent_window);
 
   gtk_file_chooser_set_do_overwrite_confirmation (GTK_FILE_CHOOSER (dialog), TRUE);
 
