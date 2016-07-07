@@ -263,7 +263,14 @@ handle_close (XdpImplRequest *object,
               GDBusMethodInvocation *invocation,
               PrintDialogHandle *handle)
 {
-  xdp_impl_print_complete_print (handle->impl, handle->invocation, NULL, 2, NULL);
+  GVariantBuilder opt_builder;
+
+  g_variant_builder_init (&opt_builder, G_VARIANT_TYPE_VARDICT);
+  xdp_impl_print_complete_print (handle->impl,
+                                 handle->invocation,
+                                 NULL,
+                                 2,
+                                 g_variant_builder_end (&opt_builder));
   print_dialog_handle_close (handle);
 
   if (handle->request->exported)
