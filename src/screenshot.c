@@ -115,6 +115,13 @@ handle_close (XdpImplRequest *object,
               GDBusMethodInvocation *invocation,
               ScreenshotDialogHandle *handle)
 {
+  GVariantBuilder opt_builder;
+
+  g_variant_builder_init (&opt_builder, G_VARIANT_TYPE_VARDICT);
+  xdp_impl_screenshot_complete_screenshot (handle->impl,
+                                           handle->invocation,
+                                           2,
+                                           g_variant_builder_end (&opt_builder));
   screenshot_dialog_handle_close (handle);
   return FALSE;
 }
