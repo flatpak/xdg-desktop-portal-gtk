@@ -1,0 +1,10 @@
+Initial release 0.1
+===================
+
+Implemented portal backend interfaces:
+ * org.freedesktop.impl.portal.FileChooser
+ * org.freedesktop.impl.portal.Print
+ * org.freedesktop.impl.portal.AppChooser
+ * org.freedesktop.impl.portal.Screenshot
+ * org.freedesktop.impl.portal.Inhibit
+ * org.freedestkop.impl.portal.Notification
