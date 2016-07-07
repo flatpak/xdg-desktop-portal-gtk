@@ -154,7 +154,7 @@ handle_screenshot (XdpImplScreenshot *object,
   handle->invocation = invocation;
   handle->request = g_object_ref (request);
   handle->dialog = g_object_ref (dialog);
-  handle->uri = g_strconcat ("file://", filename, NULL);
+  handle->uri = g_filename_to_uri (filename, NULL, NULL);
 
   g_signal_connect (request, "handle-close", G_CALLBACK (handle_close), handle);
 
