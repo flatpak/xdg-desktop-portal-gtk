@@ -300,6 +300,7 @@ handle_print (XdpImplPrint *object,
   guint32 token = 0;
   PrintParams *params;
   int idx, fd;
+  gboolean modal;
 
   g_variant_get (arg_fd_in, "h", &idx);
   fd = g_unix_fd_list_get (fd_list, idx, NULL);
@@ -345,7 +346,11 @@ handle_print (XdpImplPrint *object,
   else
     g_warning ("Unhandled parent window type %s", arg_parent_window);
 
+  if (!g_variant_lookup (arg_options, "modal", "b", &modal))
+    modal = TRUE;
+
   dialog = gtk_print_unix_dialog_new (arg_title, NULL);
+  gtk_window_set_modal (GTK_WINDOW (dialog), modal);
   gtk_print_unix_dialog_set_manual_capabilities (GTK_PRINT_UNIX_DIALOG (dialog), 0);
 
   handle = g_new0 (PrintDialogHandle, 1);
@@ -449,6 +454,7 @@ handle_prepare_print (XdpImplPrint *object,
   PrintDialogHandle *handle;
   GtkPrintSettings *settings;
   GtkPageSetup *page_setup;
+  gboolean modal;
 
   sender = g_dbus_method_invocation_get_sender (invocation);
 
@@ -470,8 +476,11 @@ handle_prepare_print (XdpImplPrint *object,
 
   settings = gtk_print_settings_new_from_gvariant (arg_settings);
   page_setup = gtk_page_setup_new_from_gvariant (arg_page_setup);
+  if (!g_variant_lookup (arg_options, "modal", "b", &modal))
+    modal = TRUE;
 
   dialog = gtk_print_unix_dialog_new (arg_title, NULL);
+  gtk_window_set_modal (GTK_WINDOW (dialog), modal);
   gtk_print_unix_dialog_set_manual_capabilities (GTK_PRINT_UNIX_DIALOG (dialog), 0);
   gtk_print_unix_dialog_set_embed_page_setup (GTK_PRINT_UNIX_DIALOG (dialog), TRUE);
   gtk_print_unix_dialog_set_settings (GTK_PRINT_UNIX_DIALOG (dialog), settings);

@@ -150,7 +150,7 @@ handle_screenshot (XdpImplScreenshot *object,
                                                    NULL, NULL);
 
   if (!g_variant_lookup (arg_options, "modal", "b", &modal))
-    modal = FALSE;
+    modal = TRUE;
 
   dialog = GTK_WIDGET (screenshot_dialog_new (arg_app_id, filename));
   gtk_window_set_modal (GTK_WINDOW (dialog), modal);

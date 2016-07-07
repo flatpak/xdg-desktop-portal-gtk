@@ -316,7 +316,7 @@ handle_open (XdpImplFileChooser *object,
     }
 
   if (!g_variant_lookup (arg_options, "modal", "b", &modal))
-    modal = FALSE;
+    modal = TRUE;
 
   if (!g_variant_lookup (arg_options, "accept_label", "&s", &accept_label))
     accept_label = _("_Open");
