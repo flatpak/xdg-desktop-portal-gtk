@@ -133,7 +133,9 @@ handle_screenshot (XdpImplScreenshot *object,
   g_autoptr(GError) error = NULL;
   g_autofree char *filename = NULL;
   gboolean success;
+  gboolean modal;
   GtkWidget *dialog;
+  GdkWindow *foreign_parent = NULL;
 
   sender = g_dbus_method_invocation_get_sender (invocation);
 
@@ -147,7 +149,25 @@ handle_screenshot (XdpImplScreenshot *object,
                                                    &filename,
                                                    NULL, NULL);
 
+  if (!g_variant_lookup (arg_options, "modal", "b", &modal))
+    modal = FALSE;
+
   dialog = GTK_WIDGET (screenshot_dialog_new (arg_app_id, filename));
+  gtk_window_set_modal (GTK_WINDOW (dialog), modal);
+
+#ifdef GDK_WINDOWING_X11
+  if (g_str_has_prefix (arg_parent_window, "x11:"))
+    {
+      int xid;
+
+      if (sscanf (arg_parent_window, "x11:%x", &xid) != 1)
+        g_warning ("invalid xid");
+      else
+        foreign_parent = gdk_x11_window_foreign_new_for_display (gtk_widget_get_display (dialog), xid);
+    }
+#endif
+  else
+    g_warning ("Unhandled parent window type %s", arg_parent_window);
 
   handle = g_new0 (ScreenshotDialogHandle, 1);
   handle->impl = object;
@@ -160,7 +180,12 @@ handle_screenshot (XdpImplScreenshot *object,
 
   g_signal_connect (dialog, "done", G_CALLBACK (screenshot_dialog_done), handle);
 
-  gtk_window_present (GTK_WINDOW (dialog));
+  gtk_widget_realize (dialog);
+
+  if (foreign_parent)
+    gdk_window_set_transient_for (gtk_widget_get_window (dialog), foreign_parent);
+
+  gtk_widget_show (dialog);
 
   request_export (request, g_dbus_method_invocation_get_connection (invocation));
 
