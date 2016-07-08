@@ -90,10 +90,10 @@ screenshot_dialog_new (const char *app_id,
       g_autoptr(GAppInfo) info = NULL;
       id = g_strconcat (app_id, ".desktop", NULL);
       info = G_APP_INFO (g_desktop_app_info_new (id));
-      heading = g_strdup_printf (_("Share this screenshot with %s ?"), g_app_info_get_display_name (info));
+      heading = g_strdup_printf (_("Share this screenshot with %s?"), g_app_info_get_display_name (info));
     }
   else
-    heading = g_strdup (_("Share this screenshot with the requesting application ?"));
+    heading = g_strdup (_("Share this screenshot with the requesting application?"));
 
   gtk_label_set_label (GTK_LABEL (dialog->heading), heading);
 
