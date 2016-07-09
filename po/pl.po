@@ -1,0 +1,62 @@
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+# Aviary.pl
+# Jeśli masz jakiekolwiek uwagi odnoszące się do tłumaczenia lub chcesz
+# pomóc w jego rozwijaniu i pielęgnowaniu, napisz do nas:
+# gnomepl@aviary.pl
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+# Piotr Drąg <piotrdrag@gmail.com>, 2016.
+# Aviary.pl <gnomepl@aviary.pl>, 2016.
+msgid ""
+msgstr ""
+"Project-Id-Version: xdg-desktop-portal-gtk\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-07-08 22:00+0200\n"
+"PO-Revision-Date: 2016-07-08 22:05+0200\n"
+"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"Language-Team: Polish <gnomepl@aviary.pl>\n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+"X-Poedit-Language: Polish\n"
+"X-Poedit-Country: Poland\n"
+
+#: src/appchooser.c:157
+msgid "_Select"
+msgstr "_Wybierz"
+
+#: src/appchooser.c:159 src/appchooserdialog.ui:10
+msgid "Open With"
+msgstr "Otwarcie za pomocą"
+
+#: src/appchooser.c:161
+msgid "Select application"
+msgstr "Wybór programu"
+
+#: src/appchooser.c:165 src/appchooserdialog.ui:14 src/filechooser.c:343
+#: src/screenshotdialog.ui:14
+msgid "_Cancel"
+msgstr "_Anuluj"
+
+#: src/appchooserdialog.ui:26 src/filechooser.c:341
+msgid "_Open"
+msgstr "_Otwórz"
+
+#: src/screenshotdialog.c:93
+#, c-format
+msgid "Share this screenshot with %s?"
+msgstr "Udostępnić ten zrzut ekranu programowi %s?"
+
+#: src/screenshotdialog.c:96
+msgid "Share this screenshot with the requesting application?"
+msgstr "Udostępnić ten zrzut ekranu proszącemu o to programowi?"
+
+#: src/screenshotdialog.ui:10
+msgid "Screenshot"
+msgstr "Zrzut ekranu"
+
+#: src/screenshotdialog.ui:25
+msgid "_Share"
+msgstr "_Udostępnij"
