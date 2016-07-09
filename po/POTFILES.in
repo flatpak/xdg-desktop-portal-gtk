@@ -4,3 +4,4 @@ src/appchooserdialog.ui
 src/filechooser.c
 src/screenshotdialog.c
 src/screenshotdialog.ui
+src/access.c
