@@ -61,6 +61,15 @@ if test "$have_gtk_x11" = "yes"; then
 fi
 AM_CONDITIONAL([HAVE_GTK_X11], [test "$have_gtk_x11" = "yes"])
 
+PKG_CHECK_MODULES(GTK_WAYLAND, gtk+-wayland-3.0 >= 3.21.5,
+		  have_gtk_wayland=yes, have_gtk_wayland=no)
+if test "$have_gtk_wayland" = "yes"; then
+	AC_DEFINE(HAVE_GTK_WAYLAND, 1, [define if we we have gtk+-wayland])
+	AC_SUBST(GTK_WAYLAND_CFLAGS)
+	AC_SUBST(GTK_WAYLAND_LIBS)
+fi
+AM_CONDITIONAL([HAVE_GTK_WAYLAND], [test "$have_gtk_wayland" = "yes"])
+
 AC_CONFIG_FILES([
 Makefile
 po/Makefile.in

@@ -26,7 +26,9 @@
 #ifdef HAVE_GTK_X11
 #include "externalwindow-x11.h"
 #endif
-
+#ifdef HAVE_GTK_WAYLAND
+#include "externalwindow-wayland.h"
+#endif
 
 enum
 {
@@ -55,6 +57,20 @@ create_external_window_from_handle (const char *handle_str)
 
           external_window_x11 = external_window_x11_new (x11_handle_str);
           return EXTERNAL_WINDOW (external_window_x11);
+        }
+    }
+#endif
+#ifdef HAVE_GTK_WAYLAND
+    {
+      const char wayland_prefix[] = "wayland:";
+      if (g_str_has_prefix (handle_str, wayland_prefix))
+        {
+          ExternalWindowWayland *external_window_wayland;
+          const char *wayland_handle_str = handle_str + strlen (wayland_prefix);
+
+          external_window_wayland =
+            external_window_wayland_new (wayland_handle_str);
+          return EXTERNAL_WINDOW (external_window_wayland);
         }
     }
 #endif

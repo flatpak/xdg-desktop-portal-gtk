@@ -92,6 +92,13 @@ xdg_desktop_portal_gtk_SOURCES += \
 	$(NULL)
 endif
 
+if HAVE_GTK_WAYLAND
+xdg_desktop_portal_gtk_SOURCES += \
+	src/externalwindow-wayland.h		\
+	src/externalwindow-wayland.c		\
+	$(NULL)
+endif
+
 xdg_desktop_portal_gtk_LDADD = $(BASE_LIBS) $(GTK_LIBS) $(GTK_X11_LIBS)
 xdg_desktop_portal_gtk_CFLAGS = $(BASE_CFLAGS) $(GTK_CFLAGS) $(GTK_X11_CFLAGS)
 xdg_desktop_portal_gtk_CPPFLAGS = \
