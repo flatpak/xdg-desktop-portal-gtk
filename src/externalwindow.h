@@ -15,25 +15,30 @@
  * License along with this library. If not, see <http://www.gnu.org/licenses/>.
  *
  * Authors:
- *       Matthias Clasen <mclasen@redhat.com>
+ *       Jonas Ådahl <jadahl@redhat.com>
  */
 
 #pragma once
 
-#include <gdk/gdk.h>
+#include <glib-object.h>
+#include <gtk/gtk.h>
 
-#define DESKTOP_PORTAL_OBJECT_PATH "/org/freedesktop/portal/desktop"
 
-typedef enum {
-  XDG_DESKTOP_PORTAL_ERROR_FAILED     = 0,
-  XDG_DESKTOP_PORTAL_ERROR_INVALID_ARGUMENT,
-  XDG_DESKTOP_PORTAL_ERROR_NOT_FOUND,
-  XDG_DESKTOP_PORTAL_ERROR_EXISTS,
-  XDG_DESKTOP_PORTAL_ERROR_NOT_ALLOWED,
-  XDG_DESKTOP_PORTAL_ERROR_CANCELLED,
-  XDG_DESKTOP_PORTAL_ERROR_WINDOW_DESTROYED
-} XdgDesktopPortalErrorEnum;
+#define EXTERNAL_TYPE_WINDOW (external_window_get_type ())
+G_DECLARE_DERIVABLE_TYPE (ExternalWindow, external_window,
+			  EXTERNAL, WINDOW, GObject)
 
-#define XDG_DESKTOP_PORTAL_ERROR xdg_desktop_portal_error_quark ()
+struct _ExternalWindowClass
+{
+  GObjectClass parent_class;
 
-GQuark  xdg_desktop_portal_error_quark (void);
+  void (*set_parent_of) (ExternalWindow *external_window,
+                         GdkWindow      *child_window);
+};
+
+ExternalWindow *create_external_window_from_handle (const char *handle_str);
+
+void external_window_set_parent_of (ExternalWindow *external_window,
+                                    GdkWindow      *child_window);
+
+GdkDisplay *external_window_get_display (ExternalWindow *external_window);

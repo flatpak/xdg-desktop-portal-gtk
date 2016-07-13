@@ -45,4 +45,3 @@ xdg_desktop_portal_error_quark (void)
                                       G_N_ELEMENTS (xdg_desktop_portal_error_entries));
   return (GQuark) quark_volatile;
 }
-

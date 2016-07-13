@@ -52,6 +52,15 @@ PKG_CHECK_MODULES(GTK, [xdg-desktop-portal gtk+-3.0 gtk+-unix-print-3.0])
 AC_SUBST(GTK_CFLAGS)
 AC_SUBST(GTK_LIBS)
 
+PKG_CHECK_MODULES(GTK_X11, gtk+-x11-3.0,
+		  have_gtk_x11=yes, have_gtk_x11=no)
+if test "$have_gtk_x11" = "yes"; then
+	AC_DEFINE(HAVE_GTK_X11, 1, [define if we we have gtk+-x11])
+	AC_SUBST(GTK_X11_CFLAGS)
+	AC_SUBST(GTK_X11_LIBS)
+fi
+AM_CONDITIONAL([HAVE_GTK_X11], [test "$have_gtk_x11" = "yes"])
+
 AC_CONFIG_FILES([
 Makefile
 po/Makefile.in
