@@ -119,7 +119,13 @@ handle_close (XdpImplRequest *object,
               GDBusMethodInvocation *invocation,
               AppDialogHandle *handle)
 {
-  xdp_impl_app_chooser_complete_choose_application (handle->impl, handle->invocation, 2, NULL);
+  GVariantBuilder opt_builder;
+
+  g_variant_builder_init (&opt_builder, G_VARIANT_TYPE_VARDICT);
+  xdp_impl_app_chooser_complete_choose_application (handle->impl,
+                                                    handle->invocation,
+                                                    2,
+                                                    g_variant_builder_end (&opt_builder));
   app_dialog_handle_close (handle);
 
   if (handle->request->exported)
