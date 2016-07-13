@@ -445,13 +445,12 @@ handle_open (XdpImplFileChooser *object,
       gtk_file_chooser_set_extra_widget (GTK_FILE_CHOOSER (dialog), readonly);
     }
 
-  gtk_widget_realize (dialog);
+  gtk_widget_show (dialog);
 
   if (external_parent)
     external_window_set_parent_of (external_parent,
                                    gtk_widget_get_window (dialog));
 
-  gtk_widget_show (dialog);
 
   request_export (request, g_dbus_method_invocation_get_connection (invocation));
 
