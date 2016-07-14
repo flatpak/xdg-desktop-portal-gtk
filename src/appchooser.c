@@ -147,6 +147,7 @@ handle_choose_application (XdpImplAppChooser *object,
 {
   g_autoptr(Request) request = NULL;
   GtkWidget *dialog;
+  GdkWindow *foreign_parent = NULL;
   AppDialogHandle *handle;
   const char *sender;
   const char *cancel_label;
@@ -154,6 +155,7 @@ handle_choose_application (XdpImplAppChooser *object,
   const char *title;
   const char *heading;
   const char *latest_chosen_id;
+  gboolean modal;
 
   sender = g_dbus_method_invocation_get_sender (invocation);
 
@@ -167,10 +169,14 @@ handle_choose_application (XdpImplAppChooser *object,
     heading = _("Select application");
   if (!g_variant_lookup (arg_options, "latest-choice", "&s", &latest_chosen_id))
     latest_chosen_id = NULL;
+  if (!g_variant_lookup (arg_options, "modal", "b", &modal))
+    modal = TRUE;
 
   cancel_label = _("_Cancel");
 
   dialog = GTK_WIDGET (app_chooser_dialog_new (choices, latest_chosen_id, cancel_label, accept_label, title, heading));
+
+  gtk_window_set_modal (GTK_WINDOW (dialog), modal);
 
   handle = g_new0 (AppDialogHandle, 1);
   handle->impl = object;
@@ -183,6 +189,25 @@ handle_choose_application (XdpImplAppChooser *object,
 
   g_signal_connect (dialog, "done",
                     G_CALLBACK (handle_app_chooser_done), handle);
+
+#ifdef GDK_WINDOWING_X11
+  if (g_str_has_prefix (arg_parent_window, "x11:"))
+    {
+      int xid;
+
+      if (sscanf (arg_parent_window, "x11:%x", &xid) != 1)
+        g_warning ("invalid xid");
+      else
+        foreign_parent = gdk_x11_window_foreign_new_for_display (gtk_widget_get_display (dialog), xid);
+    }
+#endif
+  else
+    g_warning ("Unhandled parent window type %s", arg_parent_window);
+
+  gtk_widget_realize (dialog);
+
+  if (foreign_parent)
+    gdk_window_set_transient_for (gtk_widget_get_window (dialog), foreign_parent);
 
   gtk_window_present (GTK_WINDOW (dialog));
 
