@@ -167,7 +167,7 @@ handle_choose_application (XdpImplAppChooser *object,
     title = _("Open With");
   if (!g_variant_lookup (arg_options, "heading", "&s", &heading))
     heading = _("Select application");
-  if (!g_variant_lookup (arg_options, "latest-choice", "&s", &latest_chosen_id))
+  if (!g_variant_lookup (arg_options, "last_choice", "&s", &latest_chosen_id))
     latest_chosen_id = NULL;
   if (!g_variant_lookup (arg_options, "modal", "b", &modal))
     modal = TRUE;
