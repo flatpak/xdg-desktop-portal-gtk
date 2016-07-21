@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-08 22:00+0200\n"
-"PO-Revision-Date: 2016-07-08 22:05+0200\n"
+"POT-Creation-Date: 2016-07-22 01:54+0200\n"
+"PO-Revision-Date: 2016-07-22 01:55+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>\n"
 "Language: pl\n"
@@ -20,22 +20,20 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Poedit-Language: Polish\n"
-"X-Poedit-Country: Poland\n"
 
-#: src/appchooser.c:157
+#: src/appchooser.c:165
 msgid "_Select"
 msgstr "_Wybierz"
 
-#: src/appchooser.c:159 src/appchooserdialog.ui:10
+#: src/appchooser.c:167 src/appchooserdialog.ui:10
 msgid "Open With"
 msgstr "Otwarcie za pomocą"
 
-#: src/appchooser.c:161
+#: src/appchooser.c:169
 msgid "Select application"
 msgstr "Wybór programu"
 
-#: src/appchooser.c:165 src/appchooserdialog.ui:14 src/filechooser.c:343
+#: src/appchooser.c:175 src/appchooserdialog.ui:14 src/filechooser.c:343
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
 msgstr "_Anuluj"
@@ -60,3 +58,11 @@ msgstr "Zrzut ekranu"
 #: src/screenshotdialog.ui:25
 msgid "_Share"
 msgstr "_Udostępnij"
+
+#: src/access.c:269
+msgid "Deny Access"
+msgstr "Odmów dostępu"
+
+#: src/access.c:272
+msgid "Grant Access"
+msgstr "Udziel dostępu"
