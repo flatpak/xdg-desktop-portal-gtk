@@ -257,7 +257,8 @@ app_chooser_dialog_new (const char **choices,
   n_choices = g_strv_length ((char **)choices);
   for (i = 0; i < n_choices; i++)
     {
-      g_autoptr(GAppInfo) info = G_APP_INFO (g_desktop_app_info_new (choices[i]));
+      g_autofree char *desktop_id = g_strconcat (choices[i], ".desktop", NULL);
+      g_autoptr(GAppInfo) info = G_APP_INFO (g_desktop_app_info_new (desktop_id));
       GtkWidget *row;
 
       row = GTK_WIDGET (app_chooser_row_new (info));
@@ -297,6 +298,7 @@ app_chooser_dialog_set_selected (AppChooserDialog *dialog,
   GAppInfo *info = NULL;
   g_autoptr(GList) choices = NULL;
   GList *l = NULL;
+  g_autofree char *desktop_id = g_strconcat (choice_id, ".desktop", NULL);
 
   choices = gtk_container_get_children (GTK_CONTAINER (dialog->list));
   for (l = choices; l != NULL; l = g_list_next (l))
@@ -304,7 +306,7 @@ app_chooser_dialog_set_selected (AppChooserDialog *dialog,
       row = APP_CHOOSER_ROW (l->data);
       info = app_chooser_row_get_info (row);
 
-      if (g_strcmp0 (choice_id, g_app_info_get_id (info)) == 0)
+      if (g_strcmp0 (desktop_id, g_app_info_get_id (info)) == 0)
         {
           g_signal_emit_by_name (GTK_LIST_BOX (dialog->list), "row-activated", row, dialog);
           break;

@@ -102,8 +102,9 @@ handle_app_chooser_done (GtkDialog *dialog,
 
   if (info != NULL)
     {
+      const char *desktop_id = g_app_info_get_id (info);
       handle->response = 0;
-      handle->chosen = g_strdup (g_app_info_get_id (info));
+      handle->chosen = g_strndup (desktop_id, strlen (desktop_id) - strlen (".desktop"));
     }
   else
     {
