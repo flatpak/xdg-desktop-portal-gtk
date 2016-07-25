@@ -1,0 +1,67 @@
+# German translation for xdg-desktop-portal-gtk.
+# Copyright (C) 2016 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
+# This file is distributed under the same license as the xdg-desktop-portal-gtk package.
+# Christian Kirbach <Christian.Kirbach@gmail.com>, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xdg-desktop-portal-gtk master\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
+"issues\n"
+"POT-Creation-Date: 2016-07-15 14:29+0000\n"
+"PO-Revision-Date: 2016-07-15 23:39+0200\n"
+"Last-Translator: Christian Kirbach <christian.kirbach@gmail.com>\n"
+"Language-Team: German <gnome-de@gnome.org>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.7.1\n"
+
+#: src/appchooser.c:165
+msgid "_Select"
+msgstr "A_uswählen"
+
+#: src/appchooser.c:167 src/appchooserdialog.ui:10
+msgid "Open With"
+msgstr "Öffnen mit"
+
+#: src/appchooser.c:169
+msgid "Select application"
+msgstr "Anwendung auswählen"
+
+#: src/appchooser.c:175 src/appchooserdialog.ui:14 src/filechooser.c:343
+#: src/screenshotdialog.ui:14
+msgid "_Cancel"
+msgstr "Abbre_chen"
+
+#: src/appchooserdialog.ui:26 src/filechooser.c:341
+msgid "_Open"
+msgstr "_Öffnen"
+
+#: src/screenshotdialog.c:93
+#, c-format
+msgid "Share this screenshot with %s?"
+msgstr "Soll dieses Bildschirmfoto mit %s geteilt werden?"
+
+#: src/screenshotdialog.c:96
+msgid "Share this screenshot with the requesting application?"
+msgstr ""
+"Soll dieses Bildschirmfoto mit der anfragenden Anwendung geteilt werden?"
+
+#: src/screenshotdialog.ui:10
+msgid "Screenshot"
+msgstr "Bildschirmfoto"
+
+#: src/screenshotdialog.ui:25
+msgid "_Share"
+msgstr "_Freigeben"
+
+#: src/access.c:269
+msgid "Deny Access"
+msgstr "Zugriff verweigern"
+
+#: src/access.c:272
+msgid "Grant Access"
+msgstr "Zugriff gewähren"
