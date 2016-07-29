@@ -285,7 +285,7 @@ handle_access_dialog (XdpImplAccess *object,
   gtk_window_set_modal (GTK_WINDOW (dialog), modal);
   gtk_dialog_add_button (GTK_DIALOG (dialog), deny_label, GTK_RESPONSE_CANCEL);
   gtk_dialog_add_button (GTK_DIALOG (dialog), grant_label, GTK_RESPONSE_OK);
-  gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog), arg_subtitle);
+  gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog), "%s", arg_subtitle);
 
   area = gtk_message_dialog_get_message_area (GTK_MESSAGE_DIALOG (dialog));
   fix_up_label_alignment (area);
