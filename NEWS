@@ -1,3 +1,16 @@
+Major changes in 0.2
+====================
+
+* Make app chooser use app ids without .desktop
+
+* Added backend interfaces:
+ - org.freedesktop.impl.portal.Access
+
+* Translation updates
+ German
+ Polish
+
+
 Initial release 0.1
 ===================
 
