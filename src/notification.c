@@ -31,17 +31,19 @@ static OrgGtkNotifications *gtk_notifications;
 static gboolean
 handle_add_notification_gtk (XdpImplNotification *object,
                              GDBusMethodInvocation *invocation,
+                             const char *arg_sender,
                              const char *arg_app_id,
                              const char *arg_id,
                              GVariant *arg_notification)
 {
-  org_gtk_notifications_call_add_notification (gtk_notifications,
-                                               arg_app_id,
-                                               arg_id,
-                                               arg_notification,
-                                               NULL,
-                                               NULL,
-                                               NULL);
+  if (gtk_notifications)
+    org_gtk_notifications_call_add_notification (gtk_notifications,
+                                                 arg_app_id,
+                                                 arg_id,
+                                                 arg_notification,
+                                                 NULL,
+                                                 NULL,
+                                                 NULL);
 
   xdp_impl_notification_complete_add_notification (object, invocation);
 
@@ -54,12 +56,13 @@ handle_remove_notification_gtk (XdpImplNotification *object,
                                 const char *arg_app_id,
                                 const char *arg_id)
 {
-  org_gtk_notifications_call_remove_notification (gtk_notifications,
-                                                  arg_app_id,
-                                                  arg_id,
-                                                  NULL,
-                                                  NULL,
-                                                  NULL);
+  if (gtk_notifications)
+    org_gtk_notifications_call_remove_notification (gtk_notifications,
+                                                    arg_app_id,
+                                                    arg_id,
+                                                    NULL,
+                                                    NULL,
+                                                    NULL);
 
   xdp_impl_notification_complete_remove_notification (object, invocation);
 
@@ -75,6 +78,7 @@ static GSList *fdo_notifications;
 
 typedef struct
 {
+  char *sender;
   char *app_id;
   char *id;
   guint32 notify_id;
@@ -87,6 +91,7 @@ fdo_notification_free (gpointer data)
 {
   FdoNotification *n = data;
 
+  g_free (n->sender);
   g_free (n->app_id);
   g_free (n->id);
   g_free (n->default_action);
@@ -148,7 +153,9 @@ app_path_for_id (const gchar *app_id)
 
 static void
 activate_action (GDBusConnection *connection,
+                 const char *sender,
                  const char *app_id,
+                 const char *id,
                  const char *name,
                  GVariant *parameter)
 {
@@ -175,6 +182,9 @@ activate_action (GDBusConnection *connection,
     }
   else
     {
+      g_autoptr(GVariant) ret = NULL;
+      GVariantBuilder parms;
+
       g_dbus_connection_call (connection,
                               app_id,
                               object_path,
@@ -185,6 +195,20 @@ activate_action (GDBusConnection *connection,
                               NULL,
                               G_DBUS_CALL_FLAGS_NONE,
                               -1, NULL, NULL, NULL);
+
+      g_variant_builder_init (&parms, G_VARIANT_TYPE ("av"));
+      if (parameter)
+        g_variant_builder_add (&parms, "v", parameter);
+
+      g_dbus_connection_emit_signal (connection,
+                                     sender,
+                                     "/org/freedesktop/portal/desktop",
+                                     "org.freedesktop.portal.Notification",
+                                     "ActionInvoked",
+                                     g_variant_new ("(ss@av)",
+                                                    id, name,
+                                                    g_variant_builder_end (&parms)),
+                                     NULL);
     }
 }
 
@@ -223,7 +247,9 @@ notify_signal (GDBusConnection *connection,
       if (g_str_equal (action, "default"))
         {
           activate_action (connection,
+                           n->sender,
                            n->app_id,
+                           n->id,
                            n->default_action,
                            n->default_action_target);
         }
@@ -235,7 +261,9 @@ notify_signal (GDBusConnection *connection,
           if (g_action_parse_detailed_name (action, &name, &target, NULL))
             {
               activate_action (connection,
+                               n->sender,
                                n->app_id,
+                               n->id,
                                name,
                                target);
               g_free (name);
@@ -406,6 +434,7 @@ notification_sent (GObject      *source_object,
 static void
 handle_add_notification_fdo (XdpImplNotification *object,
                              GDBusMethodInvocation *invocation,
+                             const gchar *arg_sender,
                              const gchar *arg_app_id,
                              const gchar *arg_id,
                              GVariant *arg_notification)
@@ -432,6 +461,7 @@ handle_add_notification_fdo (XdpImplNotification *object,
       n = g_slice_new0 (FdoNotification);
       n->app_id = g_strdup (arg_app_id);
       n->id = g_strdup (arg_id);
+      n->sender = g_strdup (arg_sender);
       n->notify_id = 0;
 
       fdo_notifications = g_slist_prepend (fdo_notifications, n);
@@ -482,13 +512,68 @@ handle_remove_notification_fdo (XdpImplNotification *object,
     }
 }
 
+static gboolean
+has_unprefixed_action (GVariant *notification)
+{
+  const char *action;
+  g_autoptr(GVariant) buttons = NULL;
+  int i;
+
+  if (g_variant_lookup (notification, "default-action", "&s", &action) &&
+      !g_str_has_prefix (action, "app."))
+    return TRUE;
+
+  buttons = g_variant_lookup_value (notification, "buttons", G_VARIANT_TYPE("aa{sv}"));
+  if (buttons)
+    for (i = 0; i < g_variant_n_children (buttons); i++)
+      {
+        g_autoptr(GVariant) button = NULL;
+
+        button = g_variant_get_child_value (buttons, i);
+        if (g_variant_lookup (button, "action", "&s", &action) &&
+            !g_str_has_prefix (action, "app."))
+          return TRUE;
+      }
+
+  return FALSE;
+}
+
+static void
+handle_add_notification (XdpImplNotification *object,
+                         GDBusMethodInvocation *invocation,
+                         const gchar *arg_sender,
+                         const gchar *arg_app_id,
+                         const gchar *arg_id,
+                         GVariant *arg_notification)
+{
+  if (gtk_notifications == NULL ||
+      g_dbus_proxy_get_name_owner (G_DBUS_PROXY (gtk_notifications)) == NULL ||
+      has_unprefixed_action (arg_notification))
+    handle_add_notification_fdo (object, invocation, arg_sender, arg_app_id, arg_id, arg_notification);
+  else
+    handle_add_notification_gtk (object, invocation, arg_sender, arg_app_id, arg_id, arg_notification);
+}
+
+static void
+handle_remove_notification (XdpImplNotification *object,
+                            GDBusMethodInvocation *invocation,
+                            const gchar *arg_app_id,
+                            const gchar *arg_id)
+{
+  FdoNotification *n;
+
+  n = fdo_find_notification (arg_app_id, arg_id);
+  if (n)
+    handle_remove_notification_fdo (object, invocation, arg_app_id, arg_id);
+  else
+    handle_remove_notification_gtk (object, invocation, arg_app_id, arg_id);
+}
+
 gboolean
 notification_init (GDBusConnection *bus,
                    GError **error)
 {
   GDBusInterfaceSkeleton *helper;
-
-  helper = G_DBUS_INTERFACE_SKELETON (xdp_impl_notification_skeleton_new ());
 
   gtk_notifications = org_gtk_notifications_proxy_new_sync (bus,
                                                             G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
@@ -496,17 +581,11 @@ notification_init (GDBusConnection *bus,
                                                             "/org/gtk/Notifications",
                                                             NULL,
                                                             NULL);
-  if (gtk_notifications != NULL &&
-      g_dbus_proxy_get_name_owner (G_DBUS_PROXY (gtk_notifications)) != NULL)
-    {
-      g_signal_connect (helper, "handle-add-notification", G_CALLBACK (handle_add_notification_gtk), NULL);
-      g_signal_connect (helper, "handle-remove-notification", G_CALLBACK (handle_remove_notification_gtk), NULL);
-    }
-  else
-    {
-      g_signal_connect (helper, "handle-add-notification", G_CALLBACK (handle_add_notification_fdo), NULL);
-      g_signal_connect (helper, "handle-remove-notification", G_CALLBACK (handle_remove_notification_fdo), NULL);
-    }
+
+  helper = G_DBUS_INTERFACE_SKELETON (xdp_impl_notification_skeleton_new ());
+
+  g_signal_connect (helper, "handle-add-notification", G_CALLBACK (handle_add_notification), NULL);
+  g_signal_connect (helper, "handle-remove-notification", G_CALLBACK (handle_remove_notification), NULL);
 
   if (!g_dbus_interface_skeleton_export (helper,
                                          bus,
