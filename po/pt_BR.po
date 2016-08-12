@@ -1,0 +1,65 @@
+# Brazilian Portuguese translation for xdg-desktop-portal-gtk.
+# Copyright (C) 2016 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
+# This file is distributed under the same license as the xdg-desktop-portal-gtk package.
+# Rafael Fontenelle <rafaelff@gnome.org>, 2016.
+msgid ""
+msgstr ""
+"Project-Id-Version: xdg-desktop-portal-gtk master\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
+"issues\n"
+"POT-Creation-Date: 2016-08-10 02:28+0000\n"
+"PO-Revision-Date: 2016-08-10 08:27-0200\n"
+"Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
+"Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Virtaal 0.7.1\n"
+
+#: src/appchooser.c:166
+msgid "_Select"
+msgstr "_Selecionar"
+
+#: src/appchooser.c:168 src/appchooserdialog.ui:10
+msgid "Open With"
+msgstr "Abrir com"
+
+#: src/appchooser.c:170
+msgid "Select application"
+msgstr "Selecionar aplicativo"
+
+#: src/appchooser.c:176 src/appchooserdialog.ui:14 src/filechooser.c:343
+#: src/screenshotdialog.ui:14
+msgid "_Cancel"
+msgstr "_Cancelar"
+
+#: src/appchooserdialog.ui:26 src/filechooser.c:341
+msgid "_Open"
+msgstr "_Abrir"
+
+#: src/screenshotdialog.c:93
+#, c-format
+msgid "Share this screenshot with %s?"
+msgstr "Compartilhar essa captura de tela com %s?"
+
+#: src/screenshotdialog.c:96
+msgid "Share this screenshot with the requesting application?"
+msgstr "Compartilhar essa captura de tela com o aplicativo requisitante?"
+
+#: src/screenshotdialog.ui:10
+msgid "Screenshot"
+msgstr "Captura de tela"
+
+#: src/screenshotdialog.ui:25
+msgid "_Share"
+msgstr "_Compartilhar"
+
+#: src/access.c:269
+msgid "Deny Access"
+msgstr "Negar acesso"
+
+#: src/access.c:272
+msgid "Grant Access"
+msgstr "Conceder acesso"
