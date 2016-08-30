@@ -79,12 +79,28 @@ xdg_desktop_portal_gtk_SOURCES = \
 	src/access.c				\
         src/gtkbackports.h                      \
         src/gtkbackports.c                      \
+	src/externalwindow.h			\
+	src/externalwindow.c			\
 	$(dbus_built_sources)		        \
 	$(shell_built_sources)		        \
 	$(NULL)
 
-xdg_desktop_portal_gtk_LDADD = $(BASE_LIBS) $(GTK_LIBS)
-xdg_desktop_portal_gtk_CFLAGS = $(BASE_CFLAGS) $(GTK_CFLAGS)
+if HAVE_GTK_X11
+xdg_desktop_portal_gtk_SOURCES += \
+	src/externalwindow-x11.h		\
+	src/externalwindow-x11.c		\
+	$(NULL)
+endif
+
+if HAVE_GTK_WAYLAND
+xdg_desktop_portal_gtk_SOURCES += \
+	src/externalwindow-wayland.h		\
+	src/externalwindow-wayland.c		\
+	$(NULL)
+endif
+
+xdg_desktop_portal_gtk_LDADD = $(BASE_LIBS) $(GTK_LIBS) $(GTK_X11_LIBS)
+xdg_desktop_portal_gtk_CFLAGS = $(BASE_CFLAGS) $(GTK_CFLAGS) $(GTK_X11_CFLAGS)
 xdg_desktop_portal_gtk_CPPFLAGS = \
 	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"        \
 	-DLOCALEDIR=\"$(localedir)\"                    \

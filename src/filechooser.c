@@ -39,14 +39,11 @@
 
 #include "xdg-desktop-portal-dbus.h"
 
-#ifdef GDK_WINDOWING_X11
-#include <gdk/gdkx.h>
-#endif
-
 #include "filechooser.h"
 #include "request.h"
 #include "utils.h"
 #include "gtkbackports.h"
+#include "externalwindow.h"
 
 
 typedef struct {
@@ -56,6 +53,7 @@ typedef struct {
   GtkWidget *dialog;
   GtkFileChooserAction action;
   gboolean multiple;
+  ExternalWindow *external_parent;
 
   int response;
   GSList *uris;
@@ -70,6 +68,7 @@ file_dialog_handle_free (gpointer data)
 {
   FileDialogHandle *handle = data;
 
+  g_clear_object (&handle->external_parent);
   g_object_unref (handle->dialog);
   g_object_unref (handle->request);
   g_slist_free_full (handle->uris, g_free);
@@ -303,8 +302,10 @@ handle_open (XdpImplFileChooser *object,
   GtkFileChooserAction action;
   gboolean multiple;
   gboolean modal;
+  GdkDisplay *display;
+  GdkScreen *screen;
   GtkWidget *dialog;
-  GdkWindow *foreign_parent = NULL;
+  ExternalWindow *external_parent = NULL;
   GtkWidget *fake_parent;
   FileDialogHandle *handle;
   const char *cancel_label;
@@ -318,9 +319,6 @@ handle_open (XdpImplFileChooser *object,
   sender = g_dbus_method_invocation_get_sender (invocation);
 
   request = request_new (sender, arg_app_id, arg_handle);
-
-  fake_parent = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-  g_object_ref_sink (fake_parent);
 
   if (strcmp (method_name, "SaveFile") == 0)
     {
@@ -342,6 +340,26 @@ handle_open (XdpImplFileChooser *object,
 
   cancel_label = _("_Cancel");
 
+  if (arg_parent_window)
+    {
+      external_parent = create_external_window_from_handle (arg_parent_window);
+      if (!external_parent)
+        g_warning ("Failed to associate portal window with parent window %s",
+                   arg_parent_window);
+    }
+
+  if (external_parent)
+    display = external_window_get_display (external_parent);
+  else
+    display = gdk_display_get_default ();
+  screen = gdk_display_get_default_screen (display);
+
+  fake_parent = g_object_new (GTK_TYPE_WINDOW,
+                              "type", GTK_WINDOW_TOPLEVEL,
+                              "screen", screen,
+                              NULL);
+  g_object_ref_sink (fake_parent);
+
   dialog = gtk_file_chooser_dialog_new (arg_title, GTK_WINDOW (fake_parent), action,
                                         cancel_label, GTK_RESPONSE_CANCEL,
                                         accept_label, GTK_RESPONSE_OK,
@@ -359,6 +377,7 @@ handle_open (XdpImplFileChooser *object,
   handle->action = action;
   handle->multiple = multiple;
   handle->choices = g_hash_table_new (g_str_hash, g_str_equal);
+  handle->external_parent = external_parent;
 
   g_signal_connect (request, "handle-close", G_CALLBACK (handle_close), handle);
 
@@ -411,20 +430,6 @@ handle_open (XdpImplFileChooser *object,
 
   g_object_unref (fake_parent);
 
-#ifdef GDK_WINDOWING_X11
-  if (g_str_has_prefix (arg_parent_window, "x11:"))
-    {
-      int xid;
-
-      if (sscanf (arg_parent_window, "x11:%x", &xid) != 1)
-        g_warning ("invalid xid");
-      else
-        foreign_parent = gdk_x11_window_foreign_new_for_display (gtk_widget_get_display (dialog), xid);
-    }
-#endif
-  else
-    g_warning ("Unhandled parent window type %s", arg_parent_window);
-
   gtk_file_chooser_set_do_overwrite_confirmation (GTK_FILE_CHOOSER (dialog), TRUE);
 
   if (action == GTK_FILE_CHOOSER_ACTION_OPEN)
@@ -440,12 +445,12 @@ handle_open (XdpImplFileChooser *object,
       gtk_file_chooser_set_extra_widget (GTK_FILE_CHOOSER (dialog), readonly);
     }
 
-  gtk_widget_realize (dialog);
-
-  if (foreign_parent)
-    gdk_window_set_transient_for (gtk_widget_get_window (dialog), foreign_parent);
-
   gtk_widget_show (dialog);
+
+  if (external_parent)
+    external_window_set_parent_of (external_parent,
+                                   gtk_widget_get_window (dialog));
+
 
   request_export (request, g_dbus_method_invocation_get_connection (invocation));
 
