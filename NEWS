@@ -1,3 +1,15 @@
+Major changes in 0.3
+====================
+
+* Add Wayland support for transient-for dialogs
+
+* Translation updates:
+ Brazilian Portuguese
+ Hungarian
+ Slovak
+ Ukrainian
+
+
 Major changes in 0.2
 ====================
 
