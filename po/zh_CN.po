@@ -1,0 +1,65 @@
+# Chinese (China) translation for xdg-desktop-portal-gtk.
+# Copyright (C) 2016 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
+# This file is distributed under the same license as the xdg-desktop-portal-gtk package.
+# Mingye Wang <arthur2e5@aosc.xyz>, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xdg-desktop-portal-gtk master\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
+"issues\n"
+"POT-Creation-Date: 2016-10-28 14:30+0000\n"
+"PO-Revision-Date: 2016-10-28 18:05-0400\n"
+"Language-Team: Chinese (China) <i18n-zh@googlegroups.com>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: Mingye Wang (Arthur2e5) <arthur200126@gmail.com>\n"
+"X-Generator: Poedit 1.8.7\n"
+
+#: src/appchooser.c:166
+msgid "_Select"
+msgstr "选择(_S)"
+
+#: src/appchooser.c:168 src/appchooserdialog.ui:10
+msgid "Open With"
+msgstr "打开方式"
+
+#: src/appchooser.c:170
+msgid "Select application"
+msgstr "选择应用程序"
+
+#: src/appchooser.c:176 src/appchooserdialog.ui:14 src/filechooser.c:341
+#: src/screenshotdialog.ui:14
+msgid "_Cancel"
+msgstr "取消(_C)"
+
+#: src/appchooserdialog.ui:26 src/filechooser.c:339
+msgid "_Open"
+msgstr "打开(_O)"
+
+#: src/screenshotdialog.c:93
+#, c-format
+msgid "Share this screenshot with %s?"
+msgstr "要与 %s 分享截屏吗？"
+
+#: src/screenshotdialog.c:96
+msgid "Share this screenshot with the requesting application?"
+msgstr "与正发出请求的应用程序共享此截图吗？"
+
+#: src/screenshotdialog.ui:10
+msgid "Screenshot"
+msgstr "截屏"
+
+#: src/screenshotdialog.ui:25
+msgid "_Share"
+msgstr "分享(_S)"
+
+#: src/access.c:269
+msgid "Deny Access"
+msgstr "拒绝访问"
+
+#: src/access.c:272
+msgid "Grant Access"
+msgstr "允许访问"
