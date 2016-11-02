@@ -287,6 +287,28 @@ handle_close (XdpImplRequest *object,
   return TRUE;
 }
 
+static void
+update_preview_cb (GtkFileChooser *file_chooser, gpointer data)
+{
+  GtkWidget *preview;
+  char *filename;
+  GdkPixbuf *pixbuf;
+  gboolean have_preview;
+
+  preview = GTK_WIDGET (data);
+  filename = gtk_file_chooser_get_preview_filename (file_chooser);
+
+  pixbuf = gdk_pixbuf_new_from_file_at_size (filename, 128, 128, NULL);
+  have_preview = (pixbuf != NULL);
+  g_free (filename);
+
+  gtk_image_set_from_pixbuf (GTK_IMAGE (preview), pixbuf);
+  if (pixbuf)
+    g_object_unref (pixbuf);
+
+  gtk_file_chooser_set_preview_widget_active (file_chooser, have_preview);
+}
+
 static gboolean
 handle_open (XdpImplFileChooser *object,
              GDBusMethodInvocation *invocation,
@@ -314,6 +336,7 @@ handle_open (XdpImplFileChooser *object,
   const char *current_name;
   const char *path;
   g_autoptr (GVariant) choices = NULL;
+  GtkWidget *preview;
 
   method_name = g_dbus_method_invocation_get_method_name (invocation);
   sender = g_dbus_method_invocation_get_sender (invocation);
@@ -368,6 +391,13 @@ handle_open (XdpImplFileChooser *object,
 
   gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
   gtk_file_chooser_set_select_multiple (GTK_FILE_CHOOSER (dialog), multiple);
+
+  preview = gtk_image_new ();
+  g_object_set (preview, "margin", 10, NULL);
+  gtk_widget_show (preview);
+  gtk_file_chooser_set_preview_widget (GTK_FILE_CHOOSER (dialog), preview);
+  gtk_file_chooser_set_use_preview_label (GTK_FILE_CHOOSER (dialog), FALSE);
+  g_signal_connect (dialog, "update-preview", G_CALLBACK (update_preview_cb), preview);
 
   handle = g_new0 (FileDialogHandle, 1);
   handle->impl = object;
