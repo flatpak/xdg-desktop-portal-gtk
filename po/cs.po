@@ -1,0 +1,67 @@
+# Czech translation for xdg-desktop-portal-gtk.
+# Copyright (C) 2016 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
+# This file is distributed under the same license as the xdg-desktop-portal-gtk package.
+#
+# Marek Černocký <marek@manet.cz>, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xdg-desktop-portal-gtk master\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
+"issues\n"
+"POT-Creation-Date: 2016-11-09 03:30+0000\n"
+"PO-Revision-Date: 2016-11-09 12:02+0100\n"
+"Last-Translator: Marek Černocký <marek@manet.cz>\n"
+"Language-Team: Czech <gnome-cs-list@gnome.org>>\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Gtranslator 2.91.7\n"
+
+#: src/appchooser.c:166
+msgid "_Select"
+msgstr "_Vybrat"
+
+#: src/appchooser.c:168 src/appchooserdialog.ui:10
+msgid "Open With"
+msgstr "Otevření pomocí"
+
+#: src/appchooser.c:170
+msgid "Select application"
+msgstr "Výběr aplikace"
+
+#: src/appchooser.c:176 src/appchooserdialog.ui:14 src/filechooser.c:341
+#: src/screenshotdialog.ui:14
+msgid "_Cancel"
+msgstr "_Zrušit"
+
+#: src/appchooserdialog.ui:26 src/filechooser.c:339
+msgid "_Open"
+msgstr "_Otevřít"
+
+#: src/screenshotdialog.c:93
+#, c-format
+msgid "Share this screenshot with %s?"
+msgstr "Sdílet tento snímek obrazovky s aplikací %s?"
+
+#: src/screenshotdialog.c:96
+msgid "Share this screenshot with the requesting application?"
+msgstr "Sdílet tento snímek obrazovky s aplikací, která o to žádá?"
+
+#: src/screenshotdialog.ui:10
+msgid "Screenshot"
+msgstr "Snímek obrazovky"
+
+#: src/screenshotdialog.ui:25
+msgid "_Share"
+msgstr "_Sdílet"
+
+#: src/access.c:269
+msgid "Deny Access"
+msgstr "Zamítnout přístup"
+
+#: src/access.c:272
+msgid "Grant Access"
+msgstr "Udělit přístup"
