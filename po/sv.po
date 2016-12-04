@@ -1,0 +1,66 @@
+# Swedish translation for xdg-desktop-portal-gtk.
+# Copyright © 2016 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
+# This file is distributed under the same license as the xdg-desktop-portal-gtk package.
+# Sebastian Rasmussen <sebras@gmail.com>, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xdg-desktop-portal-gtk master\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
+"issues\n"
+"POT-Creation-Date: 2016-08-30 02:30+0000\n"
+"PO-Revision-Date: 2016-08-14 13:53+0800\n"
+"Last-Translator: Sebastian Rasmussen <sebras@gmail.com>\n"
+"Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.8\n"
+
+#: src/appchooser.c:166
+msgid "_Select"
+msgstr "_Välj"
+
+#: src/appchooser.c:168 src/appchooserdialog.ui:10
+msgid "Open With"
+msgstr "Öppna med"
+
+#: src/appchooser.c:170
+msgid "Select application"
+msgstr "Välj program"
+
+#: src/appchooser.c:176 src/appchooserdialog.ui:14 src/filechooser.c:341
+#: src/screenshotdialog.ui:14
+msgid "_Cancel"
+msgstr "_Avbryt"
+
+#: src/appchooserdialog.ui:26 src/filechooser.c:339
+msgid "_Open"
+msgstr "_Öppna"
+
+#: src/screenshotdialog.c:93
+#, c-format
+msgid "Share this screenshot with %s?"
+msgstr "Dela denna skärmbild med %s?"
+
+#: src/screenshotdialog.c:96
+msgid "Share this screenshot with the requesting application?"
+msgstr "Dela denna skärmbild med programmet som begär den?"
+
+#: src/screenshotdialog.ui:10
+msgid "Screenshot"
+msgstr "Skärmbild"
+
+#: src/screenshotdialog.ui:25
+msgid "_Share"
+msgstr "_Dela"
+
+#: src/access.c:269
+msgid "Deny Access"
+msgstr "Neka tillgång"
+
+#: src/access.c:272
+msgid "Grant Access"
+msgstr "Bevilja tillgång"
