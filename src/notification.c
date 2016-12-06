@@ -31,7 +31,6 @@ static OrgGtkNotifications *gtk_notifications;
 static gboolean
 handle_add_notification_gtk (XdpImplNotification *object,
                              GDBusMethodInvocation *invocation,
-                             const char *arg_sender,
                              const char *arg_app_id,
                              const char *arg_id,
                              GVariant *arg_notification)
@@ -78,7 +77,6 @@ static GSList *fdo_notifications;
 
 typedef struct
 {
-  char *sender;
   char *app_id;
   char *id;
   guint32 notify_id;
@@ -91,7 +89,6 @@ fdo_notification_free (gpointer data)
 {
   FdoNotification *n = data;
 
-  g_free (n->sender);
   g_free (n->app_id);
   g_free (n->id);
   g_free (n->default_action);
@@ -153,7 +150,6 @@ app_path_for_id (const gchar *app_id)
 
 static void
 activate_action (GDBusConnection *connection,
-                 const char *sender,
                  const char *app_id,
                  const char *id,
                  const char *name,
@@ -201,12 +197,12 @@ activate_action (GDBusConnection *connection,
         g_variant_builder_add (&parms, "v", parameter);
 
       g_dbus_connection_emit_signal (connection,
-                                     sender,
+                                     NULL,
                                      "/org/freedesktop/portal/desktop",
-                                     "org.freedesktop.portal.Notification",
+                                     "org.freedesktop.impl.portal.Notification",
                                      "ActionInvoked",
-                                     g_variant_new ("(ss@av)",
-                                                    id, name,
+                                     g_variant_new ("(sss@av)",
+                                                    app_id, id, name,
                                                     g_variant_builder_end (&parms)),
                                      NULL);
     }
@@ -247,7 +243,6 @@ notify_signal (GDBusConnection *connection,
       if (g_str_equal (action, "default"))
         {
           activate_action (connection,
-                           n->sender,
                            n->app_id,
                            n->id,
                            n->default_action,
@@ -261,7 +256,6 @@ notify_signal (GDBusConnection *connection,
           if (g_action_parse_detailed_name (action, &name, &target, NULL))
             {
               activate_action (connection,
-                               n->sender,
                                n->app_id,
                                n->id,
                                name,
@@ -434,7 +428,6 @@ notification_sent (GObject      *source_object,
 static void
 handle_add_notification_fdo (XdpImplNotification *object,
                              GDBusMethodInvocation *invocation,
-                             const gchar *arg_sender,
                              const gchar *arg_app_id,
                              const gchar *arg_id,
                              GVariant *arg_notification)
@@ -461,7 +454,6 @@ handle_add_notification_fdo (XdpImplNotification *object,
       n = g_slice_new0 (FdoNotification);
       n->app_id = g_strdup (arg_app_id);
       n->id = g_strdup (arg_id);
-      n->sender = g_strdup (arg_sender);
       n->notify_id = 0;
 
       fdo_notifications = g_slist_prepend (fdo_notifications, n);
@@ -541,7 +533,6 @@ has_unprefixed_action (GVariant *notification)
 static void
 handle_add_notification (XdpImplNotification *object,
                          GDBusMethodInvocation *invocation,
-                         const gchar *arg_sender,
                          const gchar *arg_app_id,
                          const gchar *arg_id,
                          GVariant *arg_notification)
@@ -549,9 +540,9 @@ handle_add_notification (XdpImplNotification *object,
   if (gtk_notifications == NULL ||
       g_dbus_proxy_get_name_owner (G_DBUS_PROXY (gtk_notifications)) == NULL ||
       has_unprefixed_action (arg_notification))
-    handle_add_notification_fdo (object, invocation, arg_sender, arg_app_id, arg_id, arg_notification);
+    handle_add_notification_fdo (object, invocation, arg_app_id, arg_id, arg_notification);
   else
-    handle_add_notification_gtk (object, invocation, arg_sender, arg_app_id, arg_id, arg_notification);
+    handle_add_notification_gtk (object, invocation, arg_app_id, arg_id, arg_notification);
 }
 
 static void
