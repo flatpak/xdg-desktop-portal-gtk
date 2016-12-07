@@ -1,3 +1,15 @@
+Major changes in 0.4
+====================
+
+* Add Wayland transient parent support to all portals
+
+* Support non-exported actions in the notification portal
+
+* Add image preview to the filechooser portal
+
+* Added backend interfaces:
+ - org.freedesktop.impl.portal.Account
+
 Major changes in 0.3
 ====================
 
