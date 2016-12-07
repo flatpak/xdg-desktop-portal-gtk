@@ -40,10 +40,6 @@
 
 #include "xdg-desktop-portal-dbus.h"
 
-#ifdef GDK_WINDOWING_X11
-#include <gdk/gdkx.h>
-#endif
-
 #include "request.h"
 #include "filechooser.h"
 #include "appchooser.h"
