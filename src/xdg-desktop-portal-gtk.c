@@ -52,6 +52,7 @@
 #include "notification.h"
 #include "inhibit.h"
 #include "access.h"
+#include "account.h"
 
 
 static GMainLoop *loop = NULL;
@@ -123,6 +124,12 @@ on_bus_acquired (GDBusConnection *connection,
     }
 
   if (!access_init (connection, &error))
+    {
+      g_warning ("error: %s\n", error->message);
+      g_clear_error (&error);
+    }
+
+  if (!account_init (connection, &error))
     {
       g_warning ("error: %s\n", error->message);
       g_clear_error (&error);

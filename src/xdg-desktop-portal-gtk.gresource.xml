@@ -5,6 +5,7 @@
     <file>appchooserrow.ui</file>
     <file>appchooserdialog.css</file>
     <file>screenshotdialog.ui</file>
+    <file>accountdialog.ui</file>
   </gresource>
 </gresources>
 
