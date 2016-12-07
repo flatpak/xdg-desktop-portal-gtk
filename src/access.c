@@ -20,12 +20,9 @@
 #include "xdg-desktop-portal-dbus.h"
 #include "shell-dbus.h"
 
-#ifdef GDK_WINDOWING_X11
-#include <gdk/gdkx.h>
-#endif
-
 #include "request.h"
 #include "utils.h"
+#include "externalwindow.h"
 
 typedef struct {
   XdpImplAccess *impl;
@@ -33,6 +30,7 @@ typedef struct {
   Request *request;
 
   GtkWidget *dialog;
+  ExternalWindow *external_parent;
   GHashTable *choices;
 
   int response;
@@ -43,6 +41,7 @@ access_dialog_handle_free (gpointer data)
 {
   AccessDialogHandle *handle = data;
 
+  g_clear_object (&handle->external_parent);
   g_object_unref (handle->request);
   g_object_unref (handle->dialog);
   if (handle->choices)
@@ -249,7 +248,6 @@ handle_access_dialog (XdpImplAccess *object,
   g_autofree char *filename = NULL;
   gboolean modal;
   GtkWidget *dialog;
-  GdkWindow *foreign_parent = NULL;
   const char *deny_label;
   const char *grant_label;
   const char *icon;
@@ -257,6 +255,10 @@ handle_access_dialog (XdpImplAccess *object,
   GtkWidget *area;
   GtkWidget *image;
   GHashTable *choice_table = NULL;
+  GdkDisplay *display;
+  GdkScreen *screen;
+  ExternalWindow *external_parent = NULL;
+  GtkWidget *fake_parent;
 
   sender = g_dbus_method_invocation_get_sender (invocation);
 
@@ -276,12 +278,33 @@ handle_access_dialog (XdpImplAccess *object,
 
   choices = g_variant_lookup_value (arg_options, "choices", G_VARIANT_TYPE ("a(ssa(ss)s)"));
 
+ if (arg_parent_window)
+    {
+      external_parent = create_external_window_from_handle (arg_parent_window);
+      if (!external_parent)
+        g_warning ("Failed to associate portal window with parent window %s",
+                   arg_parent_window);
+    }
+
+  if (external_parent)
+    display = external_window_get_display (external_parent);
+  else
+    display = gdk_display_get_default ();
+  screen = gdk_display_get_default_screen (display);
+
+  fake_parent = g_object_new (GTK_TYPE_WINDOW,
+                              "type", GTK_WINDOW_TOPLEVEL,
+                              "screen", screen,
+                              NULL);
+  g_object_ref_sink (fake_parent);
+
   dialog = gtk_message_dialog_new (NULL,
                                    0,
                                    GTK_MESSAGE_QUESTION,
                                    GTK_BUTTONS_NONE,
                                    arg_title,
                                    NULL);
+  gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (fake_parent));
   gtk_window_set_modal (GTK_WINDOW (dialog), modal);
   gtk_dialog_add_button (GTK_DIALOG (dialog), deny_label, GTK_RESPONSE_CANCEL);
   gtk_dialog_add_button (GTK_DIALOG (dialog), grant_label, GTK_RESPONSE_OK);
@@ -320,25 +343,12 @@ G_GNUC_BEGIN_IGNORE_DEPRECATIONS
   gtk_message_dialog_set_image (GTK_MESSAGE_DIALOG (dialog), image);
 G_GNUC_END_IGNORE_DEPRECATIONS
 
-#ifdef GDK_WINDOWING_X11
-  if (g_str_has_prefix (arg_parent_window, "x11:"))
-    {
-      int xid;
-
-      if (sscanf (arg_parent_window, "x11:%x", &xid) != 1)
-        g_warning ("invalid xid");
-      else
-        foreign_parent = gdk_x11_window_foreign_new_for_display (gtk_widget_get_display (dialog), xid);
-    }
-#endif
-  else
-    g_warning ("Unhandled parent window type %s", arg_parent_window);
-
   handle = g_new0 (AccessDialogHandle, 1);
   handle->impl = object;
   handle->invocation = invocation;
   handle->request = g_object_ref (request);
   handle->dialog = g_object_ref (dialog);
+  handle->external_parent = external_parent;
   handle->choices = choice_table;
 
   g_signal_connect (request, "handle-close", G_CALLBACK (handle_close), handle);
@@ -347,8 +357,8 @@ G_GNUC_END_IGNORE_DEPRECATIONS
 
   gtk_widget_realize (dialog);
 
-  if (foreign_parent)
-    gdk_window_set_transient_for (gtk_widget_get_window (dialog), foreign_parent);
+  if (external_parent)
+    external_window_set_parent_of (external_parent, gtk_widget_get_window (dialog));
 
   gtk_widget_show (dialog);
 
