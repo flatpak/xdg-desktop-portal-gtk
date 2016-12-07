@@ -32,13 +32,10 @@
 
 #include "xdg-desktop-portal-dbus.h"
 
-#ifdef GDK_WINDOWING_X11
-#include <gdk/gdkx.h>
-#endif
-
 #include "print.h"
 #include "request.h"
 #include "utils.h"
+#include "externalwindow.h"
 
 #include "gtkbackports.h"
 
@@ -142,6 +139,7 @@ typedef struct {
   GDBusMethodInvocation *invocation;
   Request *request;
   GtkWidget *dialog;
+  ExternalWindow *external_parent;
 
   int fd;
   int response;
@@ -155,6 +153,7 @@ print_dialog_handle_free (gpointer data)
 {
   PrintDialogHandle *handle = data;
 
+  g_clear_object (&handle->external_parent);
   g_object_unref (handle->request);
   g_object_unref (handle->dialog);
   close (handle->fd);
@@ -295,12 +294,15 @@ handle_print (XdpImplPrint *object,
   g_autoptr(Request) request = NULL;
   const char *sender;
   GtkWidget *dialog;
-  GdkWindow *foreign_parent = NULL;
   PrintDialogHandle *handle;
   guint32 token = 0;
   PrintParams *params;
   int idx, fd;
   gboolean modal;
+  GdkDisplay *display;
+  GdkScreen *screen;
+  ExternalWindow *external_parent = NULL;
+  GtkWidget *fake_parent;
 
   g_variant_get (arg_fd_in, "h", &idx);
   fd = g_unix_fd_list_get (fd_list, idx, NULL);
@@ -332,24 +334,31 @@ handle_print (XdpImplPrint *object,
   sender = g_dbus_method_invocation_get_sender (invocation);
   request = request_new (sender, arg_app_id, arg_handle);
 
- #ifdef GDK_WINDOWING_X11
-  if (g_str_has_prefix (arg_parent_window, "x11:"))
+  if (arg_parent_window)
     {
-      int xid;
-
-      if (sscanf (arg_parent_window, "x11:%x", &xid) != 1)
-        g_warning ("invalid xid");
-      else
-        foreign_parent = gdk_x11_window_foreign_new_for_display (gdk_display_get_default (), xid);
+      external_parent = create_external_window_from_handle (arg_parent_window);
+      if (!external_parent)
+        g_warning ("Failed to associate portal window with parent window %s",
+                   arg_parent_window);
     }
-#endif
+
+  if (external_parent)
+    display = external_window_get_display (external_parent);
   else
-    g_warning ("Unhandled parent window type %s", arg_parent_window);
+    display = gdk_display_get_default ();
+  screen = gdk_display_get_default_screen (display);
+
+  fake_parent = g_object_new (GTK_TYPE_WINDOW,
+                              "type", GTK_WINDOW_TOPLEVEL,
+                              "screen", screen,
+                              NULL);
+  g_object_ref_sink (fake_parent);
 
   if (!g_variant_lookup (arg_options, "modal", "b", &modal))
     modal = TRUE;
 
   dialog = gtk_print_unix_dialog_new (arg_title, NULL);
+  gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (fake_parent));
   gtk_window_set_modal (GTK_WINDOW (dialog), modal);
   gtk_print_unix_dialog_set_manual_capabilities (GTK_PRINT_UNIX_DIALOG (dialog), 0);
 
@@ -358,6 +367,7 @@ handle_print (XdpImplPrint *object,
   handle->invocation = invocation;
   handle->request = g_object_ref (request);
   handle->dialog = g_object_ref (dialog);
+  handle->external_parent = external_parent;
   handle->fd = fd;
 
   g_signal_connect (request, "handle-close", G_CALLBACK (handle_close), handle);
@@ -366,8 +376,8 @@ handle_print (XdpImplPrint *object,
 
   gtk_widget_realize (dialog);
 
-  if (foreign_parent)
-    gdk_window_set_transient_for (gtk_widget_get_window (dialog), foreign_parent);
+  if (external_parent)
+    external_window_set_parent_of (external_parent, gtk_widget_get_window (dialog));
 
   request_export (request, g_dbus_method_invocation_get_connection (invocation));
 
@@ -450,29 +460,38 @@ handle_prepare_print (XdpImplPrint *object,
   g_autoptr(Request) request = NULL;
   const char *sender;
   GtkWidget *dialog;
-  GdkWindow *foreign_parent = NULL;
   PrintDialogHandle *handle;
   GtkPrintSettings *settings;
   GtkPageSetup *page_setup;
   gboolean modal;
+  GdkDisplay *display;
+  GdkScreen *screen;
+  ExternalWindow *external_parent = NULL;
+  GtkWidget *fake_parent;
 
   sender = g_dbus_method_invocation_get_sender (invocation);
 
   request = request_new (sender, arg_app_id, arg_handle);
 
-#ifdef GDK_WINDOWING_X11
-  if (g_str_has_prefix (arg_parent_window, "x11:"))
+  if (arg_parent_window)
     {
-      int xid;
-
-      if (sscanf (arg_parent_window, "x11:%x", &xid) != 1)
-        g_warning ("invalid xid");
-      else
-        foreign_parent = gdk_x11_window_foreign_new_for_display (gdk_display_get_default (), xid);
+      external_parent = create_external_window_from_handle (arg_parent_window);
+      if (!external_parent)
+        g_warning ("Failed to associate portal window with parent window %s",
+                   arg_parent_window);
     }
-#endif
+
+  if (external_parent)
+    display = external_window_get_display (external_parent);
   else
-    g_warning ("Unhandled parent window type %s", arg_parent_window);
+    display = gdk_display_get_default ();
+  screen = gdk_display_get_default_screen (display);
+
+  fake_parent = g_object_new (GTK_TYPE_WINDOW,
+                              "type", GTK_WINDOW_TOPLEVEL,
+                              "screen", screen,
+                              NULL);
+  g_object_ref_sink (fake_parent);
 
   settings = gtk_print_settings_new_from_gvariant (arg_settings);
   page_setup = gtk_page_setup_new_from_gvariant (arg_page_setup);
@@ -480,6 +499,7 @@ handle_prepare_print (XdpImplPrint *object,
     modal = TRUE;
 
   dialog = gtk_print_unix_dialog_new (arg_title, NULL);
+  gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (fake_parent));
   gtk_window_set_modal (GTK_WINDOW (dialog), modal);
   gtk_print_unix_dialog_set_manual_capabilities (GTK_PRINT_UNIX_DIALOG (dialog), 0);
   gtk_print_unix_dialog_set_embed_page_setup (GTK_PRINT_UNIX_DIALOG (dialog), TRUE);
@@ -494,6 +514,7 @@ handle_prepare_print (XdpImplPrint *object,
   handle->invocation = invocation;
   handle->request = g_object_ref (request);
   handle->dialog = g_object_ref (dialog);
+  handle->external_parent = external_parent;
 
   g_signal_connect (request, "handle-close", G_CALLBACK (handle_close), handle);
 
@@ -501,8 +522,8 @@ handle_prepare_print (XdpImplPrint *object,
 
   gtk_widget_realize (dialog);
 
-  if (foreign_parent)
-    gdk_window_set_transient_for (gtk_widget_get_window (dialog), foreign_parent);
+  if (external_parent)
+    external_window_set_parent_of (external_parent, gtk_widget_get_window (dialog));
 
   gtk_widget_show (dialog);
 
