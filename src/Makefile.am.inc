@@ -15,6 +15,7 @@ $(dbus_built_sources): src/Makefile.am.inc
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Notification.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Inhibit.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Access.xml \
+	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Account.xml \
 	$(NULL)
 
 shell_built_sources = src/shell-dbus.c src/shell-dbus.h
@@ -27,6 +28,8 @@ $(shell_built_sources): src/Makefile.am.inc
 	$(top_srcdir)/data/org.gtk.Notifications.xml			\
 	$(top_srcdir)/data/org.gnome.SessionManager.xml		        \
 	$(top_srcdir)/data/org.freedesktop.ScreenSaver.xml		\
+	$(top_srcdir)/data/org.freedesktop.Accounts.xml		        \
+	$(top_srcdir)/data/org.freedesktop.Accounts.User.xml            \
 	$(NULL)
 
 resource_files = $(shell $(GLIB_COMPILE_RESOURCES) --sourcedir=$(top_srcdir)/src --generate-dependencies $(top_srcdir)/src/xdg-desktop-portal-gtk.gresource.xml)
@@ -77,6 +80,10 @@ xdg_desktop_portal_gtk_SOURCES = \
 	src/print.c				\
 	src/access.h				\
 	src/access.c				\
+	src/account.h				\
+	src/account.c				\
+	src/accountdialog.h			\
+	src/accountdialog.c			\
         src/gtkbackports.h                      \
         src/gtkbackports.c                      \
 	src/externalwindow.h			\
