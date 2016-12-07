@@ -18,14 +18,11 @@
 #include "xdg-desktop-portal-dbus.h"
 #include "shell-dbus.h"
 
-#ifdef GDK_WINDOWING_X11
-#include <gdk/gdkx.h>
-#endif
-
 #include "account.h"
 #include "accountdialog.h"
 #include "request.h"
 #include "utils.h"
+#include "externalwindow.h"
 
 static OrgFreedesktopAccountsUser *user;
 
@@ -35,6 +32,7 @@ typedef struct {
   Request *request;
 
   GtkWidget *dialog;
+  ExternalWindow *external_parent;
 
   int response;
   char *user_name;
@@ -47,6 +45,7 @@ account_dialog_handle_free (gpointer data)
 {
   AccountDialogHandle *handle = data;
 
+  g_clear_object (&handle->external_parent);
   g_object_unref (handle->request);
   g_object_unref (handle->dialog);
   g_free (handle->user_name);
@@ -155,7 +154,10 @@ handle_get_user_information (XdpImplAccount *object,
   const char *real_name;
   const char *icon_file;
   GtkWidget *dialog;
-  GdkWindow *foreign_parent = NULL;
+  GdkDisplay *display;
+  GdkScreen *screen;
+  ExternalWindow *external_parent = NULL;
+  GtkWidget *fake_parent;
 
   sender = g_dbus_method_invocation_get_sender (invocation);
 
@@ -165,28 +167,36 @@ handle_get_user_information (XdpImplAccount *object,
   real_name = org_freedesktop_accounts_user_get_real_name (user);
   icon_file = org_freedesktop_accounts_user_get_icon_file (user);
 
-  dialog = GTK_WIDGET (account_dialog_new (arg_app_id, user_name, real_name, icon_file));
-  gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
-
-#ifdef GDK_WINDOWING_X11
-  if (g_str_has_prefix (arg_parent_window, "x11:"))
+  if (arg_parent_window)
     {
-      int xid;
-
-      if (sscanf (arg_parent_window, "x11:%x", &xid) != 1)
-        g_warning ("invalid xid");
-      else
-        foreign_parent = gdk_x11_window_foreign_new_for_display (gtk_widget_get_display (dialog), xid);
+      external_parent = create_external_window_from_handle (arg_parent_window);
+      if (!external_parent)
+        g_warning ("Failed to associate portal window with parent window %s",
+                   arg_parent_window);
     }
-#endif
+
+  if (external_parent)
+    display = external_window_get_display (external_parent);
   else
-    g_warning ("Unhandled parent window type %s", arg_parent_window);
+    display = gdk_display_get_default ();
+  screen = gdk_display_get_default_screen (display);
+
+  fake_parent = g_object_new (GTK_TYPE_WINDOW,
+                              "type", GTK_WINDOW_TOPLEVEL,
+                              "screen", screen,
+                              NULL);
+  g_object_ref_sink (fake_parent);
+
+  dialog = GTK_WIDGET (account_dialog_new (arg_app_id, user_name, real_name, icon_file));
+  gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (fake_parent));
+  gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
 
   handle = g_new0 (AccountDialogHandle, 1);
   handle->impl = object;
   handle->invocation = invocation;
   handle->request = g_object_ref (request);
   handle->dialog = g_object_ref (dialog);
+  handle->external_parent = external_parent;
   handle->user_name = g_strdup (user_name);
   handle->real_name = g_strdup (real_name);
   handle->icon_uri = g_filename_to_uri (icon_file, NULL, NULL);
@@ -197,8 +207,8 @@ handle_get_user_information (XdpImplAccount *object,
 
   gtk_widget_realize (dialog);
 
-  if (foreign_parent)
-    gdk_window_set_transient_for (gtk_widget_get_window (dialog), foreign_parent);
+  if (external_parent)
+    external_window_set_parent_of (external_parent, gtk_widget_get_window (dialog));
 
   gtk_widget_show (dialog);
 
