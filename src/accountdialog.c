@@ -17,6 +17,7 @@ struct _AccountDialog {
   GtkWidget *name;
   GtkWidget *fullname;
   GtkWidget *image;
+  GtkWidget *stack;
 
   char *icon_file;
 };
@@ -185,6 +186,14 @@ image_button_clicked (AccountDialog *dialog)
 }
 
 static void
+override_button_clicked (GtkButton *button,
+                         AccountDialog *dialog)
+{
+  gtk_stack_set_visible_child_name (GTK_STACK (dialog->stack), "details");
+  gtk_widget_hide (GTK_WIDGET (button));
+}
+
+static void
 account_dialog_class_init (AccountDialogClass *class)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (class);
@@ -207,8 +216,10 @@ account_dialog_class_init (AccountDialogClass *class)
   gtk_widget_class_bind_template_child (widget_class, AccountDialog, name);
   gtk_widget_class_bind_template_child (widget_class, AccountDialog, fullname);
   gtk_widget_class_bind_template_child (widget_class, AccountDialog, image);
+  gtk_widget_class_bind_template_child (widget_class, AccountDialog, stack);
   gtk_widget_class_bind_template_callback (widget_class, button_clicked);
   gtk_widget_class_bind_template_callback (widget_class, image_button_clicked);
+  gtk_widget_class_bind_template_callback (widget_class, override_button_clicked);
 }
 
 AccountDialog *

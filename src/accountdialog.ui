@@ -33,15 +33,44 @@
       </object>
     </child>
     <child>
-      <object class="GtkBox">
+      <object class="GtkStack" id="stack">
         <property name="visible">1</property>
-        <property name="orientation">vertical</property>
-        <property name="margin">20</property>
-        <property name="spacing">20</property>
+        <property name="transition-type">slide-left-right</property>
         <child>
-          <object class="GtkLabel" id="heading">
+          <object class="GtkBox">
             <property name="visible">1</property>
+            <property name="orientation">vertical</property>
+            <property name="halign">fill</property>
+            <property name="valign">fill</property>
+            <child>
+              <object class="GtkLabel" id="heading">
+                <property name="visible">1</property>
+                <property name="wrap">1</property>
+                <property name="max-width-chars">26</property>
+                <property name="width-chars">26</property>
+                <property name="valign">start</property>
+                <property name="halign">fill</property>
+                <property name="margin">40</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton" id="override_button">
+                <property name="visible">1</property>
+                <property name="label" translatable="yes">_Review</property>
+                <property name="use-underline">1</property>
+                <property name="halign">end</property>
+                <property name="valign">end</property>
+                <property name="margin">10</property>
+                <signal name="clicked" handler="override_button_clicked"/>
+              </object>
+              <packing>
+                <property name="expand">1</property>
+              </packing>
+            </child>
           </object>
+          <packing>
+            <property name="name">label</property>
+          </packing>
         </child>
         <child>
           <object class="GtkGrid">
@@ -51,6 +80,7 @@
             <property name="column-spacing">6</property>
             <property name="margin-top">20</property>
             <property name="margin-bottom">20</property>
+            <property name="halign">center</property>
             <child>
               <object class="GtkLabel">
                 <property name="visible">1</property>
@@ -125,6 +155,9 @@
               </packing>
             </child>
           </object>
+          <packing>
+            <property name="name">details</property>
+          </packing>
         </child>
       </object>
     </child>

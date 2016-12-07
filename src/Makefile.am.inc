@@ -34,11 +34,7 @@ $(shell_built_sources): src/Makefile.am.inc
 
 resource_files = $(shell $(GLIB_COMPILE_RESOURCES) --sourcedir=$(top_srcdir)/src --generate-dependencies $(top_srcdir)/src/xdg-desktop-portal-gtk.gresource.xml)
 
-src/resources.h: src/xdg-desktop-portal-gtk.gresource.xml
-	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) $< \
-		--target=$@ --sourcedir=$(top_srcdir)/src --c-name _xdg_desktop --generate-header
-
-src/resources.c: src/xdg-desktop-portal-gtk.gresource.xml
+src/resources.c: src/xdg-desktop-portal-gtk.gresource.xml $(resource_files)
 	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) $< \
 		--target=$@ --sourcedir=$(top_srcdir)/src --c-name _xdg_desktop --generate-source
 
