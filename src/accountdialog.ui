@@ -37,55 +37,12 @@
         <property name="visible">1</property>
         <property name="orientation">vertical</property>
         <child>
-          <object class="GtkLabel" id="heading">
-            <property name="visible">1</property>
-            <property name="wrap">1</property>
-            <property name="max-width-chars">26</property>
-            <property name="width-chars">26</property>
-            <property name="valign">start</property>
-            <property name="margin-start">40</property>
-            <property name="margin-end">40</property>
-            <property name="margin-top">20</property>
-            <property name="margin-bottom">20</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkButton" id="override_button">
-            <property name="visible">1</property>
-            <property name="label" translatable="yes">_Edit</property>
-            <property name="use-underline">1</property>
-            <property name="halign">end</property>
-            <property name="valign">end</property>
-            <property name="margin">10</property>
-            <signal name="clicked" handler="override_button_clicked"/>
-          </object>
-          <packing>
-            <property name="expand">1</property>
-            <property name="pack-type">end</property>
-          </packing>
-        </child>
-        <child>
           <object class="GtkGrid">
             <property name="visible">1</property>
-            <property name="margin">6</property>
-            <property name="row-spacing">12</property>
-            <property name="column-spacing">6</property>
-            <property name="margin-top">20</property>
-            <property name="margin-bottom">20</property>
+            <property name="row-spacing">10</property>
+            <property name="column-spacing">10</property>
+            <property name="margin">20</property>
             <property name="halign">center</property>
-            <child>
-              <object class="GtkLabel">
-                <property name="visible">1</property>
-                <property name="label" translatable="yes">_Short Name:</property>
-                <property name="use-underline">1</property>
-                <property name="mnemonic-widget">name</property>
-                <property name="xalign">1</property>
-              </object>
-              <packing>
-                <property name="left-attach">0</property>
-                <property name="top-attach">0</property>
-              </packing>
-            </child>
             <child>
               <object class="GtkStack" id="name_stack">
                 <property name="visible">1</property>
@@ -93,6 +50,8 @@
                   <object class="GtkLabel" id="name_readonly">
                     <property name="visible">1</property>
                     <property name="xalign">0</property>
+                    <property name="valign">start</property>
+                    <property name="margin-start">10</property>
                   </object>
                   <packing>
                     <property name="name">show</property>
@@ -109,19 +68,6 @@
               </object>
               <packing>
                 <property name="left-attach">1</property>
-                <property name="top-attach">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel">
-                <property name="visible">1</property>
-                <property name="label" translatable="yes">_Name:</property>
-                <property name="use-underline">1</property>
-                <property name="mnemonic-widget">fullname</property>
-                <property name="xalign">1</property>
-              </object>
-              <packing>
-                <property name="left-attach">0</property>
                 <property name="top-attach">1</property>
               </packing>
             </child>
@@ -132,6 +78,10 @@
                   <object class="GtkLabel" id="fullname_readonly">
                     <property name="visible">1</property>
                     <property name="xalign">0</property>
+                    <property name="margin-start">10</property>
+                    <attributes>
+                      <attribute name="scale" value="1.44"/>
+                    </attributes>
                   </object>
                   <packing>
                     <property name="name">show</property>
@@ -148,20 +98,7 @@
               </object>
               <packing>
                 <property name="left-attach">1</property>
-                <property name="top-attach">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel">
-                <property name="visible">1</property>
-                <property name="label" translatable="yes">_Picture:</property>
-                <property name="use-underline">1</property>
-                <property name="mnemonic-widget">button</property>
-                <property name="xalign">1</property>
-              </object>
-              <packing>
-                <property name="left-attach">0</property>
-                <property name="top-attach">3</property>
+                <property name="top-attach">0</property>
               </packing>
             </child>
             <child>
@@ -197,12 +134,51 @@
                 </child>
               </object>
               <packing>
-                <property name="left-attach">1</property>
-                <property name="top-attach">3</property>
+                <property name="left-attach">0</property>
+                <property name="top-attach">0</property>
+                <property name="height">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="override_button">
+                <property name="visible">1</property>
+                <property name="halign">end</property>
+                <property name="valign">center</property>
+                <property name="relief">none</property>
+                <property name="tooltip-text" translatable="yes">Make changes before sharing the information</property>
+                <signal name="clicked" handler="override_button_clicked"/>
+                <style>
+                  <class name="image-button"/>
+                  <class name="circular"/>
+                </style>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">1</property>
+                    <property name="icon-name">document-edit-symbolic</property>
+                    <property name="icon-size">1</property>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="left-attach">2</property>
+                <property name="top-attach">0</property>
+                <property name="height">2</property>
               </packing>
             </child>
           </object>
         </child>
+            <child>
+              <object class="GtkLabel" id="heading">
+                <property name="visible">1</property>
+                <property name="wrap">1</property>
+                <property name="xalign">0</property>
+                <property name="max-width-chars">26</property>
+                <property name="width-chars">26</property>
+                <property name="valign">start</property>
+                <property name="margin">20</property>
+                <property name="margin-top">0</property>
+              </object>
+            </child>
       </object>
     </child>
   </template>
