@@ -15,9 +15,14 @@ struct _AccountDialog {
   GtkWidget *heading;
   GtkWidget *accept_button;
   GtkWidget *name;
+  GtkWidget *name_readonly;
+  GtkWidget *name_stack;
   GtkWidget *fullname;
+  GtkWidget *fullname_readonly;
+  GtkWidget *fullname_stack;
   GtkWidget *image;
-  GtkWidget *stack;
+  GtkWidget *image_readonly;
+  GtkWidget *image_stack;
 
   char *icon_file;
 };
@@ -189,8 +194,10 @@ static void
 override_button_clicked (GtkButton *button,
                          AccountDialog *dialog)
 {
-  gtk_stack_set_visible_child_name (GTK_STACK (dialog->stack), "details");
-  gtk_widget_hide (GTK_WIDGET (button));
+   gtk_stack_set_visible_child_name (GTK_STACK (dialog->name_stack), "edit");
+   gtk_stack_set_visible_child_name (GTK_STACK (dialog->fullname_stack), "edit");
+   gtk_stack_set_visible_child_name (GTK_STACK (dialog->image_stack), "edit");
+   gtk_widget_set_opacity (GTK_WIDGET (button), 0);
 }
 
 static void
@@ -214,9 +221,14 @@ account_dialog_class_init (AccountDialogClass *class)
   gtk_widget_class_bind_template_child (widget_class, AccountDialog, accept_button);
   gtk_widget_class_bind_template_child (widget_class, AccountDialog, heading);
   gtk_widget_class_bind_template_child (widget_class, AccountDialog, name);
+  gtk_widget_class_bind_template_child (widget_class, AccountDialog, name_readonly);
+  gtk_widget_class_bind_template_child (widget_class, AccountDialog, name_stack);
   gtk_widget_class_bind_template_child (widget_class, AccountDialog, fullname);
+  gtk_widget_class_bind_template_child (widget_class, AccountDialog, fullname_readonly);
+  gtk_widget_class_bind_template_child (widget_class, AccountDialog, fullname_stack);
   gtk_widget_class_bind_template_child (widget_class, AccountDialog, image);
-  gtk_widget_class_bind_template_child (widget_class, AccountDialog, stack);
+  gtk_widget_class_bind_template_child (widget_class, AccountDialog, image_readonly);
+  gtk_widget_class_bind_template_child (widget_class, AccountDialog, image_stack);
   gtk_widget_class_bind_template_callback (widget_class, button_clicked);
   gtk_widget_class_bind_template_callback (widget_class, image_button_clicked);
   gtk_widget_class_bind_template_callback (widget_class, override_button_clicked);
@@ -248,13 +260,18 @@ account_dialog_new (const char *app_id,
 
   gtk_label_set_label (GTK_LABEL (dialog->heading), heading);
   gtk_entry_set_text (GTK_ENTRY (dialog->name), user_name);
+  gtk_label_set_label (GTK_LABEL (dialog->name_readonly), user_name);
   gtk_entry_set_text (GTK_ENTRY (dialog->fullname), real_name);
+  gtk_label_set_label (GTK_LABEL (dialog->fullname_readonly), real_name);
 
   pixbuf = gdk_pixbuf_new_from_file_at_scale (icon_file, 64, 64, TRUE, &error);
   if (error)
     g_warning ("Failed to load account %s: %s", icon_file, error->message);
-
-  gtk_image_set_from_pixbuf (GTK_IMAGE (dialog->image), pixbuf);
+  else
+    {
+      gtk_image_set_from_pixbuf (GTK_IMAGE (dialog->image), pixbuf);
+      gtk_image_set_from_pixbuf (GTK_IMAGE (dialog->image_readonly), pixbuf);
+    }
 
   dialog->icon_file = g_strdup (icon_file);
 

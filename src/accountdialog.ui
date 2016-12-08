@@ -33,43 +33,35 @@
       </object>
     </child>
     <child>
-      <object class="GtkStack" id="stack">
+      <object class="GtkBox">
         <property name="visible">1</property>
-        <property name="transition-type">slide-left-right</property>
+        <property name="orientation">vertical</property>
         <child>
-          <object class="GtkBox">
+          <object class="GtkLabel" id="heading">
             <property name="visible">1</property>
-            <property name="orientation">vertical</property>
-            <property name="halign">fill</property>
-            <property name="valign">fill</property>
-            <child>
-              <object class="GtkLabel" id="heading">
-                <property name="visible">1</property>
-                <property name="wrap">1</property>
-                <property name="max-width-chars">26</property>
-                <property name="width-chars">26</property>
-                <property name="valign">start</property>
-                <property name="halign">fill</property>
-                <property name="margin">40</property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkButton" id="override_button">
-                <property name="visible">1</property>
-                <property name="label" translatable="yes">_Review</property>
-                <property name="use-underline">1</property>
-                <property name="halign">end</property>
-                <property name="valign">end</property>
-                <property name="margin">10</property>
-                <signal name="clicked" handler="override_button_clicked"/>
-              </object>
-              <packing>
-                <property name="expand">1</property>
-              </packing>
-            </child>
+            <property name="wrap">1</property>
+            <property name="max-width-chars">26</property>
+            <property name="width-chars">26</property>
+            <property name="valign">start</property>
+            <property name="margin-start">40</property>
+            <property name="margin-end">40</property>
+            <property name="margin-top">20</property>
+            <property name="margin-bottom">20</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="override_button">
+            <property name="visible">1</property>
+            <property name="label" translatable="yes">_Edit</property>
+            <property name="use-underline">1</property>
+            <property name="halign">end</property>
+            <property name="valign">end</property>
+            <property name="margin">10</property>
+            <signal name="clicked" handler="override_button_clicked"/>
           </object>
           <packing>
-            <property name="name">label</property>
+            <property name="expand">1</property>
+            <property name="pack-type">end</property>
           </packing>
         </child>
         <child>
@@ -95,8 +87,25 @@
               </packing>
             </child>
             <child>
-              <object class="GtkEntry" id="name">
+              <object class="GtkStack" id="name_stack">
                 <property name="visible">1</property>
+                <child>
+                  <object class="GtkLabel" id="name_readonly">
+                    <property name="visible">1</property>
+                    <property name="xalign">0</property>
+                  </object>
+                  <packing>
+                    <property name="name">show</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="name">
+                    <property name="visible">1</property>
+                  </object>
+                  <packing>
+                    <property name="name">edit</property>
+                  </packing>
+                </child>
               </object>
               <packing>
                 <property name="left-attach">1</property>
@@ -117,8 +126,25 @@
               </packing>
             </child>
             <child>
-              <object class="GtkEntry" id="fullname">
+              <object class="GtkStack" id="fullname_stack">
                 <property name="visible">1</property>
+                <child>
+                  <object class="GtkLabel" id="fullname_readonly">
+                    <property name="visible">1</property>
+                    <property name="xalign">0</property>
+                  </object>
+                  <packing>
+                    <property name="name">show</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="fullname">
+                    <property name="visible">1</property>
+                  </object>
+                  <packing>
+                    <property name="name">edit</property>
+                  </packing>
+                </child>
               </object>
               <packing>
                 <property name="left-attach">1</property>
@@ -139,14 +165,35 @@
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="button">
+              <object class="GtkStack" id="image_stack">
                 <property name="visible">1</property>
                 <property name="halign">start</property>
-                <signal name="clicked" handler="image_button_clicked" swapped="yes"/>
                 <child>
-                  <object class="GtkImage" id="image">
+                  <object class="GtkImage" id="image_readonly">
                     <property name="visible">1</property>
+                    <property name="halign">fill</property>
+                    <property name="valign">fill</property>
+                    <style> <class name="frame"/> </style>
                   </object>
+                  <packing>
+                    <property name="name">show</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="button">
+                    <property name="visible">1</property>
+                    <property name="halign">fill</property>
+                    <property name="valign">fill</property>
+                    <signal name="clicked" handler="image_button_clicked" swapped="yes"/>
+                    <child>
+                      <object class="GtkImage" id="image">
+                        <property name="visible">1</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="name">edit</property>
+                  </packing>
                 </child>
               </object>
               <packing>
@@ -155,9 +202,6 @@
               </packing>
             </child>
           </object>
-          <packing>
-            <property name="name">details</property>
-          </packing>
         </child>
       </object>
     </child>
