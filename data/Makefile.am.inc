@@ -14,6 +14,8 @@ EXTRA_DIST += \
 	$(dbus_service_in_files)                \
         data/org.gtk.Notifications.xml          \
         data/org.gnome.SessionManager.xml       \
-        data/org.freedesktop.ScreenSaver.xml    \
         data/org.gnome.Shell.Screenshot.xml     \
+        data/org.freedesktop.ScreenSaver.xml    \
+        data/org.freedesktop.Accounts.xml       \
+        data/org.freedesktop.Accounts.User.xml  \
         $(NULL)
