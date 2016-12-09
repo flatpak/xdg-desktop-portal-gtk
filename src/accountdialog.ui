@@ -7,7 +7,7 @@
     <child type="titlebar">
       <object class="GtkHeaderBar" id="titlebar">
         <property name="visible">1</property>
-        <property name="title" translatable="yes">Account</property>
+        <property name="title" translatable="yes">Share Details</property>
         <child>
           <object class="GtkButton" id="cancel_button">
             <property name="visible">1</property>
