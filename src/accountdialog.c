@@ -13,6 +13,7 @@ struct _AccountDialog {
   GtkWindow parent;
 
   GtkWidget *heading;
+  GtkWidget *reason;
   GtkWidget *accept_button;
   GtkWidget *name;
   GtkWidget *name_readonly;
@@ -220,6 +221,7 @@ account_dialog_class_init (AccountDialogClass *class)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/freedesktop/portal/desktop/gtk/accountdialog.ui");
   gtk_widget_class_bind_template_child (widget_class, AccountDialog, accept_button);
   gtk_widget_class_bind_template_child (widget_class, AccountDialog, heading);
+  gtk_widget_class_bind_template_child (widget_class, AccountDialog, reason);
   gtk_widget_class_bind_template_child (widget_class, AccountDialog, name);
   gtk_widget_class_bind_template_child (widget_class, AccountDialog, name_readonly);
   gtk_widget_class_bind_template_child (widget_class, AccountDialog, name_stack);
@@ -229,6 +231,7 @@ account_dialog_class_init (AccountDialogClass *class)
   gtk_widget_class_bind_template_child (widget_class, AccountDialog, image);
   gtk_widget_class_bind_template_child (widget_class, AccountDialog, image_readonly);
   gtk_widget_class_bind_template_child (widget_class, AccountDialog, image_stack);
+
   gtk_widget_class_bind_template_callback (widget_class, button_clicked);
   gtk_widget_class_bind_template_callback (widget_class, image_button_clicked);
   gtk_widget_class_bind_template_callback (widget_class, override_button_clicked);
@@ -238,7 +241,8 @@ AccountDialog *
 account_dialog_new (const char *app_id,
                     const char *user_name,
                     const char *real_name,
-                    const char *icon_file)
+                    const char *icon_file,
+                    const char *reason)
 {
   AccountDialog *dialog;
   g_autofree char *heading = NULL;
@@ -263,6 +267,11 @@ account_dialog_new (const char *app_id,
   gtk_label_set_label (GTK_LABEL (dialog->name_readonly), user_name);
   gtk_entry_set_text (GTK_ENTRY (dialog->fullname), real_name);
   gtk_label_set_label (GTK_LABEL (dialog->fullname_readonly), real_name);
+
+  if (reason)
+    gtk_label_set_label (GTK_LABEL (dialog->reason), reason);
+  else
+    gtk_widget_hide (dialog->reason);
 
   pixbuf = gdk_pixbuf_new_from_file_at_scale (icon_file, 64, 64, TRUE, &error);
   if (error)

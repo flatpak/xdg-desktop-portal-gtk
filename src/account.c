@@ -144,7 +144,8 @@ handle_get_user_information (XdpImplAccount *object,
                              GDBusMethodInvocation *invocation,
                              const char *arg_handle,
                              const char *arg_app_id,
-                             const char *arg_parent_window)
+                             const char *arg_parent_window,
+                             GVariant *arg_options)
 {
   g_autoptr(Request) request = NULL;
   const char *sender;
@@ -158,6 +159,7 @@ handle_get_user_information (XdpImplAccount *object,
   GdkScreen *screen;
   ExternalWindow *external_parent = NULL;
   GtkWidget *fake_parent;
+  const char *reason;
 
   sender = g_dbus_method_invocation_get_sender (invocation);
 
@@ -166,6 +168,9 @@ handle_get_user_information (XdpImplAccount *object,
   user_name = org_freedesktop_accounts_user_get_user_name (user);
   real_name = org_freedesktop_accounts_user_get_real_name (user);
   icon_file = org_freedesktop_accounts_user_get_icon_file (user);
+
+  if (!g_variant_lookup (arg_options, "reason", "&s", &reason))
+    reason = NULL;
 
   if (arg_parent_window)
     {
@@ -187,7 +192,7 @@ handle_get_user_information (XdpImplAccount *object,
                               NULL);
   g_object_ref_sink (fake_parent);
 
-  dialog = GTK_WIDGET (account_dialog_new (arg_app_id, user_name, real_name, icon_file));
+  dialog = GTK_WIDGET (account_dialog_new (arg_app_id, user_name, real_name, icon_file, reason));
   gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (fake_parent));
   gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
 
