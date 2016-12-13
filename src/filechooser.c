@@ -465,6 +465,9 @@ handle_open (XdpImplFileChooser *object,
   if (action == GTK_FILE_CHOOSER_ACTION_OPEN)
     {
       GtkWidget *readonly;
+      GtkWidget *extra;
+
+      extra = gtk_file_chooser_get_extra_widget (GTK_FILE_CHOOSER (dialog));
 
       readonly = gtk_check_button_new_with_label ("Open files read-only");
       gtk_widget_show (readonly);
@@ -472,7 +475,10 @@ handle_open (XdpImplFileChooser *object,
       g_signal_connect (readonly, "toggled",
                         G_CALLBACK (read_only_toggled), handle);
 
-      gtk_file_chooser_set_extra_widget (GTK_FILE_CHOOSER (dialog), readonly);
+      if (GTK_IS_CONTAINER (extra))
+        gtk_container_add (GTK_CONTAINER (extra), readonly);
+      else
+        gtk_file_chooser_set_extra_widget (GTK_FILE_CHOOSER (dialog), readonly);
     }
 
   gtk_widget_show (dialog);
