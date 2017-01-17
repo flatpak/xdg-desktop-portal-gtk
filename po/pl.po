@@ -1,19 +1,18 @@
-# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-# Aviary.pl
-# Jeśli masz jakiekolwiek uwagi odnoszące się do tłumaczenia lub chcesz
-# pomóc w jego rozwijaniu i pielęgnowaniu, napisz do nas:
-# gnomepl@aviary.pl
-# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-# Piotr Drąg <piotrdrag@gmail.com>, 2016.
-# Aviary.pl <gnomepl@aviary.pl>, 2016.
+# Polish translation for xdg-desktop-portal-gtk.
+# Copyright © 2016-2017 the xdg-desktop-portal-gtk authors.
+# This file is distributed under the same license as the xdg-desktop-portal-gtk package.
+# Piotr Drąg <piotrdrag@gmail.com>, 2016-2017.
+# Aviary.pl <community-poland@mozilla.org>, 2016-2017.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-22 01:54+0200\n"
-"PO-Revision-Date: 2016-07-22 01:55+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
+"issues\n"
+"POT-Creation-Date: 2017-01-16 12:47+0000\n"
+"PO-Revision-Date: 2017-01-16 14:00+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
-"Language-Team: Polish <gnomepl@aviary.pl>\n"
+"Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,48 +20,85 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 
-#: src/appchooser.c:165
-msgid "_Select"
-msgstr "_Wybierz"
+#: src/access.c:271
+msgid "Deny Access"
+msgstr "Odmów dostępu"
 
-#: src/appchooser.c:167 src/appchooserdialog.ui:10
-msgid "Open With"
-msgstr "Otwarcie za pomocą"
+#: src/access.c:274
+msgid "Grant Access"
+msgstr "Udziel dostępu"
 
-#: src/appchooser.c:169
-msgid "Select application"
-msgstr "Wybór programu"
+#: src/accountdialog.c:166
+msgid "Select an Image"
+msgstr "Wybór obrazu"
 
-#: src/appchooser.c:175 src/appchooserdialog.ui:14 src/filechooser.c:343
-#: src/screenshotdialog.ui:14
+#: src/accountdialog.c:169
+msgid "Cancel"
+msgstr "Anuluj"
+
+#: src/accountdialog.c:170
+msgid "Select"
+msgstr "Wybierz"
+
+#: src/accountdialog.c:171
+msgid "Clear"
+msgstr "Wyczyść"
+
+#: src/accountdialog.c:185
+msgid "Images"
+msgstr "Obrazy"
+
+#: src/accountdialog.c:260
+#, c-format
+msgid "Share your personal information with %s?"
+msgstr "Udostępnić informacje o użytkowniku programowi „%s”?"
+
+#: src/accountdialog.c:263
+msgid "Share your personal information with the requesting application?"
+msgstr "Udostępnić informacje o użytkowniku proszącemu o to programowi?"
+
+#: src/accountdialog.ui:10
+msgid "Share Details"
+msgstr "Udostępnianie informacji"
+
+#: src/accountdialog.ui:14 src/appchooser.c:179 src/appchooserdialog.ui:14
+#: src/filechooser.c:364 src/screenshotdialog.ui:14
 msgid "_Cancel"
 msgstr "_Anuluj"
 
-#: src/appchooserdialog.ui:26 src/filechooser.c:341
+#: src/accountdialog.ui:22 src/screenshotdialog.ui:25
+msgid "_Share"
+msgstr "_Udostępnij"
+
+#: src/accountdialog.ui:148
+msgid "Make changes before sharing the information"
+msgstr "Umożliwia wprowadzenie zmian przed udostępnieniem informacji"
+
+#: src/appchooser.c:169
+msgid "_Select"
+msgstr "_Wybierz"
+
+#: src/appchooser.c:171 src/appchooserdialog.ui:10
+msgid "Open With"
+msgstr "Otwarcie za pomocą"
+
+#: src/appchooser.c:173
+msgid "Select application"
+msgstr "Wybór programu"
+
+#: src/appchooserdialog.ui:26 src/filechooser.c:362
 msgid "_Open"
 msgstr "_Otwórz"
 
 #: src/screenshotdialog.c:93
 #, c-format
 msgid "Share this screenshot with %s?"
-msgstr "Udostępnić ten zrzut ekranu programowi %s?"
+msgstr "Udostępnić ten zrzut ekranu programowi „%s”?"
 
 #: src/screenshotdialog.c:96
 msgid "Share this screenshot with the requesting application?"
-msgstr "Udostępnić ten zrzut ekranu proszącemu o to programowi?"
+msgstr "Udostępnić ten zrzut ekranu proszącemu o to programowi?"
 
 #: src/screenshotdialog.ui:10
 msgid "Screenshot"
 msgstr "Zrzut ekranu"
-
-#: src/screenshotdialog.ui:25
-msgid "_Share"
-msgstr "_Udostępnij"
-
-#: src/access.c:269
-msgid "Deny Access"
-msgstr "Odmów dostępu"
-
-#: src/access.c:272
-msgid "Grant Access"
-msgstr "Udziel dostępu"
