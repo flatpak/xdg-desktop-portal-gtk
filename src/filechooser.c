@@ -115,7 +115,7 @@ send_response (FileDialogHandle *handle)
     g_variant_builder_add (&uri_builder, "s", l->data);
 
   g_variant_builder_add (&opt_builder, "{sv}", "uris", g_variant_builder_end (&uri_builder));
-  g_variant_builder_add (&opt_builder, "{sv}", "writable", g_variant_new_variant (g_variant_new_boolean (handle->allow_write)));
+  g_variant_builder_add (&opt_builder, "{sv}", "writable", g_variant_new_boolean (handle->allow_write));
 
   add_choices (handle, &opt_builder);
 
@@ -408,6 +408,7 @@ handle_open (XdpImplFileChooser *object,
   handle->multiple = multiple;
   handle->choices = g_hash_table_new (g_str_hash, g_str_equal);
   handle->external_parent = external_parent;
+  handle->allow_write = TRUE;
 
   g_signal_connect (request, "handle-close", G_CALLBACK (handle_close), handle);
 
