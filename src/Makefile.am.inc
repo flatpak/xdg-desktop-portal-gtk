@@ -41,8 +41,10 @@ src/resources.c: src/xdg-desktop-portal-gtk.gresource.xml $(resource_files)
 EXTRA_DIST += \
 	src/xdg-desktop-portal-gtk.gresource.xml	\
         src/appchooserdialog.ui                         \
+        src/appchooserdialog.css                        \
         src/appchooserrow.ui                            \
         src/screenshotdialog.ui                         \
+        src/accountdialog.ui                            \
 	$(NULL)
 
 libexec_PROGRAMS = \
