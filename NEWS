@@ -1,4 +1,4 @@
-Major changes in 0.4
+Major changes in 0.5
 ====================
 
 * Add Wayland transient parent support to all portals
@@ -9,6 +9,13 @@ Major changes in 0.4
 
 * Added backend interfaces:
  - org.freedesktop.impl.portal.Account
+
+* Translation updates
+ Czech
+ Serbian
+ Simplified Chinese
+ Swedish
+
 
 Major changes in 0.3
 ====================
