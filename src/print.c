@@ -176,7 +176,7 @@ print_file (int fd,
             GtkPageSetup *page_setup,
             GError **error)
 {
-  g_autoptr(GtkPrintJob) job = NULL;
+  GtkPrintJob *job;
   g_autofree char *title = NULL;
 
   title = g_strdup_printf ("Document from %s", app_id);
@@ -184,9 +184,13 @@ print_file (int fd,
   job = gtk_print_job_new (title, printer, settings, page_setup);
 
   if (!gtk_print_job_set_source_fd (job, fd, error))
-    return FALSE;
+    {
+      g_object_unref (job);
+      return FALSE;
+    }
 
   gtk_print_job_send (job, NULL, NULL, NULL);
+  g_object_unref (job);
 
   return TRUE;
 }
@@ -215,7 +219,7 @@ handle_print_response (GtkDialog *dialog,
     case GTK_RESPONSE_OK:
       {
         GtkPrinter *printer;
-        g_autoptr(GtkPrintSettings) settings = NULL;
+        GtkPrintSettings *settings;
         GtkPageSetup *page_setup;
 
         printer = gtk_print_unix_dialog_get_selected_printer (GTK_PRINT_UNIX_DIALOG (handle->dialog));
@@ -231,6 +235,8 @@ handle_print_response (GtkDialog *dialog,
           handle->response = 2;
         else
           handle->response = 0;
+
+        g_object_unref (settings);
       }
       break;
     }
