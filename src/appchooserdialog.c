@@ -241,7 +241,7 @@ app_chooser_dialog_new (const char **choices,
   if (provider == NULL)
     {
       provider = gtk_css_provider_new ();
-      gtk_css_provider_load_from_resource (provider, "/org/freedesktop/portal/desktop/gtk/appchooserdialog.css");
+      gtk_css_provider_load_from_path (provider, "resource:///org/freedesktop/portal/desktop/gtk/appchooserdialog.css", NULL);
       gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
                                                  GTK_STYLE_PROVIDER (provider),
                                                  GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
