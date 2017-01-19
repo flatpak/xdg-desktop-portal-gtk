@@ -144,6 +144,57 @@ search_changed (GtkSearchEntry *entry,
   gtk_list_box_invalidate_filter (GTK_LIST_BOX (dialog->list));
 }
 
+/* gtk_search_entry_handle_event() was not added until GTK+ 3.16. */
+#if !GTK_CHECK_VERSION (3, 16, 0)
+static gboolean
+gtk_search_entry_is_keynav_event (GdkEvent *event)
+{
+  GdkModifierType state = 0;
+  guint keyval;
+
+  if (!gdk_event_get_keyval (event, &keyval))
+    return FALSE;
+
+  gdk_event_get_state (event, &state);
+
+  if (keyval == GDK_KEY_Tab       || keyval == GDK_KEY_KP_Tab ||
+      keyval == GDK_KEY_Up        || keyval == GDK_KEY_KP_Up ||
+      keyval == GDK_KEY_Down      || keyval == GDK_KEY_KP_Down ||
+      keyval == GDK_KEY_Left      || keyval == GDK_KEY_KP_Left ||
+      keyval == GDK_KEY_Right     || keyval == GDK_KEY_KP_Right ||
+      keyval == GDK_KEY_Home      || keyval == GDK_KEY_KP_Home ||
+      keyval == GDK_KEY_End       || keyval == GDK_KEY_KP_End ||
+      keyval == GDK_KEY_Page_Up   || keyval == GDK_KEY_KP_Page_Up ||
+      keyval == GDK_KEY_Page_Down || keyval == GDK_KEY_KP_Page_Down ||
+      ((state & (GDK_CONTROL_MASK | GDK_MOD1_MASK)) != 0))
+        return TRUE;
+
+  /* Other navigation events should get automatically
+   * ignored as they will not change the content of the entry
+   */
+  return FALSE;
+}
+
+static gboolean
+gtk_search_entry_handle_event (GtkSearchEntry *entry,
+                               GdkEvent       *event)
+{
+  gboolean handled;
+
+  if (!gtk_widget_get_realized (GTK_WIDGET (entry)))
+    gtk_widget_realize (GTK_WIDGET (entry));
+
+  if (gtk_search_entry_is_keynav_event (event) ||
+      event->key.keyval == GDK_KEY_space ||
+      event->key.keyval == GDK_KEY_Menu)
+    return GDK_EVENT_PROPAGATE;
+
+  handled = gtk_widget_event (GTK_WIDGET (entry), event);
+
+  return handled ? GDK_EVENT_STOP : GDK_EVENT_PROPAGATE;
+}
+#endif
+
 static gboolean
 app_chooser_dialog_key_press (GtkWidget *widget,
                               GdkEventKey *event)
