@@ -181,7 +181,12 @@ search_toggled (GtkToggleButton *button,
       show_all (dialog);
       gtk_list_box_set_filter_func (GTK_LIST_BOX (dialog->list),
                                     filter_func, dialog, NULL);
+#if GTK_CHECK_VERSION (3, 16, 0)
       gtk_entry_grab_focus_without_selecting (GTK_ENTRY (dialog->search_entry));
+#else
+      gtk_widget_grab_focus (dialog->search_entry);
+      gtk_editable_set_position (GTK_EDITABLE (dialog->search_entry), -1);
+#endif
     }
   else
     {
