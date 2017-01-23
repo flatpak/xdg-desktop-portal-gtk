@@ -29,6 +29,8 @@
 
 #include <gio/gio.h>
 #include <gio/gunixfdlist.h>
+#include <gio/gunixinputstream.h>
+#include <gio/gunixoutputstream.h>
 
 #include "xdg-desktop-portal-dbus.h"
 
@@ -178,16 +180,54 @@ print_file (int fd,
 {
   GtkPrintJob *job;
   g_autofree char *title = NULL;
+#if !GTK_CHECK_VERSION (3, 22, 0)
+  g_autofree char *filename = NULL;
+  g_autoptr(GUnixInputStream) istream = NULL;
+  g_autoptr(GUnixOutputStream) ostream = NULL;
+  int fd2;
+#endif
 
   title = g_strdup_printf ("Document from %s", app_id);
 
   job = gtk_print_job_new (title, printer, settings, page_setup);
 
+#if GTK_CHECK_VERSION (3, 22, 0)
   if (!gtk_print_job_set_source_fd (job, fd, error))
     {
       g_object_unref (job);
       return FALSE;
     }
+#else
+  istream = g_unix_input_stream_new (fd, FALSE);
+
+  if ((fd2 = g_file_open_tmp (PACKAGE_NAME "XXXXXX", &filename, error)) == -1)
+    {
+      g_object_unref (job);
+      return FALSE;
+    }
+
+  ostream = g_unix_output_stream_new (fd2, TRUE);
+
+  if (g_output_stream_splice (G_OUTPUT_STREAM (ostream),
+                              G_INPUT_STREAM (istream),
+                              G_OUTPUT_STREAM_SPLICE_NONE,
+                              NULL,
+                              error) == -1)
+    {
+      g_object_unref (job);
+      return FALSE;
+    }
+
+  if (!gtk_print_job_set_source_file (job, filename, error))
+    {
+      g_object_unref (job);
+      return FALSE;
+    }
+
+  /* The file will be removed when the GtkPrintJob closes it (once the job is
+   * complete). */
+  unlink (filename);
+#endif
 
   gtk_print_job_send (job, NULL, NULL, NULL);
   g_object_unref (job);
