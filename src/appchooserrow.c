@@ -72,14 +72,18 @@ AppChooserRow *
 app_chooser_row_new (GAppInfo *info)
 {
   AppChooserRow *row;
+  GIcon *icon;
 
   row = g_object_new (app_chooser_row_get_type (), NULL);
 
   g_set_object (&row->info, info);
 
-  gtk_image_set_from_gicon (GTK_IMAGE (row->icon),
-                            g_app_info_get_icon (info),
-                            GTK_ICON_SIZE_DIALOG);
+  icon = g_app_info_get_icon (info);
+
+  if (icon)
+    gtk_image_set_from_gicon (GTK_IMAGE (row->icon),
+                              icon,
+                              GTK_ICON_SIZE_DIALOG);
   gtk_label_set_label (GTK_LABEL (row->name),
                        g_app_info_get_display_name (info));
 
