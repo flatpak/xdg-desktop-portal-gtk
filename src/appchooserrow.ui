@@ -19,14 +19,12 @@
         <child>
           <object class="GtkImage" id="icon">
             <property name="visible">1</property>
-            <property name="icon-name">gedit</property>
             <property name="icon-size">6</property>
           </object>
         </child>
         <child>
           <object class="GtkLabel" id="name">
             <property name="visible">1</property>
-            <property name="label">GEdit</property>
             <property name="xalign">0</property>
           </object>
           <packing>
