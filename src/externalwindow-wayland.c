@@ -34,6 +34,11 @@ struct _ExternalWindowWayland
   char *handle_str;
 };
 
+struct _ExternalWindowWaylandClass
+{
+  ExternalWindowClass parent_class;
+};
+
 G_DEFINE_TYPE (ExternalWindowWayland, external_window_wayland,
                EXTERNAL_TYPE_WINDOW)
 

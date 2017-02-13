@@ -37,6 +37,11 @@ struct _ExternalWindowX11
   GdkWindow *foreign_gdk_window;
 };
 
+struct _ExternalWindowX11Class
+{
+  ExternalWindowClass parent_class;
+};
+
 G_DEFINE_TYPE (ExternalWindowX11, external_window_x11,
                EXTERNAL_TYPE_WINDOW)
 

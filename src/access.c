@@ -329,7 +329,15 @@ handle_access_dialog (XdpImplAccess *object,
       body_label = gtk_label_new (arg_body);
       gtk_widget_set_halign (body_label, GTK_ALIGN_START);
       g_object_set (body_label, "margin-top", 10, NULL);
+#if GTK_CHECK_VERSION (3,16,0)
       gtk_label_set_xalign (GTK_LABEL (body_label), 0);
+#else
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+      /* This is deprecated in 3.14, but gtk_label_set_xalign() is not
+       * available until 3.16. */
+      gtk_misc_set_alignment (GTK_MISC (body_label), 0.0, 0.5);
+G_GNUC_END_IGNORE_DEPRECATIONS
+#endif
       gtk_label_set_line_wrap (GTK_LABEL (body_label), TRUE);
       gtk_label_set_max_width_chars (GTK_LABEL (body_label), 50);
       gtk_widget_show (body_label);

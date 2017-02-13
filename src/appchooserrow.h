@@ -22,8 +22,13 @@
 
 #include <gtk/gtk.h>
 
-G_DECLARE_FINAL_TYPE (AppChooserRow, app_chooser_row, APP, CHOOSER_ROW, GtkListBox)
+#define APP_TYPE_CHOOSER_ROW (app_chooser_row_get_type ())
+#define APP_CHOOSER_ROW(object) (G_TYPE_CHECK_INSTANCE_CAST (object, APP_TYPE_CHOOSER_ROW, AppChooserRow))
 
+typedef struct _AppChooserRow AppChooserRow;
+typedef struct _AppChooserRowClass AppChooserRowClass;
+
+GType app_chooser_row_get_type (void);
 AppChooserRow *app_chooser_row_new (GAppInfo *info);
 void app_chooser_row_set_selected (AppChooserRow *row,
                                    gboolean selected);
