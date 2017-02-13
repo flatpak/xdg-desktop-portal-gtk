@@ -49,6 +49,7 @@
 #include "inhibit.h"
 #include "access.h"
 #include "account.h"
+#include "email.h"
 
 
 static GMainLoop *loop = NULL;
@@ -126,6 +127,12 @@ on_bus_acquired (GDBusConnection *connection,
     }
 
   if (!account_init (connection, &error))
+    {
+      g_warning ("error: %s\n", error->message);
+      g_clear_error (&error);
+    }
+
+  if (!email_init (connection, &error))
     {
       g_warning ("error: %s\n", error->message);
       g_clear_error (&error);
