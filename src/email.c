@@ -23,11 +23,11 @@
 #include "utils.h"
 
 static gboolean
-send_mail (const char  *address,
-           const char  *subject,
-           const char  *body,
-           const char **attachments,
-           GError     **error)
+compose_mail (const char  *address,
+              const char  *subject,
+              const char  *body,
+              const char **attachments,
+              GError     **error)
 {
   g_autofree char *enc_subject = NULL;
   g_autofree char *enc_body = NULL;
@@ -62,12 +62,12 @@ send_mail (const char  *address,
 }
 
 static gboolean
-handle_send_email (XdpImplEmail *object,
-                   GDBusMethodInvocation *invocation,
-                   const char *arg_handle,
-                   const char *arg_app_id,
-                   const char *arg_parent_window,
-                   GVariant *arg_options)
+handle_compose_email (XdpImplEmail *object,
+                      GDBusMethodInvocation *invocation,
+                      const char *arg_handle,
+                      const char *arg_app_id,
+                      const char *arg_parent_window,
+                      GVariant *arg_options)
 {
   g_autoptr(Request) request = NULL;
   const char *sender;
@@ -89,14 +89,14 @@ handle_send_email (XdpImplEmail *object,
   g_variant_lookup (arg_options, "body", "&s", &body);
   g_variant_lookup (arg_options, "attachments", "^a&s", &attachments);
 
-  if (!send_mail (address, subject, body, attachments, NULL))
+  if (!compose_mail (address, subject, body, attachments, NULL))
     response = 1;
 
   g_variant_builder_init (&opt_builder, G_VARIANT_TYPE_VARDICT);
-  xdp_impl_email_complete_send_email (object,
-                                      invocation,
-                                      response,
-                                      g_variant_builder_end (&opt_builder));
+  xdp_impl_email_complete_compose_email (object,
+                                         invocation,
+                                         response,
+                                         g_variant_builder_end (&opt_builder));
 
   return TRUE;
 }
@@ -109,7 +109,7 @@ email_init (GDBusConnection *bus,
 
   helper = G_DBUS_INTERFACE_SKELETON (xdp_impl_email_skeleton_new ());
 
-  g_signal_connect (helper, "handle-send-email", G_CALLBACK (handle_send_email), NULL);
+  g_signal_connect (helper, "handle-compose-email", G_CALLBACK (handle_compose_email), NULL);
 
   if (!g_dbus_interface_skeleton_export (helper,
                                          bus,
