@@ -1,14 +1,14 @@
 # Brazilian Portuguese translation for xdg-desktop-portal-gtk.
-# Copyright (C) 2016 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
+# Copyright (C) 2017 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
 # This file is distributed under the same license as the xdg-desktop-portal-gtk package.
-# Rafael Fontenelle <rafaelff@gnome.org>, 2016.
+# Rafael Fontenelle <rafaelff@gnome.org>, 2016, 2017.
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2016-08-10 02:28+0000\n"
-"PO-Revision-Date: 2016-08-10 08:27-0200\n"
+"POT-Creation-Date: 2017-01-17 14:33+0000\n"
+"PO-Revision-Date: 2017-02-14 10:30-0200\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
@@ -16,26 +16,75 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Virtaal 0.7.1\n"
+"X-Generator: Virtaal 1.0.0-beta1\n"
 
-#: src/appchooser.c:166
-msgid "_Select"
-msgstr "_Selecionar"
+#: src/access.c:271
+msgid "Deny Access"
+msgstr "Negar acesso"
 
-#: src/appchooser.c:168 src/appchooserdialog.ui:10
-msgid "Open With"
-msgstr "Abrir com"
+#: src/access.c:274
+msgid "Grant Access"
+msgstr "Conceder acesso"
 
-#: src/appchooser.c:170
-msgid "Select application"
-msgstr "Selecionar aplicativo"
+#: src/accountdialog.c:166
+msgid "Select an Image"
+msgstr "Selecionar uma imagem"
 
-#: src/appchooser.c:176 src/appchooserdialog.ui:14 src/filechooser.c:343
-#: src/screenshotdialog.ui:14
+#: src/accountdialog.c:169
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: src/accountdialog.c:170
+msgid "Select"
+msgstr "Selecionar"
+
+#: src/accountdialog.c:171
+msgid "Clear"
+msgstr "Limpar"
+
+#: src/accountdialog.c:185
+msgid "Images"
+msgstr "Imagens"
+
+#: src/accountdialog.c:260
+#, c-format
+msgid "Share your personal information with %s?"
+msgstr "Compartilhar suas informações pessoais com %s?"
+
+#: src/accountdialog.c:263
+msgid "Share your personal information with the requesting application?"
+msgstr "Compartilhar suas informações pessoais com o aplicativo requisitante?"
+
+#: src/accountdialog.ui:10
+msgid "Share Details"
+msgstr "Compartilhar detalhes"
+
+#: src/accountdialog.ui:14 src/appchooser.c:179 src/appchooserdialog.ui:14
+#: src/filechooser.c:364 src/screenshotdialog.ui:14
 msgid "_Cancel"
 msgstr "_Cancelar"
 
-#: src/appchooserdialog.ui:26 src/filechooser.c:341
+#: src/accountdialog.ui:22 src/screenshotdialog.ui:25
+msgid "_Share"
+msgstr "_Compartilhar"
+
+#: src/accountdialog.ui:148
+msgid "Make changes before sharing the information"
+msgstr "Fazer alterações antes de compartilhar as informações"
+
+#: src/appchooser.c:169
+msgid "_Select"
+msgstr "_Selecionar"
+
+#: src/appchooser.c:171 src/appchooserdialog.ui:10
+msgid "Open With"
+msgstr "Abrir com"
+
+#: src/appchooser.c:173
+msgid "Select application"
+msgstr "Selecionar aplicativo"
+
+#: src/appchooserdialog.ui:26 src/filechooser.c:362
 msgid "_Open"
 msgstr "_Abrir"
 
@@ -51,15 +100,3 @@ msgstr "Compartilhar essa captura de tela com o aplicativo requisitante?"
 #: src/screenshotdialog.ui:10
 msgid "Screenshot"
 msgstr "Captura de tela"
-
-#: src/screenshotdialog.ui:25
-msgid "_Share"
-msgstr "_Compartilhar"
-
-#: src/access.c:269
-msgid "Deny Access"
-msgstr "Negar acesso"
-
-#: src/access.c:272
-msgid "Grant Access"
-msgstr "Conceder acesso"
