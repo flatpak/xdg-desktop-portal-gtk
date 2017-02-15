@@ -10,8 +10,14 @@ dbus_service_DATA = org.freedesktop.impl.portal.desktop.gtk.service
 
 CLEANFILES += $(dbus_service_DATA)
 
+systemduserunit_in_files = data/xdg-desktop-portal-gtk.service.in
+systemduserunit_DATA = xdg-desktop-portal-gtk.service
+
+CLEANFILES += $(systemduserunit_DATA)
+
 EXTRA_DIST += \
 	$(dbus_service_in_files)                \
+        $(systemduserunit_in_files)             \
         data/org.gtk.Notifications.xml          \
         data/org.gnome.SessionManager.xml       \
         data/org.gnome.Shell.Screenshot.xml     \

@@ -1,0 +1,7 @@
+[Unit]
+Description=Portal service (GTK+/GNOME implementation)
+
+[Service]
+Type=dbus
+BusName=org.freedesktop.impl.portal.desktop.gtk
+ExecStart=@libexecdir@/xdg-desktop-portal-gtk
