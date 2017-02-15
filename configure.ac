@@ -43,6 +43,15 @@ AC_ARG_WITH(dbus_service_dir,
 DBUS_SERVICE_DIR=$with_dbus_service_dir
 AC_SUBST(DBUS_SERVICE_DIR)
 
+AC_ARG_WITH([systemduserunitdir],
+            [AS_HELP_STRING([--with-systemduserunitdir=DIR],
+                            [Directory for systemd user service files (default=PREFIX/lib/systemd/user)])],
+    [],
+    dnl This is deliberately not ${libdir}: systemd units always go in
+    dnl .../lib, never .../lib64 or .../lib/x86_64-linux-gnu
+    [with_systemduserunitdir='${prefix}/lib/systemd/user'])
+AC_SUBST([systemduserunitdir], [$with_systemduserunitdir])
+
 AC_SUBST([DESKTOP_PORTAL_INTERFACES_DIR], [`$PKG_CONFIG --variable=interfaces_dir xdg-desktop-portal`])
 AC_SUBST([DBUS_INTERFACES_DIR], [`$PKG_CONFIG --variable=interfaces_dir dbus-1`])
 AC_SUBST([GDBUS_CODEGEN], [`$PKG_CONFIG --variable gdbus_codegen gio-2.0`])
