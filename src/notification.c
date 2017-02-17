@@ -28,6 +28,18 @@
  */
 static OrgGtkNotifications *gtk_notifications;
 
+static void
+notification_added (GObject      *source,
+                    GAsyncResult *result,
+                    gpointer      data)
+{
+  g_autoptr(GError) error = NULL;
+  g_autoptr(GVariant) reply = NULL;
+
+  if (!org_gtk_notifications_call_add_notification_finish (gtk_notifications, result, &error))
+    g_warning ("Error from gnome-shell: %s", error->message);
+}
+
 static gboolean
 handle_add_notification_gtk (XdpImplNotification *object,
                              GDBusMethodInvocation *invocation,
@@ -35,13 +47,15 @@ handle_add_notification_gtk (XdpImplNotification *object,
                              const char *arg_id,
                              GVariant *arg_notification)
 {
+  g_debug ("handle add-notification from %s using the gtk implementation", arg_app_id);
+
   if (gtk_notifications)
     org_gtk_notifications_call_add_notification (gtk_notifications,
                                                  arg_app_id,
                                                  arg_id,
                                                  arg_notification,
                                                  NULL,
-                                                 NULL,
+                                                 notification_added,
                                                  NULL);
 
   xdp_impl_notification_complete_add_notification (object, invocation);
@@ -55,6 +69,8 @@ handle_remove_notification_gtk (XdpImplNotification *object,
                                 const char *arg_app_id,
                                 const char *arg_id)
 {
+  g_debug ("handle remove-notification from %s using the gtk implementation", arg_app_id);
+
   if (gtk_notifications)
     org_gtk_notifications_call_remove_notification (gtk_notifications,
                                                     arg_app_id,
@@ -435,6 +451,8 @@ handle_add_notification_fdo (XdpImplNotification *object,
   FdoNotification *n;
   GDBusConnection *connection;
 
+  g_debug ("handle add-notification from %s using the freedesktop implementation", arg_app_id);
+
   connection = g_dbus_method_invocation_get_connection (invocation);
 
   if (fdo_notify_subscription == 0)
@@ -482,6 +500,8 @@ handle_remove_notification_fdo (XdpImplNotification *object,
                                 const gchar *arg_id)
 {
   FdoNotification *n;
+
+  g_debug ("handle remove-notification from %s using the freedesktop implementation", arg_app_id);
 
   n = fdo_find_notification (arg_app_id, arg_id);
   if (n)
