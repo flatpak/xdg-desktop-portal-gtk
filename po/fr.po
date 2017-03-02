@@ -1,0 +1,102 @@
+# French translation for xdg-desktop-portal-gtk.
+# Copyright (C) 2017 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
+# This file is distributed under the same license as the xdg-desktop-portal-gtk package.
+# Claude Paroz <claude@2xlibre.net>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xdg-desktop-portal-gtk master\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
+"issues\n"
+"POT-Creation-Date: 2017-02-22 03:32+0000\n"
+"PO-Revision-Date: 2017-03-02 11:43+0100\n"
+"Last-Translator: Claude Paroz <claude@2xlibre.net>\n"
+"Language-Team: French <gnomefr@traduc.org>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: src/access.c:271
+msgid "Deny Access"
+msgstr "Refuser l'accès"
+
+#: src/access.c:274
+msgid "Grant Access"
+msgstr "Accorder l'accès"
+
+#: src/accountdialog.c:166
+msgid "Select an Image"
+msgstr "Choisir une image"
+
+#: src/accountdialog.c:169
+msgid "Cancel"
+msgstr "Annuler"
+
+#: src/accountdialog.c:170
+msgid "Select"
+msgstr "Choisir"
+
+#: src/accountdialog.c:171
+msgid "Clear"
+msgstr "Effacer"
+
+#: src/accountdialog.c:185
+msgid "Images"
+msgstr "Images"
+
+#: src/accountdialog.c:260
+#, c-format
+msgid "Share your personal information with %s?"
+msgstr "Partager mes informations personelles avec %s ?"
+
+#: src/accountdialog.c:263
+msgid "Share your personal information with the requesting application?"
+msgstr "Partager mes informations personelles avec l'application qui le demande ?"
+
+#: src/accountdialog.ui:10
+msgid "Share Details"
+msgstr "Partager les détails"
+
+#: src/accountdialog.ui:14 src/appchooser.c:179 src/appchooserdialog.ui:14
+#: src/filechooser.c:364 src/screenshotdialog.ui:14
+msgid "_Cancel"
+msgstr "A_nnuler"
+
+#: src/accountdialog.ui:22 src/screenshotdialog.ui:25
+msgid "_Share"
+msgstr "_Partager"
+
+#: src/accountdialog.ui:148
+msgid "Make changes before sharing the information"
+msgstr "Effectuer des changements avant de partager les informations"
+
+#: src/appchooser.c:169
+msgid "_Select"
+msgstr "_Choisir"
+
+#: src/appchooser.c:171 src/appchooserdialog.ui:10
+msgid "Open With"
+msgstr "Ouvrir avec"
+
+#: src/appchooser.c:173
+msgid "Select application"
+msgstr "Choisir une application"
+
+#: src/appchooserdialog.ui:26 src/filechooser.c:362
+msgid "_Open"
+msgstr "_Ouvrir"
+
+#: src/screenshotdialog.c:93
+#, c-format
+msgid "Share this screenshot with %s?"
+msgstr "Partager la capture d'écran avec %s ?"
+
+#: src/screenshotdialog.c:96
+msgid "Share this screenshot with the requesting application?"
+msgstr "Partager la capture d'écran avec l'application qui le demande ?"
+
+#: src/screenshotdialog.ui:10
+msgid "Screenshot"
+msgstr "Capture d'écran"
