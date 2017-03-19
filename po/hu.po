@@ -1,15 +1,15 @@
 # Hungarian translation for xdg-desktop-portal-gtk.
-# Copyright (C) 2016 Free Software Foundation, Inc.
+# Copyright (C) 2016, 2017 Free Software Foundation, Inc.
 # This file is distributed under the same license as the xdg-sesktop-portal-gtk package.
 #
-# Balázs Úr <urbalazs at gmail dot com>, 2016.
+# Balázs Úr <urbalazs at gmail dot com>, 2016, 2017.
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
-"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
-"issues\n"
-"POT-Creation-Date: 2016-07-15 14:29+0000\n"
-"PO-Revision-Date: 2016-07-15 23:39+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/issues"
+"\n"
+"POT-Creation-Date: 2017-03-02 15:40+0000\n"
+"PO-Revision-Date: 2017-03-19 20:30+0100\n"
 "Last-Translator: Balázs Úr <urbalazs@gmail.com>\n"
 "Language-Team: Hungarian <gnome-hu-list at gnome dot org>\n"
 "Language: hu\n"
@@ -19,24 +19,76 @@ msgstr ""
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 2.0\n"
 
-#: src/appchooser.c:165
-msgid "_Select"
-msgstr "_Kiválasztás"
+#: src/access.c:271
+msgid "Deny Access"
+msgstr "Hozzáférés megtagadása"
 
-#: src/appchooser.c:167 src/appchooserdialog.ui:10
-msgid "Open With"
-msgstr "Megnyitás ezzel"
+#: src/access.c:274
+msgid "Grant Access"
+msgstr "Hozzáférés megadása"
 
-#: src/appchooser.c:169
-msgid "Select application"
-msgstr "Alkalmazás kiválasztása"
+#: src/accountdialog.c:166
+msgid "Select an Image"
+msgstr "Válasszon lemezképet"
 
-#: src/appchooser.c:175 src/appchooserdialog.ui:14 src/filechooser.c:343
-#: src/screenshotdialog.ui:14
+#: src/accountdialog.c:169
+#| msgid "_Cancel"
+msgid "Cancel"
+msgstr "Mégse"
+
+#: src/accountdialog.c:170
+#| msgid "_Select"
+msgid "Select"
+msgstr "Kiválasztás"
+
+#: src/accountdialog.c:171
+msgid "Clear"
+msgstr "Törlés"
+
+#: src/accountdialog.c:185
+msgid "Images"
+msgstr "Lemezképek"
+
+#: src/accountdialog.c:260
+#, c-format
+msgid "Share your personal information with %s?"
+msgstr "Megosztja a személyes információit ezzel: %s?"
+
+#: src/accountdialog.c:263
+#| msgid "Share this screenshot with the requesting application?"
+msgid "Share your personal information with the requesting application?"
+msgstr "Megosztja a személyes információit a kérelmező alkalmazással?"
+
+#: src/accountdialog.ui:10
+msgid "Share Details"
+msgstr "Részletek megosztása"
+
+#: src/accountdialog.ui:14 src/appchooser.c:179 src/appchooserdialog.ui:14
+#: src/filechooser.c:364 src/screenshotdialog.ui:14
 msgid "_Cancel"
 msgstr "_Mégse"
 
-#: src/appchooserdialog.ui:26 src/filechooser.c:341
+#: src/accountdialog.ui:22 src/screenshotdialog.ui:25
+msgid "_Share"
+msgstr "Meg_osztás"
+
+#: src/accountdialog.ui:148
+msgid "Make changes before sharing the information"
+msgstr "Megváltoztatás az információk megosztása előtt"
+
+#: src/appchooser.c:169
+msgid "_Select"
+msgstr "_Kiválasztás"
+
+#: src/appchooser.c:171 src/appchooserdialog.ui:10
+msgid "Open With"
+msgstr "Megnyitás ezzel"
+
+#: src/appchooser.c:173
+msgid "Select application"
+msgstr "Alkalmazás kiválasztása"
+
+#: src/appchooserdialog.ui:26 src/filechooser.c:362
 msgid "_Open"
 msgstr "Meg_nyitás"
 
@@ -53,14 +105,3 @@ msgstr "Megosztja ezt a képernyőképet a kérő alkalmazással?"
 msgid "Screenshot"
 msgstr "Képernyőkép"
 
-#: src/screenshotdialog.ui:25
-msgid "_Share"
-msgstr "Meg_osztás"
-
-#: src/access.c:269
-msgid "Deny Access"
-msgstr "Hozzáférés megtagadása"
-
-#: src/access.c:272
-msgid "Grant Access"
-msgstr "Hozzáférés megadása"
