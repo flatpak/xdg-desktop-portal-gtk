@@ -8,35 +8,84 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2016-08-30 02:30+0000\n"
-"PO-Revision-Date: 2016-08-14 13:53+0800\n"
-"Last-Translator: Sebastian Rasmussen <sebras@gmail.com>\n"
+"POT-Creation-Date: 2017-03-02 15:40+0000\n"
+"PO-Revision-Date: 2017-03-19 20:58+0100\n"
+"Last-Translator: Josef Andersson <l10nl18nsweja@gmail.com>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.8\n"
+"X-Generator: Poedit 1.8.9\n"
 
-#: src/appchooser.c:166
-msgid "_Select"
-msgstr "_Välj"
+#: src/access.c:271
+msgid "Deny Access"
+msgstr "Neka tillgång"
 
-#: src/appchooser.c:168 src/appchooserdialog.ui:10
-msgid "Open With"
-msgstr "Öppna med"
+#: src/access.c:274
+msgid "Grant Access"
+msgstr "Bevilja tillgång"
 
-#: src/appchooser.c:170
-msgid "Select application"
-msgstr "Välj program"
+#: src/accountdialog.c:166
+msgid "Select an Image"
+msgstr "Välj en bild"
 
-#: src/appchooser.c:176 src/appchooserdialog.ui:14 src/filechooser.c:341
-#: src/screenshotdialog.ui:14
+#: src/accountdialog.c:169
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: src/accountdialog.c:170
+msgid "Select"
+msgstr "Välj"
+
+#: src/accountdialog.c:171
+msgid "Clear"
+msgstr "Rensa"
+
+#: src/accountdialog.c:185
+msgid "Images"
+msgstr "Bilder"
+
+#: src/accountdialog.c:260
+#, c-format
+msgid "Share your personal information with %s?"
+msgstr "Dela din personliga information med %s?"
+
+#: src/accountdialog.c:263
+msgid "Share your personal information with the requesting application?"
+msgstr "Dela din personliga information med programmet som begär den?"
+
+#: src/accountdialog.ui:10
+msgid "Share Details"
+msgstr "Dela detaljer"
+
+#: src/accountdialog.ui:14 src/appchooser.c:179 src/appchooserdialog.ui:14
+#: src/filechooser.c:364 src/screenshotdialog.ui:14
 msgid "_Cancel"
 msgstr "_Avbryt"
 
-#: src/appchooserdialog.ui:26 src/filechooser.c:339
+#: src/accountdialog.ui:22 src/screenshotdialog.ui:25
+msgid "_Share"
+msgstr "_Dela"
+
+#: src/accountdialog.ui:148
+msgid "Make changes before sharing the information"
+msgstr "Ändra informationen innan den delas"
+
+#: src/appchooser.c:169
+msgid "_Select"
+msgstr "_Välj"
+
+#: src/appchooser.c:171 src/appchooserdialog.ui:10
+msgid "Open With"
+msgstr "Öppna med"
+
+#: src/appchooser.c:173
+msgid "Select application"
+msgstr "Välj program"
+
+#: src/appchooserdialog.ui:26 src/filechooser.c:362
 msgid "_Open"
 msgstr "_Öppna"
 
@@ -52,15 +101,3 @@ msgstr "Dela denna skärmbild med programmet som begär den?"
 #: src/screenshotdialog.ui:10
 msgid "Screenshot"
 msgstr "Skärmbild"
-
-#: src/screenshotdialog.ui:25
-msgid "_Share"
-msgstr "_Dela"
-
-#: src/access.c:269
-msgid "Deny Access"
-msgstr "Neka tillgång"
-
-#: src/access.c:272
-msgid "Grant Access"
-msgstr "Bevilja tillgång"
