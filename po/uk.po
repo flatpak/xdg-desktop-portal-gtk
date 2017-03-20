@@ -2,42 +2,91 @@
 # Copyright (C) 2016 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
 # This file is distributed under the same license as the xdg-desktop-portal-gtk package.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2016.
+# Yuri Chornoivan <yurchor@ukr.net>, 2016, 2017.
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2016-08-26 02:29+0000\n"
-"PO-Revision-Date: 2016-08-26 12:37+0300\n"
+"POT-Creation-Date: 2017-03-02 15:40+0000\n"
+"PO-Revision-Date: 2017-03-20 19:34+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n%"
-"10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
+"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Lokalize 1.5\n"
 
-#: src/appchooser.c:166
-msgid "_Select"
-msgstr "Ви_брати"
+#: src/access.c:271
+msgid "Deny Access"
+msgstr "Заборонити доступ"
 
-#: src/appchooser.c:168 src/appchooserdialog.ui:10
-msgid "Open With"
-msgstr "Відкрити за допомогою"
+#: src/access.c:274
+msgid "Grant Access"
+msgstr "Надати доступ"
 
-#: src/appchooser.c:170
-msgid "Select application"
-msgstr "Вибір програми"
+#: src/accountdialog.c:166
+msgid "Select an Image"
+msgstr "Виберіть образ"
 
-#: src/appchooser.c:176 src/appchooserdialog.ui:14 src/filechooser.c:343
-#: src/screenshotdialog.ui:14
+#: src/accountdialog.c:169
+msgid "Cancel"
+msgstr "Скасувати"
+
+#: src/accountdialog.c:170
+msgid "Select"
+msgstr "Вибрати"
+
+#: src/accountdialog.c:171
+msgid "Clear"
+msgstr "Спорожнити"
+
+#: src/accountdialog.c:185
+msgid "Images"
+msgstr "Образи"
+
+#: src/accountdialog.c:260
+#, c-format
+msgid "Share your personal information with %s?"
+msgstr "Поділитися вашими особистими даними з %s?"
+
+#: src/accountdialog.c:263
+msgid "Share your personal information with the requesting application?"
+msgstr "Поділитися вашими особистими даними з програмою, яка про це просить?"
+
+#: src/accountdialog.ui:10
+msgid "Share Details"
+msgstr "Оприлюднити подробиці"
+
+#: src/accountdialog.ui:14 src/appchooser.c:179 src/appchooserdialog.ui:14
+#: src/filechooser.c:364 src/screenshotdialog.ui:14
 msgid "_Cancel"
 msgstr "_Скасувати"
 
-#: src/appchooserdialog.ui:26 src/filechooser.c:341
+#: src/accountdialog.ui:22 src/screenshotdialog.ui:25
+msgid "_Share"
+msgstr "_Оприлюднити"
+
+#: src/accountdialog.ui:148
+msgid "Make changes before sharing the information"
+msgstr "Внести зміни до оприлюднення даних"
+
+#: src/appchooser.c:169
+msgid "_Select"
+msgstr "Ви_брати"
+
+#: src/appchooser.c:171 src/appchooserdialog.ui:10
+msgid "Open With"
+msgstr "Відкрити за допомогою"
+
+#: src/appchooser.c:173
+msgid "Select application"
+msgstr "Вибір програми"
+
+#: src/appchooserdialog.ui:26 src/filechooser.c:362
 msgid "_Open"
 msgstr "_Відкрити"
 
@@ -53,16 +102,4 @@ msgstr "Оприлюднити цей знімок екрана за допом�
 #: src/screenshotdialog.ui:10
 msgid "Screenshot"
 msgstr "Знімок екрана"
-
-#: src/screenshotdialog.ui:25
-msgid "_Share"
-msgstr "_Оприлюднити"
-
-#: src/access.c:269
-msgid "Deny Access"
-msgstr "Заборонити доступ"
-
-#: src/access.c:272
-msgid "Grant Access"
-msgstr "Надати доступ"
 
