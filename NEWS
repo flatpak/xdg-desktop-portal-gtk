@@ -1,3 +1,28 @@
+Major changes in 0.6
+====================
+
+* Implement the portal for composing email. Currently supported
+  clients: evolution, thunderbird
+
+* Install a systemd service file to put xdg-desktop-portal-gtk
+  into its own cgroup
+
+* Install a desktop file to provide an icon and name for
+  xdg-desktop-portal-gtk
+
+* Apply image rotations in the file chooser preview
+
+* Add a new app chooser dialog
+
+* Translation updates
+ Brazilian Portuguese
+ French
+ German
+ Hungarian
+ Swedish
+ Ukrainian
+
+
 Major changes in 0.5
 ====================
 
