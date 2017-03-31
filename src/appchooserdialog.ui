@@ -38,14 +38,50 @@
               <class name="view"/>
             </style>
             <child>
-              <object class="GtkFlowBox" id="list">
+              <object class="GtkStack" id="stack">
                 <property name="visible">1</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <property name="selection-mode">none</property>
-                <property name="min-children-per-line">2</property>
-                <property name="max-children-per-line">6</property>
-                <signal name="child-activated" handler="row_activated"/>
+                <child>
+                  <object class="GtkFlowBox" id="list">
+                    <property name="visible">1</property>
+                    <property name="halign">center</property>
+                    <property name="valign">center</property>
+                    <property name="selection-mode">none</property>
+                    <property name="min-children-per-line">2</property>
+                    <property name="max-children-per-line">6</property>
+                    <signal name="child-activated" handler="row_activated"/>
+                  </object>
+                  <packing>
+                    <property name="name">list</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">1</property>
+                    <property name="orientation">vertical</property>
+                    <property name="halign">center</property>
+                    <property name="valign">center</property>
+                    <property name="spacing">10</property>
+                    <style>
+                      <class name="dim-label"/>
+                    </style>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="visible">1</property>
+                        <property name="icon-name">face-plain-symbolic</property>
+                        <property name="pixel-size">64</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">1</property>
+                        <property name="label" translatable="yes">No applications found</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="name">empty</property>
+                  </packing>
+                </child>
               </object>
             </child>
           </object>

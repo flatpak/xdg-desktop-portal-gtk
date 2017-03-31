@@ -37,7 +37,7 @@ struct _AppChooserDialog {
   GtkWidget *titlebar;
   GtkWidget *cancel_button;
   GtkWidget *list;
-  GtkWidget *more;
+  GtkWidget *stack;
 };
 
 struct _AppChooserDialogClass {
@@ -98,6 +98,7 @@ app_chooser_dialog_class_init (AppChooserDialogClass *class)
   gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, titlebar);
   gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, cancel_button);
   gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, list);
+  gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, stack);
   gtk_widget_class_bind_template_callback (widget_class, row_activated);
   gtk_widget_class_bind_template_callback (widget_class, button_clicked);
 }
@@ -140,6 +141,8 @@ app_chooser_dialog_new (const char **choices,
       gtk_widget_set_visible (row, TRUE);
       gtk_flow_box_insert (GTK_FLOW_BOX (dialog->list), row, -1);
     }
+
+  gtk_stack_set_visible_child_name (GTK_STACK (dialog->stack), n_choices > 0 ? "list" : "empty");
 
   return dialog;
 }
