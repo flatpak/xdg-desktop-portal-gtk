@@ -28,7 +28,7 @@ main (int argc, char *argv[])
                 apps[i] = argv[i + 1];
         apps[argc - 1] = NULL;
 
-        window = GTK_WIDGET (app_chooser_dialog_new (apps, NULL, "Cancel", "Select", "Click on it!", "Heading"));
+        window = GTK_WIDGET (app_chooser_dialog_new (apps, NULL, "Cancel", "Select", "Open With", "A heading goes here"));
         g_signal_connect (window, "done", G_CALLBACK (done_cb), NULL);
 
         gtk_widget_show (window);
