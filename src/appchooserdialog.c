@@ -115,6 +115,7 @@ app_chooser_dialog_new (const char **choices,
   int n_choices;
   int i;
   static GtkCssProvider *provider;
+  GtkWidget *default_row;
 
   if (provider == NULL)
     {
@@ -130,6 +131,8 @@ app_chooser_dialog_new (const char **choices,
   gtk_button_set_label (GTK_BUTTON (dialog->cancel_button), cancel_label);
   gtk_header_bar_set_title (GTK_HEADER_BAR (dialog->titlebar), title);
 
+  default_row = NULL;
+
   n_choices = g_strv_length ((char **)choices);
   for (i = 0; i < n_choices; i++)
     {
@@ -140,7 +143,13 @@ app_chooser_dialog_new (const char **choices,
       row = GTK_WIDGET (app_chooser_row_new (info));
       gtk_widget_set_visible (row, TRUE);
       gtk_flow_box_insert (GTK_FLOW_BOX (dialog->list), row, -1);
+
+      if (g_strcmp0 (choices[i], default_id) == 0)
+        default_row = row;
     }
+
+  if (default_row)
+    gtk_widget_grab_focus (default_row);
 
   gtk_stack_set_visible_child_name (GTK_STACK (dialog->stack), n_choices > 0 ? "list" : "empty");
 
