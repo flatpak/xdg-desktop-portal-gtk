@@ -22,21 +22,20 @@
 #include "appchooserrow.h"
 
 struct _AppChooserRow {
-  GtkListBoxRow parent;
+  GtkFlowBoxChild parent;
 
   GAppInfo *info;
   gboolean selected;
 
   GtkWidget *icon;
   GtkWidget *name;
-  GtkWidget *check;
 };
 
 struct _AppChooserRowClass {
-  GtkListBoxRowClass parent_class;
+  GtkFlowBoxChildClass parent_class;
 };
 
-G_DEFINE_TYPE (AppChooserRow, app_chooser_row, GTK_TYPE_LIST_BOX_ROW)
+G_DEFINE_TYPE (AppChooserRow, app_chooser_row, GTK_TYPE_FLOW_BOX_CHILD)
 
 static void
 app_chooser_row_init (AppChooserRow *row)
@@ -65,7 +64,6 @@ app_chooser_row_class_init (AppChooserRowClass *class)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/freedesktop/portal/desktop/gtk/appchooserrow.ui");
   gtk_widget_class_bind_template_child (widget_class, AppChooserRow, icon);
   gtk_widget_class_bind_template_child (widget_class, AppChooserRow, name);
-  gtk_widget_class_bind_template_child (widget_class, AppChooserRow, check);
 }
 
 AppChooserRow *
@@ -91,14 +89,6 @@ app_chooser_row_new (GAppInfo *info)
                        g_app_info_get_display_name (info));
 
   return row;
-}
-
-void
-app_chooser_row_set_selected (AppChooserRow *row,
-                              gboolean selected)
-{
-  row->selected = selected;
-  gtk_widget_set_opacity (row->check, selected ? 1.0 : 0.0);
 }
 
 GAppInfo *

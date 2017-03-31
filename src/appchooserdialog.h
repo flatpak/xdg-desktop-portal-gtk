@@ -34,5 +34,3 @@ AppChooserDialog * app_chooser_dialog_new (const char **app_ids,
                                            const char *accept_label,
                                            const char *title,
                                            const char *heading);
-void app_chooser_dialog_set_selected (AppChooserDialog *dialog,
-                                      const char *choice_id);

@@ -1,42 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface domain="xdg-desktop-portal-gtk">
   <!-- interface-requires gtk+ 3.22 -->
-  <template class="AppChooserRow" parent="GtkListBoxRow">
-    <property name="selectable">0</property>
-    <property name="activatable">1</property>
-    <style>
-      <class name="with-border"/>
-    </style>
+  <template class="AppChooserRow" parent="GtkFlowBoxChild">
+    <property name="visible">1</property>
     <child>
       <object class="GtkBox">
         <property name="visible">1</property>
-        <property name="orientation">horizontal</property>
+        <property name="orientation">vertical</property>
         <property name="spacing">10</property>
-        <property name="margin-top">10</property>
-        <property name="margin-bottom">10</property>
-        <property name="margin-start">20</property>
-        <property name="margin-end">20</property>
+        <property name="margin">10</property>
+        <property name="halign">center</property>
+        <property name="valign">center</property>
         <child>
           <object class="GtkImage" id="icon">
             <property name="visible">1</property>
-            <property name="icon-size">6</property>
+            <property name="pixel-size">64</property>
           </object>
         </child>
         <child>
           <object class="GtkLabel" id="name">
             <property name="visible">1</property>
-            <property name="xalign">0</property>
-          </object>
-          <packing>
-            <property name="expand">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkImage" id="check">
-            <property name="visible">1</property>
-            <property name="opacity">0</property>
-            <property name="icon-name">object-select-symbolic</property>
-            <property name="icon-size">1</property>
+            <property name="xalign">0.5</property>
+            <property name="width-chars">25</property>
+            <property name="max-width-chars">25</property>
+            <property name="ellipsize">end</property>
           </object>
         </child>
       </object>
