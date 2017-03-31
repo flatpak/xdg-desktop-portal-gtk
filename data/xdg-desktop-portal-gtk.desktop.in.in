@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Portal
+Icon=applications-system-symbolic
+Exec=@libexecdir@/xdg-desktop-portal-gtk
+NoDisplay=true
