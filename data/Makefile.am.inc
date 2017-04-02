@@ -16,21 +16,23 @@ systemduserunit_DATA = xdg-desktop-portal-gtk.service
 CLEANFILES += $(systemduserunit_DATA)
 
 %.desktop.in: data/%.desktop.in.in
-	$(AM_V_GEN) sed -e "s|@libexecdir[@]|$(libexecdir)|" $< > $@
+	$(AM_V_GEN) msgfmt --desktop -d po --template $< -o $@
 
 %.desktop: %.desktop.in
-	$(AM_V_GEN) msgfmt --desktop -d po --template $< -o $@
+	$(AM_V_GEN) $(SED) -e "s|\@libexecdir\@|$(libexecdir)|" $< > $@
 
 desktopdir = $(datadir)/applications
 desktop_in_in_files = data/xdg-desktop-portal-gtk.desktop.in.in
-dist_desktop_DATA = xdg-desktop-portal-gtk.desktop
+desktop_in_files = xdg-desktop-portal-gtk.desktop.in
+desktop_DATA = xdg-desktop-portal-gtk.desktop
 
-CLEANFILES += $(dist_desktop_DATA)
+CLEANFILES += $(desktop_DATA)
 
 EXTRA_DIST += \
 	$(dbus_service_in_files)                \
         $(systemduserunit_in_files)             \
         $(desktop_in_in_files)                  \
+        $(desktop_in_files)                     \
         data/org.gtk.Notifications.xml          \
         data/org.gnome.SessionManager.xml       \
         data/org.gnome.Shell.Screenshot.xml     \
