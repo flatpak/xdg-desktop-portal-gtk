@@ -26,13 +26,15 @@ desktop_in_in_files = data/xdg-desktop-portal-gtk.desktop.in.in
 desktop_in_files = xdg-desktop-portal-gtk.desktop.in
 desktop_DATA = xdg-desktop-portal-gtk.desktop
 
-CLEANFILES += $(desktop_DATA)
+CLEANFILES += \
+	$(desktop_in_files)	\
+	$(desktop_DATA)		\
+	$(NULL)
 
 EXTRA_DIST += \
 	$(dbus_service_in_files)                \
         $(systemduserunit_in_files)             \
         $(desktop_in_in_files)                  \
-        $(desktop_in_files)                     \
         data/org.gtk.Notifications.xml          \
         data/org.gnome.SessionManager.xml       \
         data/org.gnome.Shell.Screenshot.xml     \
