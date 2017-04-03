@@ -1,5 +1,6 @@
 dbus_built_sources = src/xdg-desktop-portal-dbus.c src/xdg-desktop-portal-dbus.h
 BUILT_SOURCES += $(dbus_built_sources)
+CLEANFILES += $(dbus_built_sources)
 
 $(dbus_built_sources): src/Makefile.am.inc
 	$(AM_V_GEN) $(GDBUS_CODEGEN)			\
@@ -21,6 +22,7 @@ $(dbus_built_sources): src/Makefile.am.inc
 
 shell_built_sources = src/shell-dbus.c src/shell-dbus.h
 BUILT_SOURCES += $(shell_built_sources)
+CLEANFILES += $(shell_built_sources)
 
 $(shell_built_sources): src/Makefile.am.inc
 	$(AM_V_GEN) $(GDBUS_CODEGEN)			                \
@@ -74,7 +76,6 @@ xdg_desktop_portal_gtk_SOURCES = \
 	src/screenshot.c			\
 	src/screenshotdialog.h		        \
 	src/screenshotdialog.c		        \
-	src/resources.c			        \
 	src/print.h				\
 	src/print.c				\
 	src/access.h				\
@@ -89,8 +90,12 @@ xdg_desktop_portal_gtk_SOURCES = \
         src/gtkbackports.c                      \
 	src/externalwindow.h			\
 	src/externalwindow.c			\
-	$(dbus_built_sources)		        \
-	$(shell_built_sources)		        \
+	$(NULL)
+
+nodist_xdg_desktop_portal_gtk_SOURCES = \
+	src/resources.c				\
+	$(dbus_built_sources)			\
+	$(shell_built_sources)			\
 	$(NULL)
 
 if HAVE_GTK_X11
