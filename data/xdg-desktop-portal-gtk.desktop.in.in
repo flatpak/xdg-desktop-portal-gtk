@@ -1,6 +1,7 @@
 [Desktop Entry]
 Type=Application
 Name=Portal
+# TRANSLATORS: Don't translate this text (this is icon name)
 Icon=applications-system-symbolic
 Exec=@libexecdir@/xdg-desktop-portal-gtk
 NoDisplay=true
