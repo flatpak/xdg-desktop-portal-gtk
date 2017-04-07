@@ -40,7 +40,7 @@ notification_added (GObject      *source,
     g_warning ("Error from gnome-shell: %s", error->message);
 }
 
-static gboolean
+static void
 handle_add_notification_gtk (XdpImplNotification *object,
                              GDBusMethodInvocation *invocation,
                              const char *arg_app_id,
@@ -59,11 +59,9 @@ handle_add_notification_gtk (XdpImplNotification *object,
                                                  NULL);
 
   xdp_impl_notification_complete_add_notification (object, invocation);
-
-  return TRUE;
 }
 
-static gboolean
+static void
 handle_remove_notification_gtk (XdpImplNotification *object,
                                 GDBusMethodInvocation *invocation,
                                 const char *arg_app_id,
@@ -80,8 +78,6 @@ handle_remove_notification_gtk (XdpImplNotification *object,
                                                     NULL);
 
   xdp_impl_notification_complete_remove_notification (object, invocation);
-
-  return TRUE;
 }
 
 /* org.freedesktop.Notifications support.
@@ -550,7 +546,7 @@ has_unprefixed_action (GVariant *notification)
   return FALSE;
 }
 
-static void
+static gboolean
 handle_add_notification (XdpImplNotification *object,
                          GDBusMethodInvocation *invocation,
                          const gchar *arg_app_id,
@@ -563,9 +559,10 @@ handle_add_notification (XdpImplNotification *object,
     handle_add_notification_fdo (object, invocation, arg_app_id, arg_id, arg_notification);
   else
     handle_add_notification_gtk (object, invocation, arg_app_id, arg_id, arg_notification);
+  return TRUE;
 }
 
-static void
+static gboolean
 handle_remove_notification (XdpImplNotification *object,
                             GDBusMethodInvocation *invocation,
                             const gchar *arg_app_id,
@@ -578,6 +575,7 @@ handle_remove_notification (XdpImplNotification *object,
     handle_remove_notification_fdo (object, invocation, arg_app_id, arg_id);
   else
     handle_remove_notification_gtk (object, invocation, arg_app_id, arg_id);
+  return TRUE;
 }
 
 gboolean
