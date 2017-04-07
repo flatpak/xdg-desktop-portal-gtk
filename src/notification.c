@@ -359,7 +359,7 @@ call_notify (GDBusConnection *connection,
     urgency = 1;
   g_variant_builder_add (&hints_builder, "{sv}", "urgency", g_variant_new_byte (urgency));
 
-  icon = g_variant_lookup_value (notification, "icon", G_VARIANT_TYPE_VARIANT);
+  icon = g_variant_lookup_value (notification, "icon", NULL);
   if (icon != NULL)
     {
       g_autoptr(GIcon) gicon = g_icon_deserialize (icon);
