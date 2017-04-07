@@ -376,6 +376,48 @@ call_notify (GDBusConnection *connection,
            const gchar* const* icon_names = g_themed_icon_get_names (G_THEMED_ICON (gicon));
            icon_name = g_strdup (icon_names[0]);
         }
+      else if (G_IS_BYTES_ICON (gicon))
+        {
+           g_autoptr(GInputStream) istream = NULL;
+           g_autoptr(GdkPixbuf) pixbuf = NULL;
+           int width, height, rowstride, n_channels, bits_per_sample;
+           GVariant *image;
+           gsize image_len;
+
+           istream = g_loadable_icon_load (G_LOADABLE_ICON (gicon),
+                                           -1 /* unused */,
+                                           NULL /* type */,
+                                           NULL,
+                                           NULL);
+           pixbuf = gdk_pixbuf_new_from_stream (istream, NULL, NULL);
+           g_input_stream_close (istream, NULL, NULL);
+
+           g_object_get (pixbuf,
+                         "width", &width,
+                         "height", &height,
+                         "rowstride", &rowstride,
+                         "n-channels", &n_channels,
+                         "bits-per-sample", &bits_per_sample,
+                         NULL);
+
+           image_len = (height - 1) * rowstride + width *
+                       ((n_channels * bits_per_sample + 7) / 8);
+
+           image = g_variant_new ("(iiibii@ay)",
+                                  width,
+                                  height,
+                                  rowstride,
+                                  gdk_pixbuf_get_has_alpha (pixbuf),
+                                  bits_per_sample,
+                                  n_channels,
+                                  g_variant_new_from_data (G_VARIANT_TYPE ("ay"),
+                                                           gdk_pixbuf_get_pixels (pixbuf),
+                                                           image_len,
+                                                           TRUE,
+                                                           (GDestroyNotify) g_object_unref,
+                                                           g_object_ref (pixbuf)));
+           g_variant_builder_add (&hints_builder, "{sv}", "image-data", image);
+        }
     }
 
   if (icon_name == NULL)
