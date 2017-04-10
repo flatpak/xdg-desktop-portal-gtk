@@ -1,8 +1,9 @@
 # Czech translation for xdg-desktop-portal-gtk.
-# Copyright (C) 2016 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
+# Copyright (C) 2016-2017 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
 # This file is distributed under the same license as the xdg-desktop-portal-gtk package.
 #
 # Marek Černocký <marek@manet.cz>, 2016.
+# Daniel Rusek <mail@asciiwolf.com>, 2017.
 #
 msgid ""
 msgstr ""
@@ -10,34 +11,87 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
 "POT-Creation-Date: 2016-11-09 03:30+0000\n"
-"PO-Revision-Date: 2016-11-09 12:02+0100\n"
-"Last-Translator: Marek Černocký <marek@manet.cz>\n"
-"Language-Team: Czech <gnome-cs-list@gnome.org>>\n"
+"PO-Revision-Date: 2017-04-10 15:16+0200\n"
+"Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
+"Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Gtranslator 2.91.7\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
-#: src/appchooser.c:166
-msgid "_Select"
-msgstr "_Vybrat"
+#: src/access.c:271
+msgid "Deny Access"
+msgstr "Zamítnout přístup"
 
-#: src/appchooser.c:168 src/appchooserdialog.ui:10
-msgid "Open With"
-msgstr "Otevření pomocí"
+#: src/access.c:274
+msgid "Grant Access"
+msgstr "Udělit přístup"
 
-#: src/appchooser.c:170
-msgid "Select application"
-msgstr "Výběr aplikace"
+#: src/accountdialog.c:166
+msgid "Select an Image"
+msgstr "Výběr obrazu"
 
-#: src/appchooser.c:176 src/appchooserdialog.ui:14 src/filechooser.c:341
-#: src/screenshotdialog.ui:14
+#: src/accountdialog.c:169
+msgid "Cancel"
+msgstr "Zrušit"
+
+#: src/accountdialog.c:170
+msgid "Select"
+msgstr "Vybrat"
+
+#: src/accountdialog.c:171
+msgid "Clear"
+msgstr "Vymazat"
+
+#: src/accountdialog.c:185
+msgid "Images"
+msgstr "Obrazy"
+
+#: src/accountdialog.c:260
+#, c-format
+msgid "Share your personal information with %s?"
+msgstr "Sdílet vaše osobní informace s aplikací %s?"
+
+#: src/accountdialog.c:263
+msgid "Share your personal information with the requesting application?"
+msgstr "Sdílet vaše osobní informace s aplikací, která o to žádá?"
+
+#: src/accountdialog.ui:10
+msgid "Share Details"
+msgstr "Sdílet detaily"
+
+#: src/accountdialog.ui:14 src/appchooser.c:179 src/appchooserdialog.ui:16
+#: src/filechooser.c:365 src/screenshotdialog.ui:14
 msgid "_Cancel"
 msgstr "_Zrušit"
 
-#: src/appchooserdialog.ui:26 src/filechooser.c:339
+#: src/accountdialog.ui:22 src/screenshotdialog.ui:25
+msgid "_Share"
+msgstr "_Sdílet"
+
+#: src/accountdialog.ui:148
+msgid "Make changes before sharing the information"
+msgstr "Provést změny před sdílením informací"
+
+#: src/appchooser.c:169
+msgid "_Select"
+msgstr "_Vybrat"
+
+#: src/appchooser.c:171 src/appchooserdialog.ui:12
+msgid "Open With"
+msgstr "Otevření pomocí"
+
+#: src/appchooser.c:173
+msgid "Select application"
+msgstr "Výběr aplikace"
+
+#: src/appchooserdialog.ui:77
+msgid "No applications found"
+msgstr "Nenalezeny žádné aplikace"
+
+#: src/filechooser.c:363
 msgid "_Open"
 msgstr "_Otevřít"
 
@@ -54,14 +108,10 @@ msgstr "Sdílet tento snímek obrazovky s aplikací, která o to žádá?"
 msgid "Screenshot"
 msgstr "Snímek obrazovky"
 
-#: src/screenshotdialog.ui:25
-msgid "_Share"
-msgstr "_Sdílet"
+#: data/xdg-desktop-portal-gtk.desktop.in.in:4
+msgid "Portal"
+msgstr "Portal"
 
-#: src/access.c:269
-msgid "Deny Access"
-msgstr "Zamítnout přístup"
-
-#: src/access.c:272
-msgid "Grant Access"
-msgstr "Udělit přístup"
+#: data/xdg-desktop-portal-gtk.desktop.in.in:5
+msgid "applications-system-symbolic"
+msgstr "applications-system-symbolic"
