@@ -308,6 +308,7 @@ call_notify (GDBusConnection *connection,
   GVariant *icon;
   const char *body;
   const char *title;
+  g_autofree char *icon_name = NULL;
   guchar urgency;
   const char *dummy;
   g_autoptr(GVariant) buttons = NULL;
@@ -359,7 +360,7 @@ call_notify (GDBusConnection *connection,
     urgency = 1;
   g_variant_builder_add (&hints_builder, "{sv}", "urgency", g_variant_new_byte (urgency));
 
-  icon = g_variant_lookup_value (notification, "icon", G_VARIANT_TYPE_VARIANT);
+  icon = g_variant_lookup_value (notification, "icon", NULL);
   if (icon != NULL)
     {
       g_autoptr(GIcon) gicon = g_icon_deserialize (icon);
@@ -368,17 +369,59 @@ call_notify (GDBusConnection *connection,
            GFile *file;
 
            file = g_file_icon_get_file (G_FILE_ICON (gicon));
-           g_variant_builder_add (&hints_builder, "{sv}", "image-path",
-                                  g_variant_new_take_string (g_file_get_path (file)));
+           icon_name = g_file_get_path (file);
         }
       else if (G_IS_THEMED_ICON (gicon))
         {
            const gchar* const* icon_names = g_themed_icon_get_names (G_THEMED_ICON (gicon));
-           /* Take first name from GThemedIcon */
-           g_variant_builder_add (&hints_builder, "{sv}", "image-path",
-                                  g_variant_new_string (icon_names[0]));
+           icon_name = g_strdup (icon_names[0]);
+        }
+      else if (G_IS_BYTES_ICON (gicon))
+        {
+           g_autoptr(GInputStream) istream = NULL;
+           g_autoptr(GdkPixbuf) pixbuf = NULL;
+           int width, height, rowstride, n_channels, bits_per_sample;
+           GVariant *image;
+           gsize image_len;
+
+           istream = g_loadable_icon_load (G_LOADABLE_ICON (gicon),
+                                           -1 /* unused */,
+                                           NULL /* type */,
+                                           NULL,
+                                           NULL);
+           pixbuf = gdk_pixbuf_new_from_stream (istream, NULL, NULL);
+           g_input_stream_close (istream, NULL, NULL);
+
+           g_object_get (pixbuf,
+                         "width", &width,
+                         "height", &height,
+                         "rowstride", &rowstride,
+                         "n-channels", &n_channels,
+                         "bits-per-sample", &bits_per_sample,
+                         NULL);
+
+           image_len = (height - 1) * rowstride + width *
+                       ((n_channels * bits_per_sample + 7) / 8);
+
+           image = g_variant_new ("(iiibii@ay)",
+                                  width,
+                                  height,
+                                  rowstride,
+                                  gdk_pixbuf_get_has_alpha (pixbuf),
+                                  bits_per_sample,
+                                  n_channels,
+                                  g_variant_new_from_data (G_VARIANT_TYPE ("ay"),
+                                                           gdk_pixbuf_get_pixels (pixbuf),
+                                                           image_len,
+                                                           TRUE,
+                                                           (GDestroyNotify) g_object_unref,
+                                                           g_object_ref (pixbuf)));
+           g_variant_builder_add (&hints_builder, "{sv}", "image-data", image);
         }
     }
+
+  if (icon_name == NULL)
+    icon_name = g_strdup ("");
 
   if (!g_variant_lookup (notification, "body", "&s", &body))
     body = "";
@@ -393,7 +436,7 @@ call_notify (GDBusConnection *connection,
                           g_variant_new ("(susssasa{sv}i)",
                                          "", /* app name */
                                          replace_id,
-                                         "", /* app icon */
+                                         icon_name,
                                          title,
                                          body,
                                          &action_builder,
