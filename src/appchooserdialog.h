@@ -29,4 +29,6 @@ typedef struct _AppChooserDialog AppChooserDialog;
 typedef struct _AppChooserDialogClass AppChooserDialogClass;
 
 AppChooserDialog * app_chooser_dialog_new (const char **app_ids,
-                                           const char  *default_id);
+                                           const char  *default_id,
+                                           const char  *content_type,
+                                           const char  *filename);

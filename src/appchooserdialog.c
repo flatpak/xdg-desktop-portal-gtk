@@ -25,6 +25,7 @@
 #include <string.h>
 
 #include <gio/gio.h>
+#include <glib/gi18n.h>
 #include <gio/gdesktopappinfo.h>
 
 #include "appchooserdialog.h"
@@ -39,6 +40,8 @@ struct _AppChooserDialog {
   GtkWidget *list;
   GtkWidget *stack;
   GtkWidget *heading;
+
+  char *content_type;
 };
 
 struct _AppChooserDialogClass {
@@ -58,6 +61,16 @@ static void
 app_chooser_dialog_init (AppChooserDialog *dialog)
 {
   gtk_widget_init_template (GTK_WIDGET (dialog));
+}
+
+static void
+app_chooser_dialog_finalize (GObject *object)
+{
+  AppChooserDialog *dialog = APP_CHOOSER_DIALOG (object);
+
+  g_free (dialog->content_type);
+
+  G_OBJECT_CLASS (app_chooser_dialog_parent_class)->finalize (object);
 }
 
 static void
@@ -81,9 +94,52 @@ button_clicked (GtkWidget *button,
 }
 
 static void
+show_error_dialog (const gchar *primary,
+                   const gchar *secondary,
+                   GtkWindow *parent)
+{
+  GtkWidget *message_dialog;
+
+  message_dialog = gtk_message_dialog_new (parent, 0,
+                                           GTK_MESSAGE_ERROR,
+                                           GTK_BUTTONS_OK,
+                                           NULL);
+  g_object_set (message_dialog,
+                "text", primary,
+                "secondary-text", secondary,
+                NULL);
+  gtk_dialog_set_default_response (GTK_DIALOG (message_dialog), GTK_RESPONSE_OK);
+  gtk_widget_show (message_dialog);
+  g_signal_connect (message_dialog, "response",
+                    G_CALLBACK (gtk_widget_destroy), NULL);
+}
+
+static void
+link_activated (GtkWidget *label,
+                const char *uri,
+                AppChooserDialog *dialog)
+{
+  g_autofree char *option = NULL;
+  g_autoptr(GSubprocess) process = NULL;
+  g_autoptr(GError) error = NULL;
+
+  if (dialog->content_type)
+    option = g_strconcat ("--search=", dialog->content_type, NULL);
+  else
+    option = g_strdup ("--mode=overview");
+
+  process = g_subprocess_new (0, &error, "gnome-software", option, NULL);
+  if (!process)
+    show_error_dialog (_("Failed to start Software"), error->message, GTK_WINDOW (dialog));
+}
+
+static void
 app_chooser_dialog_class_init (AppChooserDialogClass *class)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (class);
+  GObjectClass *object_class = G_OBJECT_CLASS (class);
+
+  object_class->finalize = app_chooser_dialog_finalize;
 
   signals[DONE] = g_signal_new ("done",
                                 G_TYPE_FROM_CLASS (class),
@@ -103,11 +159,14 @@ app_chooser_dialog_class_init (AppChooserDialogClass *class)
   gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, heading);
   gtk_widget_class_bind_template_callback (widget_class, row_activated);
   gtk_widget_class_bind_template_callback (widget_class, button_clicked);
+  gtk_widget_class_bind_template_callback (widget_class, link_activated);
 }
 
 AppChooserDialog *
 app_chooser_dialog_new (const char **choices,
-                        const char *default_id)
+                        const char *default_id,
+                        const char *content_type,
+                        const char *filename)
 {
   AppChooserDialog *dialog;
   int n_choices;
@@ -125,6 +184,20 @@ app_chooser_dialog_new (const char **choices,
     }
 
   dialog = g_object_new (app_chooser_dialog_get_type (), NULL);
+
+  dialog->content_type = g_strdup (content_type);
+
+  if (filename)
+    {
+      g_autofree char *heading = NULL;
+
+      heading = g_strdup_printf (_("Select an application to open '%s'. More applications are available in <a href='software'>Software.</a>"), filename);
+      gtk_label_set_label (GTK_LABEL (dialog->heading), heading);
+    }
+  else
+    {
+      gtk_label_set_label (GTK_LABEL (dialog->heading), _("Select an application. More applications are available in <a href='software'>Software.</a>"));
+    }
 
   default_row = NULL;
 

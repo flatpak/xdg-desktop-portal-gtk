@@ -48,7 +48,8 @@
                       <object class="GtkLabel" id="heading">
                         <property name="visible">1</property>
                         <property name="use-markup">1</property>
-                        <property name="label">Select an application to open 'foo.svg'. More applications are available in &lt;a href='software'&gt;Software&lt;/a&gt;.</property>
+                        <property name="label">Select an application</property>
+                        <signal name="activate-link" handler="link_activated"/>
                         <style>
                           <class name="heading"/>
                         </style>
