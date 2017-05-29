@@ -41,14 +41,27 @@
               <object class="GtkStack" id="stack">
                 <property name="visible">1</property>
                 <child>
-                  <object class="GtkFlowBox" id="list">
+                  <object class="GtkBox">
                     <property name="visible">1</property>
-                    <property name="halign">center</property>
-                    <property name="valign">center</property>
-                    <property name="selection-mode">none</property>
-                    <property name="min-children-per-line">2</property>
-                    <property name="max-children-per-line">6</property>
-                    <signal name="child-activated" handler="row_activated"/>
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <object class="GtkLabel" id="heading">
+                        <property name="visible">1</property>
+                        <property name="use-markup">1</property>
+                        <property name="label">Select an application to open 'foo.svg'. More applications are available in &lt;a href='software'&gt;Software&lt;/a&gt;.</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkFlowBox" id="list">
+                        <property name="visible">1</property>
+                        <property name="halign">center</property>
+                        <property name="valign">center</property>
+                        <property name="selection-mode">none</property>
+                        <property name="min-children-per-line">2</property>
+                        <property name="max-children-per-line">6</property>
+                        <signal name="child-activated" handler="row_activated"/>
+                      </object>
+                    </child>
                   </object>
                   <packing>
                     <property name="name">list</property>
