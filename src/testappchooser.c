@@ -22,8 +22,10 @@ main (int argc, char *argv[])
         const char **apps;
         int i;
         const char *default_id = NULL;
+        const char *heading = NULL;
         GOptionEntry entries[] = {
           { "default", 0, 0, G_OPTION_ARG_STRING, &default_id, "The default choice", "ID" },
+          { "heading", 0, 0, G_OPTION_ARG_STRING, &heading, "The heading", "STRING" },
           { NULL, }
         };
 
@@ -34,7 +36,7 @@ main (int argc, char *argv[])
                 apps[i] = argv[i + 1];
         apps[argc - 1] = NULL;
 
-        window = GTK_WIDGET (app_chooser_dialog_new (apps, default_id, "Cancel", "Select", "Open With", "A heading goes here"));
+        window = GTK_WIDGET (app_chooser_dialog_new (apps, default_id));
         g_signal_connect (window, "done", G_CALLBACK (done_cb), NULL);
 
         gtk_widget_show (window);

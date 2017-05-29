@@ -38,6 +38,7 @@ struct _AppChooserDialog {
   GtkWidget *cancel_button;
   GtkWidget *list;
   GtkWidget *stack;
+  GtkWidget *heading;
 };
 
 struct _AppChooserDialogClass {
@@ -99,17 +100,14 @@ app_chooser_dialog_class_init (AppChooserDialogClass *class)
   gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, cancel_button);
   gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, list);
   gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, stack);
+  gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, heading);
   gtk_widget_class_bind_template_callback (widget_class, row_activated);
   gtk_widget_class_bind_template_callback (widget_class, button_clicked);
 }
 
 AppChooserDialog *
 app_chooser_dialog_new (const char **choices,
-                        const char *default_id,
-                        const char *cancel_label,
-                        const char *accept_label,
-                        const char *title,
-                        const char *heading)
+                        const char *default_id)
 {
   AppChooserDialog *dialog;
   int n_choices;
@@ -127,9 +125,6 @@ app_chooser_dialog_new (const char **choices,
     }
 
   dialog = g_object_new (app_chooser_dialog_get_type (), NULL);
-
-  gtk_button_set_label (GTK_BUTTON (dialog->cancel_button), cancel_label);
-  gtk_header_bar_set_title (GTK_HEADER_BAR (dialog->titlebar), title);
 
   default_row = NULL;
 
