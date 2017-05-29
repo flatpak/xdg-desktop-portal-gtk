@@ -49,6 +49,9 @@
                         <property name="visible">1</property>
                         <property name="use-markup">1</property>
                         <property name="label">Select an application to open 'foo.svg'. More applications are available in &lt;a href='software'&gt;Software&lt;/a&gt;.</property>
+                        <style>
+                          <class name="heading"/>
+                        </style>
                       </object>
                     </child>
                     <child>
