@@ -94,12 +94,13 @@ send_response (AppDialogHandle *handle)
 }
 
 static void
-handle_app_chooser_done (GtkDialog *dialog,
-                         GAppInfo *info,
-                         gpointer data)
+handle_app_chooser_close (AppChooserDialog *dialog,
+                          gpointer data)
 {
   AppDialogHandle *handle = data;
+  GAppInfo *info;
 
+  info = app_chooser_dialog_get_info (dialog);
   if (info != NULL)
     {
       const char *desktop_id = g_app_info_get_id (info);
@@ -207,8 +208,8 @@ handle_choose_application (XdpImplAppChooser *object,
   g_signal_connect (request, "handle-close",
                     G_CALLBACK (handle_close), handle);
 
-  g_signal_connect (dialog, "done",
-                    G_CALLBACK (handle_app_chooser_done), handle);
+  g_signal_connect (dialog, "close",
+                    G_CALLBACK (handle_app_chooser_close), handle);
 
   gtk_widget_realize (dialog);
 

@@ -4,3 +4,6 @@ row.with-border:not(:last-child) {
 label.heading {
   margin: 20px 60px;
 }
+button.more {
+  margin: 20px;
+}
