@@ -1,6 +1,6 @@
 AC_PREREQ([2.63])
 
-AC_INIT([xdg-desktop-portal-gtk],[0.6])
+AC_INIT([xdg-desktop-portal-gtk],[0.7])
 
 AC_PROG_CC
 AM_PROG_CC_C_O
