@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-29 19:04+0100\n"
+"POT-Creation-Date: 2017-06-05 20:33-0400\n"
 "PO-Revision-Date: 2016-06-28 01:17+0100\n"
 "Last-Translator: Mario Sanchez Prada <mario@endlessm.com>\n"
 "Language-Team: Spanish; Castilian <>\n"
@@ -19,40 +19,100 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Gtranslator 2.91.7\n"
 
-#: appchooser.c:158
-msgid "_Select"
+#: src/access.c:271
+msgid "Deny Access"
+msgstr ""
+
+#: src/access.c:274
+msgid "Grant Access"
+msgstr ""
+
+#: src/accountdialog.c:166
+msgid "Select an Image"
+msgstr ""
+
+#: src/accountdialog.c:169
+#, fuzzy
+msgid "Cancel"
+msgstr "_Cancelar"
+
+#: src/accountdialog.c:170
+#, fuzzy
+msgid "Select"
 msgstr "_Seleccionar"
 
-#: appchooser.c:160 appchooserdialog.ui:10
-msgid "Open With"
-msgstr "Abrir Con"
+#: src/accountdialog.c:171
+msgid "Clear"
+msgstr ""
 
-#: appchooser.c:162
-msgid "Select application"
-msgstr "Seleccionar aplicación"
+#: src/accountdialog.c:185
+msgid "Images"
+msgstr ""
 
-#: appchooser.c:166 appchooserdialog.ui:14 filechooser.c:400
-#: screenshotdialog.ui:14
+#: src/accountdialog.c:260
+#, c-format
+msgid "Share your personal information with %s?"
+msgstr ""
+
+#: src/accountdialog.c:263
+#, fuzzy
+msgid "Share your personal information with the requesting application?"
+msgstr "¿ Compartir esta captura de pantalla con la aplicación de destino ?"
+
+#: src/accountdialog.ui:10
+msgid "Share Details"
+msgstr ""
+
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:365
+#: src/screenshotdialog.ui:14
 msgid "_Cancel"
 msgstr "_Cancelar"
 
-#: appchooserdialog.ui:26 filechooser.c:398
+#: src/accountdialog.ui:22 src/screenshotdialog.ui:25
+msgid "_Share"
+msgstr "_Compartir"
+
+#: src/accountdialog.ui:148
+msgid "Make changes before sharing the information"
+msgstr ""
+
+#: src/appchooserdialog.ui:13
+msgid "Open With"
+msgstr "Abrir Con"
+
+#: src/filechooser.c:363
 msgid "_Open"
 msgstr "_Abrir"
 
-#: screenshotdialog.c:93
-#, c-format
-msgid "Share this screenshot with %s ?"
+#: src/screenshotdialog.c:93
+#, fuzzy, c-format
+msgid "Share this screenshot with %s?"
 msgstr "¿ Compartir esta captura de pantalla con %s ?"
 
-#: screenshotdialog.c:96
-msgid "Share this screenshot with the requesting application ?"
+#: src/screenshotdialog.c:96
+#, fuzzy
+msgid "Share this screenshot with the requesting application?"
 msgstr "¿ Compartir esta captura de pantalla con la aplicación de destino ?"
 
-#: screenshotdialog.ui:10
+#: src/screenshotdialog.ui:10
 msgid "Screenshot"
 msgstr "Captura de Pantalla"
 
-#: screenshotdialog.ui:25
-msgid "_Share"
-msgstr "_Compartir"
+#: data/xdg-desktop-portal-gtk.desktop.in.in:4
+msgid "Portal"
+msgstr ""
+
+#. TRANSLATORS: Don't translate this text (this is icon name)
+#: data/xdg-desktop-portal-gtk.desktop.in.in:6
+msgid "applications-system-symbolic"
+msgstr ""
+
+#~ msgid "_Select"
+#~ msgstr "_Seleccionar"
+
+#~ msgid "Select application"
+#~ msgstr "Seleccionar aplicación"
+
+#, fuzzy
+#~ msgid "No applications found"
+#~ msgstr "Seleccionar aplicación"

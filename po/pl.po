@@ -7,9 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk\n"
-"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
-"issues\n"
-"POT-Creation-Date: 2017-03-31 15:28+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-06-05 20:33-0400\n"
 "PO-Revision-Date: 2017-04-01 10:50+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
@@ -61,8 +60,8 @@ msgstr "Udostępnić informacje o użytkowniku proszącemu o to programowi?"
 msgid "Share Details"
 msgstr "Udostępnianie informacji"
 
-#: src/accountdialog.ui:14 src/appchooser.c:179 src/appchooserdialog.ui:16
-#: src/filechooser.c:365 src/screenshotdialog.ui:14
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:365
+#: src/screenshotdialog.ui:14
 msgid "_Cancel"
 msgstr "_Anuluj"
 
@@ -74,21 +73,9 @@ msgstr "_Udostępnij"
 msgid "Make changes before sharing the information"
 msgstr "Umożliwia wprowadzenie zmian przed udostępnieniem informacji"
 
-#: src/appchooser.c:169
-msgid "_Select"
-msgstr "_Wybierz"
-
-#: src/appchooser.c:171 src/appchooserdialog.ui:12
+#: src/appchooserdialog.ui:13
 msgid "Open With"
 msgstr "Otwarcie za pomocą"
-
-#: src/appchooser.c:173
-msgid "Select application"
-msgstr "Wybór programu"
-
-#: src/appchooserdialog.ui:77
-msgid "No applications found"
-msgstr "Nie odnaleziono programów"
 
 #: src/filechooser.c:363
 msgid "_Open"
@@ -111,6 +98,16 @@ msgstr "Zrzut ekranu"
 msgid "Portal"
 msgstr "Portal"
 
-#: data/xdg-desktop-portal-gtk.desktop.in.in:5
+#. TRANSLATORS: Don't translate this text (this is icon name)
+#: data/xdg-desktop-portal-gtk.desktop.in.in:6
 msgid "applications-system-symbolic"
 msgstr "applications-system-symbolic"
+
+#~ msgid "_Select"
+#~ msgstr "_Wybierz"
+
+#~ msgid "Select application"
+#~ msgstr "Wybór programu"
+
+#~ msgid "No applications found"
+#~ msgstr "Nie odnaleziono programów"

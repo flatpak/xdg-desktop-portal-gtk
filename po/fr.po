@@ -6,9 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
-"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
-"issues\n"
-"POT-Creation-Date: 2017-02-22 03:32+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-06-05 20:33-0400\n"
 "PO-Revision-Date: 2017-03-02 11:43+0100\n"
 "Last-Translator: Claude Paroz <claude@2xlibre.net>\n"
 "Language-Team: French <gnomefr@traduc.org>\n"
@@ -53,14 +52,15 @@ msgstr "Partager mes informations personelles avec %s ?"
 
 #: src/accountdialog.c:263
 msgid "Share your personal information with the requesting application?"
-msgstr "Partager mes informations personelles avec l'application qui le demande ?"
+msgstr ""
+"Partager mes informations personelles avec l'application qui le demande ?"
 
 #: src/accountdialog.ui:10
 msgid "Share Details"
 msgstr "Partager les détails"
 
-#: src/accountdialog.ui:14 src/appchooser.c:179 src/appchooserdialog.ui:14
-#: src/filechooser.c:364 src/screenshotdialog.ui:14
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:365
+#: src/screenshotdialog.ui:14
 msgid "_Cancel"
 msgstr "A_nnuler"
 
@@ -72,19 +72,11 @@ msgstr "_Partager"
 msgid "Make changes before sharing the information"
 msgstr "Effectuer des changements avant de partager les informations"
 
-#: src/appchooser.c:169
-msgid "_Select"
-msgstr "_Choisir"
-
-#: src/appchooser.c:171 src/appchooserdialog.ui:10
+#: src/appchooserdialog.ui:13
 msgid "Open With"
 msgstr "Ouvrir avec"
 
-#: src/appchooser.c:173
-msgid "Select application"
-msgstr "Choisir une application"
-
-#: src/appchooserdialog.ui:26 src/filechooser.c:362
+#: src/filechooser.c:363
 msgid "_Open"
 msgstr "_Ouvrir"
 
@@ -100,3 +92,22 @@ msgstr "Partager la capture d'écran avec l'application qui le demande ?"
 #: src/screenshotdialog.ui:10
 msgid "Screenshot"
 msgstr "Capture d'écran"
+
+#: data/xdg-desktop-portal-gtk.desktop.in.in:4
+msgid "Portal"
+msgstr ""
+
+#. TRANSLATORS: Don't translate this text (this is icon name)
+#: data/xdg-desktop-portal-gtk.desktop.in.in:6
+msgid "applications-system-symbolic"
+msgstr ""
+
+#~ msgid "_Select"
+#~ msgstr "_Choisir"
+
+#~ msgid "Select application"
+#~ msgstr "Choisir une application"
+
+#, fuzzy
+#~ msgid "No applications found"
+#~ msgstr "Choisir une application"

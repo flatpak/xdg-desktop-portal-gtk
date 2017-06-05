@@ -5,9 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
-"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
-"issues\n"
-"POT-Creation-Date: 2017-03-31 15:28+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-06-05 20:33-0400\n"
 "PO-Revision-Date: 2017-04-04 07:13-0200\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
@@ -59,8 +58,8 @@ msgstr "Compartilhar suas informações pessoais com o aplicativo requisitante?"
 msgid "Share Details"
 msgstr "Compartilhar detalhes"
 
-#: src/accountdialog.ui:14 src/appchooser.c:179 src/appchooserdialog.ui:16
-#: src/filechooser.c:365 src/screenshotdialog.ui:14
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:365
+#: src/screenshotdialog.ui:14
 msgid "_Cancel"
 msgstr "_Cancelar"
 
@@ -72,21 +71,9 @@ msgstr "_Compartilhar"
 msgid "Make changes before sharing the information"
 msgstr "Fazer alterações antes de compartilhar as informações"
 
-#: src/appchooser.c:169
-msgid "_Select"
-msgstr "_Selecionar"
-
-#: src/appchooser.c:171 src/appchooserdialog.ui:12
+#: src/appchooserdialog.ui:13
 msgid "Open With"
 msgstr "Abrir com"
-
-#: src/appchooser.c:173
-msgid "Select application"
-msgstr "Selecionar aplicativo"
-
-#: src/appchooserdialog.ui:77
-msgid "No applications found"
-msgstr "Nenhum aplicativo localizado"
 
 #: src/filechooser.c:363
 msgid "_Open"
@@ -109,6 +96,16 @@ msgstr "Captura de tela"
 msgid "Portal"
 msgstr "Portal"
 
-#: data/xdg-desktop-portal-gtk.desktop.in.in:5
+#. TRANSLATORS: Don't translate this text (this is icon name)
+#: data/xdg-desktop-portal-gtk.desktop.in.in:6
 msgid "applications-system-symbolic"
 msgstr "applications-system-symbolic"
+
+#~ msgid "_Select"
+#~ msgstr "_Selecionar"
+
+#~ msgid "Select application"
+#~ msgstr "Selecionar aplicativo"
+
+#~ msgid "No applications found"
+#~ msgstr "Nenhum aplicativo localizado"

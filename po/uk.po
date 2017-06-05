@@ -6,9 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
-"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
-"issues\n"
-"POT-Creation-Date: 2017-03-02 15:40+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-06-05 20:33-0400\n"
 "PO-Revision-Date: 2017-03-20 19:34+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -61,8 +60,8 @@ msgstr "Поділитися вашими особистими даними з �
 msgid "Share Details"
 msgstr "Оприлюднити подробиці"
 
-#: src/accountdialog.ui:14 src/appchooser.c:179 src/appchooserdialog.ui:14
-#: src/filechooser.c:364 src/screenshotdialog.ui:14
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:365
+#: src/screenshotdialog.ui:14
 msgid "_Cancel"
 msgstr "_Скасувати"
 
@@ -74,19 +73,11 @@ msgstr "_Оприлюднити"
 msgid "Make changes before sharing the information"
 msgstr "Внести зміни до оприлюднення даних"
 
-#: src/appchooser.c:169
-msgid "_Select"
-msgstr "Ви_брати"
-
-#: src/appchooser.c:171 src/appchooserdialog.ui:10
+#: src/appchooserdialog.ui:13
 msgid "Open With"
 msgstr "Відкрити за допомогою"
 
-#: src/appchooser.c:173
-msgid "Select application"
-msgstr "Вибір програми"
-
-#: src/appchooserdialog.ui:26 src/filechooser.c:362
+#: src/filechooser.c:363
 msgid "_Open"
 msgstr "_Відкрити"
 
@@ -103,3 +94,21 @@ msgstr "Оприлюднити цей знімок екрана за допом�
 msgid "Screenshot"
 msgstr "Знімок екрана"
 
+#: data/xdg-desktop-portal-gtk.desktop.in.in:4
+msgid "Portal"
+msgstr ""
+
+#. TRANSLATORS: Don't translate this text (this is icon name)
+#: data/xdg-desktop-portal-gtk.desktop.in.in:6
+msgid "applications-system-symbolic"
+msgstr ""
+
+#~ msgid "_Select"
+#~ msgstr "Ви_брати"
+
+#~ msgid "Select application"
+#~ msgstr "Вибір програми"
+
+#, fuzzy
+#~ msgid "No applications found"
+#~ msgstr "Вибір програми"

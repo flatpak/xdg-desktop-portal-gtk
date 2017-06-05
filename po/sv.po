@@ -6,9 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
-"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
-"issues\n"
-"POT-Creation-Date: 2017-03-02 15:40+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-06-05 20:33-0400\n"
 "PO-Revision-Date: 2017-03-19 20:58+0100\n"
 "Last-Translator: Josef Andersson <l10nl18nsweja@gmail.com>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
@@ -60,8 +59,8 @@ msgstr "Dela din personliga information med programmet som begär den?"
 msgid "Share Details"
 msgstr "Dela detaljer"
 
-#: src/accountdialog.ui:14 src/appchooser.c:179 src/appchooserdialog.ui:14
-#: src/filechooser.c:364 src/screenshotdialog.ui:14
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:365
+#: src/screenshotdialog.ui:14
 msgid "_Cancel"
 msgstr "_Avbryt"
 
@@ -73,19 +72,11 @@ msgstr "_Dela"
 msgid "Make changes before sharing the information"
 msgstr "Ändra informationen innan den delas"
 
-#: src/appchooser.c:169
-msgid "_Select"
-msgstr "_Välj"
-
-#: src/appchooser.c:171 src/appchooserdialog.ui:10
+#: src/appchooserdialog.ui:13
 msgid "Open With"
 msgstr "Öppna med"
 
-#: src/appchooser.c:173
-msgid "Select application"
-msgstr "Välj program"
-
-#: src/appchooserdialog.ui:26 src/filechooser.c:362
+#: src/filechooser.c:363
 msgid "_Open"
 msgstr "_Öppna"
 
@@ -101,3 +92,22 @@ msgstr "Dela denna skärmbild med programmet som begär den?"
 #: src/screenshotdialog.ui:10
 msgid "Screenshot"
 msgstr "Skärmbild"
+
+#: data/xdg-desktop-portal-gtk.desktop.in.in:4
+msgid "Portal"
+msgstr ""
+
+#. TRANSLATORS: Don't translate this text (this is icon name)
+#: data/xdg-desktop-portal-gtk.desktop.in.in:6
+msgid "applications-system-symbolic"
+msgstr ""
+
+#~ msgid "_Select"
+#~ msgstr "_Välj"
+
+#~ msgid "Select application"
+#~ msgstr "Välj program"
+
+#, fuzzy
+#~ msgid "No applications found"
+#~ msgstr "Välj program"
