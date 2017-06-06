@@ -54,6 +54,9 @@
           </object>
         </child>
         <child>
+          <object class="GtkStack" id="stack">
+            <property name="visible">1</property>
+        <child>
           <object class="GtkScrolledWindow" id="scrolled_window">
             <property name="visible">1</property>
             <property name="expand">1</property>
@@ -141,8 +144,80 @@
               </object>
             </child>
           </object>
+          <packing>
+            <property name="name">list</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox">
+            <property name="visible">1</property>
+            <property name="orientation">vertical</property>
+            <style>
+              <class name="view"/>
+            </style>
+            <child type="center">
+              <object class="GtkBox">
+                <property name="visible">1</property>
+                <property name="orientation">vertical</property>
+                <property name="spacing">10</property>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">1</property>
+                    <property name="label" translatable="yes">No Applications Found</property>
+                    <style>
+                      <class name="bold-heading"/>
+                    </style>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="empty_label">
+                    <property name="visible">1</property>
+                    <property name="label">Too bad!</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton" id="find_software_button">
+                    <property name="visible">1</property>
+                    <property name="halign">center</property>
+                    <property name="label" translatable="yes">Find Compatible Applications in Software</property>
+                    <signal name="clicked" handler="find_in_software"/>
+                    <style>
+                      <class name="suggested-action"/>
+                    </style>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton" id="more2_button">
+                <property name="visible">1</property>
+                <property name="halign">center</property>
+                <property name="valign">end</property>
+                <signal name="clicked" handler="more2_clicked"/>
+                <style>
+                  <class name="circular"/>
+                  <class name="more"/>
+                </style>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">1</property>
+                    <property name="icon-name">view-more-symbolic</property>
+                    <property name="icon-size">1</property>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="pack-type">end</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="name">empty</property>
+          </packing>
         </child>
       </object>
+      </child>
+    </object>
     </child>
   </template>
 </interface>
