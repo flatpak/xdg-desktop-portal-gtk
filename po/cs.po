@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-05 20:33-0400\n"
-"PO-Revision-Date: 2017-04-10 15:16+0200\n"
+"POT-Creation-Date: 2016-11-09 03:30+0000\n"
+"PO-Revision-Date: 2017-06-06 02:30+0200\n"
 "Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -74,9 +74,26 @@ msgstr "_Sdílet"
 msgid "Make changes before sharing the information"
 msgstr "Provést změny před sdílením informací"
 
+#: src/appchooserdialog.c:153
+msgid "Failed to start Software"
+msgstr "Nepodařilo se spustit Software"
+
+#: src/appchooserdialog.c:343
+#, c-format
+msgid "Select an application to open '%s'. More applications are available in <a href='software'>Software.</a>"
+msgstr "Vyberte aplikaci pro otevření „%s”. Další aplikace jsou k dispozici v <a href='software'>Software.</a>"
+
+#: src/appchooserdialog.c:348
+msgid "Select an application. More applications are available in <a href='software'>Software.</a>"
+msgstr "Vyberte aplikaci. Další aplikace jsou k dispozici v <a href='software'>Software.</a>"
+
 #: src/appchooserdialog.ui:13
 msgid "Open With"
 msgstr "Otevření pomocí"
+
+#: src/appchooserdialog.ui:73
+msgid "Select an application"
+msgstr "Výběr aplikace"
 
 #: src/filechooser.c:363
 msgid "_Open"
