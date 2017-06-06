@@ -77,16 +77,12 @@ app_chooser_row_new (GAppInfo *info)
   g_set_object (&row->info, info);
 
   icon = g_app_info_get_icon (info);
+  if (!icon)
+    icon = g_themed_icon_new ("application-x-executable");
 
-  if (icon)
-    {
-      gtk_image_set_from_gicon (GTK_IMAGE (row->icon),
-                                icon,
-                                GTK_ICON_SIZE_DIALOG);
-      gtk_image_set_pixel_size (GTK_IMAGE (row->icon), 48);
-    }
-  gtk_label_set_label (GTK_LABEL (row->name),
-                       g_app_info_get_display_name (info));
+  gtk_image_set_from_gicon (GTK_IMAGE (row->icon), icon, GTK_ICON_SIZE_DIALOG);
+  gtk_image_set_pixel_size (GTK_IMAGE (row->icon), 64);
+  gtk_label_set_label (GTK_LABEL (row->name), g_app_info_get_name (info));
 
   return row;
 }

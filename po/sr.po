@@ -6,9 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
-"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
-"issues\n"
-"POT-Creation-Date: 2016-09-14 02:31+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-06-05 20:33-0400\n"
 "PO-Revision-Date: 2016-09-14 12:56+0200\n"
 "Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: српски <gnome-sr@googlegroups.org>\n"
@@ -16,27 +15,71 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=n==1? 3 : n%10==1 && n%100!=11 ? 0 : "
-"n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=4; plural=n==1? 3 : n%10==1 && n%100!=11 ? 0 : n"
+"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
-#: src/appchooser.c:166
-msgid "_Select"
+#: src/access.c:271
+msgid "Deny Access"
+msgstr "Забрани приступ"
+
+#: src/access.c:274
+msgid "Grant Access"
+msgstr "Дозволи приступ"
+
+#: src/accountdialog.c:166
+msgid "Select an Image"
+msgstr ""
+
+#: src/accountdialog.c:169
+#, fuzzy
+msgid "Cancel"
+msgstr "От_кажи"
+
+#: src/accountdialog.c:170
+#, fuzzy
+msgid "Select"
 msgstr "_Изабери"
 
-#: src/appchooser.c:168 src/appchooserdialog.ui:10
-msgid "Open With"
-msgstr "Отвори програмом"
+#: src/accountdialog.c:171
+msgid "Clear"
+msgstr ""
 
-#: src/appchooser.c:170
-msgid "Select application"
-msgstr "Изаберите програм"
+#: src/accountdialog.c:185
+msgid "Images"
+msgstr ""
 
-#: src/appchooser.c:176 src/appchooserdialog.ui:14 src/filechooser.c:341
+#: src/accountdialog.c:260
+#, c-format
+msgid "Share your personal information with %s?"
+msgstr ""
+
+#: src/accountdialog.c:263
+#, fuzzy
+msgid "Share your personal information with the requesting application?"
+msgstr "Да поделим овај снимак екрана са програмом који то захтева?"
+
+#: src/accountdialog.ui:10
+msgid "Share Details"
+msgstr ""
+
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:365
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
 msgstr "От_кажи"
 
-#: src/appchooserdialog.ui:26 src/filechooser.c:339
+#: src/accountdialog.ui:22 src/screenshotdialog.ui:25
+msgid "_Share"
+msgstr "_Дели"
+
+#: src/accountdialog.ui:148
+msgid "Make changes before sharing the information"
+msgstr ""
+
+#: src/appchooserdialog.ui:13
+msgid "Open With"
+msgstr "Отвори програмом"
+
+#: src/filechooser.c:363
 msgid "_Open"
 msgstr "От_вори"
 
@@ -53,14 +96,21 @@ msgstr "Да поделим овај снимак екрана са програ
 msgid "Screenshot"
 msgstr "Снимак екрана"
 
-#: src/screenshotdialog.ui:25
-msgid "_Share"
-msgstr "_Дели"
+#: data/xdg-desktop-portal-gtk.desktop.in.in:4
+msgid "Portal"
+msgstr ""
 
-#: src/access.c:269
-msgid "Deny Access"
-msgstr "Забрани приступ"
+#. TRANSLATORS: Don't translate this text (this is icon name)
+#: data/xdg-desktop-portal-gtk.desktop.in.in:6
+msgid "applications-system-symbolic"
+msgstr ""
 
-#: src/access.c:272
-msgid "Grant Access"
-msgstr "Дозволи приступ"
+#~ msgid "_Select"
+#~ msgstr "_Изабери"
+
+#~ msgid "Select application"
+#~ msgstr "Изаберите програм"
+
+#, fuzzy
+#~ msgid "No applications found"
+#~ msgstr "Изаберите програм"

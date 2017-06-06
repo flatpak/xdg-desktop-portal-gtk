@@ -6,9 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
-"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/issues"
-"\n"
-"POT-Creation-Date: 2017-03-02 15:40+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-06-05 20:33-0400\n"
 "PO-Revision-Date: 2017-03-19 20:30+0100\n"
 "Last-Translator: Balázs Úr <urbalazs@gmail.com>\n"
 "Language-Team: Hungarian <gnome-hu-list at gnome dot org>\n"
@@ -32,12 +31,10 @@ msgid "Select an Image"
 msgstr "Válasszon lemezképet"
 
 #: src/accountdialog.c:169
-#| msgid "_Cancel"
 msgid "Cancel"
 msgstr "Mégse"
 
 #: src/accountdialog.c:170
-#| msgid "_Select"
 msgid "Select"
 msgstr "Kiválasztás"
 
@@ -55,7 +52,6 @@ msgid "Share your personal information with %s?"
 msgstr "Megosztja a személyes információit ezzel: %s?"
 
 #: src/accountdialog.c:263
-#| msgid "Share this screenshot with the requesting application?"
 msgid "Share your personal information with the requesting application?"
 msgstr "Megosztja a személyes információit a kérelmező alkalmazással?"
 
@@ -63,8 +59,8 @@ msgstr "Megosztja a személyes információit a kérelmező alkalmazással?"
 msgid "Share Details"
 msgstr "Részletek megosztása"
 
-#: src/accountdialog.ui:14 src/appchooser.c:179 src/appchooserdialog.ui:14
-#: src/filechooser.c:364 src/screenshotdialog.ui:14
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:365
+#: src/screenshotdialog.ui:14
 msgid "_Cancel"
 msgstr "_Mégse"
 
@@ -76,19 +72,11 @@ msgstr "Meg_osztás"
 msgid "Make changes before sharing the information"
 msgstr "Megváltoztatás az információk megosztása előtt"
 
-#: src/appchooser.c:169
-msgid "_Select"
-msgstr "_Kiválasztás"
-
-#: src/appchooser.c:171 src/appchooserdialog.ui:10
+#: src/appchooserdialog.ui:13
 msgid "Open With"
 msgstr "Megnyitás ezzel"
 
-#: src/appchooser.c:173
-msgid "Select application"
-msgstr "Alkalmazás kiválasztása"
-
-#: src/appchooserdialog.ui:26 src/filechooser.c:362
+#: src/filechooser.c:363
 msgid "_Open"
 msgstr "Meg_nyitás"
 
@@ -105,3 +93,21 @@ msgstr "Megosztja ezt a képernyőképet a kérő alkalmazással?"
 msgid "Screenshot"
 msgstr "Képernyőkép"
 
+#: data/xdg-desktop-portal-gtk.desktop.in.in:4
+msgid "Portal"
+msgstr ""
+
+#. TRANSLATORS: Don't translate this text (this is icon name)
+#: data/xdg-desktop-portal-gtk.desktop.in.in:6
+msgid "applications-system-symbolic"
+msgstr ""
+
+#~ msgid "_Select"
+#~ msgstr "_Kiválasztás"
+
+#~ msgid "Select application"
+#~ msgstr "Alkalmazás kiválasztása"
+
+#, fuzzy
+#~ msgid "No applications found"
+#~ msgstr "Alkalmazás kiválasztása"

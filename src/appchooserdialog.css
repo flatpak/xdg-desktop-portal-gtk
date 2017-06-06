@@ -1,3 +1,9 @@
 row.with-border:not(:last-child) {
   border-bottom: 1px solid alpha(black, 0.33);
 }
+label.heading {
+  margin: 20px 60px;
+}
+button.more {
+  margin: 20px;
+}

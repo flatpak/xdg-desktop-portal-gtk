@@ -94,12 +94,13 @@ send_response (AppDialogHandle *handle)
 }
 
 static void
-handle_app_chooser_done (GtkDialog *dialog,
-                         GAppInfo *info,
-                         gpointer data)
+handle_app_chooser_close (AppChooserDialog *dialog,
+                          gpointer data)
 {
   AppDialogHandle *handle = data;
+  GAppInfo *info;
 
+  info = app_chooser_dialog_get_info (dialog);
   if (info != NULL)
     {
       const char *desktop_id = g_app_info_get_id (info);
@@ -150,11 +151,9 @@ handle_choose_application (XdpImplAppChooser *object,
   GtkWidget *dialog;
   AppDialogHandle *handle;
   const char *sender;
-  const char *cancel_label;
-  const char *accept_label;
-  const char *title;
-  const char *heading;
   const char *latest_chosen_id;
+  const char *content_type;
+  const char *filename;
   gboolean modal;
   GdkDisplay *display;
   GdkScreen *screen;
@@ -165,18 +164,14 @@ handle_choose_application (XdpImplAppChooser *object,
 
   request = request_new (sender, arg_app_id, arg_handle);
 
-  if (!g_variant_lookup (arg_options, "accept_label", "&s", &accept_label))
-    accept_label = _("_Select");
-  if (!g_variant_lookup (arg_options, "title", "&s", &title))
-    title = _("Open With");
-  if (!g_variant_lookup (arg_options, "heading", "&s", &heading))
-    heading = _("Select application");
   if (!g_variant_lookup (arg_options, "last_choice", "&s", &latest_chosen_id))
     latest_chosen_id = NULL;
   if (!g_variant_lookup (arg_options, "modal", "b", &modal))
     modal = TRUE;
-
-  cancel_label = _("_Cancel");
+  if (!g_variant_lookup (arg_options, "content_type", "&s", &content_type))
+    content_type = NULL;
+  if (!g_variant_lookup (arg_options, "filename", "&s", &filename))
+    filename = NULL;
 
   if (arg_parent_window)
     {
@@ -198,7 +193,7 @@ handle_choose_application (XdpImplAppChooser *object,
                               NULL);
   g_object_ref_sink (fake_parent);
 
-  dialog = GTK_WIDGET (app_chooser_dialog_new (choices, latest_chosen_id, cancel_label, accept_label, title, heading));
+  dialog = GTK_WIDGET (app_chooser_dialog_new (choices, latest_chosen_id, content_type, filename));
   gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (fake_parent));
 
   gtk_window_set_modal (GTK_WINDOW (dialog), modal);
@@ -213,8 +208,8 @@ handle_choose_application (XdpImplAppChooser *object,
   g_signal_connect (request, "handle-close",
                     G_CALLBACK (handle_close), handle);
 
-  g_signal_connect (dialog, "done",
-                    G_CALLBACK (handle_app_chooser_done), handle);
+  g_signal_connect (dialog, "close",
+                    G_CALLBACK (handle_app_chooser_close), handle);
 
   gtk_widget_realize (dialog);
 
