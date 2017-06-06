@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-05 20:33-0400\n"
-"PO-Revision-Date: 2017-04-01 10:50+0200\n"
+"POT-Creation-Date: 2017-06-06 12:08+0200\n"
+"PO-Revision-Date: 2017-06-06 12:14+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
@@ -73,6 +73,27 @@ msgstr "_Udostępnij"
 msgid "Make changes before sharing the information"
 msgstr "Umożliwia wprowadzenie zmian przed udostępnieniem informacji"
 
+#: src/appchooserdialog.c:153
+msgid "Failed to start Software"
+msgstr "Uruchomienie Menedżera oprogramowania się nie powiodło"
+
+#: src/appchooserdialog.c:343
+#, c-format
+msgid ""
+"Select an application to open '%s'. More applications are available in <a "
+"href='software'>Software.</a>"
+msgstr ""
+"Proszę wybrać program do otwarcia pliku „%s”. Więcej programów jest "
+"dostępnych w <a href='software'>Menedżerze oprogramowania.</a>"
+
+#: src/appchooserdialog.c:348
+msgid ""
+"Select an application. More applications are available in <a "
+"href='software'>Software.</a>"
+msgstr ""
+"Proszę wybrać program. Więcej programów jest dostępnych w <a "
+"href='software'>Menedżerze oprogramowania.</a>"
+
 #: src/appchooserdialog.ui:13
 msgid "Open With"
 msgstr "Otwarcie za pomocą"
@@ -102,12 +123,3 @@ msgstr "Portal"
 #: data/xdg-desktop-portal-gtk.desktop.in.in:6
 msgid "applications-system-symbolic"
 msgstr "applications-system-symbolic"
-
-#~ msgid "_Select"
-#~ msgstr "_Wybierz"
-
-#~ msgid "Select application"
-#~ msgstr "Wybór programu"
-
-#~ msgid "No applications found"
-#~ msgstr "Nie odnaleziono programów"
