@@ -3,9 +3,10 @@
   <!-- interface-requires gtk+ 3.22 -->
   <template class="AppChooserDialog" parent="GtkWindow">
     <property name="type-hint">dialog</property>
-    <property name="resizable">0</property>
+    <property name="resizable">1</property>
     <property name="default-width">500</property>
     <property name="default-height">300</property>
+    <signal name="key-press-event" handler="key_press_event_cb"/>
     <child type="titlebar">
       <object class="GtkHeaderBar" id="titlebar">
         <property name="visible">1</property>
@@ -14,12 +15,22 @@
           <object class="GtkButton" id="cancel_button">
             <property name="visible">1</property>
             <property name="label" translatable="yes">_Cancel</property>
-            <property name="use_underline">1</property>
-            <signal name="clicked" handler="button_clicked"/>
-            <accelerator signal="clicked" key="Escape"/>
+            <property name="use-underline">1</property>
+            <signal name="clicked" handler="cancel_clicked"/>
+          </object>
+        </child>
+        <child>
+          <object class="GtkToggleButton" id="search_button">
+            <child>
+              <object class="GtkImage">
+                <property name="visible">1</property>
+                <property name="icon-name">edit-find-symbolic</property>
+                <property name="icon-size">1</property>
+              </object>
+            </child>
           </object>
           <packing>
-            <property name="pack-type">start</property>
+            <property name="pack-type">end</property>
           </packing>
         </child>
       </object>
@@ -29,58 +40,103 @@
         <property name="visible">1</property>
         <property name="orientation">vertical</property>
         <child>
+          <object class="GtkSearchBar" id="search_bar">
+            <property name="visible">1</property>
+            <property name="search-mode-enabled" bind-source="search_button" bind-property="active" bind-flags="bidirectional"/>
+            <child>
+              <object class="GtkSearchEntry" id="search_entry">
+                <property name="visible">1</property>
+                <property name="hexpand">1</property>
+                <property name="max-width-chars">40</property>
+                <signal name="search-changed" handler="search_changed"/>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
           <object class="GtkScrolledWindow" id="scrolled_window">
             <property name="visible">1</property>
             <property name="expand">1</property>
             <property name="hscrollbar-policy">never</property>
-            <property name="vscrollbar-policy">automatic</property>
+            <property name="vscrollbar-policy">never</property>
             <style>
               <class name="view"/>
             </style>
             <child>
-              <object class="GtkStack" id="stack">
+              <object class="GtkBox">
                 <property name="visible">1</property>
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="GtkLabel" id="heading">
+                    <property name="visible">1</property>
+                    <property name="use-markup">1</property>
+                    <property name="label">Select an application</property>
+                    <signal name="activate-link" handler="link_activated"/>
+                    <style>
+                      <class name="heading"/>
+                    </style>
+                  </object>
+                </child>
                 <child>
                   <object class="GtkFlowBox" id="list">
                     <property name="visible">1</property>
                     <property name="halign">center</property>
                     <property name="valign">center</property>
                     <property name="selection-mode">none</property>
-                    <property name="min-children-per-line">2</property>
-                    <property name="max-children-per-line">6</property>
+                    <property name="min-children-per-line">3</property>
+                    <property name="max-children-per-line">9</property>
+                    <property name="row-spacing">15</property>
                     <signal name="child-activated" handler="row_activated"/>
                   </object>
-                  <packing>
-                    <property name="name">list</property>
-                  </packing>
                 </child>
                 <child>
-                  <object class="GtkBox">
+                  <object class="GtkButton" id="more_button">
                     <property name="visible">1</property>
-                    <property name="orientation">vertical</property>
                     <property name="halign">center</property>
-                    <property name="valign">center</property>
-                    <property name="spacing">10</property>
+                    <property name="valign">end</property>
+                    <signal name="clicked" handler="more_clicked"/>
                     <style>
-                      <class name="dim-label"/>
+                      <class name="circular"/>
+                      <class name="more"/>
                     </style>
                     <child>
                       <object class="GtkImage">
                         <property name="visible">1</property>
-                        <property name="icon-name">face-plain-symbolic</property>
-                        <property name="pixel-size">64</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkLabel">
-                        <property name="visible">1</property>
-                        <property name="label" translatable="yes">No applications found</property>
+                        <property name="icon-name">view-more-symbolic</property>
+                        <property name="icon-size">1</property>
                       </object>
                     </child>
                   </object>
                   <packing>
-                    <property name="name">empty</property>
+                    <property name="expand">1</property>
                   </packing>
+                </child>
+                <child>
+                  <object class="GtkBox" id="full_list_box">
+                    <property name="orientation">vertical</property>
+                    <property name="height-request">480</property>
+                    <child>
+                      <object class="GtkSeparator" id="separator">
+                        <property name="visible">1</property>
+                        <property name="margin-top">20</property>
+                        <property name="margin-bottom">20</property>
+                        <property name="margin-start">40</property>
+                        <property name="margin-end">40</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkFlowBox" id="full_list">
+                        <property name="visible">1</property>
+                        <property name="halign">center</property>
+                        <property name="valign">start</property>
+                        <property name="selection-mode">none</property>
+                        <property name="min-children-per-line">3</property>
+                        <property name="max-children-per-line">9</property>
+                        <property name="row-spacing">15</property>
+                        <signal name="child-activated" handler="row_activated"/>
+                      </object>
+                    </child>
+                  </object>
                 </child>
               </object>
             </child>

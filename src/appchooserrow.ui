@@ -8,7 +8,6 @@
         <property name="visible">1</property>
         <property name="orientation">vertical</property>
         <property name="spacing">10</property>
-        <property name="margin">10</property>
         <property name="halign">center</property>
         <property name="valign">center</property>
         <child>
@@ -20,8 +19,8 @@
           <object class="GtkLabel" id="name">
             <property name="visible">1</property>
             <property name="xalign">0.5</property>
-            <property name="width-chars">25</property>
-            <property name="max-width-chars">25</property>
+            <property name="width-chars">18</property>
+            <property name="max-width-chars">18</property>
             <property name="ellipsize">end</property>
           </object>
         </child>
