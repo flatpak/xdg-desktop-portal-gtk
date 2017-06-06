@@ -3,6 +3,7 @@ src/access.c
 src/accountdialog.c
 src/accountdialog.ui
 src/appchooser.c
+src/appchooserdialog.c
 src/appchooserdialog.ui
 src/filechooser.c
 src/screenshotdialog.c
