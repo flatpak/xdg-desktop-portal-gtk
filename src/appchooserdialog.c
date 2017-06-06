@@ -345,7 +345,7 @@ AppChooserDialog *
 app_chooser_dialog_new (const char **choices,
                         const char *default_id,
                         const char *content_type,
-                        const char *filename)
+                        const char *location)
 {
   AppChooserDialog *dialog;
   int n_choices;
@@ -366,11 +366,11 @@ app_chooser_dialog_new (const char **choices,
 
   dialog->content_type = g_strdup (content_type);
 
-  if (filename)
+  if (location)
     {
       g_autofree char *heading = NULL;
 
-      heading = g_strdup_printf (_("Select an application to open “%s”. More applications are available in <a href='software'>Software.</a>"), filename);
+      heading = g_strdup_printf (_("Select an application to open “%s”. More applications are available in <a href='software'>Software.</a>"), location);
       gtk_label_set_label (GTK_LABEL (dialog->heading), heading);
     }
   else
@@ -384,11 +384,11 @@ app_chooser_dialog_new (const char **choices,
   if (n_choices == 0)
     {
       gtk_stack_set_visible_child_name (GTK_STACK (dialog->stack), "empty");
-      if (filename)
+      if (location)
         {
           g_autofree char *label = NULL;
 
-          label = g_strdup_printf (_("Unable to find an application that is able to open “%s”."), filename);
+          label = g_strdup_printf (_("Unable to find an application that is able to open “%s”."), location);
           gtk_label_set_label (GTK_LABEL (dialog->empty_label), label);
         }
       else

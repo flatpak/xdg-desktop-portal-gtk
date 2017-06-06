@@ -153,7 +153,7 @@ handle_choose_application (XdpImplAppChooser *object,
   const char *sender;
   const char *latest_chosen_id;
   const char *content_type;
-  const char *filename;
+  const char *location;
   gboolean modal;
   GdkDisplay *display;
   GdkScreen *screen;
@@ -170,8 +170,9 @@ handle_choose_application (XdpImplAppChooser *object,
     modal = TRUE;
   if (!g_variant_lookup (arg_options, "content_type", "&s", &content_type))
     content_type = NULL;
-  if (!g_variant_lookup (arg_options, "filename", "&s", &filename))
-    filename = NULL;
+  if (!g_variant_lookup (arg_options, "filename", "&s", &location) &&
+      !g_variant_lookup (arg_options, "uri", "&s", &location))
+    location = NULL;
 
   if (arg_parent_window)
     {
@@ -193,7 +194,7 @@ handle_choose_application (XdpImplAppChooser *object,
                               NULL);
   g_object_ref_sink (fake_parent);
 
-  dialog = GTK_WIDGET (app_chooser_dialog_new (choices, latest_chosen_id, content_type, filename));
+  dialog = GTK_WIDGET (app_chooser_dialog_new (choices, latest_chosen_id, content_type, location));
   gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (fake_parent));
 
   gtk_window_set_modal (GTK_WINDOW (dialog), modal);
