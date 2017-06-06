@@ -7,3 +7,8 @@ label.heading {
 button.more {
   margin: 20px;
 }
+
+label.bold-heading {
+  font-size: 20pt;
+  font-weight: bold;
+}

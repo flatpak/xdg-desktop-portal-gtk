@@ -45,6 +45,9 @@ struct _AppChooserDialog {
   GtkWidget *heading;
   GtkWidget *search_bar;
   GtkWidget *search_entry;
+  GtkWidget *stack;
+  GtkWidget *separator;
+  GtkWidget *empty_label;
 
   char *content_type;
   char *search_text;
@@ -135,9 +138,7 @@ show_error_dialog (const gchar *primary,
 }
 
 static void
-link_activated (GtkWidget *label,
-                const char *uri,
-                AppChooserDialog *dialog)
+launch_software (AppChooserDialog *dialog)
 {
   g_autofree char *option = NULL;
   g_autoptr(GSubprocess) process = NULL;
@@ -151,6 +152,21 @@ link_activated (GtkWidget *label,
   process = g_subprocess_new (0, &error, "gnome-software", option, NULL);
   if (!process)
     show_error_dialog (_("Failed to start Software"), error->message, GTK_WINDOW (dialog));
+}
+
+static void
+link_activated (GtkWidget *label,
+                const char *uri,
+                AppChooserDialog *dialog)
+{
+  launch_software (dialog);
+}
+
+static void
+find_in_software (GtkWidget *button,
+                  AppChooserDialog *dialog)
+{
+  launch_software (dialog);
 }
 
 static void
@@ -210,6 +226,15 @@ static void
 more_clicked (GtkButton *button,
               AppChooserDialog *dialog)
 {
+  show_full_list (dialog);
+}
+
+static void
+more2_clicked (GtkButton *button,
+               AppChooserDialog *dialog)
+{
+  gtk_stack_set_visible_child_name (GTK_STACK (dialog->stack), "list");
+  gtk_widget_hide (dialog->separator);
   show_full_list (dialog);
 }
 
@@ -303,12 +328,17 @@ app_chooser_dialog_class_init (AppChooserDialogClass *class)
   gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, heading);
   gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, search_bar);
   gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, search_entry);
+  gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, stack);
+  gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, separator);
+  gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, empty_label);
   gtk_widget_class_bind_template_callback (widget_class, row_activated);
   gtk_widget_class_bind_template_callback (widget_class, cancel_clicked);
   gtk_widget_class_bind_template_callback (widget_class, link_activated);
   gtk_widget_class_bind_template_callback (widget_class, more_clicked);
+  gtk_widget_class_bind_template_callback (widget_class, more2_clicked);
   gtk_widget_class_bind_template_callback (widget_class, search_changed);
   gtk_widget_class_bind_template_callback (widget_class, key_press_event_cb);
+  gtk_widget_class_bind_template_callback (widget_class, find_in_software);
 }
 
 AppChooserDialog *
@@ -340,7 +370,7 @@ app_chooser_dialog_new (const char **choices,
     {
       g_autofree char *heading = NULL;
 
-      heading = g_strdup_printf (_("Select an application to open '%s'. More applications are available in <a href='software'>Software.</a>"), filename);
+      heading = g_strdup_printf (_("Select an application to open “%s”. More applications are available in <a href='software'>Software.</a>"), filename);
       gtk_label_set_label (GTK_LABEL (dialog->heading), heading);
     }
   else
@@ -351,25 +381,44 @@ app_chooser_dialog_new (const char **choices,
   default_row = NULL;
 
   n_choices = g_strv_length ((char **)choices);
-  for (i = 0; i < n_choices; i++)
+  if (n_choices == 0)
     {
-      g_autofree char *desktop_id = g_strconcat (choices[i], ".desktop", NULL);
-      g_autoptr(GAppInfo) info = G_APP_INFO (g_desktop_app_info_new (desktop_id));
-      GtkWidget *row;
+      gtk_stack_set_visible_child_name (GTK_STACK (dialog->stack), "empty");
+      if (filename)
+        {
+          g_autofree char *label = NULL;
 
-      row = GTK_WIDGET (app_chooser_row_new (info));
-      gtk_widget_set_visible (row, TRUE);
-      gtk_flow_box_insert (GTK_FLOW_BOX (dialog->list), row, -1);
-
-      if (g_strcmp0 (choices[i], default_id) == 0)
-        default_row = row;
+          label = g_strdup_printf (_("Unable to find an application that is able to open “%s”."), filename);
+          gtk_label_set_label (GTK_LABEL (dialog->empty_label), label);
+        }
+      else
+        {
+          gtk_label_set_label (GTK_LABEL (dialog->empty_label), _("Unable to find a suitable application."));
+        }
     }
+  else
+    {
+      gtk_stack_set_visible_child_name (GTK_STACK (dialog->stack), "list");
+      for (i = 0; i < n_choices; i++)
+        {
+          g_autofree char *desktop_id = g_strconcat (choices[i], ".desktop", NULL);
+          g_autoptr(GAppInfo) info = G_APP_INFO (g_desktop_app_info_new (desktop_id));
+          GtkWidget *row;
 
-  if (n_choices < 4)
-    gtk_widget_set_halign (dialog->list, GTK_ALIGN_START);
+          row = GTK_WIDGET (app_chooser_row_new (info));
+          gtk_widget_set_visible (row, TRUE);
+          gtk_flow_box_insert (GTK_FLOW_BOX (dialog->list), row, -1);
 
-  if (default_row)
-    gtk_widget_grab_focus (default_row);
+          if (g_strcmp0 (choices[i], default_id) == 0)
+            default_row = row;
+       }
+
+     if (n_choices < 4)
+       gtk_widget_set_halign (dialog->list, GTK_ALIGN_START);
+
+     if (default_row)
+       gtk_widget_grab_focus (default_row);
+    }
 
   gtk_flow_box_set_filter_func (GTK_FLOW_BOX (dialog->full_list), filter_func, dialog, NULL);
 
