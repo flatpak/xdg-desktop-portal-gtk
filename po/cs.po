@@ -8,10 +8,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
-"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
-"issues\n"
+"Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-09 03:30+0000\n"
-"PO-Revision-Date: 2017-04-10 15:16+0200\n"
+"PO-Revision-Date: 2017-06-06 02:30+0200\n"
 "Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -62,8 +61,8 @@ msgstr "Sdílet vaše osobní informace s aplikací, která o to žádá?"
 msgid "Share Details"
 msgstr "Sdílet detaily"
 
-#: src/accountdialog.ui:14 src/appchooser.c:179 src/appchooserdialog.ui:16
-#: src/filechooser.c:365 src/screenshotdialog.ui:14
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:365
+#: src/screenshotdialog.ui:14
 msgid "_Cancel"
 msgstr "_Zrušit"
 
@@ -75,21 +74,26 @@ msgstr "_Sdílet"
 msgid "Make changes before sharing the information"
 msgstr "Provést změny před sdílením informací"
 
-#: src/appchooser.c:169
-msgid "_Select"
-msgstr "_Vybrat"
+#: src/appchooserdialog.c:153
+msgid "Failed to start Software"
+msgstr "Nepodařilo se spustit Software"
 
-#: src/appchooser.c:171 src/appchooserdialog.ui:12
+#: src/appchooserdialog.c:343
+#, c-format
+msgid "Select an application to open '%s'. More applications are available in <a href='software'>Software.</a>"
+msgstr "Vyberte aplikaci pro otevření „%s”. Další aplikace jsou k dispozici v <a href='software'>Software.</a>"
+
+#: src/appchooserdialog.c:348
+msgid "Select an application. More applications are available in <a href='software'>Software.</a>"
+msgstr "Vyberte aplikaci. Další aplikace jsou k dispozici v <a href='software'>Software.</a>"
+
+#: src/appchooserdialog.ui:13
 msgid "Open With"
 msgstr "Otevření pomocí"
 
-#: src/appchooser.c:173
-msgid "Select application"
+#: src/appchooserdialog.ui:73
+msgid "Select an application"
 msgstr "Výběr aplikace"
-
-#: src/appchooserdialog.ui:77
-msgid "No applications found"
-msgstr "Nenalezeny žádné aplikace"
 
 #: src/filechooser.c:363
 msgid "_Open"
@@ -112,6 +116,16 @@ msgstr "Snímek obrazovky"
 msgid "Portal"
 msgstr "Portal"
 
-#: data/xdg-desktop-portal-gtk.desktop.in.in:5
+#. TRANSLATORS: Don't translate this text (this is icon name)
+#: data/xdg-desktop-portal-gtk.desktop.in.in:6
 msgid "applications-system-symbolic"
 msgstr "applications-system-symbolic"
+
+#~ msgid "_Select"
+#~ msgstr "_Vybrat"
+
+#~ msgid "Select application"
+#~ msgstr "Výběr aplikace"
+
+#~ msgid "No applications found"
+#~ msgstr "Nenalezeny žádné aplikace"
