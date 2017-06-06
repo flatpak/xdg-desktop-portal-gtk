@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/issues\n"
 "POT-Creation-Date: 2017-06-06 12:08+0200\n"
 "PO-Revision-Date: 2017-06-06 12:14+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
