@@ -40,6 +40,7 @@ resource_files = $(shell $(GLIB_COMPILE_RESOURCES) --sourcedir=$(top_srcdir)/src
 src/resources.c: src/xdg-desktop-portal-gtk.gresource.xml $(resource_files)
 	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) $< \
 		--target=$@ --sourcedir=$(top_srcdir)/src --c-name _xdg_desktop --generate-source
+CLEANFILES += src/resources.c
 
 EXTRA_DIST += \
 	src/xdg-desktop-portal-gtk.gresource.xml	\
@@ -139,5 +140,8 @@ testappchooser_SOURCES = \
 	src/appchooserrow.c			\
 	src/appchooserdialog.h		        \
 	src/appchooserdialog.c		        \
-	src/resources.c                         \
         $(NULL)
+
+nodist_testappchooser_SOURCES = \
+	src/resources.c				\
+	$(NULL)
