@@ -151,7 +151,7 @@ handle_compose_email (XdpImplEmail *object,
   g_variant_lookup (arg_options, "attachments", "^a&s", &attachments);
 
   if (!compose_mail (address, subject, body, attachments, NULL))
-    response = 1;
+    response = 2;
 
   g_variant_builder_init (&opt_builder, G_VARIANT_TYPE_VARDICT);
   xdp_impl_email_complete_compose_email (object,
