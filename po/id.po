@@ -1,0 +1,141 @@
+# Indonesian translation for xdg-desktop-portal-gtk.
+# Copyright (C) 2017 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
+# This file is distributed under the same license as the xdg-desktop-portal-gtk package.
+# Kukuh Syafaat <syafaatkukuh@gmail.com>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xdg-desktop-portal-gtk master\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
+"issues\n"
+"POT-Creation-Date: 2017-08-18 03:27+0000\n"
+"PO-Revision-Date: 2017-08-18 19:54+0700\n"
+"Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
+"Language: id\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
+"X-Generator: Poedit 2.0.3\n"
+
+#: src/access.c:271
+msgid "Deny Access"
+msgstr "Tolak Akses"
+
+#: src/access.c:274
+msgid "Grant Access"
+msgstr "Beri Akses"
+
+#: src/accountdialog.c:166
+msgid "Select an Image"
+msgstr "Pilih Gambar"
+
+#: src/accountdialog.c:169
+msgid "Cancel"
+msgstr "Batal"
+
+#: src/accountdialog.c:170
+msgid "Select"
+msgstr "Pilih"
+
+#: src/accountdialog.c:171
+msgid "Clear"
+msgstr "Bersihkan"
+
+#: src/accountdialog.c:185
+msgid "Images"
+msgstr "Gambar"
+
+#: src/accountdialog.c:260
+#, c-format
+msgid "Share your personal information with %s?"
+msgstr "Bagikan informasi pribadi Anda dengan %s?"
+
+#: src/accountdialog.c:263
+msgid "Share your personal information with the requesting application?"
+msgstr "Bagikan informasi pribadi Anda dengan aplikasi yang meminta?"
+
+#: src/accountdialog.ui:10
+msgid "Share Details"
+msgstr "Bagikan Detail"
+
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:365
+#: src/screenshotdialog.ui:14
+msgid "_Cancel"
+msgstr "Ba_tal"
+
+#: src/accountdialog.ui:22 src/screenshotdialog.ui:25
+msgid "_Share"
+msgstr "_Bagikan"
+
+#: src/accountdialog.ui:148
+msgid "Make changes before sharing the information"
+msgstr "Buat perubahan sebelum membagikan informasi"
+
+#: src/appchooserdialog.c:154
+msgid "Failed to start Software"
+msgstr "Gagal memulai Perangkat Lunak"
+
+#: src/appchooserdialog.c:373
+#, c-format
+msgid ""
+"Select an application to open “%s”. More applications are available in <a "
+"href='software'>Software.</a>"
+msgstr ""
+"Pilih aplikasi untuk membuka “%s”. Aplikasi lainnya tersedia di <a "
+"href='software'>Perangkat Lunak.</a>"
+
+#: src/appchooserdialog.c:378
+msgid ""
+"Select an application. More applications are available in <a "
+"href='software'>Software.</a>"
+msgstr ""
+"Pilih sebuah aplikasi. Aplikasi lainnya tersedia di <a "
+"href='software'>Perangkat Lunak.</a>"
+
+#: src/appchooserdialog.c:391
+#, c-format
+msgid "Unable to find an application that is able to open “%s”."
+msgstr "Tidak dapat menemukan aplikasi yang dapat membuka \"%s\"."
+
+#: src/appchooserdialog.c:396
+msgid "Unable to find a suitable application."
+msgstr "Tidak dapat menemukan aplikasi yang sesuai."
+
+#: src/appchooserdialog.ui:13
+msgid "Open With"
+msgstr "Buka Dengan"
+
+#: src/appchooserdialog.ui:166
+msgid "No Applications Found"
+msgstr "Tidak Ada Aplikasi yang Ditemukan"
+
+#: src/appchooserdialog.ui:182
+msgid "Find Compatible Applications in Software"
+msgstr "Temukan Aplikasi yang Kompatibel di Perangkat Lunak"
+
+#: src/filechooser.c:363
+msgid "_Open"
+msgstr "B_uka"
+
+#: src/screenshotdialog.c:93
+#, c-format
+msgid "Share this screenshot with %s?"
+msgstr "Bagikan cuplikan layar ini dengan %s?"
+
+#: src/screenshotdialog.c:96
+msgid "Share this screenshot with the requesting application?"
+msgstr "Bagikan cuplikan layar ini dengan aplikasi yang meminta?"
+
+#: src/screenshotdialog.ui:10
+msgid "Screenshot"
+msgstr "Cuplikan layar"
+
+#: data/xdg-desktop-portal-gtk.desktop.in.in:4
+msgid "Portal"
+msgstr "Portal"
+
+#. TRANSLATORS: Don't translate this text (this is icon name)
+#: data/xdg-desktop-portal-gtk.desktop.in.in:6
+msgid "applications-system-symbolic"
+msgstr "applications-system-symbolic"
