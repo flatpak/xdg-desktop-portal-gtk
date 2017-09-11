@@ -5,9 +5,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
-"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/issues\n"
-"POT-Creation-Date: 2017-06-05 20:33-0400\n"
-"PO-Revision-Date: 2017-04-04 07:13-0200\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
+"issues\n"
+"POT-Creation-Date: 2017-09-11 03:26+0000\n"
+"PO-Revision-Date: 2017-09-11 01:28-0200\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
@@ -71,9 +72,47 @@ msgstr "_Compartilhar"
 msgid "Make changes before sharing the information"
 msgstr "Fazer alterações antes de compartilhar as informações"
 
+#: src/appchooserdialog.c:154
+msgid "Failed to start Software"
+msgstr "Falha ao iniciar Software"
+
+#: src/appchooserdialog.c:373
+#, c-format
+msgid ""
+"Select an application to open “%s”. More applications are available in <a "
+"href='software'>Software.</a>"
+msgstr ""
+"Selecione um aplicativo para abrir “%s”. Mais aplicativos estão disponíveis "
+"no <a href='software'>Software</a>."
+
+#: src/appchooserdialog.c:378
+msgid ""
+"Select an application. More applications are available in <a "
+"href='software'>Software.</a>"
+msgstr ""
+"Selecione um aplicativo. Mais aplicativos estão disponíveis no <a "
+"href='software'>Software</a>."
+
+#: src/appchooserdialog.c:391
+#, c-format
+msgid "Unable to find an application that is able to open “%s”."
+msgstr "Não foi possível localizar um aplicativo que seja capaz de abrir “%s”."
+
+#: src/appchooserdialog.c:396
+msgid "Unable to find a suitable application."
+msgstr "Não foi possível localizar um aplicativo adequado."
+
 #: src/appchooserdialog.ui:13
 msgid "Open With"
 msgstr "Abrir com"
+
+#: src/appchooserdialog.ui:166
+msgid "No Applications Found"
+msgstr "Nenhum aplicativo localizado"
+
+#: src/appchooserdialog.ui:182
+msgid "Find Compatible Applications in Software"
+msgstr "Localizar aplicativos compatíveis no Software"
 
 #: src/filechooser.c:363
 msgid "_Open"
@@ -106,6 +145,3 @@ msgstr "applications-system-symbolic"
 
 #~ msgid "Select application"
 #~ msgstr "Selecionar aplicativo"
-
-#~ msgid "No applications found"
-#~ msgstr "Nenhum aplicativo localizado"
