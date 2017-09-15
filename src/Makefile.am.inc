@@ -27,6 +27,7 @@ CLEANFILES += $(shell_built_sources)
 $(shell_built_sources): src/Makefile.am.inc
 	$(AM_V_GEN) $(GDBUS_CODEGEN)			                \
 	--generate-c-code src/shell-dbus	                        \
+	$(top_srcdir)/data/org.gnome.Mutter.DisplayConfig.xml	        \
 	$(top_srcdir)/data/org.gnome.Shell.Screenshot.xml	        \
 	$(top_srcdir)/data/org.gtk.Notifications.xml			\
 	$(top_srcdir)/data/org.gnome.SessionManager.xml		        \
@@ -92,6 +93,8 @@ xdg_desktop_portal_gtk_SOURCES = \
         src/gtkbackports.c                      \
 	src/externalwindow.h			\
 	src/externalwindow.c			\
+	src/displaystatetracker.c		\
+	src/displaystatetracker.h		\
 	$(NULL)
 
 nodist_xdg_desktop_portal_gtk_SOURCES = \
