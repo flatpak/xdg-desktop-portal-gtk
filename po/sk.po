@@ -1,14 +1,15 @@
 # Slovak translation for xdg-desktop-portal-gtk.
 # Copyright (C) 2016 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
 # This file is distributed under the same license as the xdg-desktop-portal-gtk package.
-# Dušan Kazik <prescott66@gmail.com>, 2016.
+# Dušan Kazik <prescott66@gmail.com>, 2016-2017.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
-"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/issues\n"
-"POT-Creation-Date: 2017-06-05 20:33-0400\n"
-"PO-Revision-Date: 2016-08-08 09:34+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
+"issues\n"
+"POT-Creation-Date: 2017-06-07 03:27+0000\n"
+"PO-Revision-Date: 2017-09-16 09:28+0200\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
@@ -16,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Generator: Poedit 1.8.8\n"
+"X-Generator: Poedit 2.0.3\n"
 
 #: src/access.c:271
 msgid "Deny Access"
@@ -26,41 +27,39 @@ msgstr "Zamietnuť prístup"
 msgid "Grant Access"
 msgstr "Udeliť prístup"
 
+# dialog title
 #: src/accountdialog.c:166
 msgid "Select an Image"
-msgstr ""
+msgstr "Výber obrázku"
 
 #: src/accountdialog.c:169
-#, fuzzy
 msgid "Cancel"
-msgstr "_Zrušiť"
+msgstr "Zrušiť"
 
 #: src/accountdialog.c:170
-#, fuzzy
 msgid "Select"
-msgstr "Vy_brať"
+msgstr "Vybrať"
 
 #: src/accountdialog.c:171
 msgid "Clear"
-msgstr ""
+msgstr "Vymazať"
 
 #: src/accountdialog.c:185
 msgid "Images"
-msgstr ""
+msgstr "Obrázky"
 
 #: src/accountdialog.c:260
 #, c-format
 msgid "Share your personal information with %s?"
-msgstr ""
+msgstr "Sprístupniť vaše osobné informácie aplikácii %s?"
 
 #: src/accountdialog.c:263
-#, fuzzy
 msgid "Share your personal information with the requesting application?"
-msgstr "Sprístupniť túto snímku obrazovky požadovanej aplikácii?"
+msgstr "Sprístupniť vaše osobné informácie požadovanej aplikácii?"
 
 #: src/accountdialog.ui:10
 msgid "Share Details"
-msgstr ""
+msgstr "Podrobnosti o sprístupnení"
 
 #: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:365
 #: src/screenshotdialog.ui:14
@@ -71,13 +70,53 @@ msgstr "_Zrušiť"
 msgid "_Share"
 msgstr "_Sprístupniť"
 
+# tooltip
 #: src/accountdialog.ui:148
 msgid "Make changes before sharing the information"
+msgstr "Vykoná zmeny pred sprístupnením informácií"
+
+#: src/appchooserdialog.c:154
+msgid "Failed to start Software"
+msgstr "Zlyhalo spustenie aplikácie Softvér"
+
+#: src/appchooserdialog.c:373
+#, c-format
+msgid ""
+"Select an application to open “%s”. More applications are available in <a "
+"href='software'>Software.</a>"
 msgstr ""
+"Vyberte aplikáciu na otvorenie „%s“. Viac aplikácií je dostupných v "
+"aplikácii <a href='software'>Softvér.</a>"
+
+#: src/appchooserdialog.c:378
+msgid ""
+"Select an application. More applications are available in <a "
+"href='software'>Software.</a>"
+msgstr ""
+"Vyberte aplikáciu. Viac aplikácií je dostupných v aplikácii <a "
+"href='software'>Softvér.</a>"
+
+#: src/appchooserdialog.c:391
+#, c-format
+msgid "Unable to find an application that is able to open “%s”."
+msgstr "Nie je možné nájsť aplikáciu, ktorá dokáže otvoriť „%s“."
+
+#: src/appchooserdialog.c:396
+msgid "Unable to find a suitable application."
+msgstr "Nie je možné nájsť vhodnú aplikáciu."
 
 #: src/appchooserdialog.ui:13
 msgid "Open With"
 msgstr "Otvoriť pomocou"
+
+#: src/appchooserdialog.ui:166
+msgid "No Applications Found"
+msgstr "Nenašli sa žiadne aplikácie"
+
+# gtk button label
+#: src/appchooserdialog.ui:182
+msgid "Find Compatible Applications in Software"
+msgstr "Nájsť kompatibilné aplikácie v aplikácii Softvér"
 
 #: src/filechooser.c:363
 msgid "_Open"
@@ -98,19 +137,9 @@ msgstr "Snímka obrazovky"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
-msgstr ""
+msgstr "Portál"
 
 #. TRANSLATORS: Don't translate this text (this is icon name)
 #: data/xdg-desktop-portal-gtk.desktop.in.in:6
 msgid "applications-system-symbolic"
-msgstr ""
-
-#~ msgid "_Select"
-#~ msgstr "Vy_brať"
-
-#~ msgid "Select application"
-#~ msgstr "Výber aplikácie"
-
-#, fuzzy
-#~ msgid "No applications found"
-#~ msgstr "Výber aplikácie"
+msgstr "applications-system-symbolic"
