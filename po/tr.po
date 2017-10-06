@@ -1,0 +1,142 @@
+# Turkish translation for xdg-desktop-portal-gtk.
+# Copyright (C) 2017 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
+# This file is distributed under the same license as the xdg-desktop-portal-gtk package.
+# Muhammet Kara <muhammetk@gmail.com>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xdg-desktop-portal-gtk master\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
+"issues\n"
+"POT-Creation-Date: 2017-10-06 15:28+0000\n"
+"PO-Revision-Date: 2017-10-06 21:57+0300\n"
+"Last-Translator: Muhammet Kara <muhammetk@gmail.com>\n"
+"Language-Team: Türkçe <gnome-turk@gnome.org>\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Gtranslator 2.91.7\n"
+
+#: src/access.c:271
+msgid "Deny Access"
+msgstr "Erişimi Reddet"
+
+#: src/access.c:274
+msgid "Grant Access"
+msgstr "Erişime İzin Ver"
+
+#: src/accountdialog.c:166
+msgid "Select an Image"
+msgstr "Resim Seç"
+
+#: src/accountdialog.c:169
+msgid "Cancel"
+msgstr "İptal"
+
+#: src/accountdialog.c:170
+msgid "Select"
+msgstr "Seç"
+
+#: src/accountdialog.c:171
+msgid "Clear"
+msgstr "Temizle"
+
+#: src/accountdialog.c:185
+msgid "Images"
+msgstr "Resimler"
+
+#: src/accountdialog.c:260
+#, c-format
+msgid "Share your personal information with %s?"
+msgstr "Kişisel bilgileriniz %s ile paylaşılsın mı?"
+
+#: src/accountdialog.c:263
+msgid "Share your personal information with the requesting application?"
+msgstr "Kişisel bilgileriniz, istekte bulunan uygulamayla paylaşılsın mı?"
+
+#: src/accountdialog.ui:10
+msgid "Share Details"
+msgstr "Ayrıntıları Paylaş"
+
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:365
+#: src/screenshotdialog.ui:14
+msgid "_Cancel"
+msgstr "_İptal"
+
+#: src/accountdialog.ui:22 src/screenshotdialog.ui:25
+msgid "_Share"
+msgstr "_Paylaş"
+
+#: src/accountdialog.ui:148
+msgid "Make changes before sharing the information"
+msgstr "Bilgileri paylaşmadan önce değişiklik yapın"
+
+#: src/appchooserdialog.c:154
+msgid "Failed to start Software"
+msgstr "Yazılımlar başlatılamadı"
+
+#: src/appchooserdialog.c:373
+#, c-format
+msgid ""
+"Select an application to open “%s”. More applications are available in <a "
+"href='software'>Software.</a>"
+msgstr ""
+"“%s”i açmak için bir uygulama seçin. <a href='software'>Yazılımlar</a>'da "
+"daha fazla uygulama bulabilirsiniz."
+
+#: src/appchooserdialog.c:378
+msgid ""
+"Select an application. More applications are available in <a "
+"href='software'>Software.</a>"
+msgstr ""
+"Bir uygulama seçin. <a href='software'>Yazılımlar</a>'da daha fazla uygulama "
+"bulabilirsiniz."
+
+#: src/appchooserdialog.c:391
+#, c-format
+msgid "Unable to find an application that is able to open “%s”."
+msgstr "“%s”i açabilen bir uygulama bulunamadı."
+
+#: src/appchooserdialog.c:396
+msgid "Unable to find a suitable application."
+msgstr "Uygun bir uygulama bulunamadı."
+
+#: src/appchooserdialog.ui:13
+msgid "Open With"
+msgstr "Birlikte Aç"
+
+#: src/appchooserdialog.ui:166
+msgid "No Applications Found"
+msgstr "Hiçbir Uygulama Bulunamadı"
+
+#: src/appchooserdialog.ui:182
+msgid "Find Compatible Applications in Software"
+msgstr "Uyumlu Uygulamaları Yazılımlar'da Bul"
+
+#: src/filechooser.c:363
+msgid "_Open"
+msgstr "_Aç"
+
+#: src/screenshotdialog.c:93
+#, c-format
+msgid "Share this screenshot with %s?"
+msgstr "Bu ekran görüntüsü %s ile paylaşılsın mı?"
+
+#: src/screenshotdialog.c:96
+msgid "Share this screenshot with the requesting application?"
+msgstr "Bu ekran görüntüsü, istekte bulunan uygulama ile paylaşılsın mı?"
+
+#: src/screenshotdialog.ui:10
+msgid "Screenshot"
+msgstr "Ekran Görüntüsü"
+
+#: data/xdg-desktop-portal-gtk.desktop.in.in:4
+msgid "Portal"
+msgstr "Portal"
+
+#. TRANSLATORS: Don't translate this text (this is icon name)
+#: data/xdg-desktop-portal-gtk.desktop.in.in:6
+msgid "applications-system-symbolic"
+msgstr "applications-system-symbolic"
