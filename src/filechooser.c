@@ -454,9 +454,9 @@ handle_open (XdpImplFileChooser *object,
        * In a sandboxed situation, the current folder and current file
        * are likely in the fuse filesystem
        */
-      if (g_variant_lookup (arg_options, "current_folder", "&ay", &path))
+      if (g_variant_lookup (arg_options, "current_folder", "^&ay", &path))
         gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dialog), path);
-      if (g_variant_lookup (arg_options, "current_file", "&ay", &path))
+      if (g_variant_lookup (arg_options, "current_file", "^&ay", &path))
         gtk_file_chooser_select_filename (GTK_FILE_CHOOSER (dialog), path);
     }
 
