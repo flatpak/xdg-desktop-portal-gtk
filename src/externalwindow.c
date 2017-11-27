@@ -131,6 +131,7 @@ external_window_get_property (GObject    *object,
     {
     case PROP_DISPLAY:
       g_value_set_object (value, priv->display);
+      break;
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
