@@ -9,6 +9,7 @@ $(dbus_built_sources): src/Makefile.am.inc
 	--generate-c-code src/xdg-desktop-portal-dbus	\
 	--annotate "org.freedesktop.impl.portal.Print.Print()" "org.gtk.GDBus.C.UnixFD" "true" \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Request.xml \
+	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Session.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.FileChooser.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.AppChooser.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Print.xml \
@@ -63,6 +64,8 @@ xdg_desktop_portal_gtk_SOURCES = \
 	src/utils.c				\
 	src/request.h			        \
 	src/request.c			        \
+	src/session.c   			\
+	src/session.h	        		\
 	src/filechooser.h			\
 	src/filechooser.c			\
 	src/appchooser.h			\
