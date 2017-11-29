@@ -50,6 +50,7 @@
 #include "access.h"
 #include "account.h"
 #include "email.h"
+#include "screencast.h"
 
 
 static GMainLoop *loop = NULL;
@@ -133,6 +134,12 @@ on_bus_acquired (GDBusConnection *connection,
     }
 
   if (!email_init (connection, &error))
+    {
+      g_warning ("error: %s\n", error->message);
+      g_clear_error (&error);
+    }
+
+  if (!screen_cast_init (connection, &error))
     {
       g_warning ("error: %s\n", error->message);
       g_clear_error (&error);

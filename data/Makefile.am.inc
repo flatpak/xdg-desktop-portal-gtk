@@ -37,6 +37,7 @@ EXTRA_DIST += \
         $(desktop_in_in_files)                  \
         data/org.gtk.Notifications.xml          \
         data/org.gnome.Mutter.DisplayConfig.xml \
+        data/org.gnome.Mutter.ScreenCast.xml    \
         data/org.gnome.SessionManager.xml       \
         data/org.gnome.Shell.Screenshot.xml     \
         data/org.freedesktop.ScreenSaver.xml    \
