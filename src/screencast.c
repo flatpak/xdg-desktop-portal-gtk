@@ -23,10 +23,10 @@
 #include <stdint.h>
 
 #include "xdg-desktop-portal-dbus.h"
-#include "shell-dbus.h"
 
 #include "screencast.h"
 #include "screencastdialog.h"
+#include "gnomescreencast.h"
 #include "displaystatetracker.h"
 #include "externalwindow.h"
 #include "request.h"
@@ -46,13 +46,11 @@ typedef struct _ScreenCastSession
 {
   Session parent;
 
-  char *parent_window;
-  char *mutter_session_path;
-  OrgGnomeMutterScreenCastSession *mutter_session_proxy;
-  gulong closed_handler_id;
+  GnomeScreenCastSession *gnome_screen_cast_session;
+  gulong session_ready_handler_id;
+  gulong session_closed_handler_id;
 
-  GList *streams;
-  int n_needed_stream_node_ids;
+  char *parent_window;
 
   struct {
     gboolean multiple;
@@ -78,18 +76,10 @@ typedef struct _ScreenCastDialogHandle
   int response;
 } ScreenCastDialogHandle;
 
-typedef struct _ScreenCastStream
-{
-  ScreenCastSession *session;
-  char *stream_path;
-  uint32_t pipewire_node_id;
-  OrgGnomeMutterScreenCastStream *stream_proxy;
-} ScreenCastStream;
-
 static GDBusConnection *impl_connection;
-static guint screen_cast_name_watch;
 static GDBusInterfaceSkeleton *impl;
-static OrgGnomeMutterScreenCast *screen_cast;
+
+static GnomeScreenCast *gnome_screen_cast;
 
 GType screen_cast_session_get_type (void);
 G_DEFINE_TYPE (ScreenCastSession, screen_cast_session, session_get_type ())
@@ -238,56 +228,15 @@ create_screen_cast_dialog (ScreenCastSession *session,
   return dialog_handle;
 }
 
-static ScreenCastStream *
-screen_cast_stream_new (ScreenCastSession *screen_cast_session,
-                        const char *stream_path,
-                        OrgGnomeMutterScreenCastStream *stream_proxy)
-{
-  ScreenCastStream *stream;
-
-  stream = g_new0 (ScreenCastStream, 1);
-  stream->session = screen_cast_session;
-  stream->stream_path = g_strdup (stream_path);
-  stream->stream_proxy = stream_proxy;
-
-  return stream;
-}
-
-static void
-screen_cast_stream_free (ScreenCastStream *stream)
-{
-  g_clear_object (&stream->stream_proxy);
-  g_free (stream->stream_path);
-  g_free (stream);
-}
-
-static void
-on_mutter_session_closed (OrgGnomeMutterScreenCastSession *mutter_session_proxy,
-                          ScreenCastSession *screen_cast_session)
-{
-  session_close ((Session *)screen_cast_session);
-}
-
 static ScreenCastSession *
 screen_cast_session_new (const char *app_id,
-                         const char *session_handle,
-                         const char *mutter_session_path,
-                         OrgGnomeMutterScreenCastSession *mutter_session_proxy)
+                         const char *session_handle)
 {
   ScreenCastSession *screen_cast_session;
 
   screen_cast_session = g_object_new (screen_cast_session_get_type (),
                                       "id", session_handle,
                                       NULL);
-  screen_cast_session->mutter_session_path =
-    g_strdup (mutter_session_path);
-  screen_cast_session->mutter_session_proxy =
-    g_object_ref (mutter_session_proxy);
-
-  screen_cast_session->closed_handler_id =
-    g_signal_connect (screen_cast_session->mutter_session_proxy,
-                      "closed", G_CALLBACK (on_mutter_session_closed),
-                      screen_cast_session);
 
   return screen_cast_session;
 }
@@ -302,12 +251,8 @@ handle_create_session (XdpImplScreenCast *object,
 {
   const char *sender;
   g_autoptr(Request) request = NULL;
-  g_autofree char *mutter_session_path = NULL;
   g_autoptr(GError) error = NULL;
   int response;
-  GVariantBuilder properties_builder;
-  GVariant *properties;
-  OrgGnomeMutterScreenCastSession *mutter_session_proxy;
   Session *session;
   GVariantBuilder results_builder;
 
@@ -315,37 +260,8 @@ handle_create_session (XdpImplScreenCast *object,
 
   request = request_new (sender, arg_app_id, arg_handle);
 
-  g_variant_builder_init (&properties_builder, G_VARIANT_TYPE_VARDICT);
-  properties = g_variant_builder_end (&properties_builder);
-  if (!org_gnome_mutter_screen_cast_call_create_session_sync (screen_cast,
-                                                              properties,
-                                                              &mutter_session_path,
-                                                              NULL,
-                                                              &error))
-    {
-      g_warning ("Failed to create screen cast session: %s", error->message);
-      response = 2;
-      goto out;
-    }
-
-  mutter_session_proxy =
-    org_gnome_mutter_screen_cast_session_proxy_new_sync (impl_connection,
-                                                         G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
-                                                         "org.gnome.Mutter.ScreenCast",
-                                                         mutter_session_path,
-                                                         NULL,
-                                                         &error);
-  if (!mutter_session_proxy)
-    {
-      g_warning ("Failed to get screen cast session proxy: %s", error->message);
-      response = 2;
-      goto out;
-    }
-
   session = (Session *)screen_cast_session_new (arg_app_id,
-                                                arg_session_handle,
-                                                mutter_session_path,
-                                                mutter_session_proxy);
+                                                arg_session_handle);
 
   if (!session_export (session,
                        g_dbus_method_invocation_get_connection (invocation),
@@ -368,21 +284,7 @@ out:
                                                 response,
                                                 g_variant_builder_end (&results_builder));
 
-  g_clear_object (&mutter_session_proxy);
-
   return TRUE;
-}
-
-static void
-on_pipewire_stream_added (OrgGnomeMutterScreenCastStream *stream_proxy,
-                          unsigned int arg_node_id,
-                          ScreenCastStream *stream)
-{
-  stream->pipewire_node_id = arg_node_id;
-  g_return_if_fail (stream->session->n_needed_stream_node_ids > 0);
-  stream->session->n_needed_stream_node_ids--;
-  if (stream->session->n_needed_stream_node_ids == 0)
-    start_done (stream->session);
 }
 
 static gboolean
@@ -443,6 +345,8 @@ out:
 static void
 start_done (ScreenCastSession *screen_cast_session)
 {
+  GnomeScreenCastSession *gnome_screen_cast_session;
+  GList *streams;
   GVariantBuilder streams_builder;
   GVariantBuilder results_builder;
   GList *l;
@@ -450,37 +354,30 @@ start_done (ScreenCastSession *screen_cast_session)
   g_variant_builder_init (&results_builder, G_VARIANT_TYPE_VARDICT);
   g_variant_builder_init (&streams_builder, G_VARIANT_TYPE ("a(ua{sv})"));
 
-  for (l = screen_cast_session->streams; l; l = l->next)
+  gnome_screen_cast_session = screen_cast_session->gnome_screen_cast_session;
+  streams = gnome_screen_cast_session_get_streams (gnome_screen_cast_session);
+  for (l = streams; l; l = l->next)
     {
-      ScreenCastStream *stream = l->data;
+      GnomeScreenCastStream *stream = l->data;
       GVariantBuilder stream_properties_builder;
-      GVariant *parameters;
       int x, y;
       int width, height;
+      uint32_t pipewire_node_id;
 
       g_variant_builder_init (&stream_properties_builder, G_VARIANT_TYPE_VARDICT);
 
-      parameters =
-        org_gnome_mutter_screen_cast_stream_get_parameters (stream->stream_proxy);
-      if (parameters)
-        {
-          if (g_variant_lookup (parameters, "position", "(ii)", &x, &y))
-            g_variant_builder_add (&stream_properties_builder, "{sv}",
-                                   "position",
-                                   g_variant_new ("(ii)", x, y));
-          if (g_variant_lookup (parameters, "size", "(ii)", &width, &height))
-            g_variant_builder_add (&stream_properties_builder, "{sv}",
-                                   "size",
-                                   g_variant_new ("(ii)", width, height));
-        }
-      else
-        {
-          g_warning ("Screen cast stream %s missing parameters",
-                     stream->stream_path);
-        }
+      if (gnome_screen_cast_stream_get_position (stream, &x, &y))
+        g_variant_builder_add (&stream_properties_builder, "{sv}",
+                               "position",
+                               g_variant_new ("(ii)", x, y));
+      if (gnome_screen_cast_stream_get_size (stream, &width, &height))
+        g_variant_builder_add (&stream_properties_builder, "{sv}",
+                               "size",
+                               g_variant_new ("(ii)", width, height));
 
+      pipewire_node_id = gnome_screen_cast_stream_get_pipewire_node_id (stream);
       g_variant_builder_add (&streams_builder, "(ua{sv})",
-                             stream->pipewire_node_id,
+                             pipewire_node_id,
                              &stream_properties_builder);
     }
 
@@ -499,44 +396,13 @@ record_monitor (ScreenCastSession *screen_cast_session,
                 const char *connector,
                 GError **error)
 {
-  GVariantBuilder properties_builder;
-  GVariant *properties;
-  OrgGnomeMutterScreenCastSession *session_proxy;
-  g_autofree char *stream_path = NULL;
-  OrgGnomeMutterScreenCastStream *stream_proxy;
-  ScreenCastStream *stream;
+  GnomeScreenCastSession *gnome_screen_cast_session =
+    screen_cast_session->gnome_screen_cast_session;
 
-  g_variant_builder_init (&properties_builder, G_VARIANT_TYPE_VARDICT);
-  properties = g_variant_builder_end (&properties_builder);
-  session_proxy = screen_cast_session->mutter_session_proxy;
-  if (!org_gnome_mutter_screen_cast_session_call_record_monitor_sync (session_proxy,
-                                                                      connector,
-                                                                      properties,
-                                                                      &stream_path,
-                                                                      NULL,
-                                                                      error))
+  if (!gnome_screen_cast_session_record_monitor (gnome_screen_cast_session,
+                                                 connector,
+                                                 error))
     return FALSE;
-
-  stream_proxy =
-    org_gnome_mutter_screen_cast_stream_proxy_new_sync (impl_connection,
-                                                        G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
-                                                        "org.gnome.Mutter.ScreenCast",
-                                                        stream_path,
-                                                        NULL,
-                                                        error);
-  if (!stream_proxy)
-    return FALSE;
-
-  stream = screen_cast_stream_new (screen_cast_session,
-                                   stream_path,
-                                   stream_proxy);
-  screen_cast_session->streams = g_list_append (screen_cast_session->streams,
-                                                stream);
-  screen_cast_session->n_needed_stream_node_ids++;
-
-  g_signal_connect (stream_proxy, "pipewire-stream-added",
-                    G_CALLBACK (on_pipewire_stream_added),
-                    stream);
 
   return TRUE;
 }
@@ -571,20 +437,47 @@ record_streams (ScreenCastSession *screen_cast_session,
   return TRUE;
 }
 
+static void
+on_gnome_screen_cast_session_ready (GnomeScreenCastSession *gnome_screen_cast_session,
+                                    ScreenCastSession *screen_cast_session)
+{
+  start_done (screen_cast_session);
+}
+
+static void
+on_gnome_screen_cast_session_closed (GnomeScreenCastSession *gnome_screen_cast_session,
+                                     ScreenCastSession *screen_cast_session)
+{
+  session_close ((Session *)screen_cast_session);
+}
+
 static gboolean
 start_session (ScreenCastSession *screen_cast_session,
                GVariant *selections,
                GError **error)
 {
-  OrgGnomeMutterScreenCastSession *session_proxy;
+  GnomeScreenCastSession *gnome_screen_cast_session;
+
+  gnome_screen_cast_session =
+    gnome_screen_cast_create_session (gnome_screen_cast, error);
+  if (!gnome_screen_cast_session)
+    return FALSE;
+
+  screen_cast_session->gnome_screen_cast_session = gnome_screen_cast_session;
+
+  screen_cast_session->session_ready_handler_id =
+    g_signal_connect (gnome_screen_cast_session, "ready",
+                      G_CALLBACK (on_gnome_screen_cast_session_ready),
+                      screen_cast_session);
+  screen_cast_session->session_closed_handler_id =
+    g_signal_connect (gnome_screen_cast_session, "closed",
+                      G_CALLBACK (on_gnome_screen_cast_session_closed),
+                      screen_cast_session);
 
   if (!record_streams (screen_cast_session, selections, error))
     return FALSE;
 
-  session_proxy = screen_cast_session->mutter_session_proxy;
-  if (!org_gnome_mutter_screen_cast_session_call_start_sync (session_proxy,
-                                                             NULL,
-                                                             error))
+  if (!gnome_screen_cast_session_start (gnome_screen_cast_session, error))
     return FALSE;
 
   return TRUE;
@@ -658,25 +551,9 @@ err:
 }
 
 static void
-screen_cast_name_appeared (GDBusConnection *connection,
-                           const char *name,
-                           const char *name_owner,
-                           gpointer user_data)
+on_gnome_screen_cast_enabled (GnomeScreenCast *gnome_screen_cast)
 {
   g_autoptr(GError) error = NULL;
-
-  screen_cast = org_gnome_mutter_screen_cast_proxy_new_sync (impl_connection,
-                                                             G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
-                                                             "org.gnome.Mutter.ScreenCast",
-                                                             "/org/gnome/Mutter/ScreenCast",
-                                                             NULL,
-                                                             &error);
-  if (!screen_cast)
-    {
-      g_warning ("Failed to acquire org.gnome.Mutter.ScreenCast proxy: %s",
-                 error->message);
-      return;
-    }
 
   impl = G_DBUS_INTERFACE_SKELETON (xdp_impl_screen_cast_skeleton_new ());
 
@@ -705,17 +582,17 @@ screen_cast_name_appeared (GDBusConnection *connection,
 }
 
 static void
-screen_cast_name_vanished (GDBusConnection *connection,
-                           const char *name,
-                           gpointer user_data)
+on_gnome_screen_cast_disabled (GDBusConnection *connection,
+                               const char *name,
+                               gpointer user_data)
 {
   if (impl)
     {
+      g_debug ("unproviding %s", g_dbus_interface_skeleton_get_info (impl)->name);
+
       g_dbus_interface_skeleton_unexport (impl);
       g_clear_object (&impl);
     }
-
-  g_clear_object (&screen_cast);
 }
 
 gboolean
@@ -723,13 +600,12 @@ screen_cast_init (GDBusConnection *connection,
                   GError **error)
 {
   impl_connection = connection;
-  screen_cast_name_watch = g_bus_watch_name (G_BUS_TYPE_SESSION,
-                                             "org.gnome.Mutter.ScreenCast",
-                                             G_BUS_NAME_WATCHER_FLAGS_NONE,
-                                             screen_cast_name_appeared,
-                                             screen_cast_name_vanished,
-                                             NULL,
-                                             NULL);
+  gnome_screen_cast = gnome_screen_cast_new (connection);
+
+  g_signal_connect (gnome_screen_cast, "enabled",
+                    G_CALLBACK (on_gnome_screen_cast_enabled), NULL);
+  g_signal_connect (gnome_screen_cast, "disabled",
+                    G_CALLBACK (on_gnome_screen_cast_disabled), NULL);
 
   return TRUE;
 }
@@ -738,19 +614,21 @@ static void
 screen_cast_session_close (Session *session)
 {
   ScreenCastSession *screen_cast_session = (ScreenCastSession *)session;
-  OrgGnomeMutterScreenCastSession *session_proxy;
+  GnomeScreenCastSession *gnome_screen_cast_session;
   g_autoptr(GError) error = NULL;
 
-  session_proxy = screen_cast_session->mutter_session_proxy;
-  g_signal_handler_disconnect (session_proxy,
-                               screen_cast_session->closed_handler_id);
-
-  if (!org_gnome_mutter_screen_cast_session_call_stop_sync (session_proxy,
-                                                            NULL,
-                                                            &error))
+  gnome_screen_cast_session = screen_cast_session->gnome_screen_cast_session;
+  if (gnome_screen_cast_session)
     {
-      g_warning ("Failed to stop screen cast session: %s", error->message);
-      return;
+      g_signal_handler_disconnect (gnome_screen_cast_session,
+                                   screen_cast_session->session_ready_handler_id);
+      g_signal_handler_disconnect (gnome_screen_cast_session,
+                                   screen_cast_session->session_closed_handler_id);
+      if (!gnome_screen_cast_session_stop (gnome_screen_cast_session,
+                                           &error))
+        g_warning ("Failed to close GNOME screen cast session: %s",
+                   error->message);
+      g_clear_object (&screen_cast_session->gnome_screen_cast_session);
     }
 }
 
@@ -759,9 +637,7 @@ screen_cast_session_finalize (GObject *object)
 {
   ScreenCastSession *screen_cast_session = (ScreenCastSession *)object;
 
-  g_list_free_full (screen_cast_session->streams,
-                    (GDestroyNotify) screen_cast_stream_free);
-  g_free (screen_cast_session->mutter_session_path);
+  g_clear_object (&screen_cast_session->gnome_screen_cast_session);
 
   G_OBJECT_CLASS (screen_cast_session_parent_class)->finalize (object);
 }

@@ -103,6 +103,8 @@ xdg_desktop_portal_gtk_SOURCES = \
 	src/srceencast.h			\
 	src/screencastdialog.c			\
 	src/screencastdialog.h			\
+	src/gnomescreencast.c			\
+	src/gnomescreencast.h			\
 	src/displaystatetracker.c		\
 	src/displaystatetracker.h		\
 	$(NULL)
