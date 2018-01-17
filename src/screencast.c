@@ -25,6 +25,7 @@
 #include "xdg-desktop-portal-dbus.h"
 
 #include "screencast.h"
+#include "screencastwidget.h"
 #include "screencastdialog.h"
 #include "gnomescreencast.h"
 #include "displaystatetracker.h"
@@ -457,6 +458,7 @@ start_session (ScreenCastSession *screen_cast_session,
                GError **error)
 {
   GnomeScreenCastSession *gnome_screen_cast_session;
+  g_autoptr(GVariant) source_selections = NULL;
 
   gnome_screen_cast_session =
     gnome_screen_cast_create_session (gnome_screen_cast, error);
@@ -474,7 +476,8 @@ start_session (ScreenCastSession *screen_cast_session,
                       G_CALLBACK (on_gnome_screen_cast_session_closed),
                       screen_cast_session);
 
-  if (!record_streams (screen_cast_session, selections, error))
+  g_variant_lookup (selections, "selected_screen_cast_sources", "@a(us)",
+                    &source_selections);
     return FALSE;
 
   if (!gnome_screen_cast_session_start (gnome_screen_cast_session, error))

@@ -54,6 +54,7 @@ EXTRA_DIST += \
         src/screenshotdialog.ui                         \
         src/screenshotdialog.css                        \
         src/accountdialog.ui                            \
+        src/screencastwidget.ui                         \
         src/screencastdialog.ui                         \
 	$(NULL)
 
@@ -101,6 +102,8 @@ xdg_desktop_portal_gtk_SOURCES = \
 	src/externalwindow.c			\
 	src/screencast.c			\
 	src/srceencast.h			\
+	src/screencastwidget.c			\
+	src/screencastwidget.h			\
 	src/screencastdialog.c			\
 	src/screencastdialog.h			\
 	src/gnomescreencast.c			\

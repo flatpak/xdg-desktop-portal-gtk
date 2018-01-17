@@ -7,6 +7,7 @@
     <file>screenshotdialog.ui</file>
     <file>screenshotdialog.css</file>
     <file>accountdialog.ui</file>
+    <file>screencastwidget.ui</file>
     <file>screencastdialog.ui</file>
   </gresource>
 </gresources>
