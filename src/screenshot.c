@@ -15,7 +15,6 @@
 #include <gio/gdesktopappinfo.h>
 #include <gio/gunixfdlist.h>
 
-#include "xdg-desktop-portal-dbus.h"
 #include "shell-dbus.h"
 
 #include "screenshotdialog.h"
@@ -80,6 +79,7 @@ send_response (ScreenshotDialogHandle *handle)
 static void
 screenshot_dialog_done (GtkWidget *widget,
                         int response,
+                        const char *filename,
                         gpointer user_data)
 {
   ScreenshotDialogHandle *handle = user_data;
@@ -91,17 +91,14 @@ screenshot_dialog_done (GtkWidget *widget,
       /* Fall through */
     case GTK_RESPONSE_DELETE_EVENT:
       handle->response = 2;
-      g_free (handle->uri);
-      handle->uri = NULL;
       break;
 
     case GTK_RESPONSE_CANCEL:
       handle->response = 1;
-      g_free (handle->uri);
-      handle->uri = NULL;
       break;
 
     case GTK_RESPONSE_OK:
+      handle->uri = g_filename_to_uri (filename, NULL, NULL);
       handle->response = 0;
       break;
     }
@@ -137,9 +134,8 @@ handle_screenshot (XdpImplScreenshot *object,
   const char *sender;
   ScreenshotDialogHandle *handle;
   g_autoptr(GError) error = NULL;
-  g_autofree char *filename = NULL;
-  gboolean success;
   gboolean modal;
+  gboolean interactive;
   GtkWidget *dialog;
   GdkDisplay *display;
   GdkScreen *screen;
@@ -150,16 +146,11 @@ handle_screenshot (XdpImplScreenshot *object,
 
   request = request_new (sender, arg_app_id, arg_handle);
 
-  org_gnome_shell_screenshot_call_screenshot_sync (shell,
-                                                   FALSE,
-                                                   TRUE,
-                                                   "Screenshot",
-                                                   &success,
-                                                   &filename,
-                                                   NULL, NULL);
-
   if (!g_variant_lookup (arg_options, "modal", "b", &modal))
     modal = TRUE;
+
+  if (!g_variant_lookup (arg_options, "interactive", "b", &interactive))
+    interactive = FALSE;
 
   if (arg_parent_window)
     {
@@ -181,7 +172,7 @@ handle_screenshot (XdpImplScreenshot *object,
                               NULL);
   g_object_ref_sink (fake_parent);
 
-  dialog = GTK_WIDGET (screenshot_dialog_new (arg_app_id, filename));
+  dialog = GTK_WIDGET (screenshot_dialog_new (arg_app_id, interactive, shell));
   gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (fake_parent));
   gtk_window_set_modal (GTK_WINDOW (dialog), modal);
 
@@ -191,7 +182,6 @@ handle_screenshot (XdpImplScreenshot *object,
   handle->request = g_object_ref (request);
   handle->dialog = g_object_ref (dialog);
   handle->external_parent = external_parent;
-  handle->uri = g_filename_to_uri (filename, NULL, NULL);
 
   g_signal_connect (request, "handle-close", G_CALLBACK (handle_close), handle);
 
@@ -201,8 +191,6 @@ handle_screenshot (XdpImplScreenshot *object,
 
   if (external_parent)
     external_window_set_parent_of (external_parent, gtk_widget_get_window (dialog));
-
-  gtk_widget_show (dialog);
 
   request_export (request, g_dbus_method_invocation_get_connection (invocation));
 

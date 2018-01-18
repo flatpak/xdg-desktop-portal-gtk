@@ -48,6 +48,7 @@ EXTRA_DIST += \
         src/appchooserdialog.css                        \
         src/appchooserrow.ui                            \
         src/screenshotdialog.ui                         \
+        src/screenshotdialog.css                        \
         src/accountdialog.ui                            \
 	$(NULL)
 
