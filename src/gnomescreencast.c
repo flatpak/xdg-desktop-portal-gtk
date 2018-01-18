@@ -194,6 +194,23 @@ gnome_screen_cast_stream_class_init (GnomeScreenCastStreamClass *klass)
                                                       G_TYPE_NONE, 0);
 }
 
+const char *
+gnome_screen_cast_session_get_stream_path_from_id (GnomeScreenCastSession *gnome_screen_cast_session,
+                                                   uint32_t stream_id)
+{
+  GList *l;
+
+  for (l = gnome_screen_cast_session->streams; l; l = l->next)
+    {
+      GnomeScreenCastStream *stream = l->data;
+
+      if (stream->pipewire_node_id == stream_id)
+        return stream->path;
+    }
+
+  return NULL;
+}
+
 void
 gnome_screen_cast_session_add_stream_properties (GnomeScreenCastSession *gnome_screen_cast_session,
                                                  GVariantBuilder *streams_builder)

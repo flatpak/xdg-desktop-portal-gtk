@@ -26,6 +26,9 @@ typedef struct _GnomeScreenCast GnomeScreenCast;
 typedef struct _GnomeScreenCastSession GnomeScreenCastSession;
 typedef struct _GnomeScreenCastStream GnomeScreenCastStream;
 
+const char * gnome_screen_cast_session_get_stream_path_from_id (GnomeScreenCastSession *gnome_screen_cast_session,
+                                                                uint32_t stream_id);
+
 void gnome_screen_cast_session_add_stream_properties (GnomeScreenCastSession *gnome_screen_cast_session,
                                                       GVariantBuilder *streams_builder);
 
