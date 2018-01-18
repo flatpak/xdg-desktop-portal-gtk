@@ -390,7 +390,7 @@ start_session (ScreenCastSession *screen_cast_session,
   g_autoptr(GVariant) source_selections = NULL;
 
   gnome_screen_cast_session =
-    gnome_screen_cast_create_session (gnome_screen_cast, error);
+    gnome_screen_cast_create_session (gnome_screen_cast, NULL, error);
   if (!gnome_screen_cast_session)
     return FALSE;
 

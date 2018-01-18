@@ -40,6 +40,7 @@ gboolean gnome_screen_cast_session_start (GnomeScreenCastSession *gnome_screen_c
                                           GError **error);
 
 GnomeScreenCastSession *gnome_screen_cast_create_session (GnomeScreenCast *gnome_screen_cast,
+                                                          const char *remote_desktop_session_id,
                                                           GError **error);
 
 GnomeScreenCast *gnome_screen_cast_new (GDBusConnection *connection);

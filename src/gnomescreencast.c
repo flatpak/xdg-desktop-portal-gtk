@@ -412,6 +412,7 @@ on_mutter_session_closed (OrgGnomeMutterScreenCastSession *session_proxy,
 
 GnomeScreenCastSession *
 gnome_screen_cast_create_session (GnomeScreenCast *gnome_screen_cast,
+                                  const char *remote_desktop_session_id,
                                   GError **error)
 {
   GVariantBuilder properties_builder;
@@ -422,6 +423,12 @@ gnome_screen_cast_create_session (GnomeScreenCast *gnome_screen_cast,
   GnomeScreenCastSession *gnome_screen_cast_session;
 
   g_variant_builder_init (&properties_builder, G_VARIANT_TYPE_VARDICT);
+  if (remote_desktop_session_id)
+    {
+      g_variant_builder_add (&properties_builder, "{sv}",
+                             "remote-desktop-session-id",
+                             g_variant_new_string (remote_desktop_session_id));
+    }
   properties = g_variant_builder_end (&properties_builder);
   if (!org_gnome_mutter_screen_cast_call_create_session_sync (gnome_screen_cast->proxy,
                                                               properties,
