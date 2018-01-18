@@ -20,6 +20,7 @@ $(dbus_built_sources): src/Makefile.am.inc
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Account.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Email.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.ScreenCast.xml \
+	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.RemoteDesktop.xml \
 	$(NULL)
 
 shell_built_sources = src/shell-dbus.c src/shell-dbus.h
@@ -31,6 +32,7 @@ $(shell_built_sources): src/Makefile.am.inc
 	--generate-c-code src/shell-dbus	                        \
 	$(top_srcdir)/data/org.gnome.Mutter.DisplayConfig.xml	        \
 	$(top_srcdir)/data/org.gnome.Mutter.ScreenCast.xml	        \
+	$(top_srcdir)/data/org.gnome.Mutter.RemoteDesktop.xml	        \
 	$(top_srcdir)/data/org.gnome.Shell.Screenshot.xml	        \
 	$(top_srcdir)/data/org.gtk.Notifications.xml			\
 	$(top_srcdir)/data/org.gnome.SessionManager.xml		        \
@@ -56,6 +58,7 @@ EXTRA_DIST += \
         src/accountdialog.ui                            \
         src/screencastwidget.ui                         \
         src/screencastdialog.ui                         \
+        src/remotedesktopdialog.ui                      \
 	$(NULL)
 
 libexec_PROGRAMS = \
@@ -108,6 +111,10 @@ xdg_desktop_portal_gtk_SOURCES = \
 	src/screencastdialog.h			\
 	src/gnomescreencast.c			\
 	src/gnomescreencast.h			\
+	src/remotedesktop.c			\
+	src/remotedesktop.h			\
+	src/remotedesktopdialog.c		\
+	src/remotedesktopdialog.h		\
 	src/displaystatetracker.c		\
 	src/displaystatetracker.h		\
 	$(NULL)

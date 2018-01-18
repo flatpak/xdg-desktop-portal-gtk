@@ -51,6 +51,7 @@
 #include "account.h"
 #include "email.h"
 #include "screencast.h"
+#include "remotedesktop.h"
 
 
 static GMainLoop *loop = NULL;
@@ -140,6 +141,12 @@ on_bus_acquired (GDBusConnection *connection,
     }
 
   if (!screen_cast_init (connection, &error))
+    {
+      g_warning ("error: %s\n", error->message);
+      g_clear_error (&error);
+    }
+
+  if (!remote_desktop_init (connection, &error))
     {
       g_warning ("error: %s\n", error->message);
       g_clear_error (&error);

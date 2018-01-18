@@ -9,6 +9,7 @@
     <file>accountdialog.ui</file>
     <file>screencastwidget.ui</file>
     <file>screencastdialog.ui</file>
+    <file>remotedesktopdialog.ui</file>
   </gresource>
 </gresources>
 

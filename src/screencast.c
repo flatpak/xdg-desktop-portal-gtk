@@ -28,6 +28,7 @@
 #include "screencastwidget.h"
 #include "screencastdialog.h"
 #include "gnomescreencast.h"
+#include "remotedesktop.h"
 #include "displaystatetracker.h"
 #include "externalwindow.h"
 #include "request.h"
@@ -96,6 +97,12 @@ start_session (ScreenCastSession *session,
 static void
 cancel_start_session (ScreenCastSession *session,
                       int response);
+
+static gboolean
+is_screen_cast_session (Session *session)
+{
+  return G_TYPE_CHECK_INSTANCE_TYPE (session, screen_cast_session_get_type ());
+}
 
 static void
 screen_cast_dialog_handle_free (ScreenCastDialogHandle *dialog_handle)
@@ -298,7 +305,7 @@ handle_select_sources (XdpImplScreenCast *object,
 {
   const char *sender;
   g_autoptr(Request) request = NULL;
-  ScreenCastSession *screen_cast_session;
+  Session *session;
   int response;
   uint32_t types;
   gboolean multiple;
@@ -308,8 +315,8 @@ handle_select_sources (XdpImplScreenCast *object,
   sender = g_dbus_method_invocation_get_sender (invocation);
   request = request_new (sender, arg_app_id, arg_handle);
 
-  screen_cast_session = (ScreenCastSession *)lookup_session (arg_session_handle);
-  if (!screen_cast_session)
+  session = lookup_session (arg_session_handle);
+  if (!session)
     {
       g_warning ("Tried to select sources on non-existing %s", arg_session_handle);
       response = 2;
@@ -329,8 +336,27 @@ handle_select_sources (XdpImplScreenCast *object,
       goto out;
     }
 
-  screen_cast_session->select.multiple = multiple;
-  response = 0;
+  if (is_screen_cast_session (session))
+    {
+      ScreenCastSession *screen_cast_session = (ScreenCastSession *)session;
+
+      screen_cast_session->select.multiple = multiple;
+      response = 0;
+    }
+  else if (is_remote_desktop_session (session))
+    {
+      RemoteDesktopSession *remote_desktop_session =
+        (RemoteDesktopSession *)session;
+
+      remote_desktop_session_sources_selected (remote_desktop_session,
+                                               multiple);
+      response = 0;
+    }
+  else
+    {
+      g_warning ("Tried to select sources on invalid session type");
+      response = 2;
+    }
 
 out:
   request_export (request, g_dbus_method_invocation_get_connection (invocation));
