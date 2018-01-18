@@ -41,8 +41,6 @@ struct _ScreenCastWidget
   GtkWidget *monitor_heading;
   GtkWidget *monitor_list;
 
-  gboolean multiple;
-
   DisplayStateTracker *display_state_tracker;
   gulong monitors_changed_handler_id;
 };
@@ -132,28 +130,19 @@ on_row_activated (GtkListBox *box,
                   GtkListBoxRow *row,
                   ScreenCastWidget *widget)
 {
-  GList *selected_rows;
-
   if (!row)
     return;
 
-  if (widget->multiple)
+  if (is_row_selected (row))
     {
-      if (is_row_selected (row))
-        {
-          set_row_is_selected (row, FALSE);
-          gtk_list_box_unselect_row (box, row);
-        }
-      else
-        {
-          set_row_is_selected (row, TRUE);
-          gtk_list_box_select_row (box, row);
-        }
+      set_row_is_selected (row, FALSE);
+      gtk_list_box_unselect_row (box, row);
     }
-
-  selected_rows = gtk_list_box_get_selected_rows (box);
-
-  g_list_free (selected_rows);
+  else
+    {
+      set_row_is_selected (row, TRUE);
+      gtk_list_box_select_row (box, row);
+    }
 }
 
 static void
@@ -266,8 +255,6 @@ void
 screen_cast_widget_set_allow_multiple (ScreenCastWidget *widget,
                                        gboolean multiple)
 {
-  widget->multiple = multiple;
-
   gtk_list_box_set_selection_mode (GTK_LIST_BOX (widget->monitor_list),
                                    multiple ? GTK_SELECTION_MULTIPLE
                                             : GTK_SELECTION_SINGLE);
