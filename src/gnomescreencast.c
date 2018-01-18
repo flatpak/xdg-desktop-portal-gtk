@@ -17,6 +17,7 @@
  */
 
 #include "gnomescreencast.h"
+#include "screencastwidget.h"
 #include "shell-dbus.h"
 
 #include <stdint.h>
@@ -114,13 +115,13 @@ G_DEFINE_TYPE (GnomeScreenCastSession, gnome_screen_cast_session, G_TYPE_OBJECT)
 static GType gnome_screen_cast_get_type (void);
 G_DEFINE_TYPE (GnomeScreenCast, gnome_screen_cast, G_TYPE_OBJECT)
 
-uint32_t
+static uint32_t
 gnome_screen_cast_stream_get_pipewire_node_id (GnomeScreenCastStream *stream)
 {
   return stream->pipewire_node_id;
 }
 
-gboolean
+static gboolean
 gnome_screen_cast_stream_get_position (GnomeScreenCastStream *stream,
                                        int *x,
                                        int *y)
@@ -134,7 +135,7 @@ gnome_screen_cast_stream_get_position (GnomeScreenCastStream *stream,
   return TRUE;
 }
 
-gboolean
+static gboolean
 gnome_screen_cast_stream_get_size (GnomeScreenCastStream *stream,
                                    int *width,
                                    int *height)
@@ -193,13 +194,42 @@ gnome_screen_cast_stream_class_init (GnomeScreenCastStreamClass *klass)
                                                       G_TYPE_NONE, 0);
 }
 
-GList *
-gnome_screen_cast_session_get_streams (GnomeScreenCastSession *gnome_screen_cast_session)
+void
+gnome_screen_cast_session_add_stream_properties (GnomeScreenCastSession *gnome_screen_cast_session,
+                                                 GVariantBuilder *streams_builder)
 {
-  return gnome_screen_cast_session->streams;
+  GList *streams;
+  GList *l;
+
+  streams = gnome_screen_cast_session->streams;
+  for (l = streams; l; l = l->next)
+    {
+      GnomeScreenCastStream *stream = l->data;
+      GVariantBuilder stream_properties_builder;
+      int x, y;
+      int width, height;
+      uint32_t pipewire_node_id;
+
+
+      g_variant_builder_init (&stream_properties_builder, G_VARIANT_TYPE_VARDICT);
+
+      if (gnome_screen_cast_stream_get_position (stream, &x, &y))
+        g_variant_builder_add (&stream_properties_builder, "{sv}",
+                               "position",
+                               g_variant_new ("(ii)", x, y));
+      if (gnome_screen_cast_stream_get_size (stream, &width, &height))
+        g_variant_builder_add (&stream_properties_builder, "{sv}",
+                               "size",
+                               g_variant_new ("(ii)", width, height));
+
+      pipewire_node_id = gnome_screen_cast_stream_get_pipewire_node_id (stream);
+      g_variant_builder_add (streams_builder, "(ua{sv})",
+                             pipewire_node_id,
+                             &stream_properties_builder);
+    }
 }
 
-gboolean
+static gboolean
 gnome_screen_cast_session_record_monitor (GnomeScreenCastSession *gnome_screen_cast_session,
                                           const char *connector,
                                           GError **error)
@@ -264,6 +294,37 @@ gnome_screen_cast_session_record_monitor (GnomeScreenCastSession *gnome_screen_c
   gnome_screen_cast_session->streams =
     g_list_prepend (gnome_screen_cast_session->streams, stream);
   gnome_screen_cast_session->n_needed_stream_node_ids++;
+
+  return TRUE;
+}
+
+gboolean
+gnome_screen_cast_session_record_selections (GnomeScreenCastSession *gnome_screen_cast_session,
+                                             GVariant *selections,
+                                             GError **error)
+{
+  GVariantIter selections_iter;
+  GVariant *selection;
+
+  g_variant_iter_init (&selections_iter, selections);
+  while ((selection = g_variant_iter_next_value (&selections_iter)))
+    {
+      ScreenCastSelection selection_type;
+      g_autofree char *key = NULL;
+
+      g_variant_get (selection, "(us)",
+                     &selection_type,
+                     &key);
+
+      switch (selection_type)
+        {
+        case SCREEN_CAST_SELECTION_MONITOR:
+          if (!gnome_screen_cast_session_record_monitor (gnome_screen_cast_session,
+                                                         key, error))
+            return FALSE;
+          break;
+        }
+    }
 
   return TRUE;
 }

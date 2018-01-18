@@ -26,21 +26,12 @@ typedef struct _GnomeScreenCast GnomeScreenCast;
 typedef struct _GnomeScreenCastSession GnomeScreenCastSession;
 typedef struct _GnomeScreenCastStream GnomeScreenCastStream;
 
-uint32_t gnome_screen_cast_stream_get_pipewire_node_id (GnomeScreenCastStream *stream);
+void gnome_screen_cast_session_add_stream_properties (GnomeScreenCastSession *gnome_screen_cast_session,
+                                                      GVariantBuilder *streams_builder);
 
-gboolean gnome_screen_cast_stream_get_position (GnomeScreenCastStream *stream,
-                                                int *x,
-                                                int *y);
-
-gboolean gnome_screen_cast_stream_get_size (GnomeScreenCastStream *stream,
-                                            int *width,
-                                            int *height);
-
-GList *gnome_screen_cast_session_get_streams (GnomeScreenCastSession *gnome_screen_cast_session);
-
-gboolean gnome_screen_cast_session_record_monitor (GnomeScreenCastSession *gnome_screen_cast_session,
-                                                   const char *connector,
-                                                   GError **error);
+gboolean gnome_screen_cast_session_record_selections (GnomeScreenCastSession *gnome_screen_cast_session,
+                                                      GVariant *selections,
+                                                      GError **error);
 
 gboolean gnome_screen_cast_session_stop (GnomeScreenCastSession *gnome_screen_cast_session,
                                          GError **error);

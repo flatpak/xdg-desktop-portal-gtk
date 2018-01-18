@@ -347,40 +347,15 @@ static void
 start_done (ScreenCastSession *screen_cast_session)
 {
   GnomeScreenCastSession *gnome_screen_cast_session;
-  GList *streams;
   GVariantBuilder streams_builder;
   GVariantBuilder results_builder;
-  GList *l;
 
   g_variant_builder_init (&results_builder, G_VARIANT_TYPE_VARDICT);
   g_variant_builder_init (&streams_builder, G_VARIANT_TYPE ("a(ua{sv})"));
 
   gnome_screen_cast_session = screen_cast_session->gnome_screen_cast_session;
-  streams = gnome_screen_cast_session_get_streams (gnome_screen_cast_session);
-  for (l = streams; l; l = l->next)
-    {
-      GnomeScreenCastStream *stream = l->data;
-      GVariantBuilder stream_properties_builder;
-      int x, y;
-      int width, height;
-      uint32_t pipewire_node_id;
-
-      g_variant_builder_init (&stream_properties_builder, G_VARIANT_TYPE_VARDICT);
-
-      if (gnome_screen_cast_stream_get_position (stream, &x, &y))
-        g_variant_builder_add (&stream_properties_builder, "{sv}",
-                               "position",
-                               g_variant_new ("(ii)", x, y));
-      if (gnome_screen_cast_stream_get_size (stream, &width, &height))
-        g_variant_builder_add (&stream_properties_builder, "{sv}",
-                               "size",
-                               g_variant_new ("(ii)", width, height));
-
-      pipewire_node_id = gnome_screen_cast_stream_get_pipewire_node_id (stream);
-      g_variant_builder_add (&streams_builder, "(ua{sv})",
-                             pipewire_node_id,
-                             &stream_properties_builder);
-    }
+  gnome_screen_cast_session_add_stream_properties (gnome_screen_cast_session,
+                                                   &streams_builder);
 
   g_variant_builder_add (&results_builder, "{sv}",
                          "streams",
@@ -390,52 +365,6 @@ start_done (ScreenCastSession *screen_cast_session)
                                        screen_cast_session->start_invocation, 0,
                                        g_variant_builder_end (&results_builder));
   screen_cast_session->start_invocation = NULL;
-}
-
-static gboolean
-record_monitor (ScreenCastSession *screen_cast_session,
-                const char *connector,
-                GError **error)
-{
-  GnomeScreenCastSession *gnome_screen_cast_session =
-    screen_cast_session->gnome_screen_cast_session;
-
-  if (!gnome_screen_cast_session_record_monitor (gnome_screen_cast_session,
-                                                 connector,
-                                                 error))
-    return FALSE;
-
-  return TRUE;
-}
-
-static gboolean
-record_streams (ScreenCastSession *screen_cast_session,
-                GVariant *selections,
-                GError **error)
-{
-  GVariantIter selections_iter;
-  GVariant *selection;
-
-  g_variant_iter_init (&selections_iter, selections);
-  while ((selection = g_variant_iter_next_value (&selections_iter)))
-    {
-      ScreenCastSelection selection_type;
-      g_autofree char *key = NULL;
-
-      g_variant_get (selection, "(us)",
-                     &selection_type,
-                     &key);
-
-      switch (selection_type)
-        {
-        case SCREEN_CAST_SELECTION_MONITOR:
-          if (!record_monitor (screen_cast_session, key, error))
-            return FALSE;
-          break;
-        }
-    }
-
-  return TRUE;
 }
 
 static void
@@ -478,6 +407,9 @@ start_session (ScreenCastSession *screen_cast_session,
 
   g_variant_lookup (selections, "selected_screen_cast_sources", "@a(us)",
                     &source_selections);
+  if (!gnome_screen_cast_session_record_selections (gnome_screen_cast_session,
+                                                    source_selections,
+                                                    error))
     return FALSE;
 
   if (!gnome_screen_cast_session_start (gnome_screen_cast_session, error))
