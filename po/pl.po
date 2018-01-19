@@ -1,16 +1,16 @@
 # Polish translation for xdg-desktop-portal-gtk.
-# Copyright © 2016-2017 the xdg-desktop-portal-gtk authors.
+# Copyright © 2016-2018 the xdg-desktop-portal-gtk authors.
 # This file is distributed under the same license as the xdg-desktop-portal-gtk package.
-# Piotr Drąg <piotrdrag@gmail.com>, 2016-2017.
-# Aviary.pl <community-poland@mozilla.org>, 2016-2017.
+# Piotr Drąg <piotrdrag@gmail.com>, 2016-2018.
+# Aviary.pl <community-poland@mozilla.org>, 2016-2018.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2017-06-07 03:27+0000\n"
-"PO-Revision-Date: 2017-06-07 14:17+0200\n"
+"POT-Creation-Date: 2018-01-19 16:14+0000\n"
+"PO-Revision-Date: 2018-01-19 17:15+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
@@ -66,7 +66,7 @@ msgstr "Udostępnianie informacji"
 msgid "_Cancel"
 msgstr "_Anuluj"
 
-#: src/accountdialog.ui:22 src/screenshotdialog.ui:25
+#: src/accountdialog.ui:22 src/screenshotdialog.ui:38
 msgid "_Share"
 msgstr "_Udostępnij"
 
@@ -120,18 +120,62 @@ msgstr "Znajdź zgodne programy w Menedżerze oprogramowania"
 msgid "_Open"
 msgstr "_Otwórz"
 
-#: src/screenshotdialog.c:93
+#: src/screenshotdialog.c:420
 #, c-format
 msgid "Share this screenshot with %s?"
 msgstr "Udostępnić ten zrzut ekranu programowi „%s”?"
 
-#: src/screenshotdialog.c:96
+#: src/screenshotdialog.c:423
 msgid "Share this screenshot with the requesting application?"
 msgstr "Udostępnić ten zrzut ekranu proszącemu o to programowi?"
 
 #: src/screenshotdialog.ui:10
 msgid "Screenshot"
 msgstr "Zrzut ekranu"
+
+#: src/screenshotdialog.ui:30
+msgid "_Options…"
+msgstr "_Opcje…"
+
+#: src/screenshotdialog.ui:55
+msgid "Take _Screenshot"
+msgstr "_Wykonaj zrzut ekranu"
+
+#: src/screenshotdialog.ui:111
+msgid "Take Screenshot"
+msgstr "Zrzut ekranu"
+
+#: src/screenshotdialog.ui:122
+msgid "Grab the whole sc_reen"
+msgstr "_Cały ekran"
+
+#: src/screenshotdialog.ui:133
+msgid "Grab the current _window"
+msgstr "O_becne okno"
+
+#: src/screenshotdialog.ui:144
+msgid "Select _area to grab"
+msgstr "Zaznaczony ob_szar"
+
+#: src/screenshotdialog.ui:158
+msgid "Grab after a _delay of"
+msgstr "Po _upływie"
+
+#: src/screenshotdialog.ui:171
+msgid "seconds"
+msgstr "s"
+
+#: src/screenshotdialog.ui:181
+msgid "Effects"
+msgstr "Efekty"
+
+#: src/screenshotdialog.ui:192
+msgid "Include _pointer"
+msgstr "Wi_doczny kursor"
+
+#: src/screenshotdialog.ui:201
+msgid "Include the window _border"
+msgstr "_Krawędź okna"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
