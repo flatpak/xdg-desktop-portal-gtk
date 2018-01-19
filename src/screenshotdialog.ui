@@ -189,7 +189,7 @@
                 <property name="visible">1</property>
                 <property name="use_underline">1</property>
                 <property name="margin-start">20</property>
-                <property name="label">Include _pointer</property>
+                <property name="label" translatable="yes">Include _pointer</property>
                 <property name="action-name">dialog.pointer</property>
               </object>
             </child>
@@ -198,7 +198,7 @@
                 <property name="visible">1</property>
                 <property name="use_underline">1</property>
                 <property name="margin-start">20</property>
-                <property name="label">Include the window _border</property>
+                <property name="label" translatable="yes">Include the window _border</property>
                 <property name="action-name">dialog.border</property>
               </object>
             </child>
