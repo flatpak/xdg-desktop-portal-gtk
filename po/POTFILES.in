@@ -8,4 +8,6 @@ src/appchooserdialog.ui
 src/filechooser.c
 src/screenshotdialog.c
 src/screenshotdialog.ui
+src/screencastdialog.c
+src/screencastdialog.ui
 data/xdg-desktop-portal-gtk.desktop.in.in

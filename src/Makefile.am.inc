@@ -9,6 +9,7 @@ $(dbus_built_sources): src/Makefile.am.inc
 	--generate-c-code src/xdg-desktop-portal-dbus	\
 	--annotate "org.freedesktop.impl.portal.Print.Print()" "org.gtk.GDBus.C.UnixFD" "true" \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Request.xml \
+	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Session.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.FileChooser.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.AppChooser.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Print.xml \
@@ -18,6 +19,8 @@ $(dbus_built_sources): src/Makefile.am.inc
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Access.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Account.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Email.xml \
+	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.ScreenCast.xml \
+	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.RemoteDesktop.xml \
 	$(NULL)
 
 shell_built_sources = src/shell-dbus.c src/shell-dbus.h
@@ -27,6 +30,9 @@ CLEANFILES += $(shell_built_sources)
 $(shell_built_sources): src/Makefile.am.inc
 	$(AM_V_GEN) $(GDBUS_CODEGEN)			                \
 	--generate-c-code src/shell-dbus	                        \
+	$(top_srcdir)/data/org.gnome.Mutter.DisplayConfig.xml	        \
+	$(top_srcdir)/data/org.gnome.Mutter.ScreenCast.xml	        \
+	$(top_srcdir)/data/org.gnome.Mutter.RemoteDesktop.xml	        \
 	$(top_srcdir)/data/org.gnome.Shell.Screenshot.xml	        \
 	$(top_srcdir)/data/org.gtk.Notifications.xml			\
 	$(top_srcdir)/data/org.gnome.SessionManager.xml		        \
@@ -50,6 +56,9 @@ EXTRA_DIST += \
         src/screenshotdialog.ui                         \
         src/screenshotdialog.css                        \
         src/accountdialog.ui                            \
+        src/screencastwidget.ui                         \
+        src/screencastdialog.ui                         \
+        src/remotedesktopdialog.ui                      \
 	$(NULL)
 
 libexec_PROGRAMS = \
@@ -62,6 +71,8 @@ xdg_desktop_portal_gtk_SOURCES = \
 	src/utils.c				\
 	src/request.h			        \
 	src/request.c			        \
+	src/session.c   			\
+	src/session.h	        		\
 	src/filechooser.h			\
 	src/filechooser.c			\
 	src/appchooser.h			\
@@ -92,6 +103,20 @@ xdg_desktop_portal_gtk_SOURCES = \
         src/gtkbackports.c                      \
 	src/externalwindow.h			\
 	src/externalwindow.c			\
+	src/screencast.c			\
+	src/srceencast.h			\
+	src/screencastwidget.c			\
+	src/screencastwidget.h			\
+	src/screencastdialog.c			\
+	src/screencastdialog.h			\
+	src/gnomescreencast.c			\
+	src/gnomescreencast.h			\
+	src/remotedesktop.c			\
+	src/remotedesktop.h			\
+	src/remotedesktopdialog.c		\
+	src/remotedesktopdialog.h		\
+	src/displaystatetracker.c		\
+	src/displaystatetracker.h		\
 	$(NULL)
 
 nodist_xdg_desktop_portal_gtk_SOURCES = \
