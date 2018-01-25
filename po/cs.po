@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/issues\n"
 "POT-Creation-Date: 2017-06-05 20:33-0400\n"
-"PO-Revision-Date: 2017-09-16 18:12+0200\n"
+"PO-Revision-Date: 2018-01-25 20:58+0100\n"
 "Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -66,7 +66,7 @@ msgstr "Sdílet detaily"
 msgid "_Cancel"
 msgstr "_Zrušit"
 
-#: src/accountdialog.ui:22 src/screenshotdialog.ui:25
+#: src/accountdialog.ui:22 src/screenshotdialog.ui:38
 msgid "_Share"
 msgstr "_Sdílet"
 
@@ -74,16 +74,16 @@ msgstr "_Sdílet"
 msgid "Make changes before sharing the information"
 msgstr "Provést změny před sdílením informací"
 
-#: src/appchooserdialog.c:153
+#: src/appchooserdialog.c:154
 msgid "Failed to start Software"
 msgstr "Nepodařilo se spustit Software"
 
-#: src/appchooserdialog.c:343
+#: src/appchooserdialog.c:373
 #, c-format
 msgid "Select an application to open “%s”. More applications are available in <a href='software'>Software.</a>"
 msgstr "Vyberte aplikaci pro otevření „%s”. Další aplikace jsou k dispozici v <a href='software'>Software.</a>"
 
-#: src/appchooserdialog.c:348
+#: src/appchooserdialog.c:378
 msgid "Select an application. More applications are available in <a href='software'>Software.</a>"
 msgstr "Vyberte aplikaci. Další aplikace jsou k dispozici v <a href='software'>Software.</a>"
 
@@ -111,18 +111,62 @@ msgstr "Najít kompatibilní aplikace v Software"
 msgid "_Open"
 msgstr "_Otevřít"
 
-#: src/screenshotdialog.c:93
+#: src/screenshotdialog.c:420
 #, c-format
 msgid "Share this screenshot with %s?"
 msgstr "Sdílet tento snímek obrazovky s aplikací %s?"
 
-#: src/screenshotdialog.c:96
+#: src/screenshotdialog.c:423
 msgid "Share this screenshot with the requesting application?"
 msgstr "Sdílet tento snímek obrazovky s aplikací, která o to žádá?"
 
 #: src/screenshotdialog.ui:10
 msgid "Screenshot"
 msgstr "Snímek obrazovky"
+
+#: src/screenshotdialog.ui:30
+msgid "_Options…"
+msgstr "_Volby…"
+
+#: src/screenshotdialog.ui:55
+msgid "Take _Screenshot"
+msgstr "Zachytit _snímek obrazovky"
+
+#: src/screenshotdialog.ui:111
+msgid "Take Screenshot"
+msgstr "Zachytit snímek obrazovky"
+
+#: src/screenshotdialog.ui:122
+msgid "Grab the whole sc_reen"
+msgstr "Zachytit celou ob_razovku"
+
+#: src/screenshotdialog.ui:133
+msgid "Grab the current _window"
+msgstr "Zachytit akt_uální okno"
+
+#: src/screenshotdialog.ui:144
+msgid "Select _area to grab"
+msgstr "Vybr_at zachytávanou oblast"
+
+#: src/screenshotdialog.ui:158
+msgid "Grab after a _delay of"
+msgstr "Zachytit po pro_dlevě"
+
+#: src/screenshotdialog.ui:171
+msgid "seconds"
+msgstr "sekund"
+
+#: src/screenshotdialog.ui:181
+msgid "Effects"
+msgstr "Efekty"
+
+#: src/screenshotdialog.ui:192
+msgid "Include _pointer"
+msgstr "Zahrnout _kurzor myši"
+
+#: src/screenshotdialog.ui:201
+msgid "Include the window _border"
+msgstr "Zahrnout _rámeček okna"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
@@ -132,9 +176,3 @@ msgstr "Portál"
 #: data/xdg-desktop-portal-gtk.desktop.in.in:6
 msgid "applications-system-symbolic"
 msgstr ""
-
-#~ msgid "_Select"
-#~ msgstr "_Vybrat"
-
-#~ msgid "Select application"
-#~ msgstr "Výběr aplikace"
