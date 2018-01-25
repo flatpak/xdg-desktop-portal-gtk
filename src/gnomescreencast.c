@@ -22,6 +22,8 @@
 
 #include <stdint.h>
 
+#define SUPPORTED_MUTTER_SCREEN_CAST_API_VERSION 1
+
 enum
 {
   STREAM_SIGNAL_READY,
@@ -485,6 +487,7 @@ gnome_screen_cast_name_appeared (GDBusConnection *connection,
 {
   GnomeScreenCast *gnome_screen_cast = user_data;
   g_autoptr(GError) error = NULL;
+  int api_version;
 
   gnome_screen_cast->proxy =
     org_gnome_mutter_screen_cast_proxy_new_sync (connection,
@@ -497,6 +500,15 @@ gnome_screen_cast_name_appeared (GDBusConnection *connection,
     {
       g_warning ("Failed to acquire org.gnome.Mutter.ScreenCast proxy: %s",
                  error->message);
+      return;
+    }
+
+  api_version =
+    org_gnome_mutter_screen_cast_get_version (gnome_screen_cast->proxy);
+  if (api_version != SUPPORTED_MUTTER_SCREEN_CAST_API_VERSION)
+    {
+      g_warning ("org.gnome.Mutter.ScreenCast API version not compatible");
+      g_clear_object (&gnome_screen_cast->proxy);
       return;
     }
 
