@@ -1,13 +1,14 @@
 # List of source files containing translatable strings.
+data/xdg-desktop-portal-gtk.desktop.in.in
 src/access.c
 src/accountdialog.c
 src/accountdialog.ui
-src/appchooser.c
 src/appchooserdialog.c
 src/appchooserdialog.ui
 src/filechooser.c
+src/remotedesktopdialog.c
+src/remotedesktopdialog.ui
+src/screencastdialog.ui
+src/screencastwidget.c
 src/screenshotdialog.c
 src/screenshotdialog.ui
-src/screencastdialog.c
-src/screencastdialog.ui
-data/xdg-desktop-portal-gtk.desktop.in.in
