@@ -13,7 +13,7 @@
         <child>
           <object class="GtkLabel" id="monitor_heading">
             <property name="visible">True</property>
-            <property name="label" translatable="yes"/>
+            <property name="label"/>
             <property name="xalign">0.0</property>
             <property name="margin_bottom">12</property>
             <attributes>
