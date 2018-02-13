@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2018-01-19 16:14+0000\n"
-"PO-Revision-Date: 2018-01-19 17:15+0100\n"
+"POT-Creation-Date: 2018-02-13 15:18+0000\n"
+"PO-Revision-Date: 2018-02-13 16:22+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
@@ -19,6 +19,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
+
+#: data/xdg-desktop-portal-gtk.desktop.in.in:4
+msgid "Portal"
+msgstr "Portal"
+
+#. TRANSLATORS: Don't translate this text (this is icon name)
+#: data/xdg-desktop-portal-gtk.desktop.in.in:6
+msgid "applications-system-symbolic"
+msgstr "applications-system-symbolic"
 
 #: src/access.c:271
 msgid "Deny Access"
@@ -62,11 +71,13 @@ msgid "Share Details"
 msgstr "Udostępnianie informacji"
 
 #: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:365
+#: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
 msgstr "_Anuluj"
 
-#: src/accountdialog.ui:22 src/screenshotdialog.ui:38
+#: src/accountdialog.ui:22 src/remotedesktopdialog.ui:28
+#: src/screencastdialog.ui:28 src/screenshotdialog.ui:38
 msgid "_Share"
 msgstr "_Udostępnij"
 
@@ -119,6 +130,44 @@ msgstr "Znajdź zgodne programy w Menedżerze oprogramowania"
 #: src/filechooser.c:363
 msgid "_Open"
 msgstr "_Otwórz"
+
+#: src/remotedesktopdialog.c:190
+msgid "Pointer"
+msgstr "Kursor"
+
+#: src/remotedesktopdialog.c:193
+msgid "Keyboard"
+msgstr "Klawiatura"
+
+#: src/remotedesktopdialog.c:196
+msgid "Touch screen"
+msgstr "Ekran dotykowy"
+
+#: src/remotedesktopdialog.c:302
+#, c-format
+msgid "Select what to share with %s"
+msgstr "Wybór, co udostępnić programowi „%s”"
+
+#: src/remotedesktopdialog.c:307
+msgid "Select what to share with the requesting application"
+msgstr "Wybór, co udostępnić proszącemu o to programowi"
+
+#: src/remotedesktopdialog.ui:12
+msgid "Remote desktop"
+msgstr "Zdalny pulpit"
+
+#: src/screencastdialog.ui:12
+msgid "Screen casting"
+msgstr "Udostępnianie ekranu"
+
+#: src/screencastwidget.c:243
+#, c-format
+msgid "Select monitor to share with %s"
+msgstr "Wybór monitora do udostępnienia programowi „%s”"
+
+#: src/screencastwidget.c:248
+msgid "Select monitor to share with the requesting application"
+msgstr "Wybór monitora do udostępnienia proszącemu o to programowi"
 
 #: src/screenshotdialog.c:420
 #, c-format
@@ -176,12 +225,3 @@ msgstr "Wi_doczny kursor"
 #: src/screenshotdialog.ui:201
 msgid "Include the window _border"
 msgstr "_Krawędź okna"
-
-#: data/xdg-desktop-portal-gtk.desktop.in.in:4
-msgid "Portal"
-msgstr "Portal"
-
-#. TRANSLATORS: Don't translate this text (this is icon name)
-#: data/xdg-desktop-portal-gtk.desktop.in.in:6
-msgid "applications-system-symbolic"
-msgstr "applications-system-symbolic"
