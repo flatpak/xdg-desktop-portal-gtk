@@ -6,10 +6,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
-"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
-"issues\n"
-"POT-Creation-Date: 2018-02-12 15:27+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-02-14 12:37+0100\n"
 "PO-Revision-Date: 2018-02-13 01:28+0200\n"
+"Last-Translator: Moo\n"
 "Language-Team: Lithuanian <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
 "MIME-Version: 1.0\n"
@@ -17,8 +17,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
 "%100<10 || n%100>=20) ? 1 : 2);\n"
-"Last-Translator: Moo\n"
 "X-Generator: Poedit 2.0.6\n"
+
+#: data/xdg-desktop-portal-gtk.desktop.in.in:4
+msgid "Portal"
+msgstr "Portalas"
+
+#. TRANSLATORS: Don't translate this text (this is icon name)
+#: data/xdg-desktop-portal-gtk.desktop.in.in:6
+msgid "applications-system-symbolic"
+msgstr "applications-system-symbolic"
 
 #: src/access.c:271
 msgid "Deny Access"
@@ -62,12 +70,13 @@ msgid "Share Details"
 msgstr "Bendrinti išsamesnę informaciją"
 
 #: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:365
-#: src/screenshotdialog.ui:14 src/screencastdialog.ui:16
+#: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
+#: src/screenshotdialog.ui:14
 msgid "_Cancel"
 msgstr "_Atsisakyti"
 
-#: src/accountdialog.ui:22 src/screenshotdialog.ui:38
-#: src/screencastdialog.ui:28
+#: src/accountdialog.ui:22 src/remotedesktopdialog.ui:28
+#: src/screencastdialog.ui:28 src/screenshotdialog.ui:38
 msgid "_Share"
 msgstr "_Bendrinti"
 
@@ -85,8 +94,8 @@ msgid ""
 "Select an application to open “%s”. More applications are available in <a "
 "href='software'>Software.</a>"
 msgstr ""
-"Pasirinkite programą, skirtą atverti \"%s\". Daugiau programų yra "
-"prieinama <a href='software'>Programinėje įrangoje.</a>"
+"Pasirinkite programą, skirtą atverti \"%s\". Daugiau programų yra prieinama "
+"<a href='software'>Programinėje įrangoje.</a>"
 
 #: src/appchooserdialog.c:378
 msgid ""
@@ -120,6 +129,46 @@ msgstr "Rasti suderinamas programas Programinėje įrangoje"
 #: src/filechooser.c:363
 msgid "_Open"
 msgstr "_Atverti"
+
+#: src/remotedesktopdialog.c:190
+msgid "Pointer"
+msgstr ""
+
+#: src/remotedesktopdialog.c:193
+msgid "Keyboard"
+msgstr ""
+
+#: src/remotedesktopdialog.c:196
+msgid "Touch screen"
+msgstr ""
+
+#: src/remotedesktopdialog.c:302
+#, c-format
+msgid "Select what to share with %s"
+msgstr ""
+
+#: src/remotedesktopdialog.c:307
+#, fuzzy
+msgid "Select what to share with the requesting application"
+msgstr "Bendrinti šią ekrano kopiją su prašančia programa?"
+
+#: src/remotedesktopdialog.ui:12
+msgid "Remote desktop"
+msgstr ""
+
+#: src/screencastdialog.ui:12
+msgid "Screen casting"
+msgstr "Ekrano įrašymas"
+
+#: src/screencastwidget.c:243
+#, c-format
+msgid "Select monitor to share with %s"
+msgstr ""
+
+#: src/screencastwidget.c:248
+#, fuzzy
+msgid "Select monitor to share with the requesting application"
+msgstr "Bendrinti šią ekrano kopiją su prašančia programa?"
 
 #: src/screenshotdialog.c:420
 #, c-format
@@ -177,16 +226,3 @@ msgstr "Įtraukti _rodyklę"
 #: src/screenshotdialog.ui:201
 msgid "Include the window _border"
 msgstr "Įtraukti lango rė_melį"
-
-#: src/screencastdialog.ui:12
-msgid "Screen casting"
-msgstr "Ekrano įrašymas"
-
-#: data/xdg-desktop-portal-gtk.desktop.in.in:4
-msgid "Portal"
-msgstr "Portalas"
-
-#. TRANSLATORS: Don't translate this text (this is icon name)
-#: data/xdg-desktop-portal-gtk.desktop.in.in:6
-msgid "applications-system-symbolic"
-msgstr "applications-system-symbolic"

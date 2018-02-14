@@ -6,9 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
-"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
-"issues\n"
-"POT-Creation-Date: 2017-06-07 03:27+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-02-14 12:37+0100\n"
 "PO-Revision-Date: 2017-09-16 09:28+0200\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
@@ -18,6 +17,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
 "X-Generator: Poedit 2.0.3\n"
+
+#: data/xdg-desktop-portal-gtk.desktop.in.in:4
+msgid "Portal"
+msgstr "Portál"
+
+#. TRANSLATORS: Don't translate this text (this is icon name)
+#: data/xdg-desktop-portal-gtk.desktop.in.in:6
+msgid "applications-system-symbolic"
+msgstr "applications-system-symbolic"
 
 #: src/access.c:271
 msgid "Deny Access"
@@ -62,11 +70,13 @@ msgid "Share Details"
 msgstr "Podrobnosti o sprístupnení"
 
 #: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:365
+#: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
 msgstr "_Zrušiť"
 
-#: src/accountdialog.ui:22 src/screenshotdialog.ui:25
+#: src/accountdialog.ui:22 src/remotedesktopdialog.ui:28
+#: src/screencastdialog.ui:28 src/screenshotdialog.ui:38
 msgid "_Share"
 msgstr "_Sprístupniť"
 
@@ -122,12 +132,53 @@ msgstr "Nájsť kompatibilné aplikácie v aplikácii Softvér"
 msgid "_Open"
 msgstr "_Otvoriť"
 
-#: src/screenshotdialog.c:93
+#: src/remotedesktopdialog.c:190
+msgid "Pointer"
+msgstr ""
+
+#: src/remotedesktopdialog.c:193
+msgid "Keyboard"
+msgstr ""
+
+#: src/remotedesktopdialog.c:196
+msgid "Touch screen"
+msgstr ""
+
+#: src/remotedesktopdialog.c:302
+#, c-format
+msgid "Select what to share with %s"
+msgstr ""
+
+#: src/remotedesktopdialog.c:307
+#, fuzzy
+msgid "Select what to share with the requesting application"
+msgstr "Sprístupniť túto snímku obrazovky požadovanej aplikácii?"
+
+#: src/remotedesktopdialog.ui:12
+msgid "Remote desktop"
+msgstr ""
+
+#: src/screencastdialog.ui:12
+#, fuzzy
+msgid "Screen casting"
+msgstr "Snímka obrazovky"
+
+#: src/screencastwidget.c:243
+#, c-format
+msgid "Select monitor to share with %s"
+msgstr ""
+
+#: src/screencastwidget.c:248
+#, fuzzy
+msgid "Select monitor to share with the requesting application"
+msgstr "Sprístupniť túto snímku obrazovky požadovanej aplikácii?"
+
+#: src/screenshotdialog.c:420
 #, c-format
 msgid "Share this screenshot with %s?"
 msgstr "Sprístupniť túto snímku obrazovky aplikácii %s?"
 
-#: src/screenshotdialog.c:96
+#: src/screenshotdialog.c:423
 msgid "Share this screenshot with the requesting application?"
 msgstr "Sprístupniť túto snímku obrazovky požadovanej aplikácii?"
 
@@ -135,11 +186,48 @@ msgstr "Sprístupniť túto snímku obrazovky požadovanej aplikácii?"
 msgid "Screenshot"
 msgstr "Snímka obrazovky"
 
-#: data/xdg-desktop-portal-gtk.desktop.in.in:4
-msgid "Portal"
-msgstr "Portál"
+#: src/screenshotdialog.ui:30
+msgid "_Options…"
+msgstr ""
 
-#. TRANSLATORS: Don't translate this text (this is icon name)
-#: data/xdg-desktop-portal-gtk.desktop.in.in:6
-msgid "applications-system-symbolic"
-msgstr "applications-system-symbolic"
+#: src/screenshotdialog.ui:55
+#, fuzzy
+msgid "Take _Screenshot"
+msgstr "Snímka obrazovky"
+
+#: src/screenshotdialog.ui:111
+#, fuzzy
+msgid "Take Screenshot"
+msgstr "Snímka obrazovky"
+
+#: src/screenshotdialog.ui:122
+msgid "Grab the whole sc_reen"
+msgstr ""
+
+#: src/screenshotdialog.ui:133
+msgid "Grab the current _window"
+msgstr ""
+
+#: src/screenshotdialog.ui:144
+msgid "Select _area to grab"
+msgstr ""
+
+#: src/screenshotdialog.ui:158
+msgid "Grab after a _delay of"
+msgstr ""
+
+#: src/screenshotdialog.ui:171
+msgid "seconds"
+msgstr ""
+
+#: src/screenshotdialog.ui:181
+msgid "Effects"
+msgstr ""
+
+#: src/screenshotdialog.ui:192
+msgid "Include _pointer"
+msgstr ""
+
+#: src/screenshotdialog.ui:201
+msgid "Include the window _border"
+msgstr ""
