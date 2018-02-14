@@ -104,7 +104,7 @@ xdg_desktop_portal_gtk_SOURCES = \
 	src/externalwindow.h			\
 	src/externalwindow.c			\
 	src/screencast.c			\
-	src/srceencast.h			\
+	src/screencast.h			\
 	src/screencastwidget.c			\
 	src/screencastwidget.h			\
 	src/screencastdialog.c			\
