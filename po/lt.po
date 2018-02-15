@@ -132,29 +132,28 @@ msgstr "_Atverti"
 
 #: src/remotedesktopdialog.c:190
 msgid "Pointer"
-msgstr ""
+msgstr "Rodyklė"
 
 #: src/remotedesktopdialog.c:193
 msgid "Keyboard"
-msgstr ""
+msgstr "Klaviatūra"
 
 #: src/remotedesktopdialog.c:196
 msgid "Touch screen"
-msgstr ""
+msgstr "Jutiklinis ekranas"
 
 #: src/remotedesktopdialog.c:302
 #, c-format
 msgid "Select what to share with %s"
-msgstr ""
+msgstr "Pasirinkti ką bendrinti su %s"
 
 #: src/remotedesktopdialog.c:307
-#, fuzzy
 msgid "Select what to share with the requesting application"
-msgstr "Bendrinti šią ekrano kopiją su prašančia programa?"
+msgstr "Pasirinkti ką bendrinti su prašančia programa"
 
 #: src/remotedesktopdialog.ui:12
 msgid "Remote desktop"
-msgstr ""
+msgstr "Nuotolinis darbalaukis"
 
 #: src/screencastdialog.ui:12
 msgid "Screen casting"
@@ -163,12 +162,11 @@ msgstr "Ekrano įrašymas"
 #: src/screencastwidget.c:243
 #, c-format
 msgid "Select monitor to share with %s"
-msgstr ""
+msgstr "Pasirinkti vaizduoklį, kurį bendrinti su %s"
 
 #: src/screencastwidget.c:248
-#, fuzzy
 msgid "Select monitor to share with the requesting application"
-msgstr "Bendrinti šią ekrano kopiją su prašančia programa?"
+msgstr "Pasirinkti vaizduoklį, kurį bendrinti su prašančia programa"
 
 #: src/screenshotdialog.c:420
 #, c-format
