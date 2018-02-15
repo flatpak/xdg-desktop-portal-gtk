@@ -8,9 +8,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
+"issues\n"
 "POT-Creation-Date: 2018-02-14 12:37+0100\n"
-"PO-Revision-Date: 2018-01-25 20:58+0100\n"
+"PO-Revision-Date: 2018-02-14 23:56+0100\n"
 "Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -120,7 +121,6 @@ msgid "Open With"
 msgstr "Otevření pomocí"
 
 #: src/appchooserdialog.ui:166
-#, fuzzy
 msgid "No Applications Found"
 msgstr "Nenalezeny žádné aplikace"
 
@@ -134,44 +134,41 @@ msgstr "_Otevřít"
 
 #: src/remotedesktopdialog.c:190
 msgid "Pointer"
-msgstr ""
+msgstr "Kurzor"
 
 #: src/remotedesktopdialog.c:193
 msgid "Keyboard"
-msgstr ""
+msgstr "Klávesnice"
 
 #: src/remotedesktopdialog.c:196
 msgid "Touch screen"
-msgstr ""
+msgstr "Dotyková obrazovka"
 
 #: src/remotedesktopdialog.c:302
 #, c-format
 msgid "Select what to share with %s"
-msgstr ""
+msgstr "Vyberte, co sdílet s aplikací %s"
 
 #: src/remotedesktopdialog.c:307
-#, fuzzy
 msgid "Select what to share with the requesting application"
-msgstr "Sdílet tento snímek obrazovky s aplikací, která o to žádá?"
+msgstr "Vyberte, co sdílet s aplikací, která o to žádá"
 
 #: src/remotedesktopdialog.ui:12
 msgid "Remote desktop"
-msgstr ""
+msgstr "Vzdálená plocha"
 
 #: src/screencastdialog.ui:12
-#, fuzzy
 msgid "Screen casting"
-msgstr "Snímek obrazovky"
+msgstr "Záznam obrazovky"
 
 #: src/screencastwidget.c:243
 #, c-format
 msgid "Select monitor to share with %s"
-msgstr ""
+msgstr "Vyberte monitor pro sdílení s aplikací %s"
 
 #: src/screencastwidget.c:248
-#, fuzzy
 msgid "Select monitor to share with the requesting application"
-msgstr "Sdílet tento snímek obrazovky s aplikací, která o to žádá?"
+msgstr "Vyberte monitor pro sdílení s aplikací, která o to žádá"
 
 #: src/screenshotdialog.c:420
 #, c-format
