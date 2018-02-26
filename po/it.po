@@ -1,14 +1,15 @@
 # Italian translation for xdg-desktop-portal-gtk.
-# Copyright (C) 2017 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
+# Copyright (C) 2017, 2018 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
 # This file is distributed under the same license as the xdg-desktop-portal-gtk package.
-# Milo Casagrande <milo@milo.name>, 2017.
+# Milo Casagrande <milo@milo.name>, 2017, 2018.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-14 12:37+0100\n"
-"PO-Revision-Date: 2017-08-31 19:20+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
+"issues\n"
+"POT-Creation-Date: 2018-02-15 03:27+0000\n"
+"PO-Revision-Date: 2018-02-26 10:00+0100\n"
 "Last-Translator: Milo Casagrande <milo@milo.name>\n"
 "Language-Team: Italian <gnome-it-list@gnome.org>\n"
 "Language: it\n"
@@ -16,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.12\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
@@ -96,14 +97,14 @@ msgid ""
 "href='software'>Software.</a>"
 msgstr ""
 "Selezionare un'applicazione per aprire «%s». Ulteriori applicazioni sono "
-"disponibile in «<a href='software'>Software</a>»."
+"disponibili in «<a href='software'>Software</a>»."
 
 #: src/appchooserdialog.c:378
 msgid ""
 "Select an application. More applications are available in <a "
 "href='software'>Software.</a>"
 msgstr ""
-"Selezionare un'applicazione. Ulteriori applicazioni sono disponibile in «<a "
+"Selezionare un'applicazione. Ulteriori applicazioni sono disponibili in «<a "
 "href='software'>Software</a>»."
 
 #: src/appchooserdialog.c:391
@@ -133,44 +134,42 @@ msgstr "A_pri"
 
 #: src/remotedesktopdialog.c:190
 msgid "Pointer"
-msgstr ""
+msgstr "Puntatore"
 
 #: src/remotedesktopdialog.c:193
 msgid "Keyboard"
-msgstr ""
+msgstr "Tastiera"
 
 #: src/remotedesktopdialog.c:196
 msgid "Touch screen"
-msgstr ""
+msgstr "Schermo tattile"
 
 #: src/remotedesktopdialog.c:302
 #, c-format
 msgid "Select what to share with %s"
-msgstr ""
+msgstr "Selezionare cosa condividere con %s"
 
 #: src/remotedesktopdialog.c:307
-#, fuzzy
 msgid "Select what to share with the requesting application"
-msgstr "Condividere questa schermata con l'applicazione che la richiede?"
+msgstr "Selezionare cosa condividere con l'applicazione che la richiede"
 
 #: src/remotedesktopdialog.ui:12
 msgid "Remote desktop"
-msgstr ""
+msgstr "Desktop remoto"
 
 #: src/screencastdialog.ui:12
-#, fuzzy
 msgid "Screen casting"
-msgstr "Schermata"
+msgstr "Screencast"
 
 #: src/screencastwidget.c:243
 #, c-format
 msgid "Select monitor to share with %s"
-msgstr ""
+msgstr "Selezionare la schermata da condividere con %s"
 
 #: src/screencastwidget.c:248
-#, fuzzy
 msgid "Select monitor to share with the requesting application"
-msgstr "Condividere questa schermata con l'applicazione che la richiede?"
+msgstr ""
+"Selezionare la schermata da condividere con l'applicazione che la richiede"
 
 #: src/screenshotdialog.c:420
 #, c-format
@@ -187,52 +186,45 @@ msgstr "Schermata"
 
 #: src/screenshotdialog.ui:30
 msgid "_Options…"
-msgstr ""
+msgstr "Op_zioni…"
 
 #: src/screenshotdialog.ui:55
-#, fuzzy
 msgid "Take _Screenshot"
-msgstr "Schermata"
+msgstr "Cattura _schermata"
 
 #: src/screenshotdialog.ui:111
-#, fuzzy
 msgid "Take Screenshot"
-msgstr "Schermata"
+msgstr "Cattura schermata"
 
 #: src/screenshotdialog.ui:122
 msgid "Grab the whole sc_reen"
-msgstr ""
+msgstr "Cattura l'intero sc_hermo"
 
 #: src/screenshotdialog.ui:133
 msgid "Grab the current _window"
-msgstr ""
+msgstr "Cattura la _finestra corrente"
 
 #: src/screenshotdialog.ui:144
 msgid "Select _area to grab"
-msgstr ""
+msgstr "Seleziona l'_area da catturare"
 
 #: src/screenshotdialog.ui:158
 msgid "Grab after a _delay of"
-msgstr ""
+msgstr "C_attura dopo un ritardo di"
 
 #: src/screenshotdialog.ui:171
 msgid "seconds"
-msgstr ""
+msgstr "secondi"
 
 #: src/screenshotdialog.ui:181
 msgid "Effects"
-msgstr ""
+msgstr "Effetti"
 
 #: src/screenshotdialog.ui:192
 msgid "Include _pointer"
-msgstr ""
+msgstr "Includere il _puntatore"
 
 #: src/screenshotdialog.ui:201
 msgid "Include the window _border"
-msgstr ""
+msgstr "Includere il _bordo finestra"
 
-#~ msgid "_Select"
-#~ msgstr "_Seleziona"
-
-#~ msgid "Select application"
-#~ msgstr "Selezione applicazione"
