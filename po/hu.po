@@ -1,14 +1,14 @@
 # Hungarian translation for xdg-desktop-portal-gtk.
-# Copyright (C) 2016, 2017 Free Software Foundation, Inc.
+# Copyright (C) 2016, 2017, 2018 Free Software Foundation, Inc.
 # This file is distributed under the same license as the xdg-sesktop-portal-gtk package.
 #
-# Balázs Úr <urbalazs at gmail dot com>, 2016, 2017.
+# Balázs Úr <urbalazs at gmail dot com>, 2016, 2017, 2018.
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-14 12:37+0100\n"
-"PO-Revision-Date: 2017-03-19 20:30+0100\n"
+"PO-Revision-Date: 2018-03-03 08:15+0100\n"
 "Last-Translator: Balázs Úr <urbalazs@gmail.com>\n"
 "Language-Team: Hungarian <gnome-hu-list at gnome dot org>\n"
 "Language: hu\n"
@@ -20,12 +20,12 @@ msgstr ""
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
-msgstr ""
+msgstr "Portál"
 
 #. TRANSLATORS: Don't translate this text (this is icon name)
 #: data/xdg-desktop-portal-gtk.desktop.in.in:6
 msgid "applications-system-symbolic"
-msgstr ""
+msgstr "applications-system-symbolic"
 
 #: src/access.c:271
 msgid "Deny Access"
@@ -85,7 +85,7 @@ msgstr "Megváltoztatás az információk megosztása előtt"
 
 #: src/appchooserdialog.c:154
 msgid "Failed to start Software"
-msgstr ""
+msgstr "Nem sikerült elindítani a Szoftvereket"
 
 #: src/appchooserdialog.c:373
 #, c-format
@@ -93,34 +93,38 @@ msgid ""
 "Select an application to open “%s”. More applications are available in <a "
 "href='software'>Software.</a>"
 msgstr ""
+"Válasszon egy alkalmazást a(z) „%s” megnyitásához. További alkalmazások "
+"érhetők el a <a href='software'>Szoftverekben.</a>"
 
 #: src/appchooserdialog.c:378
 msgid ""
 "Select an application. More applications are available in <a "
 "href='software'>Software.</a>"
 msgstr ""
+"Válasszon egy alkalmazást. További alkalmazások érhetők el a <a "
+"href='software'>Szoftverekben.</a>"
 
 #: src/appchooserdialog.c:391
 #, c-format
 msgid "Unable to find an application that is able to open “%s”."
 msgstr ""
+"Nem sikerült olyan alkalmazást találni, amely képes a(z) „%s” megnyitására."
 
 #: src/appchooserdialog.c:396
 msgid "Unable to find a suitable application."
-msgstr ""
+msgstr "Nem sikerült megfelelő alkalmazást találni."
 
 #: src/appchooserdialog.ui:13
 msgid "Open With"
 msgstr "Megnyitás ezzel"
 
 #: src/appchooserdialog.ui:166
-#, fuzzy
 msgid "No Applications Found"
-msgstr "Alkalmazás kiválasztása"
+msgstr "Nem találhatók alkalmazások"
 
 #: src/appchooserdialog.ui:182
 msgid "Find Compatible Applications in Software"
-msgstr ""
+msgstr "Kompatibilis alkalmazások keresése a Szoftverekben"
 
 #: src/filechooser.c:363
 msgid "_Open"
@@ -128,44 +132,41 @@ msgstr "Meg_nyitás"
 
 #: src/remotedesktopdialog.c:190
 msgid "Pointer"
-msgstr ""
+msgstr "Mutató"
 
 #: src/remotedesktopdialog.c:193
 msgid "Keyboard"
-msgstr ""
+msgstr "Billentyűzet"
 
 #: src/remotedesktopdialog.c:196
 msgid "Touch screen"
-msgstr ""
+msgstr "Érintőképernyő"
 
 #: src/remotedesktopdialog.c:302
 #, c-format
 msgid "Select what to share with %s"
-msgstr ""
+msgstr "Válassza ki, mit szeretne megosztani ezzel: %s"
 
 #: src/remotedesktopdialog.c:307
-#, fuzzy
 msgid "Select what to share with the requesting application"
-msgstr "Megosztja ezt a képernyőképet a kérő alkalmazással?"
+msgstr "Válassza ki, hogy mit szeretne megosztani a kérő alkalmazással"
 
 #: src/remotedesktopdialog.ui:12
 msgid "Remote desktop"
-msgstr ""
+msgstr "Távoli asztal"
 
 #: src/screencastdialog.ui:12
-#, fuzzy
 msgid "Screen casting"
-msgstr "Képernyőkép"
+msgstr "Képernyőfelvétel"
 
 #: src/screencastwidget.c:243
 #, c-format
 msgid "Select monitor to share with %s"
-msgstr ""
+msgstr "Válasszon monitort az ezzel történő megosztáshoz: %s"
 
 #: src/screencastwidget.c:248
-#, fuzzy
 msgid "Select monitor to share with the requesting application"
-msgstr "Megosztja ezt a képernyőképet a kérő alkalmazással?"
+msgstr "Válasszon monitort a kérő alkalmazással történő megosztáshoz"
 
 #: src/screenshotdialog.c:420
 #, c-format
@@ -182,52 +183,45 @@ msgstr "Képernyőkép"
 
 #: src/screenshotdialog.ui:30
 msgid "_Options…"
-msgstr ""
+msgstr "_Beállítások…"
 
 #: src/screenshotdialog.ui:55
-#, fuzzy
 msgid "Take _Screenshot"
-msgstr "Képernyőkép"
+msgstr "_Képernyőkép készítése"
 
 #: src/screenshotdialog.ui:111
-#, fuzzy
 msgid "Take Screenshot"
-msgstr "Képernyőkép"
+msgstr "Képernyőkép készítése"
 
 #: src/screenshotdialog.ui:122
 msgid "Grab the whole sc_reen"
-msgstr ""
+msgstr "A teljes képernyő _rögzítése"
 
 #: src/screenshotdialog.ui:133
 msgid "Grab the current _window"
-msgstr ""
+msgstr "A jelenlegi _ablak rögzítése"
 
 #: src/screenshotdialog.ui:144
 msgid "Select _area to grab"
-msgstr ""
+msgstr "Rögzítendő _terület kijelölése"
 
 #: src/screenshotdialog.ui:158
 msgid "Grab after a _delay of"
-msgstr ""
+msgstr "Rögzítés ennyi késleltetés _után"
 
 #: src/screenshotdialog.ui:171
 msgid "seconds"
-msgstr ""
+msgstr "másodperc"
 
 #: src/screenshotdialog.ui:181
 msgid "Effects"
-msgstr ""
+msgstr "Hatások"
 
 #: src/screenshotdialog.ui:192
 msgid "Include _pointer"
-msgstr ""
+msgstr "_Mutató felvétele"
 
 #: src/screenshotdialog.ui:201
 msgid "Include the window _border"
-msgstr ""
+msgstr "Az ablak _szegélyét is tartalmazza"
 
-#~ msgid "_Select"
-#~ msgstr "_Kiválasztás"
-
-#~ msgid "Select application"
-#~ msgstr "Alkalmazás kiválasztása"
