@@ -48,6 +48,7 @@ typedef struct {
   GtkPrinter *printer;
   guint timeout_id;
   guint32 token;
+  gboolean preview;
 } PrintParams;
 
 static GHashTable *print_params;
@@ -86,6 +87,7 @@ print_params_timeout (gpointer data)
 
 static PrintParams *
 print_params_new (const char *app_id,
+                  gboolean preview,
                   GtkPageSetup *page_setup,
                   GtkPrintSettings *settings,
                   GtkPrinter *printer)
@@ -100,6 +102,7 @@ print_params_new (const char *app_id,
   params->page_setup = g_object_ref (page_setup);
   params->settings = g_object_ref (settings);
   params->printer = g_object_ref (printer);
+  params->preview = preview;
 
   do {
     r = g_random_int ();
@@ -171,66 +174,133 @@ print_dialog_handle_close (PrintDialogHandle *handle)
 }
 
 static gboolean
+can_preview (void)
+{
+  g_autofree char *path = NULL;
+
+  path = g_find_program_in_path ("evince-previewer");
+
+  if (path)
+    return TRUE;
+
+  g_warning ("evince-previewer not found, disabling print preview");
+
+  return FALSE;
+}
+
+static gboolean
+launch_preview (const char *filename,
+                const char *title,
+                GtkPrintSettings *settings,
+                GtkPageSetup *page_setup,
+                GError **error)
+{
+  g_autofree char *cmd = NULL;
+  g_autoptr(GAppInfo) appinfo = NULL;
+  g_autoptr(GAppLaunchContext) context = NULL;
+  gboolean retval = FALSE;
+  g_autoptr(GKeyFile) keyfile = NULL;
+  g_autofree char *data = NULL;
+  gsize data_len;
+  g_autofree char *settings_filename = NULL;
+  int fd;
+
+  fd = g_file_open_tmp ("settingsXXXXXX.ini", &settings_filename, error);
+  if (fd == -1)
+    goto out;
+
+  keyfile = g_key_file_new ();
+
+  if (settings)
+    gtk_print_settings_to_key_file (settings, keyfile, NULL);
+
+  if (page_setup)
+    gtk_page_setup_to_key_file (page_setup, keyfile, NULL);
+
+  g_key_file_set_string (keyfile, "Print Job", "title", title);
+
+  data = g_key_file_to_data (keyfile, &data_len, NULL);
+  if (data)
+    g_file_set_contents (settings_filename, data, data_len, NULL);
+
+  cmd = g_strdup_printf ("evince-previewer --unlink-tempfile --print-settings %s %s", settings_filename, filename);
+
+  g_debug ("launching %s", cmd);
+
+  appinfo = g_app_info_create_from_commandline (cmd,
+                                                "Print Preview",
+                                                G_APP_INFO_CREATE_NONE,
+                                                error);
+  if (!appinfo)
+    goto out;
+
+  context = (GAppLaunchContext *)gdk_display_get_app_launch_context (gdk_display_get_default ());
+  retval = g_app_info_launch (appinfo, NULL, G_APP_LAUNCH_CONTEXT (context), error);
+
+out:
+  if (fd > 0)
+    close (fd);
+
+  return retval;
+}
+
+static gboolean
 print_file (int fd,
             const char *app_id,
+            gboolean preview,
             GtkPrinter *printer,
             GtkPrintSettings *settings,
             GtkPageSetup *page_setup,
             GError **error)
 {
-  GtkPrintJob *job;
+  g_autoptr (GtkPrintJob) job = NULL;
   g_autofree char *title = NULL;
-#if !GTK_CHECK_VERSION (3, 22, 0)
   g_autofree char *filename = NULL;
   g_autoptr(GUnixInputStream) istream = NULL;
   g_autoptr(GUnixOutputStream) ostream = NULL;
   int fd2;
-#endif
 
   title = g_strdup_printf ("Document from %s", app_id);
 
-  job = gtk_print_job_new (title, printer, settings, page_setup);
+  if (!preview)
+    job = gtk_print_job_new (title, printer, settings, page_setup);
 
 #if GTK_CHECK_VERSION (3, 22, 0)
-  if (!gtk_print_job_set_source_fd (job, fd, error))
-    {
-      g_object_unref (job);
-      return FALSE;
-    }
-#else
-  istream = g_unix_input_stream_new (fd, FALSE);
+  if (job && !gtk_print_job_set_source_fd (job, fd, error))
+    return FALSE;
+#endif
+
+  istream = (GUnixInputStream *)g_unix_input_stream_new (fd, FALSE);
 
   if ((fd2 = g_file_open_tmp (PACKAGE_NAME "XXXXXX", &filename, error)) == -1)
-    {
-      g_object_unref (job);
-      return FALSE;
-    }
+    return FALSE;
 
-  ostream = g_unix_output_stream_new (fd2, TRUE);
+  ostream = (GUnixOutputStream *)g_unix_output_stream_new (fd2, TRUE);
 
   if (g_output_stream_splice (G_OUTPUT_STREAM (ostream),
                               G_INPUT_STREAM (istream),
                               G_OUTPUT_STREAM_SPLICE_NONE,
                               NULL,
                               error) == -1)
-    {
-      g_object_unref (job);
-      return FALSE;
-    }
+    return FALSE;
 
-  if (!gtk_print_job_set_source_file (job, filename, error))
+  if (job)
     {
-      g_object_unref (job);
-      return FALSE;
+      if (!gtk_print_job_set_source_file (job, filename, error))
+        return FALSE;
+
+      gtk_print_job_send (job, NULL, NULL, NULL);
+    }
+  else
+    {
+      if (!launch_preview (filename, title, settings, page_setup, error))
+        return FALSE;
     }
 
   /* The file will be removed when the GtkPrintJob closes it (once the job is
-   * complete). */
+   * complete).
+   */
   unlink (filename);
-#endif
-
-  gtk_print_job_send (job, NULL, NULL, NULL);
-  g_object_unref (job);
 
   return TRUE;
 }
@@ -242,6 +312,7 @@ handle_print_response (GtkDialog *dialog,
 {
   PrintDialogHandle *handle = data;
   g_autoptr(GError) error = NULL;
+  gboolean preview = FALSE;
 
   switch (response)
     {
@@ -256,6 +327,10 @@ handle_print_response (GtkDialog *dialog,
       handle->response = 1;
       break;
 
+    case GTK_RESPONSE_APPLY:
+      preview = TRUE;
+      /* fall thru */
+
     case GTK_RESPONSE_OK:
       {
         GtkPrinter *printer;
@@ -265,9 +340,10 @@ handle_print_response (GtkDialog *dialog,
         printer = gtk_print_unix_dialog_get_selected_printer (GTK_PRINT_UNIX_DIALOG (handle->dialog));
         settings = gtk_print_unix_dialog_get_settings (GTK_PRINT_UNIX_DIALOG (handle->dialog));
         page_setup = gtk_print_unix_dialog_get_page_setup (GTK_PRINT_UNIX_DIALOG (handle->dialog));
-;
+
         if (!print_file (handle->fd,
                          handle->request->app_id,
+                         preview,
                          printer,
                          settings,
                          page_setup,
@@ -361,6 +437,7 @@ handle_print (XdpImplPrint *object,
 
       print_file (fd,
                   params->app_id,
+		  params->preview,
                   params->printer,
                   params->settings,
                   params->page_setup,
@@ -406,7 +483,8 @@ handle_print (XdpImplPrint *object,
   dialog = gtk_print_unix_dialog_new (arg_title, NULL);
   gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (fake_parent));
   gtk_window_set_modal (GTK_WINDOW (dialog), modal);
-  gtk_print_unix_dialog_set_manual_capabilities (GTK_PRINT_UNIX_DIALOG (dialog), 0);
+  gtk_print_unix_dialog_set_manual_capabilities (GTK_PRINT_UNIX_DIALOG (dialog),
+                                                 can_preview () ? GTK_PRINT_CAPABILITY_PREVIEW : 0);
 
   handle = g_new0 (PrintDialogHandle, 1);
   handle->impl = object;
@@ -463,6 +541,7 @@ handle_prepare_print_response (GtkDialog *dialog,
                                gpointer data)
 {
   PrintDialogHandle *handle = data;
+  gboolean preview = FALSE;
 
   switch (response)
     {
@@ -477,11 +556,16 @@ handle_prepare_print_response (GtkDialog *dialog,
       handle->response = 1;
       break;
 
+    case GTK_RESPONSE_APPLY:
+      preview = TRUE;
+      /* fall thru */
+
     case GTK_RESPONSE_OK:
       {
         handle->response = 0;
 
         handle->params = print_params_new (handle->request->app_id,
+                                           preview,
                                            gtk_print_unix_dialog_get_page_setup (GTK_PRINT_UNIX_DIALOG (handle->dialog)),
                                            gtk_print_unix_dialog_get_settings (GTK_PRINT_UNIX_DIALOG (handle->dialog)),
                                            gtk_print_unix_dialog_get_selected_printer (GTK_PRINT_UNIX_DIALOG (handle->dialog)));
@@ -547,7 +631,8 @@ handle_prepare_print (XdpImplPrint *object,
   dialog = gtk_print_unix_dialog_new (arg_title, NULL);
   gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (fake_parent));
   gtk_window_set_modal (GTK_WINDOW (dialog), modal);
-  gtk_print_unix_dialog_set_manual_capabilities (GTK_PRINT_UNIX_DIALOG (dialog), 0);
+  gtk_print_unix_dialog_set_manual_capabilities (GTK_PRINT_UNIX_DIALOG (dialog),
+                                                 can_preview () ? GTK_PRINT_CAPABILITY_PREVIEW : 0);
   gtk_print_unix_dialog_set_embed_page_setup (GTK_PRINT_UNIX_DIALOG (dialog), TRUE);
   gtk_print_unix_dialog_set_settings (GTK_PRINT_UNIX_DIALOG (dialog), settings);
   gtk_print_unix_dialog_set_page_setup (GTK_PRINT_UNIX_DIALOG (dialog), page_setup);
