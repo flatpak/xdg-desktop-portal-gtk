@@ -36,6 +36,11 @@
 
 #define SUPPORTED_MUTTER_REMOTE_DESKTOP_API_VERSION 1
 
+enum _GnomeRemoteDesktopNotifyAxisFlags
+{
+  GNOME_REMOTE_DESKTOP_NOTIFY_AXIS_FLAGS_FINISH = 1 << 0,
+} GnomeRemoteDesktopNotifyAxisFlags;
+
 typedef struct _RemoteDesktopDialogHandle RemoteDesktopDialogHandle;
 
 typedef struct _RemoteDesktopSession
@@ -669,13 +674,21 @@ handle_notify_pointer_axis (XdpImplRemoteDesktop *object,
 {
   RemoteDesktopSession *remote_desktop_session;
   OrgGnomeMutterRemoteDesktopSession *proxy;
+  gboolean finish;
+  unsigned int flags = 0;
 
   remote_desktop_session =
     (RemoteDesktopSession *)lookup_session (arg_session_handle);
   proxy = remote_desktop_session->mutter_session_proxy;
 
+  if (g_variant_lookup (arg_options, "finish", "b", &finish))
+    {
+      if (finish)
+        flags = GNOME_REMOTE_DESKTOP_NOTIFY_AXIS_FLAGS_FINISH;
+    }
+
   org_gnome_mutter_remote_desktop_session_call_notify_pointer_axis (proxy,
-                                                                    dx, dy,
+                                                                    dx, dy, flags,
                                                                     NULL, NULL, NULL);
 
   xdp_impl_remote_desktop_complete_notify_pointer_axis (object, invocation);
