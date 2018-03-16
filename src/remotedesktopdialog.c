@@ -195,6 +195,7 @@ update_device_list (RemoteDesktopDialog *dialog)
         case REMOTE_DESKTOP_DEVICE_TYPE_TOUCHSCREEN:
           device_type_name = _("Touch screen");
           break;
+        case REMOTE_DESKTOP_DEVICE_TYPE_NONE:
         case REMOTE_DESKTOP_DEVICE_TYPE_ALL:
           g_assert_not_reached ();
         }
