@@ -2,13 +2,13 @@
 # Copyright (C) 2016 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
 # This file is distributed under the same license as the xdg-desktop-portal-gtk package.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2016, 2017.
+# Yuri Chornoivan <yurchor@ukr.net>, 2016, 2017, 2018.
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-14 12:37+0100\n"
-"PO-Revision-Date: 2017-06-24 15:30+0300\n"
+"PO-Revision-Date: 2018-03-18 10:34+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Lokalize 1.5\n"
+"X-Generator: Lokalize 2.0\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
@@ -132,44 +132,43 @@ msgstr "_Відкрити"
 
 #: src/remotedesktopdialog.c:190
 msgid "Pointer"
-msgstr ""
+msgstr "Координатний пристрій"
 
 #: src/remotedesktopdialog.c:193
 msgid "Keyboard"
-msgstr ""
+msgstr "Клавіатура"
 
 #: src/remotedesktopdialog.c:196
 msgid "Touch screen"
-msgstr ""
+msgstr "Сенсорна панель"
 
 #: src/remotedesktopdialog.c:302
 #, c-format
 msgid "Select what to share with %s"
-msgstr ""
+msgstr "Виберіть, що слід оприлюднити для %s"
 
 #: src/remotedesktopdialog.c:307
-#, fuzzy
 msgid "Select what to share with the requesting application"
-msgstr "Оприлюднити цей знімок екрана за допомогою відповідної програми?"
+msgstr "Виберіть, що слід оприлюднити за допомогою відповідної програми"
 
 #: src/remotedesktopdialog.ui:12
 msgid "Remote desktop"
-msgstr ""
+msgstr "Віддалена стільниця"
 
 #: src/screencastdialog.ui:12
-#, fuzzy
 msgid "Screen casting"
-msgstr "Знімок екрана"
+msgstr "Відео з екрана"
 
 #: src/screencastwidget.c:243
 #, c-format
 msgid "Select monitor to share with %s"
-msgstr ""
+msgstr "Виберіть монітор, дані з якого слід оприлюднити для %s"
 
 #: src/screencastwidget.c:248
-#, fuzzy
 msgid "Select monitor to share with the requesting application"
-msgstr "Оприлюднити цей знімок екрана за допомогою відповідної програми?"
+msgstr ""
+"Виберіть монітор, дані з якого слід оприлюднити за допомогою відповідної"
+" програми"
 
 #: src/screenshotdialog.c:420
 #, c-format
@@ -186,49 +185,47 @@ msgstr "Знімок екрана"
 
 #: src/screenshotdialog.ui:30
 msgid "_Options…"
-msgstr ""
+msgstr "П_араметри…"
 
 #: src/screenshotdialog.ui:55
-#, fuzzy
 msgid "Take _Screenshot"
-msgstr "Знімок екрана"
+msgstr "З_робити знімок екрана"
 
 #: src/screenshotdialog.ui:111
-#, fuzzy
 msgid "Take Screenshot"
-msgstr "Знімок екрана"
+msgstr "Зробити знімок екрана"
 
 #: src/screenshotdialog.ui:122
 msgid "Grab the whole sc_reen"
-msgstr ""
+msgstr "Захопити увесь е_кран"
 
 #: src/screenshotdialog.ui:133
 msgid "Grab the current _window"
-msgstr ""
+msgstr "Захопити поточне _вікно"
 
 #: src/screenshotdialog.ui:144
 msgid "Select _area to grab"
-msgstr ""
+msgstr "Вибрати _область для захоплення"
 
 #: src/screenshotdialog.ui:158
 msgid "Grab after a _delay of"
-msgstr ""
+msgstr "Захопити із з_атримкою у"
 
 #: src/screenshotdialog.ui:171
 msgid "seconds"
-msgstr ""
+msgstr "секунд"
 
 #: src/screenshotdialog.ui:181
 msgid "Effects"
-msgstr ""
+msgstr "Ефекти"
 
 #: src/screenshotdialog.ui:192
 msgid "Include _pointer"
-msgstr ""
+msgstr "Разом із в_казівником"
 
 #: src/screenshotdialog.ui:201
 msgid "Include the window _border"
-msgstr ""
+msgstr "Включити _рамку вікна"
 
 #~ msgid "_Select"
 #~ msgstr "Ви_брати"
