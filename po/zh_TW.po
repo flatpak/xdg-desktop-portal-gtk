@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
 "POT-Creation-Date: 2018-03-26 03:26+0000\n"
-"PO-Revision-Date: 2018-03-26 20:55+0800\n"
+"PO-Revision-Date: 2018-03-26 20:59+0800\n"
 "Language-Team: Chinese (Taiwan) <chinese-l10n@googlegroups.com>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
@@ -154,7 +154,7 @@ msgstr "遠端桌面"
 
 #: src/screencastdialog.ui:12
 msgid "Screen casting"
-msgstr "螢幕錄製"
+msgstr "螢幕投放"
 
 #: src/screencastwidget.c:243
 #, c-format
