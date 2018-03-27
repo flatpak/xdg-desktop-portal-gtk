@@ -1,0 +1,223 @@
+# Chinese (Taiwan) translation for xdg-desktop-portal-gtk.
+# Copyright (C) 2018 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
+# This file is distributed under the same license as the xdg-desktop-portal-gtk package.
+# Cheng-Chia Tseng <pswo10680@gmail.com>, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xdg-desktop-portal-gtk master\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
+"issues\n"
+"POT-Creation-Date: 2018-03-26 03:26+0000\n"
+"PO-Revision-Date: 2018-03-26 20:59+0800\n"
+"Language-Team: Chinese (Taiwan) <chinese-l10n@googlegroups.com>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
+"X-Generator: Poedit 2.0.6\n"
+
+#: data/xdg-desktop-portal-gtk.desktop.in.in:4
+msgid "Portal"
+msgstr "入口"
+
+#. TRANSLATORS: Don't translate this text (this is icon name)
+#: data/xdg-desktop-portal-gtk.desktop.in.in:6
+msgid "applications-system-symbolic"
+msgstr "applications-system-symbolic"
+
+#: src/access.c:271
+msgid "Deny Access"
+msgstr "拒絕存取"
+
+#: src/access.c:274
+msgid "Grant Access"
+msgstr "允許存取"
+
+#: src/accountdialog.c:166
+msgid "Select an Image"
+msgstr "選取影像"
+
+#: src/accountdialog.c:169
+msgid "Cancel"
+msgstr "取消"
+
+#: src/accountdialog.c:170
+msgid "Select"
+msgstr "選取"
+
+#: src/accountdialog.c:171
+msgid "Clear"
+msgstr "清除"
+
+#: src/accountdialog.c:185
+msgid "Images"
+msgstr "影像"
+
+#: src/accountdialog.c:260
+#, c-format
+msgid "Share your personal information with %s?"
+msgstr "是否要和 %s 分享您的個人資訊？"
+
+#: src/accountdialog.c:263
+msgid "Share your personal information with the requesting application?"
+msgstr "是否要和請求程式分享您的個人資訊？"
+
+#: src/accountdialog.ui:10
+msgid "Share Details"
+msgstr "分享細節"
+
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:365
+#: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
+#: src/screenshotdialog.ui:14
+msgid "_Cancel"
+msgstr "取消(_C)"
+
+#: src/accountdialog.ui:22 src/remotedesktopdialog.ui:28
+#: src/screencastdialog.ui:28 src/screenshotdialog.ui:38
+msgid "_Share"
+msgstr "分享(_S)"
+
+#: src/accountdialog.ui:148
+msgid "Make changes before sharing the information"
+msgstr "在分享資訊前做出修改"
+
+#: src/appchooserdialog.c:154
+msgid "Failed to start Software"
+msgstr "無法啟動《軟體》"
+
+#: src/appchooserdialog.c:373
+#, c-format
+msgid ""
+"Select an application to open “%s”. More applications are available in <a "
+"href='software'>Software.</a>"
+msgstr ""
+"選取開啟「%s」的應用程式。《<a href='software'>軟體</a>》中有更多應用程式"
+"可用。"
+
+#: src/appchooserdialog.c:378
+msgid ""
+"Select an application. More applications are available in <a "
+"href='software'>Software.</a>"
+msgstr "選取應用程式。《<a href='software'>軟體</a>》中有更多應用程式可用。"
+
+#: src/appchooserdialog.c:391
+#, c-format
+msgid "Unable to find an application that is able to open “%s”."
+msgstr "找不到可開啟「%s」的應用程式。"
+
+#: src/appchooserdialog.c:396
+msgid "Unable to find a suitable application."
+msgstr "找不到適合的應用程式。"
+
+#: src/appchooserdialog.ui:13
+msgid "Open With"
+msgstr "開啟方式"
+
+#: src/appchooserdialog.ui:166
+msgid "No Applications Found"
+msgstr "找不到應用程式"
+
+#: src/appchooserdialog.ui:182
+msgid "Find Compatible Applications in Software"
+msgstr "在《軟體》中尋找相容的應用程式"
+
+#: src/filechooser.c:363
+msgid "_Open"
+msgstr "開啟(_O)"
+
+#: src/remotedesktopdialog.c:190
+msgid "Pointer"
+msgstr "指標"
+
+#: src/remotedesktopdialog.c:193
+msgid "Keyboard"
+msgstr "鍵盤"
+
+#: src/remotedesktopdialog.c:196
+msgid "Touch screen"
+msgstr "觸控螢幕"
+
+#: src/remotedesktopdialog.c:303
+#, c-format
+msgid "Select what to share with %s"
+msgstr "選取您想和 %s 分享的項目"
+
+#: src/remotedesktopdialog.c:308
+msgid "Select what to share with the requesting application"
+msgstr "選取您想和請求程式分享的項目"
+
+#: src/remotedesktopdialog.ui:12
+msgid "Remote desktop"
+msgstr "遠端桌面"
+
+#: src/screencastdialog.ui:12
+msgid "Screen casting"
+msgstr "螢幕投放"
+
+#: src/screencastwidget.c:243
+#, c-format
+msgid "Select monitor to share with %s"
+msgstr "選取您想要和 %s 分享的螢幕"
+
+#: src/screencastwidget.c:248
+msgid "Select monitor to share with the requesting application"
+msgstr "選取您想和請求程式分享的螢幕"
+
+#: src/screenshotdialog.c:420
+#, c-format
+msgid "Share this screenshot with %s?"
+msgstr "是否要和 %s 分享此畫面快照？"
+
+#: src/screenshotdialog.c:423
+msgid "Share this screenshot with the requesting application?"
+msgstr "是否要和請求程式分享此畫面快照？"
+
+#: src/screenshotdialog.ui:10
+msgid "Screenshot"
+msgstr "畫面快照"
+
+#: src/screenshotdialog.ui:30
+msgid "_Options…"
+msgstr "選項(_O)…"
+
+#: src/screenshotdialog.ui:55
+msgid "Take _Screenshot"
+msgstr "拍攝畫面快照(_S)"
+
+#: src/screenshotdialog.ui:111
+msgid "Take Screenshot"
+msgstr "拍攝畫面快照"
+
+#: src/screenshotdialog.ui:122
+msgid "Grab the whole sc_reen"
+msgstr "擷取整個螢幕"
+
+#: src/screenshotdialog.ui:133
+msgid "Grab the current _window"
+msgstr "擷取目前視窗(_W)"
+
+#: src/screenshotdialog.ui:144
+msgid "Select _area to grab"
+msgstr "選取擷取區域(_A)"
+
+#: src/screenshotdialog.ui:158
+msgid "Grab after a _delay of"
+msgstr "擷取倒數時間為(_D)"
+
+#: src/screenshotdialog.ui:171
+msgid "seconds"
+msgstr "秒"
+
+#: src/screenshotdialog.ui:181
+msgid "Effects"
+msgstr "效果"
+
+#: src/screenshotdialog.ui:192
+msgid "Include _pointer"
+msgstr "包含指標(_P)"
+
+#: src/screenshotdialog.ui:201
+msgid "Include the window _border"
+msgstr "包含視窗邊框(_B)"
