@@ -6,4 +6,4 @@ org.gnome.Shell.Screenshot or org.gnome.SessionManager D-Bus interfaces.
 
 ## Building xdg-desktop-portal-gtk
 
-xdg-desktop-portal-gtk depends on xdg-desktop-portal, Flatpak and GTK+.
+xdg-desktop-portal-gtk depends on xdg-desktop-portal and GTK+.
