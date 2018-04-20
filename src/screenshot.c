@@ -156,7 +156,7 @@ handle_screenshot (XdpImplScreenshot *object,
     {
       external_parent = create_external_window_from_handle (arg_parent_window);
       if (!external_parent)
-        g_warning ("Failed to associate portal window with parent window %s",
+        g_warning ("Failed to associate portal window with parent window '%s'",
                    arg_parent_window);
     }
 

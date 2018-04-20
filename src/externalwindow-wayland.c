@@ -65,7 +65,10 @@ external_window_wayland_new (const char *handle_str)
 
   display = get_wayland_display ();
   if (!display)
-    return NULL;
+    {
+      g_warning ("No Wayland display connection, ignoring Wayland parent");
+      return NULL;
+    }
 
   external_window_wayland = g_object_new (EXTERNAL_TYPE_WINDOW_WAYLAND,
                                           "display", display,
