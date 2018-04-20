@@ -70,21 +70,23 @@ external_window_x11_new (const char *handle_str)
 
   display = get_x11_display ();
   if (!display)
-    return NULL;
+    {
+      g_warning ("No X display connection, ignoring X11 parent");
+      return NULL;
+    }
 
   errno = 0;
   xid = strtol (handle_str, NULL, 16);
   if (errno != 0)
     {
-      g_warning ("Failed to reference external X11 window, invalid XID");
+      g_warning ("Failed to reference external X11 window, invalid XID %s", handle_str);
       return NULL;
     }
 
-  foreign_gdk_window = gdk_x11_window_foreign_new_for_display (display,
-                                                               xid);
+  foreign_gdk_window = gdk_x11_window_foreign_new_for_display (display, xid);
   if (!foreign_gdk_window)
     {
-      g_warning ("Failed to reference external X11 window");
+      g_warning ("Failed to create foreign window for XID %d", xid);
       return NULL;
     }
 
