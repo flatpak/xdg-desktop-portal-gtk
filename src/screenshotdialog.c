@@ -122,6 +122,7 @@ show_options (ScreenshotDialog *dialog)
 {
   gtk_stack_set_visible_child_name (GTK_STACK (dialog->stack), "options");
   gtk_stack_set_visible_child_name (GTK_STACK (dialog->header_stack), "options");
+  gtk_widget_show (GTK_WIDGET (dialog));
 }
 
 static void
