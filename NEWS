@@ -1,3 +1,23 @@
+Major changes in 0.11
+=====================
+
+* Add dependency on gio-unix-2.0.
+* remotedesktop: Add support for the 'finish' flag of NotifyPointerAxis.
+* remotedesktop: Correctly expose device types supporting remote control.
+* print: Add a 'Print Preview' button (requires evince-previewer).
+* screenshot: Make sure the dialog is shown in the interactive case.
+
+* Translation updates
+ Brazilian Portuguese
+ Chinese (Taiwan)
+ Czech
+ Hungarian
+ Indonesian
+ Italian
+ Lithuanian
+ Spanish
+ Ukrainian
+
 Major changes in 0.10
 =====================
 
