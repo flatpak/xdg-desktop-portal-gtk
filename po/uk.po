@@ -6,8 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-14 12:37+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
+"issues\n"
+"POT-Creation-Date: 2018-04-24 18:42+0100\n"
 "PO-Revision-Date: 2018-03-18 10:34+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -142,12 +143,12 @@ msgstr "Клавіатура"
 msgid "Touch screen"
 msgstr "Сенсорна панель"
 
-#: src/remotedesktopdialog.c:302
+#: src/remotedesktopdialog.c:303
 #, c-format
 msgid "Select what to share with %s"
 msgstr "Виберіть, що слід оприлюднити для %s"
 
-#: src/remotedesktopdialog.c:307
+#: src/remotedesktopdialog.c:308
 msgid "Select what to share with the requesting application"
 msgstr "Виберіть, що слід оприлюднити за допомогою відповідної програми"
 
@@ -167,15 +168,15 @@ msgstr "Виберіть монітор, дані з якого слід опр�
 #: src/screencastwidget.c:248
 msgid "Select monitor to share with the requesting application"
 msgstr ""
-"Виберіть монітор, дані з якого слід оприлюднити за допомогою відповідної"
-" програми"
+"Виберіть монітор, дані з якого слід оприлюднити за допомогою відповідної "
+"програми"
 
-#: src/screenshotdialog.c:420
+#: src/screenshotdialog.c:422
 #, c-format
 msgid "Share this screenshot with %s?"
 msgstr "Оприлюднити цей знімок екрана за допомогою %s?"
 
-#: src/screenshotdialog.c:423
+#: src/screenshotdialog.c:426
 msgid "Share this screenshot with the requesting application?"
 msgstr "Оприлюднити цей знімок екрана за допомогою відповідної програми?"
 

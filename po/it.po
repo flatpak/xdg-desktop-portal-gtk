@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2018-02-15 03:27+0000\n"
+"POT-Creation-Date: 2018-04-24 18:42+0100\n"
 "PO-Revision-Date: 2018-02-26 10:00+0100\n"
 "Last-Translator: Milo Casagrande <milo@milo.name>\n"
 "Language-Team: Italian <gnome-it-list@gnome.org>\n"
@@ -144,12 +144,12 @@ msgstr "Tastiera"
 msgid "Touch screen"
 msgstr "Schermo tattile"
 
-#: src/remotedesktopdialog.c:302
+#: src/remotedesktopdialog.c:303
 #, c-format
 msgid "Select what to share with %s"
 msgstr "Selezionare cosa condividere con %s"
 
-#: src/remotedesktopdialog.c:307
+#: src/remotedesktopdialog.c:308
 msgid "Select what to share with the requesting application"
 msgstr "Selezionare cosa condividere con l'applicazione che la richiede"
 
@@ -171,12 +171,12 @@ msgid "Select monitor to share with the requesting application"
 msgstr ""
 "Selezionare la schermata da condividere con l'applicazione che la richiede"
 
-#: src/screenshotdialog.c:420
+#: src/screenshotdialog.c:422
 #, c-format
 msgid "Share this screenshot with %s?"
 msgstr "Condividere questa schermata con %s?"
 
-#: src/screenshotdialog.c:423
+#: src/screenshotdialog.c:426
 msgid "Share this screenshot with the requesting application?"
 msgstr "Condividere questa schermata con l'applicazione che la richiede?"
 
@@ -227,4 +227,3 @@ msgstr "Includere il _puntatore"
 #: src/screenshotdialog.ui:201
 msgid "Include the window _border"
 msgstr "Includere il _bordo finestra"
-

@@ -6,8 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-14 12:37+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
+"issues\n"
+"POT-Creation-Date: 2018-04-24 18:42+0100\n"
 "PO-Revision-Date: 2017-09-16 09:28+0200\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
@@ -144,12 +145,12 @@ msgstr ""
 msgid "Touch screen"
 msgstr ""
 
-#: src/remotedesktopdialog.c:302
+#: src/remotedesktopdialog.c:303
 #, c-format
 msgid "Select what to share with %s"
 msgstr ""
 
-#: src/remotedesktopdialog.c:307
+#: src/remotedesktopdialog.c:308
 #, fuzzy
 msgid "Select what to share with the requesting application"
 msgstr "Sprístupniť túto snímku obrazovky požadovanej aplikácii?"
@@ -173,12 +174,12 @@ msgstr ""
 msgid "Select monitor to share with the requesting application"
 msgstr "Sprístupniť túto snímku obrazovky požadovanej aplikácii?"
 
-#: src/screenshotdialog.c:420
+#: src/screenshotdialog.c:422
 #, c-format
 msgid "Share this screenshot with %s?"
 msgstr "Sprístupniť túto snímku obrazovky aplikácii %s?"
 
-#: src/screenshotdialog.c:423
+#: src/screenshotdialog.c:426
 msgid "Share this screenshot with the requesting application?"
 msgstr "Sprístupniť túto snímku obrazovky požadovanej aplikácii?"
 

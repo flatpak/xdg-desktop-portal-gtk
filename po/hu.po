@@ -6,8 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-14 12:37+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
+"issues\n"
+"POT-Creation-Date: 2018-04-24 18:42+0100\n"
 "PO-Revision-Date: 2018-03-03 08:15+0100\n"
 "Last-Translator: Balázs Úr <urbalazs@gmail.com>\n"
 "Language-Team: Hungarian <gnome-hu-list at gnome dot org>\n"
@@ -142,12 +143,12 @@ msgstr "Billentyűzet"
 msgid "Touch screen"
 msgstr "Érintőképernyő"
 
-#: src/remotedesktopdialog.c:302
+#: src/remotedesktopdialog.c:303
 #, c-format
 msgid "Select what to share with %s"
 msgstr "Válassza ki, mit szeretne megosztani ezzel: %s"
 
-#: src/remotedesktopdialog.c:307
+#: src/remotedesktopdialog.c:308
 msgid "Select what to share with the requesting application"
 msgstr "Válassza ki, hogy mit szeretne megosztani a kérő alkalmazással"
 
@@ -168,12 +169,12 @@ msgstr "Válasszon monitort az ezzel történő megosztáshoz: %s"
 msgid "Select monitor to share with the requesting application"
 msgstr "Válasszon monitort a kérő alkalmazással történő megosztáshoz"
 
-#: src/screenshotdialog.c:420
+#: src/screenshotdialog.c:422
 #, c-format
 msgid "Share this screenshot with %s?"
 msgstr "Megosztja ezt a képernyőképet ezzel: %s?"
 
-#: src/screenshotdialog.c:423
+#: src/screenshotdialog.c:426
 msgid "Share this screenshot with the requesting application?"
 msgstr "Megosztja ezt a képernyőképet a kérő alkalmazással?"
 
@@ -224,4 +225,3 @@ msgstr "_Mutató felvétele"
 #: src/screenshotdialog.ui:201
 msgid "Include the window _border"
 msgstr "Az ablak _szegélyét is tartalmazza"
-

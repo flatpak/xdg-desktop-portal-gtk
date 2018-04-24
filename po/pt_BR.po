@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2018-03-29 03:27+0000\n"
+"POT-Creation-Date: 2018-04-24 18:42+0100\n"
 "PO-Revision-Date: 2018-03-09 13:40-0200\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
@@ -167,12 +167,12 @@ msgstr "Selecione o monitor para compartilhar com %s"
 msgid "Select monitor to share with the requesting application"
 msgstr "Selecione o monitor para compartilhar com aplicativo requisitante"
 
-#: src/screenshotdialog.c:420
+#: src/screenshotdialog.c:422
 #, c-format
 msgid "Share this screenshot with %s?"
 msgstr "Compartilhar essa captura de tela com %s?"
 
-#: src/screenshotdialog.c:423
+#: src/screenshotdialog.c:426
 msgid "Share this screenshot with the requesting application?"
 msgstr "Compartilhar essa captura de tela com o aplicativo requisitante?"
 

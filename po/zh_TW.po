@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2018-03-26 03:26+0000\n"
+"POT-Creation-Date: 2018-04-24 18:42+0100\n"
 "PO-Revision-Date: 2018-03-26 20:59+0800\n"
+"Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) <chinese-l10n@googlegroups.com>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
 "X-Generator: Poedit 2.0.6\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
@@ -93,8 +93,8 @@ msgid ""
 "Select an application to open “%s”. More applications are available in <a "
 "href='software'>Software.</a>"
 msgstr ""
-"選取開啟「%s」的應用程式。《<a href='software'>軟體</a>》中有更多應用程式"
-"可用。"
+"選取開啟「%s」的應用程式。《<a href='software'>軟體</a>》中有更多應用程式可"
+"用。"
 
 #: src/appchooserdialog.c:378
 msgid ""
@@ -165,12 +165,12 @@ msgstr "選取您想要和 %s 分享的螢幕"
 msgid "Select monitor to share with the requesting application"
 msgstr "選取您想和請求程式分享的螢幕"
 
-#: src/screenshotdialog.c:420
+#: src/screenshotdialog.c:422
 #, c-format
 msgid "Share this screenshot with %s?"
 msgstr "是否要和 %s 分享此畫面快照？"
 
-#: src/screenshotdialog.c:423
+#: src/screenshotdialog.c:426
 msgid "Share this screenshot with the requesting application?"
 msgstr "是否要和請求程式分享此畫面快照？"
 
