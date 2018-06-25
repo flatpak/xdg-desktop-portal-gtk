@@ -31,6 +31,8 @@
 #include "appchooserdialog.h"
 #include "appchooserrow.h"
 
+#define LOCATION_MAX_LENGTH 40
+
 struct _AppChooserDialog {
   GtkWindow parent;
 
@@ -341,6 +343,25 @@ app_chooser_dialog_class_init (AppChooserDialogClass *class)
   gtk_widget_class_bind_template_callback (widget_class, find_in_software);
 }
 
+/* Ellipsize the location, keeping the suffix which is likely
+ * to have more relevant information, such as filename and extension.
+ */
+static char *
+shorten_location (const char *location)
+{
+  int len;
+
+  len = g_utf8_strlen (location, -1);
+
+  if (len < LOCATION_MAX_LENGTH)
+    return g_strdup (location);
+
+  for (; len >= 40; len--)
+    location = g_utf8_next_char (location);
+
+  return g_strconcat ("…", location, NULL);
+}
+
 AppChooserDialog *
 app_chooser_dialog_new (const char **choices,
                         const char *default_id,
@@ -352,6 +373,7 @@ app_chooser_dialog_new (const char **choices,
   int i;
   static GtkCssProvider *provider;
   GtkWidget *default_row;
+  g_autofree char *short_location = shorten_location (location);
 
   if (provider == NULL)
     {
@@ -370,7 +392,7 @@ app_chooser_dialog_new (const char **choices,
     {
       g_autofree char *heading = NULL;
 
-      heading = g_strdup_printf (_("Select an application to open “%s”. More applications are available in <a href='software'>Software.</a>"), location);
+      heading = g_strdup_printf (_("Select an application to open “%s”. More applications are available in <a href='software'>Software.</a>"), short_location);
       gtk_label_set_label (GTK_LABEL (dialog->heading), heading);
     }
   else
@@ -388,7 +410,7 @@ app_chooser_dialog_new (const char **choices,
         {
           g_autofree char *label = NULL;
 
-          label = g_strdup_printf (_("Unable to find an application that is able to open “%s”."), location);
+          label = g_strdup_printf (_("Unable to find an application that is able to open “%s”."), short_location);
           gtk_label_set_label (GTK_LABEL (dialog->empty_label), label);
         }
       else
