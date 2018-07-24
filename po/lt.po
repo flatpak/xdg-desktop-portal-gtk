@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2018-04-24 18:42+0100\n"
+"POT-Creation-Date: 2018-07-24 01:41+0000\n"
 "PO-Revision-Date: 2018-02-13 01:28+0200\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian <gnome-lt@lists.akl.lt>\n"
@@ -85,11 +85,11 @@ msgstr "_Bendrinti"
 msgid "Make changes before sharing the information"
 msgstr "Prieš bendrinant informaciją, atlikti pakeitimus"
 
-#: src/appchooserdialog.c:154
+#: src/appchooserdialog.c:156
 msgid "Failed to start Software"
 msgstr "Nepavyko paleisti Programinės įrangos"
 
-#: src/appchooserdialog.c:373
+#: src/appchooserdialog.c:395
 #, c-format
 msgid ""
 "Select an application to open “%s”. More applications are available in <a "
@@ -98,7 +98,7 @@ msgstr ""
 "Pasirinkite programą, skirtą atverti \"%s\". Daugiau programų yra prieinama "
 "<a href='software'>Programinėje įrangoje.</a>"
 
-#: src/appchooserdialog.c:378
+#: src/appchooserdialog.c:400
 msgid ""
 "Select an application. More applications are available in <a "
 "href='software'>Software.</a>"
@@ -106,12 +106,12 @@ msgstr ""
 "Pasirinkite programą. Daugiau programų yra prieinama <a "
 "href='software'>Programinėje įrangoje.</a>"
 
-#: src/appchooserdialog.c:391
+#: src/appchooserdialog.c:413
 #, c-format
 msgid "Unable to find an application that is able to open “%s”."
 msgstr "Nepavyko rasti programos, kuri galėtų atverti \"%s\"."
 
-#: src/appchooserdialog.c:396
+#: src/appchooserdialog.c:418
 msgid "Unable to find a suitable application."
 msgstr "Nepavyko rasti tinkamos programos."
 
