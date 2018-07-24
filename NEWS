@@ -1,3 +1,11 @@
+Major changes in 0.99
+=====================
+
+* Shorten excessively long filenames in the app chooser dialog
+* Fixes for the screencast portal
+* Support more email clients in the Email portal
+* Fix a crash in the print portal
+
 Major changes in 0.11
 =====================
 
