@@ -35,6 +35,8 @@ typedef struct {
 
   int response;
   char *uri;
+  double red, green, blue;
+  const char *retval;
 } ScreenshotDialogHandle;
 
 static void
@@ -43,8 +45,8 @@ screenshot_dialog_handle_free (gpointer data)
   ScreenshotDialogHandle *handle = data;
 
   g_clear_object (&handle->external_parent);
-  g_object_unref (handle->request);
-  g_object_unref (handle->dialog);
+  g_clear_object (&handle->request);
+  g_clear_object (&handle->dialog);
   g_free (handle->uri);
 
   g_free (handle);
@@ -53,25 +55,45 @@ screenshot_dialog_handle_free (gpointer data)
 static void
 screenshot_dialog_handle_close (ScreenshotDialogHandle *handle)
 {
-  gtk_widget_destroy (handle->dialog);
+  if (handle->dialog)
+    gtk_widget_destroy (handle->dialog);
   screenshot_dialog_handle_free (handle);
 }
 
 static void
 send_response (ScreenshotDialogHandle *handle)
 {
-  GVariantBuilder opt_builder;
-
-  g_variant_builder_init (&opt_builder, G_VARIANT_TYPE_VARDICT);
-  g_variant_builder_add (&opt_builder, "{sv}", "uri", g_variant_new_string (handle->uri ? handle->uri : ""));
-
   if (handle->request->exported)
     request_unexport (handle->request);
 
-  xdp_impl_screenshot_complete_screenshot (handle->impl,
-                                           handle->invocation,
-                                           handle->response,
-                                           g_variant_builder_end (&opt_builder));
+  if (strcmp (handle->retval, "url") == 0)
+    {
+      GVariantBuilder opt_builder;
+
+      g_variant_builder_init (&opt_builder, G_VARIANT_TYPE_VARDICT);
+      g_variant_builder_add (&opt_builder, "{sv}", "uri", g_variant_new_string (handle->uri ? handle->uri : ""));
+
+      xdp_impl_screenshot_complete_screenshot (handle->impl,
+                                               handle->invocation,
+                                               handle->response,
+                                               g_variant_builder_end (&opt_builder));
+    }
+  else
+    {
+      GVariantBuilder opt_builder;
+
+      g_variant_builder_init (&opt_builder, G_VARIANT_TYPE_VARDICT);
+      g_variant_builder_add (&opt_builder, "{sv}", "color", g_variant_new ("(ddd)",
+                                                                           handle->red,
+                                                                           handle->green,
+                                                                           handle->blue));
+
+      xdp_impl_screenshot_complete_pick_color (handle->impl,
+                                               handle->invocation,
+                                               handle->response,
+                                               g_variant_builder_end (&opt_builder));
+
+    }
 
   screenshot_dialog_handle_close (handle);
 }
@@ -182,6 +204,7 @@ handle_screenshot (XdpImplScreenshot *object,
   handle->request = g_object_ref (request);
   handle->dialog = g_object_ref (dialog);
   handle->external_parent = external_parent;
+  handle->retval = "url";
 
   g_signal_connect (request, "handle-close", G_CALLBACK (handle_close), handle);
 
@@ -197,6 +220,69 @@ handle_screenshot (XdpImplScreenshot *object,
   return TRUE;
 }
 
+static void
+color_picked (GObject *object,
+              GAsyncResult *res,
+              gpointer data)
+{
+  ScreenshotDialogHandle *handle = data;
+  g_autoptr(GError) error = NULL;
+  g_autoptr(GVariant) result = NULL;
+  
+  if (!org_gnome_shell_screenshot_call_pick_color_finish (shell, &result, res, &error))
+    {
+      g_warning ("PickColor failed: %s", error->message);
+      return;
+    }
+
+  if (!g_variant_lookup (result, "color", "(ddd)",
+                         &handle->red,
+                         &handle->green,
+                         &handle->blue))
+    {
+      g_warning ("PickColor didn't return a color");
+      return;
+    }
+
+  handle->response = 0;
+
+  send_response (handle);
+}
+
+static gboolean
+handle_pick_color (XdpImplScreenshot *object,
+                   GDBusMethodInvocation *invocation,
+                   const char *arg_handle,
+                   const char *arg_app_id,
+                   const char *arg_parent_window,
+                   GVariant *arg_options)
+{
+  g_autoptr(Request) request = NULL;
+  const char *sender;
+  ScreenshotDialogHandle *handle;
+  g_autoptr(GError) error = NULL;
+
+  sender = g_dbus_method_invocation_get_sender (invocation);
+  request = request_new (sender, arg_app_id, arg_handle);
+
+  handle = g_new0 (ScreenshotDialogHandle, 1);
+  handle->impl = object;
+  handle->invocation = invocation;
+  handle->request = g_object_ref (request);
+  handle->dialog = NULL;
+  handle->external_parent = NULL;
+  handle->retval = "color";
+  handle->response = 2;
+
+  g_signal_connect (request, "handle-close", G_CALLBACK (handle_close), handle);
+
+  request_export (request, g_dbus_method_invocation_get_connection (invocation));
+
+  org_gnome_shell_screenshot_call_pick_color (shell, NULL, color_picked, handle);
+
+  return TRUE;
+}
+
 gboolean
 screenshot_init (GDBusConnection *bus,
                  GError **error)
@@ -206,6 +292,7 @@ screenshot_init (GDBusConnection *bus,
   helper = G_DBUS_INTERFACE_SKELETON (xdp_impl_screenshot_skeleton_new ());
 
   g_signal_connect (helper, "handle-screenshot", G_CALLBACK (handle_screenshot), NULL);
+  g_signal_connect (helper, "handle-pick-color", G_CALLBACK (handle_pick_color), NULL);
 
   if (!g_dbus_interface_skeleton_export (helper,
                                          bus,
