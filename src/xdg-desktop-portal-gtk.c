@@ -62,7 +62,7 @@ static gboolean opt_replace;
 
 static GOptionEntry entries[] = {
   { "verbose", 'v', 0, G_OPTION_ARG_NONE, &opt_verbose, "Print debug information during command processing", NULL },
-  { "replace", 'r', 0, G_OPTION_ARG_NONE, &opt_replace, "Replace", NULL },
+  { "replace", 'r', 0, G_OPTION_ARG_NONE, &opt_replace, "Replace a running instance", NULL },
   { NULL }
 };
 
@@ -187,7 +187,17 @@ main (int argc, char *argv[])
 
   gtk_init (&argc, &argv);
 
-  context = g_option_context_new ("- file chooser portal");
+  context = g_option_context_new ("- portal backends");
+  g_option_context_set_summary (context,
+      "A backend implementation for xdg-desktop-portal.");
+  g_option_context_set_description (context,
+      "xdg-desktop-portal-gtk provides D-Bus interfaces that\n"
+      "are used by xdg-desktop-portal to implement portals\n"
+      "\n"
+      "Documentation for the available D-Bus interfaces can be found at\n"
+      "https://flatpak.github.io/xdg-desktop-portal/portal-docs.html\n"
+      "\n"
+      "Please report issues at https://github.com/flatpak/xdg-desktop-portal-gtk/issues");
   g_option_context_add_main_entries (context, entries, NULL);
   if (!g_option_context_parse (context, &argc, &argv, &error))
     {
