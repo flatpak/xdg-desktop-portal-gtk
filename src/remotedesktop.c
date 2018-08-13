@@ -309,7 +309,7 @@ handle_create_session (XdpImplRemoteDesktop *object,
   g_autofree char *mutter_session_path = NULL;
   g_autoptr(GError) error = NULL;
   int response;
-  OrgGnomeMutterRemoteDesktopSession *mutter_session_proxy;
+  OrgGnomeMutterRemoteDesktopSession *mutter_session_proxy = NULL;
   Session *session;
   GVariantBuilder results_builder;
 
