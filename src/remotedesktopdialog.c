@@ -178,7 +178,7 @@ update_device_list (RemoteDesktopDialog *dialog)
   for (i = 0; i < n_device_types; i++)
     {
       RemoteDesktopDeviceType device_type = 1 << i;
-      const char *device_type_name;
+      const char *device_type_name = NULL;
       GtkWidget *device_type_widget;
 
       if (!(dialog->device_types & device_type))
@@ -300,12 +300,12 @@ remote_desktop_dialog_new (const char *app_id,
 
       id = g_strconcat (app_id, ".desktop", NULL);
       info = G_APP_INFO (g_desktop_app_info_new (id));
-      heading = g_strdup_printf (_("Select what to share with %s"),
+      heading = g_strdup_printf (_("Select devices to share with %s"),
                                  g_app_info_get_display_name (info));
     }
   else
     {
-      heading = g_strdup (_("Select what to share with the requesting application"));
+      heading = g_strdup (_("Select devices to share with the requesting application"));
     }
 
   if (screen_cast_enable)
