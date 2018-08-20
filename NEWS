@@ -1,3 +1,10 @@
+Major changes in 1.0
+====================
+
+* screenshot: Add a PickColor method
+* screencast: Some UI improvements
+* Improve --help output
+
 Major changes in 0.99
 =====================
 
