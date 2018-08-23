@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2018-07-24 01:41+0000\n"
-"PO-Revision-Date: 2018-03-09 13:40-0200\n"
+"POT-Creation-Date: 2018-08-20 13:41+0000\n"
+"PO-Revision-Date: 2018-08-23 07:01-0200\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
@@ -143,12 +143,12 @@ msgstr "Tela sensível ao toque"
 
 #: src/remotedesktopdialog.c:303
 #, c-format
-msgid "Select what to share with %s"
-msgstr "Selecione o que compartilhar com %s"
+msgid "Select devices to share with %s"
+msgstr "Selecione os dispositivos para compartilhar com %s"
 
 #: src/remotedesktopdialog.c:308
-msgid "Select what to share with the requesting application"
-msgstr "Selecione que compartilhar com aplicativo requisitante"
+msgid "Select devices to share with the requesting application"
+msgstr "Selecione os dispositivos para compartilhar com aplicativo requisitante"
 
 #: src/remotedesktopdialog.ui:12
 msgid "Remote desktop"
