@@ -182,9 +182,6 @@ main (int argc, char *argv[])
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
   textdomain (GETTEXT_PACKAGE);
 
-  /* Avoid even loading gvfs to avoid accidental confusion */
-  g_setenv ("GIO_USE_VFS", "local", TRUE);
-
   /* Avoid pointless and confusing recursion */
   g_unsetenv ("GTK_USE_PORTAL");
 
