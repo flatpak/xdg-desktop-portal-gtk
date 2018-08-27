@@ -185,6 +185,9 @@ main (int argc, char *argv[])
   /* Avoid even loading gvfs to avoid accidental confusion */
   g_setenv ("GIO_USE_VFS", "local", TRUE);
 
+  /* Avoid pointless and confusing recursion */
+  g_unsetenv ("GTK_USE_PORTAL");
+
   gtk_init (&argc, &argv);
 
   context = g_option_context_new ("- portal backends");
