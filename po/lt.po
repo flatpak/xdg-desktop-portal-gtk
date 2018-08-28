@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2018-07-24 01:41+0000\n"
-"PO-Revision-Date: 2018-02-13 01:28+0200\n"
+"POT-Creation-Date: 2018-08-21 15:25+0000\n"
+"PO-Revision-Date: 2018-08-21 22:20+0300\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
 "%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.1.1\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
@@ -145,12 +145,12 @@ msgstr "Jutiklinis ekranas"
 
 #: src/remotedesktopdialog.c:303
 #, c-format
-msgid "Select what to share with %s"
-msgstr "Pasirinkti ką bendrinti su %s"
+msgid "Select devices to share with %s"
+msgstr "Pasirinkti įrenginius, kuriuos bendrinti su %s"
 
 #: src/remotedesktopdialog.c:308
-msgid "Select what to share with the requesting application"
-msgstr "Pasirinkti ką bendrinti su prašančia programa"
+msgid "Select devices to share with the requesting application"
+msgstr "Pasirinkti įrenginius, kuriuos bendrinti su prašančia programa"
 
 #: src/remotedesktopdialog.ui:12
 msgid "Remote desktop"
