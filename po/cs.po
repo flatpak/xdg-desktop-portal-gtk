@@ -11,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
 "POT-Creation-Date: 2018-07-24 01:41+0000\n"
-"PO-Revision-Date: 2018-02-14 23:56+0100\n"
+"PO-Revision-Date: 2018-08-26 00:56+0200\n"
 "Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Poedit 2.0.3\n"
+"X-Generator: Poedit 2.1.1\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
@@ -146,12 +146,12 @@ msgstr "Dotyková obrazovka"
 
 #: src/remotedesktopdialog.c:303
 #, c-format
-msgid "Select what to share with %s"
-msgstr "Vyberte, co sdílet s aplikací %s"
+msgid "Select devices to share with %s"
+msgstr "Vyberte zařízení pro sdílení s aplikací %s"
 
 #: src/remotedesktopdialog.c:308
-msgid "Select what to share with the requesting application"
-msgstr "Vyberte, co sdílet s aplikací, která o to žádá"
+msgid "Select devices to share with the requesting application"
+msgstr "Vyberte zařízení pro sdílení s aplikací, která o to žádá"
 
 #: src/remotedesktopdialog.ui:12
 msgid "Remote desktop"
