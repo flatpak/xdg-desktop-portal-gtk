@@ -1,3 +1,11 @@
+Major changes in 1.0.1
+======================
+
+* Use gvfs
+* Unset GTK_USE_PORTAL
+* Require xdg-desktop-portal 1.0
+* Translation updates
+
 Major changes in 1.0
 ====================
 
