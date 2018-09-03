@@ -1,3 +1,9 @@
+Major changes in 1.0.2
+======================
+
+* filechooser: Add returned files to recent files
+* inhibit: Implement screensaver monitoring
+
 Major changes in 1.0.1
 ======================
 
