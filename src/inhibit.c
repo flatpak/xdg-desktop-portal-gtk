@@ -8,6 +8,7 @@
 
 #include "xdg-desktop-portal-dbus.h"
 #include "shell-dbus.h"
+#include "session.h"
 #include "utils.h"
 
 #include "inhibit.h"
@@ -20,7 +21,9 @@ enum {
   INHIBIT_IDLE    = 8
 };
 
-static OrgGnomeSessionManager *session;
+static GDBusInterfaceSkeleton *inhibit;
+static OrgGnomeSessionManager *sessionmanager;
+static OrgGnomeScreenSaver *screensaver;
 
 static void
 uninhibit_done_gnome (GObject *source,
@@ -29,9 +32,7 @@ uninhibit_done_gnome (GObject *source,
 {
   g_autoptr(GError) error = NULL;
 
-  if (!org_gnome_session_manager_call_uninhibit_finish (session,
-                                                        result,
-                                                        &error))
+  if (!org_gnome_session_manager_call_uninhibit_finish (sessionmanager, result, &error))
     g_warning ("Backend call failed: %s", error->message);
 }
 
@@ -48,11 +49,7 @@ handle_close_gnome (XdpImplRequest *object,
    */
   cookie = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (request), "cookie"));
   if (cookie)
-    org_gnome_session_manager_call_uninhibit (session,
-                                              cookie,
-                                              NULL,
-                                              uninhibit_done_gnome,
-                                              NULL);
+    org_gnome_session_manager_call_uninhibit (sessionmanager, cookie, NULL, uninhibit_done_gnome, NULL);
   else
     g_object_set_data (G_OBJECT (request), "closed", GINT_TO_POINTER (1));
 
@@ -74,20 +71,13 @@ inhibit_done_gnome (GObject *source,
   gboolean closed;
   g_autoptr(GError) error = NULL;
 
-  if (!org_gnome_session_manager_call_inhibit_finish (session,
-                                                      &cookie,
-                                                      result,
-                                                      &error))
+  if (!org_gnome_session_manager_call_inhibit_finish (sessionmanager, &cookie, result, &error))
     g_warning ("Backend call failed: %s", error->message);
 
   closed = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (request), "closed"));
 
   if (closed)
-    org_gnome_session_manager_call_uninhibit (session,
-                                              cookie,
-                                              NULL,
-                                              uninhibit_done_gnome,
-                                              NULL);
+    org_gnome_session_manager_call_uninhibit (sessionmanager, cookie, NULL, uninhibit_done_gnome, NULL);
   else
     g_object_set_data (G_OBJECT (request), "cookie", GUINT_TO_POINTER (cookie));
 }
@@ -117,7 +107,7 @@ handle_inhibit_gnome (XdpImplInhibit *object,
   if (!g_variant_lookup (arg_options, "reason", "&s", &reason))
     reason = "";
 
-  org_gnome_session_manager_call_inhibit (session,
+  org_gnome_session_manager_call_inhibit (sessionmanager,
                                           arg_app_id,
                                           0, /* window */
                                           reason,
@@ -131,7 +121,7 @@ handle_inhibit_gnome (XdpImplInhibit *object,
   return TRUE;
 }
 
-static OrgFreedesktopScreenSaver *screen_saver;
+static OrgFreedesktopScreenSaver *fdo_screensaver;
 
 static void
 uninhibit_done_fdo (GObject *source,
@@ -140,7 +130,7 @@ uninhibit_done_fdo (GObject *source,
 {
   g_autoptr(GError) error = NULL;
 
-  if (!org_freedesktop_screen_saver_call_un_inhibit_finish (screen_saver,
+  if (!org_freedesktop_screen_saver_call_un_inhibit_finish (fdo_screensaver,
                                                             result,
                                                             &error))
     g_warning ("Backend call failed: %s", error->message);
@@ -159,7 +149,7 @@ handle_close_fdo (XdpImplRequest *object,
    */
   cookie = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (request), "cookie"));
   if (cookie)
-    org_freedesktop_screen_saver_call_un_inhibit (screen_saver,
+    org_freedesktop_screen_saver_call_un_inhibit (fdo_screensaver,
                                                   cookie,
                                                   NULL,
                                                   uninhibit_done_fdo,
@@ -185,7 +175,7 @@ inhibit_done_fdo (GObject *source,
   gboolean closed;
   g_autoptr(GError) error = NULL;
 
-  if (!org_freedesktop_screen_saver_call_inhibit_finish (screen_saver,
+  if (!org_freedesktop_screen_saver_call_inhibit_finish (fdo_screensaver,
                                                          &cookie,
                                                          result,
                                                          &error))
@@ -194,7 +184,7 @@ inhibit_done_fdo (GObject *source,
   closed = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (request), "closed"));
 
   if (closed)
-    org_freedesktop_screen_saver_call_un_inhibit (screen_saver,
+    org_freedesktop_screen_saver_call_un_inhibit (fdo_screensaver,
                                                   cookie,
                                                   NULL,
                                                   uninhibit_done_fdo,
@@ -237,7 +227,7 @@ handle_inhibit_fdo (XdpImplInhibit *object,
   if (!g_variant_lookup (arg_options, "reason", "&s", &reason))
     reason = "";
 
-  org_freedesktop_screen_saver_call_inhibit (screen_saver,
+  org_freedesktop_screen_saver_call_inhibit (fdo_screensaver,
                                              arg_app_id,
                                              reason,
                                              NULL,
@@ -249,52 +239,201 @@ handle_inhibit_fdo (XdpImplInhibit *object,
   return TRUE;
 }
 
+static GList *active_sessions = NULL;
+
+typedef struct
+{
+  Session parent;
+
+  gulong active_changed_handler_id;
+} InhibitSession;
+
+typedef struct _InhibitSessionClass
+{
+  SessionClass parent_class;
+} InhibitSessionClass;
+
+GType inhibit_session_get_type (void);
+G_DEFINE_TYPE (InhibitSession, inhibit_session, session_get_type ())
+
+static void
+inhibit_session_close (Session *session)
+{
+  InhibitSession *inhibit_session = (InhibitSession *)session;
+
+  g_debug ("Closing inhibit session %s", ((Session *)inhibit_session)->id);
+
+  active_sessions = g_list_remove (active_sessions, session);
+}
+
+static void
+inhibit_session_finalize (GObject *object)
+{
+  G_OBJECT_CLASS (inhibit_session_parent_class)->finalize (object);
+}
+
+static void
+inhibit_session_init (InhibitSession *inhibit_session)
+{
+}
+
+static void
+inhibit_session_class_init (InhibitSessionClass *klass)
+{
+  GObjectClass *gobject_class;
+  SessionClass *session_class;
+
+  gobject_class = (GObjectClass *)klass;
+  gobject_class->finalize = inhibit_session_finalize;
+
+  session_class = (SessionClass *)klass;
+  session_class->close = inhibit_session_close;
+}
+
+static void
+active_changed_cb (Session *session,
+                   gboolean active)
+{
+  GVariantBuilder state;
+
+  g_debug ("Updating inhibit session %s", session->id);
+
+  g_variant_builder_init (&state, G_VARIANT_TYPE_VARDICT);
+  g_variant_builder_add (&state, "{sv}",
+                         "screensaver-active", g_variant_new_boolean (active));
+  g_signal_emit_by_name (inhibit, "state-changed", session->id, g_variant_builder_end (&state)); 
+}
+
+static InhibitSession *
+inhibit_session_new (const char *app_id,
+                     const char *session_handle)
+{
+  InhibitSession *inhibit_session;
+  gboolean active;
+
+  g_debug ("Creating inhibit session %s", session_handle);
+
+  inhibit_session = g_object_new (inhibit_session_get_type (),
+                                  "id", session_handle,
+                                  NULL);
+
+  active_sessions = g_list_prepend (active_sessions, inhibit_session);
+
+  active = GPOINTER_TO_INT (g_object_get_data (screensaver ? (GObject *)screensaver : (GObject *)fdo_screensaver, "active"));
+  active_changed_cb ((Session *)inhibit_session, active);
+
+  return inhibit_session;
+}
+
+static gboolean
+handle_create_monitor (XdpImplInhibit *object,
+                       GDBusMethodInvocation *invocation,
+                       const char *arg_handle,
+                       const char *arg_session_handle,
+                       const char *arg_app_id,
+                       const char *arg_window)
+{
+  g_autoptr(GError) error = NULL;
+  int response;
+  Session *session;
+
+  session = (Session *)inhibit_session_new (arg_app_id, arg_session_handle);
+
+  if (!session_export (session, g_dbus_method_invocation_get_connection (invocation), &error))
+    {
+      g_clear_object (&session);
+      g_warning ("Failed to create inhibit session: %s", error->message);
+      response = 2;
+      goto out;
+    }
+
+  response = 0;
+
+out:
+  xdp_impl_inhibit_complete_create_monitor (object, invocation, response);
+
+  return TRUE;
+}
+
+static void
+global_active_changed_cb (GObject *object,
+                          gboolean active)
+{
+  GList *l;
+
+  g_debug ("Screensaver %s", active  ? "active" : "inactive");
+  g_object_set_data (object, "active", GINT_TO_POINTER (active));
+
+  for (l = active_sessions; l; l = l->next)
+    active_changed_cb ((Session *)l->data, active);
+}
+
 gboolean
 inhibit_init (GDBusConnection *bus,
               GError **error)
 {
-  GDBusInterfaceSkeleton *helper;
-  char *owner;
+  g_autofree char *owner = NULL;
+  g_autofree char *owner2 = NULL;
+  gboolean active;
 
-  helper = G_DBUS_INTERFACE_SKELETON (xdp_impl_inhibit_skeleton_new ());
+  inhibit = G_DBUS_INTERFACE_SKELETON (xdp_impl_inhibit_skeleton_new ());
 
-  session = org_gnome_session_manager_proxy_new_sync (bus,
-                                                      G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
-                                                      "org.gnome.SessionManager",
-                                                      "/org/gnome/SessionManager",
-                                                      NULL,
-                                                      NULL);
+  sessionmanager = org_gnome_session_manager_proxy_new_sync (bus,
+                                                             G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
+                                                             "org.gnome.SessionManager",
+                                                             "/org/gnome/SessionManager",
+                                                             NULL,
+                                                             NULL);
+  owner = g_dbus_proxy_get_name_owner (G_DBUS_PROXY (sessionmanager));
 
-  owner = g_dbus_proxy_get_name_owner (G_DBUS_PROXY (session));
-  if (owner)
+  screensaver = org_gnome_screen_saver_proxy_new_sync (bus,
+                                                       G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
+                                                       "org.gnome.ScreenSaver",
+                                                       "/org/gnome/ScreenSaver",
+                                                       NULL,
+                                                       NULL);
+  owner2 = g_dbus_proxy_get_name_owner (G_DBUS_PROXY (screensaver));
+
+  if (owner && owner2)
     {
-      g_free (owner);
-      g_signal_connect (helper, "handle-inhibit", G_CALLBACK (handle_inhibit_gnome), NULL);
+      g_signal_connect (inhibit, "handle-inhibit", G_CALLBACK (handle_inhibit_gnome), NULL);
+      g_signal_connect (inhibit, "handle-create-monitor", G_CALLBACK (handle_create_monitor), NULL);
+
+      g_signal_connect (screensaver, "active-changed", G_CALLBACK (global_active_changed_cb), NULL);
+      org_gnome_screen_saver_call_get_active_sync (screensaver, &active, NULL, NULL);
+      g_object_set_data (G_OBJECT (screensaver), "active", GINT_TO_POINTER (active));
+
       g_debug ("Using org.gnome.SessionManager for inhibit");
+      g_debug ("Using org.gnome.Screensaver for state changes");
     }
   else
     {
-      g_clear_object (&session);
+      g_clear_object (&sessionmanager);
+      g_clear_object (&screensaver);
 
-      screen_saver = org_freedesktop_screen_saver_proxy_new_sync (bus,
+      g_signal_connect (inhibit, "handle-inhibit", G_CALLBACK (handle_inhibit_fdo), NULL);
+      g_signal_connect (inhibit, "handle-create-monitor", G_CALLBACK (handle_create_monitor), NULL);
+
+      fdo_screensaver = org_freedesktop_screen_saver_proxy_new_sync (bus,
                                                                   G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
                                                                   "org.freedesktop.ScreenSaver",
                                                                   "/org/freedesktop/ScreenSaver",
                                                                   NULL,
                                                                   NULL);
 
-      g_signal_connect (helper, "handle-inhibit", G_CALLBACK (handle_inhibit_fdo), NULL);
+      g_signal_connect (fdo_screensaver, "active-changed", G_CALLBACK (global_active_changed_cb), NULL);
+      org_freedesktop_screen_saver_call_get_active_sync (fdo_screensaver, &active, NULL, NULL);
+      g_object_set_data (G_OBJECT (fdo_screensaver), "active", GINT_TO_POINTER (active));
+
       g_debug ("Using org.freedesktop.ScreenSaver for inhibit");
+      g_debug ("Using org.freedesktop.ScreenSaver for state changes");
     }
 
 
-  if (!g_dbus_interface_skeleton_export (helper,
-                                         bus,
-                                         "/org/freedesktop/portal/desktop",
-                                         error))
+  if (!g_dbus_interface_skeleton_export (inhibit, bus, "/org/freedesktop/portal/desktop", error))
     return FALSE;
 
-  g_debug ("providing %s", g_dbus_interface_skeleton_get_info (helper)->name);
+  g_debug ("providing %s", g_dbus_interface_skeleton_get_info (inhibit)->name);
 
   return TRUE;
 }

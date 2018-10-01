@@ -102,6 +102,28 @@ add_choices (FileDialogHandle *handle,
 }
 
 static void
+add_recent_entry (const char *app_id,
+                  const char *uri)
+{
+  GtkRecentManager *recent;
+  GtkRecentData data;
+
+  /* These fields are ignored by everybody, so it is not worth
+   * spending effort on filling them out. Just use defaults.
+   */
+  data.display_name = NULL;
+  data.description = NULL;
+  data.mime_type = "application/octet-stream";
+  data.app_name = (char *)app_id;
+  data.app_exec = "gio open %u";
+  data.groups = NULL;
+  data.is_private = FALSE;
+
+  recent = gtk_recent_manager_get_default ();
+  gtk_recent_manager_add_full (recent, uri, &data);
+}
+
+static void
 send_response (FileDialogHandle *handle)
 {
   GVariantBuilder uri_builder;
@@ -112,7 +134,10 @@ send_response (FileDialogHandle *handle)
 
   g_variant_builder_init (&uri_builder, G_VARIANT_TYPE_STRING_ARRAY);
   for (l = handle->uris; l; l = l->next)
-    g_variant_builder_add (&uri_builder, "s", l->data);
+    {
+      add_recent_entry (handle->request->app_id, l->data);
+      g_variant_builder_add (&uri_builder, "s", l->data);
+    }
 
   g_variant_builder_add (&opt_builder, "{sv}", "uris", g_variant_builder_end (&uri_builder));
   g_variant_builder_add (&opt_builder, "{sv}", "writable", g_variant_new_boolean (handle->allow_write));

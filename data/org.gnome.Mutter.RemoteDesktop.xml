@@ -22,8 +22,19 @@
     </method>
 
     <!--
-        Version:
-        @short_description: API version
+	SupportedDeviceTypes:
+	@short_description: Bit mask of supported device types
+
+	Device types:
+	  1: keyboard
+	  2: pointer
+	  4: touchscreen
+    -->
+    <property name="SupportedDeviceTypes" type="u" access="read" />
+
+    <!--
+	Version:
+	@short_description: API version
     -->
     <property name="Version" type="i" access="read" />
 
@@ -101,10 +112,14 @@
 	NotifyPointerAxis:
 
 	A smooth pointer axis event notification
+
+	Possible @flags:
+	  1: finish - scroll motion was finished (e.g. fingers lifted)
      -->
     <method name="NotifyPointerAxis">
       <arg name="dx" type="d" direction="in" />
       <arg name="dy" type="d" direction="in" />
+      <arg name="flags" type="u" direction="in" />
     </method>
     <!--
 	NotifyPointerAxisDiscrete:
@@ -117,7 +132,7 @@
     </method>
 
     <!--
-	NotifyPointerMotionAbsolute:
+	NotifyPointerMotionRelative:
 
 	A absolute pointer motion event notification
      -->

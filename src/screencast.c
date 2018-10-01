@@ -171,6 +171,9 @@ screen_cast_dialog_done (GtkWidget *widget,
 
   if (response != 0)
     cancel_start_session (dialog_handle->session, response);
+
+  if (dialog_handle->request->exported)
+    request_unexport (dialog_handle->request);
 }
 
 static ScreenCastDialogHandle *
@@ -257,16 +260,10 @@ handle_create_session (XdpImplScreenCast *object,
                        const char *arg_app_id,
                        GVariant *arg_options)
 {
-  const char *sender;
-  g_autoptr(Request) request = NULL;
   g_autoptr(GError) error = NULL;
   int response;
   Session *session;
   GVariantBuilder results_builder;
-
-  sender = g_dbus_method_invocation_get_sender (invocation);
-
-  request = request_new (sender, arg_app_id, arg_handle);
 
   session = (Session *)screen_cast_session_new (arg_app_id,
                                                 arg_session_handle);
@@ -284,8 +281,6 @@ handle_create_session (XdpImplScreenCast *object,
   response = 0;
 
 out:
-  request_export (request, g_dbus_method_invocation_get_connection (invocation));
-
   g_variant_builder_init (&results_builder, G_VARIANT_TYPE_VARDICT);
   xdp_impl_screen_cast_complete_create_session (object,
                                                 invocation,
@@ -303,17 +298,12 @@ handle_select_sources (XdpImplScreenCast *object,
                        const char *arg_app_id,
                        GVariant *arg_options)
 {
-  const char *sender;
-  g_autoptr(Request) request = NULL;
   Session *session;
   int response;
   uint32_t types;
   gboolean multiple;
   GVariantBuilder results_builder;
   GVariant *results;
-
-  sender = g_dbus_method_invocation_get_sender (invocation);
-  request = request_new (sender, arg_app_id, arg_handle);
 
   session = lookup_session (arg_session_handle);
   if (!session)
@@ -359,8 +349,6 @@ handle_select_sources (XdpImplScreenCast *object,
     }
 
 out:
-  request_export (request, g_dbus_method_invocation_get_connection (invocation));
-
   g_variant_builder_init (&results_builder, G_VARIANT_TYPE_VARDICT);
   results = g_variant_builder_end (&results_builder);
   xdp_impl_screen_cast_complete_select_sources (object, invocation,

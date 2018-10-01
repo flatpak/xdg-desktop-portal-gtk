@@ -7,8 +7,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-14 12:37+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
+"issues\n"
+"POT-Creation-Date: 2018-07-24 01:41+0000\n"
 "PO-Revision-Date: 2018-02-19 05:21-0600\n"
 "Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
 "Language-Team: Spanish; Castilian <>\n"
@@ -85,20 +86,20 @@ msgstr "Co_mpartir"
 msgid "Make changes before sharing the information"
 msgstr "Realizar cambios antes de compartir la información"
 
-#: src/appchooserdialog.c:154
+#: src/appchooserdialog.c:156
 msgid "Failed to start Software"
 msgstr "No se pudo iniciar Software"
 
-#: src/appchooserdialog.c:373
+#: src/appchooserdialog.c:395
 #, c-format
 msgid ""
 "Select an application to open “%s”. More applications are available in <a "
 "href='software'>Software.</a>"
 msgstr ""
-"Seleccione una aplicación para abrir «%s». Hay más aplicaciones "
-"disponibles en <a href='software'>Software</a>."
+"Seleccione una aplicación para abrir «%s». Hay más aplicaciones disponibles "
+"en <a href='software'>Software</a>."
 
-#: src/appchooserdialog.c:378
+#: src/appchooserdialog.c:400
 msgid ""
 "Select an application. More applications are available in <a "
 "href='software'>Software.</a>"
@@ -106,12 +107,12 @@ msgstr ""
 "Seleccione una aplicación. Hay más aplicaciones disponibles en <a "
 "href='software'>Software</a>."
 
-#: src/appchooserdialog.c:391
+#: src/appchooserdialog.c:413
 #, c-format
 msgid "Unable to find an application that is able to open “%s”."
 msgstr "No se encontró ninguna aplicación capaz de abrir «%s»."
 
-#: src/appchooserdialog.c:396
+#: src/appchooserdialog.c:418
 msgid "Unable to find a suitable application."
 msgstr "No se encontró ninguna aplicación adecuada."
 
@@ -143,12 +144,12 @@ msgstr "Teclado"
 msgid "Touch screen"
 msgstr "Pantalla táctil"
 
-#: src/remotedesktopdialog.c:302
+#: src/remotedesktopdialog.c:303
 #, c-format
 msgid "Select what to share with %s"
 msgstr "Seleccione qué compartir con %s"
 
-#: src/remotedesktopdialog.c:307
+#: src/remotedesktopdialog.c:308
 msgid "Select what to share with the requesting application"
 msgstr "Seleccione qué compartir con la aplicación solicitante"
 
@@ -170,12 +171,12 @@ msgid "Select monitor to share with the requesting application"
 msgstr ""
 "Seleccione el monitor que quiera compartir con la aplicación solicitante"
 
-#: src/screenshotdialog.c:420
+#: src/screenshotdialog.c:422
 #, c-format
 msgid "Share this screenshot with %s?"
 msgstr "¿Quiere compartir esta captura de pantalla con %s?"
 
-#: src/screenshotdialog.c:423
+#: src/screenshotdialog.c:426
 msgid "Share this screenshot with the requesting application?"
 msgstr ""
 "¿Quiere compartir esta captura de pantalla con la aplicación solicitante?"

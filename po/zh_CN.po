@@ -6,8 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-14 12:37+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
+"issues\n"
+"POT-Creation-Date: 2018-07-24 01:41+0000\n"
 "PO-Revision-Date: 2016-10-28 18:05-0400\n"
 "Last-Translator: Mingye Wang (Arthur2e5) <arthur200126@gmail.com>\n"
 "Language-Team: Chinese (China) <i18n-zh@googlegroups.com>\n"
@@ -85,29 +86,29 @@ msgstr "分享(_S)"
 msgid "Make changes before sharing the information"
 msgstr ""
 
-#: src/appchooserdialog.c:154
+#: src/appchooserdialog.c:156
 msgid "Failed to start Software"
 msgstr ""
 
-#: src/appchooserdialog.c:373
+#: src/appchooserdialog.c:395
 #, c-format
 msgid ""
 "Select an application to open “%s”. More applications are available in <a "
 "href='software'>Software.</a>"
 msgstr ""
 
-#: src/appchooserdialog.c:378
+#: src/appchooserdialog.c:400
 msgid ""
 "Select an application. More applications are available in <a "
 "href='software'>Software.</a>"
 msgstr ""
 
-#: src/appchooserdialog.c:391
+#: src/appchooserdialog.c:413
 #, c-format
 msgid "Unable to find an application that is able to open “%s”."
 msgstr ""
 
-#: src/appchooserdialog.c:396
+#: src/appchooserdialog.c:418
 msgid "Unable to find a suitable application."
 msgstr ""
 
@@ -140,12 +141,12 @@ msgstr ""
 msgid "Touch screen"
 msgstr ""
 
-#: src/remotedesktopdialog.c:302
+#: src/remotedesktopdialog.c:303
 #, c-format
 msgid "Select what to share with %s"
 msgstr ""
 
-#: src/remotedesktopdialog.c:307
+#: src/remotedesktopdialog.c:308
 #, fuzzy
 msgid "Select what to share with the requesting application"
 msgstr "与正发出请求的应用程序共享此截图吗？"
@@ -169,12 +170,12 @@ msgstr ""
 msgid "Select monitor to share with the requesting application"
 msgstr "与正发出请求的应用程序共享此截图吗？"
 
-#: src/screenshotdialog.c:420
+#: src/screenshotdialog.c:422
 #, c-format
 msgid "Share this screenshot with %s?"
 msgstr "要与 %s 分享截屏吗？"
 
-#: src/screenshotdialog.c:423
+#: src/screenshotdialog.c:426
 msgid "Share this screenshot with the requesting application?"
 msgstr "与正发出请求的应用程序共享此截图吗？"
 

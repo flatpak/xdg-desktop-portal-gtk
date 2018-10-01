@@ -36,6 +36,7 @@ $(shell_built_sources): src/Makefile.am.inc
 	$(top_srcdir)/data/org.gnome.Shell.Screenshot.xml	        \
 	$(top_srcdir)/data/org.gtk.Notifications.xml			\
 	$(top_srcdir)/data/org.gnome.SessionManager.xml		        \
+	$(top_srcdir)/data/org.gnome.ScreenSaver.xml			\
 	$(top_srcdir)/data/org.freedesktop.ScreenSaver.xml		\
 	$(top_srcdir)/data/org.freedesktop.Accounts.xml		        \
 	$(top_srcdir)/data/org.freedesktop.Accounts.User.xml            \

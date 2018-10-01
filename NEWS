@@ -1,3 +1,52 @@
+Major changes in 1.0.2
+======================
+
+* filechooser: Add returned files to recent files
+* inhibit: Implement screensaver monitoring
+
+Major changes in 1.0.1
+======================
+
+* Use gvfs
+* Unset GTK_USE_PORTAL
+* Require xdg-desktop-portal 1.0
+* Translation updates
+
+Major changes in 1.0
+====================
+
+* screenshot: Add a PickColor method
+* screencast: Some UI improvements
+* Improve --help output
+
+Major changes in 0.99
+=====================
+
+* Shorten excessively long filenames in the app chooser dialog
+* Fixes for the screencast portal
+* Support more email clients in the Email portal
+* Fix a crash in the print portal
+
+Major changes in 0.11
+=====================
+
+* Add dependency on gio-unix-2.0.
+* remotedesktop: Add support for the 'finish' flag of NotifyPointerAxis.
+* remotedesktop: Correctly expose device types supporting remote control.
+* print: Add a 'Print Preview' button (requires evince-previewer).
+* screenshot: Make sure the dialog is shown in the interactive case.
+
+* Translation updates
+ Brazilian Portuguese
+ Chinese (Taiwan)
+ Czech
+ Hungarian
+ Indonesian
+ Italian
+ Lithuanian
+ Spanish
+ Ukrainian
+
 Major changes in 0.10
 =====================
 

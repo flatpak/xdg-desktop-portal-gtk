@@ -6,9 +6,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-14 12:37+0100\n"
-"PO-Revision-Date: 2018-02-13 01:28+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
+"issues\n"
+"POT-Creation-Date: 2018-08-21 15:25+0000\n"
+"PO-Revision-Date: 2018-08-21 22:20+0300\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
@@ -17,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
 "%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.1.1\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
@@ -84,11 +85,11 @@ msgstr "_Bendrinti"
 msgid "Make changes before sharing the information"
 msgstr "Prieš bendrinant informaciją, atlikti pakeitimus"
 
-#: src/appchooserdialog.c:154
+#: src/appchooserdialog.c:156
 msgid "Failed to start Software"
 msgstr "Nepavyko paleisti Programinės įrangos"
 
-#: src/appchooserdialog.c:373
+#: src/appchooserdialog.c:395
 #, c-format
 msgid ""
 "Select an application to open “%s”. More applications are available in <a "
@@ -97,7 +98,7 @@ msgstr ""
 "Pasirinkite programą, skirtą atverti \"%s\". Daugiau programų yra prieinama "
 "<a href='software'>Programinėje įrangoje.</a>"
 
-#: src/appchooserdialog.c:378
+#: src/appchooserdialog.c:400
 msgid ""
 "Select an application. More applications are available in <a "
 "href='software'>Software.</a>"
@@ -105,12 +106,12 @@ msgstr ""
 "Pasirinkite programą. Daugiau programų yra prieinama <a "
 "href='software'>Programinėje įrangoje.</a>"
 
-#: src/appchooserdialog.c:391
+#: src/appchooserdialog.c:413
 #, c-format
 msgid "Unable to find an application that is able to open “%s”."
 msgstr "Nepavyko rasti programos, kuri galėtų atverti \"%s\"."
 
-#: src/appchooserdialog.c:396
+#: src/appchooserdialog.c:418
 msgid "Unable to find a suitable application."
 msgstr "Nepavyko rasti tinkamos programos."
 
@@ -142,14 +143,14 @@ msgstr "Klaviatūra"
 msgid "Touch screen"
 msgstr "Jutiklinis ekranas"
 
-#: src/remotedesktopdialog.c:302
+#: src/remotedesktopdialog.c:303
 #, c-format
-msgid "Select what to share with %s"
-msgstr "Pasirinkti ką bendrinti su %s"
+msgid "Select devices to share with %s"
+msgstr "Pasirinkti įrenginius, kuriuos bendrinti su %s"
 
-#: src/remotedesktopdialog.c:307
-msgid "Select what to share with the requesting application"
-msgstr "Pasirinkti ką bendrinti su prašančia programa"
+#: src/remotedesktopdialog.c:308
+msgid "Select devices to share with the requesting application"
+msgstr "Pasirinkti įrenginius, kuriuos bendrinti su prašančia programa"
 
 #: src/remotedesktopdialog.ui:12
 msgid "Remote desktop"
@@ -168,12 +169,12 @@ msgstr "Pasirinkti vaizduoklį, kurį bendrinti su %s"
 msgid "Select monitor to share with the requesting application"
 msgstr "Pasirinkti vaizduoklį, kurį bendrinti su prašančia programa"
 
-#: src/screenshotdialog.c:420
+#: src/screenshotdialog.c:422
 #, c-format
 msgid "Share this screenshot with %s?"
 msgstr "Bendrinti šią ekrano kopiją su %s?"
 
-#: src/screenshotdialog.c:423
+#: src/screenshotdialog.c:426
 msgid "Share this screenshot with the requesting application?"
 msgstr "Bendrinti šią ekrano kopiją su prašančia programa?"
 

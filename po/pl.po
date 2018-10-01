@@ -7,9 +7,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-14 12:37+0100\n"
-"PO-Revision-Date: 2018-02-13 16:22+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
+"issues\n"
+"POT-Creation-Date: 2018-08-20 13:41+0000\n"
+"PO-Revision-Date: 2018-08-20 15:45+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
@@ -84,11 +85,11 @@ msgstr "_Udostępnij"
 msgid "Make changes before sharing the information"
 msgstr "Umożliwia wprowadzenie zmian przed udostępnieniem informacji"
 
-#: src/appchooserdialog.c:154
+#: src/appchooserdialog.c:156
 msgid "Failed to start Software"
 msgstr "Uruchomienie Menedżera oprogramowania się nie powiodło"
 
-#: src/appchooserdialog.c:373
+#: src/appchooserdialog.c:395
 #, c-format
 msgid ""
 "Select an application to open “%s”. More applications are available in <a "
@@ -97,7 +98,7 @@ msgstr ""
 "Proszę wybrać program do otwarcia pliku „%s”. Więcej programów jest "
 "dostępnych w <a href='software'>Menedżerze oprogramowania.</a>"
 
-#: src/appchooserdialog.c:378
+#: src/appchooserdialog.c:400
 msgid ""
 "Select an application. More applications are available in <a "
 "href='software'>Software.</a>"
@@ -105,12 +106,12 @@ msgstr ""
 "Proszę wybrać program. Więcej programów jest dostępnych w <a "
 "href='software'>Menedżerze oprogramowania.</a>"
 
-#: src/appchooserdialog.c:391
+#: src/appchooserdialog.c:413
 #, c-format
 msgid "Unable to find an application that is able to open “%s”."
 msgstr "Nie można odnaleźć programu do otwarcia pliku „%s”."
 
-#: src/appchooserdialog.c:396
+#: src/appchooserdialog.c:418
 msgid "Unable to find a suitable application."
 msgstr "Nie można odnaleźć odpowiedniego programu."
 
@@ -142,14 +143,14 @@ msgstr "Klawiatura"
 msgid "Touch screen"
 msgstr "Ekran dotykowy"
 
-#: src/remotedesktopdialog.c:302
+#: src/remotedesktopdialog.c:303
 #, c-format
-msgid "Select what to share with %s"
-msgstr "Wybór, co udostępnić programowi „%s”"
+msgid "Select devices to share with %s"
+msgstr "Wybór urządzeń do udostępnienia programowi „%s”"
 
-#: src/remotedesktopdialog.c:307
-msgid "Select what to share with the requesting application"
-msgstr "Wybór, co udostępnić proszącemu o to programowi"
+#: src/remotedesktopdialog.c:308
+msgid "Select devices to share with the requesting application"
+msgstr "Wybór urządzeń do udostępnienia proszącemu o to programowi"
 
 #: src/remotedesktopdialog.ui:12
 msgid "Remote desktop"
@@ -168,12 +169,12 @@ msgstr "Wybór monitora do udostępnienia programowi „%s”"
 msgid "Select monitor to share with the requesting application"
 msgstr "Wybór monitora do udostępnienia proszącemu o to programowi"
 
-#: src/screenshotdialog.c:420
+#: src/screenshotdialog.c:422
 #, c-format
 msgid "Share this screenshot with %s?"
 msgstr "Udostępnić ten zrzut ekranu programowi „%s”?"
 
-#: src/screenshotdialog.c:423
+#: src/screenshotdialog.c:426
 msgid "Share this screenshot with the requesting application?"
 msgstr "Udostępnić ten zrzut ekranu proszącemu o to programowi?"
 

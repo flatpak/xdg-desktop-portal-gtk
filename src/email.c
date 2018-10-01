@@ -106,6 +106,42 @@ compose_mail_thunderbird (const char  *address,
 }
 
 static gboolean
+compose_mail_mailto (GAppInfo *info,
+                     const char     *address,
+                     const char     *subject,
+                     const char     *body,
+                     const char    **attachments,
+                     GError        **error)
+{
+  g_autofree char *enc_subject = NULL;
+  g_autofree char *enc_body = NULL;
+  g_autoptr(GString) url = NULL;
+  g_autoptr(GList) uris = NULL;
+  int i;
+  gboolean success;
+
+  enc_subject = g_uri_escape_string (subject ? subject : "", NULL, FALSE);
+  enc_body = g_uri_escape_string (body ? body : "", NULL, FALSE);
+
+  url = g_string_new ("mailto:");
+
+  g_string_append_printf (url, "%s?", address ? address : "");
+  g_string_append_printf (url, "&subject=%s", enc_subject);
+  g_string_append_printf (url, "&body=%s", enc_body);
+
+  for (i = 0; attachments[i]; i++)
+    g_string_append_printf (url, "&attachment=%s", attachments[i]);
+
+  uris = g_list_append (uris, url->str);
+
+  g_debug ("Launching: %s\n", url->str);
+
+  success = g_app_info_launch_uris (info, uris, NULL, error);
+
+  return success;
+}
+
+static gboolean
 compose_mail (const char  *address,
               const char  *subject,
               const char  *body,
@@ -118,8 +154,10 @@ compose_mail (const char  *address,
 
         if (strstr (g_app_info_get_commandline (info), "thunderbird"))
                 return compose_mail_thunderbird (address, subject,body, attachments, error);
-        else
+        else if (strstr (g_app_info_get_commandline (info), "evolution"))
                 return compose_mail_evolution (address, subject,body, attachments, error);
+        else
+                return compose_mail_mailto(info, address, subject,body, attachments, error);
 }
 
 static gboolean

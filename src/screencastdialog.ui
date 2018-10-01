@@ -39,66 +39,19 @@
       </object>
     </child>
     <child>
-      <object class="GtkStack" id="main_stack">
+      <object class="GtkBox">
         <property name="visible">True</property>
-        <property name="can-focus">True</property>
-        <property name="homogeneous">False</property>
-        <property name="transition_type">crossfade</property>
+        <property name="orientation">vertical</property>
+        <property name="border-width">32</property>
+        <property name="spacing">32</property>
+        <property name="hexpand">True</property>
+        <property name="vexpand">True</property>
         <child>
-          <object class="GtkScrolledWindow">
+          <object class="ScreenCastWidget" id="screen_cast_widget">
             <property name="visible">True</property>
-            <property name="can-focus">True</property>
-            <property name="hscrollbar-policy">never</property>
-            <child>
-              <object class="GtkViewport">
-                <property name="visible">True</property>
-                <property name="shadow-type">none</property>
-                <child>
-                  <object class="GtkGrid">
-                    <property name="visible">True</property>
-                    <property name="border-width">32</property>
-
-                    <!-- Empty boxes to enforce 1/3 width for the main widgets -->
-                    <child>
-                      <object class="GtkBox">
-                        <property name="visible">True</property>
-                        <property name="hexpand">True</property>
-                      </object>
-                      <packing>
-                        <property name="left-attach">0</property>
-                        <property name="top-attach">0</property>
-                        <property name="height">3</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkBox">
-                        <property name="visible">True</property>
-                        <property name="hexpand">True</property>
-                      </object>
-                      <packing>
-                        <property name="left-attach">2</property>
-                        <property name="top-attach">0</property>
-                        <property name="height">3</property>
-                      </packing>
-                    </child>
-
-                    <!-- Monitor selection widget -->
-                    <child>
-                      <object class="ScreenCastWidget" id="screen_cast_widget">
-                        <property name="visible">True</property>
-                        <property name="hexpand">True</property>
-                        <property name="halign">fill</property>
-                        <property name="spacing">6</property>
-                      </object>
-                      <packing>
-                        <property name="left-attach">1</property>
-                        <property name="top-attach">1</property>
-                      </packing>
-                    </child>
-                  </object>
-                </child>
-              </object>
-            </child>
+            <property name="hexpand">True</property>
+            <property name="halign">fill</property>
+            <property name="spacing">6</property>
           </object>
         </child>
       </object>
