@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2018-07-24 01:41+0000\n"
-"PO-Revision-Date: 2018-02-22 16:06+0700\n"
-"Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
+"POT-Creation-Date: 2018-08-30 02:24+0000\n"
+"PO-Revision-Date: 2018-10-01 13:01+0700\n"
+"Last-Translator: Kukuh Syafaat <kukuhsyafaat@gnome.org>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
@@ -143,12 +143,12 @@ msgstr "Layar sentuh"
 
 #: src/remotedesktopdialog.c:303
 #, c-format
-msgid "Select what to share with %s"
-msgstr "Pilih yang akan dibagikan dengan %s"
+msgid "Select devices to share with %s"
+msgstr "Pilih perangkat yang akan dibagikan dengan %s"
 
 #: src/remotedesktopdialog.c:308
-msgid "Select what to share with the requesting application"
-msgstr "Pilih apa yang akan dibagikan dengan aplikasi yang meminta"
+msgid "Select devices to share with the requesting application"
+msgstr "Pilih perangkat yang akan dibagikan dengan aplikasi yang meminta"
 
 #: src/remotedesktopdialog.ui:12
 msgid "Remote desktop"
