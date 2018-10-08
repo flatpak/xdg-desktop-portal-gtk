@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2018-08-20 13:41+0000\n"
-"PO-Revision-Date: 2018-08-20 15:45+0200\n"
+"POT-Creation-Date: 2018-10-08 15:25+0000\n"
+"PO-Revision-Date: 2018-10-08 21:00+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
@@ -70,7 +70,7 @@ msgstr "Udostępnić informacje o użytkowniku proszącemu o to programowi?"
 msgid "Share Details"
 msgstr "Udostępnianie informacji"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:365
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:395
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
@@ -127,7 +127,11 @@ msgstr "Nie odnaleziono programów"
 msgid "Find Compatible Applications in Software"
 msgstr "Znajdź zgodne programy w Menedżerze oprogramowania"
 
-#: src/filechooser.c:363
+#: src/filechooser.c:390
+msgid "_Save"
+msgstr "_Zapisz"
+
+#: src/filechooser.c:392
 msgid "_Open"
 msgstr "_Otwórz"
 
