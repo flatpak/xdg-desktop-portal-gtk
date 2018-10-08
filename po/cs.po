@@ -11,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
 "POT-Creation-Date: 2018-07-24 01:41+0000\n"
-"PO-Revision-Date: 2018-08-26 00:56+0200\n"
+"PO-Revision-Date: 2018-10-09 00:52+0200\n"
 "Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -71,7 +71,7 @@ msgstr "Sdílet vaše osobní informace s aplikací, která o to žádá?"
 msgid "Share Details"
 msgstr "Sdílet detaily"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:365
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:395
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
@@ -128,7 +128,11 @@ msgstr "Nenalezeny žádné aplikace"
 msgid "Find Compatible Applications in Software"
 msgstr "Najít kompatibilní aplikace v Software"
 
-#: src/filechooser.c:363
+#: src/filechooser.c:390
+msgid "_Save"
+msgstr "_Uložit"
+
+#: src/filechooser.c:392
 msgid "_Open"
 msgstr "_Otevřít"
 
