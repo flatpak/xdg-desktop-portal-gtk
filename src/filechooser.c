@@ -385,7 +385,12 @@ handle_open (XdpImplFileChooser *object,
     modal = TRUE;
 
   if (!g_variant_lookup (arg_options, "accept_label", "&s", &accept_label))
-    accept_label = _("_Open");
+    {
+      if (strcmp (method_name, "SaveFile") == 0)
+        accept_label = _("_Save");
+      else
+        accept_label = _("_Open");
+    }
 
   cancel_label = _("_Cancel");
 
