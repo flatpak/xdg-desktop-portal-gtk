@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2018-07-24 01:41+0000\n"
-"PO-Revision-Date: 2018-03-26 20:59+0800\n"
+"POT-Creation-Date: 2018-10-10 03:25+0000\n"
+"PO-Revision-Date: 2018-10-10 12:22+0800\n"
 "Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) <chinese-l10n@googlegroups.com>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.1.1\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
@@ -68,7 +68,7 @@ msgstr "是否要和請求程式分享您的個人資訊？"
 msgid "Share Details"
 msgstr "分享細節"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:365
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:395
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
@@ -93,8 +93,8 @@ msgid ""
 "Select an application to open “%s”. More applications are available in <a "
 "href='software'>Software.</a>"
 msgstr ""
-"選取開啟「%s」的應用程式。《<a href='software'>軟體</a>》中有更多應用程式可"
-"用。"
+"選取開啟「%s」的應用程式。《<a href='software'>軟體</a>》中有更多應用程式"
+"可用。"
 
 #: src/appchooserdialog.c:400
 msgid ""
@@ -123,7 +123,11 @@ msgstr "找不到應用程式"
 msgid "Find Compatible Applications in Software"
 msgstr "在《軟體》中尋找相容的應用程式"
 
-#: src/filechooser.c:363
+#: src/filechooser.c:390
+msgid "_Save"
+msgstr "儲存(_S)"
+
+#: src/filechooser.c:392
 msgid "_Open"
 msgstr "開啟(_O)"
 
@@ -141,12 +145,12 @@ msgstr "觸控螢幕"
 
 #: src/remotedesktopdialog.c:303
 #, c-format
-msgid "Select what to share with %s"
-msgstr "選取您想和 %s 分享的項目"
+msgid "Select devices to share with %s"
+msgstr "選取要和 %s 分享的裝置"
 
 #: src/remotedesktopdialog.c:308
-msgid "Select what to share with the requesting application"
-msgstr "選取您想和請求程式分享的項目"
+msgid "Select devices to share with the requesting application"
+msgstr "選取您想和請求程式分享的裝置"
 
 #: src/remotedesktopdialog.ui:12
 msgid "Remote desktop"
@@ -192,7 +196,7 @@ msgstr "拍攝畫面快照"
 
 #: src/screenshotdialog.ui:122
 msgid "Grab the whole sc_reen"
-msgstr "擷取整個螢幕"
+msgstr "擷取整個螢幕(_R)"
 
 #: src/screenshotdialog.ui:133
 msgid "Grab the current _window"
@@ -221,3 +225,9 @@ msgstr "包含指標(_P)"
 #: src/screenshotdialog.ui:201
 msgid "Include the window _border"
 msgstr "包含視窗邊框(_B)"
+
+#~ msgid "Select what to share with %s"
+#~ msgstr "選取您想和 %s 分享的項目"
+
+#~ msgid "Select what to share with the requesting application"
+#~ msgstr "選取您想和請求程式分享的項目"
