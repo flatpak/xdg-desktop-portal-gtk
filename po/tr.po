@@ -1,17 +1,17 @@
 # Turkish translation for xdg-desktop-portal-gtk.
 # Copyright (C) 2017 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
 # This file is distributed under the same license as the xdg-desktop-portal-gtk package.
-# Muhammet Kara <muhammetk@gmail.com>, 2017.
+# Muhammet Kara <muhammetk@gnome.org>, 2017, 2018.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2018-07-24 01:41+0000\n"
-"PO-Revision-Date: 2017-10-06 21:57+0300\n"
-"Last-Translator: Muhammet Kara <muhammetk@gmail.com>\n"
-"Language-Team: Türkçe <gnome-turk@gnome.org>\n"
+"POT-Creation-Date: 2018-10-08 15:25+0000\n"
+"PO-Revision-Date: 2018-10-31 00:33+0300\n"
+"Last-Translator: Muhammet Kara <muhammetk@gnome.org>\n"
+"Language-Team: Turkish <gnome-turk@gnome.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -69,7 +69,7 @@ msgstr "Kişisel bilgileriniz, istekte bulunan uygulamayla paylaşılsın mı?"
 msgid "Share Details"
 msgstr "Ayrıntıları Paylaş"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:365
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:395
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
@@ -126,50 +126,51 @@ msgstr "Hiçbir Uygulama Bulunamadı"
 msgid "Find Compatible Applications in Software"
 msgstr "Uyumlu Uygulamaları Yazılımlar'da Bul"
 
-#: src/filechooser.c:363
+#: src/filechooser.c:390
+msgid "_Save"
+msgstr "_Kaydet"
+
+#: src/filechooser.c:392
 msgid "_Open"
 msgstr "_Aç"
 
 #: src/remotedesktopdialog.c:190
 msgid "Pointer"
-msgstr ""
+msgstr "İşaretçi"
 
 #: src/remotedesktopdialog.c:193
 msgid "Keyboard"
-msgstr ""
+msgstr "Klavye"
 
 #: src/remotedesktopdialog.c:196
 msgid "Touch screen"
-msgstr ""
+msgstr "Dokunmatik ekran"
 
 #: src/remotedesktopdialog.c:303
 #, c-format
-msgid "Select what to share with %s"
-msgstr ""
+msgid "Select devices to share with %s"
+msgstr "%s ile paylaşılacak cihazları seçin"
 
 #: src/remotedesktopdialog.c:308
-#, fuzzy
-msgid "Select what to share with the requesting application"
-msgstr "Bu ekran görüntüsü, istekte bulunan uygulama ile paylaşılsın mı?"
+msgid "Select devices to share with the requesting application"
+msgstr "İstekte bulunan uygulama ile paylaşılacak cihazları seçin"
 
 #: src/remotedesktopdialog.ui:12
 msgid "Remote desktop"
-msgstr ""
+msgstr "Uzak masaüstü"
 
 #: src/screencastdialog.ui:12
-#, fuzzy
 msgid "Screen casting"
-msgstr "Ekran Görüntüsü"
+msgstr "Ekran yayını"
 
 #: src/screencastwidget.c:243
 #, c-format
 msgid "Select monitor to share with %s"
-msgstr ""
+msgstr "%s ile paylaşılacak monitörü seçin"
 
 #: src/screencastwidget.c:248
-#, fuzzy
 msgid "Select monitor to share with the requesting application"
-msgstr "Bu ekran görüntüsü, istekte bulunan uygulama ile paylaşılsın mı?"
+msgstr "İstekte bulunan uygulama ile paylaşılacak monitörü seçin"
 
 #: src/screenshotdialog.c:422
 #, c-format
@@ -186,46 +187,44 @@ msgstr "Ekran Görüntüsü"
 
 #: src/screenshotdialog.ui:30
 msgid "_Options…"
-msgstr ""
+msgstr "Se_çenekler..."
 
 #: src/screenshotdialog.ui:55
-#, fuzzy
 msgid "Take _Screenshot"
-msgstr "Ekran Görüntüsü"
+msgstr "Ekran Görüntüsü _Al"
 
 #: src/screenshotdialog.ui:111
-#, fuzzy
 msgid "Take Screenshot"
-msgstr "Ekran Görüntüsü"
+msgstr "Ekran Görüntüsü Al"
 
 #: src/screenshotdialog.ui:122
 msgid "Grab the whole sc_reen"
-msgstr ""
+msgstr "Tüm _masaüstünü yakala"
 
 #: src/screenshotdialog.ui:133
 msgid "Grab the current _window"
-msgstr ""
+msgstr "Geçerli _pencereyi yakala"
 
 #: src/screenshotdialog.ui:144
 msgid "Select _area to grab"
-msgstr ""
+msgstr "Yakalanacak _alan seç"
 
 #: src/screenshotdialog.ui:158
 msgid "Grab after a _delay of"
-msgstr ""
+msgstr "Yakalamadan ö_nce beklenecek süre"
 
 #: src/screenshotdialog.ui:171
 msgid "seconds"
-msgstr ""
+msgstr "saniye"
 
 #: src/screenshotdialog.ui:181
 msgid "Effects"
-msgstr ""
+msgstr "Etkiler"
 
 #: src/screenshotdialog.ui:192
 msgid "Include _pointer"
-msgstr ""
+msgstr "_Belirteçi dahil et"
 
 #: src/screenshotdialog.ui:201
 msgid "Include the window _border"
-msgstr ""
+msgstr "Pencere _kenarlığını dahil et"
