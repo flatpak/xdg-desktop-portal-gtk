@@ -6,12 +6,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
-"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
-"issues\n"
-"POT-Creation-Date: 2018-07-24 01:41+0000\n"
-"PO-Revision-Date: 2018-03-18 10:34+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/issues"
+"\n"
+"POT-Creation-Date: 2018-10-08 15:25+0000\n"
+"PO-Revision-Date: 2018-10-29 13:20+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
-"Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
+"Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -70,7 +70,7 @@ msgstr "Поділитися вашими особистими даними з �
 msgid "Share Details"
 msgstr "Оприлюднити подробиці"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:365
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:395
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
@@ -127,7 +127,11 @@ msgstr "Програм не знайдено"
 msgid "Find Compatible Applications in Software"
 msgstr "Пошук відповідних програм у Програмних засобах"
 
-#: src/filechooser.c:363
+#: src/filechooser.c:390
+msgid "_Save"
+msgstr "_Зберегти"
+
+#: src/filechooser.c:392
 msgid "_Open"
 msgstr "_Відкрити"
 
@@ -145,12 +149,15 @@ msgstr "Сенсорна панель"
 
 #: src/remotedesktopdialog.c:303
 #, c-format
-msgid "Select what to share with %s"
-msgstr "Виберіть, що слід оприлюднити для %s"
+#| msgid "Select what to share with %s"
+msgid "Select devices to share with %s"
+msgstr "Виберіть пристрої, які слід оприлюднити для %s"
 
 #: src/remotedesktopdialog.c:308
-msgid "Select what to share with the requesting application"
-msgstr "Виберіть, що слід оприлюднити за допомогою відповідної програми"
+#| msgid "Select what to share with the requesting application"
+msgid "Select devices to share with the requesting application"
+msgstr ""
+"Виберіть пристрої, які слід оприлюднити за допомогою відповідної програми"
 
 #: src/remotedesktopdialog.ui:12
 msgid "Remote desktop"
