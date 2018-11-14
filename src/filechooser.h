@@ -22,4 +22,4 @@
 
 #include <gio/gio.h>
 
-gboolean file_chooser_init (GDBusConnection *bus, GError **error);
+gboolean file_chooser_init (GDBusConnection *bus, GSettings *lockdown, GError **error);
