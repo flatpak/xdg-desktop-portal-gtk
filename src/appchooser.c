@@ -41,7 +41,6 @@
 #include "appchooserdialog.h"
 #include "externalwindow.h"
 
-
 typedef struct {
   XdpImplAppChooser *impl;
   GDBusMethodInvocation *invocation;
@@ -224,8 +223,20 @@ handle_choose_application (XdpImplAppChooser *object,
   return TRUE;
 }
 
+static void
+lockdown_changed (GSettings *settings,
+                  const char *key,
+                  gpointer data)
+{
+  XdpImplAppChooser *impl = data;
+  gboolean disabled = g_settings_get_boolean (settings, key);
+  g_debug ("Lockdown changed for app chooser: %s = %s", key, disabled ? "true" : "false");
+  xdp_impl_app_chooser_set_disabled (impl, disabled);
+}
+
 gboolean
 app_chooser_init (GDBusConnection *bus,
+                  GSettings *lockdown,
                   GError **error)
 {
   GDBusInterfaceSkeleton *helper;
@@ -233,6 +244,10 @@ app_chooser_init (GDBusConnection *bus,
   helper = G_DBUS_INTERFACE_SKELETON (xdp_impl_app_chooser_skeleton_new ());
 
   g_signal_connect (helper, "handle-choose-application", G_CALLBACK (handle_choose_application), NULL);
+
+  g_signal_connect (lockdown, "changed::disable-application-handlers",
+                    G_CALLBACK (lockdown_changed), helper);
+  lockdown_changed (lockdown, "disable-application-handlers", helper);
 
   if (!g_dbus_interface_skeleton_export (helper,
                                          bus,
