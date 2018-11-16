@@ -28,9 +28,14 @@
 typedef struct _AppChooserDialog AppChooserDialog;
 typedef struct _AppChooserDialogClass AppChooserDialogClass;
 
+GType              app_chooser_dialog_get_type (void) G_GNUC_CONST;
+
 AppChooserDialog * app_chooser_dialog_new (const char **app_ids,
                                            const char  *default_id,
                                            const char  *content_type,
                                            const char  *filename);
+
+void      app_chooser_dialog_update_choices (AppChooserDialog *dialog,
+                                             const char       **app_ids);
 
 GAppInfo *app_chooser_dialog_get_info (AppChooserDialog *dialog);
