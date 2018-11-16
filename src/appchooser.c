@@ -41,6 +41,8 @@
 #include "appchooserdialog.h"
 #include "externalwindow.h"
 
+static GHashTable *handles;
+
 typedef struct {
   XdpImplAppChooser *impl;
   GDBusMethodInvocation *invocation;
@@ -58,6 +60,7 @@ app_dialog_handle_free (gpointer data)
 {
   AppDialogHandle *handle = data;
 
+  g_hash_table_remove (handles, handle->request->id);
   g_clear_object (&handle->external_parent);
   g_object_unref (handle->request);
   g_object_unref (handle->dialog);
@@ -205,6 +208,8 @@ handle_choose_application (XdpImplAppChooser *object,
   handle->dialog = g_object_ref (dialog);
   handle->external_parent = external_parent;
 
+  g_hash_table_insert (handles, handle->request->id, handle);
+
   g_signal_connect (request, "handle-close",
                     G_CALLBACK (handle_close), handle);
 
@@ -219,6 +224,35 @@ handle_choose_application (XdpImplAppChooser *object,
   gtk_window_present (GTK_WINDOW (dialog));
 
   request_export (request, g_dbus_method_invocation_get_connection (invocation));
+
+  return TRUE;
+}
+
+static gboolean
+handle_update_choices (XdpImplAppChooser *object,
+                       GDBusMethodInvocation *invocation,
+                       const char *arg_handle,
+                       const char **choices)
+{
+  AppDialogHandle *handle;
+  g_autofree char *a = NULL;
+
+  handle = g_hash_table_lookup (handles, arg_handle);
+
+  if (handle == NULL)
+    {
+      g_dbus_method_invocation_return_error (invocation,
+                                             XDG_DESKTOP_PORTAL_ERROR,
+                                             XDG_DESKTOP_PORTAL_ERROR_NOT_FOUND,
+                                             "Request not found");
+      return TRUE;
+    }
+
+  g_debug ("Updating choices: %s\n", a = g_strjoinv (", ", (char **)choices));
+
+  app_chooser_dialog_update_choices (APP_CHOOSER_DIALOG (handle->dialog), choices);
+
+  g_dbus_method_invocation_return_value (invocation, NULL);
 
   return TRUE;
 }
@@ -244,6 +278,7 @@ app_chooser_init (GDBusConnection *bus,
   helper = G_DBUS_INTERFACE_SKELETON (xdp_impl_app_chooser_skeleton_new ());
 
   g_signal_connect (helper, "handle-choose-application", G_CALLBACK (handle_choose_application), NULL);
+  g_signal_connect (helper, "handle-update-choices", G_CALLBACK (handle_update_choices), NULL);
 
   g_signal_connect (lockdown, "changed::disable-application-handlers",
                     G_CALLBACK (lockdown_changed), helper);
@@ -254,6 +289,8 @@ app_chooser_init (GDBusConnection *bus,
                                          DESKTOP_PORTAL_OBJECT_PATH,
                                          error))
     return FALSE;
+
+  handles = g_hash_table_new (g_str_hash, g_str_equal);
 
   g_debug ("providing %s", g_dbus_interface_skeleton_get_info (helper)->name);
 

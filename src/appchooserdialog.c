@@ -54,6 +54,8 @@ struct _AppChooserDialog {
   char *content_type;
   char *search_text;
 
+  char **choices;
+
   GAppInfo *info;
 };
 
@@ -85,6 +87,7 @@ app_chooser_dialog_finalize (GObject *object)
 
   g_free (dialog->content_type);
   g_free (dialog->search_text);
+  g_strfreev (dialog->choices);
 
   G_OBJECT_CLASS (app_chooser_dialog_parent_class)->finalize (object);
 }
@@ -402,6 +405,8 @@ app_chooser_dialog_new (const char **choices,
 
   default_row = NULL;
 
+  dialog->choices = g_strdupv ((char **)choices);
+
   n_choices = g_strv_length ((char **)choices);
   if (n_choices == 0)
     {
@@ -445,4 +450,41 @@ app_chooser_dialog_new (const char **choices,
   gtk_flow_box_set_filter_func (GTK_FLOW_BOX (dialog->full_list), filter_func, dialog, NULL);
 
   return dialog;
+}
+
+void
+app_chooser_dialog_update_choices (AppChooserDialog  *dialog,
+                                   const char       **choices)
+{
+  int i;
+  GPtrArray *new_choices;
+
+  new_choices = g_ptr_array_new ();
+  g_ptr_array_set_size (new_choices, g_strv_length (dialog->choices));
+  for (i = 0; dialog->choices[i]; i++)
+    new_choices->pdata[i] = dialog->choices[i];
+
+  for (i = 0; choices[i]; i++)
+    {
+      g_autofree char *desktop_id = NULL;
+      g_autoptr(GAppInfo) info = NULL;
+      GtkWidget *row;
+
+      if (g_strv_contains ((const char * const *)dialog->choices, choices[i]))
+        continue;
+
+      g_ptr_array_add (new_choices, g_strdup (choices[i]));
+
+      desktop_id = g_strconcat (choices[i], ".desktop", NULL);
+      info = G_APP_INFO (g_desktop_app_info_new (desktop_id));
+
+      row = GTK_WIDGET (app_chooser_row_new (info));
+      gtk_widget_set_visible (row, TRUE);
+      gtk_flow_box_insert (GTK_FLOW_BOX (dialog->list), row, -1);
+    }
+
+  g_ptr_array_add (new_choices, NULL);
+
+  g_free (dialog->choices);
+  dialog->choices = (char **) g_ptr_array_free (new_choices, FALSE);
 }
