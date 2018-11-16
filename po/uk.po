@@ -6,9 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
-"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/issues"
-"\n"
-"POT-Creation-Date: 2018-10-08 15:25+0000\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
+"issues\n"
+"POT-Creation-Date: 2018-11-16 15:18-0500\n"
 "PO-Revision-Date: 2018-10-29 13:20+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -85,11 +85,11 @@ msgstr "_Оприлюднити"
 msgid "Make changes before sharing the information"
 msgstr "Внести зміни до оприлюднення даних"
 
-#: src/appchooserdialog.c:156
+#: src/appchooserdialog.c:159
 msgid "Failed to start Software"
 msgstr "Не вдалося запустити Програмні засоби"
 
-#: src/appchooserdialog.c:395
+#: src/appchooserdialog.c:398
 #, c-format
 msgid ""
 "Select an application to open “%s”. More applications are available in <a "
@@ -98,7 +98,7 @@ msgstr ""
 "Виберіть програму для відкриття «%s». Ширший список програм можна знайти у "
 "програмі <a href='software'>Програмні засоби</a>."
 
-#: src/appchooserdialog.c:400
+#: src/appchooserdialog.c:403
 msgid ""
 "Select an application. More applications are available in <a "
 "href='software'>Software.</a>"
@@ -106,12 +106,12 @@ msgstr ""
 "Виберіть програму. Ширший список програм можна знайти у програмі <a "
 "href='software'>Програмні засоби</a>."
 
-#: src/appchooserdialog.c:413
+#: src/appchooserdialog.c:418
 #, c-format
 msgid "Unable to find an application that is able to open “%s”."
 msgstr "Не вдалося знайти програму, яка здатна відкривати «%s»."
 
-#: src/appchooserdialog.c:418
+#: src/appchooserdialog.c:423
 msgid "Unable to find a suitable application."
 msgstr "Не вдалося знайти відповідну програму."
 
@@ -149,12 +149,10 @@ msgstr "Сенсорна панель"
 
 #: src/remotedesktopdialog.c:303
 #, c-format
-#| msgid "Select what to share with %s"
 msgid "Select devices to share with %s"
 msgstr "Виберіть пристрої, які слід оприлюднити для %s"
 
 #: src/remotedesktopdialog.c:308
-#| msgid "Select what to share with the requesting application"
 msgid "Select devices to share with the requesting application"
 msgstr ""
 "Виберіть пристрої, які слід оприлюднити за допомогою відповідної програми"

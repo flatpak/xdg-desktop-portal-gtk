@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2018-10-10 03:25+0000\n"
+"POT-Creation-Date: 2018-11-16 15:18-0500\n"
 "PO-Revision-Date: 2018-10-10 12:22+0800\n"
 "Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) <chinese-l10n@googlegroups.com>\n"
@@ -83,31 +83,31 @@ msgstr "分享(_S)"
 msgid "Make changes before sharing the information"
 msgstr "在分享資訊前做出修改"
 
-#: src/appchooserdialog.c:156
+#: src/appchooserdialog.c:159
 msgid "Failed to start Software"
 msgstr "無法啟動《軟體》"
 
-#: src/appchooserdialog.c:395
+#: src/appchooserdialog.c:398
 #, c-format
 msgid ""
 "Select an application to open “%s”. More applications are available in <a "
 "href='software'>Software.</a>"
 msgstr ""
-"選取開啟「%s」的應用程式。《<a href='software'>軟體</a>》中有更多應用程式"
-"可用。"
+"選取開啟「%s」的應用程式。《<a href='software'>軟體</a>》中有更多應用程式可"
+"用。"
 
-#: src/appchooserdialog.c:400
+#: src/appchooserdialog.c:403
 msgid ""
 "Select an application. More applications are available in <a "
 "href='software'>Software.</a>"
 msgstr "選取應用程式。《<a href='software'>軟體</a>》中有更多應用程式可用。"
 
-#: src/appchooserdialog.c:413
+#: src/appchooserdialog.c:418
 #, c-format
 msgid "Unable to find an application that is able to open “%s”."
 msgstr "找不到可開啟「%s」的應用程式。"
 
-#: src/appchooserdialog.c:418
+#: src/appchooserdialog.c:423
 msgid "Unable to find a suitable application."
 msgstr "找不到適合的應用程式。"
 

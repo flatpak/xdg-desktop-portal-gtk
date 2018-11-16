@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2018-07-24 01:41+0000\n"
+"POT-Creation-Date: 2018-11-16 15:18-0500\n"
 "PO-Revision-Date: 2017-12-06 14:54+0100\n"
 "Last-Translator: Josef Andersson <l10nl18nsweja@gmail.com>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
@@ -70,7 +70,7 @@ msgstr "Dela din personliga information med programmet som begär den?"
 msgid "Share Details"
 msgstr "Dela detaljer"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:365
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:395
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
@@ -85,11 +85,11 @@ msgstr "_Dela"
 msgid "Make changes before sharing the information"
 msgstr "Ändra informationen innan den delas"
 
-#: src/appchooserdialog.c:156
+#: src/appchooserdialog.c:159
 msgid "Failed to start Software"
 msgstr "Misslyckades med att starta Programvara"
 
-#: src/appchooserdialog.c:395
+#: src/appchooserdialog.c:398
 #, c-format
 msgid ""
 "Select an application to open “%s”. More applications are available in <a "
@@ -98,7 +98,7 @@ msgstr ""
 "Välj ett program för att öppna ”%s”. Fler program finns tillgängliga i <a "
 "href='software'>Programvara.</a>"
 
-#: src/appchooserdialog.c:400
+#: src/appchooserdialog.c:403
 msgid ""
 "Select an application. More applications are available in <a "
 "href='software'>Software.</a>"
@@ -106,12 +106,12 @@ msgstr ""
 "Välj ett program. Fler program finns tillgängliga i <a "
 "href='software'>Programvara.</a>"
 
-#: src/appchooserdialog.c:413
+#: src/appchooserdialog.c:418
 #, c-format
 msgid "Unable to find an application that is able to open “%s”."
 msgstr "Det går inte att hitta ett program som kan öppna ”%s”."
 
-#: src/appchooserdialog.c:418
+#: src/appchooserdialog.c:423
 msgid "Unable to find a suitable application."
 msgstr "Det går inte att hitta ett passande program."
 
@@ -127,7 +127,11 @@ msgstr "Inga program funna"
 msgid "Find Compatible Applications in Software"
 msgstr "Sök efter kompatibla program i Programvara"
 
-#: src/filechooser.c:363
+#: src/filechooser.c:390
+msgid "_Save"
+msgstr ""
+
+#: src/filechooser.c:392
 msgid "_Open"
 msgstr "_Öppna"
 
@@ -145,12 +149,12 @@ msgstr ""
 
 #: src/remotedesktopdialog.c:303
 #, c-format
-msgid "Select what to share with %s"
+msgid "Select devices to share with %s"
 msgstr ""
 
 #: src/remotedesktopdialog.c:308
 #, fuzzy
-msgid "Select what to share with the requesting application"
+msgid "Select devices to share with the requesting application"
 msgstr "Dela denna skärmbild med programmet som begär den?"
 
 #: src/remotedesktopdialog.ui:12

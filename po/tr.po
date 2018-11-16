@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2018-10-08 15:25+0000\n"
+"POT-Creation-Date: 2018-11-16 15:18-0500\n"
 "PO-Revision-Date: 2018-10-31 00:33+0300\n"
 "Last-Translator: Muhammet Kara <muhammetk@gnome.org>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
@@ -84,11 +84,11 @@ msgstr "_Paylaş"
 msgid "Make changes before sharing the information"
 msgstr "Bilgileri paylaşmadan önce değişiklik yapın"
 
-#: src/appchooserdialog.c:156
+#: src/appchooserdialog.c:159
 msgid "Failed to start Software"
 msgstr "Yazılımlar başlatılamadı"
 
-#: src/appchooserdialog.c:395
+#: src/appchooserdialog.c:398
 #, c-format
 msgid ""
 "Select an application to open “%s”. More applications are available in <a "
@@ -97,7 +97,7 @@ msgstr ""
 "“%s”i açmak için bir uygulama seçin. <a href='software'>Yazılımlar</a>'da "
 "daha fazla uygulama bulabilirsiniz."
 
-#: src/appchooserdialog.c:400
+#: src/appchooserdialog.c:403
 msgid ""
 "Select an application. More applications are available in <a "
 "href='software'>Software.</a>"
@@ -105,12 +105,12 @@ msgstr ""
 "Bir uygulama seçin. <a href='software'>Yazılımlar</a>'da daha fazla uygulama "
 "bulabilirsiniz."
 
-#: src/appchooserdialog.c:413
+#: src/appchooserdialog.c:418
 #, c-format
 msgid "Unable to find an application that is able to open “%s”."
 msgstr "“%s”i açabilen bir uygulama bulunamadı."
 
-#: src/appchooserdialog.c:418
+#: src/appchooserdialog.c:423
 msgid "Unable to find a suitable application."
 msgstr "Uygun bir uygulama bulunamadı."
 

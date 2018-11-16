@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2018-07-24 01:41+0000\n"
+"POT-Creation-Date: 2018-11-16 15:18-0500\n"
 "PO-Revision-Date: 2018-02-19 05:21-0600\n"
 "Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
 "Language-Team: Spanish; Castilian <>\n"
@@ -71,7 +71,7 @@ msgstr ""
 msgid "Share Details"
 msgstr "Compartir los datos"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:365
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:395
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
@@ -86,11 +86,11 @@ msgstr "Co_mpartir"
 msgid "Make changes before sharing the information"
 msgstr "Realizar cambios antes de compartir la información"
 
-#: src/appchooserdialog.c:156
+#: src/appchooserdialog.c:159
 msgid "Failed to start Software"
 msgstr "No se pudo iniciar Software"
 
-#: src/appchooserdialog.c:395
+#: src/appchooserdialog.c:398
 #, c-format
 msgid ""
 "Select an application to open “%s”. More applications are available in <a "
@@ -99,7 +99,7 @@ msgstr ""
 "Seleccione una aplicación para abrir «%s». Hay más aplicaciones disponibles "
 "en <a href='software'>Software</a>."
 
-#: src/appchooserdialog.c:400
+#: src/appchooserdialog.c:403
 msgid ""
 "Select an application. More applications are available in <a "
 "href='software'>Software.</a>"
@@ -107,12 +107,12 @@ msgstr ""
 "Seleccione una aplicación. Hay más aplicaciones disponibles en <a "
 "href='software'>Software</a>."
 
-#: src/appchooserdialog.c:413
+#: src/appchooserdialog.c:418
 #, c-format
 msgid "Unable to find an application that is able to open “%s”."
 msgstr "No se encontró ninguna aplicación capaz de abrir «%s»."
 
-#: src/appchooserdialog.c:418
+#: src/appchooserdialog.c:423
 msgid "Unable to find a suitable application."
 msgstr "No se encontró ninguna aplicación adecuada."
 
@@ -128,7 +128,11 @@ msgstr "No se encontró ninguna aplicación"
 msgid "Find Compatible Applications in Software"
 msgstr "Encuentre aplicaciones compatibles en Software"
 
-#: src/filechooser.c:363
+#: src/filechooser.c:390
+msgid "_Save"
+msgstr ""
+
+#: src/filechooser.c:392
 msgid "_Open"
 msgstr "_Abrir"
 
@@ -145,12 +149,13 @@ msgid "Touch screen"
 msgstr "Pantalla táctil"
 
 #: src/remotedesktopdialog.c:303
-#, c-format
-msgid "Select what to share with %s"
+#, fuzzy, c-format
+msgid "Select devices to share with %s"
 msgstr "Seleccione qué compartir con %s"
 
 #: src/remotedesktopdialog.c:308
-msgid "Select what to share with the requesting application"
+#, fuzzy
+msgid "Select devices to share with the requesting application"
 msgstr "Seleccione qué compartir con la aplicación solicitante"
 
 #: src/remotedesktopdialog.ui:12

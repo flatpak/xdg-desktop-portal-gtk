@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2018-07-24 01:41+0000\n"
+"POT-Creation-Date: 2018-11-16 15:18-0500\n"
 "PO-Revision-Date: 2018-03-03 08:15+0100\n"
 "Last-Translator: Balázs Úr <urbalazs@gmail.com>\n"
 "Language-Team: Hungarian <gnome-hu-list at gnome dot org>\n"
@@ -69,7 +69,7 @@ msgstr "Megosztja a személyes információit a kérelmező alkalmazással?"
 msgid "Share Details"
 msgstr "Részletek megosztása"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:365
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:395
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
@@ -84,11 +84,11 @@ msgstr "Meg_osztás"
 msgid "Make changes before sharing the information"
 msgstr "Megváltoztatás az információk megosztása előtt"
 
-#: src/appchooserdialog.c:156
+#: src/appchooserdialog.c:159
 msgid "Failed to start Software"
 msgstr "Nem sikerült elindítani a Szoftvereket"
 
-#: src/appchooserdialog.c:395
+#: src/appchooserdialog.c:398
 #, c-format
 msgid ""
 "Select an application to open “%s”. More applications are available in <a "
@@ -97,7 +97,7 @@ msgstr ""
 "Válasszon egy alkalmazást a(z) „%s” megnyitásához. További alkalmazások "
 "érhetők el a <a href='software'>Szoftverekben.</a>"
 
-#: src/appchooserdialog.c:400
+#: src/appchooserdialog.c:403
 msgid ""
 "Select an application. More applications are available in <a "
 "href='software'>Software.</a>"
@@ -105,13 +105,13 @@ msgstr ""
 "Válasszon egy alkalmazást. További alkalmazások érhetők el a <a "
 "href='software'>Szoftverekben.</a>"
 
-#: src/appchooserdialog.c:413
+#: src/appchooserdialog.c:418
 #, c-format
 msgid "Unable to find an application that is able to open “%s”."
 msgstr ""
 "Nem sikerült olyan alkalmazást találni, amely képes a(z) „%s” megnyitására."
 
-#: src/appchooserdialog.c:418
+#: src/appchooserdialog.c:423
 msgid "Unable to find a suitable application."
 msgstr "Nem sikerült megfelelő alkalmazást találni."
 
@@ -127,7 +127,11 @@ msgstr "Nem találhatók alkalmazások"
 msgid "Find Compatible Applications in Software"
 msgstr "Kompatibilis alkalmazások keresése a Szoftverekben"
 
-#: src/filechooser.c:363
+#: src/filechooser.c:390
+msgid "_Save"
+msgstr ""
+
+#: src/filechooser.c:392
 msgid "_Open"
 msgstr "Meg_nyitás"
 
@@ -144,12 +148,13 @@ msgid "Touch screen"
 msgstr "Érintőképernyő"
 
 #: src/remotedesktopdialog.c:303
-#, c-format
-msgid "Select what to share with %s"
+#, fuzzy, c-format
+msgid "Select devices to share with %s"
 msgstr "Válassza ki, mit szeretne megosztani ezzel: %s"
 
 #: src/remotedesktopdialog.c:308
-msgid "Select what to share with the requesting application"
+#, fuzzy
+msgid "Select devices to share with the requesting application"
 msgstr "Válassza ki, hogy mit szeretne megosztani a kérő alkalmazással"
 
 #: src/remotedesktopdialog.ui:12

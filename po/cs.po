@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2018-07-24 01:41+0000\n"
+"POT-Creation-Date: 2018-11-16 15:18-0500\n"
 "PO-Revision-Date: 2018-10-09 00:52+0200\n"
 "Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
@@ -86,11 +86,11 @@ msgstr "_Sdílet"
 msgid "Make changes before sharing the information"
 msgstr "Provést změny před sdílením informací"
 
-#: src/appchooserdialog.c:156
+#: src/appchooserdialog.c:159
 msgid "Failed to start Software"
 msgstr "Nepodařilo se spustit Software"
 
-#: src/appchooserdialog.c:395
+#: src/appchooserdialog.c:398
 #, c-format
 msgid ""
 "Select an application to open “%s”. More applications are available in <a "
@@ -99,7 +99,7 @@ msgstr ""
 "Vyberte aplikaci pro otevření „%s”. Další aplikace jsou k dispozici v <a "
 "href='software'>Software.</a>"
 
-#: src/appchooserdialog.c:400
+#: src/appchooserdialog.c:403
 msgid ""
 "Select an application. More applications are available in <a "
 "href='software'>Software.</a>"
@@ -107,12 +107,12 @@ msgstr ""
 "Vyberte aplikaci. Další aplikace jsou k dispozici v <a "
 "href='software'>Software.</a>"
 
-#: src/appchooserdialog.c:413
+#: src/appchooserdialog.c:418
 #, c-format
 msgid "Unable to find an application that is able to open “%s”."
 msgstr "Nenalezena žádná aplikace, která je schopna otevřít „%s”."
 
-#: src/appchooserdialog.c:418
+#: src/appchooserdialog.c:423
 msgid "Unable to find a suitable application."
 msgstr "Nenalezena žádná vhodná aplikace."
 
