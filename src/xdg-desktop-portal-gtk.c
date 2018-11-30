@@ -52,6 +52,7 @@
 #include "email.h"
 #include "screencast.h"
 #include "remotedesktop.h"
+#include "lockdown.h"
 
 
 static GMainLoop *loop = NULL;
@@ -147,6 +148,12 @@ on_bus_acquired (GDBusConnection *connection,
     }
 
   if (!remote_desktop_init (connection, &error))
+    {
+      g_warning ("error: %s\n", error->message);
+      g_clear_error (&error);
+    }
+
+  if (!lockdown_init (connection, &error))
     {
       g_warning ("error: %s\n", error->message);
       g_clear_error (&error);
