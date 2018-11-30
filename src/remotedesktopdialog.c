@@ -343,10 +343,22 @@ remote_desktop_dialog_init (RemoteDesktopDialog *dialog)
   gtk_widget_init_template (GTK_WIDGET (dialog));
 }
 
+static gboolean
+remote_desktop_dialog_delete_event (GtkWidget *dialog, GdkEventAny *event)
+{
+  gtk_widget_hide (dialog);
+
+  g_signal_emit (dialog, signals[DONE], 0, GTK_RESPONSE_CANCEL, NULL);
+
+  return TRUE;
+}
+
 static void
 remote_desktop_dialog_class_init (RemoteDesktopDialogClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+
+  widget_class->delete_event = remote_desktop_dialog_delete_event;
 
   signals[DONE] = g_signal_new ("done",
                                 G_TYPE_FROM_CLASS (klass),

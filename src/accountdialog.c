@@ -57,6 +57,16 @@ account_dialog_finalize (GObject *object)
   G_OBJECT_CLASS (account_dialog_parent_class)->finalize (object);
 }
 
+static gboolean
+account_dialog_delete_event (GtkWidget *dialog, GdkEventAny *event)
+{
+  gtk_widget_hide (dialog);
+
+  g_signal_emit (dialog, signals[DONE], 0, GTK_RESPONSE_CANCEL, NULL);
+
+  return TRUE;
+}
+
 static void
 button_clicked (GtkWidget *button,
                 AccountDialog *dialog)
@@ -208,6 +218,8 @@ account_dialog_class_init (AccountDialogClass *class)
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (class);
 
   object_class->finalize = account_dialog_finalize;
+
+  widget_class->delete_event = account_dialog_delete_event;
 
   signals[DONE] = g_signal_new ("done",
                                 G_TYPE_FROM_CLASS (class),
