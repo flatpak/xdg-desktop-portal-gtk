@@ -293,6 +293,14 @@ key_press_event_cb (GtkWidget *widget,
   return GDK_EVENT_PROPAGATE;
 }
 
+static gboolean
+app_chooser_delete_event (GtkWidget *dialog, GdkEventAny *event)
+{
+  close_dialog (APP_CHOOSER_DIALOG (dialog), NULL);
+
+  return TRUE;
+}
+
 static void
 app_chooser_dialog_close (AppChooserDialog *dialog)
 {
@@ -307,6 +315,8 @@ app_chooser_dialog_class_init (AppChooserDialogClass *class)
   GtkBindingSet *binding_set;
 
   object_class->finalize = app_chooser_dialog_finalize;
+
+  widget_class->delete_event = app_chooser_delete_event;
 
   class->close = app_chooser_dialog_close;
 

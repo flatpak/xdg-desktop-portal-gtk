@@ -118,10 +118,22 @@ screen_cast_dialog_init (ScreenCastDialog *dialog)
   gtk_widget_show (dialog->screen_cast_widget);
 }
 
+static gboolean
+screen_cast_dialog_delete_event (GtkWidget *dialog, GdkEventAny *event)
+{
+  gtk_widget_hide (dialog);
+
+  g_signal_emit (dialog, signals[DONE], 0, GTK_RESPONSE_CANCEL, NULL);
+
+  return TRUE;
+}
+
 static void
 screen_cast_dialog_class_init (ScreenCastDialogClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+
+  widget_class->delete_event = screen_cast_dialog_delete_event;
 
   signals[DONE] = g_signal_new ("done",
                                 G_TYPE_FROM_CLASS (klass),

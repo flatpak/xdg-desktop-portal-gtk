@@ -359,6 +359,16 @@ screenshot_dialog_finalize (GObject *object)
   G_OBJECT_CLASS (screenshot_dialog_parent_class)->finalize (object);
 }
 
+static gboolean
+screenshot_dialog_delete_event (GtkWidget *dialog, GdkEventAny *event)
+{
+  gtk_widget_hide (dialog);
+
+  g_signal_emit (dialog, signals[DONE], 0, GTK_RESPONSE_CANCEL, NULL);
+
+  return TRUE;
+}
+
 static void
 screenshot_dialog_class_init (ScreenshotDialogClass *class)
 {
@@ -366,6 +376,8 @@ screenshot_dialog_class_init (ScreenshotDialogClass *class)
   GObjectClass *object_class = G_OBJECT_CLASS (class);
 
   object_class->finalize = screenshot_dialog_finalize;
+
+  widget_class->delete_event = screenshot_dialog_delete_event;
 
   signals[DONE] = g_signal_new ("done",
                                 G_TYPE_FROM_CLASS (class),
