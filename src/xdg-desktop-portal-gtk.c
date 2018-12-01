@@ -52,6 +52,7 @@
 #include "email.h"
 #include "screencast.h"
 #include "remotedesktop.h"
+#include "lockdown.h"
 
 
 static GMainLoop *loop = NULL;
@@ -79,8 +80,6 @@ message_handler (const gchar *log_domain,
     g_printerr ("%s: %s\n", g_get_prgname (), message);
 }
 
-static GSettings *lockdown;
-
 static void
 on_bus_acquired (GDBusConnection *connection,
                  const gchar     *name,
@@ -88,19 +87,19 @@ on_bus_acquired (GDBusConnection *connection,
 {
   GError *error = NULL;
 
-  if (!file_chooser_init (connection, lockdown, &error))
+  if (!file_chooser_init (connection, &error))
     {
       g_warning ("error: %s\n", error->message);
       g_clear_error (&error);
     }
 
-  if (!app_chooser_init (connection, lockdown, &error))
+  if (!app_chooser_init (connection, &error))
     {
       g_warning ("error: %s\n", error->message);
       g_clear_error (&error);
     }
 
-  if (!print_init (connection, lockdown, &error))
+  if (!print_init (connection, &error))
     {
       g_warning ("error: %s\n", error->message);
       g_clear_error (&error);
@@ -149,6 +148,12 @@ on_bus_acquired (GDBusConnection *connection,
     }
 
   if (!remote_desktop_init (connection, &error))
+    {
+      g_warning ("error: %s\n", error->message);
+      g_clear_error (&error);
+    }
+
+  if (!lockdown_init (connection, &error))
     {
       g_warning ("error: %s\n", error->message);
       g_clear_error (&error);
@@ -222,8 +227,6 @@ main (int argc, char *argv[])
       g_printerr ("No session bus: %s\n", error->message);
       return 2;
     }
-
-  lockdown = g_settings_new ("org.gnome.desktop.lockdown");
 
   owner_id = g_bus_own_name (G_BUS_TYPE_SESSION,
                              "org.freedesktop.impl.portal.desktop.gtk",

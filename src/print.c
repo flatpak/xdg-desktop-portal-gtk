@@ -600,6 +600,7 @@ handle_prepare_print (XdpImplPrint *object,
   GtkWidget *fake_parent;
 
   sender = g_dbus_method_invocation_get_sender (invocation);
+
   request = request_new (sender, arg_app_id, arg_handle);
 
   if (arg_parent_window)
@@ -662,20 +663,8 @@ handle_prepare_print (XdpImplPrint *object,
   return TRUE;
 }
 
-static void
-lockdown_changed (GSettings *settings,
-                  const char *key,
-                  gpointer data)
-{
-  XdpImplPrint *impl = data;
-  gboolean disabled = g_settings_get_boolean (settings, key);
-  g_debug ("Lockdown changed for printing: %s = %s", key, disabled ? "true" : "false");
-  xdp_impl_print_set_disabled (impl, g_settings_get_boolean (settings, key));
-}
-
 gboolean
 print_init (GDBusConnection *bus,
-            GSettings *lockdown,
             GError **error)
 {
   GDBusInterfaceSkeleton *helper;
@@ -684,10 +673,6 @@ print_init (GDBusConnection *bus,
 
   g_signal_connect (helper, "handle-print", G_CALLBACK (handle_print), NULL);
   g_signal_connect (helper, "handle-prepare-print", G_CALLBACK (handle_prepare_print), NULL);
-
-  g_signal_connect (lockdown, "changed::disable-printing",
-                    G_CALLBACK (lockdown_changed), helper);
-  lockdown_changed (lockdown, "disable-printing", helper);
 
   if (!g_dbus_interface_skeleton_export (helper,
                                          bus,

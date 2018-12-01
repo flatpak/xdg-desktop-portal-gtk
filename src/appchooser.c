@@ -257,20 +257,8 @@ handle_update_choices (XdpImplAppChooser *object,
   return TRUE;
 }
 
-static void
-lockdown_changed (GSettings *settings,
-                  const char *key,
-                  gpointer data)
-{
-  XdpImplAppChooser *impl = data;
-  gboolean disabled = g_settings_get_boolean (settings, key);
-  g_debug ("Lockdown changed for app chooser: %s = %s", key, disabled ? "true" : "false");
-  xdp_impl_app_chooser_set_disabled (impl, disabled);
-}
-
 gboolean
 app_chooser_init (GDBusConnection *bus,
-                  GSettings *lockdown,
                   GError **error)
 {
   GDBusInterfaceSkeleton *helper;
@@ -279,10 +267,6 @@ app_chooser_init (GDBusConnection *bus,
 
   g_signal_connect (helper, "handle-choose-application", G_CALLBACK (handle_choose_application), NULL);
   g_signal_connect (helper, "handle-update-choices", G_CALLBACK (handle_update_choices), NULL);
-
-  g_signal_connect (lockdown, "changed::disable-application-handlers",
-                    G_CALLBACK (lockdown_changed), helper);
-  lockdown_changed (lockdown, "disable-application-handlers", helper);
 
   if (!g_dbus_interface_skeleton_export (helper,
                                          bus,

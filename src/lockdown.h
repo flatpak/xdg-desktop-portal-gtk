@@ -1,5 +1,5 @@
 /*
- * Copyright © 2016 Red Hat, Inc
+ * Copyright © 2018 Red Hat, Inc
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -22,4 +22,4 @@
 
 #include <gio/gio.h>
 
-gboolean file_chooser_init (GDBusConnection *bus, GError **error);
+gboolean lockdown_init (GDBusConnection *bus, GError **error);

@@ -525,20 +525,8 @@ handle_open (XdpImplFileChooser *object,
   return TRUE;
 }
 
-static void
-lockdown_changed (GSettings *settings,
-                  const char *key,
-                  gpointer data)
-{
-  XdpImplFileChooser *impl = data;
-  gboolean disabled = g_settings_get_boolean (settings, key);
-  g_debug ("Lockdown changed for file chooser: %s = %s", key, disabled ? "true" : "false");
-  xdp_impl_file_chooser_set_save_disabled (impl, g_settings_get_boolean (settings, key));
-}
-
 gboolean
 file_chooser_init (GDBusConnection *bus,
-                   GSettings *lockdown,
                    GError **error)
 {
   GDBusInterfaceSkeleton *helper;
@@ -547,10 +535,6 @@ file_chooser_init (GDBusConnection *bus,
 
   g_signal_connect (helper, "handle-open-file", G_CALLBACK (handle_open), NULL);
   g_signal_connect (helper, "handle-save-file", G_CALLBACK (handle_open), NULL);
-
-  g_signal_connect (lockdown, "changed::disable-save-to-disk",
-                    G_CALLBACK (lockdown_changed), helper);
-  lockdown_changed (lockdown, "disable-save-to-disk", helper);
 
   if (!g_dbus_interface_skeleton_export (helper,
                                          bus,

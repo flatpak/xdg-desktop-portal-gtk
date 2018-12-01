@@ -21,6 +21,7 @@ $(dbus_built_sources): src/Makefile.am.inc
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Email.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.ScreenCast.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.RemoteDesktop.xml \
+	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Lockdown.xml \
 	$(NULL)
 
 shell_built_sources = src/shell-dbus.c src/shell-dbus.h
@@ -118,6 +119,8 @@ xdg_desktop_portal_gtk_SOURCES = \
 	src/remotedesktopdialog.h		\
 	src/displaystatetracker.c		\
 	src/displaystatetracker.h		\
+	src/lockdown.c				\
+	src/lockdown.h				\
 	$(NULL)
 
 nodist_xdg_desktop_portal_gtk_SOURCES = \
