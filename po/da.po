@@ -1,0 +1,228 @@
+# Danish translation for xdg-desktop-portal-gtk
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# scootergrisen, 2018.
+msgid ""
+msgstr ""
+"Project-Id-Version: xdg-desktop-portal-gtk\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-"
+"gtk/issues\n"
+"POT-Creation-Date: 2018-12-05 03:29+0000\n"
+"PO-Revision-Date: 2018-12-06 03:20+0200\n"
+"Last-Translator: scootergrisen\n"
+"Language-Team: Danish\n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: data/xdg-desktop-portal-gtk.desktop.in.in:4
+msgid "Portal"
+msgstr "Portal"
+
+#. TRANSLATORS: Don't translate this text (this is icon name)
+#: data/xdg-desktop-portal-gtk.desktop.in.in:6
+msgid "applications-system-symbolic"
+msgstr "applications-system-symbolic"
+
+#: src/access.c:271
+msgid "Deny Access"
+msgstr "Nægt adgang"
+
+#: src/access.c:274
+msgid "Grant Access"
+msgstr "Giv adgang"
+
+#: src/accountdialog.c:176
+msgid "Select an Image"
+msgstr "Vælg et billede"
+
+#: src/accountdialog.c:179
+msgid "Cancel"
+msgstr "Annuller"
+
+#: src/accountdialog.c:180
+msgid "Select"
+msgstr "Vælg"
+
+#: src/accountdialog.c:181
+msgid "Clear"
+msgstr "Ryd"
+
+#: src/accountdialog.c:195
+msgid "Images"
+msgstr "Billeder"
+
+#: src/accountdialog.c:272
+#, c-format
+msgid "Share your personal information with %s?"
+msgstr "Del dine personlige informationer med %s?"
+
+#: src/accountdialog.c:275
+msgid "Share your personal information with the requesting application?"
+msgstr "Del dine personlige informationer med det anmodede program?"
+
+#: src/accountdialog.ui:10
+msgid "Share Details"
+msgstr "Delingsdetaljer"
+
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:395
+#: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
+#: src/screenshotdialog.ui:14
+msgid "_Cancel"
+msgstr "_Annuller"
+
+#: src/accountdialog.ui:22 src/remotedesktopdialog.ui:28
+#: src/screencastdialog.ui:28 src/screenshotdialog.ui:38
+msgid "_Share"
+msgstr "_Del"
+
+#: src/accountdialog.ui:148
+msgid "Make changes before sharing the information"
+msgstr "Foretag ændringer inden informationen deles"
+
+#: src/appchooserdialog.c:159
+msgid "Failed to start Software"
+msgstr "Kunne ikke starte Software"
+
+#: src/appchooserdialog.c:408
+#, c-format
+msgid ""
+"Select an application to open “%s”. More applications are available in <a "
+"href='software'>Software.</a>"
+msgstr ""
+"Vælg et program til at åbne “%s”. Der findes flere programmer i <a "
+"href='software'>Software.</a>"
+
+#: src/appchooserdialog.c:413
+msgid ""
+"Select an application. More applications are available in <a "
+"href='software'>Software.</a>"
+msgstr ""
+"Vælg et program. Der findes flere programmer i <a "
+"href='software'>Software.</a>"
+
+#: src/appchooserdialog.c:428
+#, c-format
+msgid "Unable to find an application that is able to open “%s”."
+msgstr "Kan ikke finde et program som er i stand til at åbne “%s”."
+
+#: src/appchooserdialog.c:433
+msgid "Unable to find a suitable application."
+msgstr "Kan ikke finde et egnet program."
+
+#: src/appchooserdialog.ui:13
+msgid "Open With"
+msgstr "Åbn med"
+
+#: src/appchooserdialog.ui:166
+msgid "No Applications Found"
+msgstr "Der blev ikke fundet nogen programmer"
+
+#: src/appchooserdialog.ui:182
+msgid "Find Compatible Applications in Software"
+msgstr "Find kompatible programmer i Software"
+
+#: src/filechooser.c:390
+msgid "_Save"
+msgstr "_Gem"
+
+#: src/filechooser.c:392
+msgid "_Open"
+msgstr "_Åbn"
+
+#: src/remotedesktopdialog.c:190
+msgid "Pointer"
+msgstr "Markør"
+
+#: src/remotedesktopdialog.c:193
+msgid "Keyboard"
+msgstr "Tastatur"
+
+#: src/remotedesktopdialog.c:196
+msgid "Touch screen"
+msgstr "Berøringsfølsom skærm"
+
+#: src/remotedesktopdialog.c:303
+#, c-format
+msgid "Select devices to share with %s"
+msgstr "Vælg enheder som skal deles med %s"
+
+#: src/remotedesktopdialog.c:308
+msgid "Select devices to share with the requesting application"
+msgstr "Vælg enheder som skal deles med det anmodede program"
+
+#: src/remotedesktopdialog.ui:12
+msgid "Remote desktop"
+msgstr "Fjernskrivebord"
+
+#: src/screencastdialog.ui:12
+msgid "Screen casting"
+msgstr "Skærmoptagelse"
+
+#: src/screencastwidget.c:243
+#, c-format
+msgid "Select monitor to share with %s"
+msgstr "Vælg skærm som skal deles med %s"
+
+#: src/screencastwidget.c:248
+msgid "Select monitor to share with the requesting application"
+msgstr "Vælg skærm som skal deles med det anmodede program"
+
+#: src/screenshotdialog.c:434
+#, c-format
+msgid "Share this screenshot with %s?"
+msgstr "Del skærmbilledet med %s?"
+
+#: src/screenshotdialog.c:438
+msgid "Share this screenshot with the requesting application?"
+msgstr "Del skærmbilledet med det anmodede program?"
+
+#: src/screenshotdialog.ui:10
+msgid "Screenshot"
+msgstr "Skærmbillede"
+
+#: src/screenshotdialog.ui:30
+msgid "_Options…"
+msgstr "_Valgmuligheder…"
+
+#: src/screenshotdialog.ui:55
+msgid "Take _Screenshot"
+msgstr "Tag _skærmbillede"
+
+#: src/screenshotdialog.ui:111
+msgid "Take Screenshot"
+msgstr "Tag skærmbillede"
+
+#: src/screenshotdialog.ui:122
+msgid "Grab the whole sc_reen"
+msgstr "Indfang _hele skærmen"
+
+#: src/screenshotdialog.ui:133
+msgid "Grab the current _window"
+msgstr "Indgang det nuværende _vindue"
+
+#: src/screenshotdialog.ui:144
+msgid "Select _area to grab"
+msgstr "Vælg _område som skal indfanges"
+
+#: src/screenshotdialog.ui:158
+msgid "Grab after a _delay of"
+msgstr "Indfang efter en _forsinkelse på"
+
+#: src/screenshotdialog.ui:171
+msgid "seconds"
+msgstr "sekunder"
+
+#: src/screenshotdialog.ui:181
+msgid "Effects"
+msgstr "Effekter"
+
+#: src/screenshotdialog.ui:192
+msgid "Include _pointer"
+msgstr "Inkluder _markør"
+
+#: src/screenshotdialog.ui:201
+msgid "Include the window _border"
+msgstr "Inkluder vinduets _kant"
