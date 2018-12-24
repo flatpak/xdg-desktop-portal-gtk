@@ -149,15 +149,23 @@ compose_mail (const char  *address,
               GError     **error)
 {
         g_autoptr(GAppInfo) info = NULL;
+        const char *commandline;
 
         info = g_app_info_get_default_for_uri_scheme ("mailto");
+        if (info == NULL)
+          {
+            g_set_error (error, G_IO_ERROR, G_IO_ERROR_FAILED, "No mailto handler");
+            return FALSE;
+          }
 
-        if (strstr (g_app_info_get_commandline (info), "thunderbird"))
-                return compose_mail_thunderbird (address, subject,body, attachments, error);
-        else if (strstr (g_app_info_get_commandline (info), "evolution"))
-                return compose_mail_evolution (address, subject,body, attachments, error);
+        commandline = g_app_info_get_commandline (info);
+
+        if (strstr (commandline, "thunderbird"))
+                return compose_mail_thunderbird (address, subject, body, attachments, error);
+        else if (strstr (commandline, "evolution"))
+                return compose_mail_evolution (address, subject, body, attachments, error);
         else
-                return compose_mail_mailto(info, address, subject,body, attachments, error);
+                return compose_mail_mailto (info, address, subject, body, attachments, error);
 }
 
 static gboolean
