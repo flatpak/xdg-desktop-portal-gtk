@@ -362,6 +362,8 @@ handle_open (XdpImplFileChooser *object,
   const char *current_name;
   const char *path;
   g_autoptr (GVariant) choices = NULL;
+  g_autoptr (GVariant) current_filter = NULL;
+  GSList *filters = NULL;
   GtkWidget *preview;
 
   method_name = g_dbus_method_invocation_get_method_name (invocation);
@@ -471,11 +473,57 @@ handle_open (XdpImplFileChooser *object,
           GtkFileFilter *filter;
 
           filter = gtk_file_filter_new_from_gvariant (variant);
+          filters = g_slist_append (filters, g_object_ref (filter));
           gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (dialog), filter);
           g_variant_unref (variant);
         }
       g_variant_iter_free (iter);
     }
+
+  if (g_variant_lookup (arg_options, "current_filter", "@(sa(us))", &current_filter))
+    {
+      g_autoptr (GtkFileFilter) filter = NULL;
+      const char *current_filter_name;
+
+      filter = gtk_file_filter_new_from_gvariant (current_filter);
+      current_filter_name = gtk_file_filter_get_name (filter);
+
+      if (!filters)
+        {
+          /* We are setting a single, unchangeable filter. */
+          gtk_file_chooser_set_filter (GTK_FILE_CHOOSER (dialog), filter);
+        }
+      else
+        {
+          gboolean handled = FALSE;
+
+          /* We are trying to select the default filter from the list of
+           * filters. We want to naively take filter and pass it to
+           * gtk_file_chooser_set_filter(), but it's not good enough
+           * because GTK+ just compares filters by pointer value, so the
+           * pointer itself has to match. We'll use the heuristic that
+           * if two filters have the same name, they must be the same
+           * unless the application is very dumb.
+           */
+          for (GSList *l = filters; l; l = l->next)
+            {
+              GtkFileFilter *f = l->data;
+              const char *name = gtk_file_filter_get_name (f);
+
+              if (g_strcmp0 (name, current_filter_name) == 0)
+                {
+                  gtk_file_chooser_set_filter (GTK_FILE_CHOOSER (dialog), f);
+                  handled = TRUE;
+                  break;
+                }
+            }
+
+          if (!handled)
+            g_warning ("current file filter must be present in filters list when list is nonempty");
+        }
+    }
+  g_slist_free_full (filters, g_object_unref);
+
   if (strcmp (method_name, "SaveFile") == 0)
     {
       if (g_variant_lookup (arg_options, "current_name", "&s", &current_name))
