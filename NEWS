@@ -1,3 +1,10 @@
+Changes in 1.1.1
+================
+
+* lockdown: Implement the lockdown backend
+* email: Be more careful when selecting a handler
+* Translation updates
+
 Changes in 1.1.0
 ================
 
