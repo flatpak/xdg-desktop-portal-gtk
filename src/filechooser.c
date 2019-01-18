@@ -501,7 +501,7 @@ handle_open (XdpImplFileChooser *object,
 
       extra = gtk_file_chooser_get_extra_widget (GTK_FILE_CHOOSER (dialog));
 
-      readonly = gtk_check_button_new_with_label ("Open files read-only");
+      readonly = gtk_check_button_new_with_label (_("Open files read-only"));
       gtk_widget_show (readonly);
 
       g_signal_connect (readonly, "toggled",
