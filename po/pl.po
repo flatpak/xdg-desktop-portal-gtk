@@ -1,16 +1,16 @@
 # Polish translation for xdg-desktop-portal-gtk.
-# Copyright © 2016-2018 the xdg-desktop-portal-gtk authors.
+# Copyright © 2016-2019 the xdg-desktop-portal-gtk authors.
 # This file is distributed under the same license as the xdg-desktop-portal-gtk package.
-# Piotr Drąg <piotrdrag@gmail.com>, 2016-2018.
-# Aviary.pl <community-poland@mozilla.org>, 2016-2018.
+# Piotr Drąg <piotrdrag@gmail.com>, 2016-2019.
+# Aviary.pl <community-poland@mozilla.org>, 2016-2019.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2018-11-16 15:18-0500\n"
-"PO-Revision-Date: 2018-10-08 21:00+0200\n"
+"POT-Creation-Date: 2019-01-19 03:27+0000\n"
+"PO-Revision-Date: 2019-01-20 12:24+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
@@ -37,32 +37,32 @@ msgstr "Odmów dostępu"
 msgid "Grant Access"
 msgstr "Udziel dostępu"
 
-#: src/accountdialog.c:166
+#: src/accountdialog.c:176
 msgid "Select an Image"
 msgstr "Wybór obrazu"
 
-#: src/accountdialog.c:169
+#: src/accountdialog.c:179
 msgid "Cancel"
 msgstr "Anuluj"
 
-#: src/accountdialog.c:170
+#: src/accountdialog.c:180
 msgid "Select"
 msgstr "Wybierz"
 
-#: src/accountdialog.c:171
+#: src/accountdialog.c:181
 msgid "Clear"
 msgstr "Wyczyść"
 
-#: src/accountdialog.c:185
+#: src/accountdialog.c:195
 msgid "Images"
 msgstr "Obrazy"
 
-#: src/accountdialog.c:260
+#: src/accountdialog.c:272
 #, c-format
 msgid "Share your personal information with %s?"
 msgstr "Udostępnić informacje o użytkowniku programowi „%s”?"
 
-#: src/accountdialog.c:263
+#: src/accountdialog.c:275
 msgid "Share your personal information with the requesting application?"
 msgstr "Udostępnić informacje o użytkowniku proszącemu o to programowi?"
 
@@ -89,7 +89,7 @@ msgstr "Umożliwia wprowadzenie zmian przed udostępnieniem informacji"
 msgid "Failed to start Software"
 msgstr "Uruchomienie Menedżera oprogramowania się nie powiodło"
 
-#: src/appchooserdialog.c:398
+#: src/appchooserdialog.c:408
 #, c-format
 msgid ""
 "Select an application to open “%s”. More applications are available in <a "
@@ -98,7 +98,7 @@ msgstr ""
 "Proszę wybrać program do otwarcia pliku „%s”. Więcej programów jest "
 "dostępnych w <a href='software'>Menedżerze oprogramowania.</a>"
 
-#: src/appchooserdialog.c:403
+#: src/appchooserdialog.c:413
 msgid ""
 "Select an application. More applications are available in <a "
 "href='software'>Software.</a>"
@@ -106,12 +106,12 @@ msgstr ""
 "Proszę wybrać program. Więcej programów jest dostępnych w <a "
 "href='software'>Menedżerze oprogramowania.</a>"
 
-#: src/appchooserdialog.c:418
+#: src/appchooserdialog.c:428
 #, c-format
 msgid "Unable to find an application that is able to open “%s”."
 msgstr "Nie można odnaleźć programu do otwarcia pliku „%s”."
 
-#: src/appchooserdialog.c:423
+#: src/appchooserdialog.c:433
 msgid "Unable to find a suitable application."
 msgstr "Nie można odnaleźć odpowiedniego programu."
 
@@ -134,6 +134,10 @@ msgstr "_Zapisz"
 #: src/filechooser.c:392
 msgid "_Open"
 msgstr "_Otwórz"
+
+#: src/filechooser.c:504
+msgid "Open files read-only"
+msgstr "Otwarcie plików tylko do odczytu"
 
 #: src/remotedesktopdialog.c:190
 msgid "Pointer"
@@ -173,12 +177,12 @@ msgstr "Wybór monitora do udostępnienia programowi „%s”"
 msgid "Select monitor to share with the requesting application"
 msgstr "Wybór monitora do udostępnienia proszącemu o to programowi"
 
-#: src/screenshotdialog.c:422
+#: src/screenshotdialog.c:434
 #, c-format
 msgid "Share this screenshot with %s?"
 msgstr "Udostępnić ten zrzut ekranu programowi „%s”?"
 
-#: src/screenshotdialog.c:426
+#: src/screenshotdialog.c:438
 msgid "Share this screenshot with the requesting application?"
 msgstr "Udostępnić ten zrzut ekranu proszącemu o to programowi?"
 
