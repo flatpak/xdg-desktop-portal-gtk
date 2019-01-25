@@ -47,9 +47,7 @@ typedef struct _ScreenCastSession
 
   char *parent_window;
 
-  struct {
-    gboolean multiple;
-  } select;
+  ScreenCastSelection select;
 
   GDBusMethodInvocation *start_invocation;
   ScreenCastDialogHandle *dialog_handle;
@@ -206,7 +204,7 @@ create_screen_cast_dialog (ScreenCastSession *session,
   g_object_ref_sink (fake_parent);
 
   dialog = GTK_WIDGET (screen_cast_dialog_new (request->app_id,
-                                               session->select.multiple));
+                                               &session->select));
   gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (fake_parent));
   gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
 
@@ -295,6 +293,7 @@ handle_select_sources (XdpImplScreenCast *object,
   int response;
   uint32_t types;
   gboolean multiple;
+  ScreenCastSelection select;
   GVariantBuilder results_builder;
   GVariant *results;
 
@@ -319,11 +318,13 @@ handle_select_sources (XdpImplScreenCast *object,
       goto out;
     }
 
+  select.multiple = multiple;
+
   if (is_screen_cast_session (session))
     {
       ScreenCastSession *screen_cast_session = (ScreenCastSession *)session;
 
-      screen_cast_session->select.multiple = multiple;
+      screen_cast_session->select = select;
       response = 0;
     }
   else if (is_remote_desktop_session (session))
@@ -331,8 +332,7 @@ handle_select_sources (XdpImplScreenCast *object,
       RemoteDesktopSession *remote_desktop_session =
         (RemoteDesktopSession *)session;
 
-      remote_desktop_session_sources_selected (remote_desktop_session,
-                                               multiple);
+      remote_desktop_session_sources_selected (remote_desktop_session, &select);
       response = 0;
     }
   else

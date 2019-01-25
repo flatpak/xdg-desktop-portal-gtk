@@ -22,6 +22,7 @@
 #include <gio/gio.h>
 
 #include "session.h"
+#include "screencast.h"
 
 typedef struct _RemoteDesktopSession RemoteDesktopSession;
 
@@ -40,7 +41,7 @@ typedef enum _RemoteDesktopDeviceType
 gboolean is_remote_desktop_session (Session *session);
 
 void remote_desktop_session_sources_selected (RemoteDesktopSession *session,
-                                              gboolean multiple);
+                                              ScreenCastSelection *select);
 
 gboolean remote_desktop_init (GDBusConnection *connection,
                               GError **error);

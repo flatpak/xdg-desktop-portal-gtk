@@ -27,5 +27,10 @@ typedef enum _ScreenCastSourceType
   SCREEN_CAST_SOURCE_TYPE_WINDOW = 2,
 } ScreenCastSourceType;
 
+typedef struct _ScreenCastSelection
+{
+  gboolean multiple;
+} ScreenCastSelection;
+
 gboolean screen_cast_init (GDBusConnection *connection,
                            GError **error);

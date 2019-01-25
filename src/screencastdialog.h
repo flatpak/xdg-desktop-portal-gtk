@@ -20,9 +20,11 @@
 
 #include <gtk/gtk.h>
 
+#include "screencast.h"
+
 #define SCREEN_CAST_TYPE_DIALOG (screen_cast_dialog_get_type ())
 G_DECLARE_FINAL_TYPE (ScreenCastDialog, screen_cast_dialog,
                       SCREEN_CAST, DIALOG, GtkWindow)
 
 ScreenCastDialog * screen_cast_dialog_new (const char *app_id,
-                                           gboolean multiple);
+                                           ScreenCastSelection *select);
