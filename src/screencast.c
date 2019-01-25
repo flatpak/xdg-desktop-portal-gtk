@@ -37,13 +37,6 @@
 
 typedef struct _ScreenCastDialogHandle ScreenCastDialogHandle;
 
-typedef enum _ScreenCastSourceType
-{
-  SCREEN_CAST_SOURCE_TYPE_ANY,
-  SCREEN_CAST_SOURCE_TYPE_MONITOR,
-  SCREEN_CAST_SOURCE_TYPE_WINDOW,
-} ScreenCastSourceType;
-
 typedef struct _ScreenCastSession
 {
   Session parent;

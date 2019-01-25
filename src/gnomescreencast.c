@@ -330,20 +330,23 @@ gnome_screen_cast_session_record_selections (GnomeScreenCastSession *gnome_scree
   g_variant_iter_init (&selections_iter, selections);
   while ((selection = g_variant_iter_next_value (&selections_iter)))
     {
-      ScreenCastSelection selection_type;
+      ScreenCastSourceType source_type;
       g_autofree char *key = NULL;
 
       g_variant_get (selection, "(us)",
-                     &selection_type,
+                     &source_type,
                      &key);
 
-      switch (selection_type)
+      switch (source_type)
         {
-        case SCREEN_CAST_SELECTION_MONITOR:
+        case SCREEN_CAST_SOURCE_TYPE_MONITOR:
           if (!gnome_screen_cast_session_record_monitor (gnome_screen_cast_session,
                                                          key, error))
             return FALSE;
           break;
+        case SCREEN_CAST_SOURCE_TYPE_WINDOW:
+          g_assert_not_reached ();
+          return FALSE;
         }
     }
 

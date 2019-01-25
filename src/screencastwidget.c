@@ -200,7 +200,7 @@ add_selections (ScreenCastWidget *widget,
                                     quark_monitor_widget_data);
 
       g_variant_builder_add (source_selections_builder, "(us)",
-                             SCREEN_CAST_SELECTION_MONITOR,
+                             SCREEN_CAST_SOURCE_TYPE_MONITOR,
                              monitor_get_connector (monitor));
     }
   g_list_free (selected_rows);
