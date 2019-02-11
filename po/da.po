@@ -1,14 +1,14 @@
 # Danish translation for xdg-desktop-portal-gtk
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# scootergrisen, 2018.
+# scootergrisen, 2018-2019.
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk\n"
-"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-"
-"gtk/issues\n"
-"POT-Creation-Date: 2018-12-05 03:29+0000\n"
-"PO-Revision-Date: 2018-12-06 03:20+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
+"issues\n"
+"POT-Creation-Date: 2019-02-11 03:27+0000\n"
+"PO-Revision-Date: 2019-02-11 00:00+0200\n"
 "Last-Translator: scootergrisen\n"
 "Language-Team: Danish\n"
 "Language: da\n"
@@ -67,7 +67,7 @@ msgstr "Del dine personlige informationer med det anmodede program?"
 msgid "Share Details"
 msgstr "Delingsdetaljer"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:395
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:397
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
@@ -93,15 +93,15 @@ msgid ""
 "href='software'>Software.</a>"
 msgstr ""
 "Vælg et program til at åbne “%s”. Der findes flere programmer i <a "
-"href='software'>Software.</a>"
+"href='software'>Software</a>."
 
 #: src/appchooserdialog.c:413
 msgid ""
 "Select an application. More applications are available in <a "
 "href='software'>Software.</a>"
 msgstr ""
-"Vælg et program. Der findes flere programmer i <a "
-"href='software'>Software.</a>"
+"Vælg et program. Der findes flere programmer i <a href='software'>Software</"
+"a>."
 
 #: src/appchooserdialog.c:428
 #, c-format
@@ -124,13 +124,17 @@ msgstr "Der blev ikke fundet nogen programmer"
 msgid "Find Compatible Applications in Software"
 msgstr "Find kompatible programmer i Software"
 
-#: src/filechooser.c:390
+#: src/filechooser.c:392
 msgid "_Save"
 msgstr "_Gem"
 
-#: src/filechooser.c:392
+#: src/filechooser.c:394
 msgid "_Open"
 msgstr "_Åbn"
+
+#: src/filechooser.c:552
+msgid "Open files read-only"
+msgstr "Åbn filer som skrivebeskyttet"
 
 #: src/remotedesktopdialog.c:190
 msgid "Pointer"
