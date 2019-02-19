@@ -24,6 +24,18 @@ enum {
 static GDBusInterfaceSkeleton *inhibit;
 static OrgGnomeSessionManager *sessionmanager;
 static OrgGnomeScreenSaver *screensaver;
+static GDBusProxy *client;
+
+typedef enum {
+  UNKNOWN   = 0,
+  RUNNING   = 1,
+  QUERY_END = 2,
+  ENDING    = 3
+} SessionState;
+
+static SessionState session_state = RUNNING;
+static gboolean screensaver_active = FALSE;
+static guint query_end_timeout;
 
 static void
 uninhibit_done_gnome (GObject *source,
@@ -119,6 +131,130 @@ handle_inhibit_gnome (XdpImplInhibit *object,
   xdp_impl_inhibit_complete_inhibit (object, invocation);
 
   return TRUE;
+}
+
+static void
+send_quit_response (GDBusProxy  *client,
+                    gboolean     will_quit,
+                    const gchar *reason)
+{
+  g_debug ("Calling EndSessionResponse %d '%s'", will_quit, reason ? reason : "");
+
+  g_dbus_proxy_call (client,
+                     "EndSessionResponse",
+                     g_variant_new ("(bs)", will_quit, reason ? reason : ""),
+                     G_DBUS_CALL_FLAGS_NONE,
+                     G_MAXINT,
+                     NULL, NULL, NULL);
+}
+
+static void global_emit_state_changed (void);
+
+static void
+set_session_state (SessionState state)
+{
+  const char *names[] = {
+    "Unknown", "Running", "Query-end", "Ending"
+  };
+
+  g_debug ("Session state now: %s", names[state]);
+
+  session_state = state;
+
+  global_emit_state_changed ();
+}
+
+static void global_set_pending_query_end_response (gboolean pending);
+static gboolean global_get_pending_query_end_response (void);
+
+static void
+stop_waiting_for_query_end_response (gboolean send_response)
+{
+  g_debug ("Stop waiting for QueryEndResponse calls");
+
+  if (query_end_timeout != 0)
+    {
+      g_source_remove (query_end_timeout);
+      query_end_timeout = 0;
+    }
+
+  global_set_pending_query_end_response (FALSE);
+
+  if (send_response && client)
+    send_quit_response (client, TRUE, NULL);
+}
+
+static gboolean
+query_end_response (gpointer data)
+{
+  g_debug ("1 second wait is over");
+
+  stop_waiting_for_query_end_response (TRUE);
+
+  return G_SOURCE_REMOVE;
+}
+
+static void
+wait_for_query_end_response (GDBusProxy *proxy)
+{
+  if (query_end_timeout != 0)
+    return; /* we're already waiting */
+
+  g_debug ("Waiting for up to 1 second for QueryEndResponse calls");
+
+  query_end_timeout = g_timeout_add (1000, query_end_response, proxy);
+  
+  global_set_pending_query_end_response (TRUE);
+}
+
+static void
+maybe_send_quit_response (void)
+{
+  if (query_end_timeout == 0)
+    return;
+
+  if (!client)
+    return;
+
+  if (global_get_pending_query_end_response ())
+    return;
+
+  g_debug ("No more pending QueryEndResponse calls");
+
+  stop_waiting_for_query_end_response (TRUE);
+}
+
+static void
+client_proxy_signal (GDBusProxy  *proxy,
+                     const gchar *sender_name,
+                     const gchar *signal_name,
+                     GVariant    *parameters,
+                     gpointer     user_data)
+{
+  if (g_str_equal (signal_name, "QueryEndSession"))
+    {
+      g_debug ("Received QueryEndSession");
+      wait_for_query_end_response (proxy); 
+      set_session_state (QUERY_END);
+      maybe_send_quit_response ();
+    }
+  else if (g_str_equal (signal_name, "CancelEndSession"))
+    {
+      g_debug ("Received CancelEndSession");
+      stop_waiting_for_query_end_response (FALSE);
+      set_session_state (RUNNING);
+    }
+  else if (g_str_equal (signal_name, "EndSession"))
+    {
+      g_debug ("Received EndSession");
+      stop_waiting_for_query_end_response (FALSE);
+      set_session_state (ENDING);
+      send_quit_response (client, TRUE, NULL);
+    }
+  else if (g_str_equal (signal_name, "Stop"))
+    {
+      g_debug ("Received Stop");
+    }
 }
 
 static OrgFreedesktopScreenSaver *fdo_screensaver;
@@ -241,11 +377,32 @@ handle_inhibit_fdo (XdpImplInhibit *object,
 
 static GList *active_sessions = NULL;
 
+static void
+emit_state_changed (Session *session)
+{
+  GVariantBuilder state;
+
+  g_debug ("Emitting StateChanged for session %s", session->id);
+
+  g_variant_builder_init (&state, G_VARIANT_TYPE_VARDICT);
+  g_variant_builder_add (&state, "{sv}", "screensaver-active", g_variant_new_boolean (screensaver_active));
+  g_variant_builder_add (&state, "{sv}", "session-state", g_variant_new_uint32 (session_state));
+  g_signal_emit_by_name (inhibit, "state-changed", session->id, g_variant_builder_end (&state)); 
+}
+
+static void
+global_emit_state_changed (void)
+{
+  GList *l;
+
+  for (l = active_sessions; l; l = l->next)
+    emit_state_changed ((Session *)l->data);
+}
+
 typedef struct
 {
   Session parent;
-
-  gulong active_changed_handler_id;
+  gboolean pending_query_end_response;
 } InhibitSession;
 
 typedef struct _InhibitSessionClass
@@ -255,6 +412,33 @@ typedef struct _InhibitSessionClass
 
 GType inhibit_session_get_type (void);
 G_DEFINE_TYPE (InhibitSession, inhibit_session, session_get_type ())
+
+static void
+global_set_pending_query_end_response (gboolean pending)
+{
+  GList *l;
+
+  for (l = active_sessions; l; l = l->next)
+    {
+      InhibitSession *session = (InhibitSession *)l->data;
+      session->pending_query_end_response = pending;
+    }
+}
+
+static gboolean
+global_get_pending_query_end_response (void)
+{
+  GList *l;
+
+  for (l = active_sessions; l; l = l->next)
+    {
+      InhibitSession *session = (InhibitSession *)l->data;
+      if (session->pending_query_end_response)
+        return TRUE;
+    }
+
+  return FALSE;
+}
 
 static void
 inhibit_session_close (Session *session)
@@ -290,26 +474,11 @@ inhibit_session_class_init (InhibitSessionClass *klass)
   session_class->close = inhibit_session_close;
 }
 
-static void
-active_changed_cb (Session *session,
-                   gboolean active)
-{
-  GVariantBuilder state;
-
-  g_debug ("Updating inhibit session %s", session->id);
-
-  g_variant_builder_init (&state, G_VARIANT_TYPE_VARDICT);
-  g_variant_builder_add (&state, "{sv}",
-                         "screensaver-active", g_variant_new_boolean (active));
-  g_signal_emit_by_name (inhibit, "state-changed", session->id, g_variant_builder_end (&state)); 
-}
-
 static InhibitSession *
 inhibit_session_new (const char *app_id,
                      const char *session_handle)
 {
   InhibitSession *inhibit_session;
-  gboolean active;
 
   g_debug ("Creating inhibit session %s", session_handle);
 
@@ -318,9 +487,6 @@ inhibit_session_new (const char *app_id,
                                   NULL);
 
   active_sessions = g_list_prepend (active_sessions, inhibit_session);
-
-  active = GPOINTER_TO_INT (g_object_get_data (screensaver ? (GObject *)screensaver : (GObject *)fdo_screensaver, "active"));
-  active_changed_cb ((Session *)inhibit_session, active);
 
   return inhibit_session;
 }
@@ -351,6 +517,28 @@ handle_create_monitor (XdpImplInhibit *object,
 
 out:
   xdp_impl_inhibit_complete_create_monitor (object, invocation, response);
+  if (session)
+    emit_state_changed (session);
+
+  return TRUE;
+}
+
+static gboolean
+handle_query_end_response (XdpImplInhibit *object,
+                           GDBusMethodInvocation *invocation,
+                           const char *arg_session_handle)
+{
+  InhibitSession *session = (InhibitSession *)lookup_session (arg_session_handle);
+
+  g_debug ("Handle QueryEndSessionResponse for session %s", arg_session_handle);
+
+  if (session)
+    {
+      session->pending_query_end_response = FALSE;
+      maybe_send_quit_response ();
+    }
+ 
+  xdp_impl_inhibit_complete_query_end_response (object, invocation);
 
   return TRUE;
 }
@@ -359,13 +547,11 @@ static void
 global_active_changed_cb (GObject *object,
                           gboolean active)
 {
-  GList *l;
-
   g_debug ("Screensaver %s", active  ? "active" : "inactive");
-  g_object_set_data (object, "active", GINT_TO_POINTER (active));
 
-  for (l = active_sessions; l; l = l->next)
-    active_changed_cb ((Session *)l->data, active);
+  screensaver_active = active;
+
+  global_emit_state_changed ();
 }
 
 gboolean
@@ -396,15 +582,43 @@ inhibit_init (GDBusConnection *bus,
 
   if (owner && owner2)
     {
+      g_autofree char *client_path = NULL;
+      g_autofree char *owner3 = NULL;
+
       g_signal_connect (inhibit, "handle-inhibit", G_CALLBACK (handle_inhibit_gnome), NULL);
       g_signal_connect (inhibit, "handle-create-monitor", G_CALLBACK (handle_create_monitor), NULL);
+      g_signal_connect (inhibit, "handle-query-end-response", G_CALLBACK (handle_query_end_response), NULL);
 
       g_signal_connect (screensaver, "active-changed", G_CALLBACK (global_active_changed_cb), NULL);
       org_gnome_screen_saver_call_get_active_sync (screensaver, &active, NULL, NULL);
       g_object_set_data (G_OBJECT (screensaver), "active", GINT_TO_POINTER (active));
 
       g_debug ("Using org.gnome.SessionManager for inhibit");
-      g_debug ("Using org.gnome.Screensaver for state changes");
+      g_debug ("Using org.gnome.Screensaver for screensaver state");
+
+      if (org_gnome_session_manager_call_register_client_sync (sessionmanager,
+                                                               "org.freedesktop.portal",
+                                                               "",
+                                                               &client_path,
+                                                               NULL,
+                                                               NULL))
+        {
+          client = g_dbus_proxy_new_sync (bus, 0,
+                                          NULL,
+                                          "org.gnome.SessionManager",
+                                          client_path,
+                                          "org.gnome.SessionManager.ClientPrivate",
+                                          NULL,
+                                          NULL);
+                                          
+          owner3 = g_dbus_proxy_get_name_owner (client);
+          if (owner3)
+            {
+              g_signal_connect (client, "g-signal", G_CALLBACK (client_proxy_signal), NULL);
+
+              g_debug ("Using org.gnome.SessionManager for session state");
+            }
+        }
     }
   else
     {
@@ -426,7 +640,7 @@ inhibit_init (GDBusConnection *bus,
       g_object_set_data (G_OBJECT (fdo_screensaver), "active", GINT_TO_POINTER (active));
 
       g_debug ("Using org.freedesktop.ScreenSaver for inhibit");
-      g_debug ("Using org.freedesktop.ScreenSaver for state changes");
+      g_debug ("Using org.freedesktop.ScreenSaver for screensaver state");
     }
 
 
