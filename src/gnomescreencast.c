@@ -51,7 +51,7 @@ enum
   N_SIGNALS
 };
 
-guint signals[N_SIGNALS];
+static guint signals[N_SIGNALS];
 
 typedef struct _GnomeScreenCastStream
 {
