@@ -22,7 +22,7 @@
 
 #include <stdint.h>
 
-#define SUPPORTED_MUTTER_SCREEN_CAST_API_VERSION 1
+#define SUPPORTED_MUTTER_SCREEN_CAST_API_VERSION 2
 
 enum
 {
@@ -51,7 +51,7 @@ enum
   N_SIGNALS
 };
 
-guint signals[N_SIGNALS];
+static guint signals[N_SIGNALS];
 
 typedef struct _GnomeScreenCastStream
 {
@@ -98,6 +98,8 @@ typedef struct _GnomeScreenCastSessionClass
 typedef struct _GnomeScreenCast
 {
   GObject parent;
+
+  int api_version;
 
   guint screen_cast_name_watch;
   OrgGnomeMutterScreenCast *proxy;
@@ -487,7 +489,6 @@ gnome_screen_cast_name_appeared (GDBusConnection *connection,
 {
   GnomeScreenCast *gnome_screen_cast = user_data;
   g_autoptr(GError) error = NULL;
-  int api_version;
 
   gnome_screen_cast->proxy =
     org_gnome_mutter_screen_cast_proxy_new_sync (connection,
@@ -503,9 +504,9 @@ gnome_screen_cast_name_appeared (GDBusConnection *connection,
       return;
     }
 
-  api_version =
+  gnome_screen_cast->api_version =
     org_gnome_mutter_screen_cast_get_version (gnome_screen_cast->proxy);
-  if (api_version != SUPPORTED_MUTTER_SCREEN_CAST_API_VERSION)
+  if (gnome_screen_cast->api_version > SUPPORTED_MUTTER_SCREEN_CAST_API_VERSION)
     {
       g_warning ("org.gnome.Mutter.ScreenCast API version not compatible");
       g_clear_object (&gnome_screen_cast->proxy);
