@@ -1,15 +1,14 @@
 # Italian translation for xdg-desktop-portal-gtk.
-# Copyright (C) 2017, 2018 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
+# Copyright (C) 2017, 2018, 2019 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
 # This file is distributed under the same license as the xdg-desktop-portal-gtk package.
-# Milo Casagrande <milo@milo.name>, 2017, 2018.
+# Milo Casagrande <milo@milo.name>, 2017, 2018, 2019.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
-"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
-"issues\n"
-"POT-Creation-Date: 2018-11-16 15:18-0500\n"
-"PO-Revision-Date: 2018-11-21 14:50+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/issues\n"
+"POT-Creation-Date: 2019-03-08 15:41+0100\n"
+"PO-Revision-Date: 2019-03-08 15:43+0100\n"
 "Last-Translator: Milo Casagrande <milo@milo.name>\n"
 "Language-Team: Italian <gnome-it-list@gnome.org>\n"
 "Language: it\n"
@@ -17,13 +16,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.1.1\n"
+"X-Generator: Poedit 2.2.1\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
 msgstr "Portale"
 
-#. TRANSLATORS: Don't translate this text (this is icon name)
 #: data/xdg-desktop-portal-gtk.desktop.in.in:6
 msgid "applications-system-symbolic"
 msgstr "applications-system-symbolic"
@@ -36,32 +34,32 @@ msgstr "Nega accesso"
 msgid "Grant Access"
 msgstr "Consenti accesso"
 
-#: src/accountdialog.c:166
+#: src/accountdialog.c:176
 msgid "Select an Image"
 msgstr "Seleziona una immagine"
 
-#: src/accountdialog.c:169
+#: src/accountdialog.c:179
 msgid "Cancel"
 msgstr "Annulla"
 
-#: src/accountdialog.c:170
+#: src/accountdialog.c:180
 msgid "Select"
 msgstr "Seleziona"
 
-#: src/accountdialog.c:171
+#: src/accountdialog.c:181
 msgid "Clear"
 msgstr "Azzera"
 
-#: src/accountdialog.c:185
+#: src/accountdialog.c:195
 msgid "Images"
 msgstr "Immagini"
 
-#: src/accountdialog.c:260
+#: src/accountdialog.c:272
 #, c-format
 msgid "Share your personal information with %s?"
 msgstr "Condividere le proprie informazioni personali con %s?"
 
-#: src/accountdialog.c:263
+#: src/accountdialog.c:275
 msgid "Share your personal information with the requesting application?"
 msgstr ""
 "Condividere le proprie informazioni personali con l'applicazione che le "
@@ -71,7 +69,7 @@ msgstr ""
 msgid "Share Details"
 msgstr "Dettagli"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:395
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:397
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
@@ -90,7 +88,7 @@ msgstr "Applica modifiche prima di condividere"
 msgid "Failed to start Software"
 msgstr "Avvio di «Software» non riuscito"
 
-#: src/appchooserdialog.c:398
+#: src/appchooserdialog.c:408
 #, c-format
 msgid ""
 "Select an application to open “%s”. More applications are available in <a "
@@ -99,7 +97,7 @@ msgstr ""
 "Selezionare un'applicazione per aprire «%s». Ulteriori applicazioni sono "
 "disponibili in «<a href='software'>Software</a>»."
 
-#: src/appchooserdialog.c:403
+#: src/appchooserdialog.c:413
 msgid ""
 "Select an application. More applications are available in <a "
 "href='software'>Software.</a>"
@@ -107,12 +105,12 @@ msgstr ""
 "Selezionare un'applicazione. Ulteriori applicazioni sono disponibili in «<a "
 "href='software'>Software</a>»."
 
-#: src/appchooserdialog.c:418
+#: src/appchooserdialog.c:428
 #, c-format
 msgid "Unable to find an application that is able to open “%s”."
 msgstr "Impossibile trovare una applicazione che possa aprire «%s»."
 
-#: src/appchooserdialog.c:423
+#: src/appchooserdialog.c:433
 msgid "Unable to find a suitable application."
 msgstr "Impossibile trovare una applicazione adatta."
 
@@ -128,13 +126,17 @@ msgstr "Nessuna applicazione trovata"
 msgid "Find Compatible Applications in Software"
 msgstr "Trova applicazione compatibile in «Software»"
 
-#: src/filechooser.c:390
+#: src/filechooser.c:392
 msgid "_Save"
 msgstr "_Salva"
 
-#: src/filechooser.c:392
+#: src/filechooser.c:394
 msgid "_Open"
 msgstr "A_pri"
+
+#: src/filechooser.c:552
+msgid "Open files read-only"
+msgstr "Apri file in sola-lettura"
 
 #: src/remotedesktopdialog.c:190
 msgid "Pointer"
@@ -176,12 +178,12 @@ msgid "Select monitor to share with the requesting application"
 msgstr ""
 "Selezionare la schermata da condividere con l'applicazione che la richiede"
 
-#: src/screenshotdialog.c:422
+#: src/screenshotdialog.c:434
 #, c-format
 msgid "Share this screenshot with %s?"
 msgstr "Condividere questa schermata con %s?"
 
-#: src/screenshotdialog.c:426
+#: src/screenshotdialog.c:438
 msgid "Share this screenshot with the requesting application?"
 msgstr "Condividere questa schermata con l'applicazione che la richiede?"
 
