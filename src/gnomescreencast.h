@@ -22,6 +22,8 @@
 #include <gio/gio.h>
 #include <stdint.h>
 
+#include "screencast.h"
+
 typedef struct _GnomeScreenCast GnomeScreenCast;
 typedef struct _GnomeScreenCastSession GnomeScreenCastSession;
 typedef struct _GnomeScreenCastStream GnomeScreenCastStream;
@@ -34,6 +36,7 @@ void gnome_screen_cast_session_add_stream_properties (GnomeScreenCastSession *gn
 
 gboolean gnome_screen_cast_session_record_selections (GnomeScreenCastSession *gnome_screen_cast_session,
                                                       GVariant *selections,
+                                                      ScreenCastSelection *select,
                                                       GError **error);
 
 gboolean gnome_screen_cast_session_stop (GnomeScreenCastSession *gnome_screen_cast_session,
@@ -45,5 +48,7 @@ gboolean gnome_screen_cast_session_start (GnomeScreenCastSession *gnome_screen_c
 GnomeScreenCastSession *gnome_screen_cast_create_session (GnomeScreenCast *gnome_screen_cast,
                                                           const char *remote_desktop_session_id,
                                                           GError **error);
+
+int gnome_screen_cast_get_api_version (GnomeScreenCast *gnome_screen_cast);
 
 GnomeScreenCast *gnome_screen_cast_new (GDBusConnection *connection);

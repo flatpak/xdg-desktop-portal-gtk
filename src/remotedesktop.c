@@ -482,6 +482,7 @@ open_screen_cast_session (RemoteDesktopSession *remote_desktop_session,
 
   if (!gnome_screen_cast_session_record_selections (gnome_screen_cast_session,
                                                     source_selections,
+                                                    &remote_desktop_session->select.screen_cast,
                                                     error))
     return FALSE;
 
