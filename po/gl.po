@@ -1,14 +1,14 @@
 # Galician translation for xdg-desktop-portal-gtk.
 # Copyright (C) 2017 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
 # This file is distributed under the same license as the xdg-desktop-portal-gtk package.
-# Fran Dieguez <frandieguez@gnome.org>, 2017.
+# Fran Dieguez <frandieguez@gnome.org>, 2017, 2019.
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2018-11-16 15:18-0500\n"
-"PO-Revision-Date: 2017-09-26 09:46+0200\n"
+"POT-Creation-Date: 2019-02-20 01:46+0100\n"
+"PO-Revision-Date: 2019-02-20 01:47+0200\n"
 "Last-Translator: Fran Dieguez <frandieguez@gnome.org>\n"
 "Language-Team: Galician\n"
 "Language: gl\n"
@@ -18,76 +18,48 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Virtaal 0.7.1\n"
 
-#: data/xdg-desktop-portal-gtk.desktop.in.in:4
-msgid "Portal"
-msgstr "Portal"
-
-#. TRANSLATORS: Don't translate this text (this is icon name)
-#: data/xdg-desktop-portal-gtk.desktop.in.in:6
-msgid "applications-system-symbolic"
-msgstr "applications-system-symbolic"
-
-#: src/access.c:271
+#: ../src/access.c:271
 msgid "Deny Access"
 msgstr "Denegar acceso"
 
-#: src/access.c:274
+#: ../src/access.c:274
 msgid "Grant Access"
 msgstr "Conceder acceso"
 
-#: src/accountdialog.c:166
+#: ../src/accountdialog.c:176
 msgid "Select an Image"
 msgstr "Seleccione unha imaxe"
 
-#: src/accountdialog.c:169
+#: ../src/accountdialog.c:179
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: src/accountdialog.c:170
+#: ../src/accountdialog.c:180
 msgid "Select"
 msgstr "Seleccionar"
 
-#: src/accountdialog.c:171
+#: ../src/accountdialog.c:181
 msgid "Clear"
 msgstr "Limpar"
 
-#: src/accountdialog.c:185
+#: ../src/accountdialog.c:195
 msgid "Images"
 msgstr "Imaxes"
 
-#: src/accountdialog.c:260
+#: ../src/accountdialog.c:272
 #, c-format
 msgid "Share your personal information with %s?"
 msgstr "Compartir a súa información persoal con %s?"
 
-#: src/accountdialog.c:263
+#: ../src/accountdialog.c:275
 msgid "Share your personal information with the requesting application?"
 msgstr "Compartir a súa información persoal co aplicativo que o solicita?"
 
-#: src/accountdialog.ui:10
-msgid "Share Details"
-msgstr "Compartir detalles"
-
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:395
-#: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
-#: src/screenshotdialog.ui:14
-msgid "_Cancel"
-msgstr "_Cancelar"
-
-#: src/accountdialog.ui:22 src/remotedesktopdialog.ui:28
-#: src/screencastdialog.ui:28 src/screenshotdialog.ui:38
-msgid "_Share"
-msgstr "_Compartir"
-
-#: src/accountdialog.ui:148
-msgid "Make changes before sharing the information"
-msgstr "Facer cambios antes de compartir a información"
-
-#: src/appchooserdialog.c:159
+#: ../src/appchooserdialog.c:159
 msgid "Failed to start Software"
 msgstr "Produciuse un fallo ao iniciar o Software"
 
-#: src/appchooserdialog.c:398
+#: ../src/appchooserdialog.c:408
 #, c-format
 msgid ""
 "Select an application to open “%s”. More applications are available in <a "
@@ -96,7 +68,7 @@ msgstr ""
 "Seleccione un aplicativo para abrir «%s». Hai máis aplicativos dispoñíbeis "
 "en <a href='software'>Software</a>."
 
-#: src/appchooserdialog.c:403
+#: ../src/appchooserdialog.c:413
 msgid ""
 "Select an application. More applications are available in <a "
 "href='software'>Software.</a>"
@@ -104,131 +76,105 @@ msgstr ""
 "Seleccione un aplicativo. Hai máis aplicativos dispoñíbeis en <a "
 "href='software'>Software</a>."
 
-#: src/appchooserdialog.c:418
+#: ../src/appchooserdialog.c:428
 #, c-format
 msgid "Unable to find an application that is able to open “%s”."
 msgstr "Non foi posíbel atopar un aplicativo que poida abrir «%s»."
 
-#: src/appchooserdialog.c:423
+#: ../src/appchooserdialog.c:433
 msgid "Unable to find a suitable application."
 msgstr "Non foi posíbel atopar un aplicativo axeitado."
 
-#: src/appchooserdialog.ui:13
-msgid "Open With"
-msgstr "Abrir con"
-
-#: src/appchooserdialog.ui:166
-msgid "No Applications Found"
-msgstr "Non se atoparon aplicativos"
-
-#: src/appchooserdialog.ui:182
-msgid "Find Compatible Applications in Software"
-msgstr "Bucar aplicativos compatíbeis en Software"
-
-#: src/filechooser.c:390
+#: ../src/filechooser.c:392
 msgid "_Save"
-msgstr ""
+msgstr "_Gardar"
 
-#: src/filechooser.c:392
+#: ../src/filechooser.c:394
 msgid "_Open"
 msgstr "_Abrir"
 
-#: src/remotedesktopdialog.c:190
+#: ../src/filechooser.c:397
+msgid "_Cancel"
+msgstr "_Cancelar"
+
+#: ../src/filechooser.c:552
+msgid "Open files read-only"
+msgstr "Abrir ficheiros en modo só lectura"
+
+#: ../src/remotedesktopdialog.c:190
 msgid "Pointer"
-msgstr ""
+msgstr "Punteiro"
 
-#: src/remotedesktopdialog.c:193
+#: ../src/remotedesktopdialog.c:193
 msgid "Keyboard"
-msgstr ""
+msgstr "Teclado"
 
-#: src/remotedesktopdialog.c:196
+#: ../src/remotedesktopdialog.c:196
 msgid "Touch screen"
-msgstr ""
+msgstr "Pantalla táctil"
 
-#: src/remotedesktopdialog.c:303
+#: ../src/remotedesktopdialog.c:303
 #, c-format
 msgid "Select devices to share with %s"
-msgstr ""
+msgstr "Seleccione os dispositivos a compartir con %s"
 
-#: src/remotedesktopdialog.c:308
-#, fuzzy
+#: ../src/remotedesktopdialog.c:308
 msgid "Select devices to share with the requesting application"
-msgstr "Compartir esta captura de pantalla co aplicativo que o solicita?"
+msgstr "Seleccione os dispositivos a compartir co aplicativo que o solicita"
 
-#: src/remotedesktopdialog.ui:12
-msgid "Remote desktop"
-msgstr ""
-
-#: src/screencastdialog.ui:12
-#, fuzzy
-msgid "Screen casting"
-msgstr "Captura de pantalla"
-
-#: src/screencastwidget.c:243
+#: ../src/screencastwidget.c:243
 #, c-format
 msgid "Select monitor to share with %s"
-msgstr ""
+msgstr "Seleccione o monitor a compartir con %s"
 
-#: src/screencastwidget.c:248
-#, fuzzy
+#: ../src/screencastwidget.c:248
 msgid "Select monitor to share with the requesting application"
-msgstr "Compartir esta captura de pantalla co aplicativo que o solicita?"
+msgstr "Compartir o monitor para compartir co aplicativo que o solicita"
 
-#: src/screenshotdialog.c:422
+#: ../src/screenshotdialog.c:434
 #, c-format
 msgid "Share this screenshot with %s?"
 msgstr "Compartir esta captura de pantalla con %s?"
 
-#: src/screenshotdialog.c:426
+#: ../src/screenshotdialog.c:438
 msgid "Share this screenshot with the requesting application?"
 msgstr "Compartir esta captura de pantalla co aplicativo que o solicita?"
 
-#: src/screenshotdialog.ui:10
-msgid "Screenshot"
-msgstr "Captura de pantalla"
+#~ msgid "Portal"
+#~ msgstr "Portal"
 
-#: src/screenshotdialog.ui:30
-msgid "_Options…"
-msgstr ""
+#~ msgid "applications-system-symbolic"
+#~ msgstr "applications-system-symbolic"
 
-#: src/screenshotdialog.ui:55
+#~ msgid "Share Details"
+#~ msgstr "Compartir detalles"
+
+#~ msgid "_Share"
+#~ msgstr "_Compartir"
+
+#~ msgid "Make changes before sharing the information"
+#~ msgstr "Facer cambios antes de compartir a información"
+
+#~ msgid "Open With"
+#~ msgstr "Abrir con"
+
+#~ msgid "No Applications Found"
+#~ msgstr "Non se atoparon aplicativos"
+
+#~ msgid "Find Compatible Applications in Software"
+#~ msgstr "Bucar aplicativos compatíbeis en Software"
+
 #, fuzzy
-msgid "Take _Screenshot"
-msgstr "Captura de pantalla"
+#~ msgid "Screen casting"
+#~ msgstr "Captura de pantalla"
 
-#: src/screenshotdialog.ui:111
+#~ msgid "Screenshot"
+#~ msgstr "Captura de pantalla"
+
 #, fuzzy
-msgid "Take Screenshot"
-msgstr "Captura de pantalla"
+#~ msgid "Take _Screenshot"
+#~ msgstr "Captura de pantalla"
 
-#: src/screenshotdialog.ui:122
-msgid "Grab the whole sc_reen"
-msgstr ""
-
-#: src/screenshotdialog.ui:133
-msgid "Grab the current _window"
-msgstr ""
-
-#: src/screenshotdialog.ui:144
-msgid "Select _area to grab"
-msgstr ""
-
-#: src/screenshotdialog.ui:158
-msgid "Grab after a _delay of"
-msgstr ""
-
-#: src/screenshotdialog.ui:171
-msgid "seconds"
-msgstr ""
-
-#: src/screenshotdialog.ui:181
-msgid "Effects"
-msgstr ""
-
-#: src/screenshotdialog.ui:192
-msgid "Include _pointer"
-msgstr ""
-
-#: src/screenshotdialog.ui:201
-msgid "Include the window _border"
-msgstr ""
+#, fuzzy
+#~ msgid "Take Screenshot"
+#~ msgstr "Captura de pantalla"
