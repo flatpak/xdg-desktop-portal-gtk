@@ -35,14 +35,9 @@
 #include "session.h"
 #include "utils.h"
 
-typedef struct _ScreenCastDialogHandle ScreenCastDialogHandle;
+#define SUPPORTED_MUTTER_SCREEN_CAST_API_VERSION 2
 
-typedef enum _ScreenCastSourceType
-{
-  SCREEN_CAST_SOURCE_TYPE_ANY,
-  SCREEN_CAST_SOURCE_TYPE_MONITOR,
-  SCREEN_CAST_SOURCE_TYPE_WINDOW,
-} ScreenCastSourceType;
+typedef struct _ScreenCastDialogHandle ScreenCastDialogHandle;
 
 typedef struct _ScreenCastSession
 {
@@ -54,9 +49,7 @@ typedef struct _ScreenCastSession
 
   char *parent_window;
 
-  struct {
-    gboolean multiple;
-  } select;
+  ScreenCastSelection select;
 
   GDBusMethodInvocation *start_invocation;
   ScreenCastDialogHandle *dialog_handle;
@@ -213,7 +206,7 @@ create_screen_cast_dialog (ScreenCastSession *session,
   g_object_ref_sink (fake_parent);
 
   dialog = GTK_WIDGET (screen_cast_dialog_new (request->app_id,
-                                               session->select.multiple));
+                                               &session->select));
   gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (fake_parent));
   gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
 
@@ -302,6 +295,8 @@ handle_select_sources (XdpImplScreenCast *object,
   int response;
   uint32_t types;
   gboolean multiple;
+  ScreenCastCursorMode cursor_mode;
+  ScreenCastSelection select;
   GVariantBuilder results_builder;
   GVariant *results;
 
@@ -326,11 +321,29 @@ handle_select_sources (XdpImplScreenCast *object,
       goto out;
     }
 
+  if (!g_variant_lookup (arg_options, "cursor_mode", "u", &cursor_mode))
+    cursor_mode = SCREEN_CAST_CURSOR_MODE_HIDDEN;
+
+  switch (cursor_mode)
+    {
+    case SCREEN_CAST_CURSOR_MODE_HIDDEN:
+    case SCREEN_CAST_CURSOR_MODE_EMBEDDED:
+    case SCREEN_CAST_CURSOR_MODE_METADATA:
+      break;
+    default:
+      g_warning ("Unknown screen cast cursor mode");
+      response = 2;
+      goto out;
+    }
+
+  select.multiple = multiple;
+  select.cursor_mode = cursor_mode;
+
   if (is_screen_cast_session (session))
     {
       ScreenCastSession *screen_cast_session = (ScreenCastSession *)session;
 
-      screen_cast_session->select.multiple = multiple;
+      screen_cast_session->select = select;
       response = 0;
     }
   else if (is_remote_desktop_session (session))
@@ -338,8 +351,7 @@ handle_select_sources (XdpImplScreenCast *object,
       RemoteDesktopSession *remote_desktop_session =
         (RemoteDesktopSession *)session;
 
-      remote_desktop_session_sources_selected (remote_desktop_session,
-                                               multiple);
+      remote_desktop_session_sources_selected (remote_desktop_session, &select);
       response = 0;
     }
   else
@@ -401,12 +413,21 @@ start_session (ScreenCastSession *screen_cast_session,
                GError **error)
 {
   GnomeScreenCastSession *gnome_screen_cast_session;
+  int gnome_api_version;
   g_autoptr(GVariant) source_selections = NULL;
 
   gnome_screen_cast_session =
     gnome_screen_cast_create_session (gnome_screen_cast, NULL, error);
   if (!gnome_screen_cast_session)
     return FALSE;
+
+  gnome_api_version = gnome_screen_cast_get_api_version (gnome_screen_cast);
+  if (gnome_api_version < SUPPORTED_MUTTER_SCREEN_CAST_API_VERSION)
+    {
+      g_warning ("org.gnome.Mutter.ScreenCast API version not compatible");
+      g_clear_object (&gnome_screen_cast);
+      return FALSE;
+    }
 
   screen_cast_session->gnome_screen_cast_session = gnome_screen_cast_session;
 
@@ -423,6 +444,7 @@ start_session (ScreenCastSession *screen_cast_session,
                     &source_selections);
   if (!gnome_screen_cast_session_record_selections (gnome_screen_cast_session,
                                                     source_selections,
+                                                    &screen_cast_session->select,
                                                     error))
     return FALSE;
 
@@ -502,6 +524,8 @@ err:
 static void
 on_gnome_screen_cast_enabled (GnomeScreenCast *gnome_screen_cast)
 {
+  int gnome_api_version;
+  ScreenCastCursorMode available_cursor_modes;
   g_autoptr(GError) error = NULL;
 
   impl = G_DBUS_INTERFACE_SKELETON (xdp_impl_screen_cast_skeleton_new ());
@@ -513,8 +537,16 @@ on_gnome_screen_cast_enabled (GnomeScreenCast *gnome_screen_cast)
   g_signal_connect (impl, "handle-start",
                     G_CALLBACK (handle_start), NULL);
 
+  gnome_api_version = gnome_screen_cast_get_api_version (gnome_screen_cast);
+
+  available_cursor_modes = SCREEN_CAST_CURSOR_MODE_NONE;
+  if (gnome_api_version >= 2)
+    available_cursor_modes |= (SCREEN_CAST_CURSOR_MODE_HIDDEN |
+                               SCREEN_CAST_CURSOR_MODE_EMBEDDED |
+                               SCREEN_CAST_CURSOR_MODE_METADATA);
   g_object_set (G_OBJECT (impl),
                 "available-source-types", SCREEN_CAST_SOURCE_TYPE_MONITOR,
+                "available-cursor-modes", available_cursor_modes,
                 NULL);
 
   if (!g_dbus_interface_skeleton_export (impl,

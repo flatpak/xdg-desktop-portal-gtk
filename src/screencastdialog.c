@@ -95,7 +95,7 @@ on_has_selection_changed (ScreenCastWidget *screen_cast_widget,
 
 ScreenCastDialog *
 screen_cast_dialog_new (const char *app_id,
-                        gboolean multiple)
+                        ScreenCastSelection *select)
 {
   ScreenCastDialog *dialog;
   ScreenCastWidget *screen_cast_widget;
@@ -103,7 +103,7 @@ screen_cast_dialog_new (const char *app_id,
   dialog = g_object_new (SCREEN_CAST_TYPE_DIALOG, NULL);
   screen_cast_widget = SCREEN_CAST_WIDGET (dialog->screen_cast_widget);
   screen_cast_widget_set_app_id (screen_cast_widget, app_id);
-  screen_cast_widget_set_allow_multiple (screen_cast_widget, multiple);
+  screen_cast_widget_set_allow_multiple (screen_cast_widget, select->multiple);
 
   return dialog;
 }

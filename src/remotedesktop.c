@@ -65,10 +65,8 @@ typedef struct _RemoteDesktopSession
   struct {
     RemoteDesktopDeviceType device_types;
 
-    struct {
-      gboolean enable;
-      gboolean multiple;
-    } screen_cast;
+    gboolean screen_cast_enable;
+    ScreenCastSelection screen_cast;
   } select;
 
   struct {
@@ -124,10 +122,10 @@ is_remote_desktop_session (Session *session)
 
 void
 remote_desktop_session_sources_selected (RemoteDesktopSession *session,
-                                         gboolean multiple)
+                                         ScreenCastSelection *selection)
 {
-  session->select.screen_cast.enable = TRUE;
-  session->select.screen_cast.multiple = multiple;
+  session->select.screen_cast_enable = TRUE;
+  session->select.screen_cast = *selection;
 }
 
 static void
@@ -238,8 +236,8 @@ create_remote_desktop_dialog (RemoteDesktopSession *session,
   dialog =
     GTK_WIDGET (remote_desktop_dialog_new (request->app_id,
                                            session->select.device_types,
-                                           session->select.screen_cast.enable,
-                                           session->select.screen_cast.multiple));
+                                           session->select.screen_cast_enable ?
+                                             &session->select.screen_cast : NULL));
   gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (fake_parent));
   gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
 
@@ -484,6 +482,7 @@ open_screen_cast_session (RemoteDesktopSession *remote_desktop_session,
 
   if (!gnome_screen_cast_session_record_selections (gnome_screen_cast_session,
                                                     source_selections,
+                                                    &remote_desktop_session->select.screen_cast,
                                                     error))
     return FALSE;
 

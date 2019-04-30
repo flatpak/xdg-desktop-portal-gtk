@@ -20,10 +20,7 @@
 
 #include <gtk/gtk.h>
 
-typedef enum _ScreenCastSelection
-{
-  SCREEN_CAST_SELECTION_MONITOR
-} ScreenCastSelection;
+#include "screencast.h"
 
 typedef struct _ScreenCastWidget ScreenCastWidget;
 

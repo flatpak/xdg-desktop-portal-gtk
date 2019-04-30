@@ -250,9 +250,29 @@ gnome_screen_cast_session_add_stream_properties (GnomeScreenCastSession *gnome_s
     }
 }
 
+static uint32_t
+cursor_mode_to_gnome_cursor_mode (ScreenCastCursorMode cursor_mode)
+{
+  switch (cursor_mode)
+    {
+    case SCREEN_CAST_CURSOR_MODE_NONE:
+      g_assert_not_reached ();
+      return -1;
+    case SCREEN_CAST_CURSOR_MODE_HIDDEN:
+      return 0;
+    case SCREEN_CAST_CURSOR_MODE_EMBEDDED:
+      return 1;
+    case SCREEN_CAST_CURSOR_MODE_METADATA:
+      return 2;
+    }
+
+  g_assert_not_reached ();
+}
+
 static gboolean
 gnome_screen_cast_session_record_monitor (GnomeScreenCastSession *gnome_screen_cast_session,
                                           const char *connector,
+                                          ScreenCastSelection *select,
                                           GError **error)
 {
   OrgGnomeMutterScreenCastSession *session_proxy =
@@ -266,6 +286,15 @@ gnome_screen_cast_session_record_monitor (GnomeScreenCastSession *gnome_screen_c
   GVariant *parameters;
 
   g_variant_builder_init (&properties_builder, G_VARIANT_TYPE_VARDICT);
+  if (select->cursor_mode)
+    {
+      uint32_t gnome_cursor_mode;
+
+      gnome_cursor_mode = cursor_mode_to_gnome_cursor_mode (select->cursor_mode);
+      g_variant_builder_add (&properties_builder, "{sv}",
+                             "cursor-mode",
+                             g_variant_new_uint32 (gnome_cursor_mode));
+    }
   properties = g_variant_builder_end (&properties_builder);
 
   if (!org_gnome_mutter_screen_cast_session_call_record_monitor_sync (session_proxy,
@@ -322,6 +351,7 @@ gnome_screen_cast_session_record_monitor (GnomeScreenCastSession *gnome_screen_c
 gboolean
 gnome_screen_cast_session_record_selections (GnomeScreenCastSession *gnome_screen_cast_session,
                                              GVariant *selections,
+                                             ScreenCastSelection *select,
                                              GError **error)
 {
   GVariantIter selections_iter;
@@ -330,20 +360,25 @@ gnome_screen_cast_session_record_selections (GnomeScreenCastSession *gnome_scree
   g_variant_iter_init (&selections_iter, selections);
   while ((selection = g_variant_iter_next_value (&selections_iter)))
     {
-      ScreenCastSelection selection_type;
+      ScreenCastSourceType source_type;
       g_autofree char *key = NULL;
 
       g_variant_get (selection, "(us)",
-                     &selection_type,
+                     &source_type,
                      &key);
 
-      switch (selection_type)
+      switch (source_type)
         {
-        case SCREEN_CAST_SELECTION_MONITOR:
+        case SCREEN_CAST_SOURCE_TYPE_MONITOR:
           if (!gnome_screen_cast_session_record_monitor (gnome_screen_cast_session,
-                                                         key, error))
+                                                         key,
+                                                         select,
+                                                         error))
             return FALSE;
           break;
+        case SCREEN_CAST_SOURCE_TYPE_WINDOW:
+          g_assert_not_reached ();
+          return FALSE;
         }
     }
 
@@ -479,6 +514,12 @@ gnome_screen_cast_create_session (GnomeScreenCast *gnome_screen_cast,
                       gnome_screen_cast_session);
 
   return gnome_screen_cast_session;
+}
+
+int
+gnome_screen_cast_get_api_version (GnomeScreenCast *gnome_screen_cast)
+{
+  return gnome_screen_cast->api_version;
 }
 
 static void

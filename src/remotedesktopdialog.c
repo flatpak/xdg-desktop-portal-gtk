@@ -36,10 +36,8 @@ struct _RemoteDesktopDialog
 
   RemoteDesktopDeviceType device_types;
 
-  struct {
-    gboolean enable;
-    gboolean multiple;
-  } screen_cast;
+  gboolean screen_cast_enable;
+  ScreenCastSelection screen_cast;
 
   gboolean is_device_types_selected;
   gboolean is_screen_cast_sources_selected;
@@ -108,7 +106,7 @@ button_clicked (GtkWidget *button,
       g_variant_builder_init (&selections_builder, G_VARIANT_TYPE_VARDICT);
 
       add_device_type_selections (dialog, &selections_builder);
-      if (dialog->screen_cast.enable)
+      if (dialog->screen_cast_enable)
         screen_cast_widget_add_selections (screen_cast_widget,
                                            &selections_builder);
       selections = g_variant_builder_end (&selections_builder);
@@ -282,16 +280,22 @@ on_has_selection_changed (ScreenCastWidget *screen_cast_widget,
 RemoteDesktopDialog *
 remote_desktop_dialog_new (const char *app_id,
                            RemoteDesktopDeviceType device_types,
-                           gboolean screen_cast_enable,
-                           gboolean screen_cast_multiple)
+                           ScreenCastSelection *screen_cast_select)
 {
   RemoteDesktopDialog *dialog;
   g_autofree char *heading = NULL;
 
   dialog = g_object_new (REMOTE_DESKTOP_TYPE_DIALOG, NULL);
   dialog->device_types = device_types;
-  dialog->screen_cast.enable = screen_cast_enable;
-  dialog->screen_cast.multiple = screen_cast_multiple;
+  if (screen_cast_select)
+    {
+      dialog->screen_cast_enable = TRUE;
+      dialog->screen_cast = *screen_cast_select;
+    }
+  else
+    {
+      dialog->screen_cast_enable = FALSE;
+    }
 
   if (g_strcmp0 (app_id, "") != 0)
     {
@@ -308,7 +312,7 @@ remote_desktop_dialog_new (const char *app_id,
       heading = g_strdup (_("Select devices to share with the requesting application"));
     }
 
-  if (screen_cast_enable)
+  if (dialog->screen_cast_enable)
     {
       g_signal_connect (dialog->screen_cast_widget, "has-selection-changed",
                         G_CALLBACK (on_has_selection_changed), dialog);
