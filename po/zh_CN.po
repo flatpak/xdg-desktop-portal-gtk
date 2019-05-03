@@ -2,6 +2,7 @@
 # Copyright (C) 2016 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
 # This file is distributed under the same license as the xdg-desktop-portal-gtk package.
 # Mingye Wang <arthur2e5@aosc.xyz>, 2016.
+# 王滋涵 Zephyr Waitzman <i@wi24rd.ml>, 2019.
 #
 msgid ""
 msgstr ""
@@ -9,23 +10,23 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
 "POT-Creation-Date: 2018-11-16 15:18-0500\n"
-"PO-Revision-Date: 2016-10-28 18:05-0400\n"
-"Last-Translator: Mingye Wang (Arthur2e5) <arthur200126@gmail.com>\n"
+"PO-Revision-Date: 2019-05-03 01:13+0800\n"
+"Last-Translator: 王滋涵 Zephyr Waitzman <i@wi24rd.ml>\n"
 "Language-Team: Chinese (China) <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 2.2.1\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
-msgstr ""
+msgstr "门户"
 
 #. TRANSLATORS: Don't translate this text (this is icon name)
 #: data/xdg-desktop-portal-gtk.desktop.in.in:6
 msgid "applications-system-symbolic"
-msgstr ""
+msgstr "applications-system-symbolic"
 
 #: src/access.c:271
 msgid "Deny Access"
@@ -33,43 +34,40 @@ msgstr "拒绝访问"
 
 #: src/access.c:274
 msgid "Grant Access"
-msgstr "允许访问"
+msgstr "授权访问"
 
 #: src/accountdialog.c:166
 msgid "Select an Image"
-msgstr ""
+msgstr "选择一张图像"
 
 #: src/accountdialog.c:169
-#, fuzzy
 msgid "Cancel"
-msgstr "取消(_C)"
+msgstr "取消"
 
 #: src/accountdialog.c:170
-#, fuzzy
 msgid "Select"
-msgstr "选择(_S)"
+msgstr "选择"
 
 #: src/accountdialog.c:171
 msgid "Clear"
-msgstr ""
+msgstr "清除"
 
 #: src/accountdialog.c:185
 msgid "Images"
-msgstr ""
+msgstr "图像"
 
 #: src/accountdialog.c:260
 #, c-format
 msgid "Share your personal information with %s?"
-msgstr ""
+msgstr "与 %s 共享您的个人信息？"
 
 #: src/accountdialog.c:263
-#, fuzzy
 msgid "Share your personal information with the requesting application?"
-msgstr "与正发出请求的应用程序共享此截图吗？"
+msgstr "与请求应用申请共享您的个人信息？"
 
 #: src/accountdialog.ui:10
 msgid "Share Details"
-msgstr ""
+msgstr "分享详情"
 
 #: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:395
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
@@ -84,11 +82,11 @@ msgstr "分享(_S)"
 
 #: src/accountdialog.ui:148
 msgid "Make changes before sharing the information"
-msgstr ""
+msgstr "在共享信息之前进行更改"
 
 #: src/appchooserdialog.c:159
 msgid "Failed to start Software"
-msgstr ""
+msgstr "无法启动软件"
 
 #: src/appchooserdialog.c:398
 #, c-format
@@ -96,38 +94,38 @@ msgid ""
 "Select an application to open “%s”. More applications are available in <a "
 "href='software'>Software.</a>"
 msgstr ""
+"选择一款打开 “%s” 的应用。<a href='software'>软件中心</a>有更多应用。"
 
 #: src/appchooserdialog.c:403
 msgid ""
 "Select an application. More applications are available in <a "
 "href='software'>Software.</a>"
-msgstr ""
+msgstr "选择一款应用。<a href='software'>软件中心</a>有更多应用。"
 
 #: src/appchooserdialog.c:418
 #, c-format
 msgid "Unable to find an application that is able to open “%s”."
-msgstr ""
+msgstr "找不到可以打开 “%s” 的应用。"
 
 #: src/appchooserdialog.c:423
 msgid "Unable to find a suitable application."
-msgstr ""
+msgstr "找不到适合的应用。"
 
 #: src/appchooserdialog.ui:13
 msgid "Open With"
 msgstr "打开方式"
 
 #: src/appchooserdialog.ui:166
-#, fuzzy
 msgid "No Applications Found"
-msgstr "选择应用程序"
+msgstr "非找到应用"
 
 #: src/appchooserdialog.ui:182
 msgid "Find Compatible Applications in Software"
-msgstr ""
+msgstr "在软件中查找兼容的应用程序"
 
 #: src/filechooser.c:390
 msgid "_Save"
-msgstr ""
+msgstr "保存(_S)"
 
 #: src/filechooser.c:392
 msgid "_Open"
@@ -135,44 +133,41 @@ msgstr "打开(_O)"
 
 #: src/remotedesktopdialog.c:190
 msgid "Pointer"
-msgstr ""
+msgstr "指针"
 
 #: src/remotedesktopdialog.c:193
 msgid "Keyboard"
-msgstr ""
+msgstr "键盘"
 
 #: src/remotedesktopdialog.c:196
 msgid "Touch screen"
-msgstr ""
+msgstr "触摸屏"
 
 #: src/remotedesktopdialog.c:303
 #, c-format
 msgid "Select devices to share with %s"
-msgstr ""
+msgstr "选择要与 %s 共享的设备"
 
 #: src/remotedesktopdialog.c:308
-#, fuzzy
 msgid "Select devices to share with the requesting application"
-msgstr "与正发出请求的应用程序共享此截图吗？"
+msgstr "选择要与请求应用程序共享的设备"
 
 #: src/remotedesktopdialog.ui:12
 msgid "Remote desktop"
-msgstr ""
+msgstr "远程桌面"
 
 #: src/screencastdialog.ui:12
-#, fuzzy
 msgid "Screen casting"
-msgstr "截屏"
+msgstr "录屏"
 
 #: src/screencastwidget.c:243
 #, c-format
 msgid "Select monitor to share with %s"
-msgstr ""
+msgstr "选择与 %s 共享的监视器"
 
 #: src/screencastwidget.c:248
-#, fuzzy
 msgid "Select monitor to share with the requesting application"
-msgstr "与正发出请求的应用程序共享此截图吗？"
+msgstr "选择与请求应用共享的监视器"
 
 #: src/screenshotdialog.c:422
 #, c-format
@@ -189,49 +184,47 @@ msgstr "截屏"
 
 #: src/screenshotdialog.ui:30
 msgid "_Options…"
-msgstr ""
+msgstr "选项(_O)"
 
 #: src/screenshotdialog.ui:55
-#, fuzzy
 msgid "Take _Screenshot"
-msgstr "截屏"
+msgstr "截图"
 
 #: src/screenshotdialog.ui:111
-#, fuzzy
 msgid "Take Screenshot"
-msgstr "截屏"
+msgstr "截图"
 
 #: src/screenshotdialog.ui:122
 msgid "Grab the whole sc_reen"
-msgstr ""
+msgstr "抓取当前屏幕(_R)"
 
 #: src/screenshotdialog.ui:133
 msgid "Grab the current _window"
-msgstr ""
+msgstr "抓取当前窗口(_W)"
 
 #: src/screenshotdialog.ui:144
 msgid "Select _area to grab"
-msgstr ""
+msgstr "选择截取区域(_A)"
 
 #: src/screenshotdialog.ui:158
 msgid "Grab after a _delay of"
-msgstr ""
+msgstr "在延迟后抓取(_D)"
 
 #: src/screenshotdialog.ui:171
 msgid "seconds"
-msgstr ""
+msgstr "秒"
 
 #: src/screenshotdialog.ui:181
 msgid "Effects"
-msgstr ""
+msgstr "效果"
 
 #: src/screenshotdialog.ui:192
 msgid "Include _pointer"
-msgstr ""
+msgstr "包含指针(_P)"
 
 #: src/screenshotdialog.ui:201
 msgid "Include the window _border"
-msgstr ""
+msgstr "包含窗口边框(_B)"
 
 #~ msgid "_Select"
 #~ msgstr "选择(_S)"
