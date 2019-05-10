@@ -53,6 +53,7 @@
 #include "screencast.h"
 #include "remotedesktop.h"
 #include "lockdown.h"
+#include "background.h"
 
 
 static GMainLoop *loop = NULL;
@@ -170,6 +171,12 @@ on_bus_acquired (GDBusConnection *connection,
     }
 
   if (!lockdown_init (connection, &error))
+    {
+      g_warning ("error: %s\n", error->message);
+      g_clear_error (&error);
+    }
+
+  if (!background_init (connection, &error))
     {
       g_warning ("error: %s\n", error->message);
       g_clear_error (&error);
