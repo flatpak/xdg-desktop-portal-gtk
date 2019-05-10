@@ -81,6 +81,8 @@ xdg_desktop_portal_gtk_SOURCES = \
 	src/appchooser.c			\
 	src/notification.h			\
 	src/notification.c			\
+	src/fdonotification.h			\
+	src/fdonotification.c			\
 	src/inhibit.h			        \
 	src/inhibit.c			        \
 	src/appchooserrow.h			\
