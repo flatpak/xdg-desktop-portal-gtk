@@ -12,6 +12,7 @@
 #include <gtk/gtk.h>
 
 #include <glib/gi18n.h>
+#include <gio/gdesktopappinfo.h>
 
 #include "xdg-desktop-portal-dbus.h"
 #include "shell-dbus.h"
@@ -24,6 +25,20 @@
 static OrgGnomeShellIntrospect *shell;
 
 typedef enum { BACKGROUND, RUNNING, ACTIVE } AppState;
+
+static char *
+get_actual_app_id (const char *app_id)
+{
+  g_autoptr(GDesktopAppInfo) info = g_desktop_app_info_new (app_id);
+  char *app = NULL;
+
+  if (info)
+    app = g_desktop_app_info_get_string (info, "X-Flatpak");
+
+  g_debug ("looking up app id for %s: %s", app_id, app);
+
+  return app;
+}
 
 static gboolean
 handle_get_app_state (XdpImplBackground *object,
@@ -65,12 +80,10 @@ handle_get_app_state (XdpImplBackground *object,
           g_variant_lookup (dict, "is-hidden", "b", &hidden);
           g_variant_lookup (dict, "has-focus", "b", &focus);
 
-          if (app_id == NULL)
+          /* See https://gitlab.gnome.org/GNOME/gnome-shell/issues/1289 */
+          app = get_actual_app_id (app_id);
+          if (app == NULL)
             continue;
-
-          app = g_strdup (app_id);
-          if (g_str_has_suffix (app, ".desktop"))
-            app[strlen (app) - strlen (".desktop")] = '\0';
 
           state = GPOINTER_TO_INT (g_hash_table_lookup (app_states, app));
           if (!hidden)
