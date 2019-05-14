@@ -262,6 +262,83 @@ handle_notify_background (XdpImplBackground *object,
   return TRUE;
 }
 
+static gboolean
+handle_enable_autostart (XdpImplBackground *object,
+                         GDBusMethodInvocation *invocation,
+                         const char *arg_app_id,
+                         gboolean    arg_enable,
+                         const char * const *arg_commandline,
+                         gboolean    arg_activatable)
+{
+  gboolean result = FALSE;
+  g_autofree char *dir = NULL;
+  g_autofree char *file = NULL;
+  g_autofree char *path = NULL;
+  g_autoptr(GError) error = NULL;
+  g_autofree char *commandline = NULL;
+  g_autoptr(GKeyFile) keyfile = NULL;
+
+  g_debug ("background: handle EnableAutostart");
+
+  file = g_strconcat (arg_app_id, ".desktop", NULL);
+  dir = g_build_filename (g_get_user_config_dir (), "autostart", NULL);
+  path = g_build_filename (dir, file, NULL);
+
+  if (!arg_enable)
+    {
+      unlink (path);
+      g_debug ("Removed %s", path);
+      goto out;
+    }
+
+  if (g_mkdir_with_parents (dir, 0755) != 0)
+    {
+      g_warning ("Failed to create dirs %s", dir);
+      goto out;
+    }
+
+  commandline = g_strjoinv (" ", (char **)arg_commandline);
+
+  keyfile = g_key_file_new ();
+
+  g_key_file_set_string (keyfile,
+                         G_KEY_FILE_DESKTOP_GROUP,
+                         G_KEY_FILE_DESKTOP_KEY_TYPE,
+                         "Application");
+  g_key_file_set_string (keyfile,
+                         G_KEY_FILE_DESKTOP_GROUP,
+                         G_KEY_FILE_DESKTOP_KEY_NAME,
+                         arg_app_id); // FIXME
+  g_key_file_set_string (keyfile,
+                         G_KEY_FILE_DESKTOP_GROUP,
+                         G_KEY_FILE_DESKTOP_KEY_EXEC,
+                         commandline);
+  if (arg_activatable)
+    g_key_file_set_boolean (keyfile,
+                            G_KEY_FILE_DESKTOP_GROUP,
+                            G_KEY_FILE_DESKTOP_KEY_DBUS_ACTIVATABLE,
+                            TRUE);
+  g_key_file_set_string (keyfile,
+                         G_KEY_FILE_DESKTOP_GROUP,
+                         "X-Flatpak",
+                         arg_app_id);
+
+  if (!g_key_file_save_to_file (keyfile, path, &error))
+    {
+      g_warning ("Failed to save %s: %s", path, error->message);
+      goto out;
+    }
+
+  g_debug ("Wrote autostart file %s", path);
+
+  result = TRUE;
+
+out:
+  xdp_impl_background_complete_enable_autostart (object, invocation, result);
+
+  return TRUE;
+}
+
 gboolean
 background_init (GDBusConnection *bus,
                  GError **error)
@@ -279,6 +356,7 @@ background_init (GDBusConnection *bus,
 
   g_signal_connect (helper, "handle-get-app-state", G_CALLBACK (handle_get_app_state), NULL);
   g_signal_connect (helper, "handle-notify-background", G_CALLBACK (handle_notify_background), NULL);
+  g_signal_connect (helper, "handle-enable-autostart", G_CALLBACK (handle_enable_autostart), NULL);
 
   if (!g_dbus_interface_skeleton_export (helper,
                                          bus,
