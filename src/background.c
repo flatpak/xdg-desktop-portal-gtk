@@ -109,12 +109,17 @@ handle_get_app_state (XdpImplBackground *object,
   return TRUE;
 }
 
+typedef enum {
+  FORBID = 0,
+  ALLOW  = 1
+} NotifyResult;
+
 typedef struct {
   XdpImplBackground *impl;
   GDBusMethodInvocation *invocation;
   Request *request;
   char *id;
-  gboolean allow;
+  NotifyResult result;
 } BackgroundHandle;
 
 static void
@@ -146,7 +151,7 @@ send_response (BackgroundHandle *handle)
   int response = 0;
 
   g_variant_builder_init (&opt_builder, G_VARIANT_TYPE_VARDICT);
-  g_variant_builder_add (&opt_builder, "{sv}", "allow", g_variant_new_boolean (handle->allow));
+  g_variant_builder_add (&opt_builder, "{sv}", "result", g_variant_new_uint32 (handle->result));
 
   if (handle->request->exported)
     request_unexport (handle->request);
@@ -172,17 +177,17 @@ activate_action (GDBusConnection *connection,
   if (g_str_equal (name, "allow"))
     {
       g_debug ("Allowing app %s to run in background", handle->request->app_id);
-      handle->allow = TRUE;
+      handle->result = ALLOW;
     }
   else if (g_str_equal (name, "forbid"))
     {
       g_debug ("Forbid app %s to run in background", handle->request->app_id);
-      handle->allow = FALSE;
+      handle->result = FORBID;
     }
   else
     {
       g_debug ("Unexpected action for app %s", handle->request->app_id);
-      handle->allow = FALSE;
+      handle->result = FORBID;
     }
 
   send_response (handle);
