@@ -275,13 +275,18 @@ handle_notify_background (XdpImplBackground *object,
   return TRUE;
 }
 
+typedef enum {
+  AUTOSTART_FLAGS_NONE        = 0,
+  AUTOSTART_FLAGS_ACTIVATABLE = 1 << 0,
+} AutostartFlags;
+
 static gboolean
 handle_enable_autostart (XdpImplBackground *object,
                          GDBusMethodInvocation *invocation,
                          const char *arg_app_id,
-                         gboolean    arg_enable,
+                         gboolean arg_enable,
                          const char * const *arg_commandline,
-                         gboolean    arg_activatable)
+                         guint arg_flags)
 {
   gboolean result = FALSE;
   g_autofree char *dir = NULL;
@@ -326,7 +331,7 @@ handle_enable_autostart (XdpImplBackground *object,
                          G_KEY_FILE_DESKTOP_GROUP,
                          G_KEY_FILE_DESKTOP_KEY_EXEC,
                          commandline);
-  if (arg_activatable)
+  if (arg_flags & AUTOSTART_FLAGS_ACTIVATABLE)
     g_key_file_set_boolean (keyfile,
                             G_KEY_FILE_DESKTOP_GROUP,
                             G_KEY_FILE_DESKTOP_KEY_DBUS_ACTIVATABLE,
