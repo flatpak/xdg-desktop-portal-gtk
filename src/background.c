@@ -111,7 +111,8 @@ handle_get_app_state (XdpImplBackground *object,
 
 typedef enum {
   FORBID = 0,
-  ALLOW  = 1
+  ALLOW  = 1,
+  IGNORE = 2
 } NotifyResult;
 
 typedef struct {
@@ -176,13 +177,18 @@ activate_action (GDBusConnection *connection,
 
   if (g_str_equal (name, "allow"))
     {
-      g_debug ("Allowing app %s to run in background", handle->request->app_id);
+      g_debug ("Allow app %s to run in background", handle->request->app_id);
       handle->result = ALLOW;
     }
   else if (g_str_equal (name, "forbid"))
     {
       g_debug ("Forbid app %s to run in background", handle->request->app_id);
       handle->result = FORBID;
+    }
+  else if (g_str_equal (name, "ignore"))
+    {
+      g_debug ("Allow this instance of app %s to run in background", handle->request->app_id);
+      handle->result = IGNORE;
     }
   else
     {
@@ -257,6 +263,13 @@ handle_notify_background (XdpImplBackground *object,
   g_variant_builder_init (&button, G_VARIANT_TYPE_VARDICT);
   g_variant_builder_add (&button, "{sv}", "label", g_variant_new_string (_("Forbid")));
   g_variant_builder_add (&button, "{sv}", "action", g_variant_new_string ("forbid"));
+  g_variant_builder_add (&button, "{sv}", "target", g_variant_new_string (arg_app_id));
+
+  g_variant_builder_add (&bbuilder, "@a{sv}", g_variant_builder_end (&button));
+
+  g_variant_builder_init (&button, G_VARIANT_TYPE_VARDICT);
+  g_variant_builder_add (&button, "{sv}", "label", g_variant_new_string (_("Ignore")));
+  g_variant_builder_add (&button, "{sv}", "action", g_variant_new_string ("ignore"));
   g_variant_builder_add (&button, "{sv}", "target", g_variant_new_string (arg_app_id));
 
   g_variant_builder_add (&bbuilder, "@a{sv}", g_variant_builder_end (&button));
