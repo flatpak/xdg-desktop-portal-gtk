@@ -293,6 +293,49 @@ handle_notify_background (XdpImplBackground *object,
   return TRUE;
 }
 
+static gboolean
+needs_quoting (const char *arg)
+{
+  while (*arg != 0)
+    {
+      char c = *arg;
+      if (!g_ascii_isalnum (c) &&
+          !(c == '-' || c == '/' || c == '~' ||
+            c == ':' || c == '.' || c == '_' ||
+            c == '=' || c == '@'))
+        return TRUE;
+      arg++;
+    }
+  return FALSE;
+}
+
+char *
+flatpak_quote_argv (const char *argv[],
+                    gssize      len)
+{
+  GString *res = g_string_new ("");
+  int i;
+
+  if (len == -1)
+    len = g_strv_length ((char **) argv);
+
+  for (i = 0; i < len; i++)
+    {
+      if (i != 0)
+        g_string_append_c (res, ' ');
+
+      if (needs_quoting (argv[i]))
+        {
+          g_autofree char *quoted = g_shell_quote (argv[i]);
+          g_string_append (res, quoted);
+        }
+      else
+        g_string_append (res, argv[i]);
+    }
+
+  return g_string_free (res, FALSE);
+}
+
 typedef enum {
   AUTOSTART_FLAGS_NONE        = 0,
   AUTOSTART_FLAGS_ACTIVATABLE = 1 << 0,
@@ -333,7 +376,7 @@ handle_enable_autostart (XdpImplBackground *object,
       goto out;
     }
 
-  commandline = g_strjoinv (" ", (char **)arg_commandline);
+  commandline = flatpak_quote_argv ((const char **)arg_commandline, -1);
 
   keyfile = g_key_file_new ();
 
