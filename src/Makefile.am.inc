@@ -22,6 +22,7 @@ $(dbus_built_sources): src/Makefile.am.inc
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.ScreenCast.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.RemoteDesktop.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Lockdown.xml \
+	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Background.xml \
 	$(NULL)
 
 shell_built_sources = src/shell-dbus.c src/shell-dbus.h
@@ -35,6 +36,7 @@ $(shell_built_sources): src/Makefile.am.inc
 	$(top_srcdir)/data/org.gnome.Mutter.ScreenCast.xml	        \
 	$(top_srcdir)/data/org.gnome.Mutter.RemoteDesktop.xml	        \
 	$(top_srcdir)/data/org.gnome.Shell.Screenshot.xml	        \
+	$(top_srcdir)/data/org.gnome.Shell.Introspect.xml	        \
 	$(top_srcdir)/data/org.gtk.Notifications.xml			\
 	$(top_srcdir)/data/org.gnome.SessionManager.xml		        \
 	$(top_srcdir)/data/org.gnome.ScreenSaver.xml			\
@@ -81,6 +83,8 @@ xdg_desktop_portal_gtk_SOURCES = \
 	src/appchooser.c			\
 	src/notification.h			\
 	src/notification.c			\
+	src/fdonotification.h			\
+	src/fdonotification.c			\
 	src/inhibit.h			        \
 	src/inhibit.c			        \
 	src/appchooserrow.h			\
@@ -121,6 +125,8 @@ xdg_desktop_portal_gtk_SOURCES = \
 	src/displaystatetracker.h		\
 	src/lockdown.c				\
 	src/lockdown.h				\
+        src/background.c                        \
+        src/background.h                        \
 	$(NULL)
 
 nodist_xdg_desktop_portal_gtk_SOURCES = \
