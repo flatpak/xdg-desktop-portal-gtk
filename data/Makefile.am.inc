@@ -40,6 +40,7 @@ EXTRA_DIST += \
         data/org.gnome.Mutter.ScreenCast.xml    \
         data/org.gnome.Mutter.RemoteDesktop.xml \
         data/org.gnome.SessionManager.xml       \
+        data/org.gnome.Shell.Introspect.xml     \
         data/org.gnome.Shell.Screenshot.xml     \
         data/org.gnome.ScreenSaver.xml          \
         data/org.freedesktop.ScreenSaver.xml    \
