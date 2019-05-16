@@ -5,6 +5,7 @@ src/accountdialog.c
 src/accountdialog.ui
 src/appchooserdialog.c
 src/appchooserdialog.ui
+src/background.c
 src/filechooser.c
 src/remotedesktopdialog.c
 src/remotedesktopdialog.ui
