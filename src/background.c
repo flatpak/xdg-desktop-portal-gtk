@@ -71,17 +71,22 @@ handle_get_app_state (XdpImplBackground *object,
       while (g_variant_iter_loop (iter, "{t@a{sv}}", NULL, &dict))
         {
           const char *app_id = NULL;
+          const char *sandboxed_app_id = NULL;
           char *app;
           gboolean hidden = FALSE;
           gboolean focus = FALSE;
           AppState state = BACKGROUND;
 
           g_variant_lookup (dict, "app-id", "&s", &app_id);
+          g_variant_lookup (dict, "sandboxed-app-id", "&s", &sandboxed_app_id);
           g_variant_lookup (dict, "is-hidden", "b", &hidden);
           g_variant_lookup (dict, "has-focus", "b", &focus);
 
           /* See https://gitlab.gnome.org/GNOME/gnome-shell/issues/1289 */
-          app = get_actual_app_id (app_id);
+          if (sandboxed_app_id)
+            app = g_strdup (sandboxed_app_id);
+          else
+            app = get_actual_app_id (app_id);
           if (app == NULL)
             continue;
 
