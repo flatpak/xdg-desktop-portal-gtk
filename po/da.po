@@ -5,10 +5,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk\n"
-"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
-"issues\n"
-"POT-Creation-Date: 2019-02-11 03:27+0000\n"
-"PO-Revision-Date: 2019-02-11 00:00+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-"
+"gtk/issues\n"
+"POT-Creation-Date: 2019-05-20 15:30+0000\n"
+"PO-Revision-Date: 2019-05-21 00:00+0200\n"
 "Last-Translator: scootergrisen\n"
 "Language-Team: Danish\n"
 "Language: da\n"
@@ -124,6 +124,27 @@ msgstr "Der blev ikke fundet nogen programmer"
 msgid "Find Compatible Applications in Software"
 msgstr "Find kompatible programmer i Software"
 
+#: src/background.c:255
+msgid "Background activity"
+msgstr "Baggrundsaktivitet"
+
+#: src/background.c:257
+#, c-format
+msgid "%s is running in the background."
+msgstr "%s kører i baggrunden."
+
+#: src/background.c:262
+msgid "Allow"
+msgstr "Tillad"
+
+#: src/background.c:269
+msgid "Forbid"
+msgstr "Forbyd"
+
+#: src/background.c:276
+msgid "Ignore"
+msgstr "Ignorer"
+
 #: src/filechooser.c:392
 msgid "_Save"
 msgstr "_Gem"
@@ -134,26 +155,26 @@ msgstr "_Åbn"
 
 #: src/filechooser.c:552
 msgid "Open files read-only"
-msgstr "Åbn filer som skrivebeskyttet"
+msgstr "Åbn filer som skrivebeskyttede"
 
-#: src/remotedesktopdialog.c:190
+#: src/remotedesktopdialog.c:188
 msgid "Pointer"
 msgstr "Markør"
 
-#: src/remotedesktopdialog.c:193
+#: src/remotedesktopdialog.c:191
 msgid "Keyboard"
 msgstr "Tastatur"
 
-#: src/remotedesktopdialog.c:196
+#: src/remotedesktopdialog.c:194
 msgid "Touch screen"
 msgstr "Berøringsfølsom skærm"
 
-#: src/remotedesktopdialog.c:303
+#: src/remotedesktopdialog.c:307
 #, c-format
 msgid "Select devices to share with %s"
 msgstr "Vælg enheder som skal deles med %s"
 
-#: src/remotedesktopdialog.c:308
+#: src/remotedesktopdialog.c:312
 msgid "Select devices to share with the requesting application"
 msgstr "Vælg enheder som skal deles med det anmodede program"
 
@@ -189,7 +210,7 @@ msgstr "Skærmbillede"
 
 #: src/screenshotdialog.ui:30
 msgid "_Options…"
-msgstr "_Valgmuligheder…"
+msgstr "_Valgmuligheder …"
 
 #: src/screenshotdialog.ui:55
 msgid "Take _Screenshot"
@@ -205,7 +226,7 @@ msgstr "Indfang _hele skærmen"
 
 #: src/screenshotdialog.ui:133
 msgid "Grab the current _window"
-msgstr "Indgang det nuværende _vindue"
+msgstr "Indfang det nuværende _vindue"
 
 #: src/screenshotdialog.ui:144
 msgid "Select _area to grab"
@@ -225,8 +246,8 @@ msgstr "Effekter"
 
 #: src/screenshotdialog.ui:192
 msgid "Include _pointer"
-msgstr "Inkluder _markør"
+msgstr "Medtag _markør"
 
 #: src/screenshotdialog.ui:201
 msgid "Include the window _border"
-msgstr "Inkluder vinduets _kant"
+msgstr "Medtag vinduets _kant"
