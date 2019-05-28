@@ -1,3 +1,12 @@
+Changes in 1.4.0
+================
+
+* Translation updates
+* inhibit: Implement session state tracking
+* screencast: Allow selecting source types
+* screencast: Support cursor modes
+* Add a background & autostart portal
+
 Changes in 1.2.0
 ================
 
