@@ -1,7 +1,6 @@
 # Russian translation for xdg-desktop-portal-gtk.
 # Copyright (C) 2019 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
 # This file is distributed under the same license as the xdg-desktop-portal-gtk package.
-# Christian Kirbach <Christian.Kirbach@gmail.com>, 2016, 2018.
 # Andrew Sazonow <sazonow1980.@gmail.com>, 2019.
 #
 msgid ""
