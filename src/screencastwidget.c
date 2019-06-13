@@ -146,11 +146,25 @@ on_row_activated (GtkListBox *box,
     }
 }
 
+static void
+update_selected_row_cb (GtkWidget *widget,
+                        gpointer user_data)
+{
+  GtkListBoxRow *row = GTK_LIST_BOX_ROW (widget);
+
+  set_row_is_selected (row, gtk_list_box_row_is_selected (row));
+}
+
 static gboolean
 emit_selection_change_in_idle_cb (gpointer data)
 {
   ScreenCastWidget *widget = (ScreenCastWidget *)data;
   GList *selected_rows;
+
+  /* Update the selected rows */
+  gtk_container_foreach (GTK_CONTAINER (widget->monitor_list),
+                         update_selected_row_cb,
+                         widget);
 
   selected_rows = gtk_list_box_get_selected_rows (GTK_LIST_BOX (widget->monitor_list));
   g_signal_emit (widget, signals[HAS_SELECTION_CHANGED], 0,
