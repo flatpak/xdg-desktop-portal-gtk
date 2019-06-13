@@ -479,7 +479,6 @@ handle_start (XdpImplScreenCast *object,
   const char *sender;
   g_autoptr(Request) request = NULL;
   ScreenCastSession *screen_cast_session;
-  g_autoptr(GError) error = NULL;
   ScreenCastDialogHandle *dialog_handle;
   GVariantBuilder results_builder;
 
