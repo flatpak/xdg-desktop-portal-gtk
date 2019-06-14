@@ -1,15 +1,15 @@
 # Lithuanian translation for xdg-desktop-portal-gtk.
 # Copyright (C) 2018 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
 # This file is distributed under the same license as the xdg-desktop-portal-gtk package.
-# Moo, 2018.
+# Moo, 2018, 2019.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2019-02-13 15:30+0000\n"
-"PO-Revision-Date: 2019-02-14 00:32+0200\n"
+"POT-Creation-Date: 2019-06-06 15:29+0000\n"
+"PO-Revision-Date: 2019-06-07 00:27+0300\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
@@ -127,6 +127,27 @@ msgstr "Nerasta jokių programų"
 msgid "Find Compatible Applications in Software"
 msgstr "Rasti suderinamas programas Programinėje įrangoje"
 
+#: src/background.c:255
+msgid "Background activity"
+msgstr "Foninė veikla"
+
+#: src/background.c:257
+#, c-format
+msgid "%s is running in the background."
+msgstr "%s yra vykdoma fone."
+
+#: src/background.c:262
+msgid "Allow"
+msgstr "Leisti"
+
+#: src/background.c:269
+msgid "Forbid"
+msgstr "Drausti"
+
+#: src/background.c:276
+msgid "Ignore"
+msgstr "Nepaisyti"
+
 #: src/filechooser.c:392
 msgid "_Save"
 msgstr "Į_rašyti"
@@ -139,24 +160,24 @@ msgstr "_Atverti"
 msgid "Open files read-only"
 msgstr "Atverti failus tik skaitymui"
 
-#: src/remotedesktopdialog.c:190
+#: src/remotedesktopdialog.c:188
 msgid "Pointer"
 msgstr "Rodyklė"
 
-#: src/remotedesktopdialog.c:193
+#: src/remotedesktopdialog.c:191
 msgid "Keyboard"
 msgstr "Klaviatūra"
 
-#: src/remotedesktopdialog.c:196
+#: src/remotedesktopdialog.c:194
 msgid "Touch screen"
 msgstr "Jutiklinis ekranas"
 
-#: src/remotedesktopdialog.c:303
+#: src/remotedesktopdialog.c:307
 #, c-format
 msgid "Select devices to share with %s"
 msgstr "Pasirinkti įrenginius, kuriuos bendrinti su %s"
 
-#: src/remotedesktopdialog.c:308
+#: src/remotedesktopdialog.c:312
 msgid "Select devices to share with the requesting application"
 msgstr "Pasirinkti įrenginius, kuriuos bendrinti su prašančia programa"
 
