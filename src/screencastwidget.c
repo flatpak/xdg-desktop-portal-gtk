@@ -43,6 +43,7 @@ struct _ScreenCastWidget
 
   DisplayStateTracker *display_state_tracker;
   gulong monitors_changed_handler_id;
+  guint selection_changed_timeout_id;
 };
 
 static GQuark quark_monitor_widget_data;
@@ -146,15 +147,51 @@ on_row_activated (GtkListBox *box,
 }
 
 static void
-on_selected_rows_changed (GtkListBox *box,
-                          ScreenCastWidget *widget)
+update_selected_row_cb (GtkWidget *widget,
+                        gpointer user_data)
 {
+  GtkListBoxRow *row = GTK_LIST_BOX_ROW (widget);
+
+  set_row_is_selected (row, gtk_list_box_row_is_selected (row));
+}
+
+static gboolean
+emit_selection_change_in_idle_cb (gpointer data)
+{
+  ScreenCastWidget *widget = (ScreenCastWidget *)data;
   GList *selected_rows;
 
-  selected_rows = gtk_list_box_get_selected_rows (box);
+  /* Update the selected rows */
+  gtk_container_foreach (GTK_CONTAINER (widget->monitor_list),
+                         update_selected_row_cb,
+                         widget);
+
+  selected_rows = gtk_list_box_get_selected_rows (GTK_LIST_BOX (widget->monitor_list));
   g_signal_emit (widget, signals[HAS_SELECTION_CHANGED], 0,
                  !!selected_rows);
   g_list_free (selected_rows);
+
+  widget->selection_changed_timeout_id = 0;
+  return G_SOURCE_REMOVE;
+}
+
+static void
+schedule_selection_change (ScreenCastWidget *widget)
+{
+  if (widget->selection_changed_timeout_id > 0)
+    return;
+
+  widget->selection_changed_timeout_id =
+    g_idle_add (emit_selection_change_in_idle_cb, widget);
+}
+
+static void
+on_selected_rows_changed (GtkListBox *box,
+                          ScreenCastWidget *widget)
+{
+  /* GtkListBox activates rows after selecting them, which prevents
+   * us from emitting the HAS_SELECTION_CHANGED signal here */
+  schedule_selection_change (widget);
 }
 
 static void
@@ -267,6 +304,11 @@ screen_cast_widget_finalize (GObject *object)
 
   g_signal_handler_disconnect (widget->display_state_tracker,
                                widget->monitors_changed_handler_id);
+  if (widget->selection_changed_timeout_id > 0)
+    {
+      g_source_remove (widget->selection_changed_timeout_id);
+      widget->selection_changed_timeout_id = 0;
+    }
 
   G_OBJECT_CLASS (screen_cast_widget_parent_class)->finalize (object);
 }
