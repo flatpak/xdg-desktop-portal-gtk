@@ -36,5 +36,8 @@ void screen_cast_widget_set_app_id (ScreenCastWidget *widget,
 void screen_cast_widget_set_allow_multiple (ScreenCastWidget *widget,
                                             gboolean multiple);
 
+void screen_cast_widget_set_source_types (ScreenCastWidget *screen_cast_widget,
+                                          ScreenCastSourceType source_types);
+
 void screen_cast_widget_add_selections (ScreenCastWidget *widget,
                                         GVariantBuilder *selections_builder);

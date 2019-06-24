@@ -9,7 +9,7 @@
     <child type="titlebar">
       <object class="GtkHeaderBar" id="titlebar">
         <property name="visible">1</property>
-        <property name="title" translatable="yes">Screen casting</property>
+        <property name="title" translatable="yes">Screen Share</property>
         <child>
           <object class="GtkButton" id="cancel_button">
             <property name="visible">1</property>
