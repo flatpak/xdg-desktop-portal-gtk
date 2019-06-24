@@ -1,5 +1,5 @@
 /*
- * Copyright © 2017 Red Hat, Inc
+ * Copyright © 2019 Alberto Fanjul <albfan@gnome.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -18,29 +18,14 @@
 
 #pragma once
 
-#include <glib.h>
-#include <gio/gio.h>
+#include <glib-object.h>
 
-typedef enum _ScreenCastSourceType
-{
-  SCREEN_CAST_SOURCE_TYPE_MONITOR = 1,
-  SCREEN_CAST_SOURCE_TYPE_WINDOW = 2,
-} ScreenCastSourceType;
+typedef struct _Window Window;
 
-typedef enum _ScreenCastCursorMode
-{
-  SCREEN_CAST_CURSOR_MODE_NONE = 0,
-  SCREEN_CAST_CURSOR_MODE_HIDDEN = 1,
-  SCREEN_CAST_CURSOR_MODE_EMBEDDED = 2,
-  SCREEN_CAST_CURSOR_MODE_METADATA = 4,
-} ScreenCastCursorMode;
+const char * window_get_app_id (Window *window);
 
-typedef struct _ScreenCastSelection
-{
-  gboolean multiple;
-  ScreenCastSourceType source_types;
-  ScreenCastCursorMode cursor_mode;
-} ScreenCastSelection;
+const char * window_get_title (Window *window);
 
-gboolean screen_cast_init (GDBusConnection *connection,
-                           GError **error);
+const guint64 window_get_id (Window *window);
+
+GList * get_available_windows ();

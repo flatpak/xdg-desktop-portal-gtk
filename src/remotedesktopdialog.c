@@ -314,9 +314,17 @@ remote_desktop_dialog_new (const char *app_id,
 
   if (dialog->screen_cast_enable)
     {
-      g_signal_connect (dialog->screen_cast_widget, "has-selection-changed",
+      ScreenCastWidget *screen_cast_widget =
+        SCREEN_CAST_WIDGET (dialog->screen_cast_widget);
+
+      screen_cast_widget_set_allow_multiple (screen_cast_widget,
+                                             screen_cast_select->multiple);
+      screen_cast_widget_set_source_types (screen_cast_widget,
+                                           screen_cast_select->source_types);
+
+      g_signal_connect (screen_cast_widget, "has-selection-changed",
                         G_CALLBACK (on_has_selection_changed), dialog);
-      gtk_widget_show (dialog->screen_cast_widget);
+      gtk_widget_show (GTK_WIDGET (screen_cast_widget));
     }
 
   gtk_label_set_label (GTK_LABEL (dialog->device_heading), heading);

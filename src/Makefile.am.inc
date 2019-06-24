@@ -123,6 +123,8 @@ xdg_desktop_portal_gtk_SOURCES = \
 	src/remotedesktopdialog.h		\
 	src/displaystatetracker.c		\
 	src/displaystatetracker.h		\
+	src/shellintrospect.c			\
+	src/shellintrospect.h			\
 	src/lockdown.c				\
 	src/lockdown.h				\
         src/background.c                        \
