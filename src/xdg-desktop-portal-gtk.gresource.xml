@@ -10,6 +10,8 @@
     <file>screencastwidget.ui</file>
     <file>screencastdialog.ui</file>
     <file>remotedesktopdialog.ui</file>
+    <file>wallpaperdialog.ui</file>
+    <file>wallpaperpreview.ui</file>
   </gresource>
 </gresources>
 
