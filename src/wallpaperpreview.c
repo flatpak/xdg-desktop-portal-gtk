@@ -28,6 +28,8 @@
 #include <gio/gio.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
+#define GNOME_DESKTOP_USE_UNSTABLE_API
+#include <libgnome-desktop/gnome-bg.h>
 
 #include "wallpaperpreview.h"
 
@@ -35,11 +37,14 @@ struct _WallpaperPreview {
   GtkBox parent;
 
   GtkStack *stack;
+  GtkWidget *animated_background_icon;
   GtkLabel *lockscreen_clock_label;
   GtkLabel *desktop_clock_label;
   GtkWidget *drawing_area;
 
-  GFile *image_file;
+  GnomeDesktopThumbnailFactory *thumbs;
+  GnomeBG *bg;
+
   GSettings *desktop_settings;
   gboolean is_24h_format;
   GDateTime *previous_time;
@@ -59,20 +64,13 @@ on_preview_draw_cb (GtkWidget *widget,
 {
   g_autoptr(GdkPixbuf) pixbuf = NULL;
   GtkAllocation allocation;
-  const gchar *image_path;
-
-  if (!self->image_file)
-    return FALSE;
-
-  image_path = g_file_get_path (self->image_file);
-  if (!image_path)
-    return FALSE;
 
   gtk_widget_get_allocation (GTK_WIDGET (self), &allocation);
-  pixbuf = gdk_pixbuf_new_from_file_at_scale (image_path,
-                                              allocation.width,
-                                              allocation.height,
-                                              FALSE, NULL);
+  pixbuf = gnome_bg_create_thumbnail (self->bg,
+                                      self->thumbs,
+                                      gdk_screen_get_default (),
+                                      allocation.width,
+                                      allocation.height);
   gdk_cairo_set_source_pixbuf (cr, pixbuf, 0, 0);
   cairo_paint (cr);
 
@@ -139,7 +137,7 @@ wallpaper_preview_finalize (GObject *object)
   WallpaperPreview *self = WALLPAPER_PREVIEW (object);
 
   g_clear_object (&self->desktop_settings);
-  g_clear_object (&self->image_file);
+  g_clear_object (&self->thumbs);
 
   g_clear_pointer (&self->previous_time, g_date_time_unref);
 
@@ -181,6 +179,10 @@ wallpaper_preview_init (WallpaperPreview *self)
   update_clock_format (self);
 
   self->clock_time_timeout_id = g_timeout_add_seconds (1, update_clock_cb, self);
+
+  self->bg = gnome_bg_new ();
+  gnome_bg_set_placement (self->bg, G_DESKTOP_BACKGROUND_STYLE_STRETCHED);
+  self->thumbs = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE);
 }
 
 static void
@@ -194,6 +196,7 @@ wallpaper_preview_class_init (WallpaperPreviewClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/freedesktop/portal/desktop/gtk/wallpaperpreview.ui");
 
   gtk_widget_class_bind_template_child (widget_class, WallpaperPreview, stack);
+  gtk_widget_class_bind_template_child (widget_class, WallpaperPreview, animated_background_icon);
   gtk_widget_class_bind_template_child (widget_class, WallpaperPreview, drawing_area);
   gtk_widget_class_bind_template_child (widget_class, WallpaperPreview, desktop_clock_label);
   gtk_widget_class_bind_template_child (widget_class, WallpaperPreview, lockscreen_clock_label);
@@ -211,8 +214,11 @@ wallpaper_preview_set_image (WallpaperPreview *self,
                              const gchar *image_uri,
                              gboolean is_lockscreen)
 {
-  g_clear_object (&self->image_file);
-  self->image_file = g_file_new_for_uri (image_uri);
+  g_autoptr(GFile) image_file = g_file_new_for_uri (image_uri);
+  gnome_bg_set_filename (self->bg, g_file_get_path (image_file));
+
+  gtk_widget_set_visible (self->animated_background_icon,
+                          gnome_bg_changes_with_time (self->bg));
 
   if (is_lockscreen)
     {
