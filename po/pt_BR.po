@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2019-05-03 03:29+0000\n"
-"PO-Revision-Date: 2019-05-03 10:47-0300\n"
+"POT-Creation-Date: 2019-09-08 15:29+0000\n"
+"PO-Revision-Date: 2019-09-08 18:00-0300\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
@@ -126,6 +126,27 @@ msgstr "Nenhum aplicativo localizado"
 msgid "Find Compatible Applications in Software"
 msgstr "Localizar aplicativos compatíveis no Software"
 
+#: src/background.c:255
+msgid "Background activity"
+msgstr "Atividade em segundo plano"
+
+#: src/background.c:257
+#, c-format
+msgid "%s is running in the background."
+msgstr "%s está em execução em segundo plano."
+
+#: src/background.c:262
+msgid "Allow"
+msgstr "Permitir"
+
+#: src/background.c:269
+msgid "Forbid"
+msgstr "Proibir"
+
+#: src/background.c:276
+msgid "Ignore"
+msgstr "Ignorar"
+
 #: src/filechooser.c:392
 msgid "_Save"
 msgstr "_Salvar"
@@ -168,12 +189,12 @@ msgstr "Área de trabalho remota"
 msgid "Screen casting"
 msgstr "Compartilhamento de tela"
 
-#: src/screencastwidget.c:243
+#: src/screencastwidget.c:280
 #, c-format
 msgid "Select monitor to share with %s"
 msgstr "Selecione o monitor para compartilhar com %s"
 
-#: src/screencastwidget.c:248
+#: src/screencastwidget.c:285
 msgid "Select monitor to share with the requesting application"
 msgstr "Selecione o monitor para compartilhar com aplicativo requisitante"
 
