@@ -133,11 +133,34 @@ create_monitor_widget (LogicalMonitor *logical_monitor)
   return monitor_widget;
 }
 
+static gboolean
+should_skip_window (Window *window,
+                    GtkWindow *toplevel)
+{
+  g_autofree char *processed_app_id = NULL;
+
+  if (g_strcmp0 (window_get_title (window),
+                 gtk_window_get_title (toplevel)) != 0)
+    return FALSE;
+
+  processed_app_id = g_strdup (window_get_app_id (window));
+  if (g_str_has_suffix (processed_app_id, ".desktop"))
+    processed_app_id[strlen (processed_app_id) -
+                     strlen (".desktop")] = '\0';
+
+  if (g_strcmp0 (processed_app_id, g_get_prgname ()) != 0 &&
+      g_strcmp0 (processed_app_id, gdk_get_program_class ()) != 0)
+    return FALSE;
+
+  return TRUE;
+}
+
 static void
 update_windows_list (ScreenCastWidget *widget)
 {
   GtkListBox *window_list = GTK_LIST_BOX (widget->window_list);
   GList *old_window_widgets;
+  GtkWidget *toplevel;
   GList *windows;
   GList *l;
 
@@ -150,11 +173,18 @@ update_windows_list (ScreenCastWidget *widget)
     }
   g_list_free (old_window_widgets);
 
+  toplevel = gtk_widget_get_ancestor (GTK_WIDGET (widget), GTK_TYPE_WINDOW);
+  if (!toplevel)
+    return;
+
   windows = shell_introspect_get_windows (widget->shell_introspect);
   for (l = windows; l; l = l->next)
     {
       Window *window = l->data;
       GtkWidget *window_widget;
+
+      if (should_skip_window (window, GTK_WINDOW (toplevel)))
+        continue;
 
       window_widget = create_window_widget (window);
       gtk_container_add (GTK_CONTAINER (window_list), window_widget);
