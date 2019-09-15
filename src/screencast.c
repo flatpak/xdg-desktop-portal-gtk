@@ -424,7 +424,11 @@ start_session (ScreenCastSession *screen_cast_session,
   gnome_api_version = gnome_screen_cast_get_api_version (gnome_screen_cast);
   if (gnome_api_version < SUPPORTED_MUTTER_SCREEN_CAST_API_VERSION)
     {
-      g_warning ("org.gnome.Mutter.ScreenCast API version not compatible");
+      g_set_error (error, XDG_DESKTOP_PORTAL_ERROR,
+                   XDG_DESKTOP_PORTAL_ERROR_FAILED,
+                   "org.gnome.Mutter.ScreenCast API version %d lower "
+                   "than minimum supported version %d",
+                   gnome_api_version, SUPPORTED_MUTTER_SCREEN_CAST_API_VERSION);
       g_clear_object (&gnome_screen_cast);
       return FALSE;
     }
