@@ -1,23 +1,25 @@
 # Turkish translation for xdg-desktop-portal-gtk.
-# Copyright (C) 2017 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
+# Copyright (C) 2017-2019 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
 # This file is distributed under the same license as the xdg-desktop-portal-gtk package.
+#
 # Muhammet Kara <muhammetk@gnome.org>, 2017, 2018.
+# Sabri Ünal <libreajans@gmail.com>, 2019.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2018-11-16 15:18-0500\n"
-"PO-Revision-Date: 2018-10-31 00:33+0300\n"
-"Last-Translator: Muhammet Kara <muhammetk@gnome.org>\n"
+"POT-Creation-Date: 2019-09-07 15:29+0000\n"
+"PO-Revision-Date: 2019-09-07 21:52+0300\n"
+"Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Gtranslator 2.91.7\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
@@ -36,32 +38,32 @@ msgstr "Erişimi Reddet"
 msgid "Grant Access"
 msgstr "Erişime İzin Ver"
 
-#: src/accountdialog.c:166
+#: src/accountdialog.c:176
 msgid "Select an Image"
 msgstr "Resim Seç"
 
-#: src/accountdialog.c:169
+#: src/accountdialog.c:179
 msgid "Cancel"
 msgstr "İptal"
 
-#: src/accountdialog.c:170
+#: src/accountdialog.c:180
 msgid "Select"
 msgstr "Seç"
 
-#: src/accountdialog.c:171
+#: src/accountdialog.c:181
 msgid "Clear"
 msgstr "Temizle"
 
-#: src/accountdialog.c:185
+#: src/accountdialog.c:195
 msgid "Images"
 msgstr "Resimler"
 
-#: src/accountdialog.c:260
+#: src/accountdialog.c:272
 #, c-format
 msgid "Share your personal information with %s?"
 msgstr "Kişisel bilgileriniz %s ile paylaşılsın mı?"
 
-#: src/accountdialog.c:263
+#: src/accountdialog.c:275
 msgid "Share your personal information with the requesting application?"
 msgstr "Kişisel bilgileriniz, istekte bulunan uygulamayla paylaşılsın mı?"
 
@@ -69,7 +71,7 @@ msgstr "Kişisel bilgileriniz, istekte bulunan uygulamayla paylaşılsın mı?"
 msgid "Share Details"
 msgstr "Ayrıntıları Paylaş"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:395
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:397
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
@@ -88,7 +90,7 @@ msgstr "Bilgileri paylaşmadan önce değişiklik yapın"
 msgid "Failed to start Software"
 msgstr "Yazılımlar başlatılamadı"
 
-#: src/appchooserdialog.c:398
+#: src/appchooserdialog.c:408
 #, c-format
 msgid ""
 "Select an application to open “%s”. More applications are available in <a "
@@ -97,7 +99,7 @@ msgstr ""
 "“%s”i açmak için bir uygulama seçin. <a href='software'>Yazılımlar</a>'da "
 "daha fazla uygulama bulabilirsiniz."
 
-#: src/appchooserdialog.c:403
+#: src/appchooserdialog.c:413
 msgid ""
 "Select an application. More applications are available in <a "
 "href='software'>Software.</a>"
@@ -105,12 +107,12 @@ msgstr ""
 "Bir uygulama seçin. <a href='software'>Yazılımlar</a>'da daha fazla uygulama "
 "bulabilirsiniz."
 
-#: src/appchooserdialog.c:418
+#: src/appchooserdialog.c:428
 #, c-format
 msgid "Unable to find an application that is able to open “%s”."
 msgstr "“%s”i açabilen bir uygulama bulunamadı."
 
-#: src/appchooserdialog.c:423
+#: src/appchooserdialog.c:433
 msgid "Unable to find a suitable application."
 msgstr "Uygun bir uygulama bulunamadı."
 
@@ -126,32 +128,57 @@ msgstr "Hiçbir Uygulama Bulunamadı"
 msgid "Find Compatible Applications in Software"
 msgstr "Uyumlu Uygulamaları Yazılımlar'da Bul"
 
-#: src/filechooser.c:390
+#: src/background.c:255
+msgid "Background activity"
+msgstr "Arkaplan etkinliği"
+
+#: src/background.c:257
+#, c-format
+msgid "%s is running in the background."
+msgstr "%s arkaplanda çalışıyor"
+
+#: src/background.c:262
+msgid "Allow"
+msgstr "İzin ver"
+
+#: src/background.c:269
+msgid "Forbid"
+msgstr "Yasakla"
+
+#: src/background.c:276
+msgid "Ignore"
+msgstr "Yoksay"
+
+#: src/filechooser.c:392
 msgid "_Save"
 msgstr "_Kaydet"
 
-#: src/filechooser.c:392
+#: src/filechooser.c:394
 msgid "_Open"
 msgstr "_Aç"
 
-#: src/remotedesktopdialog.c:190
+#: src/filechooser.c:552
+msgid "Open files read-only"
+msgstr "Dosyaları salt okunur aç"
+
+#: src/remotedesktopdialog.c:188
 msgid "Pointer"
 msgstr "İşaretçi"
 
-#: src/remotedesktopdialog.c:193
+#: src/remotedesktopdialog.c:191
 msgid "Keyboard"
 msgstr "Klavye"
 
-#: src/remotedesktopdialog.c:196
+#: src/remotedesktopdialog.c:194
 msgid "Touch screen"
 msgstr "Dokunmatik ekran"
 
-#: src/remotedesktopdialog.c:303
+#: src/remotedesktopdialog.c:307
 #, c-format
 msgid "Select devices to share with %s"
 msgstr "%s ile paylaşılacak cihazları seçin"
 
-#: src/remotedesktopdialog.c:308
+#: src/remotedesktopdialog.c:312
 msgid "Select devices to share with the requesting application"
 msgstr "İstekte bulunan uygulama ile paylaşılacak cihazları seçin"
 
@@ -163,21 +190,21 @@ msgstr "Uzak masaüstü"
 msgid "Screen casting"
 msgstr "Ekran yayını"
 
-#: src/screencastwidget.c:243
+#: src/screencastwidget.c:280
 #, c-format
 msgid "Select monitor to share with %s"
 msgstr "%s ile paylaşılacak monitörü seçin"
 
-#: src/screencastwidget.c:248
+#: src/screencastwidget.c:285
 msgid "Select monitor to share with the requesting application"
 msgstr "İstekte bulunan uygulama ile paylaşılacak monitörü seçin"
 
-#: src/screenshotdialog.c:422
+#: src/screenshotdialog.c:434
 #, c-format
 msgid "Share this screenshot with %s?"
 msgstr "Bu ekran görüntüsü %s ile paylaşılsın mı?"
 
-#: src/screenshotdialog.c:426
+#: src/screenshotdialog.c:438
 msgid "Share this screenshot with the requesting application?"
 msgstr "Bu ekran görüntüsü, istekte bulunan uygulama ile paylaşılsın mı?"
 
