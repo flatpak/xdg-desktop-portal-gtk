@@ -6,9 +6,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
-"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/issues\n"
-"POT-Creation-Date: 2019-03-08 15:41+0100\n"
-"PO-Revision-Date: 2019-03-08 15:43+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
+"issues\n"
+"POT-Creation-Date: 2019-08-13 03:29+0000\n"
+"PO-Revision-Date: 2019-08-13 09:39+0200\n"
 "Last-Translator: Milo Casagrande <milo@milo.name>\n"
 "Language-Team: Italian <gnome-it-list@gnome.org>\n"
 "Language: it\n"
@@ -16,12 +17,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.2.3\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
 msgstr "Portale"
 
+#. TRANSLATORS: Don't translate this text (this is icon name)
 #: data/xdg-desktop-portal-gtk.desktop.in.in:6
 msgid "applications-system-symbolic"
 msgstr "applications-system-symbolic"
@@ -126,6 +128,27 @@ msgstr "Nessuna applicazione trovata"
 msgid "Find Compatible Applications in Software"
 msgstr "Trova applicazione compatibile in «Software»"
 
+#: src/background.c:255
+msgid "Background activity"
+msgstr "Attività sullo sfondo"
+
+#: src/background.c:257
+#, c-format
+msgid "%s is running in the background."
+msgstr "%s è in esecuzione sullo sfondo."
+
+#: src/background.c:262
+msgid "Allow"
+msgstr "Consenti"
+
+#: src/background.c:269
+msgid "Forbid"
+msgstr "Impedisci"
+
+#: src/background.c:276
+msgid "Ignore"
+msgstr "Ignora"
+
 #: src/filechooser.c:392
 msgid "_Save"
 msgstr "_Salva"
@@ -138,24 +161,24 @@ msgstr "A_pri"
 msgid "Open files read-only"
 msgstr "Apri file in sola-lettura"
 
-#: src/remotedesktopdialog.c:190
+#: src/remotedesktopdialog.c:188
 msgid "Pointer"
 msgstr "Puntatore"
 
-#: src/remotedesktopdialog.c:193
+#: src/remotedesktopdialog.c:191
 msgid "Keyboard"
 msgstr "Tastiera"
 
-#: src/remotedesktopdialog.c:196
+#: src/remotedesktopdialog.c:194
 msgid "Touch screen"
 msgstr "Schermo tattile"
 
-#: src/remotedesktopdialog.c:303
+#: src/remotedesktopdialog.c:307
 #, c-format
 msgid "Select devices to share with %s"
 msgstr "Selezionare i dispositivi da condividere con %s"
 
-#: src/remotedesktopdialog.c:308
+#: src/remotedesktopdialog.c:312
 msgid "Select devices to share with the requesting application"
 msgstr ""
 "Selezionare i dispositivi da condividere con l'applicazione che li richiede"
@@ -168,12 +191,12 @@ msgstr "Desktop remoto"
 msgid "Screen casting"
 msgstr "Screencast"
 
-#: src/screencastwidget.c:243
+#: src/screencastwidget.c:280
 #, c-format
 msgid "Select monitor to share with %s"
 msgstr "Selezionare la schermata da condividere con %s"
 
-#: src/screencastwidget.c:248
+#: src/screencastwidget.c:285
 msgid "Select monitor to share with the requesting application"
 msgstr ""
 "Selezionare la schermata da condividere con l'applicazione che la richiede"
