@@ -11,5 +11,6 @@ src/remotedesktopdialog.c
 src/remotedesktopdialog.ui
 src/screencastdialog.ui
 src/screencastwidget.c
+src/screencastwidget.ui
 src/screenshotdialog.c
 src/screenshotdialog.ui
