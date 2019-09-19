@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2019-08-13 03:29+0000\n"
-"PO-Revision-Date: 2019-08-13 09:39+0200\n"
+"POT-Creation-Date: 2019-09-19 03:30+0000\n"
+"PO-Revision-Date: 2019-09-19 09:49+0200\n"
 "Last-Translator: Milo Casagrande <milo@milo.name>\n"
 "Language-Team: Italian <gnome-it-list@gnome.org>\n"
 "Language: it\n"
@@ -120,11 +120,11 @@ msgstr "Impossibile trovare una applicazione adatta."
 msgid "Open With"
 msgstr "Apri con"
 
-#: src/appchooserdialog.ui:166
+#: src/appchooserdialog.ui:167
 msgid "No Applications Found"
 msgstr "Nessuna applicazione trovata"
 
-#: src/appchooserdialog.ui:182
+#: src/appchooserdialog.ui:183
 msgid "Find Compatible Applications in Software"
 msgstr "Trova applicazione compatibile in «Software»"
 
@@ -188,18 +188,36 @@ msgid "Remote desktop"
 msgstr "Desktop remoto"
 
 #: src/screencastdialog.ui:12
-msgid "Screen casting"
-msgstr "Screencast"
+msgid "Screen Share"
+msgstr "Condivisione dello schermo"
 
-#: src/screencastwidget.c:280
+#: src/screencastwidget.c:483
 #, c-format
 msgid "Select monitor to share with %s"
 msgstr "Selezionare la schermata da condividere con %s"
 
-#: src/screencastwidget.c:285
+#: src/screencastwidget.c:485
+#, c-format
+msgid "Select window to share with %s"
+msgstr "Selezionare la finestra da condividere con %s"
+
+#: src/screencastwidget.c:490
 msgid "Select monitor to share with the requesting application"
 msgstr ""
 "Selezionare la schermata da condividere con l'applicazione che la richiede"
+
+#: src/screencastwidget.c:491
+msgid "Select window to share with the requesting application"
+msgstr ""
+"Selezionare la finestra da condividere con l'applicazione che la richiede"
+
+#: src/screencastwidget.ui:100
+msgid "Single Window"
+msgstr "Finestra singola"
+
+#: src/screencastwidget.ui:176
+msgid "Entire Screen"
+msgstr "Schermo intero"
 
 #: src/screenshotdialog.c:434
 #, c-format
