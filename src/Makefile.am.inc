@@ -23,6 +23,7 @@ $(dbus_built_sources): src/Makefile.am.inc
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.RemoteDesktop.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Lockdown.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Background.xml \
+	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Settings.xml \
 	$(NULL)
 
 shell_built_sources = src/shell-dbus.c src/shell-dbus.h
@@ -127,6 +128,12 @@ xdg_desktop_portal_gtk_SOURCES = \
 	src/lockdown.h				\
         src/background.c                        \
         src/background.h                        \
+        src/fc-monitor.c                        \
+        src/fc-monitor.h                        \
+        src/gsd-remote-display-manager.c        \
+        src/gsd-remote-display-manager.h        \
+        src/settings.c                          \
+        src/settings.h                          \
 	$(NULL)
 
 nodist_xdg_desktop_portal_gtk_SOURCES = \
