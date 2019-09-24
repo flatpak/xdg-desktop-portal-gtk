@@ -14,3 +14,4 @@ src/screencastwidget.c
 src/screencastwidget.ui
 src/screenshotdialog.c
 src/screenshotdialog.ui
+src/settings.c
