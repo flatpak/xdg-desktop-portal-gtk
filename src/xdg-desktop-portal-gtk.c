@@ -212,7 +212,7 @@ main (int argc, char *argv[])
   guint owner_id;
   g_autoptr(GError) error = NULL;
   GDBusConnection  *session_bus;
-  GOptionContext *context;
+  g_autoptr(GOptionContext) context = NULL;
 
   setlocale (LC_ALL, "");
   bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
@@ -243,7 +243,6 @@ main (int argc, char *argv[])
       g_printerr ("Try \"%s --help\" for more information.",
                   g_get_prgname ());
       g_printerr ("\n");
-      g_option_context_free (context);
       return 1;
     }
 
