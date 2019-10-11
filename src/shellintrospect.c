@@ -25,6 +25,7 @@
 enum
 {
   WINDOWS_CHANGED,
+  ANIMATIONS_ENABLED_CHANGED,
 
   N_SIGNALS
 };
@@ -47,9 +48,14 @@ struct _ShellIntrospect
 
   OrgGnomeShellIntrospect *proxy;
 
+  unsigned int version;
+
   GList *windows;
 
   int num_listeners;
+
+  gboolean animations_enabled;
+  gboolean animations_enabled_valid;
 };
 
 G_DEFINE_TYPE (ShellIntrospect, shell_introspect, G_TYPE_OBJECT)
@@ -172,6 +178,41 @@ shell_introspect_unref_listeners (ShellIntrospect *shell_introspect)
     }
 }
 
+gboolean
+shell_introspect_are_animations_enabled (ShellIntrospect *shell_introspect,
+                                         gboolean        *out_animations_enabled)
+{
+  if (!shell_introspect->animations_enabled_valid)
+    return FALSE;
+
+  *out_animations_enabled = shell_introspect->animations_enabled;
+  return TRUE;
+}
+
+static void
+sync_animations_enabled (ShellIntrospect *shell_introspect)
+{
+  gboolean animations_enabled;
+
+  animations_enabled =
+    org_gnome_shell_introspect_get_animations_enabled (shell_introspect->proxy);
+  if (shell_introspect->animations_enabled_valid &&
+      animations_enabled == shell_introspect->animations_enabled)
+    return;
+
+  shell_introspect->animations_enabled_valid = TRUE;
+  shell_introspect->animations_enabled = animations_enabled;
+  g_signal_emit (shell_introspect, signals[ANIMATIONS_ENABLED_CHANGED], 0);
+}
+
+static void
+on_animations_enabled_changed (GObject         *object,
+                               GParamSpec      *pspec,
+                               ShellIntrospect *shell_introspect)
+{
+  sync_animations_enabled (shell_introspect);
+}
+
 static void
 on_shell_introspect_proxy_acquired (GObject      *object,
                                     GAsyncResult *result,
@@ -194,6 +235,17 @@ on_shell_introspect_proxy_acquired (GObject      *object,
 
   if (shell_introspect->num_listeners > 0)
     sync_state (shell_introspect);
+
+  shell_introspect->version =
+    org_gnome_shell_introspect_get_version (shell_introspect->proxy);
+
+  if (shell_introspect->version >= 2)
+    {
+      g_signal_connect (proxy, "notify::animations-enabled",
+                        G_CALLBACK (on_animations_enabled_changed),
+                        shell_introspect);
+      sync_animations_enabled (shell_introspect);
+    }
 }
 
 static void
@@ -261,4 +313,11 @@ shell_introspect_class_init (ShellIntrospectClass *klass)
                                            0,
                                            NULL, NULL, NULL,
                                            G_TYPE_NONE, 0);
+  signals[ANIMATIONS_ENABLED_CHANGED] =
+    g_signal_new ("animations-enabled-changed",
+                  G_TYPE_FROM_CLASS (klass),
+                  G_SIGNAL_RUN_LAST,
+                  0,
+                  NULL, NULL, NULL,
+                  G_TYPE_NONE, 0);
 }
