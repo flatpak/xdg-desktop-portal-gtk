@@ -132,8 +132,6 @@ xdg_desktop_portal_gtk_SOURCES = \
         src/background.h                        \
         src/fc-monitor.c                        \
         src/fc-monitor.h                        \
-        src/gsd-remote-display-manager.c        \
-        src/gsd-remote-display-manager.h        \
         src/settings.c                          \
         src/settings.h                          \
 	$(NULL)
