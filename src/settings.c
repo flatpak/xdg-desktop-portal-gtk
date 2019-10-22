@@ -27,15 +27,14 @@
 
 #include "settings.h"
 #include "utils.h"
+#include "shellintrospect.h"
 
 #include "xdg-desktop-portal-dbus.h"
 #include "fc-monitor.h"
-#include "gsd-remote-display-manager.h"
 
 static GHashTable *settings;
 static FcMonitor *fontconfig_monitor;
 static int fontconfig_serial;
-static GsdRemoteDisplayManager *remote_display;
 static gboolean enable_animations;
 
 typedef struct {
@@ -285,28 +284,44 @@ fontconfig_changed (FcMonitor       *monitor,
 }
 
 static void
-force_disable_animations_changed (GObject         *gobject,
-                                  GParamSpec      *pspec,
-                                  XdpImplSettings *impl)
+override_enable_animations (XdpImplSettings *impl,
+                            gboolean         new_enable_animations)
 {
   const char *namespace = "org.gnome.desktop.interface";
   const char *key = "enable-animations";
-  gboolean force_disable;
+  GVariant *enable_animations_variant;
 
-  g_object_get (gobject, "force-disable-animations", &force_disable, NULL);
-  if (force_disable)
-    enable_animations = FALSE;
-  else
-    {
-      SettingsBundle *bundle;
+  if (enable_animations == new_enable_animations)
+    return;
 
-      bundle = g_hash_table_lookup (settings, namespace);
-      enable_animations = g_settings_get_boolean (bundle->settings, key);
-    }
-
+  enable_animations = new_enable_animations;
+  enable_animations_variant =
+    g_variant_new ("v", g_variant_new_boolean (enable_animations));
   xdp_impl_settings_emit_setting_changed (impl,
-                                          namespace, key,
-                                          g_variant_new ("v", g_variant_new_boolean (enable_animations)));
+                                          namespace,
+                                          key,
+                                          enable_animations_variant);
+}
+
+static void
+sync_animations_enabled_override (XdpImplSettings *impl,
+                                  ShellIntrospect *shell_introspect)
+{
+  gboolean new_enable_animations;
+
+  if (!shell_introspect_are_animations_enabled (shell_introspect,
+                                                &new_enable_animations))
+
+    return;
+
+  override_enable_animations (impl, new_enable_animations);
+}
+
+static void
+animations_enabled_changed (ShellIntrospect *shell_introspect,
+                            XdpImplSettings *impl)
+{
+  sync_animations_enabled_override (impl, shell_introspect);
 }
 
 gboolean
@@ -314,6 +329,7 @@ settings_init (GDBusConnection  *bus,
                GError          **error)
 {
   GDBusInterfaceSkeleton *helper;
+  ShellIntrospect *shell_introspect;
 
   helper = G_DBUS_INTERFACE_SKELETON (xdp_impl_settings_skeleton_new ());
 
@@ -328,9 +344,12 @@ settings_init (GDBusConnection  *bus,
   g_signal_connect (fontconfig_monitor, "updated", G_CALLBACK (fontconfig_changed), helper);
   fc_monitor_start (fontconfig_monitor);
 
-  remote_display = gsd_remote_display_manager_new ();
-  g_signal_connect (remote_display, "notify::force-disable-animations", G_CALLBACK (force_disable_animations_changed), helper);
-  force_disable_animations_changed (G_OBJECT (remote_display), NULL, XDP_IMPL_SETTINGS (helper));
+  shell_introspect = shell_introspect_get ();
+  g_signal_connect (shell_introspect, "animations-enabled-changed",
+                    G_CALLBACK (animations_enabled_changed),
+                    helper);
+  sync_animations_enabled_override (XDP_IMPL_SETTINGS (helper),
+                                    shell_introspect);
 
   if (!g_dbus_interface_skeleton_export (helper,
                                          bus,
