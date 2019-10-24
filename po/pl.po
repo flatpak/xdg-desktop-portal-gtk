@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2019-09-24 18:36+0000\n"
-"PO-Revision-Date: 2019-09-28 15:20+0200\n"
+"POT-Creation-Date: 2019-10-24 14:26+0000\n"
+"PO-Revision-Date: 2019-10-24 16:33+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
@@ -41,7 +41,7 @@ msgstr "Udziel dostępu"
 msgid "Select an Image"
 msgstr "Wybór obrazu"
 
-#: src/accountdialog.c:179
+#: src/accountdialog.c:179 src/wallpaperdialog.ui:18
 msgid "Cancel"
 msgstr "Anuluj"
 
@@ -272,6 +272,30 @@ msgstr "Wi_doczny kursor"
 msgid "Include the window _border"
 msgstr "_Krawędź okna"
 
-#: src/settings.c:185
+#: src/settings.c:184
 msgid "Requested setting not found"
 msgstr "Nie odnaleziono żądanego ustawienia"
+
+#: src/wallpaperdialog.c:121 src/wallpaperdialog.ui:13
+msgid "Set Background"
+msgstr "Ustawienie tła"
+
+#: src/wallpaperdialog.c:131
+msgid "Set Lock Screen"
+msgstr "Ustawienie ekranu blokowania"
+
+#: src/wallpaperdialog.c:162
+msgid "Set Background & Lock Screen"
+msgstr "Ustawienie tła i ekranu blokowania"
+
+#: src/wallpaperdialog.ui:26
+msgid "Set"
+msgstr "Ustaw"
+
+#: src/wallpaperdialog.ui:62
+msgid "Failed to load image file"
+msgstr "Wczytanie pliku obrazu się nie powiodło"
+
+#: src/wallpaperpreview.ui:47
+msgid "Activities"
+msgstr "Podgląd"
