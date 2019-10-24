@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2019-09-25 03:50+0000\n"
-"PO-Revision-Date: 2019-09-25 11:08+0200\n"
+"POT-Creation-Date: 2019-10-24 03:50+0000\n"
+"PO-Revision-Date: 2019-10-24 16:06+0200\n"
 "Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Poedit 2.2.3\n"
+"X-Generator: Poedit 2.2.4\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
@@ -40,9 +40,9 @@ msgstr "Udělit přístup"
 
 #: src/accountdialog.c:176
 msgid "Select an Image"
-msgstr "Výběr obrázku"
+msgstr "Vyberte obrázek"
 
-#: src/accountdialog.c:179
+#: src/accountdialog.c:179 src/wallpaperdialog.ui:18
 msgid "Cancel"
 msgstr "Zrušit"
 
@@ -273,9 +273,33 @@ msgstr "Zahrnout _kurzor myši"
 msgid "Include the window _border"
 msgstr "Zahrnout _rámeček okna"
 
-#: src/settings.c:185
+#: src/settings.c:184
 msgid "Requested setting not found"
 msgstr "Požadované nastavení nebylo nalezeno"
+
+#: src/wallpaperdialog.c:121 src/wallpaperdialog.ui:13
+msgid "Set Background"
+msgstr "Nastavit pozadí"
+
+#: src/wallpaperdialog.c:131
+msgid "Set Lock Screen"
+msgstr "Nastavit uzamknutou obrazovku"
+
+#: src/wallpaperdialog.c:162
+msgid "Set Background & Lock Screen"
+msgstr "Nastavit pozadí a uzamknutou obrazovku"
+
+#: src/wallpaperdialog.ui:26
+msgid "Set"
+msgstr "Nastavit"
+
+#: src/wallpaperdialog.ui:62
+msgid "Failed to load image file"
+msgstr "Selhalo načtení souboru obrázku"
+
+#: src/wallpaperpreview.ui:47
+msgid "Activities"
+msgstr "Činnosti"
 
 #~ msgid "Screen casting"
 #~ msgstr "Záznam obrazovky"
