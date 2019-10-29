@@ -238,6 +238,7 @@ init_settings_table (XdpImplSettings *settings,
     "org.gnome.desktop.privacy",
     "org.gnome.desktop.sound",
     "org.gnome.desktop.wm.preferences",
+    "org.gnome.settings-daemon.peripherals.keyboard",
     "org.gnome.settings-daemon.peripherals.mouse",
     "org.gnome.settings-daemon.plugins.xsettings",
   };
