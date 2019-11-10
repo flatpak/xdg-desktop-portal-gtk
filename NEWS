@@ -1,3 +1,12 @@
+Changes in 1.5.0
+================
+
+* screencast: Support window selection
+* screencast: Fix a crash
+* settings: Add a settings portal backend
+* settings: Handle enable-animations setting like gsd
+* Translation updates
+
 Changes in 1.4.0
 ================
 

@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2019-05-17 03:29+0000\n"
-"PO-Revision-Date: 2019-05-27 18:14+0200\n"
+"POT-Creation-Date: 2019-10-24 14:26+0000\n"
+"PO-Revision-Date: 2019-10-24 16:33+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
@@ -41,7 +41,7 @@ msgstr "Udziel dostępu"
 msgid "Select an Image"
 msgstr "Wybór obrazu"
 
-#: src/accountdialog.c:179
+#: src/accountdialog.c:179 src/wallpaperdialog.ui:18
 msgid "Cancel"
 msgstr "Anuluj"
 
@@ -119,11 +119,11 @@ msgstr "Nie można odnaleźć odpowiedniego programu."
 msgid "Open With"
 msgstr "Otwarcie za pomocą"
 
-#: src/appchooserdialog.ui:166
+#: src/appchooserdialog.ui:167
 msgid "No Applications Found"
 msgstr "Nie odnaleziono programów"
 
-#: src/appchooserdialog.ui:182
+#: src/appchooserdialog.ui:183
 msgid "Find Compatible Applications in Software"
 msgstr "Znajdź zgodne programy w Menedżerze oprogramowania"
 
@@ -186,17 +186,34 @@ msgid "Remote desktop"
 msgstr "Zdalny pulpit"
 
 #: src/screencastdialog.ui:12
-msgid "Screen casting"
+msgid "Screen Share"
 msgstr "Udostępnianie ekranu"
 
-#: src/screencastwidget.c:243
+#: src/screencastwidget.c:483
 #, c-format
 msgid "Select monitor to share with %s"
 msgstr "Wybór monitora do udostępnienia programowi „%s”"
 
-#: src/screencastwidget.c:248
+#: src/screencastwidget.c:485
+#, c-format
+msgid "Select window to share with %s"
+msgstr "Wybór okna do udostępnienia programowi „%s”"
+
+#: src/screencastwidget.c:490
 msgid "Select monitor to share with the requesting application"
 msgstr "Wybór monitora do udostępnienia proszącemu o to programowi"
+
+#: src/screencastwidget.c:491
+msgid "Select window to share with the requesting application"
+msgstr "Wybór okna do udostępnienia proszącemu o to programowi"
+
+#: src/screencastwidget.ui:100
+msgid "Single Window"
+msgstr "Jedno okno"
+
+#: src/screencastwidget.ui:176
+msgid "Entire Screen"
+msgstr "Cały ekran"
 
 #: src/screenshotdialog.c:434
 #, c-format
@@ -254,3 +271,31 @@ msgstr "Wi_doczny kursor"
 #: src/screenshotdialog.ui:201
 msgid "Include the window _border"
 msgstr "_Krawędź okna"
+
+#: src/settings.c:184
+msgid "Requested setting not found"
+msgstr "Nie odnaleziono żądanego ustawienia"
+
+#: src/wallpaperdialog.c:121 src/wallpaperdialog.ui:13
+msgid "Set Background"
+msgstr "Ustawienie tła"
+
+#: src/wallpaperdialog.c:131
+msgid "Set Lock Screen"
+msgstr "Ustawienie ekranu blokowania"
+
+#: src/wallpaperdialog.c:162
+msgid "Set Background & Lock Screen"
+msgstr "Ustawienie tła i ekranu blokowania"
+
+#: src/wallpaperdialog.ui:26
+msgid "Set"
+msgstr "Ustaw"
+
+#: src/wallpaperdialog.ui:62
+msgid "Failed to load image file"
+msgstr "Wczytanie pliku obrazu się nie powiodło"
+
+#: src/wallpaperpreview.ui:47
+msgid "Activities"
+msgstr "Podgląd"

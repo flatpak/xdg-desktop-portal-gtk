@@ -104,6 +104,8 @@ screen_cast_dialog_new (const char *app_id,
   screen_cast_widget = SCREEN_CAST_WIDGET (dialog->screen_cast_widget);
   screen_cast_widget_set_app_id (screen_cast_widget, app_id);
   screen_cast_widget_set_allow_multiple (screen_cast_widget, select->multiple);
+  screen_cast_widget_set_source_types (screen_cast_widget,
+                                       select->source_types);
 
   return dialog;
 }

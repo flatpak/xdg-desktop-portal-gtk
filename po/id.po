@@ -1,22 +1,22 @@
 # Indonesian translation for xdg-desktop-portal-gtk.
 # Copyright (C) 2017 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
 # This file is distributed under the same license as the xdg-desktop-portal-gtk package.
-# Kukuh Syafaat <syafaatkukuh@gmail.com>, 2017, 2018.
+# Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2017, 2018, 2019.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2019-01-19 03:27+0000\n"
-"PO-Revision-Date: 2019-02-18 18:13+0700\n"
+"POT-Creation-Date: 2019-09-24 18:36+0000\n"
+"PO-Revision-Date: 2019-10-09 17:42+0700\n"
 "Last-Translator: Kukuh Syafaat <kukuhsyafaat@gnome.org>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.2.3\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
@@ -68,7 +68,7 @@ msgstr "Bagikan informasi pribadi Anda dengan aplikasi yang meminta?"
 msgid "Share Details"
 msgstr "Bagikan Detail"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:395
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:397
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
@@ -117,44 +117,65 @@ msgstr "Tidak dapat menemukan aplikasi yang sesuai."
 msgid "Open With"
 msgstr "Buka Dengan"
 
-#: src/appchooserdialog.ui:166
+#: src/appchooserdialog.ui:167
 msgid "No Applications Found"
 msgstr "Tidak Ada Aplikasi yang Ditemukan"
 
-#: src/appchooserdialog.ui:182
+#: src/appchooserdialog.ui:183
 msgid "Find Compatible Applications in Software"
 msgstr "Temukan Aplikasi yang Kompatibel di Perangkat Lunak"
 
-#: src/filechooser.c:390
+#: src/background.c:255
+msgid "Background activity"
+msgstr "Aktivitas latar belakang"
+
+#: src/background.c:257
+#, c-format
+msgid "%s is running in the background."
+msgstr "%s sedang berjalan di latar belakang."
+
+#: src/background.c:262
+msgid "Allow"
+msgstr "Izinkan"
+
+#: src/background.c:269
+msgid "Forbid"
+msgstr "Melarang"
+
+#: src/background.c:276
+msgid "Ignore"
+msgstr "Abaikan"
+
+#: src/filechooser.c:392
 msgid "_Save"
 msgstr "_Simpan"
 
-#: src/filechooser.c:392
+#: src/filechooser.c:394
 msgid "_Open"
 msgstr "B_uka"
 
-#: src/filechooser.c:504
+#: src/filechooser.c:552
 msgid "Open files read-only"
 msgstr "Buka berkas hanya-baca"
 
-#: src/remotedesktopdialog.c:190
+#: src/remotedesktopdialog.c:188
 msgid "Pointer"
 msgstr "Penunjuk"
 
-#: src/remotedesktopdialog.c:193
+#: src/remotedesktopdialog.c:191
 msgid "Keyboard"
 msgstr "Papan Tik"
 
-#: src/remotedesktopdialog.c:196
+#: src/remotedesktopdialog.c:194
 msgid "Touch screen"
 msgstr "Layar sentuh"
 
-#: src/remotedesktopdialog.c:303
+#: src/remotedesktopdialog.c:307
 #, c-format
 msgid "Select devices to share with %s"
 msgstr "Pilih perangkat yang akan dibagikan dengan %s"
 
-#: src/remotedesktopdialog.c:308
+#: src/remotedesktopdialog.c:312
 msgid "Select devices to share with the requesting application"
 msgstr "Pilih perangkat yang akan dibagikan dengan aplikasi yang meminta"
 
@@ -163,17 +184,34 @@ msgid "Remote desktop"
 msgstr "Destop jauh"
 
 #: src/screencastdialog.ui:12
-msgid "Screen casting"
-msgstr "Screen casting"
+msgid "Screen Share"
+msgstr "Berbagi Layar"
 
-#: src/screencastwidget.c:243
+#: src/screencastwidget.c:483
 #, c-format
 msgid "Select monitor to share with %s"
 msgstr "Pilih monitor untuk berbagi dengan %s"
 
-#: src/screencastwidget.c:248
+#: src/screencastwidget.c:485
+#, c-format
+msgid "Select window to share with %s"
+msgstr "Pilih jendela untuk dibagikan dengan %s"
+
+#: src/screencastwidget.c:490
 msgid "Select monitor to share with the requesting application"
 msgstr "Pilih monitor untuk berbagi dengan aplikasi yang meminta"
+
+#: src/screencastwidget.c:491
+msgid "Select window to share with the requesting application"
+msgstr "Pilih jendela untuk dibagikan dengan aplikasi yang meminta"
+
+#: src/screencastwidget.ui:100
+msgid "Single Window"
+msgstr "Jendela Tunggal"
+
+#: src/screencastwidget.ui:176
+msgid "Entire Screen"
+msgstr "Keseluruhan Layar"
 
 #: src/screenshotdialog.c:434
 #, c-format
@@ -231,3 +269,10 @@ msgstr "Sertakan _penunjuk"
 #: src/screenshotdialog.ui:201
 msgid "Include the window _border"
 msgstr "Sertakan _bingkai jendela"
+
+#: src/settings.c:185
+msgid "Requested setting not found"
+msgstr "Pengaturan yang diminta tidak ditemukan"
+
+#~ msgid "Screen casting"
+#~ msgstr "Screen casting"

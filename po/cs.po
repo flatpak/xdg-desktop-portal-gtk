@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2019-01-19 03:27+0000\n"
-"PO-Revision-Date: 2019-01-20 18:08+0100\n"
+"POT-Creation-Date: 2019-10-24 03:50+0000\n"
+"PO-Revision-Date: 2019-10-24 16:06+0200\n"
 "Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Poedit 2.2\n"
+"X-Generator: Poedit 2.2.4\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
@@ -40,9 +40,9 @@ msgstr "Udělit přístup"
 
 #: src/accountdialog.c:176
 msgid "Select an Image"
-msgstr "Výběr obrázku"
+msgstr "Vyberte obrázek"
 
-#: src/accountdialog.c:179
+#: src/accountdialog.c:179 src/wallpaperdialog.ui:18
 msgid "Cancel"
 msgstr "Zrušit"
 
@@ -71,7 +71,7 @@ msgstr "Sdílet vaše osobní informace s aplikací, která o to žádá?"
 msgid "Share Details"
 msgstr "Sdílet detaily"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:395
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:397
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
@@ -120,44 +120,65 @@ msgstr "Nenalezena žádná vhodná aplikace."
 msgid "Open With"
 msgstr "Otevření pomocí"
 
-#: src/appchooserdialog.ui:166
+#: src/appchooserdialog.ui:167
 msgid "No Applications Found"
 msgstr "Nenalezeny žádné aplikace"
 
-#: src/appchooserdialog.ui:182
+#: src/appchooserdialog.ui:183
 msgid "Find Compatible Applications in Software"
 msgstr "Najít kompatibilní aplikace v Software"
 
-#: src/filechooser.c:390
+#: src/background.c:255
+msgid "Background activity"
+msgstr "Aktivita na pozadí"
+
+#: src/background.c:257
+#, c-format
+msgid "%s is running in the background."
+msgstr "Aplikace %s běží na pozadí."
+
+#: src/background.c:262
+msgid "Allow"
+msgstr "Povolit"
+
+#: src/background.c:269
+msgid "Forbid"
+msgstr "Zakázat"
+
+#: src/background.c:276
+msgid "Ignore"
+msgstr "Ignorovat"
+
+#: src/filechooser.c:392
 msgid "_Save"
 msgstr "_Uložit"
 
-#: src/filechooser.c:392
+#: src/filechooser.c:394
 msgid "_Open"
 msgstr "_Otevřít"
 
-#: src/filechooser.c:504
+#: src/filechooser.c:552
 msgid "Open files read-only"
 msgstr "Otevřít soubory pouze pro čtení"
 
-#: src/remotedesktopdialog.c:190
+#: src/remotedesktopdialog.c:188
 msgid "Pointer"
 msgstr "Kurzor"
 
-#: src/remotedesktopdialog.c:193
+#: src/remotedesktopdialog.c:191
 msgid "Keyboard"
 msgstr "Klávesnice"
 
-#: src/remotedesktopdialog.c:196
+#: src/remotedesktopdialog.c:194
 msgid "Touch screen"
 msgstr "Dotyková obrazovka"
 
-#: src/remotedesktopdialog.c:303
+#: src/remotedesktopdialog.c:307
 #, c-format
 msgid "Select devices to share with %s"
 msgstr "Vyberte zařízení pro sdílení s aplikací %s"
 
-#: src/remotedesktopdialog.c:308
+#: src/remotedesktopdialog.c:312
 msgid "Select devices to share with the requesting application"
 msgstr "Vyberte zařízení pro sdílení s aplikací, která o to žádá"
 
@@ -166,17 +187,34 @@ msgid "Remote desktop"
 msgstr "Vzdálená plocha"
 
 #: src/screencastdialog.ui:12
-msgid "Screen casting"
-msgstr "Záznam obrazovky"
+msgid "Screen Share"
+msgstr "Sdílení obrazovky"
 
-#: src/screencastwidget.c:243
+#: src/screencastwidget.c:483
 #, c-format
 msgid "Select monitor to share with %s"
 msgstr "Vyberte monitor pro sdílení s aplikací %s"
 
-#: src/screencastwidget.c:248
+#: src/screencastwidget.c:485
+#, c-format
+msgid "Select window to share with %s"
+msgstr "Vyberte okno pro sdílení s aplikací %s"
+
+#: src/screencastwidget.c:490
 msgid "Select monitor to share with the requesting application"
 msgstr "Vyberte monitor pro sdílení s aplikací, která o to žádá"
+
+#: src/screencastwidget.c:491
+msgid "Select window to share with the requesting application"
+msgstr "Vyberte okno pro sdílení s aplikací, která o to žádá"
+
+#: src/screencastwidget.ui:100
+msgid "Single Window"
+msgstr "Samostatné okno"
+
+#: src/screencastwidget.ui:176
+msgid "Entire Screen"
+msgstr "Celá obrazovka"
 
 #: src/screenshotdialog.c:434
 #, c-format
@@ -234,3 +272,34 @@ msgstr "Zahrnout _kurzor myši"
 #: src/screenshotdialog.ui:201
 msgid "Include the window _border"
 msgstr "Zahrnout _rámeček okna"
+
+#: src/settings.c:184
+msgid "Requested setting not found"
+msgstr "Požadované nastavení nebylo nalezeno"
+
+#: src/wallpaperdialog.c:121 src/wallpaperdialog.ui:13
+msgid "Set Background"
+msgstr "Nastavit pozadí"
+
+#: src/wallpaperdialog.c:131
+msgid "Set Lock Screen"
+msgstr "Nastavit uzamknutou obrazovku"
+
+#: src/wallpaperdialog.c:162
+msgid "Set Background & Lock Screen"
+msgstr "Nastavit pozadí a uzamknutou obrazovku"
+
+#: src/wallpaperdialog.ui:26
+msgid "Set"
+msgstr "Nastavit"
+
+#: src/wallpaperdialog.ui:62
+msgid "Failed to load image file"
+msgstr "Selhalo načtení souboru obrázku"
+
+#: src/wallpaperpreview.ui:47
+msgid "Activities"
+msgstr "Činnosti"
+
+#~ msgid "Screen casting"
+#~ msgstr "Záznam obrazovky"

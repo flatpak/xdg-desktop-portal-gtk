@@ -6,9 +6,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
-"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/issues\n"
-"POT-Creation-Date: 2019-03-08 15:41+0100\n"
-"PO-Revision-Date: 2019-03-08 15:43+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
+"issues\n"
+"POT-Creation-Date: 2019-09-19 03:30+0000\n"
+"PO-Revision-Date: 2019-09-19 09:49+0200\n"
 "Last-Translator: Milo Casagrande <milo@milo.name>\n"
 "Language-Team: Italian <gnome-it-list@gnome.org>\n"
 "Language: it\n"
@@ -16,12 +17,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.2.3\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
 msgstr "Portale"
 
+#. TRANSLATORS: Don't translate this text (this is icon name)
 #: data/xdg-desktop-portal-gtk.desktop.in.in:6
 msgid "applications-system-symbolic"
 msgstr "applications-system-symbolic"
@@ -118,13 +120,34 @@ msgstr "Impossibile trovare una applicazione adatta."
 msgid "Open With"
 msgstr "Apri con"
 
-#: src/appchooserdialog.ui:166
+#: src/appchooserdialog.ui:167
 msgid "No Applications Found"
 msgstr "Nessuna applicazione trovata"
 
-#: src/appchooserdialog.ui:182
+#: src/appchooserdialog.ui:183
 msgid "Find Compatible Applications in Software"
 msgstr "Trova applicazione compatibile in «Software»"
+
+#: src/background.c:255
+msgid "Background activity"
+msgstr "Attività sullo sfondo"
+
+#: src/background.c:257
+#, c-format
+msgid "%s is running in the background."
+msgstr "%s è in esecuzione sullo sfondo."
+
+#: src/background.c:262
+msgid "Allow"
+msgstr "Consenti"
+
+#: src/background.c:269
+msgid "Forbid"
+msgstr "Impedisci"
+
+#: src/background.c:276
+msgid "Ignore"
+msgstr "Ignora"
 
 #: src/filechooser.c:392
 msgid "_Save"
@@ -138,24 +161,24 @@ msgstr "A_pri"
 msgid "Open files read-only"
 msgstr "Apri file in sola-lettura"
 
-#: src/remotedesktopdialog.c:190
+#: src/remotedesktopdialog.c:188
 msgid "Pointer"
 msgstr "Puntatore"
 
-#: src/remotedesktopdialog.c:193
+#: src/remotedesktopdialog.c:191
 msgid "Keyboard"
 msgstr "Tastiera"
 
-#: src/remotedesktopdialog.c:196
+#: src/remotedesktopdialog.c:194
 msgid "Touch screen"
 msgstr "Schermo tattile"
 
-#: src/remotedesktopdialog.c:303
+#: src/remotedesktopdialog.c:307
 #, c-format
 msgid "Select devices to share with %s"
 msgstr "Selezionare i dispositivi da condividere con %s"
 
-#: src/remotedesktopdialog.c:308
+#: src/remotedesktopdialog.c:312
 msgid "Select devices to share with the requesting application"
 msgstr ""
 "Selezionare i dispositivi da condividere con l'applicazione che li richiede"
@@ -165,18 +188,36 @@ msgid "Remote desktop"
 msgstr "Desktop remoto"
 
 #: src/screencastdialog.ui:12
-msgid "Screen casting"
-msgstr "Screencast"
+msgid "Screen Share"
+msgstr "Condivisione dello schermo"
 
-#: src/screencastwidget.c:243
+#: src/screencastwidget.c:483
 #, c-format
 msgid "Select monitor to share with %s"
 msgstr "Selezionare la schermata da condividere con %s"
 
-#: src/screencastwidget.c:248
+#: src/screencastwidget.c:485
+#, c-format
+msgid "Select window to share with %s"
+msgstr "Selezionare la finestra da condividere con %s"
+
+#: src/screencastwidget.c:490
 msgid "Select monitor to share with the requesting application"
 msgstr ""
 "Selezionare la schermata da condividere con l'applicazione che la richiede"
+
+#: src/screencastwidget.c:491
+msgid "Select window to share with the requesting application"
+msgstr ""
+"Selezionare la finestra da condividere con l'applicazione che la richiede"
+
+#: src/screencastwidget.ui:100
+msgid "Single Window"
+msgstr "Finestra singola"
+
+#: src/screencastwidget.ui:176
+msgid "Entire Screen"
+msgstr "Schermo intero"
 
 #: src/screenshotdialog.c:434
 #, c-format

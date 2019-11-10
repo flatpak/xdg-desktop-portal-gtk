@@ -1,5 +1,5 @@
 /*
- * Copyright © 2017 Red Hat, Inc
+ * Copyright © 2019 Red Hat, Inc
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -14,33 +14,22 @@
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library. If not, see <http://www.gnu.org/licenses/>.
  *
+ * Authors:
+ *       Felipe Borges <feborges@redhat.com>
  */
 
 #pragma once
 
-#include <glib.h>
-#include <gio/gio.h>
+#include <gtk/gtk.h>
 
-typedef enum _ScreenCastSourceType
-{
-  SCREEN_CAST_SOURCE_TYPE_MONITOR = 1,
-  SCREEN_CAST_SOURCE_TYPE_WINDOW = 2,
-} ScreenCastSourceType;
+#define WALLPAPER_TYPE_PREVIEW (wallpaper_preview_get_type ())
+#define WALLPAPER_PREVIEW(object) (G_TYPE_CHECK_INSTANCE_CAST (object, WALLPAPER_TYPE_PREVIEW, WallpaperPreview))
 
-typedef enum _ScreenCastCursorMode
-{
-  SCREEN_CAST_CURSOR_MODE_NONE = 0,
-  SCREEN_CAST_CURSOR_MODE_HIDDEN = 1,
-  SCREEN_CAST_CURSOR_MODE_EMBEDDED = 2,
-  SCREEN_CAST_CURSOR_MODE_METADATA = 4,
-} ScreenCastCursorMode;
+typedef struct _WallpaperPreview WallpaperPreview;
+typedef struct _WallpaperPreviewClass WallpaperPreviewClass;
 
-typedef struct _ScreenCastSelection
-{
-  gboolean multiple;
-  ScreenCastSourceType source_types;
-  ScreenCastCursorMode cursor_mode;
-} ScreenCastSelection;
+GType              wallpaper_preview_get_type  (void) G_GNUC_CONST;
 
-gboolean screen_cast_init (GDBusConnection *connection,
-                           GError **error);
+void               wallpaper_preview_set_image (WallpaperPreview *self,
+                                                const gchar *image_uri,
+                                                gboolean is_lockscreen);

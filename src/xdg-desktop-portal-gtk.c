@@ -54,6 +54,8 @@
 #include "remotedesktop.h"
 #include "lockdown.h"
 #include "background.h"
+#include "settings.h"
+#include "wallpaper.h"
 
 
 static GMainLoop *loop = NULL;
@@ -181,6 +183,18 @@ on_bus_acquired (GDBusConnection *connection,
       g_warning ("error: %s\n", error->message);
       g_clear_error (&error);
     }
+
+  if (!settings_init (connection, &error))
+    {
+      g_warning ("error: %s\n", error->message);
+      g_clear_error (&error);
+    }
+
+  if (!wallpaper_init (connection, &error))
+    {
+      g_warning ("error: %s\n", error->message);
+      g_clear_error (&error);
+    }
 }
 
 static void
@@ -205,7 +219,7 @@ main (int argc, char *argv[])
   guint owner_id;
   g_autoptr(GError) error = NULL;
   GDBusConnection  *session_bus;
-  GOptionContext *context;
+  g_autoptr(GOptionContext) context = NULL;
 
   setlocale (LC_ALL, "");
   bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
@@ -236,7 +250,6 @@ main (int argc, char *argv[])
       g_printerr ("Try \"%s --help\" for more information.",
                   g_get_prgname ());
       g_printerr ("\n");
-      g_option_context_free (context);
       return 1;
     }
 

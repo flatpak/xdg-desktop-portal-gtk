@@ -100,6 +100,7 @@
                     <signal name="clicked" handler="more_clicked"/>
                     <style>
                       <class name="circular"/>
+                      <class name="image-button"/>
                       <class name="more"/>
                     </style>
                     <child>
@@ -196,6 +197,7 @@
                 <signal name="clicked" handler="more2_clicked"/>
                 <style>
                   <class name="circular"/>
+                  <class name="image-button"/>
                   <class name="more"/>
                 </style>
                 <child>

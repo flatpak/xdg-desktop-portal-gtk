@@ -1,8 +1,7 @@
-# German translation for xdg-desktop-portal-gtk.
-# Copyright (C) 2016 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
+# Russian translation for xdg-desktop-portal-gtk.
+# Copyright (C) 2019 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
 # This file is distributed under the same license as the xdg-desktop-portal-gtk package.
-# Christian Kirbach <Christian.Kirbach@gmail.com>, 2016, 2018.
-# Mario Blättermann <mario.blaettermann@gmail.com>, 2018.
+# Andrew Sazonow <sazonow1980.@gmail.com>, 2019.
 #
 msgid ""
 msgstr ""
@@ -11,8 +10,8 @@ msgstr ""
 "issues\n"
 "POT-Creation-Date: 2018-11-16 15:18-0500\n"
 "PO-Revision-Date: 2019-05-30 10:06+0200\n"
-"Last-Translator: Mario Blättermann <mario.blaettermann@gmail.com>\n"
-"Language-Team: German <gnome-de@gnome.org>\n"
+"Last-Translator: Andrew Sazonow <sazonow1980.@gmail.com>\n"
+"Language-Team: Русский <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,7 +23,7 @@ msgstr ""
 msgid "Portal"
 msgstr "Портал"
 
-# soll nicht übersetzt werden
+# should not be translated
 #. TRANSLATORS: Don't translate this text (this is icon name)
 #: data/xdg-desktop-portal-gtk.desktop.in.in:6
 msgid "applications-system-symbolic"
@@ -236,7 +235,7 @@ msgid "Include the window _border"
 msgstr "Включить _границу окна"
 
 #~ msgid "_Select"
-#~ msgstr "A_uswählen"
+#~ msgstr "_Выбрать"
 
 #~ msgid "Select application"
-#~ msgstr "Anwendung auswählen"
+#~ msgstr "Выберите приложение"
