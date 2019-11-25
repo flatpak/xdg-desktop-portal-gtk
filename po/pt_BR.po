@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2019-09-08 15:29+0000\n"
-"PO-Revision-Date: 2019-09-08 18:00-0300\n"
+"POT-Creation-Date: 2019-11-24 15:36+0000\n"
+"PO-Revision-Date: 2019-11-24 22:37-0300\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
@@ -40,7 +40,7 @@ msgstr "Conceder acesso"
 msgid "Select an Image"
 msgstr "Selecionar uma imagem"
 
-#: src/accountdialog.c:179
+#: src/accountdialog.c:179 src/wallpaperdialog.ui:18
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -118,11 +118,11 @@ msgstr "Não foi possível localizar um aplicativo adequado."
 msgid "Open With"
 msgstr "Abrir com"
 
-#: src/appchooserdialog.ui:166
+#: src/appchooserdialog.ui:167
 msgid "No Applications Found"
 msgstr "Nenhum aplicativo localizado"
 
-#: src/appchooserdialog.ui:182
+#: src/appchooserdialog.ui:183
 msgid "Find Compatible Applications in Software"
 msgstr "Localizar aplicativos compatíveis no Software"
 
@@ -186,17 +186,34 @@ msgid "Remote desktop"
 msgstr "Área de trabalho remota"
 
 #: src/screencastdialog.ui:12
-msgid "Screen casting"
+msgid "Screen Share"
 msgstr "Compartilhamento de tela"
 
-#: src/screencastwidget.c:280
+#: src/screencastwidget.c:483
 #, c-format
 msgid "Select monitor to share with %s"
 msgstr "Selecione o monitor para compartilhar com %s"
 
-#: src/screencastwidget.c:285
+#: src/screencastwidget.c:485
+#, c-format
+msgid "Select window to share with %s"
+msgstr "Selecione a janela para compartilhar com %s"
+
+#: src/screencastwidget.c:490
 msgid "Select monitor to share with the requesting application"
 msgstr "Selecione o monitor para compartilhar com aplicativo requisitante"
+
+#: src/screencastwidget.c:491
+msgid "Select window to share with the requesting application"
+msgstr "Selecione a janela para compartilhar com aplicativo requisitante"
+
+#: src/screencastwidget.ui:100
+msgid "Single Window"
+msgstr "Janela individual"
+
+#: src/screencastwidget.ui:176
+msgid "Entire Screen"
+msgstr "Toda a tela"
 
 #: src/screenshotdialog.c:434
 #, c-format
@@ -254,6 +271,37 @@ msgstr "Incluir cu_rsor"
 #: src/screenshotdialog.ui:201
 msgid "Include the window _border"
 msgstr "Incluir a _borda da janela"
+
+#: src/settings.c:184
+msgid "Requested setting not found"
+msgstr "Configuração solicitada não foi encontrada"
+
+#: src/wallpaperdialog.c:121 src/wallpaperdialog.ui:13
+msgid "Set Background"
+msgstr "Definir plano de fundo"
+
+#: src/wallpaperdialog.c:131
+msgid "Set Lock Screen"
+msgstr "Definir tela de bloqueio"
+
+#: src/wallpaperdialog.c:162
+msgid "Set Background & Lock Screen"
+msgstr "Definir plano de fundo & tela de bloqueio"
+
+#: src/wallpaperdialog.ui:26
+msgid "Set"
+msgstr "Definir"
+
+#: src/wallpaperdialog.ui:62
+msgid "Failed to load image file"
+msgstr "Falha ao carregar o arquivo de imagem"
+
+#: src/wallpaperpreview.ui:47
+msgid "Activities"
+msgstr "Atividades"
+
+#~ msgid "Screen casting"
+#~ msgstr "Compartilhamento de tela"
 
 #~ msgid "_Select"
 #~ msgstr "_Selecionar"
