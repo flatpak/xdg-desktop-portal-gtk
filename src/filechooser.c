@@ -139,12 +139,30 @@ send_response (FileDialogHandle *handle)
     {
       g_autoptr(GFile) base_dir = g_file_new_for_uri (handle->uris->data);
 
-      g_slist_free (handle->uris);
+      g_slist_free_full (handle->uris, g_free);
+      handle->uris = NULL;
 
       for (l = handle->files; l; l = l->next)
         {
+          int uniqifier = 0;
           const char *file_name = l->data;
           g_autoptr(GFile) file = g_file_get_child (base_dir, file_name);
+
+          while (g_file_query_exists(file, NULL))
+            {
+              g_autofree char *base_name = g_file_get_basename (file);
+              g_auto(GStrv) parts = NULL;
+              g_autoptr(GString) unique_name = NULL;
+
+              parts = g_strsplit (base_name, ".", 2);
+
+              unique_name = g_string_new (parts[0]);
+              g_string_append_printf (unique_name, "(%i)", ++uniqifier);
+              if (parts[1] != NULL)
+                  g_string_append (unique_name, parts[1]);
+
+              file = g_file_get_child (base_dir, unique_name->str);
+            }
           handle->uris = g_slist_append (handle->uris, g_file_get_uri (file));
         }
     }
