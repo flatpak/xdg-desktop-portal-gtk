@@ -23,7 +23,9 @@
 #include "utils.h"
 
 static gboolean
-compose_mail_evolution (const char  *address,
+compose_mail_evolution (const char * const *addrs,
+                        const char * const *cc,
+                        const char * const *bcc,
                         const char  *subject,
                         const char  *body,
                         const char **attachments,
@@ -36,14 +38,49 @@ compose_mail_evolution (const char  *address,
   const char *argv[4];
   int i;
   g_autofree char *command = NULL;
+  const char *sep;
 
   enc_subject = g_uri_escape_string (subject ? subject : "", NULL, FALSE);
   enc_body = g_uri_escape_string (body ? body : "", NULL, FALSE);
 
   url = g_string_new ("mailto:");
 
-  g_string_append_printf (url, "\"%s\"", address ? address : "");
-  g_string_append_printf (url, "?subject=%s", enc_subject);
+  for (i = 0; addrs[i]; i++)
+    {
+      if (i > 0)
+        g_string_append (url, ",");
+      g_string_append_printf (url, "\"%s\"", addrs[i]);
+    }
+
+  sep = "?";
+
+  if (cc)
+    {
+      g_string_append_printf (url, "%scc=", sep);
+      sep = "&";
+
+      for (i = 0; cc[i]; i++)
+        {
+          if (i > 0)
+            g_string_append (url, ",");
+          g_string_append_printf (url, "\"%s\"", cc[i]);
+        }
+    }
+
+  if (bcc)
+    {
+      g_string_append_printf (url, "%sbcc=", sep);
+      sep = "&";
+
+      for (i = 0; bcc[i]; i++)
+        {
+          if (i > 0)
+            g_string_append (url, ",");
+          g_string_append_printf (url, "\"%s\"", bcc[i]);
+        }
+    }
+
+  g_string_append_printf (url, "%ssubject=%s", sep, enc_subject);
   g_string_append_printf (url, "&body=%s", enc_body);
 
   for (i = 0; attachments[i]; i++)
@@ -66,7 +103,9 @@ compose_mail_evolution (const char  *address,
 }
 
 static gboolean
-compose_mail_thunderbird (const char  *address,
+compose_mail_thunderbird (const char * const *addrs,
+                          const char * const *cc,
+                          const char * const *bcc,
                           const char  *subject,
                           const char  *body,
                           const char **attachments,
@@ -83,9 +122,38 @@ compose_mail_thunderbird (const char  *address,
   enc_subject = g_uri_escape_string (subject ? subject : "", NULL, FALSE);
   enc_body = g_uri_escape_string (body ? body : "", NULL, FALSE);
 
-  url = g_string_new ("to=");
+  url = g_string_new ("to='");
 
-  g_string_append_printf (url, "'%s,'", address ? address : "");
+  for (i = 0; addrs[i]; i++)
+    {
+      if (i > 0)
+        g_string_append (url, ";");
+       g_string_append_printf (url, "%s", addrs[i]);
+    }
+  g_string_append (url, "'");
+
+  if (cc)
+    {
+      for (i = 0; cc[i]; i++)
+        {
+          if (i > 0)
+            g_string_append (url, ";");
+          g_string_append_printf (url, "%s", cc[i]);
+        }
+      g_string_append (url, "'");
+    }
+
+  if (bcc)
+    {
+      for (i = 0; bcc[i]; i++)
+        {
+          if (i > 0)
+            g_string_append (url, ";");
+          g_string_append_printf (url, "%s", bcc[i]);
+        }
+      g_string_append (url, "'");
+    }
+
   g_string_append_printf (url, ",subject=%s", enc_subject);
   g_string_append_printf (url, ",body=%s", enc_body);
 
@@ -106,8 +174,10 @@ compose_mail_thunderbird (const char  *address,
 }
 
 static gboolean
-compose_mail_mailto (GAppInfo *info,
-                     const char     *address,
+compose_mail_mailto (GAppInfo       *info,
+                     const char * const *addrs,
+                     const char * const *cc,
+                     const char * const *bcc,
                      const char     *subject,
                      const char     *body,
                      const char    **attachments,
@@ -119,14 +189,49 @@ compose_mail_mailto (GAppInfo *info,
   g_autoptr(GList) uris = NULL;
   int i;
   gboolean success;
+  const char *sep;
 
   enc_subject = g_uri_escape_string (subject ? subject : "", NULL, FALSE);
   enc_body = g_uri_escape_string (body ? body : "", NULL, FALSE);
 
   url = g_string_new ("mailto:");
 
-  g_string_append_printf (url, "%s?", address ? address : "");
-  g_string_append_printf (url, "&subject=%s", enc_subject);
+  sep = "?";
+
+  for (i = 0; addrs[i]; i++)
+    {
+      if (i > 0)
+        g_string_append (url, ",");
+      g_string_append_printf (url, "%s", addrs[i]);
+    }
+
+  if (cc)
+    {
+      g_string_append_printf (url, "%scc=", sep);
+      sep = "&";
+
+      for (i = 0; cc[i]; i++)
+        {
+          if (i > 0)
+            g_string_append (url, ",");
+          g_string_append_printf (url, "%s", cc[i]);
+        }
+    }
+
+  if (bcc)
+    {
+      g_string_append_printf (url, "%sbcc=", sep);
+      sep = "&";
+
+      for (i = 0; bcc[i]; i++)
+        {
+          if (i > 0)
+            g_string_append (url, ",");
+          g_string_append_printf (url, "%s", bcc[i]);
+        }
+    }
+
+  g_string_append_printf (url, "%ssubject=%s", sep, enc_subject);
   g_string_append_printf (url, "&body=%s", enc_body);
 
   for (i = 0; attachments[i]; i++)
@@ -142,7 +247,9 @@ compose_mail_mailto (GAppInfo *info,
 }
 
 static gboolean
-compose_mail (const char  *address,
+compose_mail (const char * const *addrs,
+              const char * const *cc,
+              const char * const *bcc,
               const char  *subject,
               const char  *body,
               const char **attachments,
@@ -161,11 +268,11 @@ compose_mail (const char  *address,
         commandline = g_app_info_get_commandline (info);
 
         if (strstr (commandline, "thunderbird"))
-                return compose_mail_thunderbird (address, subject, body, attachments, error);
+                return compose_mail_thunderbird (addrs, cc, bcc, subject, body, attachments, error);
         else if (strstr (commandline, "evolution"))
-                return compose_mail_evolution (address, subject, body, attachments, error);
+                return compose_mail_evolution (addrs, cc, bcc, subject, body, attachments, error);
         else
-                return compose_mail_mailto (info, address, subject, body, attachments, error);
+                return compose_mail_mailto (info, addrs, cc, bcc, subject, body, attachments, error);
 }
 
 static gboolean
@@ -186,17 +293,44 @@ handle_compose_email (XdpImplEmail *object,
   const char **attachments = no_att;
   guint response = 0;
   GVariantBuilder opt_builder;
+  const char * const *addresses = NULL;
+  const char * const *cc = NULL;
+  const char * const *bcc = NULL;
+  g_auto(GStrv) addrs = NULL;
 
   sender = g_dbus_method_invocation_get_sender (invocation);
 
   request = request_new (sender, arg_app_id, arg_handle);
 
   g_variant_lookup (arg_options, "address", "&s", &address);
+  g_variant_lookup (arg_options, "addresses", "^a&s", &addresses);
+  g_variant_lookup (arg_options, "cc", "^a&s", &cc);
+  g_variant_lookup (arg_options, "bcc", "^a&s", &bcc);
   g_variant_lookup (arg_options, "subject", "&s", &subject);
   g_variant_lookup (arg_options, "body", "&s", &body);
   g_variant_lookup (arg_options, "attachments", "^a&s", &attachments);
 
-  if (!compose_mail (address, subject, body, attachments, NULL))
+  if (address)
+    {
+      if (addresses)
+        {
+          gsize len = g_strv_length ((char **)addresses);
+          addrs = g_new (char *, len + 2);
+          addrs[0] = g_strdup (address);
+          memcpy (addrs + 1, addresses, sizeof (char *) * (len + 1));
+        }
+        
+      else
+        {
+          addrs = g_new (char *, 2); 
+          addrs[0] = g_strdup (address);
+          addrs[1] = NULL;
+        }
+    }
+  else
+    addrs = g_strdupv ((char **)addresses);
+
+  if (!compose_mail ((const char * const *)addrs, cc, bcc, subject, body, attachments, NULL))
     response = 2;
 
   g_variant_builder_init (&opt_builder, G_VARIANT_TYPE_VARDICT);
