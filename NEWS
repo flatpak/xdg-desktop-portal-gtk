@@ -1,3 +1,12 @@
+Changes in 1.5.1
+================
+
+* settings: Get animations-enabled setting from gnome-shell
+* wallpaper: Add a portal backend for setting desktop backgrounds
+* email: Support multiple addresses, cc and bcc
+* filechooser: Support saving multiple files
+* Translation updates
+
 Changes in 1.5.0
 ================
 
