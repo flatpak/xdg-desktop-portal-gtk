@@ -55,6 +55,8 @@ typedef struct {
   gboolean multiple;
   ExternalWindow *external_parent;
 
+  GSList *files;
+
   int response;
   GSList *uris;
 
@@ -71,6 +73,7 @@ file_dialog_handle_free (gpointer data)
   g_clear_object (&handle->external_parent);
   g_object_unref (handle->dialog);
   g_object_unref (handle->request);
+  g_slist_free_full (handle->files, g_free);
   g_slist_free_full (handle->uris, g_free);
   g_hash_table_unref (handle->choices);
 
@@ -132,6 +135,38 @@ send_response (FileDialogHandle *handle)
 
   g_variant_builder_init (&opt_builder, G_VARIANT_TYPE_VARDICT);
 
+  if (handle->action == GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER && handle->uris)
+    {
+      g_autoptr(GFile) base_dir = g_file_new_for_uri (handle->uris->data);
+
+      g_slist_free_full (handle->uris, g_free);
+      handle->uris = NULL;
+
+      for (l = handle->files; l; l = l->next)
+        {
+          int uniqifier = 0;
+          const char *file_name = l->data;
+          g_autoptr(GFile) file = g_file_get_child (base_dir, file_name);
+
+          while (g_file_query_exists(file, NULL))
+            {
+              g_autofree char *base_name = g_file_get_basename (file);
+              g_auto(GStrv) parts = NULL;
+              g_autoptr(GString) unique_name = NULL;
+
+              parts = g_strsplit (base_name, ".", 2);
+
+              unique_name = g_string_new (parts[0]);
+              g_string_append_printf (unique_name, "(%i)", ++uniqifier);
+              if (parts[1] != NULL)
+                  g_string_append (unique_name, parts[1]);
+
+              file = g_file_get_child (base_dir, unique_name->str);
+            }
+          handle->uris = g_slist_append (handle->uris, g_file_get_uri (file));
+        }
+    }
+
   g_variant_builder_init (&uri_builder, G_VARIANT_TYPE_STRING_ARRAY);
   for (l = handle->uris; l; l = l->next)
     {
@@ -152,11 +187,16 @@ send_response (FileDialogHandle *handle)
                                               handle->invocation,
                                               handle->response,
                                               g_variant_builder_end (&opt_builder));
-  else
+  else if (handle->action == GTK_FILE_CHOOSER_ACTION_SAVE)
     xdp_impl_file_chooser_complete_save_file (handle->impl,
                                               handle->invocation,
                                               handle->response,
                                               g_variant_builder_end (&opt_builder));
+  else
+    xdp_impl_file_chooser_complete_save_files (handle->impl,
+                                               handle->invocation,
+                                               handle->response,
+                                               g_variant_builder_end (&opt_builder));
 
   file_dialog_handle_close (handle);
 }
@@ -297,11 +337,16 @@ handle_close (XdpImplRequest *object,
                                               handle->invocation,
                                               2,
                                               g_variant_builder_end (&opt_builder));
-  else
+  else if (handle->action == GTK_FILE_CHOOSER_ACTION_SAVE)
     xdp_impl_file_chooser_complete_save_file (handle->impl,
                                               handle->invocation,
                                               2,
                                               g_variant_builder_end (&opt_builder));
+  else
+    xdp_impl_file_chooser_complete_save_files (handle->impl,
+                                               handle->invocation,
+                                               2,
+                                               g_variant_builder_end (&opt_builder));
   file_dialog_handle_close (handle);
 
   if (handle->request->exported)
@@ -376,6 +421,11 @@ handle_open (XdpImplFileChooser *object,
       action = GTK_FILE_CHOOSER_ACTION_SAVE;
       multiple = FALSE;
     }
+  else if (strcmp (method_name, "SaveFiles") == 0)
+    {
+      action = GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER;
+      multiple = FALSE;
+    }
   else
     {
       action = GTK_FILE_CHOOSER_ACTION_OPEN;
@@ -388,10 +438,10 @@ handle_open (XdpImplFileChooser *object,
 
   if (!g_variant_lookup (arg_options, "accept_label", "&s", &accept_label))
     {
-      if (strcmp (method_name, "SaveFile") == 0)
-        accept_label = _("_Save");
-      else
+      if (strcmp (method_name, "OpenFile") == 0)
         accept_label = _("_Open");
+      else
+        accept_label = _("_Save");
     }
 
   cancel_label = _("_Cancel");
@@ -537,6 +587,24 @@ handle_open (XdpImplFileChooser *object,
       if (g_variant_lookup (arg_options, "current_file", "^&ay", &path))
         gtk_file_chooser_select_filename (GTK_FILE_CHOOSER (dialog), path);
     }
+  else if (strcmp (method_name, "SaveFiles") == 0)
+    {
+      /* TODO: is this useful ?
+       * In a sandboxed situation, the current folder and current file
+       * are likely in the fuse filesystem
+       */
+      if (g_variant_lookup (arg_options, "current_folder", "^&ay", &path))
+        gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dialog), path);
+
+      if (g_variant_lookup (arg_options, "files", "aay", &iter))
+        {
+          char *file = NULL;
+          while (g_variant_iter_next (iter, "^ay", &file))
+            handle->files = g_slist_append (handle->files, file);
+
+          g_variant_iter_free (iter);
+        }
+    }
 
   g_object_unref (fake_parent);
 
@@ -583,6 +651,7 @@ file_chooser_init (GDBusConnection *bus,
 
   g_signal_connect (helper, "handle-open-file", G_CALLBACK (handle_open), NULL);
   g_signal_connect (helper, "handle-save-file", G_CALLBACK (handle_open), NULL);
+  g_signal_connect (helper, "handle-save-files", G_CALLBACK (handle_open), NULL);
 
   if (!g_dbus_interface_skeleton_export (helper,
                                          bus,
