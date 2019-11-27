@@ -65,6 +65,8 @@ EXTRA_DIST += \
         src/screencastwidget.ui                         \
         src/screencastdialog.ui                         \
         src/remotedesktopdialog.ui                      \
+        src/wallpaperdialog.ui                          \
+        src/wallpaperpreview.ui                         \
 	$(NULL)
 
 libexec_PROGRAMS = \
