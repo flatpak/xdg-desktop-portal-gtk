@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2019-11-24 15:36+0000\n"
+"POT-Creation-Date: 2019-11-27 15:21-0500\n"
 "PO-Revision-Date: 2019-11-24 22:37-0300\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
@@ -69,7 +69,7 @@ msgstr "Compartilhar suas informações pessoais com o aplicativo requisitante?"
 msgid "Share Details"
 msgstr "Compartilhar detalhes"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:397
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:447
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
@@ -147,15 +147,15 @@ msgstr "Proibir"
 msgid "Ignore"
 msgstr "Ignorar"
 
-#: src/filechooser.c:392
-msgid "_Save"
-msgstr "_Salvar"
-
-#: src/filechooser.c:394
+#: src/filechooser.c:442
 msgid "_Open"
 msgstr "_Abrir"
 
-#: src/filechooser.c:552
+#: src/filechooser.c:444
+msgid "_Save"
+msgstr "_Salvar"
+
+#: src/filechooser.c:620
 msgid "Open files read-only"
 msgstr "Abrir arquivos em somente leitura"
 

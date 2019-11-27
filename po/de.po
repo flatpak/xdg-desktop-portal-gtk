@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2018-11-16 15:18-0500\n"
+"POT-Creation-Date: 2019-11-27 15:21-0500\n"
 "PO-Revision-Date: 2018-08-25 10:06+0200\n"
 "Last-Translator: Mario Blättermann <mario.blaettermann@gmail.com>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
@@ -38,32 +38,32 @@ msgstr "Zugriff verweigern"
 msgid "Grant Access"
 msgstr "Zugriff gewähren"
 
-#: src/accountdialog.c:166
+#: src/accountdialog.c:176
 msgid "Select an Image"
 msgstr "Bild auswählen"
 
-#: src/accountdialog.c:169
+#: src/accountdialog.c:179 src/wallpaperdialog.ui:18
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: src/accountdialog.c:170
+#: src/accountdialog.c:180
 msgid "Select"
 msgstr "Auswählen"
 
-#: src/accountdialog.c:171
+#: src/accountdialog.c:181
 msgid "Clear"
 msgstr "Löschen"
 
-#: src/accountdialog.c:185
+#: src/accountdialog.c:195
 msgid "Images"
 msgstr "Bilder"
 
-#: src/accountdialog.c:260
+#: src/accountdialog.c:272
 #, c-format
 msgid "Share your personal information with %s?"
 msgstr "Sollen Ihre privaten Informationen für %s freigegeben werden?"
 
-#: src/accountdialog.c:263
+#: src/accountdialog.c:275
 msgid "Share your personal information with the requesting application?"
 msgstr ""
 "Sollen Ihre privaten Informationen für die anfragende Anwendung freigegeben "
@@ -73,7 +73,7 @@ msgstr ""
 msgid "Share Details"
 msgstr "Details freigeben"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:395
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:447
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
@@ -92,7 +92,7 @@ msgstr "Änderungen vor der Freigabe der Informationen durchführen"
 msgid "Failed to start Software"
 msgstr "Starten von Software schlug fehl"
 
-#: src/appchooserdialog.c:398
+#: src/appchooserdialog.c:408
 #, c-format
 msgid ""
 "Select an application to open “%s”. More applications are available in <a "
@@ -101,7 +101,7 @@ msgstr ""
 "Wählen Sie eine Anwendung zum Öffnen von »%s«. Weitere Anwendungen sind in "
 "<a href='software'>Software</a> verfügbar."
 
-#: src/appchooserdialog.c:403
+#: src/appchooserdialog.c:413
 msgid ""
 "Select an application. More applications are available in <a "
 "href='software'>Software.</a>"
@@ -109,13 +109,13 @@ msgstr ""
 "Wählen Sie eine Anwendung. Weitere Anwendungen sind in <a "
 "href='software'>Software</a> verfügbar."
 
-#: src/appchooserdialog.c:418
+#: src/appchooserdialog.c:428
 #, c-format
 msgid "Unable to find an application that is able to open “%s”."
 msgstr ""
 "Es kann keine passende Anwendung gefunden werden, die »%s« öffnen kann."
 
-#: src/appchooserdialog.c:423
+#: src/appchooserdialog.c:433
 msgid "Unable to find a suitable application."
 msgstr "Es kann keine passende Anwendung gefunden werden."
 
@@ -123,40 +123,65 @@ msgstr "Es kann keine passende Anwendung gefunden werden."
 msgid "Open With"
 msgstr "Öffnen mit"
 
-#: src/appchooserdialog.ui:166
+#: src/appchooserdialog.ui:167
 msgid "No Applications Found"
 msgstr "Keine Anwendungen gefunden"
 
-#: src/appchooserdialog.ui:182
+#: src/appchooserdialog.ui:183
 msgid "Find Compatible Applications in Software"
 msgstr "Kompatible Anwendungen in Software suchen"
 
-#: src/filechooser.c:390
-msgid "_Save"
+#: src/background.c:255
+msgid "Background activity"
 msgstr ""
 
-#: src/filechooser.c:392
+#: src/background.c:257
+#, c-format
+msgid "%s is running in the background."
+msgstr ""
+
+#: src/background.c:262
+msgid "Allow"
+msgstr ""
+
+#: src/background.c:269
+msgid "Forbid"
+msgstr ""
+
+#: src/background.c:276
+msgid "Ignore"
+msgstr ""
+
+#: src/filechooser.c:442
 msgid "_Open"
 msgstr "_Öffnen"
 
-#: src/remotedesktopdialog.c:190
+#: src/filechooser.c:444
+msgid "_Save"
+msgstr ""
+
+#: src/filechooser.c:620
+msgid "Open files read-only"
+msgstr ""
+
+#: src/remotedesktopdialog.c:188
 msgid "Pointer"
 msgstr "Zeiger"
 
-#: src/remotedesktopdialog.c:193
+#: src/remotedesktopdialog.c:191
 msgid "Keyboard"
 msgstr "Tastatur"
 
-#: src/remotedesktopdialog.c:196
+#: src/remotedesktopdialog.c:194
 msgid "Touch screen"
 msgstr "Tastbildschirm"
 
-#: src/remotedesktopdialog.c:303
+#: src/remotedesktopdialog.c:307
 #, c-format
 msgid "Select devices to share with %s"
 msgstr "Geräte wählen, die mit %s geteilt werden sollen"
 
-#: src/remotedesktopdialog.c:308
+#: src/remotedesktopdialog.c:312
 msgid "Select devices to share with the requesting application"
 msgstr "Geräte wählen, die mit der anfragenden Anwendung geteilt werden sollen"
 
@@ -165,25 +190,45 @@ msgid "Remote desktop"
 msgstr "Entfernter Bildschirm"
 
 #: src/screencastdialog.ui:12
-msgid "Screen casting"
-msgstr "Bildschirmaufzeichnung"
+#, fuzzy
+msgid "Screen Share"
+msgstr "Bildschirmfoto"
 
-#: src/screencastwidget.c:243
+#: src/screencastwidget.c:483
 #, c-format
 msgid "Select monitor to share with %s"
 msgstr "Bildschirm wählen, der mit %s geteilt werden soll"
 
-#: src/screencastwidget.c:248
+#: src/screencastwidget.c:485
+#, fuzzy, c-format
+msgid "Select window to share with %s"
+msgstr "Bildschirm wählen, der mit %s geteilt werden soll"
+
+#: src/screencastwidget.c:490
 msgid "Select monitor to share with the requesting application"
 msgstr ""
 "Bildschirm wählen, der mit der anfragenden Anwendung geteilt werden soll"
 
-#: src/screenshotdialog.c:422
+#: src/screencastwidget.c:491
+#, fuzzy
+msgid "Select window to share with the requesting application"
+msgstr ""
+"Bildschirm wählen, der mit der anfragenden Anwendung geteilt werden soll"
+
+#: src/screencastwidget.ui:100
+msgid "Single Window"
+msgstr ""
+
+#: src/screencastwidget.ui:176
+msgid "Entire Screen"
+msgstr ""
+
+#: src/screenshotdialog.c:434
 #, c-format
 msgid "Share this screenshot with %s?"
 msgstr "Soll dieses Bildschirmfoto mit %s geteilt werden?"
 
-#: src/screenshotdialog.c:426
+#: src/screenshotdialog.c:438
 msgid "Share this screenshot with the requesting application?"
 msgstr ""
 "Soll dieses Bildschirmfoto mit der anfragenden Anwendung geteilt werden?"
@@ -235,6 +280,38 @@ msgstr "_Zeiger einbeziehen"
 #: src/screenshotdialog.ui:201
 msgid "Include the window _border"
 msgstr "Fenster_rahmen mit aufnehmen"
+
+#: src/settings.c:184
+msgid "Requested setting not found"
+msgstr ""
+
+#: src/wallpaperdialog.c:121 src/wallpaperdialog.ui:13
+msgid "Set Background"
+msgstr ""
+
+#: src/wallpaperdialog.c:131
+msgid "Set Lock Screen"
+msgstr ""
+
+#: src/wallpaperdialog.c:162
+msgid "Set Background & Lock Screen"
+msgstr ""
+
+#: src/wallpaperdialog.ui:26
+#, fuzzy
+msgid "Set"
+msgstr "Auswählen"
+
+#: src/wallpaperdialog.ui:62
+msgid "Failed to load image file"
+msgstr ""
+
+#: src/wallpaperpreview.ui:47
+msgid "Activities"
+msgstr ""
+
+#~ msgid "Screen casting"
+#~ msgstr "Bildschirmaufzeichnung"
 
 #~ msgid "_Select"
 #~ msgstr "A_uswählen"

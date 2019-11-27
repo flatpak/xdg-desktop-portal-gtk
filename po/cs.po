@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2019-10-24 03:50+0000\n"
+"POT-Creation-Date: 2019-11-27 15:21-0500\n"
 "PO-Revision-Date: 2019-10-24 16:06+0200\n"
 "Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
@@ -71,7 +71,7 @@ msgstr "Sdílet vaše osobní informace s aplikací, která o to žádá?"
 msgid "Share Details"
 msgstr "Sdílet detaily"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:397
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:447
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
@@ -149,15 +149,15 @@ msgstr "Zakázat"
 msgid "Ignore"
 msgstr "Ignorovat"
 
-#: src/filechooser.c:392
-msgid "_Save"
-msgstr "_Uložit"
-
-#: src/filechooser.c:394
+#: src/filechooser.c:442
 msgid "_Open"
 msgstr "_Otevřít"
 
-#: src/filechooser.c:552
+#: src/filechooser.c:444
+msgid "_Save"
+msgstr "_Uložit"
+
+#: src/filechooser.c:620
 msgid "Open files read-only"
 msgstr "Otevřít soubory pouze pro čtení"
 

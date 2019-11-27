@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2019-09-24 18:36+0000\n"
+"POT-Creation-Date: 2019-11-27 15:21-0500\n"
 "PO-Revision-Date: 2019-10-09 17:42+0700\n"
 "Last-Translator: Kukuh Syafaat <kukuhsyafaat@gnome.org>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
@@ -39,7 +39,7 @@ msgstr "Beri Akses"
 msgid "Select an Image"
 msgstr "Pilih Gambar"
 
-#: src/accountdialog.c:179
+#: src/accountdialog.c:179 src/wallpaperdialog.ui:18
 msgid "Cancel"
 msgstr "Batal"
 
@@ -68,7 +68,7 @@ msgstr "Bagikan informasi pribadi Anda dengan aplikasi yang meminta?"
 msgid "Share Details"
 msgstr "Bagikan Detail"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:397
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:447
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
@@ -146,15 +146,15 @@ msgstr "Melarang"
 msgid "Ignore"
 msgstr "Abaikan"
 
-#: src/filechooser.c:392
-msgid "_Save"
-msgstr "_Simpan"
-
-#: src/filechooser.c:394
+#: src/filechooser.c:442
 msgid "_Open"
 msgstr "B_uka"
 
-#: src/filechooser.c:552
+#: src/filechooser.c:444
+msgid "_Save"
+msgstr "_Simpan"
+
+#: src/filechooser.c:620
 msgid "Open files read-only"
 msgstr "Buka berkas hanya-baca"
 
@@ -270,9 +270,35 @@ msgstr "Sertakan _penunjuk"
 msgid "Include the window _border"
 msgstr "Sertakan _bingkai jendela"
 
-#: src/settings.c:185
+#: src/settings.c:184
 msgid "Requested setting not found"
 msgstr "Pengaturan yang diminta tidak ditemukan"
+
+#: src/wallpaperdialog.c:121 src/wallpaperdialog.ui:13
+#, fuzzy
+msgid "Set Background"
+msgstr "Aktivitas latar belakang"
+
+#: src/wallpaperdialog.c:131
+msgid "Set Lock Screen"
+msgstr ""
+
+#: src/wallpaperdialog.c:162
+msgid "Set Background & Lock Screen"
+msgstr ""
+
+#: src/wallpaperdialog.ui:26
+#, fuzzy
+msgid "Set"
+msgstr "Pilih"
+
+#: src/wallpaperdialog.ui:62
+msgid "Failed to load image file"
+msgstr ""
+
+#: src/wallpaperpreview.ui:47
+msgid "Activities"
+msgstr ""
 
 #~ msgid "Screen casting"
 #~ msgstr "Screen casting"

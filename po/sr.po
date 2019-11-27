@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2018-11-16 15:18-0500\n"
+"POT-Creation-Date: 2019-11-27 15:21-0500\n"
 "PO-Revision-Date: 2016-09-14 12:56+0200\n"
 "Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: српски <gnome-sr@googlegroups.org>\n"
@@ -36,34 +36,34 @@ msgstr "Забрани приступ"
 msgid "Grant Access"
 msgstr "Дозволи приступ"
 
-#: src/accountdialog.c:166
+#: src/accountdialog.c:176
 msgid "Select an Image"
 msgstr ""
 
-#: src/accountdialog.c:169
+#: src/accountdialog.c:179 src/wallpaperdialog.ui:18
 #, fuzzy
 msgid "Cancel"
 msgstr "От_кажи"
 
-#: src/accountdialog.c:170
+#: src/accountdialog.c:180
 #, fuzzy
 msgid "Select"
 msgstr "_Изабери"
 
-#: src/accountdialog.c:171
+#: src/accountdialog.c:181
 msgid "Clear"
 msgstr ""
 
-#: src/accountdialog.c:185
+#: src/accountdialog.c:195
 msgid "Images"
 msgstr ""
 
-#: src/accountdialog.c:260
+#: src/accountdialog.c:272
 #, c-format
 msgid "Share your personal information with %s?"
 msgstr ""
 
-#: src/accountdialog.c:263
+#: src/accountdialog.c:275
 #, fuzzy
 msgid "Share your personal information with the requesting application?"
 msgstr "Да поделим овај снимак екрана са програмом који то захтева?"
@@ -72,7 +72,7 @@ msgstr "Да поделим овај снимак екрана са програ
 msgid "Share Details"
 msgstr ""
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:395
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:447
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
@@ -91,25 +91,25 @@ msgstr ""
 msgid "Failed to start Software"
 msgstr ""
 
-#: src/appchooserdialog.c:398
+#: src/appchooserdialog.c:408
 #, c-format
 msgid ""
 "Select an application to open “%s”. More applications are available in <a "
 "href='software'>Software.</a>"
 msgstr ""
 
-#: src/appchooserdialog.c:403
+#: src/appchooserdialog.c:413
 msgid ""
 "Select an application. More applications are available in <a "
 "href='software'>Software.</a>"
 msgstr ""
 
-#: src/appchooserdialog.c:418
+#: src/appchooserdialog.c:428
 #, c-format
 msgid "Unable to find an application that is able to open “%s”."
 msgstr ""
 
-#: src/appchooserdialog.c:423
+#: src/appchooserdialog.c:433
 msgid "Unable to find a suitable application."
 msgstr ""
 
@@ -117,41 +117,66 @@ msgstr ""
 msgid "Open With"
 msgstr "Отвори програмом"
 
-#: src/appchooserdialog.ui:166
+#: src/appchooserdialog.ui:167
 #, fuzzy
 msgid "No Applications Found"
 msgstr "Изаберите програм"
 
-#: src/appchooserdialog.ui:182
+#: src/appchooserdialog.ui:183
 msgid "Find Compatible Applications in Software"
 msgstr ""
 
-#: src/filechooser.c:390
-msgid "_Save"
+#: src/background.c:255
+msgid "Background activity"
 msgstr ""
 
-#: src/filechooser.c:392
+#: src/background.c:257
+#, c-format
+msgid "%s is running in the background."
+msgstr ""
+
+#: src/background.c:262
+msgid "Allow"
+msgstr ""
+
+#: src/background.c:269
+msgid "Forbid"
+msgstr ""
+
+#: src/background.c:276
+msgid "Ignore"
+msgstr ""
+
+#: src/filechooser.c:442
 msgid "_Open"
 msgstr "От_вори"
 
-#: src/remotedesktopdialog.c:190
+#: src/filechooser.c:444
+msgid "_Save"
+msgstr ""
+
+#: src/filechooser.c:620
+msgid "Open files read-only"
+msgstr ""
+
+#: src/remotedesktopdialog.c:188
 msgid "Pointer"
 msgstr ""
 
-#: src/remotedesktopdialog.c:193
+#: src/remotedesktopdialog.c:191
 msgid "Keyboard"
 msgstr ""
 
-#: src/remotedesktopdialog.c:196
+#: src/remotedesktopdialog.c:194
 msgid "Touch screen"
 msgstr ""
 
-#: src/remotedesktopdialog.c:303
+#: src/remotedesktopdialog.c:307
 #, c-format
 msgid "Select devices to share with %s"
 msgstr ""
 
-#: src/remotedesktopdialog.c:308
+#: src/remotedesktopdialog.c:312
 #, fuzzy
 msgid "Select devices to share with the requesting application"
 msgstr "Да поделим овај снимак екрана са програмом који то захтева?"
@@ -162,25 +187,43 @@ msgstr ""
 
 #: src/screencastdialog.ui:12
 #, fuzzy
-msgid "Screen casting"
+msgid "Screen Share"
 msgstr "Снимак екрана"
 
-#: src/screencastwidget.c:243
+#: src/screencastwidget.c:483
 #, c-format
 msgid "Select monitor to share with %s"
 msgstr ""
 
-#: src/screencastwidget.c:248
+#: src/screencastwidget.c:485
+#, c-format
+msgid "Select window to share with %s"
+msgstr ""
+
+#: src/screencastwidget.c:490
 #, fuzzy
 msgid "Select monitor to share with the requesting application"
 msgstr "Да поделим овај снимак екрана са програмом који то захтева?"
 
-#: src/screenshotdialog.c:422
+#: src/screencastwidget.c:491
+#, fuzzy
+msgid "Select window to share with the requesting application"
+msgstr "Да поделим овај снимак екрана са програмом који то захтева?"
+
+#: src/screencastwidget.ui:100
+msgid "Single Window"
+msgstr ""
+
+#: src/screencastwidget.ui:176
+msgid "Entire Screen"
+msgstr ""
+
+#: src/screenshotdialog.c:434
 #, c-format
 msgid "Share this screenshot with %s?"
 msgstr "Да поделим овај снимак екрана са „%s“?"
 
-#: src/screenshotdialog.c:426
+#: src/screenshotdialog.c:438
 msgid "Share this screenshot with the requesting application?"
 msgstr "Да поделим овај снимак екрана са програмом који то захтева?"
 
@@ -233,6 +276,39 @@ msgstr ""
 #: src/screenshotdialog.ui:201
 msgid "Include the window _border"
 msgstr ""
+
+#: src/settings.c:184
+msgid "Requested setting not found"
+msgstr ""
+
+#: src/wallpaperdialog.c:121 src/wallpaperdialog.ui:13
+msgid "Set Background"
+msgstr ""
+
+#: src/wallpaperdialog.c:131
+msgid "Set Lock Screen"
+msgstr ""
+
+#: src/wallpaperdialog.c:162
+msgid "Set Background & Lock Screen"
+msgstr ""
+
+#: src/wallpaperdialog.ui:26
+#, fuzzy
+msgid "Set"
+msgstr "_Изабери"
+
+#: src/wallpaperdialog.ui:62
+msgid "Failed to load image file"
+msgstr ""
+
+#: src/wallpaperpreview.ui:47
+msgid "Activities"
+msgstr ""
+
+#, fuzzy
+#~ msgid "Screen casting"
+#~ msgstr "Снимак екрана"
 
 #~ msgid "_Select"
 #~ msgstr "_Изабери"

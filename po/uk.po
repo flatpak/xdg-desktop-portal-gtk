@@ -6,9 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
-"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/issues"
-"\n"
-"POT-Creation-Date: 2019-10-24 14:26+0000\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
+"issues\n"
+"POT-Creation-Date: 2019-11-27 15:21-0500\n"
 "PO-Revision-Date: 2019-11-10 13:20+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -70,7 +70,7 @@ msgstr "Поділитися вашими особистими даними з �
 msgid "Share Details"
 msgstr "Оприлюднити подробиці"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:397
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:447
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
@@ -148,15 +148,15 @@ msgstr "Заборонити"
 msgid "Ignore"
 msgstr "Ігнорувати"
 
-#: src/filechooser.c:392
-msgid "_Save"
-msgstr "_Зберегти"
-
-#: src/filechooser.c:394
+#: src/filechooser.c:442
 msgid "_Open"
 msgstr "_Відкрити"
 
-#: src/filechooser.c:552
+#: src/filechooser.c:444
+msgid "_Save"
+msgstr "_Зберегти"
+
+#: src/filechooser.c:620
 msgid "Open files read-only"
 msgstr "Відкрити файли лише для читання"
 
@@ -187,7 +187,6 @@ msgid "Remote desktop"
 msgstr "Віддалена стільниця"
 
 #: src/screencastdialog.ui:12
-#| msgid "Screenshot"
 msgid "Screen Share"
 msgstr "Оприлюднення екрана"
 
@@ -198,7 +197,6 @@ msgstr "Виберіть монітор, дані з якого слід опр�
 
 #: src/screencastwidget.c:485
 #, c-format
-#| msgid "Select monitor to share with %s"
 msgid "Select window to share with %s"
 msgstr "Виберіть вікно, дані з якого слід оприлюднити для %s"
 
@@ -209,7 +207,6 @@ msgstr ""
 "програми"
 
 #: src/screencastwidget.c:491
-#| msgid "Select monitor to share with the requesting application"
 msgid "Select window to share with the requesting application"
 msgstr ""
 "Виберіть вікно, дані з якого слід оприлюднити за допомогою відповідної "
@@ -285,7 +282,6 @@ msgid "Requested setting not found"
 msgstr "Потрібного вам параметра не знайдено"
 
 #: src/wallpaperdialog.c:121 src/wallpaperdialog.ui:13
-#| msgid "Background activity"
 msgid "Set Background"
 msgstr "Встановити тло"
 
@@ -298,7 +294,6 @@ msgid "Set Background & Lock Screen"
 msgstr "Встановити зображення тла і екран блокування"
 
 #: src/wallpaperdialog.ui:26
-#| msgid "Select"
 msgid "Set"
 msgstr "Встановити"
 

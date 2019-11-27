@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2019-09-19 03:30+0000\n"
+"POT-Creation-Date: 2019-11-27 15:21-0500\n"
 "PO-Revision-Date: 2019-09-19 09:49+0200\n"
 "Last-Translator: Milo Casagrande <milo@milo.name>\n"
 "Language-Team: Italian <gnome-it-list@gnome.org>\n"
@@ -40,7 +40,7 @@ msgstr "Consenti accesso"
 msgid "Select an Image"
 msgstr "Seleziona una immagine"
 
-#: src/accountdialog.c:179
+#: src/accountdialog.c:179 src/wallpaperdialog.ui:18
 msgid "Cancel"
 msgstr "Annulla"
 
@@ -71,7 +71,7 @@ msgstr ""
 msgid "Share Details"
 msgstr "Dettagli"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:397
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:447
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
@@ -149,15 +149,15 @@ msgstr "Impedisci"
 msgid "Ignore"
 msgstr "Ignora"
 
-#: src/filechooser.c:392
-msgid "_Save"
-msgstr "_Salva"
-
-#: src/filechooser.c:394
+#: src/filechooser.c:442
 msgid "_Open"
 msgstr "A_pri"
 
-#: src/filechooser.c:552
+#: src/filechooser.c:444
+msgid "_Save"
+msgstr "_Salva"
+
+#: src/filechooser.c:620
 msgid "Open files read-only"
 msgstr "Apri file in sola-lettura"
 
@@ -275,3 +275,33 @@ msgstr "Includere il _puntatore"
 #: src/screenshotdialog.ui:201
 msgid "Include the window _border"
 msgstr "Includere il _bordo finestra"
+
+#: src/settings.c:184
+msgid "Requested setting not found"
+msgstr ""
+
+#: src/wallpaperdialog.c:121 src/wallpaperdialog.ui:13
+#, fuzzy
+msgid "Set Background"
+msgstr "Attività sullo sfondo"
+
+#: src/wallpaperdialog.c:131
+msgid "Set Lock Screen"
+msgstr ""
+
+#: src/wallpaperdialog.c:162
+msgid "Set Background & Lock Screen"
+msgstr ""
+
+#: src/wallpaperdialog.ui:26
+#, fuzzy
+msgid "Set"
+msgstr "Seleziona"
+
+#: src/wallpaperdialog.ui:62
+msgid "Failed to load image file"
+msgstr ""
+
+#: src/wallpaperpreview.ui:47
+msgid "Activities"
+msgstr ""

@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2019-10-24 14:26+0000\n"
+"POT-Creation-Date: 2019-11-27 15:21-0500\n"
 "PO-Revision-Date: 2019-10-24 16:33+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
@@ -70,7 +70,7 @@ msgstr "Udostępnić informacje o użytkowniku proszącemu o to programowi?"
 msgid "Share Details"
 msgstr "Udostępnianie informacji"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:397
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:447
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
@@ -148,15 +148,15 @@ msgstr "Zabroń"
 msgid "Ignore"
 msgstr "Zignoruj"
 
-#: src/filechooser.c:392
-msgid "_Save"
-msgstr "_Zapisz"
-
-#: src/filechooser.c:394
+#: src/filechooser.c:442
 msgid "_Open"
 msgstr "_Otwórz"
 
-#: src/filechooser.c:552
+#: src/filechooser.c:444
+msgid "_Save"
+msgstr "_Zapisz"
+
+#: src/filechooser.c:620
 msgid "Open files read-only"
 msgstr "Otwarcie plików tylko do odczytu"
 
