@@ -135,6 +135,7 @@ typedef struct {
   Request *request;
   char *id;
   NotifyResult result;
+  char *name;
 } BackgroundHandle;
 
 static void
@@ -144,6 +145,7 @@ background_handle_free (gpointer data)
 
   g_object_unref (handle->request);
   g_free (handle->id);
+  g_free (handle->name);
 
   g_free (handle);
 }
@@ -180,6 +182,56 @@ send_response (BackgroundHandle *handle)
 }
 
 static void
+response_received (GtkDialog *dialog,
+                   int response,
+                   gpointer data)
+{
+  BackgroundHandle *handle = data;
+
+  gtk_widget_destroy (GTK_WIDGET (dialog));
+
+  switch (response)
+    {
+    case ALLOW:
+      g_debug ("Allow app %s to run in background", handle->request->app_id);
+      handle->result = ALLOW;
+      break;
+
+    case FORBID:
+      g_debug ("Forbid app %s to run in background", handle->request->app_id);
+      handle->result = FORBID;
+      break;
+    }
+
+  send_response (handle);
+}
+
+static void
+show_permission_dialog (BackgroundHandle *handle)
+{
+  GtkWidget *dialog;
+  GtkWidget *button;
+
+  dialog = gtk_message_dialog_new (NULL, 0, GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE, 
+                                   _("“%s” is running in the background"), handle->name);
+  gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+                                            _("This might be for a legitimate reason, but the application "
+                                              "has not provided one."
+                                              "\n\nNote that forcing an application to quite might cause data loss."));
+  gtk_dialog_add_button (GTK_DIALOG (dialog), _("Force quit"), FORBID);
+  gtk_dialog_add_button (GTK_DIALOG (dialog), _("Allow"), ALLOW);
+
+  button = gtk_dialog_get_widget_for_response (GTK_DIALOG (dialog), FORBID);
+  gtk_style_context_add_class (gtk_widget_get_style_context (button), "destructive-action");
+
+  gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER_ALWAYS);
+
+  g_signal_connect (dialog, "response", G_CALLBACK (response_received), handle);
+
+  gtk_window_present (GTK_WINDOW (dialog));
+}
+
+static void
 activate_action (GDBusConnection *connection,
                  const char *app_id,
                  const char *id,
@@ -189,25 +241,16 @@ activate_action (GDBusConnection *connection,
 {
   BackgroundHandle *handle = data;
 
-  if (g_str_equal (name, "allow"))
+  if (g_str_equal (name, "show"))
     {
-      g_debug ("Allow app %s to run in background", handle->request->app_id);
-      handle->result = ALLOW;
-    }
-  else if (g_str_equal (name, "forbid"))
-    {
-      g_debug ("Forbid app %s to run in background", handle->request->app_id);
-      handle->result = FORBID;
-    }
-  else if (g_str_equal (name, "ignore"))
-    {
-      g_debug ("Allow this instance of app %s to run in background", handle->request->app_id);
-      handle->result = IGNORE;
+      g_debug ("Show background permissions for %s", handle->request->app_id);
+      show_permission_dialog (handle);
+      return;
     }
   else
     {
       g_debug ("Unexpected action for app %s", handle->request->app_id);
-      handle->result = FORBID;
+      handle->result = IGNORE;
     }
 
   send_response (handle);
@@ -255,7 +298,7 @@ handle_notify_background (XdpImplBackground *object,
   g_autoptr (Request) request = NULL;
   BackgroundHandle *handle;
 
-  g_debug ("background: handle NotifyBackground");
+  g_debug ("background: handle NotifyBackground %s %s", arg_app_id, arg_name);
 
   sender = g_dbus_method_invocation_get_sender (invocation);
   request = request_new (sender, arg_app_id, arg_handle);
@@ -265,26 +308,12 @@ handle_notify_background (XdpImplBackground *object,
 
   body = g_strdup_printf (_("%s is running in the background."), arg_name);
   g_variant_builder_add (&builder, "{sv}", "body", g_variant_new_string (body));
+  g_variant_builder_add (&builder, "{sv}", "default-action", g_variant_new_string ("show"));
 
   g_variant_builder_init (&bbuilder, G_VARIANT_TYPE ("aa{sv}"));
   g_variant_builder_init (&button, G_VARIANT_TYPE_VARDICT);
-  g_variant_builder_add (&button, "{sv}", "label", g_variant_new_string (_("Allow")));
-  g_variant_builder_add (&button, "{sv}", "action", g_variant_new_string ("allow"));
-  g_variant_builder_add (&button, "{sv}", "target", g_variant_new_string (arg_app_id));
-
-  g_variant_builder_add (&bbuilder, "@a{sv}", g_variant_builder_end (&button));
-
-  g_variant_builder_init (&button, G_VARIANT_TYPE_VARDICT);
-  g_variant_builder_add (&button, "{sv}", "label", g_variant_new_string (_("Forbid")));
-  g_variant_builder_add (&button, "{sv}", "action", g_variant_new_string ("forbid"));
-  g_variant_builder_add (&button, "{sv}", "target", g_variant_new_string (arg_app_id));
-
-  g_variant_builder_add (&bbuilder, "@a{sv}", g_variant_builder_end (&button));
-
-  g_variant_builder_init (&button, G_VARIANT_TYPE_VARDICT);
-  g_variant_builder_add (&button, "{sv}", "label", g_variant_new_string (_("Ignore")));
-  g_variant_builder_add (&button, "{sv}", "action", g_variant_new_string ("ignore"));
-  g_variant_builder_add (&button, "{sv}", "target", g_variant_new_string (arg_app_id));
+  g_variant_builder_add (&button, "{sv}", "label", g_variant_new_string (_("Find out more")));
+  g_variant_builder_add (&button, "{sv}", "action", g_variant_new_string ("show"));
 
   g_variant_builder_add (&bbuilder, "@a{sv}", g_variant_builder_end (&button));
 
@@ -294,6 +323,7 @@ handle_notify_background (XdpImplBackground *object,
   handle->impl = object;
   handle->invocation = invocation;
   handle->request = g_object_ref (request);
+  handle->name = g_strdup (arg_name);
   handle->id = g_strdup_printf ("notify_background_%d", count++);
 
   g_signal_connect (request, "handle-close", G_CALLBACK (handle_close), handle);
@@ -438,7 +468,6 @@ compare_app_states (GVariant *a, GVariant *b)
   GVariantIter *iter;
   const char *app_id;
   GVariant *value;
-  GVariant *new_value;
   gboolean changed;
 
   changed = FALSE;
