@@ -173,53 +173,13 @@ send_response (BackgroundHandle *handle)
 }
 
 static void
-response_received (GtkDialog *dialog,
-                   int response,
-                   gpointer data)
+launch_control_center (const char *app_id)
 {
-  BackgroundHandle *handle = data;
+  const char *argv[] = { "gnome-control-center", "applications", "APP_ID", NULL };
 
-  gtk_widget_destroy (GTK_WIDGET (dialog));
+  argv[2] = app_id;
 
-  switch (response)
-    {
-    case ALLOW:
-      g_debug ("Allow app %s to run in background", handle->request->app_id);
-      handle->result = ALLOW;
-      break;
-
-    case FORBID:
-      g_debug ("Forbid app %s to run in background", handle->request->app_id);
-      handle->result = FORBID;
-      break;
-
-    case IGNORE:
-    default:
-      g_debug ("Allow this instance of app %s to run in background", handle->request->app_id);
-      handle->result = IGNORE;
-      break;
-    }
-
-  send_response (handle);
-}
-
-static void
-show_permission_dialog (BackgroundHandle *handle)
-{
-  GtkWidget *dialog;
-
-  dialog = gtk_message_dialog_new (NULL, 0, GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE, _("Background activity"));
-  gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-                                            _("“%s” is running in the background."), handle->name);
-  gtk_dialog_add_button (GTK_DIALOG (dialog), _("Forbid"), FORBID);
-  gtk_dialog_add_button (GTK_DIALOG (dialog), _("Allow"), ALLOW);
-  gtk_dialog_add_button (GTK_DIALOG (dialog), _("Ignore"), IGNORE);
-
-  gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER_ALWAYS);
-
-  g_signal_connect (dialog, "response", G_CALLBACK (response_received), handle);
-
-  gtk_window_present (GTK_WINDOW (dialog));
+  g_spawn_async (NULL, (char **)argv, NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, NULL);
 }
 
 static void
@@ -250,8 +210,8 @@ activate_action (GDBusConnection *connection,
   else if (g_str_equal (name, "show"))
     {
       g_debug ("Show background permissions for %s", handle->request->app_id);
-      show_permission_dialog (handle);
-      return;
+      launch_control_center (handle->request->app_id);
+      handle->result = IGNORE;
     }
   else
     {
