@@ -23,150 +23,6 @@
 #include "utils.h"
 
 static gboolean
-compose_mail_evolution (GAppInfo    *info,
-                        const char * const *addrs,
-                        const char * const *cc,
-                        const char * const *bcc,
-                        const char  *subject,
-                        const char  *body,
-                        const char **attachments,
-                        GError     **error)
-{
-  g_autofree char *enc_subject = NULL;
-  g_autofree char *enc_body = NULL;
-  g_autoptr(GString) url = NULL;
-  g_autoptr(GList) uris = NULL;
-  int i;
-  const char *sep;
-  gboolean success;
-
-  enc_subject = g_uri_escape_string (subject ? subject : "", NULL, FALSE);
-  enc_body = g_uri_escape_string (body ? body : "", NULL, FALSE);
-
-  url = g_string_new ("mailto:");
-
-  for (i = 0; addrs[i]; i++)
-    {
-      if (i > 0)
-        g_string_append (url, ",");
-      g_string_append_printf (url, "\"%s\"", addrs[i]);
-    }
-
-  sep = "?";
-
-  if (cc)
-    {
-      g_string_append_printf (url, "%scc=", sep);
-      sep = "&";
-
-      for (i = 0; cc[i]; i++)
-        {
-          if (i > 0)
-            g_string_append (url, ",");
-          g_string_append_printf (url, "\"%s\"", cc[i]);
-        }
-    }
-
-  if (bcc)
-    {
-      g_string_append_printf (url, "%sbcc=", sep);
-      sep = "&";
-
-      for (i = 0; bcc[i]; i++)
-        {
-          if (i > 0)
-            g_string_append (url, ",");
-          g_string_append_printf (url, "\"%s\"", bcc[i]);
-        }
-    }
-
-  g_string_append_printf (url, "%ssubject=%s", sep, enc_subject);
-  g_string_append_printf (url, "&body=%s", enc_body);
-
-  for (i = 0; attachments[i]; i++)
-    {
-      g_autofree char *path = g_uri_escape_string (attachments[i], NULL, FALSE);
-      g_string_append_printf (url, "&attach=%s", path);
-    }
-
-  uris = g_list_append (uris, url->str);
-
-  g_debug ("Launching: %s\n", url->str);
-
-  success = g_app_info_launch_uris (info, uris, NULL, error);
-
-  return success;
-}
-
-static gboolean
-compose_mail_thunderbird (GAppInfo    *info,
-                          const char * const *addrs,
-                          const char * const *cc,
-                          const char * const *bcc,
-                          const char  *subject,
-                          const char  *body,
-                          const char **attachments,
-                          GError     **error)
-{
-  g_autofree char *enc_subject = NULL;
-  g_autofree char *enc_body = NULL;
-  g_autoptr(GString) url = NULL;
-  g_autoptr(GSubprocess) subprocess = NULL;
-  g_autoptr(GList) uris = NULL;
-  int i;
-  gboolean success;
-
-  enc_subject = g_uri_escape_string (subject ? subject : "", NULL, FALSE);
-  enc_body = g_uri_escape_string (body ? body : "", NULL, FALSE);
-
-  url = g_string_new ("to='");
-
-  for (i = 0; addrs[i]; i++)
-    {
-      if (i > 0)
-        g_string_append (url, ";");
-       g_string_append_printf (url, "%s", addrs[i]);
-    }
-  g_string_append (url, "'");
-
-  if (cc)
-    {
-      for (i = 0; cc[i]; i++)
-        {
-          if (i > 0)
-            g_string_append (url, ";");
-          g_string_append_printf (url, "%s", cc[i]);
-        }
-      g_string_append (url, "'");
-    }
-
-  if (bcc)
-    {
-      for (i = 0; bcc[i]; i++)
-        {
-          if (i > 0)
-            g_string_append (url, ";");
-          g_string_append_printf (url, "%s", bcc[i]);
-        }
-      g_string_append (url, "'");
-    }
-
-  g_string_append_printf (url, ",subject=%s", enc_subject);
-  g_string_append_printf (url, ",body=%s", enc_body);
-
-  for (i = 0; attachments[i]; i++)
-    g_string_append_printf (url, ",attachment=%s", attachments[i]);
-
-  uris = g_list_append (uris, url->str);
-
-  g_debug ("Launching: %s\n", url->str);
-
-  success = g_app_info_launch_uris (info, uris, NULL, error);
-
-  return success;
-}
-
-static gboolean
 compose_mail_mailto (GAppInfo       *info,
                      const char * const *addrs,
                      const char * const *cc,
@@ -248,24 +104,16 @@ compose_mail (const char * const *addrs,
               const char **attachments,
               GError     **error)
 {
-        g_autoptr(GAppInfo) info = NULL;
-        const char *commandline;
+  g_autoptr(GAppInfo) info = NULL;
 
-        info = g_app_info_get_default_for_uri_scheme ("mailto");
-        if (info == NULL)
-          {
-            g_set_error (error, G_IO_ERROR, G_IO_ERROR_FAILED, "No mailto handler");
-            return FALSE;
-          }
+  info = g_app_info_get_default_for_uri_scheme ("mailto");
+  if (info == NULL)
+    {
+      g_set_error (error, G_IO_ERROR, G_IO_ERROR_FAILED, "No mailto handler");
+      return FALSE;
+    }
 
-        commandline = g_app_info_get_commandline (info);
-
-        if (strstr (commandline, "thunderbird"))
-                return compose_mail_thunderbird (info, addrs, cc, bcc, subject, body, attachments, error);
-        else if (strstr (commandline, "evolution"))
-                return compose_mail_evolution (info, addrs, cc, bcc, subject, body, attachments, error);
-        else
-                return compose_mail_mailto (info, addrs, cc, bcc, subject, body, attachments, error);
+  return compose_mail_mailto (info, addrs, cc, bcc, subject, body, attachments, error);
 }
 
 static gboolean
