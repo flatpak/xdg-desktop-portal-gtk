@@ -23,7 +23,8 @@
 #include "utils.h"
 
 static gboolean
-compose_mail_evolution (const char * const *addrs,
+compose_mail_evolution (GAppInfo    *info,
+                        const char * const *addrs,
                         const char * const *cc,
                         const char * const *bcc,
                         const char  *subject,
@@ -34,11 +35,10 @@ compose_mail_evolution (const char * const *addrs,
   g_autofree char *enc_subject = NULL;
   g_autofree char *enc_body = NULL;
   g_autoptr(GString) url = NULL;
-  g_autoptr(GSubprocess) subprocess = NULL;
-  const char *argv[4];
+  g_autoptr(GList) uris = NULL;
   int i;
-  g_autofree char *command = NULL;
   const char *sep;
+  gboolean success;
 
   enc_subject = g_uri_escape_string (subject ? subject : "", NULL, FALSE);
   enc_body = g_uri_escape_string (body ? body : "", NULL, FALSE);
@@ -89,21 +89,18 @@ compose_mail_evolution (const char * const *addrs,
       g_string_append_printf (url, "&attach=%s", path);
     }
 
-  argv[0] = "evolution";
-  argv[1] = "--component=mail";
-  argv[2] = url->str;
-  argv[3] = NULL;
+  uris = g_list_append (uris, url->str);
 
-  command = g_strjoinv (" ", (char **)argv);
-  g_debug ("Running: %s\n", command);
+  g_debug ("Launching: %s\n", url->str);
 
-  subprocess = g_subprocess_newv (argv, G_SUBPROCESS_FLAGS_NONE, error);
+  success = g_app_info_launch_uris (info, uris, NULL, error);
 
-  return subprocess != NULL;
+  return success;
 }
 
 static gboolean
-compose_mail_thunderbird (const char * const *addrs,
+compose_mail_thunderbird (GAppInfo    *info,
+                          const char * const *addrs,
                           const char * const *cc,
                           const char * const *bcc,
                           const char  *subject,
@@ -115,9 +112,9 @@ compose_mail_thunderbird (const char * const *addrs,
   g_autofree char *enc_body = NULL;
   g_autoptr(GString) url = NULL;
   g_autoptr(GSubprocess) subprocess = NULL;
-  const char *argv[4];
+  g_autoptr(GList) uris = NULL;
   int i;
-  g_autofree char *command = NULL;
+  gboolean success;
 
   enc_subject = g_uri_escape_string (subject ? subject : "", NULL, FALSE);
   enc_body = g_uri_escape_string (body ? body : "", NULL, FALSE);
@@ -160,17 +157,13 @@ compose_mail_thunderbird (const char * const *addrs,
   for (i = 0; attachments[i]; i++)
     g_string_append_printf (url, ",attachment=%s", attachments[i]);
 
-  argv[0] = "thunderbird";
-  argv[1] = "-compose";
-  argv[2] = url->str;
-  argv[3] = NULL;
+  uris = g_list_append (uris, url->str);
 
-  command = g_strjoinv (" ", (char **)argv);
-  g_debug ("Running: %s\n", command);
+  g_debug ("Launching: %s\n", url->str);
 
-  subprocess = g_subprocess_newv (argv, G_SUBPROCESS_FLAGS_NONE, error);
+  success = g_app_info_launch_uris (info, uris, NULL, error);
 
-  return subprocess != NULL;
+  return success;
 }
 
 static gboolean
@@ -268,9 +261,9 @@ compose_mail (const char * const *addrs,
         commandline = g_app_info_get_commandline (info);
 
         if (strstr (commandline, "thunderbird"))
-                return compose_mail_thunderbird (addrs, cc, bcc, subject, body, attachments, error);
+                return compose_mail_thunderbird (info, addrs, cc, bcc, subject, body, attachments, error);
         else if (strstr (commandline, "evolution"))
-                return compose_mail_evolution (addrs, cc, bcc, subject, body, attachments, error);
+                return compose_mail_evolution (info, addrs, cc, bcc, subject, body, attachments, error);
         else
                 return compose_mail_mailto (info, addrs, cc, bcc, subject, body, attachments, error);
 }
