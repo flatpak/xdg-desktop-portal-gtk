@@ -26,6 +26,8 @@ static OrgGnomeShellIntrospect *shell;
 
 typedef enum { BACKGROUND, RUNNING, ACTIVE } AppState;
 
+static GVariant *app_state;
+
 static char *
 get_actual_app_id (const char *app_id)
 {
@@ -35,14 +37,11 @@ get_actual_app_id (const char *app_id)
   if (info)
     app = g_desktop_app_info_get_string (info, "X-Flatpak");
 
-  g_debug ("looking up app id for %s: %s", app_id, app);
-
   return app;
 }
 
-static gboolean
-handle_get_app_state (XdpImplBackground *object,
-                      GDBusMethodInvocation *invocation)
+static GVariant *
+get_app_state (void)
 {
   g_autoptr(GVariant) windows = NULL;
   g_autoptr(GHashTable) app_states = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
@@ -52,15 +51,9 @@ handle_get_app_state (XdpImplBackground *object,
   const char *key;
   gpointer value;
 
-  g_debug ("background: handle GetAppState");
-
-  if (!org_gnome_shell_introspect_call_get_windows_sync (shell, &windows, NULL, &error))
+  if (!org_gnome_shell_introspect_call_get_windows_sync (shell, &windows, NULL, NULL))
     {
-      g_dbus_method_invocation_return_error (invocation,
-                                             XDG_DESKTOP_PORTAL_ERROR,
-                                             XDG_DESKTOP_PORTAL_ERROR_FAILED,
-                                             "Could not get window list: %s", error->message);
-      return TRUE;
+      return NULL;
     }
 
   if (windows)
@@ -96,6 +89,8 @@ handle_get_app_state (XdpImplBackground *object,
           if (focus)
             state = MAX (state, ACTIVE);
 
+          g_print ("app_id: %s sandboxed: %s hidden: %d focus: %d app: %s state: %u\n",
+                   app_id, sandboxed_app_id, hidden, focus, app, state);
           g_hash_table_insert (app_states, app, GINT_TO_POINTER (state));
         }
     }
@@ -103,13 +98,27 @@ handle_get_app_state (XdpImplBackground *object,
   g_variant_builder_init (&builder, G_VARIANT_TYPE_VARDICT);
   g_hash_table_iter_init (&iter, app_states);
   while (g_hash_table_iter_next (&iter, (gpointer *)&key, (gpointer *)&value))
-    {
-      g_variant_builder_add (&builder, "{sv}", key, g_variant_new_uint32 (GPOINTER_TO_UINT (value)));
-    }
+    g_variant_builder_add (&builder, "{sv}", key, g_variant_new_uint32 (GPOINTER_TO_UINT (value)));
 
-  xdp_impl_background_complete_get_app_state (object,
-                                              invocation,
-                                              g_variant_builder_end (&builder));
+  return g_variant_ref_sink (g_variant_builder_end (&builder));
+}
+
+static gboolean
+handle_get_app_state (XdpImplBackground *object,
+                      GDBusMethodInvocation *invocation)
+{
+  g_debug ("background: handle GetAppState");
+
+  if (app_state == NULL)
+    app_state = get_app_state ();
+
+  if (app_state == NULL)
+    g_dbus_method_invocation_return_error (invocation,
+                                           XDG_DESKTOP_PORTAL_ERROR,
+                                           XDG_DESKTOP_PORTAL_ERROR_FAILED,
+                                           "Could not get window list");
+  else
+    xdp_impl_background_complete_get_app_state (object, invocation, app_state);
 
   return TRUE;
 }
@@ -423,6 +432,67 @@ out:
   return TRUE;
 }
 
+static gboolean
+compare_app_states (GVariant *a, GVariant *b)
+{
+  GVariantIter *iter;
+  const char *app_id;
+  GVariant *value;
+  GVariant *new_value;
+  gboolean changed;
+
+  changed = FALSE;
+
+  iter = g_variant_iter_new (a);
+  while (!changed && g_variant_iter_next (iter, "{&sv}", &app_id, &value))
+    {
+      guint v1, v2;
+
+      g_variant_get (value, "u", &v1);
+
+      if (!g_variant_lookup (b, app_id, "u", &v2))
+        v2 = BACKGROUND;
+
+      if ((v1 == BACKGROUND && v2 != BACKGROUND) ||
+          (v1 != BACKGROUND && v2 == BACKGROUND))
+        {
+          g_debug ("App %s changed state: %u != %u", app_id, v1, v2);
+          changed = TRUE;
+        }
+    }
+  g_variant_iter_free (iter);
+
+  return changed;
+}
+
+static void
+running_applications_changed (OrgGnomeShellIntrospect *object,
+                              GDBusInterfaceSkeleton *helper)
+{
+  GVariant *new_app_state;
+  gboolean changed = FALSE;
+
+  g_debug ("Received running-applications-changed from gnome-shell");
+
+  new_app_state = get_app_state ();
+
+  if (app_state == NULL || new_app_state == NULL)
+    changed = TRUE;
+  else if (compare_app_states (app_state, new_app_state) ||
+           compare_app_states (new_app_state, app_state))
+    changed = TRUE;
+
+  if (app_state)
+    g_variant_unref (app_state);
+  app_state = new_app_state;
+
+  if (changed)
+    {
+      g_debug ("Emitting RunningApplicationsChanged");
+      xdp_impl_background_emit_running_applications_changed (XDP_IMPL_BACKGROUND (helper));
+    }
+}
+
 gboolean
 background_init (GDBusConnection *bus,
                  GError **error)
@@ -435,8 +505,9 @@ background_init (GDBusConnection *bus,
                                                      "/org/gnome/Shell/Introspect",
                                                      NULL,
                                                      NULL);
-
   helper = G_DBUS_INTERFACE_SKELETON (xdp_impl_background_skeleton_new ());
+
+  g_signal_connect (shell, "running-applications-changed", G_CALLBACK (running_applications_changed), helper);
 
   g_signal_connect (helper, "handle-get-app-state", G_CALLBACK (handle_get_app_state), NULL);
   g_signal_connect (helper, "handle-notify-background", G_CALLBACK (handle_notify_background), NULL);
