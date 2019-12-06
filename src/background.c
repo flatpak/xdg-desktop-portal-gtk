@@ -43,7 +43,7 @@ get_actual_app_id (const char *app_id)
 static GVariant *
 get_app_state (void)
 {
-  g_autoptr(GVariant) windows = NULL;
+  g_autoptr(GVariant) apps = NULL;
   g_autoptr(GHashTable) app_states = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
   g_autoptr(GError) error = NULL;
   GVariantBuilder builder;
@@ -51,29 +51,26 @@ get_app_state (void)
   const char *key;
   gpointer value;
 
-  if (!org_gnome_shell_introspect_call_get_windows_sync (shell, &windows, NULL, NULL))
+  if (!org_gnome_shell_introspect_call_get_running_applications_sync (shell, &apps, NULL, NULL))
     {
       return NULL;
     }
 
-  if (windows)
+  if (apps)
     {
-      g_autoptr(GVariantIter) iter = g_variant_iter_new (windows);
+      g_autoptr(GVariantIter) iter = g_variant_iter_new (apps);
+      const char *app_id = NULL;
       GVariant *dict;
 
-      while (g_variant_iter_loop (iter, "{t@a{sv}}", NULL, &dict))
+      while (g_variant_iter_loop (iter, "{&s@a{sv}}", &app_id, &dict))
         {
-          const char *app_id = NULL;
           const char *sandboxed_app_id = NULL;
+          const char **seats = NULL;
           char *app;
-          gboolean hidden = FALSE;
-          gboolean focus = FALSE;
           AppState state = BACKGROUND;
 
-          g_variant_lookup (dict, "app-id", "&s", &app_id);
           g_variant_lookup (dict, "sandboxed-app-id", "&s", &sandboxed_app_id);
-          g_variant_lookup (dict, "is-hidden", "b", &hidden);
-          g_variant_lookup (dict, "has-focus", "b", &focus);
+          g_variant_lookup (dict, "active-on-seats", "^a&s", &seats);
 
           /* See https://gitlab.gnome.org/GNOME/gnome-shell/issues/1289 */
           if (sandboxed_app_id)
@@ -84,13 +81,10 @@ get_app_state (void)
             continue;
 
           state = GPOINTER_TO_INT (g_hash_table_lookup (app_states, app));
-          if (!hidden)
-            state = MAX (state, RUNNING);
-          if (focus)
+          state = MAX (state, RUNNING);
+          if (seats != NULL)
             state = MAX (state, ACTIVE);
 
-          g_print ("app_id: %s sandboxed: %s hidden: %d focus: %d app: %s state: %u\n",
-                   app_id, sandboxed_app_id, hidden, focus, app, state);
           g_hash_table_insert (app_states, app, GINT_TO_POINTER (state));
         }
     }
@@ -136,6 +130,7 @@ typedef struct {
   char *id;
   NotifyResult result;
   char *name;
+  GtkWidget *dialog;
 } BackgroundHandle;
 
 static void
@@ -156,8 +151,14 @@ background_handle_close (BackgroundHandle *handle)
   GDBusConnection *connection;
 
   connection = g_dbus_interface_skeleton_get_connection (G_DBUS_INTERFACE_SKELETON (handle->impl));
-
   fdo_remove_notification (connection, handle->request->app_id, handle->id);
+
+  if (handle->dialog)
+    {
+      gtk_widget_destroy (handle->dialog);
+      handle->dialog = NULL;
+    }
+
   background_handle_free (handle);
 }
 
@@ -187,8 +188,6 @@ response_received (GtkDialog *dialog,
                    gpointer data)
 {
   BackgroundHandle *handle = data;
-
-  gtk_widget_destroy (GTK_WIDGET (dialog));
 
   switch (response)
     {
@@ -228,6 +227,8 @@ show_permission_dialog (BackgroundHandle *handle)
 
   g_signal_connect (dialog, "response", G_CALLBACK (response_received), handle);
 
+  handle->dialog = dialog;
+
   gtk_window_present (GTK_WINDOW (dialog));
 }
 
@@ -245,15 +246,13 @@ activate_action (GDBusConnection *connection,
     {
       g_debug ("Show background permissions for %s", handle->request->app_id);
       show_permission_dialog (handle);
-      return;
     }
   else
     {
       g_debug ("Unexpected action for app %s", handle->request->app_id);
       handle->result = IGNORE;
+      send_response (handle);
     }
-
-  send_response (handle);
 }
 
 static gboolean
