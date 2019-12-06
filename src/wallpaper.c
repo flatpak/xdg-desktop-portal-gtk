@@ -88,33 +88,46 @@ on_file_copy_cb (GObject *source_object,
                  gpointer data)
 {
   WallpaperDialogHandle *handle = data;
+  g_autoptr(GFile) destination = NULL;
   GFile *picture_file = G_FILE (source_object);
   g_autoptr(GError) error = NULL;
   g_autofree gchar *uri = NULL;
+  g_autofree gchar *dest_path = NULL;
+  gchar *contents = NULL;
+  gsize length = 0;
 
   handle->response = 2;
 
   uri = g_file_get_uri (picture_file);
-  if (!g_file_copy_finish (picture_file, result, &error))
+  if (!g_file_load_contents_finish (picture_file, result, &contents, &length, NULL, &error))
     {
       g_warning ("Failed to copy '%s': %s", uri, error->message);
 
       goto out;
     }
 
+  destination = g_file_new_for_path (handle->picture_uri);
+  g_file_replace_contents (destination,
+                           contents,
+                           length,
+                           NULL, FALSE,
+                           G_FILE_CREATE_REPLACE_DESTINATION,
+                           NULL, NULL,
+                           &error);
+
   switch (handle->set_on)
     {
       case BACKGROUND:
-        if (set_gsettings (BACKGROUND_SCHEMA, uri))
+        if (set_gsettings (BACKGROUND_SCHEMA, handle->picture_uri))
           handle->response = 0;
         break;
       case LOCKSCREEN:
-        if (set_gsettings (LOCKSCREEN_SCHEMA, uri))
+        if (set_gsettings (LOCKSCREEN_SCHEMA, handle->picture_uri))
           handle->response = 0;
         break;
       default:
-        if (set_gsettings (BACKGROUND_SCHEMA, uri) &&
-            set_gsettings (LOCKSCREEN_SCHEMA, uri))
+        if (set_gsettings (BACKGROUND_SCHEMA, handle->picture_uri) &&
+            set_gsettings (LOCKSCREEN_SCHEMA, handle->picture_uri))
           handle->response = 0;
     }
 
@@ -123,12 +136,11 @@ out:
 }
 
 static void
-set_wallpaper (WallpaperDialogHandle *handle)
+set_wallpaper (WallpaperDialogHandle *handle,
+               const gchar *uri)
 {
   g_autofree gchar *dest_filename = NULL;
-  g_autofree gchar *dest_path = NULL;
   g_autoptr(GFile) source = NULL;
-  g_autoptr(GFile) destination = NULL;
 
   switch (handle->set_on)
     {
@@ -142,18 +154,13 @@ set_wallpaper (WallpaperDialogHandle *handle)
         dest_filename = g_strdup ("both");
     }
 
-  dest_path = g_build_filename (g_get_user_config_dir (), dest_filename, NULL);
-  source = g_file_new_for_uri (handle->picture_uri);
-  destination = g_file_new_for_path (dest_path);
+  handle->picture_uri = g_build_filename (g_get_user_config_dir (), dest_filename, NULL);
 
-  g_file_copy_async (source,
-                     destination,
-                     G_FILE_COPY_OVERWRITE,
-                     G_PRIORITY_DEFAULT,
-                     NULL, NULL, NULL,
-                     on_file_copy_cb,
-                     handle);
-
+  source = g_file_new_for_uri (uri);
+  g_file_load_contents_async (source,
+                              NULL,
+                              on_file_copy_cb,
+                              handle);
 }
 
 static void
@@ -176,7 +183,7 @@ handle_wallpaper_dialog_response (WallpaperDialog *dialog,
         break;
       case GTK_RESPONSE_APPLY:
         handle->response = 0;
-        set_wallpaper (handle);
+        set_wallpaper (handle, wallpaper_dialog_get_uri (dialog));
 
         return;
     }
@@ -214,7 +221,6 @@ handle_set_wallpaper_uri (XdpImplWallpaper *object,
   handle->impl = object;
   handle->invocation = invocation;
   handle->request = g_object_ref (request);
-  handle->picture_uri = g_strdup (arg_uri);
 
   if (!set_on || g_strcmp0 (set_on, "both") == 0)
     handle->set_on = BOTH;
@@ -225,7 +231,7 @@ handle_set_wallpaper_uri (XdpImplWallpaper *object,
 
   if (!show_preview)
     {
-      set_wallpaper (handle);
+      set_wallpaper (handle, g_strdup (arg_uri));
       goto out;
     }
 

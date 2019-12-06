@@ -38,6 +38,7 @@ struct _WallpaperDialog {
   WallpaperPreview *lockscreen_preview;
 
   gchar *picture_uri;
+  SetWallpaperOn set_on;
 };
 
 struct _WallpaperDialogClass {
@@ -133,35 +134,70 @@ set_wallpaper_on_lockscreen (WallpaperDialog *self)
                                GTK_WIDGET (self->lockscreen_preview));
 }
 
+static void
+on_image_loaded_cb (GObject *source_object,
+                    GAsyncResult *result,
+                    gpointer data)
+{
+  WallpaperDialog *self = data;
+  GFileIOStream *stream = NULL;
+  GFile *image_file = G_FILE (source_object);
+  GFile *tmp = g_file_new_tmp ("XXXXXX", &stream, NULL);
+  g_autoptr(GError) error = NULL;
+  gchar *contents = NULL;
+  gsize length = 0;
+
+  g_object_unref (stream);
+
+  if (!g_file_load_contents_finish (image_file, result, &contents, &length, NULL, &error))
+    {
+      g_warning ("Failed to load image: %s", error->message);
+
+      return;
+    }
+
+  g_file_replace_contents (tmp, contents, length, NULL, FALSE, G_FILE_CREATE_REPLACE_DESTINATION, NULL, NULL, &error);
+
+  self->picture_uri = g_strdup (g_file_get_uri (tmp));
+
+  switch (self->set_on)
+    {
+      case BACKGROUND:
+        set_wallpaper_on_background (self);
+        break;
+      case LOCKSCREEN:
+        set_wallpaper_on_lockscreen (self);
+        break;
+      default:
+        set_wallpaper_on_background (self);
+        set_wallpaper_on_lockscreen (self);
+
+        gtk_window_set_title (GTK_WINDOW (self),
+                              _("Set Background & Lock Screen"));
+    }
+}
+
 WallpaperDialog *
 wallpaper_dialog_new (const gchar *picture_uri,
                       const gchar *app_id,
                       SetWallpaperOn set_on)
 {
   WallpaperDialog *self;
+  g_autoptr(GFile) image_file = g_file_new_for_uri (picture_uri);
 
   self = g_object_new (wallpaper_dialog_get_type (), NULL);
 
-  if (picture_uri)
-    {
-      self->picture_uri = g_strdup (picture_uri);
-
-      switch (set_on)
-        {
-          case BACKGROUND:
-            set_wallpaper_on_background (self);
-            break;
-          case LOCKSCREEN:
-            set_wallpaper_on_lockscreen (self);
-            break;
-          default:
-            set_wallpaper_on_background (self);
-            set_wallpaper_on_lockscreen (self);
-
-            gtk_window_set_title (GTK_WINDOW (self),
-                                  _("Set Background & Lock Screen"));
-        }
-    }
+  self->set_on = set_on;
+  g_file_load_contents_async (image_file,
+                              NULL,
+                              on_image_loaded_cb,
+                              self);
 
   return self;
+}
+
+const gchar *
+wallpaper_dialog_get_uri (WallpaperDialog *dialog)
+{
+  return dialog->picture_uri;
 }

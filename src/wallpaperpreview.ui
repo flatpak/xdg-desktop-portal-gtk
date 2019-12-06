@@ -28,6 +28,16 @@
             <property name="can-focus">False</property>
             <property name="expand">True</property>
             <child>
+              <object class="GtkSpinner">
+                <property name="visible">True</property>
+                <property name="active">True</property>
+                <style>
+                  <class name="background"/>
+                </style>
+              </object>
+            </child>
+
+            <child>
               <object class="GtkFrame">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
