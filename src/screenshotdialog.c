@@ -370,6 +370,23 @@ screenshot_dialog_delete_event (GtkWidget *dialog, GdkEventAny *event)
 }
 
 static void
+screenshot_dialog_map (GtkWidget *widget)
+{
+  static GtkCssProvider *provider;
+
+  GTK_WIDGET_CLASS (screenshot_dialog_parent_class)->map (widget);
+
+  if (provider == NULL)
+    {
+      provider = gtk_css_provider_new ();
+      gtk_css_provider_load_from_resource (provider, "/org/freedesktop/portal/desktop/gtk/screenshotdialog.css");
+      gtk_style_context_add_provider_for_screen (gtk_widget_get_screen (widget),
+                                                 GTK_STYLE_PROVIDER (provider),
+                                                 GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+    }
+}
+
+static void
 screenshot_dialog_class_init (ScreenshotDialogClass *class)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (class);
@@ -378,6 +395,7 @@ screenshot_dialog_class_init (ScreenshotDialogClass *class)
   object_class->finalize = screenshot_dialog_finalize;
 
   widget_class->delete_event = screenshot_dialog_delete_event;
+  widget_class->map = screenshot_dialog_map;
 
   signals[DONE] = g_signal_new ("done",
                                 G_TYPE_FROM_CLASS (class),
@@ -411,16 +429,6 @@ screenshot_dialog_new (const char *app_id,
 {
   ScreenshotDialog *dialog;
   g_autofree char *heading = NULL;
-  static GtkCssProvider *provider;
-
-  if (provider == NULL)
-    {
-      provider = gtk_css_provider_new ();
-      gtk_css_provider_load_from_resource (provider, "/org/freedesktop/portal/desktop/gtk/screenshotdialog.css");
-      gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
-                                                 GTK_STYLE_PROVIDER (provider),
-                                                 GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-    }
 
   dialog = g_object_new (screenshot_dialog_get_type (), NULL);
 
