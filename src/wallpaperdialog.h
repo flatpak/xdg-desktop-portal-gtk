@@ -39,3 +39,5 @@ GType             wallpaper_dialog_get_type (void) G_GNUC_CONST;
 WallpaperDialog * wallpaper_dialog_new (const char *picture_uri,
                                         const char *app_id,
                                         SetWallpaperOn set_on);
+
+const gchar     * wallpaper_dialog_get_uri (WallpaperDialog *dialog);
