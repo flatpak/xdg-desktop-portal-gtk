@@ -31,3 +31,5 @@ typedef struct _AppChooserRowClass AppChooserRowClass;
 GType app_chooser_row_get_type (void);
 AppChooserRow *app_chooser_row_new (GAppInfo *info);
 GAppInfo *app_chooser_row_get_info (AppChooserRow *row);
+void app_chooser_row_set_selected (AppChooserRow *row,
+                                   gboolean       selected);

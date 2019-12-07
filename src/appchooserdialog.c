@@ -32,6 +32,7 @@
 #include "appchooserrow.h"
 
 #define LOCATION_MAX_LENGTH 40
+#define INITIAL_LIST_SIZE 4
 
 struct _AppChooserDialog {
   GtkWindow parent;
@@ -39,22 +40,18 @@ struct _AppChooserDialog {
   GtkWidget *scrolled_window;
   GtkWidget *titlebar;
   GtkWidget *cancel_button;
-  GtkWidget *search_button;
-  GtkWidget *more_button;
+  GtkWidget *open_button;
   GtkWidget *list;
-  GtkWidget *full_list;
-  GtkWidget *full_list_box;
   GtkWidget *heading;
-  GtkWidget *search_bar;
-  GtkWidget *search_entry;
   GtkWidget *stack;
-  GtkWidget *separator;
   GtkWidget *empty_label;
 
   char *content_type;
-  char *search_text;
 
   char **choices;
+
+  GtkWidget *selected_row;
+  GtkWidget *more_row;
 
   GAppInfo *info;
 };
@@ -75,9 +72,27 @@ static guint signals[LAST_SIGNAL];
 G_DEFINE_TYPE (AppChooserDialog, app_chooser_dialog, GTK_TYPE_WINDOW)
 
 static void
+update_header (GtkListBoxRow *row,
+               GtkListBoxRow *before,
+               gpointer       data)
+{
+  if (before != NULL &&
+      gtk_list_box_row_get_header (row) == NULL)
+    {
+      GtkWidget *separator;
+
+      separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
+      gtk_widget_show (separator);
+      gtk_list_box_row_set_header (row, separator);
+    }
+}
+
+static void
 app_chooser_dialog_init (AppChooserDialog *dialog)
 {
   gtk_widget_init_template (GTK_WIDGET (dialog));
+
+  gtk_list_box_set_header_func (GTK_LIST_BOX (dialog->list), update_header, NULL, NULL);
 }
 
 static void
@@ -86,7 +101,6 @@ app_chooser_dialog_finalize (GObject *object)
   AppChooserDialog *dialog = APP_CHOOSER_DIALOG (object);
 
   g_free (dialog->content_type);
-  g_free (dialog->search_text);
   g_strfreev (dialog->choices);
 
   G_OBJECT_CLASS (app_chooser_dialog_parent_class)->finalize (object);
@@ -111,7 +125,39 @@ row_activated (GtkListBox *list,
                GtkWidget *row,
                AppChooserDialog *dialog)
 {
-  close_dialog (dialog, app_chooser_row_get_info (APP_CHOOSER_ROW (row)));
+  if (row == dialog->more_row)
+    {
+      int i;
+
+      gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (dialog->scrolled_window),
+                                      GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
+      gtk_window_set_resizable (GTK_WINDOW (dialog), TRUE);
+      gtk_widget_hide (row);
+
+      for (i = INITIAL_LIST_SIZE - 1; dialog->choices[i]; i++)
+        {
+          g_autofree char *desktop_id = g_strconcat (dialog->choices[i], ".desktop", NULL);
+          g_autoptr(GAppInfo) info = G_APP_INFO (g_desktop_app_info_new (desktop_id));
+          GtkWidget *row;
+
+          row = GTK_WIDGET (app_chooser_row_new (info));
+          gtk_widget_set_visible (row, TRUE);
+          gtk_list_box_insert (GTK_LIST_BOX (dialog->list), row, -1);
+        }
+
+      return;
+    }
+
+  if (dialog->selected_row)
+    app_chooser_row_set_selected (APP_CHOOSER_ROW (dialog->selected_row), FALSE);
+
+  dialog->selected_row = row;
+
+  if (dialog->selected_row)
+    {
+      app_chooser_row_set_selected (APP_CHOOSER_ROW (dialog->selected_row), TRUE);
+      gtk_widget_set_sensitive (dialog->open_button, TRUE);
+    }
 }
 
 static void
@@ -119,6 +165,17 @@ cancel_clicked (GtkWidget *button,
                 AppChooserDialog *dialog)
 {
   close_dialog (dialog, NULL);
+}
+
+static void
+open_clicked (GtkWidget *button,
+              AppChooserDialog *dialog)
+{
+  GAppInfo *info = NULL;
+
+  if (dialog->selected_row)
+    info = app_chooser_row_get_info (APP_CHOOSER_ROW (dialog->selected_row));
+  close_dialog (dialog, info);
 }
 
 static void
@@ -160,137 +217,10 @@ launch_software (AppChooserDialog *dialog)
 }
 
 static void
-link_activated (GtkWidget *label,
-                const char *uri,
-                AppChooserDialog *dialog)
-{
-  launch_software (dialog);
-}
-
-static void
 find_in_software (GtkWidget *button,
                   AppChooserDialog *dialog)
 {
   launch_software (dialog);
-}
-
-static void
-populate_full_list (AppChooserDialog *dialog)
-{
-  GList *apps, *l;
-
-  apps = g_app_info_get_all ();
-
-  for (l = apps; l; l = l->next)
-    {
-      GAppInfo *info = l->data;
-      GtkWidget *row;
-
-      row = GTK_WIDGET (app_chooser_row_new (info));
-      gtk_widget_set_visible (row, TRUE);
-      gtk_flow_box_insert (GTK_FLOW_BOX (dialog->full_list), row, -1);
-    }
-
-  g_list_free_full (apps, g_object_unref);
-}
-
-static gboolean
-scroll_down (gpointer data)
-{
-  AppChooserDialog *dialog = data;
-  GtkAdjustment *adj;
-  GtkAllocation alloc;
-
-  gtk_widget_get_allocation (dialog->full_list, &alloc);
-  adj = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (dialog->scrolled_window));
-  gtk_adjustment_set_value (adj, alloc.y);
-
-  return G_SOURCE_REMOVE;
-}
-
-static void
-show_full_list (AppChooserDialog *dialog)
-{
-  if (!gtk_widget_get_visible (dialog->more_button))
-    return;
-
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (dialog->scrolled_window),
-                                  GTK_POLICY_NEVER,
-                                  GTK_POLICY_AUTOMATIC);
-
-  gtk_widget_hide (dialog->more_button);
-  gtk_widget_show (dialog->search_button);
-  gtk_widget_show (dialog->full_list_box);
-
-  populate_full_list (dialog);
-
-  g_idle_add (scroll_down, dialog);
-}
-
-static void
-more_clicked (GtkButton *button,
-              AppChooserDialog *dialog)
-{
-  show_full_list (dialog);
-}
-
-static void
-more2_clicked (GtkButton *button,
-               AppChooserDialog *dialog)
-{
-  gtk_stack_set_visible_child_name (GTK_STACK (dialog->stack), "list");
-  gtk_widget_hide (dialog->separator);
-  show_full_list (dialog);
-}
-
-static gboolean
-filter_func (GtkFlowBoxChild *child,
-             gpointer data)
-{
-  AppChooserRow *row = APP_CHOOSER_ROW (child);
-  AppChooserDialog *dialog = data;
-  GAppInfo *info;
-  char *name;
-  gboolean match;
-
-  if (!dialog->search_text)
-    return TRUE;
-
-  info = app_chooser_row_get_info (row);
-
-  name = g_utf8_casefold (g_app_info_get_name (info), -1);
-  match = g_str_has_prefix (name, dialog->search_text);
-  g_free (name);
-
-  return match;
-}
-
-static void
-search_changed (GtkSearchEntry *entry,
-                gpointer data)
-{
-  AppChooserDialog *dialog = data;
-
-  g_free (dialog->search_text);
-  dialog->search_text = g_utf8_casefold (gtk_entry_get_text (GTK_ENTRY (dialog->search_entry)), -1);
-
-  gtk_flow_box_invalidate_filter (GTK_FLOW_BOX (dialog->full_list));
-}
-
-static gboolean
-key_press_event_cb (GtkWidget *widget,
-                    GdkEvent *event,
-                    gpointer data)
-{
-  AppChooserDialog *dialog = data;
-
-  if (gtk_search_bar_handle_event (GTK_SEARCH_BAR (dialog->search_bar), event) == GDK_EVENT_STOP)
-    {
-      show_full_list (dialog);
-      return GDK_EVENT_STOP;
-    }
-
-  return GDK_EVENT_PROPAGATE;
 }
 
 static gboolean
@@ -335,24 +265,14 @@ app_chooser_dialog_class_init (AppChooserDialogClass *class)
   gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, scrolled_window);
   gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, titlebar);
   gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, cancel_button);
-  gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, search_button);
-  gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, more_button);
+  gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, open_button);
   gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, list);
-  gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, full_list_box);
-  gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, full_list);
   gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, heading);
-  gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, search_bar);
-  gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, search_entry);
   gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, stack);
-  gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, separator);
   gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, empty_label);
   gtk_widget_class_bind_template_callback (widget_class, row_activated);
   gtk_widget_class_bind_template_callback (widget_class, cancel_clicked);
-  gtk_widget_class_bind_template_callback (widget_class, link_activated);
-  gtk_widget_class_bind_template_callback (widget_class, more_clicked);
-  gtk_widget_class_bind_template_callback (widget_class, more2_clicked);
-  gtk_widget_class_bind_template_callback (widget_class, search_changed);
-  gtk_widget_class_bind_template_callback (widget_class, key_press_event_cb);
+  gtk_widget_class_bind_template_callback (widget_class, open_clicked);
   gtk_widget_class_bind_template_callback (widget_class, find_in_software);
 }
 
@@ -363,6 +283,9 @@ static char *
 shorten_location (const char *location)
 {
   int len;
+
+  if (location == NULL)
+    return NULL;
 
   len = g_utf8_strlen (location, -1);
 
@@ -375,6 +298,36 @@ shorten_location (const char *location)
   return g_strconcat ("…", location, NULL);
 }
 
+static void
+ensure_default_is_below (const char **choices,
+                         const char  *default_id,
+                         int          num)
+{
+  int i;
+
+  if (default_id == NULL)
+    return;
+
+  for (i = 0; i < num && choices[i]; i++)
+    {
+      if (strcmp (choices[i], default_id) == 0)
+        return;
+    }
+
+  for (i = num; choices[i]; i++)
+    {
+      if (strcmp (choices[i], default_id) == 0)
+        {
+          const char *tmp = choices[0];
+          choices[0] = choices[i];
+          choices[i] = tmp;
+          return;
+        }
+    }
+
+  g_warning ("default_id not found\n");
+}
+
 AppChooserDialog *
 app_chooser_dialog_new (const char **choices,
                         const char *default_id,
@@ -384,18 +337,7 @@ app_chooser_dialog_new (const char **choices,
   AppChooserDialog *dialog;
   int n_choices;
   int i;
-  static GtkCssProvider *provider;
-  GtkWidget *default_row;
   g_autofree char *short_location = shorten_location (location);
-
-  if (provider == NULL)
-    {
-      provider = gtk_css_provider_new ();
-      gtk_css_provider_load_from_resource (provider, "/org/freedesktop/portal/desktop/gtk/appchooserdialog.css");
-      gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
-                                                 GTK_STYLE_PROVIDER (provider),
-                                                 GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-    }
 
   dialog = g_object_new (app_chooser_dialog_get_type (), NULL);
 
@@ -405,15 +347,15 @@ app_chooser_dialog_new (const char **choices,
     {
       g_autofree char *heading = NULL;
 
-      heading = g_strdup_printf (_("Select an application to open “%s”. More applications are available in <a href='software'>Software.</a>"), short_location);
+      heading = g_strdup_printf (_("Choose an application to open the file “%s”."), short_location);
       gtk_label_set_label (GTK_LABEL (dialog->heading), heading);
     }
   else
     {
-      gtk_label_set_label (GTK_LABEL (dialog->heading), _("Select an application. More applications are available in <a href='software'>Software.</a>"));
+      gtk_label_set_label (GTK_LABEL (dialog->heading), _("Choose an application."));
     }
 
-  default_row = NULL;
+  ensure_default_is_below (choices, default_id, 3);
 
   dialog->choices = g_strdupv ((char **)choices);
 
@@ -425,39 +367,53 @@ app_chooser_dialog_new (const char **choices,
         {
           g_autofree char *label = NULL;
 
-          label = g_strdup_printf (_("Unable to find an application that is able to open “%s”."), short_location);
+          label = g_strdup_printf (_("No apps installed that can open “%s”. You can find more applications in Software"), short_location);
           gtk_label_set_label (GTK_LABEL (dialog->empty_label), label);
         }
       else
         {
-          gtk_label_set_label (GTK_LABEL (dialog->empty_label), _("Unable to find a suitable application."));
+          gtk_label_set_label (GTK_LABEL (dialog->empty_label), _("No suitable app installed. You can find more applications in Software."));
         }
     }
   else
     {
       gtk_stack_set_visible_child_name (GTK_STACK (dialog->stack), "list");
-      for (i = 0; i < n_choices; i++)
+      for (i = 0; i < MIN (n_choices, INITIAL_LIST_SIZE); i++)
         {
           g_autofree char *desktop_id = g_strconcat (choices[i], ".desktop", NULL);
           g_autoptr(GAppInfo) info = G_APP_INFO (g_desktop_app_info_new (desktop_id));
           GtkWidget *row;
 
+          if (i == INITIAL_LIST_SIZE - 1 && n_choices > INITIAL_LIST_SIZE)
+            break;
+
           row = GTK_WIDGET (app_chooser_row_new (info));
           gtk_widget_set_visible (row, TRUE);
-          gtk_flow_box_insert (GTK_FLOW_BOX (dialog->list), row, -1);
+          gtk_list_box_insert (GTK_LIST_BOX (dialog->list), row, -1);
 
-          if (g_strcmp0 (choices[i], default_id) == 0)
-            default_row = row;
-       }
+          if (default_id && strcmp (choices[i], default_id) == 0)
+            {
+              app_chooser_row_set_selected (APP_CHOOSER_ROW (row), TRUE);
+              gtk_widget_set_sensitive (dialog->open_button, TRUE);
+              dialog->selected_row = row;
+            }
+        }
+      if (n_choices > INITIAL_LIST_SIZE)
+        {
+          GtkWidget *row;
+          GtkWidget *image;
 
-     if (n_choices < 4)
-       gtk_widget_set_halign (dialog->list, GTK_ALIGN_START);
-
-     if (default_row)
-       gtk_widget_grab_focus (default_row);
+          row = GTK_WIDGET (gtk_list_box_row_new ());
+          image = gtk_image_new_from_icon_name ("view-more-symbolic", GTK_ICON_SIZE_BUTTON);
+          g_object_set (image, "margin", 14, NULL);
+          gtk_container_add (GTK_CONTAINER (row), image);
+          gtk_widget_set_visible (row, TRUE);
+          gtk_widget_set_visible (image, TRUE);
+          gtk_list_box_insert (GTK_LIST_BOX (dialog->list), row, -1);
+          dialog->more_row = row;
+        }
+      
     }
-
-  gtk_flow_box_set_filter_func (GTK_FLOW_BOX (dialog->full_list), filter_func, dialog, NULL);
 
   return dialog;
 }
@@ -476,21 +432,24 @@ app_chooser_dialog_update_choices (AppChooserDialog  *dialog,
 
   for (i = 0; choices[i]; i++)
     {
-      g_autofree char *desktop_id = NULL;
-      g_autoptr(GAppInfo) info = NULL;
-      GtkWidget *row;
-
       if (g_strv_contains ((const char * const *)dialog->choices, choices[i]))
         continue;
 
       g_ptr_array_add (new_choices, g_strdup (choices[i]));
 
-      desktop_id = g_strconcat (choices[i], ".desktop", NULL);
-      info = G_APP_INFO (g_desktop_app_info_new (desktop_id));
+      if (!gtk_widget_get_visible (dialog->more_row))
+        {
+          g_autofree char *desktop_id = NULL;
+          g_autoptr(GAppInfo) info = NULL;
+          GtkWidget *row;
 
-      row = GTK_WIDGET (app_chooser_row_new (info));
-      gtk_widget_set_visible (row, TRUE);
-      gtk_flow_box_insert (GTK_FLOW_BOX (dialog->list), row, -1);
+          desktop_id = g_strconcat (choices[i], ".desktop", NULL);
+          info = G_APP_INFO (g_desktop_app_info_new (desktop_id));
+
+          row = GTK_WIDGET (app_chooser_row_new (info));
+          gtk_widget_set_visible (row, TRUE);
+          gtk_list_box_insert (GTK_LIST_BOX (dialog->list), row, -1);
+       }
     }
 
   g_ptr_array_add (new_choices, NULL);

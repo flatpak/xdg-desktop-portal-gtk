@@ -57,7 +57,6 @@ CLEANFILES += src/resources.c
 EXTRA_DIST += \
 	src/xdg-desktop-portal-gtk.gresource.xml	\
         src/appchooserdialog.ui                         \
-        src/appchooserdialog.css                        \
         src/appchooserrow.ui                            \
         src/screenshotdialog.ui                         \
         src/screenshotdialog.css                        \

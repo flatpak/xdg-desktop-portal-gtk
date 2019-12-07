@@ -3,7 +3,6 @@
   <gresource prefix='/org/freedesktop/portal/desktop/gtk'>
     <file>appchooserdialog.ui</file>
     <file>appchooserrow.ui</file>
-    <file>appchooserdialog.css</file>
     <file>screenshotdialog.ui</file>
     <file>screenshotdialog.css</file>
     <file>accountdialog.ui</file>
