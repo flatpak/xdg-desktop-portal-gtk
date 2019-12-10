@@ -153,21 +153,7 @@ wallpaper_preview_finalize (GObject *object)
 static void
 wallpaper_preview_init (WallpaperPreview *self)
 {
-  g_autoptr(GtkCssProvider) provider = NULL;
-  g_autofree gchar *css;
-
   gtk_widget_init_template (GTK_WIDGET (self));
-
-  css = g_strdup ("frame.desktop-preview { min-height: 10px; padding: 0 4px; background-color: black; }\n"
-                  "frame.desktop-preview image { color: white; }\n"
-                  "frame.desktop-preview label { color: white; font-weight: bold; font-size: 6px; }\n"
-                  "frame.lockscreen-preview { border: solid rgba(0, 0, 0, 0.33); border-width: 10px 0 0 0; }\n"
-                  "frame.lockscreen-preview label { color: white; font-weight: bold; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6); font-size: 1.2em; }\n");
-  provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_data (provider, css, -1, NULL);
-  gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
-                                             GTK_STYLE_PROVIDER (provider),
-                                             GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 
   self->desktop_settings = g_settings_new ("org.gnome.desktop.interface");
 
@@ -186,12 +172,38 @@ wallpaper_preview_init (WallpaperPreview *self)
 }
 
 static void
+wallpaper_preview_map (GtkWidget *widget)
+{
+  static GtkCssProvider *provider;
+
+  GTK_WIDGET_CLASS (wallpaper_preview_parent_class)->map (widget);
+
+  if (provider == NULL)
+    {
+      g_autofree gchar *css;
+
+      css = g_strdup ("frame.desktop-preview { min-height: 10px; padding: 0 4px; background-color: black; }\n"
+                      "frame.desktop-preview image { color: white; }\n"
+                      "frame.desktop-preview label { color: white; font-weight: bold; font-size: 6px; }\n"
+                      "frame.lockscreen-preview { border: solid rgba(0, 0, 0, 0.33); border-width: 10px 0 0 0; }\n"
+                      "frame.lockscreen-preview label { color: white; font-weight: bold; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6); font-size: 1.2em; }\n");
+
+      provider = gtk_css_provider_new ();
+      gtk_css_provider_load_from_data (provider, css, -1, NULL);
+      gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
+                                                 GTK_STYLE_PROVIDER (provider),
+                                                 GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+    }
+}
+
+static void
 wallpaper_preview_class_init (WallpaperPreviewClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   object_class->finalize = wallpaper_preview_finalize;
+  widget_class->map = wallpaper_preview_map;
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/freedesktop/portal/desktop/gtk/wallpaperpreview.ui");
 
