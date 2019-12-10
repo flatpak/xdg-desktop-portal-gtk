@@ -26,6 +26,8 @@ static OrgGnomeShellIntrospect *shell;
 
 typedef enum { BACKGROUND, RUNNING, ACTIVE } AppState;
 
+static GVariant *app_state;
+
 static char *
 get_actual_app_id (const char *app_id)
 {
@@ -35,16 +37,13 @@ get_actual_app_id (const char *app_id)
   if (info)
     app = g_desktop_app_info_get_string (info, "X-Flatpak");
 
-  g_debug ("looking up app id for %s: %s", app_id, app);
-
   return app;
 }
 
-static gboolean
-handle_get_app_state (XdpImplBackground *object,
-                      GDBusMethodInvocation *invocation)
+static GVariant *
+get_app_state (void)
 {
-  g_autoptr(GVariant) windows = NULL;
+  g_autoptr(GVariant) apps = NULL;
   g_autoptr(GHashTable) app_states = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
   g_autoptr(GError) error = NULL;
   GVariantBuilder builder;
@@ -52,35 +51,26 @@ handle_get_app_state (XdpImplBackground *object,
   const char *key;
   gpointer value;
 
-  g_debug ("background: handle GetAppState");
-
-  if (!org_gnome_shell_introspect_call_get_windows_sync (shell, &windows, NULL, &error))
+  if (!org_gnome_shell_introspect_call_get_running_applications_sync (shell, &apps, NULL, NULL))
     {
-      g_dbus_method_invocation_return_error (invocation,
-                                             XDG_DESKTOP_PORTAL_ERROR,
-                                             XDG_DESKTOP_PORTAL_ERROR_FAILED,
-                                             "Could not get window list: %s", error->message);
-      return TRUE;
+      return NULL;
     }
 
-  if (windows)
+  if (apps)
     {
-      g_autoptr(GVariantIter) iter = g_variant_iter_new (windows);
+      g_autoptr(GVariantIter) iter = g_variant_iter_new (apps);
+      const char *app_id = NULL;
       GVariant *dict;
 
-      while (g_variant_iter_loop (iter, "{t@a{sv}}", NULL, &dict))
+      while (g_variant_iter_loop (iter, "{&s@a{sv}}", &app_id, &dict))
         {
-          const char *app_id = NULL;
           const char *sandboxed_app_id = NULL;
+          const char **seats = NULL;
           char *app;
-          gboolean hidden = FALSE;
-          gboolean focus = FALSE;
           AppState state = BACKGROUND;
 
-          g_variant_lookup (dict, "app-id", "&s", &app_id);
           g_variant_lookup (dict, "sandboxed-app-id", "&s", &sandboxed_app_id);
-          g_variant_lookup (dict, "is-hidden", "b", &hidden);
-          g_variant_lookup (dict, "has-focus", "b", &focus);
+          g_variant_lookup (dict, "active-on-seats", "^a&s", &seats);
 
           /* See https://gitlab.gnome.org/GNOME/gnome-shell/issues/1289 */
           if (sandboxed_app_id)
@@ -91,9 +81,8 @@ handle_get_app_state (XdpImplBackground *object,
             continue;
 
           state = GPOINTER_TO_INT (g_hash_table_lookup (app_states, app));
-          if (!hidden)
-            state = MAX (state, RUNNING);
-          if (focus)
+          state = MAX (state, RUNNING);
+          if (seats != NULL)
             state = MAX (state, ACTIVE);
 
           g_hash_table_insert (app_states, app, GINT_TO_POINTER (state));
@@ -103,13 +92,27 @@ handle_get_app_state (XdpImplBackground *object,
   g_variant_builder_init (&builder, G_VARIANT_TYPE_VARDICT);
   g_hash_table_iter_init (&iter, app_states);
   while (g_hash_table_iter_next (&iter, (gpointer *)&key, (gpointer *)&value))
-    {
-      g_variant_builder_add (&builder, "{sv}", key, g_variant_new_uint32 (GPOINTER_TO_UINT (value)));
-    }
+    g_variant_builder_add (&builder, "{sv}", key, g_variant_new_uint32 (GPOINTER_TO_UINT (value)));
 
-  xdp_impl_background_complete_get_app_state (object,
-                                              invocation,
-                                              g_variant_builder_end (&builder));
+  return g_variant_ref_sink (g_variant_builder_end (&builder));
+}
+
+static gboolean
+handle_get_app_state (XdpImplBackground *object,
+                      GDBusMethodInvocation *invocation)
+{
+  g_debug ("background: handle GetAppState");
+
+  if (app_state == NULL)
+    app_state = get_app_state ();
+
+  if (app_state == NULL)
+    g_dbus_method_invocation_return_error (invocation,
+                                           XDG_DESKTOP_PORTAL_ERROR,
+                                           XDG_DESKTOP_PORTAL_ERROR_FAILED,
+                                           "Could not get window list");
+  else
+    xdp_impl_background_complete_get_app_state (object, invocation, app_state);
 
   return TRUE;
 }
@@ -126,6 +129,8 @@ typedef struct {
   Request *request;
   char *id;
   NotifyResult result;
+  char *name;
+  GtkWidget *dialog;
 } BackgroundHandle;
 
 static void
@@ -135,6 +140,7 @@ background_handle_free (gpointer data)
 
   g_object_unref (handle->request);
   g_free (handle->id);
+  g_free (handle->name);
 
   g_free (handle);
 }
@@ -145,8 +151,14 @@ background_handle_close (BackgroundHandle *handle)
   GDBusConnection *connection;
 
   connection = g_dbus_interface_skeleton_get_connection (G_DBUS_INTERFACE_SKELETON (handle->impl));
-
   fdo_remove_notification (connection, handle->request->app_id, handle->id);
+
+  if (handle->dialog)
+    {
+      gtk_widget_destroy (handle->dialog);
+      handle->dialog = NULL;
+    }
+
   background_handle_free (handle);
 }
 
@@ -171,6 +183,56 @@ send_response (BackgroundHandle *handle)
 }
 
 static void
+response_received (GtkDialog *dialog,
+                   int response,
+                   gpointer data)
+{
+  BackgroundHandle *handle = data;
+
+  switch (response)
+    {
+    case ALLOW:
+      g_debug ("Allow app %s to run in background", handle->request->app_id);
+      handle->result = ALLOW;
+      break;
+
+    case FORBID:
+      g_debug ("Forbid app %s to run in background", handle->request->app_id);
+      handle->result = FORBID;
+      break;
+    }
+
+  send_response (handle);
+}
+
+static void
+show_permission_dialog (BackgroundHandle *handle)
+{
+  GtkWidget *dialog;
+  GtkWidget *button;
+
+  dialog = gtk_message_dialog_new (NULL, 0, GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE, 
+                                   _("“%s” is running in the background"), handle->name);
+  gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+                                            _("This might be for a legitimate reason, but the application "
+                                              "has not provided one."
+                                              "\n\nNote that forcing an application to quite might cause data loss."));
+  gtk_dialog_add_button (GTK_DIALOG (dialog), _("Force quit"), FORBID);
+  gtk_dialog_add_button (GTK_DIALOG (dialog), _("Allow"), ALLOW);
+
+  button = gtk_dialog_get_widget_for_response (GTK_DIALOG (dialog), FORBID);
+  gtk_style_context_add_class (gtk_widget_get_style_context (button), "destructive-action");
+
+  gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER_ALWAYS);
+
+  g_signal_connect (dialog, "response", G_CALLBACK (response_received), handle);
+
+  handle->dialog = dialog;
+
+  gtk_window_present (GTK_WINDOW (dialog));
+}
+
+static void
 activate_action (GDBusConnection *connection,
                  const char *app_id,
                  const char *id,
@@ -180,28 +242,17 @@ activate_action (GDBusConnection *connection,
 {
   BackgroundHandle *handle = data;
 
-  if (g_str_equal (name, "allow"))
+  if (g_str_equal (name, "show"))
     {
-      g_debug ("Allow app %s to run in background", handle->request->app_id);
-      handle->result = ALLOW;
-    }
-  else if (g_str_equal (name, "forbid"))
-    {
-      g_debug ("Forbid app %s to run in background", handle->request->app_id);
-      handle->result = FORBID;
-    }
-  else if (g_str_equal (name, "ignore"))
-    {
-      g_debug ("Allow this instance of app %s to run in background", handle->request->app_id);
-      handle->result = IGNORE;
+      g_debug ("Show background permissions for %s", handle->request->app_id);
+      show_permission_dialog (handle);
     }
   else
     {
       g_debug ("Unexpected action for app %s", handle->request->app_id);
-      handle->result = FORBID;
+      handle->result = IGNORE;
+      send_response (handle);
     }
-
-  send_response (handle);
 }
 
 static gboolean
@@ -246,7 +297,7 @@ handle_notify_background (XdpImplBackground *object,
   g_autoptr (Request) request = NULL;
   BackgroundHandle *handle;
 
-  g_debug ("background: handle NotifyBackground");
+  g_debug ("background: handle NotifyBackground %s %s", arg_app_id, arg_name);
 
   sender = g_dbus_method_invocation_get_sender (invocation);
   request = request_new (sender, arg_app_id, arg_handle);
@@ -256,26 +307,12 @@ handle_notify_background (XdpImplBackground *object,
 
   body = g_strdup_printf (_("%s is running in the background."), arg_name);
   g_variant_builder_add (&builder, "{sv}", "body", g_variant_new_string (body));
+  g_variant_builder_add (&builder, "{sv}", "default-action", g_variant_new_string ("show"));
 
   g_variant_builder_init (&bbuilder, G_VARIANT_TYPE ("aa{sv}"));
   g_variant_builder_init (&button, G_VARIANT_TYPE_VARDICT);
-  g_variant_builder_add (&button, "{sv}", "label", g_variant_new_string (_("Allow")));
-  g_variant_builder_add (&button, "{sv}", "action", g_variant_new_string ("allow"));
-  g_variant_builder_add (&button, "{sv}", "target", g_variant_new_string (arg_app_id));
-
-  g_variant_builder_add (&bbuilder, "@a{sv}", g_variant_builder_end (&button));
-
-  g_variant_builder_init (&button, G_VARIANT_TYPE_VARDICT);
-  g_variant_builder_add (&button, "{sv}", "label", g_variant_new_string (_("Forbid")));
-  g_variant_builder_add (&button, "{sv}", "action", g_variant_new_string ("forbid"));
-  g_variant_builder_add (&button, "{sv}", "target", g_variant_new_string (arg_app_id));
-
-  g_variant_builder_add (&bbuilder, "@a{sv}", g_variant_builder_end (&button));
-
-  g_variant_builder_init (&button, G_VARIANT_TYPE_VARDICT);
-  g_variant_builder_add (&button, "{sv}", "label", g_variant_new_string (_("Ignore")));
-  g_variant_builder_add (&button, "{sv}", "action", g_variant_new_string ("ignore"));
-  g_variant_builder_add (&button, "{sv}", "target", g_variant_new_string (arg_app_id));
+  g_variant_builder_add (&button, "{sv}", "label", g_variant_new_string (_("Find out more")));
+  g_variant_builder_add (&button, "{sv}", "action", g_variant_new_string ("show"));
 
   g_variant_builder_add (&bbuilder, "@a{sv}", g_variant_builder_end (&button));
 
@@ -285,6 +322,7 @@ handle_notify_background (XdpImplBackground *object,
   handle->impl = object;
   handle->invocation = invocation;
   handle->request = g_object_ref (request);
+  handle->name = g_strdup (arg_name);
   handle->id = g_strdup_printf ("notify_background_%d", count++);
 
   g_signal_connect (request, "handle-close", G_CALLBACK (handle_close), handle);
@@ -423,6 +461,66 @@ out:
   return TRUE;
 }
 
+static gboolean
+compare_app_states (GVariant *a, GVariant *b)
+{
+  GVariantIter *iter;
+  const char *app_id;
+  GVariant *value;
+  gboolean changed;
+
+  changed = FALSE;
+
+  iter = g_variant_iter_new (a);
+  while (!changed && g_variant_iter_next (iter, "{&sv}", &app_id, &value))
+    {
+      guint v1, v2;
+
+      g_variant_get (value, "u", &v1);
+
+      if (!g_variant_lookup (b, app_id, "u", &v2))
+        v2 = BACKGROUND;
+
+      if ((v1 == BACKGROUND && v2 != BACKGROUND) ||
+          (v1 != BACKGROUND && v2 == BACKGROUND))
+        {
+          g_debug ("App %s changed state: %u != %u", app_id, v1, v2);
+          changed = TRUE;
+        }
+    }
+  g_variant_iter_free (iter);
+
+  return changed;
+}
+
+static void
+running_applications_changed (OrgGnomeShellIntrospect *object,
+                              GDBusInterfaceSkeleton *helper)
+{
+  GVariant *new_app_state;
+  gboolean changed = FALSE;
+
+  g_debug ("Received running-applications-changed from gnome-shell");
+
+  new_app_state = get_app_state ();
+
+  if (app_state == NULL || new_app_state == NULL)
+    changed = TRUE;
+  else if (compare_app_states (app_state, new_app_state) ||
+           compare_app_states (new_app_state, app_state))
+    changed = TRUE;
+
+  if (app_state)
+    g_variant_unref (app_state);
+  app_state = new_app_state;
+
+  if (changed)
+    {
+      g_debug ("Emitting RunningApplicationsChanged");
+      xdp_impl_background_emit_running_applications_changed (XDP_IMPL_BACKGROUND (helper));
+    }
+}
+
 gboolean
 background_init (GDBusConnection *bus,
                  GError **error)
@@ -435,8 +533,9 @@ background_init (GDBusConnection *bus,
                                                      "/org/gnome/Shell/Introspect",
                                                      NULL,
                                                      NULL);
-
   helper = G_DBUS_INTERFACE_SKELETON (xdp_impl_background_skeleton_new ());
+
+  g_signal_connect (shell, "running-applications-changed", G_CALLBACK (running_applications_changed), helper);
 
   g_signal_connect (helper, "handle-get-app-state", G_CALLBACK (handle_get_app_state), NULL);
   g_signal_connect (helper, "handle-notify-background", G_CALLBACK (handle_notify_background), NULL);
