@@ -180,16 +180,8 @@ wallpaper_preview_map (GtkWidget *widget)
 
   if (provider == NULL)
     {
-      g_autofree gchar *css;
-
-      css = g_strdup ("frame.desktop-preview { min-height: 10px; padding: 0 4px; background-color: black; }\n"
-                      "frame.desktop-preview image { color: white; }\n"
-                      "frame.desktop-preview label { color: white; font-weight: bold; font-size: 6px; }\n"
-                      "frame.lockscreen-preview { border: solid rgba(0, 0, 0, 0.33); border-width: 10px 0 0 0; }\n"
-                      "frame.lockscreen-preview label { color: white; font-weight: bold; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6); font-size: 1.2em; }\n");
-
       provider = gtk_css_provider_new ();
-      gtk_css_provider_load_from_data (provider, css, -1, NULL);
+      gtk_css_provider_load_from_resource (provider, "/org/freedesktop/portal/desktop/gtk/wallpaperpreview.css");
       gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
                                                  GTK_STYLE_PROVIDER (provider),
                                                  GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
