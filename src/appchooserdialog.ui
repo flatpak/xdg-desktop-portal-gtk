@@ -110,7 +110,7 @@
                       <object class="GtkLabel" id="empty_heading">
                         <property name="margin-top">40</property>
                         <property name="visible">1</property>
-                        <property name="label" translatable="yes">Unable to Open</property>
+                        <property name="label" translatable="yes">No Apps available</property>
                         <attributes>
                           <attribute name="weight" value="600"/>
                           <attribute name="scale" value="1.44"/>
