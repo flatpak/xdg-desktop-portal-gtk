@@ -224,10 +224,7 @@ wallpaper_preview_set_image (WallpaperPreview *self,
   gtk_widget_set_visible (self->animated_background_icon,
                           gnome_bg_changes_with_time (self->bg));
 
-  if (is_lockscreen)
-    {
-      gtk_stack_set_visible_child_name (GTK_STACK (self->stack), "lockscreen");
-    }
+  gtk_stack_set_visible_child_name (GTK_STACK (self->stack), is_lockscreen ? "lockscreen" : "desktop");
 
   gtk_widget_queue_draw (self->drawing_area);
 }
