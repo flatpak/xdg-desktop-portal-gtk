@@ -41,7 +41,6 @@ struct _AppChooserDialog {
   GtkWidget *cancel_button;
   GtkWidget *search_button;
   GtkWidget *more_button;
-  GtkWidget *more2_button;
   GtkWidget *list;
   GtkWidget *full_list;
   GtkWidget *full_list_box;
@@ -180,20 +179,12 @@ populate_full_list (AppChooserDialog *dialog)
 {
   GList *apps, *l;
 
-  apps = g_app_info_get_all_for_type (dialog->content_type);
+  apps = g_app_info_get_all ();
 
   for (l = apps; l; l = l->next)
     {
       GAppInfo *info = l->data;
       GtkWidget *row;
-      const char *id;
-      g_autofree char *freeme = NULL;
-
-      id = g_app_info_get_id (info);
-      if (g_str_has_suffix (id, ".desktop"))
-        id = freeme = g_strndup (id, strlen (id) - strlen (".desktop"));
-      if (g_strv_contains ((const char * const *)dialog->choices, id))
-        continue;
 
       row = GTK_WIDGET (app_chooser_row_new (info));
       gtk_widget_set_visible (row, TRUE);
@@ -317,23 +308,6 @@ app_chooser_dialog_close (AppChooserDialog *dialog)
 }
 
 static void
-app_chooser_dialog_map (GtkWidget *widget)
-{
-  static GtkCssProvider *provider;
-
-  GTK_WIDGET_CLASS (app_chooser_dialog_parent_class)->map (widget);
-
-  if (provider == NULL)
-    {
-      provider = gtk_css_provider_new ();
-      gtk_css_provider_load_from_resource (provider, "/org/freedesktop/portal/desktop/gtk/appchooserdialog.css");
-      gtk_style_context_add_provider_for_screen (gtk_widget_get_screen (widget),
-                                                 GTK_STYLE_PROVIDER (provider),
-                                                 GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-    }
-}
-
-static void
 app_chooser_dialog_class_init (AppChooserDialogClass *class)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (class);
@@ -342,7 +316,6 @@ app_chooser_dialog_class_init (AppChooserDialogClass *class)
 
   object_class->finalize = app_chooser_dialog_finalize;
 
-  widget_class->map = app_chooser_dialog_map;
   widget_class->delete_event = app_chooser_delete_event;
 
   class->close = app_chooser_dialog_close;
@@ -364,7 +337,6 @@ app_chooser_dialog_class_init (AppChooserDialogClass *class)
   gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, cancel_button);
   gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, search_button);
   gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, more_button);
-  gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, more2_button);
   gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, list);
   gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, full_list_box);
   gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, full_list);
@@ -392,9 +364,6 @@ shorten_location (const char *location)
 {
   int len;
 
-  if (location == NULL)
-    return NULL;
-
   len = g_utf8_strlen (location, -1);
 
   if (len < LOCATION_MAX_LENGTH)
@@ -415,10 +384,21 @@ app_chooser_dialog_new (const char **choices,
   AppChooserDialog *dialog;
   int n_choices;
   int i;
+  static GtkCssProvider *provider;
   GtkWidget *default_row;
   g_autofree char *short_location = shorten_location (location);
 
+  if (provider == NULL)
+    {
+      provider = gtk_css_provider_new ();
+      gtk_css_provider_load_from_resource (provider, "/org/freedesktop/portal/desktop/gtk/appchooserdialog.css");
+      gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
+                                                 GTK_STYLE_PROVIDER (provider),
+                                                 GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+    }
+
   dialog = g_object_new (app_chooser_dialog_get_type (), NULL);
+
   dialog->content_type = g_strdup (content_type);
 
   if (location)
