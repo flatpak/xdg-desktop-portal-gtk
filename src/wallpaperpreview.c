@@ -182,7 +182,7 @@ wallpaper_preview_map (GtkWidget *widget)
     {
       provider = gtk_css_provider_new ();
       gtk_css_provider_load_from_resource (provider, "/org/freedesktop/portal/desktop/gtk/wallpaperpreview.css");
-      gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
+      gtk_style_context_add_provider_for_screen (gtk_widget_get_screen (widget),
                                                  GTK_STYLE_PROVIDER (provider),
                                                  GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
     }
