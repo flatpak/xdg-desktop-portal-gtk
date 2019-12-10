@@ -41,9 +41,11 @@ struct _AppChooserDialog {
   GtkWidget *titlebar;
   GtkWidget *cancel_button;
   GtkWidget *open_button;
+  GtkWidget *find_software_button;
   GtkWidget *list;
   GtkWidget *heading;
   GtkWidget *stack;
+  GtkWidget *empty_box;
   GtkWidget *empty_label;
 
   char *content_type;
@@ -125,6 +127,8 @@ row_activated (GtkListBox *list,
                GtkWidget *row,
                AppChooserDialog *dialog)
 {
+  GAppInfo *info = NULL;
+
   if (row == dialog->more_row)
     {
       int i;
@@ -149,15 +153,17 @@ row_activated (GtkListBox *list,
     }
 
   if (dialog->selected_row)
-    app_chooser_row_set_selected (APP_CHOOSER_ROW (dialog->selected_row), FALSE);
+    info = app_chooser_row_get_info (APP_CHOOSER_ROW (dialog->selected_row));
+  close_dialog (dialog, info);
+}
 
+static void
+row_selected (GtkListBox *list,
+              GtkWidget *row,
+              AppChooserDialog *dialog)
+{
+  gtk_widget_set_sensitive (dialog->open_button, TRUE);
   dialog->selected_row = row;
-
-  if (dialog->selected_row)
-    {
-      app_chooser_row_set_selected (APP_CHOOSER_ROW (dialog->selected_row), TRUE);
-      gtk_widget_set_sensitive (dialog->open_button, TRUE);
-    }
 }
 
 static void
@@ -266,11 +272,15 @@ app_chooser_dialog_class_init (AppChooserDialogClass *class)
   gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, titlebar);
   gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, cancel_button);
   gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, open_button);
+  gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, find_software_button);
   gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, list);
   gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, heading);
   gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, stack);
+  gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, empty_box);
   gtk_widget_class_bind_template_child (widget_class, AppChooserDialog, empty_label);
+
   gtk_widget_class_bind_template_callback (widget_class, row_activated);
+  gtk_widget_class_bind_template_callback (widget_class, row_selected);
   gtk_widget_class_bind_template_callback (widget_class, cancel_clicked);
   gtk_widget_class_bind_template_callback (widget_class, open_clicked);
   gtk_widget_class_bind_template_callback (widget_class, find_in_software);
@@ -362,7 +372,9 @@ app_chooser_dialog_new (const char **choices,
   n_choices = g_strv_length ((char **)choices);
   if (n_choices == 0)
     {
+      gtk_widget_show (dialog->empty_box);
       gtk_stack_set_visible_child_name (GTK_STACK (dialog->stack), "empty");
+      gtk_widget_grab_default (dialog->find_software_button);
       if (location)
         {
           g_autofree char *label = NULL;
@@ -378,6 +390,7 @@ app_chooser_dialog_new (const char **choices,
   else
     {
       gtk_stack_set_visible_child_name (GTK_STACK (dialog->stack), "list");
+      gtk_widget_grab_default (dialog->open_button);
       for (i = 0; i < MIN (n_choices, INITIAL_LIST_SIZE); i++)
         {
           g_autofree char *desktop_id = g_strconcat (choices[i], ".desktop", NULL);
@@ -393,7 +406,7 @@ app_chooser_dialog_new (const char **choices,
 
           if (default_id && strcmp (choices[i], default_id) == 0)
             {
-              app_chooser_row_set_selected (APP_CHOOSER_ROW (row), TRUE);
+              gtk_list_box_select_row (GTK_LIST_BOX (dialog->list), GTK_LIST_BOX_ROW (row));
               gtk_widget_set_sensitive (dialog->open_button, TRUE);
               dialog->selected_row = row;
             }
@@ -404,6 +417,7 @@ app_chooser_dialog_new (const char **choices,
           GtkWidget *image;
 
           row = GTK_WIDGET (gtk_list_box_row_new ());
+          gtk_list_box_row_set_selectable (GTK_LIST_BOX_ROW (row), FALSE);
           image = gtk_image_new_from_icon_name ("view-more-symbolic", GTK_ICON_SIZE_BUTTON);
           g_object_set (image, "margin", 14, NULL);
           gtk_container_add (GTK_CONTAINER (row), image);

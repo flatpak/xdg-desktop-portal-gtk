@@ -68,11 +68,13 @@
                           <class name="view"/>
                         </style>
                         <signal name="row-activated" handler="row_activated"/>
-                        <property name="selection-mode">none</property>
+                        <signal name="row-selected" handler="row_selected"/>
+                        <property name="selection-mode">single</property>
+                        <property name="activate-on-single-click">0</property>
                         <property name="visible">1</property>
                         <property name="margin-left">20</property>
                         <property name="margin-right">20</property>
-                        <property name="margin-bottom">6</property>
+                        <property name="margin-bottom">20</property>
                         <property name="halign">fill</property>
                         <property name="valign">fill</property>
                       </object>
@@ -85,8 +87,8 @@
               </packing>
             </child>
             <child>
-              <object class="GtkBox">
-                <property name="visible">1</property>
+              <object class="GtkBox" id="empty_box">
+                <property name="visible">0</property>
                 <property name="orientation">vertical</property>
                 <style>
                   <class name="view"/>
@@ -135,7 +137,6 @@
                         <property name="halign">center</property>
                         <property name="margin">30</property>
                         <property name="can-default">1</property>
-                        <property name="has-default">1</property>
                         <style>
                           <class name="suggested-action"/>
                         </style>
