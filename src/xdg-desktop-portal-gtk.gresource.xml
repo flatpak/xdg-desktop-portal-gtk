@@ -12,6 +12,7 @@
     <file>remotedesktopdialog.ui</file>
     <file>wallpaperdialog.ui</file>
     <file>wallpaperpreview.ui</file>
+    <file>wallpaperpreview.css</file>
   </gresource>
 </gresources>
 
