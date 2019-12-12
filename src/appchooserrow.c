@@ -33,7 +33,7 @@ struct _AppChooserRow {
 };
 
 struct _AppChooserRowClass {
-  GtkFlowBoxChildClass parent_class;
+  GtkListBoxRowClass parent_class;
 };
 
 G_DEFINE_TYPE (AppChooserRow, app_chooser_row, GTK_TYPE_LIST_BOX_ROW)
