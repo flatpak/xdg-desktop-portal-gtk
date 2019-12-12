@@ -123,6 +123,28 @@ close_dialog (AppChooserDialog *dialog,
 }
 
 static void
+show_more (AppChooserDialog *dialog)
+{
+  int i;
+
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (dialog->scrolled_window),
+                                  GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
+  gtk_window_set_resizable (GTK_WINDOW (dialog), TRUE);
+  gtk_widget_hide (dialog->more_row);
+
+  for (i = INITIAL_LIST_SIZE - 1; dialog->choices[i]; i++)
+    {
+      g_autofree char *desktop_id = g_strconcat (dialog->choices[i], ".desktop", NULL);
+      g_autoptr(GAppInfo) info = G_APP_INFO (g_desktop_app_info_new (desktop_id));
+      GtkWidget *row;
+
+      row = GTK_WIDGET (app_chooser_row_new (info));
+      gtk_widget_set_visible (row, TRUE);
+      gtk_list_box_insert (GTK_LIST_BOX (dialog->list), row, -1);
+   }
+}
+
+static void
 row_activated (GtkListBox *list,
                GtkWidget *row,
                AppChooserDialog *dialog)
@@ -131,24 +153,7 @@ row_activated (GtkListBox *list,
 
   if (row == dialog->more_row)
     {
-      int i;
-
-      gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (dialog->scrolled_window),
-                                      GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
-      gtk_window_set_resizable (GTK_WINDOW (dialog), TRUE);
-      gtk_widget_hide (row);
-
-      for (i = INITIAL_LIST_SIZE - 1; dialog->choices[i]; i++)
-        {
-          g_autofree char *desktop_id = g_strconcat (dialog->choices[i], ".desktop", NULL);
-          g_autoptr(GAppInfo) info = G_APP_INFO (g_desktop_app_info_new (desktop_id));
-          GtkWidget *row;
-
-          row = GTK_WIDGET (app_chooser_row_new (info));
-          gtk_widget_set_visible (row, TRUE);
-          gtk_list_box_insert (GTK_LIST_BOX (dialog->list), row, -1);
-        }
-
+      show_more (dialog);
       return;
     }
 
@@ -338,6 +343,20 @@ ensure_default_is_below (const char **choices,
   g_warning ("default_id not found\n");
 }
 
+static void
+more_pressed (GtkGestureMultiPress *gesture,
+              int n_press,
+              double x,
+              double y,
+              AppChooserDialog *dialog)
+{
+  if (n_press != 1)
+    return;
+
+  if (gtk_list_box_get_row_at_y (dialog->list, y) == dialog->more_row)
+    show_more (dialog);
+}
+
 AppChooserDialog *
 app_chooser_dialog_new (const char **choices,
                         const char *default_id,
@@ -415,8 +434,16 @@ app_chooser_dialog_new (const char **choices,
         {
           GtkWidget *row;
           GtkWidget *image;
+          GtkGesture *gesture;
 
           row = GTK_WIDGET (gtk_list_box_row_new ());
+          gesture = gtk_gesture_multi_press_new (dialog->list);
+          gtk_gesture_single_set_touch_only (GTK_GESTURE_SINGLE (gesture), FALSE);
+          gtk_event_controller_set_propagation_phase (GTK_EVENT_CONTROLLER (gesture), GTK_PHASE_BUBBLE);
+          gtk_gesture_single_set_button (GTK_GESTURE_SINGLE (gesture), GDK_BUTTON_PRIMARY);
+
+          g_signal_connect (gesture, "pressed", G_CALLBACK (more_pressed), dialog);
+
           gtk_list_box_row_set_selectable (GTK_LIST_BOX_ROW (row), FALSE);
           image = gtk_image_new_from_icon_name ("view-more-symbolic", GTK_ICON_SIZE_BUTTON);
           g_object_set (image, "margin", 14, NULL);
