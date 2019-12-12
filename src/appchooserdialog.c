@@ -307,7 +307,7 @@ shorten_location (const char *location)
   if (len < LOCATION_MAX_LENGTH)
     return g_strdup (location);
 
-  for (; len >= 40; len--)
+  for (; len >= LOCATION_MAX_LENGTH; len--)
     location = g_utf8_next_char (location);
 
   return g_strconcat ("…", location, NULL);
@@ -353,7 +353,7 @@ more_pressed (GtkGestureMultiPress *gesture,
   if (n_press != 1)
     return;
 
-  if (gtk_list_box_get_row_at_y (dialog->list, y) == dialog->more_row)
+  if (gtk_list_box_get_row_at_y (GTK_LIST_BOX (dialog->list), y) == GTK_LIST_BOX_ROW (dialog->more_row))
     show_more (dialog);
 }
 
@@ -384,7 +384,7 @@ app_chooser_dialog_new (const char **choices,
       gtk_label_set_label (GTK_LABEL (dialog->heading), _("Choose an application."));
     }
 
-  ensure_default_is_below (choices, default_id, 3);
+  ensure_default_is_below (choices, default_id, INITIAL_LIST_SIZE - 1);
 
   dialog->choices = g_strdupv ((char **)choices);
 
@@ -437,6 +437,7 @@ app_chooser_dialog_new (const char **choices,
           GtkGesture *gesture;
 
           row = GTK_WIDGET (gtk_list_box_row_new ());
+
           gesture = gtk_gesture_multi_press_new (dialog->list);
           gtk_gesture_single_set_touch_only (GTK_GESTURE_SINGLE (gesture), FALSE);
           gtk_event_controller_set_propagation_phase (GTK_EVENT_CONTROLLER (gesture), GTK_PHASE_BUBBLE);
