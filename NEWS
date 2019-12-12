@@ -1,3 +1,13 @@
+Changes in 1.5.2
+================
+
+- email: Work with sandboxed email clients
+- wallpaper: Support http: uris
+- wallpaper: Improve preview
+- appchooser: Modernize the appearance
+- background: Improve application monitoring
+- Require xdg-desktop-portal 1.5
+
 Changes in 1.5.1
 ================
 
