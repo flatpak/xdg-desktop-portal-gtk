@@ -66,6 +66,7 @@ EXTRA_DIST += \
         src/remotedesktopdialog.ui                      \
         src/wallpaperdialog.ui                          \
         src/wallpaperpreview.ui                         \
+        src/wallpaperpreview.css                        \
 	$(NULL)
 
 libexec_PROGRAMS = \
