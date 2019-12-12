@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2019-11-27 15:21-0500\n"
+"POT-Creation-Date: 2019-12-12 09:23-0500\n"
 "PO-Revision-Date: 2018-02-19 05:21-0600\n"
 "Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
 "Language-Team: Spanish; Castilian <>\n"
@@ -71,7 +71,7 @@ msgstr ""
 msgid "Share Details"
 msgstr "Compartir los datos"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:447
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:447
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
@@ -86,72 +86,81 @@ msgstr "Co_mpartir"
 msgid "Make changes before sharing the information"
 msgstr "Realizar cambios antes de compartir la información"
 
-#: src/appchooserdialog.c:159
+#: src/appchooserdialog.c:227
 msgid "Failed to start Software"
 msgstr "No se pudo iniciar Software"
 
-#: src/appchooserdialog.c:408
-#, c-format
-msgid ""
-"Select an application to open “%s”. More applications are available in <a "
-"href='software'>Software.</a>"
-msgstr ""
-"Seleccione una aplicación para abrir «%s». Hay más aplicaciones disponibles "
-"en <a href='software'>Software</a>."
-
-#: src/appchooserdialog.c:413
-msgid ""
-"Select an application. More applications are available in <a "
-"href='software'>Software.</a>"
-msgstr ""
-"Seleccione una aplicación. Hay más aplicaciones disponibles en <a "
-"href='software'>Software</a>."
-
-#: src/appchooserdialog.c:428
-#, c-format
-msgid "Unable to find an application that is able to open “%s”."
+#: src/appchooserdialog.c:379
+#, fuzzy, c-format
+msgid "Choose an application to open the file “%s”."
 msgstr "No se encontró ninguna aplicación capaz de abrir «%s»."
 
-#: src/appchooserdialog.c:433
-msgid "Unable to find a suitable application."
-msgstr "No se encontró ninguna aplicación adecuada."
+#: src/appchooserdialog.c:384
+msgid "Choose an application."
+msgstr ""
 
-#: src/appchooserdialog.ui:13
-msgid "Open With"
+#: src/appchooserdialog.c:401
+#, c-format
+msgid ""
+"No apps installed that can open “%s”. You can find more applications in "
+"Software"
+msgstr ""
+
+#: src/appchooserdialog.c:406
+msgid "No suitable app installed. You can find more applications in Software."
+msgstr ""
+
+#: src/appchooserdialog.ui:10
+#, fuzzy
+msgid "Open With…"
 msgstr "Abrir con"
 
-#: src/appchooserdialog.ui:167
-msgid "No Applications Found"
-msgstr "No se encontró ninguna aplicación"
+#: src/appchooserdialog.ui:23 src/filechooser.c:442
+msgid "_Open"
+msgstr "_Abrir"
 
-#: src/appchooserdialog.ui:183
-msgid "Find Compatible Applications in Software"
-msgstr "Encuentre aplicaciones compatibles en Software"
+#: src/appchooserdialog.ui:115
+msgid "No Apps available"
+msgstr ""
 
-#: src/background.c:255
+#: src/appchooserdialog.ui:159
+#, fuzzy
+msgid "_Find More in Software"
+msgstr "No se pudo iniciar Software"
+
+#: src/background.c:215
+#, c-format
+msgid "“%s” is running in the background"
+msgstr ""
+
+#: src/background.c:217
+msgid ""
+"This might be for a legitimate reason, but the application has not provided "
+"one.\n"
+"\n"
+"Note that forcing an application to quite might cause data loss."
+msgstr ""
+
+#: src/background.c:220
+msgid "Force quit"
+msgstr ""
+
+#: src/background.c:221
+msgid "Allow"
+msgstr ""
+
+#: src/background.c:306
 msgid "Background activity"
 msgstr ""
 
-#: src/background.c:257
+#: src/background.c:308
 #, c-format
 msgid "%s is running in the background."
 msgstr ""
 
-#: src/background.c:262
-msgid "Allow"
+#: src/background.c:314
+msgid "Find out more"
 msgstr ""
-
-#: src/background.c:269
-msgid "Forbid"
-msgstr ""
-
-#: src/background.c:276
-msgid "Ignore"
-msgstr ""
-
-#: src/filechooser.c:442
-msgid "_Open"
-msgstr "_Abrir"
 
 #: src/filechooser.c:444
 msgid "_Save"
@@ -221,12 +230,12 @@ msgstr ""
 msgid "Entire Screen"
 msgstr ""
 
-#: src/screenshotdialog.c:434
+#: src/screenshotdialog.c:442
 #, c-format
 msgid "Share this screenshot with %s?"
 msgstr "¿Quiere compartir esta captura de pantalla con %s?"
 
-#: src/screenshotdialog.c:438
+#: src/screenshotdialog.c:446
 msgid "Share this screenshot with the requesting application?"
 msgstr ""
 "¿Quiere compartir esta captura de pantalla con la aplicación solicitante?"
@@ -283,15 +292,15 @@ msgstr "Incluir el _borde de la ventana"
 msgid "Requested setting not found"
 msgstr ""
 
-#: src/wallpaperdialog.c:121 src/wallpaperdialog.ui:13
+#: src/wallpaperdialog.c:122 src/wallpaperdialog.ui:13
 msgid "Set Background"
 msgstr ""
 
-#: src/wallpaperdialog.c:131
+#: src/wallpaperdialog.c:132
 msgid "Set Lock Screen"
 msgstr ""
 
-#: src/wallpaperdialog.c:162
+#: src/wallpaperdialog.c:176
 msgid "Set Background & Lock Screen"
 msgstr ""
 
@@ -304,9 +313,33 @@ msgstr "Seleccionar"
 msgid "Failed to load image file"
 msgstr ""
 
-#: src/wallpaperpreview.ui:47
+#: src/wallpaperpreview.ui:57
 msgid "Activities"
 msgstr ""
+
+#, c-format
+#~ msgid ""
+#~ "Select an application to open “%s”. More applications are available in <a "
+#~ "href='software'>Software.</a>"
+#~ msgstr ""
+#~ "Seleccione una aplicación para abrir «%s». Hay más aplicaciones "
+#~ "disponibles en <a href='software'>Software</a>."
+
+#~ msgid ""
+#~ "Select an application. More applications are available in <a "
+#~ "href='software'>Software.</a>"
+#~ msgstr ""
+#~ "Seleccione una aplicación. Hay más aplicaciones disponibles en <a "
+#~ "href='software'>Software</a>."
+
+#~ msgid "Unable to find a suitable application."
+#~ msgstr "No se encontró ninguna aplicación adecuada."
+
+#~ msgid "No Applications Found"
+#~ msgstr "No se encontró ninguna aplicación"
+
+#~ msgid "Find Compatible Applications in Software"
+#~ msgstr "Encuentre aplicaciones compatibles en Software"
 
 #~ msgid "Screen casting"
 #~ msgstr "Captura de vídeo"

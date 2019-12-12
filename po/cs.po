@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2019-11-27 15:21-0500\n"
+"POT-Creation-Date: 2019-12-12 09:23-0500\n"
 "PO-Revision-Date: 2019-10-24 16:06+0200\n"
 "Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
@@ -71,7 +71,7 @@ msgstr "Sdílet vaše osobní informace s aplikací, která o to žádá?"
 msgid "Share Details"
 msgstr "Sdílet detaily"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:447
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:447
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
@@ -86,72 +86,81 @@ msgstr "_Sdílet"
 msgid "Make changes before sharing the information"
 msgstr "Provést změny před sdílením informací"
 
-#: src/appchooserdialog.c:159
+#: src/appchooserdialog.c:227
 msgid "Failed to start Software"
 msgstr "Nepodařilo se spustit Software"
 
-#: src/appchooserdialog.c:408
-#, c-format
-msgid ""
-"Select an application to open “%s”. More applications are available in <a "
-"href='software'>Software.</a>"
-msgstr ""
-"Vyberte aplikaci pro otevření „%s”. Další aplikace jsou k dispozici v <a "
-"href='software'>Software.</a>"
-
-#: src/appchooserdialog.c:413
-msgid ""
-"Select an application. More applications are available in <a "
-"href='software'>Software.</a>"
-msgstr ""
-"Vyberte aplikaci. Další aplikace jsou k dispozici v <a "
-"href='software'>Software.</a>"
-
-#: src/appchooserdialog.c:428
-#, c-format
-msgid "Unable to find an application that is able to open “%s”."
+#: src/appchooserdialog.c:379
+#, fuzzy, c-format
+msgid "Choose an application to open the file “%s”."
 msgstr "Nenalezena žádná aplikace, která je schopna otevřít „%s”."
 
-#: src/appchooserdialog.c:433
-msgid "Unable to find a suitable application."
-msgstr "Nenalezena žádná vhodná aplikace."
+#: src/appchooserdialog.c:384
+msgid "Choose an application."
+msgstr ""
 
-#: src/appchooserdialog.ui:13
-msgid "Open With"
+#: src/appchooserdialog.c:401
+#, c-format
+msgid ""
+"No apps installed that can open “%s”. You can find more applications in "
+"Software"
+msgstr ""
+
+#: src/appchooserdialog.c:406
+msgid "No suitable app installed. You can find more applications in Software."
+msgstr ""
+
+#: src/appchooserdialog.ui:10
+#, fuzzy
+msgid "Open With…"
 msgstr "Otevření pomocí"
 
-#: src/appchooserdialog.ui:167
-msgid "No Applications Found"
-msgstr "Nenalezeny žádné aplikace"
+#: src/appchooserdialog.ui:23 src/filechooser.c:442
+msgid "_Open"
+msgstr "_Otevřít"
 
-#: src/appchooserdialog.ui:183
-msgid "Find Compatible Applications in Software"
-msgstr "Najít kompatibilní aplikace v Software"
+#: src/appchooserdialog.ui:115
+msgid "No Apps available"
+msgstr ""
 
-#: src/background.c:255
+#: src/appchooserdialog.ui:159
+#, fuzzy
+msgid "_Find More in Software"
+msgstr "Nepodařilo se spustit Software"
+
+#: src/background.c:215
+#, fuzzy, c-format
+msgid "“%s” is running in the background"
+msgstr "Aplikace %s běží na pozadí."
+
+#: src/background.c:217
+msgid ""
+"This might be for a legitimate reason, but the application has not provided "
+"one.\n"
+"\n"
+"Note that forcing an application to quite might cause data loss."
+msgstr ""
+
+#: src/background.c:220
+msgid "Force quit"
+msgstr ""
+
+#: src/background.c:221
+msgid "Allow"
+msgstr "Povolit"
+
+#: src/background.c:306
 msgid "Background activity"
 msgstr "Aktivita na pozadí"
 
-#: src/background.c:257
+#: src/background.c:308
 #, c-format
 msgid "%s is running in the background."
 msgstr "Aplikace %s běží na pozadí."
 
-#: src/background.c:262
-msgid "Allow"
-msgstr "Povolit"
-
-#: src/background.c:269
-msgid "Forbid"
-msgstr "Zakázat"
-
-#: src/background.c:276
-msgid "Ignore"
-msgstr "Ignorovat"
-
-#: src/filechooser.c:442
-msgid "_Open"
-msgstr "_Otevřít"
+#: src/background.c:314
+msgid "Find out more"
+msgstr ""
 
 #: src/filechooser.c:444
 msgid "_Save"
@@ -216,12 +225,12 @@ msgstr "Samostatné okno"
 msgid "Entire Screen"
 msgstr "Celá obrazovka"
 
-#: src/screenshotdialog.c:434
+#: src/screenshotdialog.c:442
 #, c-format
 msgid "Share this screenshot with %s?"
 msgstr "Sdílet tento snímek obrazovky s aplikací %s?"
 
-#: src/screenshotdialog.c:438
+#: src/screenshotdialog.c:446
 msgid "Share this screenshot with the requesting application?"
 msgstr "Sdílet tento snímek obrazovky s aplikací, která o to žádá?"
 
@@ -277,15 +286,15 @@ msgstr "Zahrnout _rámeček okna"
 msgid "Requested setting not found"
 msgstr "Požadované nastavení nebylo nalezeno"
 
-#: src/wallpaperdialog.c:121 src/wallpaperdialog.ui:13
+#: src/wallpaperdialog.c:122 src/wallpaperdialog.ui:13
 msgid "Set Background"
 msgstr "Nastavit pozadí"
 
-#: src/wallpaperdialog.c:131
+#: src/wallpaperdialog.c:132
 msgid "Set Lock Screen"
 msgstr "Nastavit uzamknutou obrazovku"
 
-#: src/wallpaperdialog.c:162
+#: src/wallpaperdialog.c:176
 msgid "Set Background & Lock Screen"
 msgstr "Nastavit pozadí a uzamknutou obrazovku"
 
@@ -297,9 +306,39 @@ msgstr "Nastavit"
 msgid "Failed to load image file"
 msgstr "Selhalo načtení souboru obrázku"
 
-#: src/wallpaperpreview.ui:47
+#: src/wallpaperpreview.ui:57
 msgid "Activities"
 msgstr "Činnosti"
+
+#, c-format
+#~ msgid ""
+#~ "Select an application to open “%s”. More applications are available in <a "
+#~ "href='software'>Software.</a>"
+#~ msgstr ""
+#~ "Vyberte aplikaci pro otevření „%s”. Další aplikace jsou k dispozici v <a "
+#~ "href='software'>Software.</a>"
+
+#~ msgid ""
+#~ "Select an application. More applications are available in <a "
+#~ "href='software'>Software.</a>"
+#~ msgstr ""
+#~ "Vyberte aplikaci. Další aplikace jsou k dispozici v <a "
+#~ "href='software'>Software.</a>"
+
+#~ msgid "Unable to find a suitable application."
+#~ msgstr "Nenalezena žádná vhodná aplikace."
+
+#~ msgid "No Applications Found"
+#~ msgstr "Nenalezeny žádné aplikace"
+
+#~ msgid "Find Compatible Applications in Software"
+#~ msgstr "Najít kompatibilní aplikace v Software"
+
+#~ msgid "Forbid"
+#~ msgstr "Zakázat"
+
+#~ msgid "Ignore"
+#~ msgstr "Ignorovat"
 
 #~ msgid "Screen casting"
 #~ msgstr "Záznam obrazovky"

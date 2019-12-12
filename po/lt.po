@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2019-11-27 15:21-0500\n"
+"POT-Creation-Date: 2019-12-12 09:23-0500\n"
 "PO-Revision-Date: 2019-06-07 00:27+0300\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian <gnome-lt@lists.akl.lt>\n"
@@ -70,7 +70,7 @@ msgstr "Bendrinti jūsų asmeninę informaciją su prašančia programa?"
 msgid "Share Details"
 msgstr "Bendrinti išsamesnę informaciją"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:447
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:447
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
@@ -85,72 +85,81 @@ msgstr "_Bendrinti"
 msgid "Make changes before sharing the information"
 msgstr "Prieš bendrinant informaciją, atlikti pakeitimus"
 
-#: src/appchooserdialog.c:159
+#: src/appchooserdialog.c:227
 msgid "Failed to start Software"
 msgstr "Nepavyko paleisti Programinės įrangos"
 
-#: src/appchooserdialog.c:408
-#, c-format
-msgid ""
-"Select an application to open “%s”. More applications are available in <a "
-"href='software'>Software.</a>"
-msgstr ""
-"Pasirinkite programą, skirtą atverti \"%s\". Daugiau programų yra prieinama "
-"<a href='software'>Programinėje įrangoje.</a>"
-
-#: src/appchooserdialog.c:413
-msgid ""
-"Select an application. More applications are available in <a "
-"href='software'>Software.</a>"
-msgstr ""
-"Pasirinkite programą. Daugiau programų yra prieinama <a "
-"href='software'>Programinėje įrangoje.</a>"
-
-#: src/appchooserdialog.c:428
-#, c-format
-msgid "Unable to find an application that is able to open “%s”."
+#: src/appchooserdialog.c:379
+#, fuzzy, c-format
+msgid "Choose an application to open the file “%s”."
 msgstr "Nepavyko rasti programos, kuri galėtų atverti \"%s\"."
 
-#: src/appchooserdialog.c:433
-msgid "Unable to find a suitable application."
-msgstr "Nepavyko rasti tinkamos programos."
+#: src/appchooserdialog.c:384
+msgid "Choose an application."
+msgstr ""
 
-#: src/appchooserdialog.ui:13
-msgid "Open With"
+#: src/appchooserdialog.c:401
+#, c-format
+msgid ""
+"No apps installed that can open “%s”. You can find more applications in "
+"Software"
+msgstr ""
+
+#: src/appchooserdialog.c:406
+msgid "No suitable app installed. You can find more applications in Software."
+msgstr ""
+
+#: src/appchooserdialog.ui:10
+#, fuzzy
+msgid "Open With…"
 msgstr "Atverti naudojant"
 
-#: src/appchooserdialog.ui:167
-msgid "No Applications Found"
-msgstr "Nerasta jokių programų"
+#: src/appchooserdialog.ui:23 src/filechooser.c:442
+msgid "_Open"
+msgstr "_Atverti"
 
-#: src/appchooserdialog.ui:183
-msgid "Find Compatible Applications in Software"
-msgstr "Rasti suderinamas programas Programinėje įrangoje"
+#: src/appchooserdialog.ui:115
+msgid "No Apps available"
+msgstr ""
 
-#: src/background.c:255
+#: src/appchooserdialog.ui:159
+#, fuzzy
+msgid "_Find More in Software"
+msgstr "Nepavyko paleisti Programinės įrangos"
+
+#: src/background.c:215
+#, fuzzy, c-format
+msgid "“%s” is running in the background"
+msgstr "%s yra vykdoma fone."
+
+#: src/background.c:217
+msgid ""
+"This might be for a legitimate reason, but the application has not provided "
+"one.\n"
+"\n"
+"Note that forcing an application to quite might cause data loss."
+msgstr ""
+
+#: src/background.c:220
+msgid "Force quit"
+msgstr ""
+
+#: src/background.c:221
+msgid "Allow"
+msgstr "Leisti"
+
+#: src/background.c:306
 msgid "Background activity"
 msgstr "Foninė veikla"
 
-#: src/background.c:257
+#: src/background.c:308
 #, c-format
 msgid "%s is running in the background."
 msgstr "%s yra vykdoma fone."
 
-#: src/background.c:262
-msgid "Allow"
-msgstr "Leisti"
-
-#: src/background.c:269
-msgid "Forbid"
-msgstr "Drausti"
-
-#: src/background.c:276
-msgid "Ignore"
-msgstr "Nepaisyti"
-
-#: src/filechooser.c:442
-msgid "_Open"
-msgstr "_Atverti"
+#: src/background.c:314
+msgid "Find out more"
+msgstr ""
 
 #: src/filechooser.c:444
 msgid "_Save"
@@ -217,12 +226,12 @@ msgstr ""
 msgid "Entire Screen"
 msgstr ""
 
-#: src/screenshotdialog.c:434
+#: src/screenshotdialog.c:442
 #, c-format
 msgid "Share this screenshot with %s?"
 msgstr "Bendrinti šią ekrano kopiją su %s?"
 
-#: src/screenshotdialog.c:438
+#: src/screenshotdialog.c:446
 msgid "Share this screenshot with the requesting application?"
 msgstr "Bendrinti šią ekrano kopiją su prašančia programa?"
 
@@ -278,16 +287,16 @@ msgstr "Įtraukti lango rė_melį"
 msgid "Requested setting not found"
 msgstr ""
 
-#: src/wallpaperdialog.c:121 src/wallpaperdialog.ui:13
+#: src/wallpaperdialog.c:122 src/wallpaperdialog.ui:13
 #, fuzzy
 msgid "Set Background"
 msgstr "Foninė veikla"
 
-#: src/wallpaperdialog.c:131
+#: src/wallpaperdialog.c:132
 msgid "Set Lock Screen"
 msgstr ""
 
-#: src/wallpaperdialog.c:162
+#: src/wallpaperdialog.c:176
 msgid "Set Background & Lock Screen"
 msgstr ""
 
@@ -300,9 +309,39 @@ msgstr "Pasirinkti"
 msgid "Failed to load image file"
 msgstr ""
 
-#: src/wallpaperpreview.ui:47
+#: src/wallpaperpreview.ui:57
 msgid "Activities"
 msgstr ""
+
+#, c-format
+#~ msgid ""
+#~ "Select an application to open “%s”. More applications are available in <a "
+#~ "href='software'>Software.</a>"
+#~ msgstr ""
+#~ "Pasirinkite programą, skirtą atverti \"%s\". Daugiau programų yra "
+#~ "prieinama <a href='software'>Programinėje įrangoje.</a>"
+
+#~ msgid ""
+#~ "Select an application. More applications are available in <a "
+#~ "href='software'>Software.</a>"
+#~ msgstr ""
+#~ "Pasirinkite programą. Daugiau programų yra prieinama <a "
+#~ "href='software'>Programinėje įrangoje.</a>"
+
+#~ msgid "Unable to find a suitable application."
+#~ msgstr "Nepavyko rasti tinkamos programos."
+
+#~ msgid "No Applications Found"
+#~ msgstr "Nerasta jokių programų"
+
+#~ msgid "Find Compatible Applications in Software"
+#~ msgstr "Rasti suderinamas programas Programinėje įrangoje"
+
+#~ msgid "Forbid"
+#~ msgstr "Drausti"
+
+#~ msgid "Ignore"
+#~ msgstr "Nepaisyti"
 
 #~ msgid "Screen casting"
 #~ msgstr "Ekrano įrašymas"

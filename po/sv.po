@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2019-11-27 15:21-0500\n"
+"POT-Creation-Date: 2019-12-12 09:23-0500\n"
 "PO-Revision-Date: 2019-01-17 14:10+0100\n"
 "Last-Translator: Josef Andersson <l10nl18nsweja@gmail.com>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
@@ -70,7 +70,7 @@ msgstr "Dela din personliga information med programmet som begär den?"
 msgid "Share Details"
 msgstr "Dela detaljer"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:447
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:447
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
@@ -85,72 +85,82 @@ msgstr "_Dela"
 msgid "Make changes before sharing the information"
 msgstr "Ändra informationen innan den delas"
 
-#: src/appchooserdialog.c:159
+#: src/appchooserdialog.c:227
 msgid "Failed to start Software"
 msgstr "Misslyckades med att starta Programvara"
 
-#: src/appchooserdialog.c:408
-#, c-format
-msgid ""
-"Select an application to open “%s”. More applications are available in <a "
-"href='software'>Software.</a>"
-msgstr ""
-"Välj ett program för att öppna ”%s”. Fler program finns tillgängliga i <a "
-"href='software'>Programvara.</a>"
-
-#: src/appchooserdialog.c:413
-msgid ""
-"Select an application. More applications are available in <a "
-"href='software'>Software.</a>"
-msgstr ""
-"Välj ett program. Fler program finns tillgängliga i <a "
-"href='software'>Programvara.</a>"
-
-#: src/appchooserdialog.c:428
-#, c-format
-msgid "Unable to find an application that is able to open “%s”."
+#: src/appchooserdialog.c:379
+#, fuzzy, c-format
+msgid "Choose an application to open the file “%s”."
 msgstr "Det går inte att hitta ett program som kan öppna ”%s”."
 
-#: src/appchooserdialog.c:433
-msgid "Unable to find a suitable application."
-msgstr "Det går inte att hitta ett passande program."
+#: src/appchooserdialog.c:384
+#, fuzzy
+msgid "Choose an application."
+msgstr "Välj program"
 
-#: src/appchooserdialog.ui:13
-msgid "Open With"
+#: src/appchooserdialog.c:401
+#, c-format
+msgid ""
+"No apps installed that can open “%s”. You can find more applications in "
+"Software"
+msgstr ""
+
+#: src/appchooserdialog.c:406
+msgid "No suitable app installed. You can find more applications in Software."
+msgstr ""
+
+#: src/appchooserdialog.ui:10
+#, fuzzy
+msgid "Open With…"
 msgstr "Öppna med"
 
-#: src/appchooserdialog.ui:167
-msgid "No Applications Found"
-msgstr "Inga program funna"
+#: src/appchooserdialog.ui:23 src/filechooser.c:442
+msgid "_Open"
+msgstr "_Öppna"
 
-#: src/appchooserdialog.ui:183
-msgid "Find Compatible Applications in Software"
-msgstr "Sök efter kompatibla program i Programvara"
+#: src/appchooserdialog.ui:115
+msgid "No Apps available"
+msgstr ""
 
-#: src/background.c:255
+#: src/appchooserdialog.ui:159
+#, fuzzy
+msgid "_Find More in Software"
+msgstr "Misslyckades med att starta Programvara"
+
+#: src/background.c:215
+#, c-format
+msgid "“%s” is running in the background"
+msgstr ""
+
+#: src/background.c:217
+msgid ""
+"This might be for a legitimate reason, but the application has not provided "
+"one.\n"
+"\n"
+"Note that forcing an application to quite might cause data loss."
+msgstr ""
+
+#: src/background.c:220
+msgid "Force quit"
+msgstr ""
+
+#: src/background.c:221
+msgid "Allow"
+msgstr ""
+
+#: src/background.c:306
 msgid "Background activity"
 msgstr ""
 
-#: src/background.c:257
+#: src/background.c:308
 #, c-format
 msgid "%s is running in the background."
 msgstr ""
 
-#: src/background.c:262
-msgid "Allow"
+#: src/background.c:314
+msgid "Find out more"
 msgstr ""
-
-#: src/background.c:269
-msgid "Forbid"
-msgstr ""
-
-#: src/background.c:276
-msgid "Ignore"
-msgstr ""
-
-#: src/filechooser.c:442
-msgid "_Open"
-msgstr "_Öppna"
 
 #: src/filechooser.c:444
 msgid "_Save"
@@ -217,12 +227,12 @@ msgstr ""
 msgid "Entire Screen"
 msgstr ""
 
-#: src/screenshotdialog.c:434
+#: src/screenshotdialog.c:442
 #, c-format
 msgid "Share this screenshot with %s?"
 msgstr "Dela denna skärmbild med %s?"
 
-#: src/screenshotdialog.c:438
+#: src/screenshotdialog.c:446
 msgid "Share this screenshot with the requesting application?"
 msgstr "Dela denna skärmbild med programmet som begär den?"
 
@@ -278,15 +288,15 @@ msgstr "Inkludera fönster_ramen"
 msgid "Requested setting not found"
 msgstr ""
 
-#: src/wallpaperdialog.c:121 src/wallpaperdialog.ui:13
+#: src/wallpaperdialog.c:122 src/wallpaperdialog.ui:13
 msgid "Set Background"
 msgstr ""
 
-#: src/wallpaperdialog.c:131
+#: src/wallpaperdialog.c:132
 msgid "Set Lock Screen"
 msgstr ""
 
-#: src/wallpaperdialog.c:162
+#: src/wallpaperdialog.c:176
 msgid "Set Background & Lock Screen"
 msgstr ""
 
@@ -299,18 +309,39 @@ msgstr "Välj"
 msgid "Failed to load image file"
 msgstr ""
 
-#: src/wallpaperpreview.ui:47
+#: src/wallpaperpreview.ui:57
 msgid "Activities"
 msgstr ""
+
+#, c-format
+#~ msgid ""
+#~ "Select an application to open “%s”. More applications are available in <a "
+#~ "href='software'>Software.</a>"
+#~ msgstr ""
+#~ "Välj ett program för att öppna ”%s”. Fler program finns tillgängliga i <a "
+#~ "href='software'>Programvara.</a>"
+
+#~ msgid ""
+#~ "Select an application. More applications are available in <a "
+#~ "href='software'>Software.</a>"
+#~ msgstr ""
+#~ "Välj ett program. Fler program finns tillgängliga i <a "
+#~ "href='software'>Programvara.</a>"
+
+#~ msgid "Unable to find a suitable application."
+#~ msgstr "Det går inte att hitta ett passande program."
+
+#~ msgid "No Applications Found"
+#~ msgstr "Inga program funna"
+
+#~ msgid "Find Compatible Applications in Software"
+#~ msgstr "Sök efter kompatibla program i Programvara"
 
 #~ msgid "Screen casting"
 #~ msgstr "Skärminspelning"
 
 #~ msgid "_Select"
 #~ msgstr "_Välj"
-
-#~ msgid "Select application"
-#~ msgstr "Välj program"
 
 #, fuzzy
 #~ msgid "No applications found"

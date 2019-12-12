@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2019-11-27 15:21-0500\n"
+"POT-Creation-Date: 2019-12-12 09:23-0500\n"
 "PO-Revision-Date: 2019-05-30 10:06+0200\n"
 "Last-Translator: Andrew Sazonow <sazonow1980.@gmail.com>\n"
 "Language-Team: Русский <gnome-cyr@gnome.org>\n"
@@ -70,7 +70,7 @@ msgstr "Поделитесь своей личной информацией с �
 msgid "Share Details"
 msgstr "Поделиться подробностями"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:17 src/filechooser.c:447
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:447
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
@@ -85,72 +85,82 @@ msgstr "_Поделиться"
 msgid "Make changes before sharing the information"
 msgstr "Внесите изменения, прежде чем делиться информацией"
 
-#: src/appchooserdialog.c:159
+#: src/appchooserdialog.c:227
 msgid "Failed to start Software"
 msgstr "Не удалось запустить программное обеспечение"
 
-#: src/appchooserdialog.c:408
-#, c-format
-msgid ""
-"Select an application to open “%s”. More applications are available in <a "
-"href='software'>Software.</a>"
-msgstr ""
-"Выберите приложение, чтобы открыть “%s”. Больше приложений доступно в <a "
-"href='software'>Программное обеспечение.</a>"
-
-#: src/appchooserdialog.c:413
-msgid ""
-"Select an application. More applications are available in <a "
-"href='software'>Software.</a>"
-msgstr ""
-"Выберите приложение. Больше приложений доступно в <a "
-"href='software'>Программное обеспечение.</a>"
-
-#: src/appchooserdialog.c:428
-#, c-format
-msgid "Unable to find an application that is able to open “%s”."
+#: src/appchooserdialog.c:379
+#, fuzzy, c-format
+msgid "Choose an application to open the file “%s”."
 msgstr "Не удалось найти приложение, которое может открыть “%s”."
 
-#: src/appchooserdialog.c:433
-msgid "Unable to find a suitable application."
-msgstr "Невозможно найти подходящее приложение."
+#: src/appchooserdialog.c:384
+#, fuzzy
+msgid "Choose an application."
+msgstr "Выберите приложение"
 
-#: src/appchooserdialog.ui:13
-msgid "Open With"
+#: src/appchooserdialog.c:401
+#, c-format
+msgid ""
+"No apps installed that can open “%s”. You can find more applications in "
+"Software"
+msgstr ""
+
+#: src/appchooserdialog.c:406
+msgid "No suitable app installed. You can find more applications in Software."
+msgstr ""
+
+#: src/appchooserdialog.ui:10
+#, fuzzy
+msgid "Open With…"
 msgstr "Открыть с помощью"
 
-#: src/appchooserdialog.ui:167
-msgid "No Applications Found"
-msgstr "Приложения не найдены"
+#: src/appchooserdialog.ui:23 src/filechooser.c:442
+msgid "_Open"
+msgstr "_Открыть"
 
-#: src/appchooserdialog.ui:183
-msgid "Find Compatible Applications in Software"
-msgstr "Найти совместимые приложения в программном обеспечении"
+#: src/appchooserdialog.ui:115
+msgid "No Apps available"
+msgstr ""
 
-#: src/background.c:255
+#: src/appchooserdialog.ui:159
+#, fuzzy
+msgid "_Find More in Software"
+msgstr "Не удалось запустить программное обеспечение"
+
+#: src/background.c:215
+#, c-format
+msgid "“%s” is running in the background"
+msgstr ""
+
+#: src/background.c:217
+msgid ""
+"This might be for a legitimate reason, but the application has not provided "
+"one.\n"
+"\n"
+"Note that forcing an application to quite might cause data loss."
+msgstr ""
+
+#: src/background.c:220
+msgid "Force quit"
+msgstr ""
+
+#: src/background.c:221
+msgid "Allow"
+msgstr ""
+
+#: src/background.c:306
 msgid "Background activity"
 msgstr ""
 
-#: src/background.c:257
+#: src/background.c:308
 #, c-format
 msgid "%s is running in the background."
 msgstr ""
 
-#: src/background.c:262
-msgid "Allow"
+#: src/background.c:314
+msgid "Find out more"
 msgstr ""
-
-#: src/background.c:269
-msgid "Forbid"
-msgstr ""
-
-#: src/background.c:276
-msgid "Ignore"
-msgstr ""
-
-#: src/filechooser.c:442
-msgid "_Open"
-msgstr "_Открыть"
 
 #: src/filechooser.c:444
 msgid "_Save"
@@ -217,12 +227,12 @@ msgstr ""
 msgid "Entire Screen"
 msgstr ""
 
-#: src/screenshotdialog.c:434
+#: src/screenshotdialog.c:442
 #, c-format
 msgid "Share this screenshot with %s?"
 msgstr "Поделиться этим снимком экрана с %s?"
 
-#: src/screenshotdialog.c:438
+#: src/screenshotdialog.c:446
 msgid "Share this screenshot with the requesting application?"
 msgstr "Поделиться этим снимком экрана с запрашивающим приложением?"
 
@@ -278,15 +288,15 @@ msgstr "Включить _границу окна"
 msgid "Requested setting not found"
 msgstr ""
 
-#: src/wallpaperdialog.c:121 src/wallpaperdialog.ui:13
+#: src/wallpaperdialog.c:122 src/wallpaperdialog.ui:13
 msgid "Set Background"
 msgstr ""
 
-#: src/wallpaperdialog.c:131
+#: src/wallpaperdialog.c:132
 msgid "Set Lock Screen"
 msgstr ""
 
-#: src/wallpaperdialog.c:162
+#: src/wallpaperdialog.c:176
 msgid "Set Background & Lock Screen"
 msgstr ""
 
@@ -299,15 +309,36 @@ msgstr "Выбрать"
 msgid "Failed to load image file"
 msgstr ""
 
-#: src/wallpaperpreview.ui:47
+#: src/wallpaperpreview.ui:57
 msgid "Activities"
 msgstr ""
+
+#, c-format
+#~ msgid ""
+#~ "Select an application to open “%s”. More applications are available in <a "
+#~ "href='software'>Software.</a>"
+#~ msgstr ""
+#~ "Выберите приложение, чтобы открыть “%s”. Больше приложений доступно в <a "
+#~ "href='software'>Программное обеспечение.</a>"
+
+#~ msgid ""
+#~ "Select an application. More applications are available in <a "
+#~ "href='software'>Software.</a>"
+#~ msgstr ""
+#~ "Выберите приложение. Больше приложений доступно в <a "
+#~ "href='software'>Программное обеспечение.</a>"
+
+#~ msgid "Unable to find a suitable application."
+#~ msgstr "Невозможно найти подходящее приложение."
+
+#~ msgid "No Applications Found"
+#~ msgstr "Приложения не найдены"
+
+#~ msgid "Find Compatible Applications in Software"
+#~ msgstr "Найти совместимые приложения в программном обеспечении"
 
 #~ msgid "Screen casting"
 #~ msgstr "Кастинг экрана"
 
 #~ msgid "_Select"
 #~ msgstr "_Выбрать"
-
-#~ msgid "Select application"
-#~ msgstr "Выберите приложение"
