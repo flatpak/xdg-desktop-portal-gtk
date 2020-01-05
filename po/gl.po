@@ -313,31 +313,3 @@ msgstr "Produciuse un fallo ao cargar o ficheiro da imaxe"
 #: src/wallpaperpreview.ui:57
 msgid "Activities"
 msgstr "Actividades"
-
-#, c-format
-#~ msgid ""
-#~ "Select an application to open “%s”. More applications are available in <a "
-#~ "href='software'>Software.</a>"
-#~ msgstr ""
-#~ "Seleccione un aplicativo para abrir «%s». Hai máis aplicativos "
-#~ "dispoñíbeis en <a href='software'>Software</a>."
-
-#~ msgid ""
-#~ "Select an application. More applications are available in <a "
-#~ "href='software'>Software.</a>"
-#~ msgstr ""
-#~ "Seleccione un aplicativo. Hai máis aplicativos dispoñíbeis en <a "
-#~ "href='software'>Software</a>."
-
-#~ msgid "Unable to find a suitable application."
-#~ msgstr "Non foi posíbel atopar un aplicativo axeitado."
-
-#~ msgid "No Applications Found"
-#~ msgstr "Non se atoparon aplicativos"
-
-#~ msgid "Find Compatible Applications in Software"
-#~ msgstr "Bucar aplicativos compatíbeis en Software"
-
-#, fuzzy
-#~ msgid "Screen casting"
-#~ msgstr "Captura de pantalla"
