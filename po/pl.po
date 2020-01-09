@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
 "POT-Creation-Date: 2019-12-12 09:23-0500\n"
-"PO-Revision-Date: 2019-10-24 16:33+0200\n"
+"PO-Revision-Date: 2019-12-21 14:52+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
@@ -90,13 +90,13 @@ msgid "Failed to start Software"
 msgstr "Uruchomienie Menedżera oprogramowania się nie powiodło"
 
 #: src/appchooserdialog.c:379
-#, fuzzy, c-format
+#, c-format
 msgid "Choose an application to open the file “%s”."
-msgstr "Nie można odnaleźć programu do otwarcia pliku „%s”."
+msgstr "Proszę wybrać program do otwarcia pliku „%s”."
 
 #: src/appchooserdialog.c:384
 msgid "Choose an application."
-msgstr ""
+msgstr "Proszę wybrać program."
 
 #: src/appchooserdialog.c:401
 #, c-format
@@ -104,15 +104,18 @@ msgid ""
 "No apps installed that can open “%s”. You can find more applications in "
 "Software"
 msgstr ""
+"Nie zainstalowano żadnych programów, które mogą otwierać pliki „%s”. "
+"W Menedżerze oprogramowania można znaleźć więcej programów."
 
 #: src/appchooserdialog.c:406
 msgid "No suitable app installed. You can find more applications in Software."
 msgstr ""
+"Nie zainstalowano odpowiedniego programu. W Menedżerze oprogramowania można "
+"znaleźć więcej programów."
 
 #: src/appchooserdialog.ui:10
-#, fuzzy
 msgid "Open With…"
-msgstr "Otwarcie za pomocą"
+msgstr "Otwarcie za pomocą…"
 
 #: src/appchooserdialog.ui:23 src/filechooser.c:442
 msgid "_Open"
@@ -120,15 +123,14 @@ msgstr "_Otwórz"
 
 #: src/appchooserdialog.ui:115
 msgid "No Apps available"
-msgstr ""
+msgstr "Brak dostępnych programów"
 
 #: src/appchooserdialog.ui:159
-#, fuzzy
 msgid "_Find More in Software"
-msgstr "Uruchomienie Menedżera oprogramowania się nie powiodło"
+msgstr "_Znajdź więcej w Menedżerze oprogramowania"
 
 #: src/background.c:215
-#, fuzzy, c-format
+#, c-format
 msgid "“%s” is running in the background"
 msgstr "Program „%s” działa w tle."
 
@@ -139,10 +141,14 @@ msgid ""
 "\n"
 "Note that forcing an application to quit might cause data loss."
 msgstr ""
+"Może się tak dziać z uzasadnionego powodu, ale program go nie podał.\n"
+"\n"
+"Proszę pamiętać, że wymuszenie zakończenia działania programu może "
+"spowodować utratę danych."
 
 #: src/background.c:220
 msgid "Force quit"
-msgstr ""
+msgstr "Wymuś zakończenie"
 
 #: src/background.c:221
 msgid "Allow"
@@ -159,7 +165,7 @@ msgstr "Program „%s” działa w tle."
 
 #: src/background.c:314
 msgid "Find out more"
-msgstr ""
+msgstr "Więcej informacji"
 
 #: src/filechooser.c:444
 msgid "_Save"
@@ -308,33 +314,3 @@ msgstr "Wczytanie pliku obrazu się nie powiodło"
 #: src/wallpaperpreview.ui:57
 msgid "Activities"
 msgstr "Podgląd"
-
-#, c-format
-#~ msgid ""
-#~ "Select an application to open “%s”. More applications are available in <a "
-#~ "href='software'>Software.</a>"
-#~ msgstr ""
-#~ "Proszę wybrać program do otwarcia pliku „%s”. Więcej programów jest "
-#~ "dostępnych w <a href='software'>Menedżerze oprogramowania.</a>"
-
-#~ msgid ""
-#~ "Select an application. More applications are available in <a "
-#~ "href='software'>Software.</a>"
-#~ msgstr ""
-#~ "Proszę wybrać program. Więcej programów jest dostępnych w <a "
-#~ "href='software'>Menedżerze oprogramowania.</a>"
-
-#~ msgid "Unable to find a suitable application."
-#~ msgstr "Nie można odnaleźć odpowiedniego programu."
-
-#~ msgid "No Applications Found"
-#~ msgstr "Nie odnaleziono programów"
-
-#~ msgid "Find Compatible Applications in Software"
-#~ msgstr "Znajdź zgodne programy w Menedżerze oprogramowania"
-
-#~ msgid "Forbid"
-#~ msgstr "Zabroń"
-
-#~ msgid "Ignore"
-#~ msgstr "Zignoruj"
