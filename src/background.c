@@ -216,7 +216,7 @@ show_permission_dialog (BackgroundHandle *handle)
   gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
                                             _("This might be for a legitimate reason, but the application "
                                               "has not provided one."
-                                              "\n\nNote that forcing an application to quite might cause data loss."));
+                                              "\n\nNote that forcing an application to quit might cause data loss."));
   gtk_dialog_add_button (GTK_DIALOG (dialog), _("Force quit"), FORBID);
   gtk_dialog_add_button (GTK_DIALOG (dialog), _("Allow"), ALLOW);
 
