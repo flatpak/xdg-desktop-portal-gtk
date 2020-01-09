@@ -2,14 +2,14 @@
 # Copyright (C) 2016 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
 # This file is distributed under the same license as the xdg-desktop-portal-gtk package.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2016, 2017, 2018, 2019.
+# Yuri Chornoivan <yurchor@ukr.net>, 2016, 2017, 2018, 2019, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
-"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
-"issues\n"
-"POT-Creation-Date: 2019-12-12 09:23-0500\n"
-"PO-Revision-Date: 2019-11-10 13:20+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/issues"
+"\n"
+"POT-Creation-Date: 2019-12-13 03:37+0000\n"
+"PO-Revision-Date: 2020-01-09 14:39+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Lokalize 19.11.70\n"
+"X-Generator: Lokalize 20.03.70\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
@@ -87,17 +87,16 @@ msgstr "Внести зміни до оприлюднення даних"
 
 #: src/appchooserdialog.c:227
 msgid "Failed to start Software"
-msgstr "Не вдалося запустити Програмні засоби"
+msgstr "Не вдалося запустити «Програмні засоби»"
 
 #: src/appchooserdialog.c:379
-#, fuzzy, c-format
+#, c-format
 msgid "Choose an application to open the file “%s”."
-msgstr "Не вдалося знайти програму, яка здатна відкривати «%s»."
+msgstr "Виберіть програму для відкриття файла «%s»."
 
 #: src/appchooserdialog.c:384
-#, fuzzy
 msgid "Choose an application."
-msgstr "Вибір програми"
+msgstr "Виберіть програму."
 
 #: src/appchooserdialog.c:401
 #, c-format
@@ -105,15 +104,18 @@ msgid ""
 "No apps installed that can open “%s”. You can find more applications in "
 "Software"
 msgstr ""
+"Не встановлено жодної програми, яка придатна для відкриття «%s». Потрібні вам"
+" програми ви можете знайти за допомогою програми «Програмні засоби»."
 
 #: src/appchooserdialog.c:406
 msgid "No suitable app installed. You can find more applications in Software."
 msgstr ""
+"Не встановлено відповідної програми. Потрібні вам програми ви можете знайти"
+" за допомогою програми «Програмні засоби»."
 
 #: src/appchooserdialog.ui:10
-#, fuzzy
 msgid "Open With…"
-msgstr "Відкрити за допомогою"
+msgstr "Відкрити за допомогою…"
 
 #: src/appchooserdialog.ui:23 src/filechooser.c:442
 msgid "_Open"
@@ -121,17 +123,16 @@ msgstr "_Відкрити"
 
 #: src/appchooserdialog.ui:115
 msgid "No Apps available"
-msgstr ""
+msgstr "Немає доступних програм"
 
 #: src/appchooserdialog.ui:159
-#, fuzzy
 msgid "_Find More in Software"
-msgstr "Не вдалося запустити Програмні засоби"
+msgstr "З_найти інші у програмі «Програмні засоби»"
 
 #: src/background.c:215
-#, fuzzy, c-format
+#, c-format
 msgid "“%s” is running in the background"
-msgstr "%s працює у фоновому режимі."
+msgstr "«%s» працює у фоновому режимі"
 
 #: src/background.c:217
 msgid ""
@@ -140,10 +141,14 @@ msgid ""
 "\n"
 "Note that forcing an application to quite might cause data loss."
 msgstr ""
+"Можливо, причина є вагомою, але програма не надала її.\n"
+"\n"
+"Зауважте, що примусове завершення роботи, ймовірно, може призвести до втрати"
+" даних."
 
 #: src/background.c:220
 msgid "Force quit"
-msgstr ""
+msgstr "Примусове завершення роботи"
 
 #: src/background.c:221
 msgid "Allow"
@@ -160,7 +165,7 @@ msgstr "%s працює у фоновому режимі."
 
 #: src/background.c:314
 msgid "Find out more"
-msgstr ""
+msgstr "Дізнатися більше"
 
 #: src/filechooser.c:444
 msgid "_Save"
@@ -315,38 +320,3 @@ msgstr "Не вдалося завантажити файл зображення
 msgid "Activities"
 msgstr "Діяльність"
 
-#, c-format
-#~ msgid ""
-#~ "Select an application to open “%s”. More applications are available in <a "
-#~ "href='software'>Software.</a>"
-#~ msgstr ""
-#~ "Виберіть програму для відкриття «%s». Ширший список програм можна знайти "
-#~ "у програмі <a href='software'>Програмні засоби</a>."
-
-#~ msgid ""
-#~ "Select an application. More applications are available in <a "
-#~ "href='software'>Software.</a>"
-#~ msgstr ""
-#~ "Виберіть програму. Ширший список програм можна знайти у програмі <a "
-#~ "href='software'>Програмні засоби</a>."
-
-#~ msgid "Unable to find a suitable application."
-#~ msgstr "Не вдалося знайти відповідну програму."
-
-#~ msgid "No Applications Found"
-#~ msgstr "Програм не знайдено"
-
-#~ msgid "Find Compatible Applications in Software"
-#~ msgstr "Пошук відповідних програм у Програмних засобах"
-
-#~ msgid "Forbid"
-#~ msgstr "Заборонити"
-
-#~ msgid "Ignore"
-#~ msgstr "Ігнорувати"
-
-#~ msgid "Screen casting"
-#~ msgstr "Відео з екрана"
-
-#~ msgid "_Select"
-#~ msgstr "Ви_брати"
