@@ -1,22 +1,22 @@
 # Indonesian translation for xdg-desktop-portal-gtk.
 # Copyright (C) 2017 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
 # This file is distributed under the same license as the xdg-desktop-portal-gtk package.
-# Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2017, 2018, 2019.
+# Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2017-2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2019-12-12 09:23-0500\n"
-"PO-Revision-Date: 2019-10-09 17:42+0700\n"
+"POT-Creation-Date: 2020-01-10 15:35+0000\n"
+"PO-Revision-Date: 2020-01-26 17:31+0700\n"
 "Last-Translator: Kukuh Syafaat <kukuhsyafaat@gnome.org>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.3\n"
+"X-Generator: Poedit 2.2.4\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
@@ -88,13 +88,13 @@ msgid "Failed to start Software"
 msgstr "Gagal memulai Perangkat Lunak"
 
 #: src/appchooserdialog.c:379
-#, fuzzy, c-format
+#, c-format
 msgid "Choose an application to open the file “%s”."
-msgstr "Tidak dapat menemukan aplikasi yang dapat membuka \"%s\"."
+msgstr "Pilih aplikasi untuk membuka berkas \"%s\"."
 
 #: src/appchooserdialog.c:384
 msgid "Choose an application."
-msgstr ""
+msgstr "Pilih aplikasi."
 
 #: src/appchooserdialog.c:401
 #, c-format
@@ -102,15 +102,18 @@ msgid ""
 "No apps installed that can open “%s”. You can find more applications in "
 "Software"
 msgstr ""
+"Tidak ada aplikasi yang dipasang yang dapat membuka \"%s\". Anda dapat "
+"menemukan lebih banyak aplikasi di Perangkat Lunak"
 
 #: src/appchooserdialog.c:406
 msgid "No suitable app installed. You can find more applications in Software."
 msgstr ""
+"Tidak ada aplikasi yang cocok dipasang. Anda dapat menemukan lebih banyak "
+"aplikasi di Perangkat Lunak."
 
 #: src/appchooserdialog.ui:10
-#, fuzzy
 msgid "Open With…"
-msgstr "Buka Dengan"
+msgstr "Buka Dengan…"
 
 #: src/appchooserdialog.ui:23 src/filechooser.c:442
 msgid "_Open"
@@ -118,17 +121,16 @@ msgstr "B_uka"
 
 #: src/appchooserdialog.ui:115
 msgid "No Apps available"
-msgstr ""
+msgstr "Tidak ada Aplikasi yang tersedia"
 
 #: src/appchooserdialog.ui:159
-#, fuzzy
 msgid "_Find More in Software"
-msgstr "Gagal memulai Perangkat Lunak"
+msgstr "T_emukan Lebih Banyak dalam Perangkat Lunak"
 
 #: src/background.c:215
-#, fuzzy, c-format
+#, c-format
 msgid "“%s” is running in the background"
-msgstr "%s sedang berjalan di latar belakang."
+msgstr "\"%s\" sedang berjalan di latar belakang"
 
 #: src/background.c:217
 msgid ""
@@ -137,10 +139,14 @@ msgid ""
 "\n"
 "Note that forcing an application to quit might cause data loss."
 msgstr ""
+"Ini mungkin karena alasan yang sah, tetapi aplikasi belum menyediakannya.\n"
+"\n"
+"Perhatikan bahwa memaksa aplikasi untuk berhenti dapat menyebabkan "
+"kehilangan data."
 
 #: src/background.c:220
 msgid "Force quit"
-msgstr ""
+msgstr "Keluar paksa"
 
 #: src/background.c:221
 msgid "Allow"
@@ -157,7 +163,7 @@ msgstr "%s sedang berjalan di latar belakang."
 
 #: src/background.c:314
 msgid "Find out more"
-msgstr ""
+msgstr "Temukan lebih banyak lagi"
 
 #: src/filechooser.c:444
 msgid "_Save"
@@ -284,32 +290,29 @@ msgid "Requested setting not found"
 msgstr "Pengaturan yang diminta tidak ditemukan"
 
 #: src/wallpaperdialog.c:122 src/wallpaperdialog.ui:13
-#, fuzzy
 msgid "Set Background"
-msgstr "Aktivitas latar belakang"
+msgstr "Atur Latar Belakang"
 
 #: src/wallpaperdialog.c:132
 msgid "Set Lock Screen"
-msgstr ""
+msgstr "Atur Layar Kunci"
 
 #: src/wallpaperdialog.c:176
 msgid "Set Background & Lock Screen"
-msgstr ""
+msgstr "Atur Latar Belakang dan Layar Kunci"
 
 #: src/wallpaperdialog.ui:26
-#, fuzzy
 msgid "Set"
-msgstr "Pilih"
+msgstr "Atur"
 
 #: src/wallpaperdialog.ui:62
 msgid "Failed to load image file"
-msgstr ""
+msgstr "Gagal memuat berkas gambar"
 
 #: src/wallpaperpreview.ui:57
 msgid "Activities"
-msgstr ""
+msgstr "Aktivitas"
 
-#, c-format
 #~ msgid ""
 #~ "Select an application to open “%s”. More applications are available in <a "
 #~ "href='software'>Software.</a>"
