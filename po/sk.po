@@ -1,51 +1,241 @@
 # Slovak translation for xdg-desktop-portal-gtk.
 # Copyright (C) 2016 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
 # This file is distributed under the same license as the xdg-desktop-portal-gtk package.
-# Dušan Kazik <prescott66@gmail.com>, 2016.
+# Dušan Kazik <prescott66@gmail.com>, 2016-2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2016-08-08 02:28+0000\n"
-"PO-Revision-Date: 2016-08-08 09:34+0200\n"
+"POT-Creation-Date: 2020-01-10 03:35+0000\n"
+"PO-Revision-Date: 2020-01-31 07:57+0100\n"
+"Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
-"X-Generator: Poedit 1.8.8\n"
+"X-Generator: Poedit 2.2.4\n"
 
-#: src/appchooser.c:166
-msgid "_Select"
-msgstr "Vy_brať"
+#: data/xdg-desktop-portal-gtk.desktop.in.in:4
+msgid "Portal"
+msgstr "Portál"
 
-#: src/appchooser.c:168 src/appchooserdialog.ui:10
-msgid "Open With"
-msgstr "Otvoriť pomocou"
+#. TRANSLATORS: Don't translate this text (this is icon name)
+#: data/xdg-desktop-portal-gtk.desktop.in.in:6
+msgid "applications-system-symbolic"
+msgstr "applications-system-symbolic"
 
-#: src/appchooser.c:170
-msgid "Select application"
-msgstr "Výber aplikácie"
+#: src/access.c:271
+msgid "Deny Access"
+msgstr "Zamietnuť prístup"
 
-#: src/appchooser.c:176 src/appchooserdialog.ui:14 src/filechooser.c:343
+#: src/access.c:274
+msgid "Grant Access"
+msgstr "Udeliť prístup"
+
+# dialog title
+#: src/accountdialog.c:176
+msgid "Select an Image"
+msgstr "Výber obrázku"
+
+#: src/accountdialog.c:179 src/wallpaperdialog.ui:18
+msgid "Cancel"
+msgstr "Zrušiť"
+
+#: src/accountdialog.c:180
+msgid "Select"
+msgstr "Vybrať"
+
+#: src/accountdialog.c:181
+msgid "Clear"
+msgstr "Vymazať"
+
+#: src/accountdialog.c:195
+msgid "Images"
+msgstr "Obrázky"
+
+#: src/accountdialog.c:272
+#, c-format
+msgid "Share your personal information with %s?"
+msgstr "Sprístupniť vaše osobné informácie aplikácii %s?"
+
+#: src/accountdialog.c:275
+msgid "Share your personal information with the requesting application?"
+msgstr "Sprístupniť vaše osobné informácie požadovanej aplikácii?"
+
+#: src/accountdialog.ui:10
+msgid "Share Details"
+msgstr "Podrobnosti o sprístupnení"
+
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:447
+#: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
 msgstr "_Zrušiť"
 
-#: src/appchooserdialog.ui:26 src/filechooser.c:341
+#: src/accountdialog.ui:22 src/remotedesktopdialog.ui:28
+#: src/screencastdialog.ui:28 src/screenshotdialog.ui:38
+msgid "_Share"
+msgstr "_Sprístupniť"
+
+# tooltip
+#: src/accountdialog.ui:148
+msgid "Make changes before sharing the information"
+msgstr "Vykoná zmeny pred sprístupnením informácií"
+
+#: src/appchooserdialog.c:227
+msgid "Failed to start Software"
+msgstr "Zlyhalo spustenie aplikácie Softvér"
+
+#: src/appchooserdialog.c:379
+#, c-format
+msgid "Choose an application to open the file “%s”."
+msgstr "Zvoľte aplikáciu, ktorou otvoriť súbor „%s“."
+
+#: src/appchooserdialog.c:384
+msgid "Choose an application."
+msgstr "Zvoľte aplikáciu."
+
+#: src/appchooserdialog.c:401
+#, c-format
+msgid ""
+"No apps installed that can open “%s”. You can find more applications in "
+"Software"
+msgstr ""
+"Nie sú nainštalované žiadne aplikácie, ktoré dokážu otvoriť „%s“. Viac "
+"aplikácií môžete nájsť v aplikácii Softvér."
+
+#: src/appchooserdialog.c:406
+msgid "No suitable app installed. You can find more applications in Software."
+msgstr ""
+"Nie je nainštalovaná žiadna vhodná aplikácia. Viac aplikácií môžete nájsť v "
+"aplikácii Softvér."
+
+#: src/appchooserdialog.ui:10
+msgid "Open With…"
+msgstr "Otvoriť pomocou…"
+
+#: src/appchooserdialog.ui:23 src/filechooser.c:442
 msgid "_Open"
 msgstr "_Otvoriť"
 
-#: src/screenshotdialog.c:93
+#: src/appchooserdialog.ui:115
+msgid "No Apps available"
+msgstr "Žiadne dostupné aplikácie"
+
+#: src/appchooserdialog.ui:159
+msgid "_Find More in Software"
+msgstr "_Nájsť viac v aplikácii Softvér"
+
+#: src/background.c:215
+#, c-format
+msgid "“%s” is running in the background"
+msgstr "Aplikácia „%s“ je spustená na pozadí"
+
+#: src/background.c:217
+msgid ""
+"This might be for a legitimate reason, but the application has not provided "
+"one.\n"
+"\n"
+"Note that forcing an application to quit might cause data loss."
+msgstr ""
+"To môže byť kvôli určitému dôvodu, ale aplikácia ho neudala.\n"
+"\n"
+"Vedzte, že núteným ukončením aplikácie môžete zapríčiniť stratu údajov."
+
+#: src/background.c:220
+msgid "Force quit"
+msgstr "Vynútiť ukončenie"
+
+#: src/background.c:221
+msgid "Allow"
+msgstr "Povoliť"
+
+#: src/background.c:306
+msgid "Background activity"
+msgstr "Aktivita na pozadí"
+
+#: src/background.c:308
+#, c-format
+msgid "%s is running in the background."
+msgstr "Aplikácia %s je spustená na pozadí."
+
+#: src/background.c:314
+msgid "Find out more"
+msgstr "Zistiť viac"
+
+#: src/filechooser.c:444
+msgid "_Save"
+msgstr "_Uložiť"
+
+#: src/filechooser.c:620
+msgid "Open files read-only"
+msgstr "Otvoriť súbory iba na čítanie"
+
+#: src/remotedesktopdialog.c:188
+msgid "Pointer"
+msgstr "Ukazovateľ"
+
+#: src/remotedesktopdialog.c:191
+msgid "Keyboard"
+msgstr "Klávesnica"
+
+#: src/remotedesktopdialog.c:194
+msgid "Touch screen"
+msgstr "Dotyková obrazovka"
+
+#: src/remotedesktopdialog.c:307
+#, c-format
+msgid "Select devices to share with %s"
+msgstr "Vyberte zariadenia, ktoré sprístupniť aplikácii %s"
+
+#: src/remotedesktopdialog.c:312
+msgid "Select devices to share with the requesting application"
+msgstr "Vyberte zariadenia, ktoré sprístupniť požadovanej aplikácii"
+
+#: src/remotedesktopdialog.ui:12
+msgid "Remote desktop"
+msgstr "Vzdialená plocha"
+
+#: src/screencastdialog.ui:12
+msgid "Screen Share"
+msgstr "Sprístupnenie obrazovky"
+
+#: src/screencastwidget.c:483
+#, c-format
+msgid "Select monitor to share with %s"
+msgstr "Vyberte monitor, ktorý sprístupniť aplikácii %s"
+
+#: src/screencastwidget.c:485
+#, c-format
+msgid "Select window to share with %s"
+msgstr "Vyberte okno, ktoré sprístupniť aplikácii %s"
+
+#: src/screencastwidget.c:490
+msgid "Select monitor to share with the requesting application"
+msgstr "Vyberte monitor, ktorý sprístupniť požadovanej aplikácii"
+
+#: src/screencastwidget.c:491
+msgid "Select window to share with the requesting application"
+msgstr "Vyberte okno, ktoré sprístupniť požadovanej aplikácii"
+
+#: src/screencastwidget.ui:100
+msgid "Single Window"
+msgstr "Jedno okno"
+
+#: src/screencastwidget.ui:176
+msgid "Entire Screen"
+msgstr "Celá obrazovka"
+
+#: src/screenshotdialog.c:442
 #, c-format
 msgid "Share this screenshot with %s?"
 msgstr "Sprístupniť túto snímku obrazovky aplikácii %s?"
 
-#: src/screenshotdialog.c:96
+#: src/screenshotdialog.c:446
 msgid "Share this screenshot with the requesting application?"
 msgstr "Sprístupniť túto snímku obrazovky požadovanej aplikácii?"
 
@@ -53,14 +243,74 @@ msgstr "Sprístupniť túto snímku obrazovky požadovanej aplikácii?"
 msgid "Screenshot"
 msgstr "Snímka obrazovky"
 
-#: src/screenshotdialog.ui:25
-msgid "_Share"
-msgstr "_Sprístupniť"
+#: src/screenshotdialog.ui:30
+msgid "_Options…"
+msgstr "_Voľby…"
 
-#: src/access.c:269
-msgid "Deny Access"
-msgstr "Zamietnuť prístup"
+#: src/screenshotdialog.ui:55
+msgid "Take _Screenshot"
+msgstr "Zachytiť _snímku obrazovky"
 
-#: src/access.c:272
-msgid "Grant Access"
-msgstr "Udeliť prístup"
+#: src/screenshotdialog.ui:111
+msgid "Take Screenshot"
+msgstr "Zachytenie snímky obrazovky"
+
+#: src/screenshotdialog.ui:122
+msgid "Grab the whole sc_reen"
+msgstr "Zachytiť celú ob_razovku"
+
+#: src/screenshotdialog.ui:133
+msgid "Grab the current _window"
+msgstr "Zachytiť aktuálne o_kno"
+
+#: src/screenshotdialog.ui:144
+msgid "Select _area to grab"
+msgstr "Označiť obl_asť na zachytenie"
+
+#: src/screenshotdialog.ui:158
+msgid "Grab after a _delay of"
+msgstr "Zachytiť s _oneskorením"
+
+#: src/screenshotdialog.ui:171
+msgid "seconds"
+msgstr "sekundy"
+
+#: src/screenshotdialog.ui:181
+msgid "Effects"
+msgstr "Efekty"
+
+#: src/screenshotdialog.ui:192
+msgid "Include _pointer"
+msgstr "Zahrnúť k_urzor"
+
+#: src/screenshotdialog.ui:201
+msgid "Include the window _border"
+msgstr "Zahrnúť ok_raj okna"
+
+#: src/settings.c:184
+msgid "Requested setting not found"
+msgstr "Požadované nastavenie sa nenašlo"
+
+#: src/wallpaperdialog.c:122 src/wallpaperdialog.ui:13
+msgid "Set Background"
+msgstr "Nastavenie pozadia"
+
+#: src/wallpaperdialog.c:132
+msgid "Set Lock Screen"
+msgstr "Nastavenie uzamknutej obrazovky"
+
+#: src/wallpaperdialog.c:176
+msgid "Set Background & Lock Screen"
+msgstr "Nastavenie pozadia a uzamknutej obrazovky"
+
+#: src/wallpaperdialog.ui:26
+msgid "Set"
+msgstr "Nastaviť"
+
+#: src/wallpaperdialog.ui:62
+msgid "Failed to load image file"
+msgstr "Zlyhalo načítanie súboru s obrázkom"
+
+#: src/wallpaperpreview.ui:57
+msgid "Activities"
+msgstr "Aktivity"
