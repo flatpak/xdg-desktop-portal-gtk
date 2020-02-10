@@ -1,7 +1,7 @@
 # Italian translation for xdg-desktop-portal-gtk.
-# Copyright (C) 2017, 2018, 2019 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
+# Copyright (C) 2017, 2018, 2019, 2020 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
 # This file is distributed under the same license as the xdg-desktop-portal-gtk package.
-# Milo Casagrande <milo@milo.name>, 2017, 2018, 2019.
+# Milo Casagrande <milo@milo.name>, 2017, 2018, 2019, 2020.
 #
 msgid ""
 msgstr ""
@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
 "POT-Creation-Date: 2019-12-12 09:23-0500\n"
-"PO-Revision-Date: 2019-09-19 09:49+0200\n"
+"PO-Revision-Date: 2020-02-10 16:16+0100\n"
 "Last-Translator: Milo Casagrande <milo@milo.name>\n"
 "Language-Team: Italian <gnome-it-list@gnome.org>\n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.2.3\n"
+"X-Generator: Poedit 2.2.4\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
@@ -91,13 +91,13 @@ msgid "Failed to start Software"
 msgstr "Avvio di «Software» non riuscito"
 
 #: src/appchooserdialog.c:379
-#, fuzzy, c-format
+#, c-format
 msgid "Choose an application to open the file “%s”."
-msgstr "Impossibile trovare una applicazione che possa aprire «%s»."
+msgstr "Scegliere un'applicazione per aprire il file «%s»."
 
 #: src/appchooserdialog.c:384
 msgid "Choose an application."
-msgstr ""
+msgstr "Scegliere un'applicazione."
 
 #: src/appchooserdialog.c:401
 #, c-format
@@ -105,15 +105,18 @@ msgid ""
 "No apps installed that can open “%s”. You can find more applications in "
 "Software"
 msgstr ""
+"Nessuna app installata può aprire «%s»; è possibile trovare altre "
+"applicazioni in Software."
 
 #: src/appchooserdialog.c:406
 msgid "No suitable app installed. You can find more applications in Software."
 msgstr ""
+"Nessuna app compatibile installata; è possibile trovare altre applicazioni "
+"in Software."
 
 #: src/appchooserdialog.ui:10
-#, fuzzy
 msgid "Open With…"
-msgstr "Apri con"
+msgstr "Apri con…"
 
 #: src/appchooserdialog.ui:23 src/filechooser.c:442
 msgid "_Open"
@@ -121,17 +124,16 @@ msgstr "A_pri"
 
 #: src/appchooserdialog.ui:115
 msgid "No Apps available"
-msgstr ""
+msgstr "Nessuna app disponibile"
 
 #: src/appchooserdialog.ui:159
-#, fuzzy
 msgid "_Find More in Software"
-msgstr "Avvio di «Software» non riuscito"
+msgstr "_Trova in Software"
 
 #: src/background.c:215
-#, fuzzy, c-format
+#, c-format
 msgid "“%s” is running in the background"
-msgstr "%s è in esecuzione sullo sfondo."
+msgstr "«%s» è in esecuzione sullo sfondo"
 
 #: src/background.c:217
 msgid ""
@@ -140,10 +142,15 @@ msgid ""
 "\n"
 "Note that forcing an application to quit might cause data loss."
 msgstr ""
+"Ciò potrebbe essere per un motivo ben definito, ma l'applicazione non ne ha "
+"fornito alcuno.\n"
+"\n"
+"Attenzione: forzare l'uscita di un'applicazione potrebbe causare la perdita "
+"di dati."
 
 #: src/background.c:220
 msgid "Force quit"
-msgstr ""
+msgstr "Uscita forzata"
 
 #: src/background.c:221
 msgid "Allow"
@@ -160,7 +167,7 @@ msgstr "%s è in esecuzione sullo sfondo."
 
 #: src/background.c:314
 msgid "Find out more"
-msgstr ""
+msgstr "Maggiori informazioni"
 
 #: src/filechooser.c:444
 msgid "_Save"
@@ -287,60 +294,28 @@ msgstr "Includere il _bordo finestra"
 
 #: src/settings.c:184
 msgid "Requested setting not found"
-msgstr ""
+msgstr "Impostazione richiesta non trovata"
 
 #: src/wallpaperdialog.c:122 src/wallpaperdialog.ui:13
-#, fuzzy
 msgid "Set Background"
-msgstr "Attività sullo sfondo"
+msgstr "Imposta sfondo"
 
 #: src/wallpaperdialog.c:132
 msgid "Set Lock Screen"
-msgstr ""
+msgstr "Imposta blocca schermo"
 
 #: src/wallpaperdialog.c:176
 msgid "Set Background & Lock Screen"
-msgstr ""
+msgstr "Imposta sfondo e blocca schermo"
 
 #: src/wallpaperdialog.ui:26
-#, fuzzy
 msgid "Set"
-msgstr "Seleziona"
+msgstr "Imposta"
 
 #: src/wallpaperdialog.ui:62
 msgid "Failed to load image file"
-msgstr ""
+msgstr "Caricamento immagine non riuscito"
 
 #: src/wallpaperpreview.ui:57
 msgid "Activities"
-msgstr ""
-
-#, c-format
-#~ msgid ""
-#~ "Select an application to open “%s”. More applications are available in <a "
-#~ "href='software'>Software.</a>"
-#~ msgstr ""
-#~ "Selezionare un'applicazione per aprire «%s». Ulteriori applicazioni sono "
-#~ "disponibili in «<a href='software'>Software</a>»."
-
-#~ msgid ""
-#~ "Select an application. More applications are available in <a "
-#~ "href='software'>Software.</a>"
-#~ msgstr ""
-#~ "Selezionare un'applicazione. Ulteriori applicazioni sono disponibili in "
-#~ "«<a href='software'>Software</a>»."
-
-#~ msgid "Unable to find a suitable application."
-#~ msgstr "Impossibile trovare una applicazione adatta."
-
-#~ msgid "No Applications Found"
-#~ msgstr "Nessuna applicazione trovata"
-
-#~ msgid "Find Compatible Applications in Software"
-#~ msgstr "Trova applicazione compatibile in «Software»"
-
-#~ msgid "Forbid"
-#~ msgstr "Impedisci"
-
-#~ msgid "Ignore"
-#~ msgstr "Ignora"
+msgstr "Attività"
