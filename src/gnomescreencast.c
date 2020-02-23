@@ -22,7 +22,7 @@
 
 #include <stdint.h>
 
-#define SUPPORTED_MUTTER_SCREEN_CAST_API_VERSION 2
+#define SUPPORTED_MUTTER_SCREEN_CAST_API_VERSION 3
 
 enum
 {
