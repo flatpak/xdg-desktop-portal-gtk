@@ -35,7 +35,7 @@
 #include "session.h"
 #include "utils.h"
 
-#define SUPPORTED_MUTTER_SCREEN_CAST_API_VERSION 2
+#define SUPPORTED_MUTTER_SCREEN_CAST_API_VERSION 3
 
 typedef struct _ScreenCastDialogHandle ScreenCastDialogHandle;
 
