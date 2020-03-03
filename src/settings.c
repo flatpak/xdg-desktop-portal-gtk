@@ -37,6 +37,8 @@ static FcMonitor *fontconfig_monitor;
 static int fontconfig_serial;
 static gboolean enable_animations;
 
+static void sync_animations_enabled (XdpImplSettings *impl, ShellIntrospect *shell_introspect);
+
 typedef struct {
   GSettingsSchema *schema;
   GSettings *settings;
@@ -218,9 +220,7 @@ on_settings_changed (GSettings             *settings,
   g_debug ("Emitting changed for %s %s", user_data->namespace, key);
   if (strcmp (user_data->namespace, "org.gnome.desktop.interface") == 0 &&
       strcmp (key, "enable-animations") == 0)
-    xdp_impl_settings_emit_setting_changed (user_data->self,
-                                            user_data->namespace, key,
-                                            g_variant_new ("v", g_variant_new_boolean (enable_animations)));
+    sync_animations_enabled (user_data->self, shell_introspect_get ());
   else
     xdp_impl_settings_emit_setting_changed (user_data->self,
                                             user_data->namespace, key,
@@ -284,8 +284,8 @@ fontconfig_changed (FcMonitor       *monitor,
 }
 
 static void
-override_enable_animations (XdpImplSettings *impl,
-                            gboolean         new_enable_animations)
+set_enable_animations (XdpImplSettings *impl,
+                       gboolean         new_enable_animations)
 {
   const char *namespace = "org.gnome.desktop.interface";
   const char *key = "enable-animations";
@@ -304,24 +304,26 @@ override_enable_animations (XdpImplSettings *impl,
 }
 
 static void
-sync_animations_enabled_override (XdpImplSettings *impl,
-                                  ShellIntrospect *shell_introspect)
+sync_animations_enabled (XdpImplSettings *impl,
+                         ShellIntrospect *shell_introspect)
 {
   gboolean new_enable_animations;
 
   if (!shell_introspect_are_animations_enabled (shell_introspect,
                                                 &new_enable_animations))
+    {
+      SettingsBundle *bundle = g_hash_table_lookup (settings, "org.gnome.desktop.interface");
+      new_enable_animations = g_settings_get_boolean (bundle->settings, "enable-animations");
+    }
 
-    return;
-
-  override_enable_animations (impl, new_enable_animations);
+  set_enable_animations (impl, new_enable_animations);
 }
 
 static void
 animations_enabled_changed (ShellIntrospect *shell_introspect,
                             XdpImplSettings *impl)
 {
-  sync_animations_enabled_override (impl, shell_introspect);
+  sync_animations_enabled (impl, shell_introspect);
 }
 
 gboolean
@@ -348,8 +350,8 @@ settings_init (GDBusConnection  *bus,
   g_signal_connect (shell_introspect, "animations-enabled-changed",
                     G_CALLBACK (animations_enabled_changed),
                     helper);
-  sync_animations_enabled_override (XDP_IMPL_SETTINGS (helper),
-                                    shell_introspect);
+  sync_animations_enabled (XDP_IMPL_SETTINGS (helper),
+                           shell_introspect);
 
   if (!g_dbus_interface_skeleton_export (helper,
                                          bus,
