@@ -1,15 +1,15 @@
 # Lithuanian translation for xdg-desktop-portal-gtk.
 # Copyright (C) 2018 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
 # This file is distributed under the same license as the xdg-desktop-portal-gtk package.
-# Moo, 2018, 2019.
+# Moo, 2018, 2019, 2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2019-12-12 09:23-0500\n"
-"PO-Revision-Date: 2019-06-07 00:27+0300\n"
+"POT-Creation-Date: 2020-01-10 15:35+0000\n"
+"PO-Revision-Date: 2020-03-07 20:21+0200\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
 "%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.3\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
@@ -90,13 +90,13 @@ msgid "Failed to start Software"
 msgstr "Nepavyko paleisti Programinės įrangos"
 
 #: src/appchooserdialog.c:379
-#, fuzzy, c-format
+#, c-format
 msgid "Choose an application to open the file “%s”."
-msgstr "Nepavyko rasti programos, kuri galėtų atverti \"%s\"."
+msgstr "Pasirinkite programą, skirtą atverti \"%s\"."
 
 #: src/appchooserdialog.c:384
 msgid "Choose an application."
-msgstr ""
+msgstr "Pasirinkite programą."
 
 #: src/appchooserdialog.c:401
 #, c-format
@@ -104,15 +104,18 @@ msgid ""
 "No apps installed that can open “%s”. You can find more applications in "
 "Software"
 msgstr ""
+"Nėra programų, kurios galėtų atverti \"%s\". Daugiau programų galite rasti "
+"Programinėje įrangoje"
 
 #: src/appchooserdialog.c:406
 msgid "No suitable app installed. You can find more applications in Software."
 msgstr ""
+"Neįdiegta jokia tinkama programa. Daugiau programų galite rasti Programinėje "
+"įrangoje."
 
 #: src/appchooserdialog.ui:10
-#, fuzzy
 msgid "Open With…"
-msgstr "Atverti naudojant"
+msgstr "Atverti naudojant…"
 
 #: src/appchooserdialog.ui:23 src/filechooser.c:442
 msgid "_Open"
@@ -120,17 +123,16 @@ msgstr "_Atverti"
 
 #: src/appchooserdialog.ui:115
 msgid "No Apps available"
-msgstr ""
+msgstr "Nėra prieinamų programų"
 
 #: src/appchooserdialog.ui:159
-#, fuzzy
 msgid "_Find More in Software"
-msgstr "Nepavyko paleisti Programinės įrangos"
+msgstr "_Rasti daugiau Programinėje įrangoje"
 
 #: src/background.c:215
-#, fuzzy, c-format
+#, c-format
 msgid "“%s” is running in the background"
-msgstr "%s yra vykdoma fone."
+msgstr "\"%s\" veikia fone"
 
 #: src/background.c:217
 msgid ""
@@ -139,10 +141,15 @@ msgid ""
 "\n"
 "Note that forcing an application to quit might cause data loss."
 msgstr ""
+"Taip gali būti dėl pagrįstos priežasties, tačiau programa priežasties "
+"nenurodė.\n"
+"\n"
+"Turėkite omenyje, kad privertus programą užbaigti darbą, gali būti prarasti "
+"duomenys."
 
 #: src/background.c:220
 msgid "Force quit"
-msgstr ""
+msgstr "Priverstinai baigti darbą"
 
 #: src/background.c:221
 msgid "Allow"
@@ -159,7 +166,7 @@ msgstr "%s yra vykdoma fone."
 
 #: src/background.c:314
 msgid "Find out more"
-msgstr ""
+msgstr "Sužinoti daugiau"
 
 #: src/filechooser.c:444
 msgid "_Save"
@@ -195,9 +202,8 @@ msgid "Remote desktop"
 msgstr "Nuotolinis darbalaukis"
 
 #: src/screencastdialog.ui:12
-#, fuzzy
 msgid "Screen Share"
-msgstr "Ekrano kopija"
+msgstr "Ekrano bendrinimas"
 
 #: src/screencastwidget.c:483
 #, c-format
@@ -205,26 +211,25 @@ msgid "Select monitor to share with %s"
 msgstr "Pasirinkti vaizduoklį, kurį bendrinti su %s"
 
 #: src/screencastwidget.c:485
-#, fuzzy, c-format
+#, c-format
 msgid "Select window to share with %s"
-msgstr "Pasirinkti vaizduoklį, kurį bendrinti su %s"
+msgstr "Pasirinkti langą, kurį bendrinti su %s"
 
 #: src/screencastwidget.c:490
 msgid "Select monitor to share with the requesting application"
 msgstr "Pasirinkti vaizduoklį, kurį bendrinti su prašančia programa"
 
 #: src/screencastwidget.c:491
-#, fuzzy
 msgid "Select window to share with the requesting application"
-msgstr "Pasirinkti vaizduoklį, kurį bendrinti su prašančia programa"
+msgstr "Pasirinkti langą, kurį bendrinti su prašančia programa"
 
 #: src/screencastwidget.ui:100
 msgid "Single Window"
-msgstr ""
+msgstr "Vienas langas"
 
 #: src/screencastwidget.ui:176
 msgid "Entire Screen"
-msgstr ""
+msgstr "Visas ekranas"
 
 #: src/screenshotdialog.c:442
 #, c-format
@@ -285,35 +290,32 @@ msgstr "Įtraukti lango rė_melį"
 
 #: src/settings.c:184
 msgid "Requested setting not found"
-msgstr ""
+msgstr "Užklaustas nustatymas nerastas"
 
 #: src/wallpaperdialog.c:122 src/wallpaperdialog.ui:13
-#, fuzzy
 msgid "Set Background"
-msgstr "Foninė veikla"
+msgstr "Nustatyti foną"
 
 #: src/wallpaperdialog.c:132
 msgid "Set Lock Screen"
-msgstr ""
+msgstr "Nustatyti užrakto ekraną"
 
 #: src/wallpaperdialog.c:176
 msgid "Set Background & Lock Screen"
-msgstr ""
+msgstr "Nustatyti foną ir užrakto ekraną"
 
 #: src/wallpaperdialog.ui:26
-#, fuzzy
 msgid "Set"
-msgstr "Pasirinkti"
+msgstr "Nustatyti"
 
 #: src/wallpaperdialog.ui:62
 msgid "Failed to load image file"
-msgstr ""
+msgstr "Nepavyko įkelti paveikslo failo"
 
 #: src/wallpaperpreview.ui:57
 msgid "Activities"
-msgstr ""
+msgstr "Apžvalga"
 
-#, c-format
 #~ msgid ""
 #~ "Select an application to open “%s”. More applications are available in <a "
 #~ "href='software'>Software.</a>"
