@@ -3,15 +3,16 @@
 # This file is distributed under the same license as the xdg-desktop-portal-gtk package.
 #
 # Muhammet Kara <muhammetk@gnome.org>, 2017, 2018.
-# Sabri Ünal <libreajans@gmail.com>, 2019.
+# Sabri Ünal <libreajans@gmail.com>, 2019-2020.
+# Emin Tufan Çetin <etcetin@gmail.com>, 2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2019-12-12 09:23-0500\n"
-"PO-Revision-Date: 2019-09-07 21:52+0300\n"
+"POT-Creation-Date: 2020-01-10 03:35+0000\n"
+"PO-Revision-Date: 2020-03-09 11:10+0300\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
 "Language: tr\n"
@@ -91,13 +92,13 @@ msgid "Failed to start Software"
 msgstr "Yazılımlar başlatılamadı"
 
 #: src/appchooserdialog.c:379
-#, fuzzy, c-format
+#, c-format
 msgid "Choose an application to open the file “%s”."
-msgstr "“%s”i açabilen bir uygulama bulunamadı."
+msgstr "“%s” dosyasını açmak için uygulama seç."
 
 #: src/appchooserdialog.c:384
 msgid "Choose an application."
-msgstr ""
+msgstr "Uygulama seç."
 
 #: src/appchooserdialog.c:401
 #, c-format
@@ -105,15 +106,18 @@ msgid ""
 "No apps installed that can open “%s”. You can find more applications in "
 "Software"
 msgstr ""
+"“%s” dosyasını açabilen hiçbir uygulama yüklenmedi. Daha çok uygulamayı "
+"Yazılımlar’da bulabilirsiniz."
 
 #: src/appchooserdialog.c:406
 msgid "No suitable app installed. You can find more applications in Software."
 msgstr ""
+"Kullanılabilir uygulama yüklenmedi. Daha çok uygulamayı Yazılımlar’da "
+"bulabilirsiniz."
 
 #: src/appchooserdialog.ui:10
-#, fuzzy
 msgid "Open With…"
-msgstr "Birlikte Aç"
+msgstr "Birlikte Aç…"
 
 #: src/appchooserdialog.ui:23 src/filechooser.c:442
 msgid "_Open"
@@ -121,17 +125,16 @@ msgstr "_Aç"
 
 #: src/appchooserdialog.ui:115
 msgid "No Apps available"
-msgstr ""
+msgstr "Kullanılabilir uygulama yok"
 
 #: src/appchooserdialog.ui:159
-#, fuzzy
 msgid "_Find More in Software"
-msgstr "Yazılımlar başlatılamadı"
+msgstr "Yazılımlar’da Daha Çoğunu _Bul"
 
 #: src/background.c:215
-#, fuzzy, c-format
+#, c-format
 msgid "“%s” is running in the background"
-msgstr "%s arkaplanda çalışıyor"
+msgstr "“%s” arkaplanda çalışıyor"
 
 #: src/background.c:217
 msgid ""
@@ -140,10 +143,13 @@ msgid ""
 "\n"
 "Note that forcing an application to quit might cause data loss."
 msgstr ""
+"Bu geçerli nedenden kaynaklanıyor olabilir, ancak uygulama neden sunmadı.\n"
+"\n"
+"Uygulamayı çıkmaya zorlamak veri kaybına neden olabilir."
 
 #: src/background.c:220
 msgid "Force quit"
-msgstr ""
+msgstr "Kapanmaya zorla"
 
 #: src/background.c:221
 msgid "Allow"
@@ -156,11 +162,11 @@ msgstr "Arkaplan etkinliği"
 #: src/background.c:308
 #, c-format
 msgid "%s is running in the background."
-msgstr "%s arkaplanda çalışıyor"
+msgstr "%s arkaplanda çalışıyor."
 
 #: src/background.c:314
 msgid "Find out more"
-msgstr ""
+msgstr "Daha çoğunu keşfet"
 
 #: src/filechooser.c:444
 msgid "_Save"
@@ -196,9 +202,8 @@ msgid "Remote desktop"
 msgstr "Uzak masaüstü"
 
 #: src/screencastdialog.ui:12
-#, fuzzy
 msgid "Screen Share"
-msgstr "Ekran Görüntüsü"
+msgstr "Ekran Paylaşımı"
 
 #: src/screencastwidget.c:483
 #, c-format
@@ -206,26 +211,25 @@ msgid "Select monitor to share with %s"
 msgstr "%s ile paylaşılacak monitörü seçin"
 
 #: src/screencastwidget.c:485
-#, fuzzy, c-format
+#, c-format
 msgid "Select window to share with %s"
-msgstr "%s ile paylaşılacak monitörü seçin"
+msgstr "%s ile paylaşılacak pencereyi seçin"
 
 #: src/screencastwidget.c:490
 msgid "Select monitor to share with the requesting application"
 msgstr "İstekte bulunan uygulama ile paylaşılacak monitörü seçin"
 
 #: src/screencastwidget.c:491
-#, fuzzy
 msgid "Select window to share with the requesting application"
-msgstr "İstekte bulunan uygulama ile paylaşılacak monitörü seçin"
+msgstr "İstekte bulunan uygulama ile paylaşılacak pencereyi seçin"
 
 #: src/screencastwidget.ui:100
 msgid "Single Window"
-msgstr ""
+msgstr "Tek Pencere"
 
 #: src/screencastwidget.ui:176
 msgid "Entire Screen"
-msgstr ""
+msgstr "Tüm Ekran"
 
 #: src/screenshotdialog.c:442
 #, c-format
@@ -242,7 +246,7 @@ msgstr "Ekran Görüntüsü"
 
 #: src/screenshotdialog.ui:30
 msgid "_Options…"
-msgstr "Se_çenekler..."
+msgstr "Se_çenekler…"
 
 #: src/screenshotdialog.ui:55
 msgid "Take _Screenshot"
@@ -286,35 +290,32 @@ msgstr "Pencere _kenarlığını dahil et"
 
 #: src/settings.c:184
 msgid "Requested setting not found"
-msgstr ""
+msgstr "İstenen ayar bulunamadı"
 
 #: src/wallpaperdialog.c:122 src/wallpaperdialog.ui:13
-#, fuzzy
 msgid "Set Background"
-msgstr "Arkaplan etkinliği"
+msgstr "Arka Plan Belirle"
 
 #: src/wallpaperdialog.c:132
 msgid "Set Lock Screen"
-msgstr ""
+msgstr "Kilit Ekranı Belirle"
 
 #: src/wallpaperdialog.c:176
 msgid "Set Background & Lock Screen"
-msgstr ""
+msgstr "Arka Plan ve Kilit Ekranı Belirle"
 
 #: src/wallpaperdialog.ui:26
-#, fuzzy
 msgid "Set"
-msgstr "Seç"
+msgstr "Belirle"
 
 #: src/wallpaperdialog.ui:62
 msgid "Failed to load image file"
-msgstr ""
+msgstr "Resim dosyası yüklenirken hata oluştu"
 
 #: src/wallpaperpreview.ui:57
 msgid "Activities"
-msgstr ""
+msgstr "Etkinlikler"
 
-#, c-format
 #~ msgid ""
 #~ "Select an application to open “%s”. More applications are available in <a "
 #~ "href='software'>Software.</a>"
