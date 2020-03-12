@@ -1,3 +1,10 @@
+Changes in 1.7.0
+================
+
+- screencast: Support mutter version 3
+- settings: Fall back to gsettings for enable-animations
+- Translation updates
+
 Changes in 1.6.0
 ================
 
