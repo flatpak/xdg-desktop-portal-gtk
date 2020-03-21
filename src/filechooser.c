@@ -132,10 +132,15 @@ send_response (FileDialogHandle *handle)
   GVariantBuilder uri_builder;
   GVariantBuilder opt_builder;
   GSList *l;
+  const char *method_name;
+
+  method_name = g_dbus_method_invocation_get_method_name (handle->invocation);
 
   g_variant_builder_init (&opt_builder, G_VARIANT_TYPE_VARDICT);
 
-  if (handle->action == GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER && handle->uris)
+  if (strcmp (method_name, "SaveFiles") == 0 &&
+      handle->action == GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER &&
+      handle->uris)
     {
       g_autoptr(GFile) base_dir = g_file_new_for_uri (handle->uris->data);
 
@@ -182,21 +187,23 @@ send_response (FileDialogHandle *handle)
   if (handle->request->exported)
     request_unexport (handle->request);
 
-  if (handle->action == GTK_FILE_CHOOSER_ACTION_OPEN)
+  if (strcmp (method_name, "OpenFile") == 0)
     xdp_impl_file_chooser_complete_open_file (handle->impl,
                                               handle->invocation,
                                               handle->response,
                                               g_variant_builder_end (&opt_builder));
-  else if (handle->action == GTK_FILE_CHOOSER_ACTION_SAVE)
+  else if (strcmp (method_name, "SaveFile") == 0)
     xdp_impl_file_chooser_complete_save_file (handle->impl,
                                               handle->invocation,
                                               handle->response,
                                               g_variant_builder_end (&opt_builder));
-  else
+  else if (strcmp (method_name, "SaveFiles") == 0)
     xdp_impl_file_chooser_complete_save_files (handle->impl,
                                                handle->invocation,
                                                handle->response,
                                                g_variant_builder_end (&opt_builder));
+  else
+    g_assert_not_reached ();
 
   file_dialog_handle_close (handle);
 }
@@ -394,6 +401,7 @@ handle_open (XdpImplFileChooser *object,
   const gchar *sender;
   GtkFileChooserAction action;
   gboolean multiple;
+  gboolean directory;
   gboolean modal;
   GdkDisplay *display;
   GdkScreen *screen;
@@ -428,9 +436,11 @@ handle_open (XdpImplFileChooser *object,
     }
   else
     {
-      action = GTK_FILE_CHOOSER_ACTION_OPEN;
       if (!g_variant_lookup (arg_options, "multiple", "b", &multiple))
         multiple = FALSE;
+      if (!g_variant_lookup (arg_options, "directory", "b", &directory))
+        directory = FALSE;
+      action = directory ? GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER : GTK_FILE_CHOOSER_ACTION_OPEN;
     }
 
   if (!g_variant_lookup (arg_options, "modal", "b", &modal))
@@ -439,7 +449,7 @@ handle_open (XdpImplFileChooser *object,
   if (!g_variant_lookup (arg_options, "accept_label", "&s", &accept_label))
     {
       if (strcmp (method_name, "OpenFile") == 0)
-        accept_label = _("_Open");
+        accept_label = multiple ? _("_Open") : _("_Select");
       else
         accept_label = _("_Save");
     }
