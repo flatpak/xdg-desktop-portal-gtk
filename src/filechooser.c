@@ -489,6 +489,7 @@ handle_open (XdpImplFileChooser *object,
   g_object_set (preview, "margin", 10, NULL);
   gtk_widget_show (preview);
   gtk_file_chooser_set_preview_widget (GTK_FILE_CHOOSER (dialog), preview);
+  gtk_file_chooser_set_preview_widget_active (GTK_FILE_CHOOSER (dialog), FALSE);
   gtk_file_chooser_set_use_preview_label (GTK_FILE_CHOOSER (dialog), FALSE);
   g_signal_connect (dialog, "update-preview", G_CALLBACK (update_preview_cb), preview);
 
