@@ -1,3 +1,10 @@
+Changes in 1.7.1
+================
+
+- filechooser: Handle the "directory" option to select directories
+- filechooser: Only show preview when we have an image
+- Translation updates
+
 Changes in 1.7.0
 ================
 
