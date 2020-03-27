@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2019-12-12 15:37+0000\n"
-"PO-Revision-Date: 2019-12-12 20:04+0100\n"
+"POT-Creation-Date: 2020-03-22 04:27+0000\n"
+"PO-Revision-Date: 2020-03-24 13:58+0100\n"
 "Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.3\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
@@ -71,7 +71,7 @@ msgstr "Sdílet vaše osobní informace s aplikací, která o to žádá?"
 msgid "Share Details"
 msgstr "Sdílet detaily"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:447
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:457
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
@@ -118,7 +118,7 @@ msgstr ""
 msgid "Open With…"
 msgstr "Otevřít pomocí…"
 
-#: src/appchooserdialog.ui:23 src/filechooser.c:442
+#: src/appchooserdialog.ui:23 src/filechooser.c:452
 msgid "_Open"
 msgstr "_Otevřít"
 
@@ -168,11 +168,15 @@ msgstr "Aplikace %s běží na pozadí."
 msgid "Find out more"
 msgstr "Zjistit více"
 
-#: src/filechooser.c:444
+#: src/filechooser.c:452
+msgid "_Select"
+msgstr "_Vybrat"
+
+#: src/filechooser.c:454
 msgid "_Save"
 msgstr "_Uložit"
 
-#: src/filechooser.c:620
+#: src/filechooser.c:630
 msgid "Open files read-only"
 msgstr "Otevřít soubory pouze pro čtení"
 
@@ -288,7 +292,7 @@ msgstr "Zahrnout _kurzor myši"
 msgid "Include the window _border"
 msgstr "Zahrnout _rámeček okna"
 
-#: src/settings.c:184
+#: src/settings.c:186
 msgid "Requested setting not found"
 msgstr "Požadované nastavení nebylo nalezeno"
 
