@@ -1,16 +1,16 @@
 # Polish translation for xdg-desktop-portal-gtk.
-# Copyright © 2016-2019 the xdg-desktop-portal-gtk authors.
+# Copyright © 2016-2020 the xdg-desktop-portal-gtk authors.
 # This file is distributed under the same license as the xdg-desktop-portal-gtk package.
-# Piotr Drąg <piotrdrag@gmail.com>, 2016-2019.
-# Aviary.pl <community-poland@mozilla.org>, 2016-2019.
+# Piotr Drąg <piotrdrag@gmail.com>, 2016-2020.
+# Aviary.pl <community-poland@mozilla.org>, 2016-2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2019-12-12 09:23-0500\n"
-"PO-Revision-Date: 2019-12-21 14:52+0100\n"
+"POT-Creation-Date: 2020-03-29 10:42+0000\n"
+"PO-Revision-Date: 2020-03-29 12:44+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
@@ -70,7 +70,7 @@ msgstr "Udostępnić informacje o użytkowniku proszącemu o to programowi?"
 msgid "Share Details"
 msgstr "Udostępnianie informacji"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:447
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:457
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
@@ -117,7 +117,7 @@ msgstr ""
 msgid "Open With…"
 msgstr "Otwarcie za pomocą…"
 
-#: src/appchooserdialog.ui:23 src/filechooser.c:442
+#: src/appchooserdialog.ui:23 src/filechooser.c:452
 msgid "_Open"
 msgstr "_Otwórz"
 
@@ -167,11 +167,15 @@ msgstr "Program „%s” działa w tle."
 msgid "Find out more"
 msgstr "Więcej informacji"
 
-#: src/filechooser.c:444
+#: src/filechooser.c:452
+msgid "_Select"
+msgstr "_Wybierz"
+
+#: src/filechooser.c:454
 msgid "_Save"
 msgstr "_Zapisz"
 
-#: src/filechooser.c:620
+#: src/filechooser.c:631
 msgid "Open files read-only"
 msgstr "Otwarcie plików tylko do odczytu"
 
@@ -287,7 +291,7 @@ msgstr "Wi_doczny kursor"
 msgid "Include the window _border"
 msgstr "_Krawędź okna"
 
-#: src/settings.c:184
+#: src/settings.c:186
 msgid "Requested setting not found"
 msgstr "Nie odnaleziono żądanego ustawienia"
 
