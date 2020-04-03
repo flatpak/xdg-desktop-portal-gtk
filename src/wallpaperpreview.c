@@ -218,8 +218,12 @@ wallpaper_preview_set_image (WallpaperPreview *self,
                              const gchar *image_uri,
                              gboolean is_lockscreen)
 {
-  g_autoptr(GFile) image_file = g_file_new_for_uri (image_uri);
-  gnome_bg_set_filename (self->bg, g_file_get_path (image_file));
+  g_autofree char *path = NULL;
+  g_autoptr(GFile) image_file = NULL;
+
+  image_file = g_file_new_for_uri (image_uri);
+  path = g_file_get_path (image_file);
+  gnome_bg_set_filename (self->bg, path);
 
   gtk_widget_set_visible (self->animated_background_icon,
                           gnome_bg_changes_with_time (self->bg));
