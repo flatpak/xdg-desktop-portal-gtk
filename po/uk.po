@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/issues"
 "\n"
-"POT-Creation-Date: 2019-12-13 03:37+0000\n"
-"PO-Revision-Date: 2020-01-09 14:39+0200\n"
+"POT-Creation-Date: 2020-03-22 04:27+0000\n"
+"PO-Revision-Date: 2020-03-28 22:00+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -70,7 +70,7 @@ msgstr "Поділитися вашими особистими даними з �
 msgid "Share Details"
 msgstr "Оприлюднити подробиці"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:447
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:457
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
@@ -104,20 +104,20 @@ msgid ""
 "No apps installed that can open “%s”. You can find more applications in "
 "Software"
 msgstr ""
-"Не встановлено жодної програми, яка придатна для відкриття «%s». Потрібні вам"
-" програми ви можете знайти за допомогою програми «Програмні засоби»."
+"Не встановлено жодної програми, яка придатна для відкриття «%s». Потрібні "
+"вам програми ви можете знайти за допомогою програми «Програмні засоби»."
 
 #: src/appchooserdialog.c:406
 msgid "No suitable app installed. You can find more applications in Software."
 msgstr ""
-"Не встановлено відповідної програми. Потрібні вам програми ви можете знайти"
-" за допомогою програми «Програмні засоби»."
+"Не встановлено відповідної програми. Потрібні вам програми ви можете знайти "
+"за допомогою програми «Програмні засоби»."
 
 #: src/appchooserdialog.ui:10
 msgid "Open With…"
 msgstr "Відкрити за допомогою…"
 
-#: src/appchooserdialog.ui:23 src/filechooser.c:442
+#: src/appchooserdialog.ui:23 src/filechooser.c:452
 msgid "_Open"
 msgstr "_Відкрити"
 
@@ -143,8 +143,8 @@ msgid ""
 msgstr ""
 "Можливо, причина є вагомою, але програма не надала її.\n"
 "\n"
-"Зауважте, що примусове завершення роботи, ймовірно, може призвести до втрати"
-" даних."
+"Зауважте, що примусове завершення роботи, ймовірно, може призвести до втрати "
+"даних."
 
 #: src/background.c:220
 msgid "Force quit"
@@ -167,11 +167,16 @@ msgstr "%s працює у фоновому режимі."
 msgid "Find out more"
 msgstr "Дізнатися більше"
 
-#: src/filechooser.c:444
+#: src/filechooser.c:452
+#| msgid "Select"
+msgid "_Select"
+msgstr "_Вибрати"
+
+#: src/filechooser.c:454
 msgid "_Save"
 msgstr "_Зберегти"
 
-#: src/filechooser.c:620
+#: src/filechooser.c:630
 msgid "Open files read-only"
 msgstr "Відкрити файли лише для читання"
 
@@ -292,7 +297,7 @@ msgstr "Разом із в_казівником"
 msgid "Include the window _border"
 msgstr "Включити _рамку вікна"
 
-#: src/settings.c:184
+#: src/settings.c:186
 msgid "Requested setting not found"
 msgstr "Потрібного вам параметра не знайдено"
 
@@ -319,4 +324,3 @@ msgstr "Не вдалося завантажити файл зображення
 #: src/wallpaperpreview.ui:57
 msgid "Activities"
 msgstr "Діяльність"
-
