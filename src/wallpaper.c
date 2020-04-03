@@ -14,6 +14,7 @@
 
 #include <glib/gi18n.h>
 #include <gio/gdesktopappinfo.h>
+#include <gdesktop-enums.h>
 
 #include "xdg-desktop-portal-dbus.h"
 #include "shell-dbus.h"
@@ -77,9 +78,8 @@ set_gsettings (gchar *schema,
 
   settings = g_settings_new (schema);
 
-  return g_settings_set_string (settings,
-                                "picture-uri",
-                                uri);
+  return (g_settings_set_string (settings, "picture-uri", uri) &&
+          g_settings_set_enum (settings, "picture-options", G_DESKTOP_BACKGROUND_STYLE_ZOOM));
 }
 
 static void
