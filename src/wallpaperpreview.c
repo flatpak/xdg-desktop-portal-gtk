@@ -167,7 +167,7 @@ wallpaper_preview_init (WallpaperPreview *self)
   self->clock_time_timeout_id = g_timeout_add_seconds (1, update_clock_cb, self);
 
   self->bg = gnome_bg_new ();
-  gnome_bg_set_placement (self->bg, G_DESKTOP_BACKGROUND_STYLE_STRETCHED);
+  gnome_bg_set_placement (self->bg, G_DESKTOP_BACKGROUND_STYLE_ZOOM);
   self->thumbs = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE);
 }
 
