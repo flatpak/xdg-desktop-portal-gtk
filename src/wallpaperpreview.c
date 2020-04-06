@@ -167,7 +167,7 @@ wallpaper_preview_init (WallpaperPreview *self)
   self->clock_time_timeout_id = g_timeout_add_seconds (1, update_clock_cb, self);
 
   self->bg = gnome_bg_new ();
-  gnome_bg_set_placement (self->bg, G_DESKTOP_BACKGROUND_STYLE_STRETCHED);
+  gnome_bg_set_placement (self->bg, G_DESKTOP_BACKGROUND_STYLE_ZOOM);
   self->thumbs = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE);
 }
 
@@ -218,8 +218,12 @@ wallpaper_preview_set_image (WallpaperPreview *self,
                              const gchar *image_uri,
                              gboolean is_lockscreen)
 {
-  g_autoptr(GFile) image_file = g_file_new_for_uri (image_uri);
-  gnome_bg_set_filename (self->bg, g_file_get_path (image_file));
+  g_autofree char *path = NULL;
+  g_autoptr(GFile) image_file = NULL;
+
+  image_file = g_file_new_for_uri (image_uri);
+  path = g_file_get_path (image_file);
+  gnome_bg_set_filename (self->bg, path);
 
   gtk_widget_set_visible (self->animated_background_icon,
                           gnome_bg_changes_with_time (self->bg));
