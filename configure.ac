@@ -57,7 +57,7 @@ AC_SUBST([DBUS_INTERFACES_DIR], [`$PKG_CONFIG --variable=interfaces_dir dbus-1`]
 AC_SUBST([GDBUS_CODEGEN], [`$PKG_CONFIG --variable gdbus_codegen gio-2.0`])
 AC_SUBST([GLIB_COMPILE_RESOURCES], [`$PKG_CONFIG --variable glib_compile_resources gio-2.0`])
 
-PKG_CHECK_MODULES(GTK, [xdg-desktop-portal >= 1.5 glib-2.0 >= 2.44 gio-unix-2.0 gtk+-3.0 >= 3.14 gtk+-unix-print-3.0 fontconfig gnome-desktop-3.0 gsettings-desktop-schemas])
+PKG_CHECK_MODULES(GTK, [xdg-desktop-portal >= 1.5 glib-2.0 >= 2.44 gio-unix-2.0 gtk+-3.0 >= 3.14 gtk+-unix-print-3.0 fontconfig gsettings-desktop-schemas])
 AC_SUBST(GTK_CFLAGS)
 AC_SUBST(GTK_LIBS)
 
@@ -79,8 +79,14 @@ if test "$have_gtk_wayland" = "yes"; then
 fi
 AM_CONDITIONAL([HAVE_GTK_WAYLAND], [test "$have_gtk_wayland" = "yes"])
 
+AC_CHECK_LIBM
+AC_SUBST(LIBM)
+PKG_CHECK_MODULES([GNOME_BG], gtk+-3.0 gsettings-desktop-schemas)
+AM_CONDITIONAL(HAVE_INTROSPECTION, test "x$found_introspection" = "xyes")
+
 AC_CONFIG_FILES([
 Makefile
+submodules/libgnome-bg/Makefile
 po/Makefile.in
 ])
 AC_OUTPUT

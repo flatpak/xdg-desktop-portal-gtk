@@ -1,0 +1,3 @@
+[submodule "libgnomebg"]
+	path = submodules/libgnome-bg
+	url = https://gitlab.gnome.org/hadess/libgnome-bg.git

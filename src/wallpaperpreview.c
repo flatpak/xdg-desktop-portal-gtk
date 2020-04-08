@@ -28,8 +28,7 @@
 #include <gio/gio.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
-#define GNOME_DESKTOP_USE_UNSTABLE_API
-#include <libgnome-desktop/gnome-bg.h>
+#include "gnome-bg.h"
 
 #include "wallpaperpreview.h"
 
@@ -42,7 +41,6 @@ struct _WallpaperPreview {
   GtkLabel *desktop_clock_label;
   GtkWidget *drawing_area;
 
-  GnomeDesktopThumbnailFactory *thumbs;
   GnomeBG *bg;
 
   GSettings *desktop_settings;
@@ -67,7 +65,6 @@ on_preview_draw_cb (GtkWidget *widget,
 
   gtk_widget_get_allocation (GTK_WIDGET (self), &allocation);
   pixbuf = gnome_bg_create_thumbnail (self->bg,
-                                      self->thumbs,
                                       gdk_screen_get_default (),
                                       allocation.width,
                                       allocation.height);
@@ -137,7 +134,6 @@ wallpaper_preview_finalize (GObject *object)
   WallpaperPreview *self = WALLPAPER_PREVIEW (object);
 
   g_clear_object (&self->desktop_settings);
-  g_clear_object (&self->thumbs);
 
   g_clear_pointer (&self->previous_time, g_date_time_unref);
 
@@ -168,7 +164,6 @@ wallpaper_preview_init (WallpaperPreview *self)
 
   self->bg = gnome_bg_new ();
   gnome_bg_set_placement (self->bg, G_DESKTOP_BACKGROUND_STYLE_ZOOM);
-  self->thumbs = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE);
 }
 
 static void

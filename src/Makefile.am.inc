@@ -165,11 +165,12 @@ xdg_desktop_portal_gtk_SOURCES += \
 	$(NULL)
 endif
 
-xdg_desktop_portal_gtk_LDADD = $(BASE_LIBS) $(GTK_LIBS) $(GTK_X11_LIBS)
+xdg_desktop_portal_gtk_LDADD = $(BASE_LIBS) $(GTK_LIBS) $(GTK_X11_LIBS) $(top_builddir)/submodules/libgnome-bg/libgnome-bg.la
 xdg_desktop_portal_gtk_CFLAGS = $(BASE_CFLAGS) $(GTK_CFLAGS) $(GTK_X11_CFLAGS)
 xdg_desktop_portal_gtk_CPPFLAGS = \
 	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"        \
 	-DLOCALEDIR=\"$(localedir)\"                    \
+	-I$(top_srcdir)/submodules/libgnome-bg		\
 	-I$(top_srcdir)/src				\
 	-I$(top_builddir)/src				\
 	$(NULL)

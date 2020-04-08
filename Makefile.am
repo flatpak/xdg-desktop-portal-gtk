@@ -1,4 +1,4 @@
-SUBDIRS = po
+SUBDIRS = submodules/libgnome-bg po
 
 BUILT_SOURCES =
 CLEANFILES =
