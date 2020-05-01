@@ -384,11 +384,11 @@ app_chooser_dialog_new (const char **choices,
       gtk_label_set_label (GTK_LABEL (dialog->heading), _("Choose an application."));
     }
 
-  ensure_default_is_below (choices, default_id, INITIAL_LIST_SIZE - 1);
-
   dialog->choices = g_strdupv ((char **)choices);
-
   n_choices = g_strv_length ((char **)choices);
+
+  ensure_default_is_below (dialog->choices, default_id, MIN (n_choices, INITIAL_LIST_SIZE - 1));
+
   if (n_choices == 0)
     {
       gtk_widget_show (dialog->empty_box);
