@@ -32,7 +32,7 @@
 #include "appchooserrow.h"
 
 #define LOCATION_MAX_LENGTH 40
-#define INITIAL_LIST_SIZE 4
+#define INITIAL_LIST_SIZE 3
 
 struct _AppChooserDialog {
   GtkWindow parent;
@@ -132,7 +132,7 @@ show_more (AppChooserDialog *dialog)
   gtk_window_set_resizable (GTK_WINDOW (dialog), TRUE);
   gtk_widget_hide (dialog->more_row);
 
-  for (i = INITIAL_LIST_SIZE - 1; dialog->choices[i]; i++)
+  for (i = INITIAL_LIST_SIZE; dialog->choices[i]; i++)
     {
       g_autofree char *desktop_id = g_strconcat (dialog->choices[i], ".desktop", NULL);
       g_autoptr(GAppInfo) info = G_APP_INFO (g_desktop_app_info_new (desktop_id));
@@ -387,7 +387,7 @@ app_chooser_dialog_new (const char **choices,
   dialog->choices = g_strdupv ((char **)choices);
   n_choices = g_strv_length ((char **)choices);
 
-  ensure_default_is_below (dialog->choices, default_id, MIN (n_choices, INITIAL_LIST_SIZE - 1));
+  ensure_default_is_below (dialog->choices, default_id, MIN (n_choices, INITIAL_LIST_SIZE));
 
   if (n_choices == 0)
     {
@@ -415,9 +415,6 @@ app_chooser_dialog_new (const char **choices,
           g_autofree char *desktop_id = g_strconcat (choices[i], ".desktop", NULL);
           g_autoptr(GAppInfo) info = G_APP_INFO (g_desktop_app_info_new (desktop_id));
           GtkWidget *row;
-
-          if (i == INITIAL_LIST_SIZE - 1 && n_choices > INITIAL_LIST_SIZE)
-            break;
 
           row = GTK_WIDGET (app_chooser_row_new (info));
           gtk_widget_set_visible (row, TRUE);
