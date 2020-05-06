@@ -132,6 +132,8 @@ show_more (AppChooserDialog *dialog)
   gtk_window_set_resizable (GTK_WINDOW (dialog), TRUE);
   gtk_widget_hide (dialog->more_row);
 
+  g_return_if_fail (g_strv_length ((char **)dialog->choices) > INITIAL_LIST_SIZE);
+
   for (i = INITIAL_LIST_SIZE; dialog->choices[i]; i++)
     {
       g_autofree char *desktop_id = g_strconcat (dialog->choices[i], ".desktop", NULL);
