@@ -316,22 +316,26 @@ shorten_location (const char *location)
 }
 
 static void
-ensure_default_is_below (const char **choices,
-                         const char  *default_id,
-                         int          num)
+ensure_default_in_initial_list (const char **choices,
+                                const char  *default_id)
 {
   int i;
+  guint n_choices;
 
   if (default_id == NULL)
     return;
 
-  for (i = 0; i < num && choices[i]; i++)
+  n_choices = g_strv_length ((char **)choices);
+  if (n_choices <= INITIAL_LIST_SIZE)
+    return;
+
+  for (i = 0; i < INITIAL_LIST_SIZE; i++)
     {
       if (strcmp (choices[i], default_id) == 0)
         return;
     }
 
-  for (i = num; choices[i]; i++)
+  for (i = INITIAL_LIST_SIZE; i < n_choices; i++)
     {
       if (strcmp (choices[i], default_id) == 0)
         {
@@ -386,11 +390,11 @@ app_chooser_dialog_new (const char **choices,
       gtk_label_set_label (GTK_LABEL (dialog->heading), _("Choose an application."));
     }
 
+  ensure_default_in_initial_list (choices, default_id);
+
   dialog->choices = g_strdupv ((char **)choices);
+
   n_choices = g_strv_length ((char **)choices);
-
-  ensure_default_is_below (dialog->choices, default_id, MIN (n_choices, INITIAL_LIST_SIZE));
-
   if (n_choices == 0)
     {
       gtk_widget_show (dialog->empty_box);
