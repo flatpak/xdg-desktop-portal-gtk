@@ -32,7 +32,7 @@
 #include "appchooserrow.h"
 
 #define LOCATION_MAX_LENGTH 40
-#define INITIAL_LIST_SIZE 4
+#define INITIAL_LIST_SIZE 3
 
 struct _AppChooserDialog {
   GtkWindow parent;
@@ -132,7 +132,9 @@ show_more (AppChooserDialog *dialog)
   gtk_window_set_resizable (GTK_WINDOW (dialog), TRUE);
   gtk_widget_hide (dialog->more_row);
 
-  for (i = INITIAL_LIST_SIZE - 1; dialog->choices[i]; i++)
+  g_return_if_fail (g_strv_length ((char **)dialog->choices) > INITIAL_LIST_SIZE);
+
+  for (i = INITIAL_LIST_SIZE; dialog->choices[i]; i++)
     {
       g_autofree char *desktop_id = g_strconcat (dialog->choices[i], ".desktop", NULL);
       g_autoptr(GAppInfo) info = G_APP_INFO (g_desktop_app_info_new (desktop_id));
@@ -314,22 +316,26 @@ shorten_location (const char *location)
 }
 
 static void
-ensure_default_is_below (const char **choices,
-                         const char  *default_id,
-                         int          num)
+ensure_default_in_initial_list (const char **choices,
+                                const char  *default_id)
 {
   int i;
+  guint n_choices;
 
   if (default_id == NULL)
     return;
 
-  for (i = 0; i < num && choices[i]; i++)
+  n_choices = g_strv_length ((char **)choices);
+  if (n_choices <= INITIAL_LIST_SIZE)
+    return;
+
+  for (i = 0; i < INITIAL_LIST_SIZE; i++)
     {
       if (strcmp (choices[i], default_id) == 0)
         return;
     }
 
-  for (i = num; choices[i]; i++)
+  for (i = INITIAL_LIST_SIZE; i < n_choices; i++)
     {
       if (strcmp (choices[i], default_id) == 0)
         {
@@ -384,7 +390,7 @@ app_chooser_dialog_new (const char **choices,
       gtk_label_set_label (GTK_LABEL (dialog->heading), _("Choose an application."));
     }
 
-  ensure_default_is_below (choices, default_id, INITIAL_LIST_SIZE - 1);
+  ensure_default_in_initial_list (choices, default_id);
 
   dialog->choices = g_strdupv ((char **)choices);
 
@@ -415,9 +421,6 @@ app_chooser_dialog_new (const char **choices,
           g_autofree char *desktop_id = g_strconcat (choices[i], ".desktop", NULL);
           g_autoptr(GAppInfo) info = G_APP_INFO (g_desktop_app_info_new (desktop_id));
           GtkWidget *row;
-
-          if (i == INITIAL_LIST_SIZE - 1 && n_choices > INITIAL_LIST_SIZE)
-            break;
 
           row = GTK_WIDGET (app_chooser_row_new (info));
           gtk_widget_set_visible (row, TRUE);
