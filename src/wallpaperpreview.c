@@ -37,8 +37,8 @@ struct _WallpaperPreview {
   GtkBox parent;
 
   GtkStack *stack;
+  GtkWidget *desktop_preview;
   GtkWidget *animated_background_icon;
-  GtkLabel *lockscreen_clock_label;
   GtkLabel *desktop_clock_label;
   GtkWidget *drawing_area;
 
@@ -99,7 +99,6 @@ update_clock_label (WallpaperPreview *self,
     label = g_date_time_format (now, "%I:%M %p");
 
   gtk_label_set_label (self->desktop_clock_label, label);
-  gtk_label_set_label (self->lockscreen_clock_label, label);
 
   g_clear_pointer (&self->previous_time, g_date_time_unref);
   self->previous_time = g_steal_pointer (&now);
@@ -200,10 +199,10 @@ wallpaper_preview_class_init (WallpaperPreviewClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/freedesktop/portal/desktop/gtk/wallpaperpreview.ui");
 
   gtk_widget_class_bind_template_child (widget_class, WallpaperPreview, stack);
+  gtk_widget_class_bind_template_child (widget_class, WallpaperPreview, desktop_preview);
   gtk_widget_class_bind_template_child (widget_class, WallpaperPreview, animated_background_icon);
   gtk_widget_class_bind_template_child (widget_class, WallpaperPreview, drawing_area);
   gtk_widget_class_bind_template_child (widget_class, WallpaperPreview, desktop_clock_label);
-  gtk_widget_class_bind_template_child (widget_class, WallpaperPreview, lockscreen_clock_label);
   gtk_widget_class_bind_template_callback (widget_class, on_preview_draw_cb);
 }
 
@@ -215,8 +214,7 @@ wallpaper_preview_new ()
 
 void
 wallpaper_preview_set_image (WallpaperPreview *self,
-                             const gchar *image_uri,
-                             gboolean is_lockscreen)
+                             const gchar *image_uri)
 {
   g_autofree char *path = NULL;
   g_autoptr(GFile) image_file = NULL;
@@ -227,8 +225,7 @@ wallpaper_preview_set_image (WallpaperPreview *self,
 
   gtk_widget_set_visible (self->animated_background_icon,
                           gnome_bg_changes_with_time (self->bg));
-
-  gtk_stack_set_visible_child_name (GTK_STACK (self->stack), is_lockscreen ? "lockscreen" : "desktop");
+  gtk_stack_set_visible_child (GTK_STACK (self->stack), self->desktop_preview);
 
   gtk_widget_queue_draw (self->drawing_area);
 }

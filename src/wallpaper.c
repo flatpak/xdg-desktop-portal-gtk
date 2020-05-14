@@ -26,7 +26,6 @@
 #include "utils.h"
 
 #define BACKGROUND_SCHEMA "org.gnome.desktop.background"
-#define LOCKSCREEN_SCHEMA "org.gnome.desktop.screensaver"
 
 typedef struct {
   XdpImplWallpaper *impl;
@@ -37,7 +36,6 @@ typedef struct {
 
   guint response;
   gchar *picture_uri;
-  SetWallpaperOn set_on;
 } WallpaperDialogHandle;
 
 static void
@@ -115,21 +113,10 @@ on_file_copy_cb (GObject *source_object,
                            NULL, NULL,
                            &error);
 
-  switch (handle->set_on)
-    {
-      case BACKGROUND:
-        if (set_gsettings (BACKGROUND_SCHEMA, handle->picture_uri))
-          handle->response = 0;
-        break;
-      case LOCKSCREEN:
-        if (set_gsettings (LOCKSCREEN_SCHEMA, handle->picture_uri))
-          handle->response = 0;
-        break;
-      default:
-        if (set_gsettings (BACKGROUND_SCHEMA, handle->picture_uri) &&
-            set_gsettings (LOCKSCREEN_SCHEMA, handle->picture_uri))
-          handle->response = 0;
-    }
+  if (set_gsettings (BACKGROUND_SCHEMA, handle->picture_uri))
+    handle->response = 0;
+  else
+    handle->response = 1;
 
 out:
   send_response (handle);
@@ -139,22 +126,9 @@ static void
 set_wallpaper (WallpaperDialogHandle *handle,
                const gchar *uri)
 {
-  g_autofree gchar *dest_filename = NULL;
   g_autoptr(GFile) source = NULL;
 
-  switch (handle->set_on)
-    {
-      case BACKGROUND:
-        dest_filename = g_strdup ("background");
-        break;
-      case LOCKSCREEN:
-        dest_filename = g_strdup ("lockscreen");
-        break;
-      default:
-        dest_filename = g_strdup ("both");
-    }
-
-  handle->picture_uri = g_build_filename (g_get_user_config_dir (), dest_filename, NULL);
+  handle->picture_uri = g_build_filename (g_get_user_config_dir (), "background", NULL);
 
   source = g_file_new_for_uri (uri);
   g_file_load_contents_async (source,
@@ -204,7 +178,6 @@ handle_set_wallpaper_uri (XdpImplWallpaper *object,
   WallpaperDialogHandle *handle;
   const char *sender;
   gboolean show_preview = FALSE;
-  const char *set_on = NULL;
   GdkDisplay *display;
   GdkScreen *screen;
   ExternalWindow *external_parent = NULL;
@@ -214,20 +187,12 @@ handle_set_wallpaper_uri (XdpImplWallpaper *object,
   sender = g_dbus_method_invocation_get_sender (invocation);
   request = request_new (sender, arg_app_id, arg_handle);
 
-  g_variant_lookup (arg_options, "set-on", "&s", &set_on);
   g_variant_lookup (arg_options, "show-preview", "b", &show_preview);
 
   handle = g_new0 (WallpaperDialogHandle, 1);
   handle->impl = object;
   handle->invocation = invocation;
   handle->request = g_object_ref (request);
-
-  if (!set_on || g_strcmp0 (set_on, "both") == 0)
-    handle->set_on = BOTH;
-  else if (g_strcmp0 (set_on, "background") == 0)
-    handle->set_on = BACKGROUND;
-  else if (g_strcmp0 (set_on, "lockscreen") == 0)
-    handle->set_on = LOCKSCREEN;
 
   if (!show_preview)
     {
@@ -255,7 +220,7 @@ handle_set_wallpaper_uri (XdpImplWallpaper *object,
                               NULL);
   g_object_ref_sink (fake_parent);
 
-  dialog = (GtkWidget *)wallpaper_dialog_new (arg_uri, arg_app_id, handle->set_on);
+  dialog = (GtkWidget *)wallpaper_dialog_new (arg_uri, arg_app_id);
   gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (fake_parent));
   handle->dialog = g_object_ref (dialog);
 
