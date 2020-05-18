@@ -305,7 +305,7 @@ handle_notify_background (XdpImplBackground *object,
   g_variant_builder_init (&builder, G_VARIANT_TYPE_VARDICT);
   g_variant_builder_add (&builder, "{sv}", "title", g_variant_new_string (_("Background activity")));
 
-  body = g_strdup_printf (_("%s is running in the background."), arg_name);
+  body = g_strdup_printf (_("“%s” is running in the background"), arg_name);
   g_variant_builder_add (&builder, "{sv}", "body", g_variant_new_string (body));
   g_variant_builder_add (&builder, "{sv}", "default-action", g_variant_new_string ("show"));
 
