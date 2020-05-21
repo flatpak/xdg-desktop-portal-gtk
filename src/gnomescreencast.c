@@ -59,6 +59,8 @@ typedef struct _GnomeScreenCastStream
 
   GnomeScreenCastSession *session;
 
+  ScreenCastSourceType source_type;
+
   char *path;
   OrgGnomeMutterScreenCastStream *proxy;
 
@@ -234,6 +236,10 @@ gnome_screen_cast_session_add_stream_properties (GnomeScreenCastSession *gnome_s
 
       g_variant_builder_init (&stream_properties_builder, G_VARIANT_TYPE_VARDICT);
 
+      g_variant_builder_add (&stream_properties_builder, "{sv}",
+                             "source_type",
+                             g_variant_new ("(u)", stream->source_type));
+
       if (gnome_screen_cast_stream_get_position (stream, &x, &y))
         g_variant_builder_add (&stream_properties_builder, "{sv}",
                                "position",
@@ -319,6 +325,7 @@ gnome_screen_cast_session_record_window (GnomeScreenCastSession *gnome_screen_ca
     return FALSE;
 
   stream = g_object_new (gnome_screen_cast_stream_get_type (), NULL);
+  stream->source_type = SCREEN_CAST_SOURCE_TYPE_WINDOW;
   stream->session = gnome_screen_cast_session;
   stream->path = g_strdup (stream_path);
   stream->proxy = stream_proxy;
@@ -398,6 +405,7 @@ gnome_screen_cast_session_record_monitor (GnomeScreenCastSession *gnome_screen_c
     return FALSE;
 
   stream = g_object_new (gnome_screen_cast_stream_get_type (), NULL);
+  stream->source_type = SCREEN_CAST_SOURCE_TYPE_MONITOR;
   stream->session = gnome_screen_cast_session;
   stream->path = g_strdup (stream_path);
   stream->proxy = stream_proxy;
