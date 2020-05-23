@@ -57,6 +57,8 @@ typedef struct {
 
   GSList *files;
 
+  GtkFileFilter *filter;
+
   int response;
   GSList *uris;
 
@@ -179,6 +181,11 @@ send_response (FileDialogHandle *handle)
       g_variant_builder_add (&uri_builder, "s", l->data);
     }
 
+  if (handle->filter) {
+    GVariant *current_filter_variant = gtk_file_filter_to_gvariant (handle->filter);
+    g_variant_builder_add (&opt_builder, "{sv}", "current_filter", current_filter_variant);
+  }
+
   g_variant_builder_add (&opt_builder, "{sv}", "uris", g_variant_builder_end (&uri_builder));
   g_variant_builder_add (&opt_builder, "{sv}", "writable", g_variant_new_boolean (handle->allow_write));
 
@@ -222,16 +229,19 @@ file_chooser_response (GtkWidget *widget,
       /* Fall through */
     case GTK_RESPONSE_DELETE_EVENT:
       handle->response = 2;
+      handle->filter = NULL;
       handle->uris = NULL;
       break;
 
     case GTK_RESPONSE_CANCEL:
       handle->response = 1;
+      handle->filter = NULL;
       handle->uris = NULL;
       break;
 
     case GTK_RESPONSE_OK:
       handle->response = 0;
+      handle->filter = gtk_file_chooser_get_filter (GTK_FILE_CHOOSER(widget));
       handle->uris = gtk_file_chooser_get_uris (GTK_FILE_CHOOSER (widget));
       break;
     }
