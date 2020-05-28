@@ -228,23 +228,31 @@ color_picked (GObject *object,
   ScreenshotDialogHandle *handle = data;
   g_autoptr(GError) error = NULL;
   g_autoptr(GVariant) result = NULL;
-  
-  if (!org_gnome_shell_screenshot_call_pick_color_finish (shell, &result, res, &error))
-    {
-      g_warning ("PickColor failed: %s", error->message);
-      return;
-    }
-
-  if (!g_variant_lookup (result, "color", "(ddd)",
-                         &handle->red,
-                         &handle->green,
-                         &handle->blue))
-    {
-      g_warning ("PickColor didn't return a color");
-      return;
-    }
 
   handle->response = 0;
+  handle->red = handle->green = handle->blue = 0;
+
+  if (!org_gnome_shell_screenshot_call_pick_color_finish (shell, &result, res, &error))
+    {
+      if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        {
+          g_warning ("PickColor cancelled");
+          handle->response = 1;
+        }
+      else
+        {
+          g_warning ("PickColor failed: %s", error->message);
+          handle->response = 2;
+        }
+    }
+  else if (!g_variant_lookup (result, "color", "(ddd)",
+                              &handle->red,
+                              &handle->green,
+                              &handle->blue))
+    {
+      g_warning ("PickColor didn't return a color");
+      handle->response = 2;
+    }
 
   send_response (handle);
 }
