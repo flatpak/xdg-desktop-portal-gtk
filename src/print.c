@@ -31,6 +31,7 @@
 #include <gio/gunixfdlist.h>
 #include <gio/gunixinputstream.h>
 #include <gio/gunixoutputstream.h>
+#include <gio/gdesktopappinfo.h>
 
 #include "xdg-desktop-portal-dbus.h"
 
@@ -259,8 +260,27 @@ print_file (int fd,
   g_autoptr(GUnixInputStream) istream = NULL;
   g_autoptr(GUnixOutputStream) ostream = NULL;
   int fd2;
+  g_autofree char *app_desktop_fullname = NULL;
+  g_autoptr (GDesktopAppInfo) app_info = NULL;
+  // ensures the app_name won't be NULL even if the app_id.desktop file doesn't exist
+  g_autofree char *app_name = g_strdup (app_id);
 
-  title = g_strdup_printf ("Document from %s", app_id);
+  if (!g_str_has_suffix (app_id, ".desktop"))
+    {
+      app_desktop_fullname = g_strconcat (app_id, ".desktop", NULL);
+    }
+  else
+    {
+      app_desktop_fullname = g_strdup (app_id);
+    }
+
+  app_info = g_desktop_app_info_new (app_desktop_fullname);
+  if (app_info)
+    {
+      app_name = g_desktop_app_info_get_locale_string (app_info, "Name");
+    }
+
+  title = g_strdup_printf ("Document from %s", app_name);
 
   if (!preview)
     job = gtk_print_job_new (title, printer, settings, page_setup);
