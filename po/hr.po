@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2019-12-12 09:23-0500\n"
-"PO-Revision-Date: 2020-01-27 17:36+0100\n"
+"POT-Creation-Date: 2020-04-27 03:50+0000\n"
+"PO-Revision-Date: 2020-04-27 07:43+0200\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: \n"
 "Language: hr\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 1.8.12\n"
+"X-Generator: Poedit 2.3\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
@@ -70,7 +70,7 @@ msgstr "Osobne podatke dijeliti s programom koji ih zahtijeva?"
 msgid "Share Details"
 msgstr "Dijeli detalje"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:447
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:457
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
@@ -83,7 +83,7 @@ msgstr "_Dijeli"
 
 #: src/accountdialog.ui:148
 msgid "Make changes before sharing the information"
-msgstr "Izradi promjene prije dijeljenja informacije"
+msgstr "Izradi promjene prije dijeljenja podataka"
 
 #: src/appchooserdialog.c:227
 msgid "Failed to start Software"
@@ -114,7 +114,7 @@ msgstr "Nema odgovarajućeg programa. Nađi daljnje programe u Softveru."
 msgid "Open With…"
 msgstr "Otvori s …"
 
-#: src/appchooserdialog.ui:23 src/filechooser.c:442
+#: src/appchooserdialog.ui:23 src/filechooser.c:452
 msgid "_Open"
 msgstr "_Otvori"
 
@@ -138,10 +138,9 @@ msgid ""
 "\n"
 "Note that forcing an application to quit might cause data loss."
 msgstr ""
-"Ovo može biti iz opravdanog razloga, ali program ga nije dostavio.\n"
+"Ovo može biti iz opravdanog razloga, ali program ga nije naveo.\n"
 "\n"
-"Imaj na umu, da prisilno zatvaranje programa može prouzročiti gubitak "
-"podataka."
+"Napomena: prisilno zatvaranje programa može prouzročiti gubitak podataka."
 
 #: src/background.c:220
 msgid "Force quit"
@@ -164,11 +163,15 @@ msgstr "„%s” radi u pozadini."
 msgid "Find out more"
 msgstr "Saznaj više"
 
-#: src/filechooser.c:444
+#: src/filechooser.c:452
+msgid "_Select"
+msgstr "_Odaberi"
+
+#: src/filechooser.c:454
 msgid "_Save"
 msgstr "_Spremi"
 
-#: src/filechooser.c:620
+#: src/filechooser.c:631
 msgid "Open files read-only"
 msgstr "Otvori datoteke u zaštićenom stanju"
 
@@ -213,11 +216,11 @@ msgstr "Odaberi prozor za dijeljenje s %s"
 
 #: src/screencastwidget.c:490
 msgid "Select monitor to share with the requesting application"
-msgstr "Odaberi monitor za dijeljenje s programom koji ih zahtijeva"
+msgstr "Odaberi monitor za dijeljenje s programom koji ga zahtijeva"
 
 #: src/screencastwidget.c:491
 msgid "Select window to share with the requesting application"
-msgstr "Odaberi prozor za dijeljenje s programom koji ih zahtijeva"
+msgstr "Odaberi prozor za dijeljenje s programom koji ga zahtijeva"
 
 #: src/screencastwidget.ui:100
 msgid "Single Window"
@@ -266,7 +269,7 @@ msgstr "Od_aberi područje za snimku"
 
 #: src/screenshotdialog.ui:158
 msgid "Grab after a _delay of"
-msgstr "Snimi s kašnjenjem od:"
+msgstr "Snimi s kašnjenjem o_d"
 
 #: src/screenshotdialog.ui:171
 msgid "seconds"
@@ -284,7 +287,7 @@ msgstr "Snimi s _pokazivačem"
 msgid "Include the window _border"
 msgstr "Snimi s _okvirom prozora"
 
-#: src/settings.c:184
+#: src/settings.c:186
 msgid "Requested setting not found"
 msgstr "Zatražena postavka nije nađena"
 
