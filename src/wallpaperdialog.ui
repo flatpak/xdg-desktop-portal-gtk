@@ -48,17 +48,12 @@
                 <property name="visible">True</property>
                </object>
              </child>
-             <child>
-               <object class="WallpaperPreview" id="lockscreen_preview">
-                 <property name="visible">True</property>
-                </object>
-            </child>
             <child>
               <object class="GtkBox">
                 <property name="visible">True</property>
                 <child>
                   <object class="GtkLabel">
-	            <property name="visible">True</property>
+                    <property name="visible">True</property>
                     <property name="label" translatable="yes">Failed to load image file</property>
                   </object>
                 </child>

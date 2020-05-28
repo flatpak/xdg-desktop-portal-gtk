@@ -31,5 +31,4 @@ typedef struct _WallpaperPreviewClass WallpaperPreviewClass;
 GType              wallpaper_preview_get_type  (void) G_GNUC_CONST;
 
 void               wallpaper_preview_set_image (WallpaperPreview *self,
-                                                const gchar *image_uri,
-                                                gboolean is_lockscreen);
+                                                const gchar *image_uri);

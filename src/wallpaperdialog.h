@@ -25,19 +25,12 @@
 #define WALLPAPER_TYPE_DIALOG (wallpaper_dialog_get_type ())
 #define WALLPAPER_DIALOG(object) (G_TYPE_CHECK_INSTANCE_CAST (object, WALLPAPER_TYPE_DIALOG, WallpaperDialog))
 
-typedef enum {
-  BACKGROUND,
-  LOCKSCREEN,
-  BOTH
-} SetWallpaperOn;
-
 typedef struct _WallpaperDialog WallpaperDialog;
 typedef struct _WallpaperDialogClass WallpaperDialogClass;
 
 GType             wallpaper_dialog_get_type (void) G_GNUC_CONST;
 
 WallpaperDialog * wallpaper_dialog_new (const char *picture_uri,
-                                        const char *app_id,
-                                        SetWallpaperOn set_on);
+                                        const char *app_id);
 
 const gchar     * wallpaper_dialog_get_uri (WallpaperDialog *dialog);
