@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2020-01-10 15:35+0000\n"
-"PO-Revision-Date: 2020-01-26 17:31+0700\n"
+"POT-Creation-Date: 2020-03-29 10:42+0000\n"
+"PO-Revision-Date: 2020-05-21 16:14+0700\n"
 "Last-Translator: Kukuh Syafaat <kukuhsyafaat@gnome.org>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.3.1\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
@@ -68,7 +68,7 @@ msgstr "Bagikan informasi pribadi Anda dengan aplikasi yang meminta?"
 msgid "Share Details"
 msgstr "Bagikan Detail"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:447
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:457
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
@@ -115,7 +115,7 @@ msgstr ""
 msgid "Open With…"
 msgstr "Buka Dengan…"
 
-#: src/appchooserdialog.ui:23 src/filechooser.c:442
+#: src/appchooserdialog.ui:23 src/filechooser.c:452
 msgid "_Open"
 msgstr "B_uka"
 
@@ -165,11 +165,15 @@ msgstr "%s sedang berjalan di latar belakang."
 msgid "Find out more"
 msgstr "Temukan lebih banyak lagi"
 
-#: src/filechooser.c:444
+#: src/filechooser.c:452
+msgid "_Select"
+msgstr "_Pilih"
+
+#: src/filechooser.c:454
 msgid "_Save"
 msgstr "_Simpan"
 
-#: src/filechooser.c:620
+#: src/filechooser.c:631
 msgid "Open files read-only"
 msgstr "Buka berkas hanya-baca"
 
@@ -285,7 +289,7 @@ msgstr "Sertakan _penunjuk"
 msgid "Include the window _border"
 msgstr "Sertakan _bingkai jendela"
 
-#: src/settings.c:184
+#: src/settings.c:186
 msgid "Requested setting not found"
 msgstr "Pengaturan yang diminta tidak ditemukan"
 
