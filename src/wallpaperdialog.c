@@ -137,7 +137,7 @@ on_image_loaded_cb (GObject *source_object,
 
   self->picture_uri = g_strdup (g_file_get_uri (tmp));
   wallpaper_preview_set_image (self->desktop_preview,
-                               self->picture_uri, FALSE);
+                               self->picture_uri);
 }
 
 WallpaperDialog *
