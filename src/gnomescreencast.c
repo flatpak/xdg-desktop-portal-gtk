@@ -238,7 +238,7 @@ gnome_screen_cast_session_add_stream_properties (GnomeScreenCastSession *gnome_s
 
       g_variant_builder_add (&stream_properties_builder, "{sv}",
                              "source_type",
-                             g_variant_new ("(u)", stream->source_type));
+                             g_variant_new ("u", stream->source_type));
 
       if (gnome_screen_cast_stream_get_position (stream, &x, &y))
         g_variant_builder_add (&stream_properties_builder, "{sv}",
