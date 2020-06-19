@@ -612,7 +612,6 @@ handle_prepare_print (XdpImplPrint *object,
   GtkWidget *dialog;
   PrintDialogHandle *handle;
   GtkPrintSettings *settings;
-  GtkPageSetup *page_setup;
   gboolean modal;
   GdkDisplay *display;
   GdkScreen *screen;
@@ -644,7 +643,6 @@ handle_prepare_print (XdpImplPrint *object,
   g_object_ref_sink (fake_parent);
 
   settings = gtk_print_settings_new_from_gvariant (arg_settings);
-  page_setup = gtk_page_setup_new_from_gvariant (arg_page_setup);
   if (!g_variant_lookup (arg_options, "modal", "b", &modal))
     modal = TRUE;
 
@@ -655,10 +653,8 @@ handle_prepare_print (XdpImplPrint *object,
                                                  can_preview () ? GTK_PRINT_CAPABILITY_PREVIEW : 0);
   gtk_print_unix_dialog_set_embed_page_setup (GTK_PRINT_UNIX_DIALOG (dialog), TRUE);
   gtk_print_unix_dialog_set_settings (GTK_PRINT_UNIX_DIALOG (dialog), settings);
-  gtk_print_unix_dialog_set_page_setup (GTK_PRINT_UNIX_DIALOG (dialog), page_setup);
 
   g_object_unref (settings);
-  g_object_unref (page_setup);
 
   handle = g_new0 (PrintDialogHandle, 1);
   handle->impl = object;
