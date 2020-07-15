@@ -504,8 +504,14 @@ handle_print (XdpImplPrint *object,
   gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (fake_parent));
   gtk_window_set_modal (GTK_WINDOW (dialog), modal);
   gtk_print_unix_dialog_set_manual_capabilities (GTK_PRINT_UNIX_DIALOG (dialog),
-                                                 can_preview () ? GTK_PRINT_CAPABILITY_PREVIEW : 0);
-
+                                                 can_preview () ? GTK_PRINT_CAPABILITY_PREVIEW : 0 |
+						 GTK_PRINT_CAPABILITY_PAGE_SET |
+						 GTK_PRINT_CAPABILITY_COPIES |
+						 GTK_PRINT_CAPABILITY_COLLATE |
+						 GTK_PRINT_CAPABILITY_REVERSE |
+						 GTK_PRINT_CAPABILITY_SCALE |
+						 GTK_PRINT_CAPABILITY_NUMBER_UP
+						 );
   handle = g_new0 (PrintDialogHandle, 1);
   handle->impl = object;
   handle->invocation = invocation;
@@ -652,7 +658,14 @@ handle_prepare_print (XdpImplPrint *object,
   gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (fake_parent));
   gtk_window_set_modal (GTK_WINDOW (dialog), modal);
   gtk_print_unix_dialog_set_manual_capabilities (GTK_PRINT_UNIX_DIALOG (dialog),
-                                                 can_preview () ? GTK_PRINT_CAPABILITY_PREVIEW : 0);
+                                                 can_preview () ? GTK_PRINT_CAPABILITY_PREVIEW : 0 |
+						 GTK_PRINT_CAPABILITY_PAGE_SET |
+						 GTK_PRINT_CAPABILITY_COPIES |
+						 GTK_PRINT_CAPABILITY_COLLATE |
+						 GTK_PRINT_CAPABILITY_REVERSE |
+						 GTK_PRINT_CAPABILITY_SCALE |
+						 GTK_PRINT_CAPABILITY_NUMBER_UP
+						 );
   gtk_print_unix_dialog_set_embed_page_setup (GTK_PRINT_UNIX_DIALOG (dialog), TRUE);
   gtk_print_unix_dialog_set_settings (GTK_PRINT_UNIX_DIALOG (dialog), settings);
   gtk_print_unix_dialog_set_page_setup (GTK_PRINT_UNIX_DIALOG (dialog), page_setup);
