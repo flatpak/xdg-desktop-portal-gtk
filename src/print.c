@@ -303,7 +303,6 @@ print_file (int fd,
                               NULL,
                               error) == -1)
     return FALSE;
-
   if (job)
     {
       if (!gtk_print_job_set_source_file (job, filename, error))
@@ -314,13 +313,17 @@ print_file (int fd,
   else
     {
       if (!launch_preview (filename, title, settings, page_setup, error))
-        return FALSE;
+	{
+	  unlink (filename);
+	  return FALSE;
+	}
     }
 
   /* The file will be removed when the GtkPrintJob closes it (once the job is
    * complete).
    */
-  unlink (filename);
+  if (!preview)
+    unlink (filename);
 
   return TRUE;
 }
