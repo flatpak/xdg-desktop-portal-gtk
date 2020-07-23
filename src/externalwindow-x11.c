@@ -76,7 +76,7 @@ external_window_x11_new (const char *handle_str)
     }
 
   errno = 0;
-  xid = strtol (handle_str, NULL, 16);
+  xid = strtol (handle_str, NULL, 10);
   if (errno != 0)
     {
       g_warning ("Failed to reference external X11 window, invalid XID %s", handle_str);
