@@ -35,8 +35,6 @@
 #include "session.h"
 #include "utils.h"
 
-#define SUPPORTED_MUTTER_SCREEN_CAST_API_VERSION 3
-
 typedef struct _ScreenCastDialogHandle ScreenCastDialogHandle;
 
 typedef struct _ScreenCastSession
@@ -415,25 +413,12 @@ start_session (ScreenCastSession *screen_cast_session,
                GError **error)
 {
   GnomeScreenCastSession *gnome_screen_cast_session;
-  int gnome_api_version;
   g_autoptr(GVariant) source_selections = NULL;
 
   gnome_screen_cast_session =
     gnome_screen_cast_create_session (gnome_screen_cast, NULL, error);
   if (!gnome_screen_cast_session)
     return FALSE;
-
-  gnome_api_version = gnome_screen_cast_get_api_version (gnome_screen_cast);
-  if (gnome_api_version < SUPPORTED_MUTTER_SCREEN_CAST_API_VERSION)
-    {
-      g_set_error (error, XDG_DESKTOP_PORTAL_ERROR,
-                   XDG_DESKTOP_PORTAL_ERROR_FAILED,
-                   "org.gnome.Mutter.ScreenCast API version %d lower "
-                   "than minimum supported version %d",
-                   gnome_api_version, SUPPORTED_MUTTER_SCREEN_CAST_API_VERSION);
-      g_clear_object (&gnome_screen_cast);
-      return FALSE;
-    }
 
   screen_cast_session->gnome_screen_cast_session = gnome_screen_cast_session;
 

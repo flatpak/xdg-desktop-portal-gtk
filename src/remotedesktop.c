@@ -34,8 +34,6 @@
 #include "session.h"
 #include "utils.h"
 
-#define SUPPORTED_MUTTER_REMOTE_DESKTOP_API_VERSION 1
-
 typedef enum _GnomeRemoteDesktopDeviceType
 {
   GNOME_REMOTE_DESKTOP_DEVICE_TYPE_KEYBOARD = 1 << 0,
@@ -878,7 +876,6 @@ remote_desktop_name_appeared (GDBusConnection *connection,
                               gpointer user_data)
 {
   g_autoptr(GError) error = NULL;
-  int api_version;
   unsigned int supported_device_types;
 
   remote_desktop =
@@ -892,14 +889,6 @@ remote_desktop_name_appeared (GDBusConnection *connection,
     {
       g_warning ("Failed to acquire org.gnome.Mutter.RemoteDesktop proxy: %s",
                  error->message);
-      return;
-    }
-
-  api_version = org_gnome_mutter_remote_desktop_get_version (remote_desktop);
-  if (api_version != SUPPORTED_MUTTER_REMOTE_DESKTOP_API_VERSION)
-    {
-      g_warning ("org.gnome.Mutter.RemoteDesktop API version not compatible");
-      g_clear_object (&remote_desktop);
       return;
     }
 

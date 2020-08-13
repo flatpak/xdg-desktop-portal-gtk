@@ -22,8 +22,6 @@
 
 #include <stdint.h>
 
-#define SUPPORTED_MUTTER_SCREEN_CAST_API_VERSION 3
-
 enum
 {
   STREAM_SIGNAL_READY,
@@ -643,12 +641,6 @@ gnome_screen_cast_name_appeared (GDBusConnection *connection,
 
   gnome_screen_cast->api_version =
     org_gnome_mutter_screen_cast_get_version (gnome_screen_cast->proxy);
-  if (gnome_screen_cast->api_version > SUPPORTED_MUTTER_SCREEN_CAST_API_VERSION)
-    {
-      g_warning ("org.gnome.Mutter.ScreenCast API version not compatible");
-      g_clear_object (&gnome_screen_cast->proxy);
-      return;
-    }
 
   g_signal_emit (gnome_screen_cast, signals[ENABLED], 0);
 }
