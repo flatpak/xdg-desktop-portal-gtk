@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2019-12-12 09:23-0500\n"
+"POT-Creation-Date: 2020-09-14 14:09-0400\n"
 "PO-Revision-Date: 2020-01-06 00:15+0100\n"
 "Last-Translator: Fran Diéguez <frandieguez@gnome.org>\n"
 "Language-Team: Galician\n"
@@ -21,11 +21,6 @@ msgstr ""
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
 msgstr "Portal"
-
-#. TRANSLATORS: Don't translate this text (this is icon name)
-#: data/xdg-desktop-portal-gtk.desktop.in.in:6
-msgid "applications-system-symbolic"
-msgstr "applications-system-symbolic"
 
 #: src/access.c:271
 msgid "Deny Access"
@@ -68,7 +63,7 @@ msgstr "Compartir a súa información persoal coa aplicación que o solicita?"
 msgid "Share Details"
 msgstr "Compartir detalles"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:447
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:467
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
@@ -83,20 +78,20 @@ msgstr "_Compartir"
 msgid "Make changes before sharing the information"
 msgstr "Facer cambios antes de compartir a información"
 
-#: src/appchooserdialog.c:227
+#: src/appchooserdialog.c:229
 msgid "Failed to start Software"
 msgstr "Produciuse un fallo ao iniciar o Software"
 
-#: src/appchooserdialog.c:379
+#: src/appchooserdialog.c:385
 #, c-format
 msgid "Choose an application to open the file “%s”."
 msgstr "Escolla unha aplicación para abrir «%s»."
 
-#: src/appchooserdialog.c:384
+#: src/appchooserdialog.c:390
 msgid "Choose an application."
 msgstr "Escolla unha aplicación."
 
-#: src/appchooserdialog.c:401
+#: src/appchooserdialog.c:407
 #, c-format
 msgid ""
 "No apps installed that can open “%s”. You can find more applications in "
@@ -105,7 +100,7 @@ msgstr ""
 "Non hai ningunha aplicación que poida abrir «%s». Pode atopar máis en "
 "Software"
 
-#: src/appchooserdialog.c:406
+#: src/appchooserdialog.c:412
 msgid "No suitable app installed. You can find more applications in Software."
 msgstr ""
 "Non hai ningunha aplicación axeitada instalada. Pode atopar máis aplicacións "
@@ -115,7 +110,7 @@ msgstr ""
 msgid "Open With…"
 msgstr "Abrir con…"
 
-#: src/appchooserdialog.ui:23 src/filechooser.c:442
+#: src/appchooserdialog.ui:23 src/filechooser.c:462
 msgid "_Open"
 msgstr "_Abrir"
 
@@ -127,7 +122,7 @@ msgstr "Non hai ningunha aplicación dispoñíbel"
 msgid "_Find More in Software"
 msgstr "_Buscar máis en Software"
 
-#: src/background.c:215
+#: src/background.c:215 src/background.c:308
 #, c-format
 msgid "“%s” is running in the background"
 msgstr "«%s» está executándose en segundo plano"
@@ -157,20 +152,20 @@ msgstr "Permitir"
 msgid "Background activity"
 msgstr "Actividade en segundo plano"
 
-#: src/background.c:308
-#, c-format
-msgid "%s is running in the background."
-msgstr "%s está executándose en segundo plano."
-
 #: src/background.c:314
 msgid "Find out more"
 msgstr "Saber máis"
 
-#: src/filechooser.c:444
+#: src/filechooser.c:462
+#, fuzzy
+msgid "_Select"
+msgstr "Seleccionar"
+
+#: src/filechooser.c:464
 msgid "_Save"
 msgstr "_Gardar"
 
-#: src/filechooser.c:620
+#: src/filechooser.c:641
 msgid "Open files read-only"
 msgstr "Abrir ficheiros en modo só lectura"
 
@@ -286,30 +281,35 @@ msgstr "Incluír o _punteiro"
 msgid "Include the window _border"
 msgstr "Incluír o _bordo da xanela"
 
-#: src/settings.c:184
+#: src/settings.c:186
 msgid "Requested setting not found"
 msgstr "A preferencia solicitada non se atopou"
 
-#: src/wallpaperdialog.c:122 src/wallpaperdialog.ui:13
+#: src/wallpaperdialog.ui:13
 msgid "Set Background"
 msgstr "Estabelecer fondo de pantalla"
-
-#: src/wallpaperdialog.c:132
-msgid "Set Lock Screen"
-msgstr "Estabelecer a pantalla de bloqueo"
-
-#: src/wallpaperdialog.c:176
-msgid "Set Background & Lock Screen"
-msgstr "Estabelecer fondo e pantalla de bloqueo"
 
 #: src/wallpaperdialog.ui:26
 msgid "Set"
 msgstr "Estabelecer"
 
-#: src/wallpaperdialog.ui:62
+#: src/wallpaperdialog.ui:57
 msgid "Failed to load image file"
 msgstr "Produciuse un fallo ao cargar o ficheiro da imaxe"
 
 #: src/wallpaperpreview.ui:57
 msgid "Activities"
 msgstr "Actividades"
+
+#~ msgid "applications-system-symbolic"
+#~ msgstr "applications-system-symbolic"
+
+#, c-format
+#~ msgid "%s is running in the background."
+#~ msgstr "%s está executándose en segundo plano."
+
+#~ msgid "Set Lock Screen"
+#~ msgstr "Estabelecer a pantalla de bloqueo"
+
+#~ msgid "Set Background & Lock Screen"
+#~ msgstr "Estabelecer fondo e pantalla de bloqueo"

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2019-12-12 09:23-0500\n"
+"POT-Creation-Date: 2020-09-14 14:09-0400\n"
 "PO-Revision-Date: 2016-09-14 12:56+0200\n"
 "Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: српски <gnome-sr@googlegroups.org>\n"
@@ -21,11 +21,6 @@ msgstr ""
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
-msgstr ""
-
-#. TRANSLATORS: Don't translate this text (this is icon name)
-#: data/xdg-desktop-portal-gtk.desktop.in.in:6
-msgid "applications-system-symbolic"
 msgstr ""
 
 #: src/access.c:271
@@ -72,7 +67,7 @@ msgstr "Да поделим овај снимак екрана са програ
 msgid "Share Details"
 msgstr ""
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:447
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:467
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
@@ -87,28 +82,28 @@ msgstr "_Дели"
 msgid "Make changes before sharing the information"
 msgstr ""
 
-#: src/appchooserdialog.c:227
+#: src/appchooserdialog.c:229
 msgid "Failed to start Software"
 msgstr ""
 
-#: src/appchooserdialog.c:379
+#: src/appchooserdialog.c:385
 #, c-format
 msgid "Choose an application to open the file “%s”."
 msgstr ""
 
-#: src/appchooserdialog.c:384
+#: src/appchooserdialog.c:390
 #, fuzzy
 msgid "Choose an application."
 msgstr "Изаберите програм"
 
-#: src/appchooserdialog.c:401
+#: src/appchooserdialog.c:407
 #, c-format
 msgid ""
 "No apps installed that can open “%s”. You can find more applications in "
 "Software"
 msgstr ""
 
-#: src/appchooserdialog.c:406
+#: src/appchooserdialog.c:412
 msgid "No suitable app installed. You can find more applications in Software."
 msgstr ""
 
@@ -117,7 +112,7 @@ msgstr ""
 msgid "Open With…"
 msgstr "Отвори програмом"
 
-#: src/appchooserdialog.ui:23 src/filechooser.c:442
+#: src/appchooserdialog.ui:23 src/filechooser.c:462
 msgid "_Open"
 msgstr "От_вори"
 
@@ -129,7 +124,7 @@ msgstr ""
 msgid "_Find More in Software"
 msgstr ""
 
-#: src/background.c:215
+#: src/background.c:215 src/background.c:308
 #, c-format
 msgid "“%s” is running in the background"
 msgstr ""
@@ -154,20 +149,19 @@ msgstr ""
 msgid "Background activity"
 msgstr ""
 
-#: src/background.c:308
-#, c-format
-msgid "%s is running in the background."
-msgstr ""
-
 #: src/background.c:314
 msgid "Find out more"
 msgstr ""
 
-#: src/filechooser.c:444
+#: src/filechooser.c:462
+msgid "_Select"
+msgstr "_Изабери"
+
+#: src/filechooser.c:464
 msgid "_Save"
 msgstr ""
 
-#: src/filechooser.c:620
+#: src/filechooser.c:641
 msgid "Open files read-only"
 msgstr ""
 
@@ -289,20 +283,12 @@ msgstr ""
 msgid "Include the window _border"
 msgstr ""
 
-#: src/settings.c:184
+#: src/settings.c:186
 msgid "Requested setting not found"
 msgstr ""
 
-#: src/wallpaperdialog.c:122 src/wallpaperdialog.ui:13
+#: src/wallpaperdialog.ui:13
 msgid "Set Background"
-msgstr ""
-
-#: src/wallpaperdialog.c:132
-msgid "Set Lock Screen"
-msgstr ""
-
-#: src/wallpaperdialog.c:176
-msgid "Set Background & Lock Screen"
 msgstr ""
 
 #: src/wallpaperdialog.ui:26
@@ -310,7 +296,7 @@ msgstr ""
 msgid "Set"
 msgstr "_Изабери"
 
-#: src/wallpaperdialog.ui:62
+#: src/wallpaperdialog.ui:57
 msgid "Failed to load image file"
 msgstr ""
 
@@ -325,6 +311,3 @@ msgstr ""
 #, fuzzy
 #~ msgid "Screen casting"
 #~ msgstr "Снимак екрана"
-
-#~ msgid "_Select"
-#~ msgstr "_Изабери"

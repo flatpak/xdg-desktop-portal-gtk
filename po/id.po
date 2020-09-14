@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2020-03-29 10:42+0000\n"
+"POT-Creation-Date: 2020-09-14 14:09-0400\n"
 "PO-Revision-Date: 2020-05-21 16:14+0700\n"
 "Last-Translator: Kukuh Syafaat <kukuhsyafaat@gnome.org>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
@@ -21,11 +21,6 @@ msgstr ""
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
 msgstr "Portal"
-
-#. TRANSLATORS: Don't translate this text (this is icon name)
-#: data/xdg-desktop-portal-gtk.desktop.in.in:6
-msgid "applications-system-symbolic"
-msgstr "applications-system-symbolic"
 
 #: src/access.c:271
 msgid "Deny Access"
@@ -68,7 +63,7 @@ msgstr "Bagikan informasi pribadi Anda dengan aplikasi yang meminta?"
 msgid "Share Details"
 msgstr "Bagikan Detail"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:457
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:467
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
@@ -83,20 +78,20 @@ msgstr "_Bagikan"
 msgid "Make changes before sharing the information"
 msgstr "Buat perubahan sebelum membagikan informasi"
 
-#: src/appchooserdialog.c:227
+#: src/appchooserdialog.c:229
 msgid "Failed to start Software"
 msgstr "Gagal memulai Perangkat Lunak"
 
-#: src/appchooserdialog.c:379
+#: src/appchooserdialog.c:385
 #, c-format
 msgid "Choose an application to open the file “%s”."
 msgstr "Pilih aplikasi untuk membuka berkas \"%s\"."
 
-#: src/appchooserdialog.c:384
+#: src/appchooserdialog.c:390
 msgid "Choose an application."
 msgstr "Pilih aplikasi."
 
-#: src/appchooserdialog.c:401
+#: src/appchooserdialog.c:407
 #, c-format
 msgid ""
 "No apps installed that can open “%s”. You can find more applications in "
@@ -105,7 +100,7 @@ msgstr ""
 "Tidak ada aplikasi yang dipasang yang dapat membuka \"%s\". Anda dapat "
 "menemukan lebih banyak aplikasi di Perangkat Lunak"
 
-#: src/appchooserdialog.c:406
+#: src/appchooserdialog.c:412
 msgid "No suitable app installed. You can find more applications in Software."
 msgstr ""
 "Tidak ada aplikasi yang cocok dipasang. Anda dapat menemukan lebih banyak "
@@ -115,7 +110,7 @@ msgstr ""
 msgid "Open With…"
 msgstr "Buka Dengan…"
 
-#: src/appchooserdialog.ui:23 src/filechooser.c:452
+#: src/appchooserdialog.ui:23 src/filechooser.c:462
 msgid "_Open"
 msgstr "B_uka"
 
@@ -127,7 +122,7 @@ msgstr "Tidak ada Aplikasi yang tersedia"
 msgid "_Find More in Software"
 msgstr "T_emukan Lebih Banyak dalam Perangkat Lunak"
 
-#: src/background.c:215
+#: src/background.c:215 src/background.c:308
 #, c-format
 msgid "“%s” is running in the background"
 msgstr "\"%s\" sedang berjalan di latar belakang"
@@ -156,24 +151,19 @@ msgstr "Izinkan"
 msgid "Background activity"
 msgstr "Aktivitas latar belakang"
 
-#: src/background.c:308
-#, c-format
-msgid "%s is running in the background."
-msgstr "%s sedang berjalan di latar belakang."
-
 #: src/background.c:314
 msgid "Find out more"
 msgstr "Temukan lebih banyak lagi"
 
-#: src/filechooser.c:452
+#: src/filechooser.c:462
 msgid "_Select"
 msgstr "_Pilih"
 
-#: src/filechooser.c:454
+#: src/filechooser.c:464
 msgid "_Save"
 msgstr "_Simpan"
 
-#: src/filechooser.c:631
+#: src/filechooser.c:641
 msgid "Open files read-only"
 msgstr "Buka berkas hanya-baca"
 
@@ -293,29 +283,34 @@ msgstr "Sertakan _bingkai jendela"
 msgid "Requested setting not found"
 msgstr "Pengaturan yang diminta tidak ditemukan"
 
-#: src/wallpaperdialog.c:122 src/wallpaperdialog.ui:13
+#: src/wallpaperdialog.ui:13
 msgid "Set Background"
 msgstr "Atur Latar Belakang"
-
-#: src/wallpaperdialog.c:132
-msgid "Set Lock Screen"
-msgstr "Atur Layar Kunci"
-
-#: src/wallpaperdialog.c:176
-msgid "Set Background & Lock Screen"
-msgstr "Atur Latar Belakang dan Layar Kunci"
 
 #: src/wallpaperdialog.ui:26
 msgid "Set"
 msgstr "Atur"
 
-#: src/wallpaperdialog.ui:62
+#: src/wallpaperdialog.ui:57
 msgid "Failed to load image file"
 msgstr "Gagal memuat berkas gambar"
 
 #: src/wallpaperpreview.ui:57
 msgid "Activities"
 msgstr "Aktivitas"
+
+#~ msgid "applications-system-symbolic"
+#~ msgstr "applications-system-symbolic"
+
+#, c-format
+#~ msgid "%s is running in the background."
+#~ msgstr "%s sedang berjalan di latar belakang."
+
+#~ msgid "Set Lock Screen"
+#~ msgstr "Atur Layar Kunci"
+
+#~ msgid "Set Background & Lock Screen"
+#~ msgstr "Atur Latar Belakang dan Layar Kunci"
 
 #~ msgid ""
 #~ "Select an application to open “%s”. More applications are available in <a "

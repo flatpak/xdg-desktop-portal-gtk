@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2020-03-22 04:27+0000\n"
+"POT-Creation-Date: 2020-09-14 14:09-0400\n"
 "PO-Revision-Date: 2020-05-18 19:42+0200\n"
 "Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
@@ -24,11 +24,6 @@ msgstr ""
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
 msgstr "Portál"
-
-#. TRANSLATORS: Don't translate this text (this is icon name)
-#: data/xdg-desktop-portal-gtk.desktop.in.in:6
-msgid "applications-system-symbolic"
-msgstr ""
 
 #: src/access.c:271
 msgid "Deny Access"
@@ -71,7 +66,7 @@ msgstr "Sdílet vaše osobní informace s aplikací, která o to žádá?"
 msgid "Share Details"
 msgstr "Sdílet detaily"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:457
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:467
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
@@ -86,20 +81,20 @@ msgstr "_Sdílet"
 msgid "Make changes before sharing the information"
 msgstr "Provést změny před sdílením informací"
 
-#: src/appchooserdialog.c:227
+#: src/appchooserdialog.c:229
 msgid "Failed to start Software"
 msgstr "Nepodařilo se spustit Software"
 
-#: src/appchooserdialog.c:379
+#: src/appchooserdialog.c:385
 #, c-format
 msgid "Choose an application to open the file “%s”."
 msgstr "Vyberte aplikaci pro otevření souboru „%s”."
 
-#: src/appchooserdialog.c:384
+#: src/appchooserdialog.c:390
 msgid "Choose an application."
 msgstr "Vyberte aplikaci."
 
-#: src/appchooserdialog.c:401
+#: src/appchooserdialog.c:407
 #, c-format
 msgid ""
 "No apps installed that can open “%s”. You can find more applications in "
@@ -108,7 +103,7 @@ msgstr ""
 "Nejsou nainstalovány žádné aplikace pro otevření „%s”. Více aplikací můžete "
 "najít v Software"
 
-#: src/appchooserdialog.c:406
+#: src/appchooserdialog.c:412
 msgid "No suitable app installed. You can find more applications in Software."
 msgstr ""
 "Není nainstalována žádná vhodná aplikace. Více aplikací můžete najít v "
@@ -118,7 +113,7 @@ msgstr ""
 msgid "Open With…"
 msgstr "Otevřít pomocí…"
 
-#: src/appchooserdialog.ui:23 src/filechooser.c:452
+#: src/appchooserdialog.ui:23 src/filechooser.c:462
 msgid "_Open"
 msgstr "_Otevřít"
 
@@ -130,7 +125,7 @@ msgstr "Nejsou dostupné žádné aplikace"
 msgid "_Find More in Software"
 msgstr "N_ajít další v Software"
 
-#: src/background.c:215
+#: src/background.c:215 src/background.c:308
 #, c-format
 msgid "“%s” is running in the background"
 msgstr "Aplikace „%s” běží na pozadí"
@@ -159,24 +154,19 @@ msgstr "Povolit"
 msgid "Background activity"
 msgstr "Aktivita na pozadí"
 
-#: src/background.c:308
-#, c-format
-msgid "%s is running in the background."
-msgstr "Aplikace %s běží na pozadí."
-
 #: src/background.c:314
 msgid "Find out more"
 msgstr "Zjistit více"
 
-#: src/filechooser.c:452
+#: src/filechooser.c:462
 msgid "_Select"
 msgstr "_Vybrat"
 
-#: src/filechooser.c:454
+#: src/filechooser.c:464
 msgid "_Save"
 msgstr "_Uložit"
 
-#: src/filechooser.c:630
+#: src/filechooser.c:641
 msgid "Open files read-only"
 msgstr "Otevřít soubory pouze pro čtení"
 
@@ -296,29 +286,31 @@ msgstr "Zahrnout _rámeček okna"
 msgid "Requested setting not found"
 msgstr "Požadované nastavení nebylo nalezeno"
 
-#: src/wallpaperdialog.c:122 src/wallpaperdialog.ui:13
+#: src/wallpaperdialog.ui:13
 msgid "Set Background"
 msgstr "Nastavit pozadí"
-
-#: src/wallpaperdialog.c:132
-msgid "Set Lock Screen"
-msgstr "Nastavit uzamknutou obrazovku"
-
-#: src/wallpaperdialog.c:176
-msgid "Set Background & Lock Screen"
-msgstr "Nastavit pozadí a uzamknutou obrazovku"
 
 #: src/wallpaperdialog.ui:26
 msgid "Set"
 msgstr "Nastavit"
 
-#: src/wallpaperdialog.ui:62
+#: src/wallpaperdialog.ui:57
 msgid "Failed to load image file"
 msgstr "Selhalo načtení souboru obrázku"
 
 #: src/wallpaperpreview.ui:57
 msgid "Activities"
 msgstr "Činnosti"
+
+#, c-format
+#~ msgid "%s is running in the background."
+#~ msgstr "Aplikace %s běží na pozadí."
+
+#~ msgid "Set Lock Screen"
+#~ msgstr "Nastavit uzamknutou obrazovku"
+
+#~ msgid "Set Background & Lock Screen"
+#~ msgstr "Nastavit pozadí a uzamknutou obrazovku"
 
 #~ msgid ""
 #~ "Select an application to open “%s”. More applications are available in <a "

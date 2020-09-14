@@ -6,9 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
-"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/issues"
-"\n"
-"POT-Creation-Date: 2020-03-22 04:27+0000\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
+"issues\n"
+"POT-Creation-Date: 2020-09-14 14:09-0400\n"
 "PO-Revision-Date: 2020-03-28 22:00+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -23,11 +23,6 @@ msgstr ""
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
 msgstr "Портал"
-
-#. TRANSLATORS: Don't translate this text (this is icon name)
-#: data/xdg-desktop-portal-gtk.desktop.in.in:6
-msgid "applications-system-symbolic"
-msgstr "applications-system-symbolic"
 
 #: src/access.c:271
 msgid "Deny Access"
@@ -70,7 +65,7 @@ msgstr "Поділитися вашими особистими даними з �
 msgid "Share Details"
 msgstr "Оприлюднити подробиці"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:457
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:467
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
@@ -85,20 +80,20 @@ msgstr "_Оприлюднити"
 msgid "Make changes before sharing the information"
 msgstr "Внести зміни до оприлюднення даних"
 
-#: src/appchooserdialog.c:227
+#: src/appchooserdialog.c:229
 msgid "Failed to start Software"
 msgstr "Не вдалося запустити «Програмні засоби»"
 
-#: src/appchooserdialog.c:379
+#: src/appchooserdialog.c:385
 #, c-format
 msgid "Choose an application to open the file “%s”."
 msgstr "Виберіть програму для відкриття файла «%s»."
 
-#: src/appchooserdialog.c:384
+#: src/appchooserdialog.c:390
 msgid "Choose an application."
 msgstr "Виберіть програму."
 
-#: src/appchooserdialog.c:401
+#: src/appchooserdialog.c:407
 #, c-format
 msgid ""
 "No apps installed that can open “%s”. You can find more applications in "
@@ -107,7 +102,7 @@ msgstr ""
 "Не встановлено жодної програми, яка придатна для відкриття «%s». Потрібні "
 "вам програми ви можете знайти за допомогою програми «Програмні засоби»."
 
-#: src/appchooserdialog.c:406
+#: src/appchooserdialog.c:412
 msgid "No suitable app installed. You can find more applications in Software."
 msgstr ""
 "Не встановлено відповідної програми. Потрібні вам програми ви можете знайти "
@@ -117,7 +112,7 @@ msgstr ""
 msgid "Open With…"
 msgstr "Відкрити за допомогою…"
 
-#: src/appchooserdialog.ui:23 src/filechooser.c:452
+#: src/appchooserdialog.ui:23 src/filechooser.c:462
 msgid "_Open"
 msgstr "_Відкрити"
 
@@ -129,7 +124,7 @@ msgstr "Немає доступних програм"
 msgid "_Find More in Software"
 msgstr "З_найти інші у програмі «Програмні засоби»"
 
-#: src/background.c:215
+#: src/background.c:215 src/background.c:308
 #, c-format
 msgid "“%s” is running in the background"
 msgstr "«%s» працює у фоновому режимі"
@@ -158,25 +153,19 @@ msgstr "Дозволити"
 msgid "Background activity"
 msgstr "Фонова робота"
 
-#: src/background.c:308
-#, c-format
-msgid "%s is running in the background."
-msgstr "%s працює у фоновому режимі."
-
 #: src/background.c:314
 msgid "Find out more"
 msgstr "Дізнатися більше"
 
-#: src/filechooser.c:452
-#| msgid "Select"
+#: src/filechooser.c:462
 msgid "_Select"
 msgstr "_Вибрати"
 
-#: src/filechooser.c:454
+#: src/filechooser.c:464
 msgid "_Save"
 msgstr "_Зберегти"
 
-#: src/filechooser.c:630
+#: src/filechooser.c:641
 msgid "Open files read-only"
 msgstr "Відкрити файли лише для читання"
 
@@ -301,26 +290,31 @@ msgstr "Включити _рамку вікна"
 msgid "Requested setting not found"
 msgstr "Потрібного вам параметра не знайдено"
 
-#: src/wallpaperdialog.c:122 src/wallpaperdialog.ui:13
+#: src/wallpaperdialog.ui:13
 msgid "Set Background"
 msgstr "Встановити тло"
-
-#: src/wallpaperdialog.c:132
-msgid "Set Lock Screen"
-msgstr "Встановити екран блокування"
-
-#: src/wallpaperdialog.c:176
-msgid "Set Background & Lock Screen"
-msgstr "Встановити зображення тла і екран блокування"
 
 #: src/wallpaperdialog.ui:26
 msgid "Set"
 msgstr "Встановити"
 
-#: src/wallpaperdialog.ui:62
+#: src/wallpaperdialog.ui:57
 msgid "Failed to load image file"
 msgstr "Не вдалося завантажити файл зображення"
 
 #: src/wallpaperpreview.ui:57
 msgid "Activities"
 msgstr "Діяльність"
+
+#~ msgid "applications-system-symbolic"
+#~ msgstr "applications-system-symbolic"
+
+#, c-format
+#~ msgid "%s is running in the background."
+#~ msgstr "%s працює у фоновому режимі."
+
+#~ msgid "Set Lock Screen"
+#~ msgstr "Встановити екран блокування"
+
+#~ msgid "Set Background & Lock Screen"
+#~ msgstr "Встановити зображення тла і екран блокування"

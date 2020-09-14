@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2019-12-12 09:23-0500\n"
+"POT-Creation-Date: 2020-09-14 14:09-0400\n"
 "PO-Revision-Date: 2019-08-24 23:53+0100\n"
 "Last-Translator: Zander Brown <zbrown@gnome.org>\n"
 "Language-Team: English - United Kingdom <en_GB@li.org>\n"
@@ -22,11 +22,6 @@ msgstr ""
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
 msgstr "Portal"
-
-#. TRANSLATORS: Don't translate this text (this is icon name)
-#: data/xdg-desktop-portal-gtk.desktop.in.in:6
-msgid "applications-system-symbolic"
-msgstr "applications-system-symbolic"
 
 #: src/access.c:271
 msgid "Deny Access"
@@ -69,7 +64,7 @@ msgstr "Share your personal information with the requesting application?"
 msgid "Share Details"
 msgstr "Share Details"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:447
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:467
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
@@ -84,27 +79,27 @@ msgstr "_Share"
 msgid "Make changes before sharing the information"
 msgstr "Make changes before sharing the information"
 
-#: src/appchooserdialog.c:227
+#: src/appchooserdialog.c:229
 msgid "Failed to start Software"
 msgstr "Failed to start Software"
 
-#: src/appchooserdialog.c:379
+#: src/appchooserdialog.c:385
 #, fuzzy, c-format
 msgid "Choose an application to open the file “%s”."
 msgstr "Unable to find an application that is able to open “%s”."
 
-#: src/appchooserdialog.c:384
+#: src/appchooserdialog.c:390
 msgid "Choose an application."
 msgstr ""
 
-#: src/appchooserdialog.c:401
+#: src/appchooserdialog.c:407
 #, c-format
 msgid ""
 "No apps installed that can open “%s”. You can find more applications in "
 "Software"
 msgstr ""
 
-#: src/appchooserdialog.c:406
+#: src/appchooserdialog.c:412
 msgid "No suitable app installed. You can find more applications in Software."
 msgstr ""
 
@@ -113,7 +108,7 @@ msgstr ""
 msgid "Open With…"
 msgstr "Open With"
 
-#: src/appchooserdialog.ui:23 src/filechooser.c:442
+#: src/appchooserdialog.ui:23 src/filechooser.c:462
 msgid "_Open"
 msgstr "_Open"
 
@@ -126,7 +121,7 @@ msgstr ""
 msgid "_Find More in Software"
 msgstr "Failed to start Software"
 
-#: src/background.c:215
+#: src/background.c:215 src/background.c:308
 #, fuzzy, c-format
 msgid "“%s” is running in the background"
 msgstr "%s is running in the background."
@@ -151,20 +146,20 @@ msgstr "Allow"
 msgid "Background activity"
 msgstr "Background activity"
 
-#: src/background.c:308
-#, c-format
-msgid "%s is running in the background."
-msgstr "%s is running in the background."
-
 #: src/background.c:314
 msgid "Find out more"
 msgstr ""
 
-#: src/filechooser.c:444
+#: src/filechooser.c:462
+#, fuzzy
+msgid "_Select"
+msgstr "Select"
+
+#: src/filechooser.c:464
 msgid "_Save"
 msgstr "_Save"
 
-#: src/filechooser.c:620
+#: src/filechooser.c:641
 msgid "Open files read-only"
 msgstr "Open files read-only"
 
@@ -282,35 +277,34 @@ msgstr "Include _pointer"
 msgid "Include the window _border"
 msgstr "Include the window _border"
 
-#: src/settings.c:184
+#: src/settings.c:186
 msgid "Requested setting not found"
 msgstr ""
 
-#: src/wallpaperdialog.c:122 src/wallpaperdialog.ui:13
+#: src/wallpaperdialog.ui:13
 #, fuzzy
 msgid "Set Background"
 msgstr "Background activity"
-
-#: src/wallpaperdialog.c:132
-msgid "Set Lock Screen"
-msgstr ""
-
-#: src/wallpaperdialog.c:176
-msgid "Set Background & Lock Screen"
-msgstr ""
 
 #: src/wallpaperdialog.ui:26
 #, fuzzy
 msgid "Set"
 msgstr "Select"
 
-#: src/wallpaperdialog.ui:62
+#: src/wallpaperdialog.ui:57
 msgid "Failed to load image file"
 msgstr ""
 
 #: src/wallpaperpreview.ui:57
 msgid "Activities"
 msgstr ""
+
+#~ msgid "applications-system-symbolic"
+#~ msgstr "applications-system-symbolic"
+
+#, c-format
+#~ msgid "%s is running in the background."
+#~ msgstr "%s is running in the background."
 
 #, c-format
 #~ msgid ""

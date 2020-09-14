@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2020-04-27 03:50+0000\n"
+"POT-Creation-Date: 2020-09-14 14:09-0400\n"
 "PO-Revision-Date: 2020-04-27 07:43+0200\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: \n"
@@ -23,11 +23,6 @@ msgstr ""
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
 msgstr "Portal"
-
-#. TRANSLATORS: Don't translate this text (this is icon name)
-#: data/xdg-desktop-portal-gtk.desktop.in.in:6
-msgid "applications-system-symbolic"
-msgstr "applications-system-symbolic"
 
 #: src/access.c:271
 msgid "Deny Access"
@@ -70,7 +65,7 @@ msgstr "Osobne podatke dijeliti s programom koji ih zahtijeva?"
 msgid "Share Details"
 msgstr "Dijeli detalje"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:457
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:467
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
@@ -85,20 +80,20 @@ msgstr "_Dijeli"
 msgid "Make changes before sharing the information"
 msgstr "Izradi promjene prije dijeljenja podataka"
 
-#: src/appchooserdialog.c:227
+#: src/appchooserdialog.c:229
 msgid "Failed to start Software"
 msgstr "Neuspjelo pokretanje Softvera"
 
-#: src/appchooserdialog.c:379
+#: src/appchooserdialog.c:385
 #, c-format
 msgid "Choose an application to open the file “%s”."
 msgstr "Odaberi program za otvaranje datoteke „%s”."
 
-#: src/appchooserdialog.c:384
+#: src/appchooserdialog.c:390
 msgid "Choose an application."
 msgstr "Odaberi program."
 
-#: src/appchooserdialog.c:401
+#: src/appchooserdialog.c:407
 #, c-format
 msgid ""
 "No apps installed that can open “%s”. You can find more applications in "
@@ -106,7 +101,7 @@ msgid ""
 msgstr ""
 "Nema programa za otvaranje datoteke „%s”. Nađi daljnje programe u Softveru"
 
-#: src/appchooserdialog.c:406
+#: src/appchooserdialog.c:412
 msgid "No suitable app installed. You can find more applications in Software."
 msgstr "Nema odgovarajućeg programa. Nađi daljnje programe u Softveru."
 
@@ -114,7 +109,7 @@ msgstr "Nema odgovarajućeg programa. Nađi daljnje programe u Softveru."
 msgid "Open With…"
 msgstr "Otvori s …"
 
-#: src/appchooserdialog.ui:23 src/filechooser.c:452
+#: src/appchooserdialog.ui:23 src/filechooser.c:462
 msgid "_Open"
 msgstr "_Otvori"
 
@@ -126,7 +121,7 @@ msgstr "Nema programa"
 msgid "_Find More in Software"
 msgstr "_Nađi daljnje u Softveru"
 
-#: src/background.c:215
+#: src/background.c:215 src/background.c:308
 #, c-format
 msgid "“%s” is running in the background"
 msgstr "„%s” radi u pozadini"
@@ -154,24 +149,19 @@ msgstr "Dozvoli"
 msgid "Background activity"
 msgstr "Radnje u pozadini"
 
-#: src/background.c:308
-#, c-format
-msgid "%s is running in the background."
-msgstr "„%s” radi u pozadini."
-
 #: src/background.c:314
 msgid "Find out more"
 msgstr "Saznaj više"
 
-#: src/filechooser.c:452
+#: src/filechooser.c:462
 msgid "_Select"
 msgstr "_Odaberi"
 
-#: src/filechooser.c:454
+#: src/filechooser.c:464
 msgid "_Save"
 msgstr "_Spremi"
 
-#: src/filechooser.c:631
+#: src/filechooser.c:641
 msgid "Open files read-only"
 msgstr "Otvori datoteke u zaštićenom stanju"
 
@@ -291,26 +281,31 @@ msgstr "Snimi s _okvirom prozora"
 msgid "Requested setting not found"
 msgstr "Zatražena postavka nije nađena"
 
-#: src/wallpaperdialog.c:122 src/wallpaperdialog.ui:13
+#: src/wallpaperdialog.ui:13
 msgid "Set Background"
 msgstr "Postavi pozadinu"
-
-#: src/wallpaperdialog.c:132
-msgid "Set Lock Screen"
-msgstr "Postavi zaključani erkan"
-
-#: src/wallpaperdialog.c:176
-msgid "Set Background & Lock Screen"
-msgstr "Postavi pozadinu i zaključani erkan"
 
 #: src/wallpaperdialog.ui:26
 msgid "Set"
 msgstr "Postavi"
 
-#: src/wallpaperdialog.ui:62
+#: src/wallpaperdialog.ui:57
 msgid "Failed to load image file"
 msgstr "Neuspjelo učitavanje slike"
 
 #: src/wallpaperpreview.ui:57
 msgid "Activities"
 msgstr "Radnje"
+
+#~ msgid "applications-system-symbolic"
+#~ msgstr "applications-system-symbolic"
+
+#, c-format
+#~ msgid "%s is running in the background."
+#~ msgstr "„%s” radi u pozadini."
+
+#~ msgid "Set Lock Screen"
+#~ msgstr "Postavi zaključani erkan"
+
+#~ msgid "Set Background & Lock Screen"
+#~ msgstr "Postavi pozadinu i zaključani erkan"

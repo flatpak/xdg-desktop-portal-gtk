@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2020-01-24 03:43+0000\n"
+"POT-Creation-Date: 2020-09-14 14:09-0400\n"
 "PO-Revision-Date: 2020-01-24 08:53-0300\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
@@ -22,11 +22,6 @@ msgstr ""
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
 msgstr "Portal"
-
-#. TRANSLATORS: Don't translate this text (this is icon name)
-#: data/xdg-desktop-portal-gtk.desktop.in.in:6
-msgid "applications-system-symbolic"
-msgstr "applications-system-symbolic"
 
 #: src/access.c:271
 msgid "Deny Access"
@@ -69,7 +64,7 @@ msgstr "Compartilhar suas informações pessoais com o aplicativo requisitante?"
 msgid "Share Details"
 msgstr "Compartilhar detalhes"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:447
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:467
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
@@ -84,20 +79,20 @@ msgstr "_Compartilhar"
 msgid "Make changes before sharing the information"
 msgstr "Fazer alterações antes de compartilhar as informações"
 
-#: src/appchooserdialog.c:227
+#: src/appchooserdialog.c:229
 msgid "Failed to start Software"
 msgstr "Falha ao iniciar Software"
 
-#: src/appchooserdialog.c:379
+#: src/appchooserdialog.c:385
 #, c-format
 msgid "Choose an application to open the file “%s”."
 msgstr "Escolha um aplicativo para abrir o arquivo “%s”."
 
-#: src/appchooserdialog.c:384
+#: src/appchooserdialog.c:390
 msgid "Choose an application."
 msgstr "Escolha um aplicativo."
 
-#: src/appchooserdialog.c:401
+#: src/appchooserdialog.c:407
 #, c-format
 msgid ""
 "No apps installed that can open “%s”. You can find more applications in "
@@ -106,7 +101,7 @@ msgstr ""
 "Nenhum aplicativo instalado que pode abrir “%s”. Você pode encontrar mais "
 "aplicativos no Software"
 
-#: src/appchooserdialog.c:406
+#: src/appchooserdialog.c:412
 msgid "No suitable app installed. You can find more applications in Software."
 msgstr ""
 "Nenhum aplicativo adequado instalado. Você pode encontrar mais aplicativos "
@@ -116,7 +111,7 @@ msgstr ""
 msgid "Open With…"
 msgstr "Abrir com…"
 
-#: src/appchooserdialog.ui:23 src/filechooser.c:442
+#: src/appchooserdialog.ui:23 src/filechooser.c:462
 msgid "_Open"
 msgstr "_Abrir"
 
@@ -128,7 +123,7 @@ msgstr "Nenhum aplicativo disponível"
 msgid "_Find More in Software"
 msgstr "_Encontrar mais no Software"
 
-#: src/background.c:215
+#: src/background.c:215 src/background.c:308
 #, c-format
 msgid "“%s” is running in the background"
 msgstr "“%s” está em execução em segundo plano"
@@ -157,20 +152,19 @@ msgstr "Permitir"
 msgid "Background activity"
 msgstr "Atividade em segundo plano"
 
-#: src/background.c:308
-#, c-format
-msgid "%s is running in the background."
-msgstr "%s está em execução em segundo plano."
-
 #: src/background.c:314
 msgid "Find out more"
 msgstr "Encontrar mais"
 
-#: src/filechooser.c:444
+#: src/filechooser.c:462
+msgid "_Select"
+msgstr "_Selecionar"
+
+#: src/filechooser.c:464
 msgid "_Save"
 msgstr "_Salvar"
 
-#: src/filechooser.c:620
+#: src/filechooser.c:641
 msgid "Open files read-only"
 msgstr "Abrir arquivos em somente leitura"
 
@@ -287,33 +281,38 @@ msgstr "Incluir cu_rsor"
 msgid "Include the window _border"
 msgstr "Incluir a _borda da janela"
 
-#: src/settings.c:184
+#: src/settings.c:186
 msgid "Requested setting not found"
 msgstr "Configuração solicitada não foi encontrada"
 
-#: src/wallpaperdialog.c:122 src/wallpaperdialog.ui:13
+#: src/wallpaperdialog.ui:13
 msgid "Set Background"
 msgstr "Definir plano de fundo"
-
-#: src/wallpaperdialog.c:132
-msgid "Set Lock Screen"
-msgstr "Definir tela de bloqueio"
-
-#: src/wallpaperdialog.c:176
-msgid "Set Background & Lock Screen"
-msgstr "Definir plano de fundo & tela de bloqueio"
 
 #: src/wallpaperdialog.ui:26
 msgid "Set"
 msgstr "Definir"
 
-#: src/wallpaperdialog.ui:62
+#: src/wallpaperdialog.ui:57
 msgid "Failed to load image file"
 msgstr "Falha ao carregar o arquivo de imagem"
 
 #: src/wallpaperpreview.ui:57
 msgid "Activities"
 msgstr "Atividades"
+
+#~ msgid "applications-system-symbolic"
+#~ msgstr "applications-system-symbolic"
+
+#, c-format
+#~ msgid "%s is running in the background."
+#~ msgstr "%s está em execução em segundo plano."
+
+#~ msgid "Set Lock Screen"
+#~ msgstr "Definir tela de bloqueio"
+
+#~ msgid "Set Background & Lock Screen"
+#~ msgstr "Definir plano de fundo & tela de bloqueio"
 
 #~ msgid ""
 #~ "Select an application to open “%s”. More applications are available in <a "
@@ -346,6 +345,3 @@ msgstr "Atividades"
 
 #~ msgid "Screen casting"
 #~ msgstr "Compartilhamento de tela"
-
-#~ msgid "_Select"
-#~ msgstr "_Selecionar"

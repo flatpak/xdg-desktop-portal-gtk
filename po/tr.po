@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2020-01-10 03:35+0000\n"
+"POT-Creation-Date: 2020-09-14 14:09-0400\n"
 "PO-Revision-Date: 2020-03-09 11:10+0300\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
@@ -25,11 +25,6 @@ msgstr ""
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
 msgstr "Portal"
-
-#. TRANSLATORS: Don't translate this text (this is icon name)
-#: data/xdg-desktop-portal-gtk.desktop.in.in:6
-msgid "applications-system-symbolic"
-msgstr "applications-system-symbolic"
 
 #: src/access.c:271
 msgid "Deny Access"
@@ -72,7 +67,7 @@ msgstr "Kişisel bilgileriniz, istekte bulunan uygulamayla paylaşılsın mı?"
 msgid "Share Details"
 msgstr "Ayrıntıları Paylaş"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:447
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:467
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
@@ -87,20 +82,20 @@ msgstr "_Paylaş"
 msgid "Make changes before sharing the information"
 msgstr "Bilgileri paylaşmadan önce değişiklik yapın"
 
-#: src/appchooserdialog.c:227
+#: src/appchooserdialog.c:229
 msgid "Failed to start Software"
 msgstr "Yazılımlar başlatılamadı"
 
-#: src/appchooserdialog.c:379
+#: src/appchooserdialog.c:385
 #, c-format
 msgid "Choose an application to open the file “%s”."
 msgstr "“%s” dosyasını açmak için uygulama seç."
 
-#: src/appchooserdialog.c:384
+#: src/appchooserdialog.c:390
 msgid "Choose an application."
 msgstr "Uygulama seç."
 
-#: src/appchooserdialog.c:401
+#: src/appchooserdialog.c:407
 #, c-format
 msgid ""
 "No apps installed that can open “%s”. You can find more applications in "
@@ -109,7 +104,7 @@ msgstr ""
 "“%s” dosyasını açabilen hiçbir uygulama yüklenmedi. Daha çok uygulamayı "
 "Yazılımlar’da bulabilirsiniz."
 
-#: src/appchooserdialog.c:406
+#: src/appchooserdialog.c:412
 msgid "No suitable app installed. You can find more applications in Software."
 msgstr ""
 "Kullanılabilir uygulama yüklenmedi. Daha çok uygulamayı Yazılımlar’da "
@@ -119,7 +114,7 @@ msgstr ""
 msgid "Open With…"
 msgstr "Birlikte Aç…"
 
-#: src/appchooserdialog.ui:23 src/filechooser.c:442
+#: src/appchooserdialog.ui:23 src/filechooser.c:462
 msgid "_Open"
 msgstr "_Aç"
 
@@ -131,7 +126,7 @@ msgstr "Kullanılabilir uygulama yok"
 msgid "_Find More in Software"
 msgstr "Yazılımlar’da Daha Çoğunu _Bul"
 
-#: src/background.c:215
+#: src/background.c:215 src/background.c:308
 #, c-format
 msgid "“%s” is running in the background"
 msgstr "“%s” arkaplanda çalışıyor"
@@ -159,20 +154,20 @@ msgstr "İzin ver"
 msgid "Background activity"
 msgstr "Arkaplan etkinliği"
 
-#: src/background.c:308
-#, c-format
-msgid "%s is running in the background."
-msgstr "%s arkaplanda çalışıyor."
-
 #: src/background.c:314
 msgid "Find out more"
 msgstr "Daha çoğunu keşfet"
 
-#: src/filechooser.c:444
+#: src/filechooser.c:462
+#, fuzzy
+msgid "_Select"
+msgstr "Seç"
+
+#: src/filechooser.c:464
 msgid "_Save"
 msgstr "_Kaydet"
 
-#: src/filechooser.c:620
+#: src/filechooser.c:641
 msgid "Open files read-only"
 msgstr "Dosyaları salt okunur aç"
 
@@ -288,33 +283,38 @@ msgstr "_Belirteçi dahil et"
 msgid "Include the window _border"
 msgstr "Pencere _kenarlığını dahil et"
 
-#: src/settings.c:184
+#: src/settings.c:186
 msgid "Requested setting not found"
 msgstr "İstenen ayar bulunamadı"
 
-#: src/wallpaperdialog.c:122 src/wallpaperdialog.ui:13
+#: src/wallpaperdialog.ui:13
 msgid "Set Background"
 msgstr "Arka Plan Belirle"
-
-#: src/wallpaperdialog.c:132
-msgid "Set Lock Screen"
-msgstr "Kilit Ekranı Belirle"
-
-#: src/wallpaperdialog.c:176
-msgid "Set Background & Lock Screen"
-msgstr "Arka Plan ve Kilit Ekranı Belirle"
 
 #: src/wallpaperdialog.ui:26
 msgid "Set"
 msgstr "Belirle"
 
-#: src/wallpaperdialog.ui:62
+#: src/wallpaperdialog.ui:57
 msgid "Failed to load image file"
 msgstr "Resim dosyası yüklenirken hata oluştu"
 
 #: src/wallpaperpreview.ui:57
 msgid "Activities"
 msgstr "Etkinlikler"
+
+#~ msgid "applications-system-symbolic"
+#~ msgstr "applications-system-symbolic"
+
+#, c-format
+#~ msgid "%s is running in the background."
+#~ msgstr "%s arkaplanda çalışıyor."
+
+#~ msgid "Set Lock Screen"
+#~ msgstr "Kilit Ekranı Belirle"
+
+#~ msgid "Set Background & Lock Screen"
+#~ msgstr "Arka Plan ve Kilit Ekranı Belirle"
 
 #~ msgid ""
 #~ "Select an application to open “%s”. More applications are available in <a "
