@@ -482,7 +482,7 @@ app_chooser_dialog_update_choices (AppChooserDialog  *dialog,
 
       g_ptr_array_add (new_choices, g_strdup (choices[i]));
 
-      if (!gtk_widget_get_visible (dialog->more_row))
+      if (dialog->more_row && !gtk_widget_get_visible (dialog->more_row))
         {
           g_autofree char *desktop_id = NULL;
           g_autoptr(GAppInfo) info = NULL;
