@@ -1,14 +1,14 @@
 # Danish translation for xdg-desktop-portal-gtk
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# scootergrisen, 2018-2019.
+# scootergrisen, 2018-2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk\n"
-"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
-"issues\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-"
+"gtk/issues\n"
 "POT-Creation-Date: 2020-09-14 14:09-0400\n"
-"PO-Revision-Date: 2019-05-21 00:00+0200\n"
+"PO-Revision-Date: 2020-10-12 01:17+0200\n"
 "Last-Translator: scootergrisen\n"
 "Language-Team: Danish\n"
 "Language: da\n"
@@ -82,13 +82,13 @@ msgid "Failed to start Software"
 msgstr "Kunne ikke starte Software"
 
 #: src/appchooserdialog.c:385
-#, fuzzy, c-format
+#, c-format
 msgid "Choose an application to open the file “%s”."
-msgstr "Kan ikke finde et program som er i stand til at åbne “%s”."
+msgstr "Vælg et program til at åbne filen “%s”."
 
 #: src/appchooserdialog.c:390
 msgid "Choose an application."
-msgstr ""
+msgstr "Vælg et program."
 
 #: src/appchooserdialog.c:407
 #, c-format
@@ -96,15 +96,18 @@ msgid ""
 "No apps installed that can open “%s”. You can find more applications in "
 "Software"
 msgstr ""
+"Der er ikke installeret nogle programmer som kan åbne “%s”. Du kan finde "
+"flere programmer i Software"
 
 #: src/appchooserdialog.c:412
 msgid "No suitable app installed. You can find more applications in Software."
 msgstr ""
+"Der er ikke installeret noget egnet program. Du kan finde flere programmer i "
+"Software."
 
 #: src/appchooserdialog.ui:10
-#, fuzzy
 msgid "Open With…"
-msgstr "Åbn med"
+msgstr "Åbn med …"
 
 #: src/appchooserdialog.ui:23 src/filechooser.c:462
 msgid "_Open"
@@ -112,17 +115,16 @@ msgstr "_Åbn"
 
 #: src/appchooserdialog.ui:115
 msgid "No Apps available"
-msgstr ""
+msgstr "Der er ikke nogle programmer tilgængelige"
 
 #: src/appchooserdialog.ui:159
-#, fuzzy
 msgid "_Find More in Software"
-msgstr "Kunne ikke starte Software"
+msgstr "_Find flere i Software"
 
 #: src/background.c:215 src/background.c:308
-#, fuzzy, c-format
+#, c-format
 msgid "“%s” is running in the background"
-msgstr "%s kører i baggrunden."
+msgstr "“%s” kører i baggrunden."
 
 #: src/background.c:217
 msgid ""
@@ -131,10 +133,14 @@ msgid ""
 "\n"
 "Note that forcing an application to quit might cause data loss."
 msgstr ""
+"Der kan være en legitim årsag men programmet har ikke angivet en.\n"
+"\n"
+"Bemærk, at det kan føre til tab af data hvis et program tvinges til at "
+"afslutte."
 
 #: src/background.c:220
 msgid "Force quit"
-msgstr ""
+msgstr "Gennemtving afslutning"
 
 #: src/background.c:221
 msgid "Allow"
@@ -146,12 +152,11 @@ msgstr "Baggrundsaktivitet"
 
 #: src/background.c:314
 msgid "Find out more"
-msgstr ""
+msgstr "Find ud af mere"
 
 #: src/filechooser.c:462
-#, fuzzy
 msgid "_Select"
-msgstr "Vælg"
+msgstr "_Vælg"
 
 #: src/filechooser.c:464
 msgid "_Save"
@@ -187,9 +192,8 @@ msgid "Remote desktop"
 msgstr "Fjernskrivebord"
 
 #: src/screencastdialog.ui:12
-#, fuzzy
 msgid "Screen Share"
-msgstr "Skærmbillede"
+msgstr "Skærmdeling"
 
 #: src/screencastwidget.c:483
 #, c-format
@@ -197,26 +201,25 @@ msgid "Select monitor to share with %s"
 msgstr "Vælg skærm som skal deles med %s"
 
 #: src/screencastwidget.c:485
-#, fuzzy, c-format
+#, c-format
 msgid "Select window to share with %s"
-msgstr "Vælg skærm som skal deles med %s"
+msgstr "Vælg vindue som skal deles med %s"
 
 #: src/screencastwidget.c:490
 msgid "Select monitor to share with the requesting application"
 msgstr "Vælg skærm som skal deles med det anmodede program"
 
 #: src/screencastwidget.c:491
-#, fuzzy
 msgid "Select window to share with the requesting application"
-msgstr "Vælg skærm som skal deles med det anmodede program"
+msgstr "Vælg vindue som skal deles med det anmodede program"
 
 #: src/screencastwidget.ui:100
 msgid "Single Window"
-msgstr ""
+msgstr "Ét vindue"
 
 #: src/screencastwidget.ui:176
 msgid "Entire Screen"
-msgstr ""
+msgstr "Hele skærmen"
 
 #: src/screenshotdialog.c:442
 #, c-format
@@ -277,62 +280,20 @@ msgstr "Medtag vinduets _kant"
 
 #: src/settings.c:186
 msgid "Requested setting not found"
-msgstr ""
+msgstr "Anmodede indstilling ikke fundet"
 
 #: src/wallpaperdialog.ui:13
-#, fuzzy
 msgid "Set Background"
-msgstr "Baggrundsaktivitet"
+msgstr "Indstil baggrund"
 
 #: src/wallpaperdialog.ui:26
-#, fuzzy
 msgid "Set"
-msgstr "Vælg"
+msgstr "Indstil"
 
 #: src/wallpaperdialog.ui:57
 msgid "Failed to load image file"
-msgstr ""
+msgstr "Kunne ikke indlæse billedfil"
 
 #: src/wallpaperpreview.ui:57
 msgid "Activities"
-msgstr ""
-
-#~ msgid "applications-system-symbolic"
-#~ msgstr "applications-system-symbolic"
-
-#, c-format
-#~ msgid "%s is running in the background."
-#~ msgstr "%s kører i baggrunden."
-
-#, c-format
-#~ msgid ""
-#~ "Select an application to open “%s”. More applications are available in <a "
-#~ "href='software'>Software.</a>"
-#~ msgstr ""
-#~ "Vælg et program til at åbne “%s”. Der findes flere programmer i <a "
-#~ "href='software'>Software</a>."
-
-#~ msgid ""
-#~ "Select an application. More applications are available in <a "
-#~ "href='software'>Software.</a>"
-#~ msgstr ""
-#~ "Vælg et program. Der findes flere programmer i <a "
-#~ "href='software'>Software</a>."
-
-#~ msgid "Unable to find a suitable application."
-#~ msgstr "Kan ikke finde et egnet program."
-
-#~ msgid "No Applications Found"
-#~ msgstr "Der blev ikke fundet nogen programmer"
-
-#~ msgid "Find Compatible Applications in Software"
-#~ msgstr "Find kompatible programmer i Software"
-
-#~ msgid "Forbid"
-#~ msgstr "Forbyd"
-
-#~ msgid "Ignore"
-#~ msgstr "Ignorer"
-
-#~ msgid "Screen casting"
-#~ msgstr "Skærmoptagelse"
+msgstr "Aktiviteter"
