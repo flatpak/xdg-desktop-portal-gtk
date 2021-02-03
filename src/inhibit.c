@@ -572,59 +572,69 @@ inhibit_init (GDBusConnection *bus,
                                                              NULL);
   owner = g_dbus_proxy_get_name_owner (G_DBUS_PROXY (sessionmanager));
 
-  screensaver = org_gnome_screen_saver_proxy_new_sync (bus,
-                                                       G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
-                                                       "org.gnome.ScreenSaver",
-                                                       "/org/gnome/ScreenSaver",
-                                                       NULL,
-                                                       NULL);
-  owner2 = g_dbus_proxy_get_name_owner (G_DBUS_PROXY (screensaver));
-
-  if (owner && owner2)
+  if (owner)
     {
-      g_autofree char *client_path = NULL;
-      g_autofree char *owner3 = NULL;
+      screensaver = org_gnome_screen_saver_proxy_new_sync (bus,
+                                                           G_DBUS_PROXY_FLAGS_NONE,
+                                                           "org.gnome.ScreenSaver",
+                                                           "/org/gnome/ScreenSaver",
+                                                           NULL,
+                                                           NULL);
+      owner2 = g_dbus_proxy_get_name_owner (G_DBUS_PROXY (screensaver));
 
-      g_signal_connect (inhibit, "handle-inhibit", G_CALLBACK (handle_inhibit_gnome), NULL);
-      g_signal_connect (inhibit, "handle-create-monitor", G_CALLBACK (handle_create_monitor), NULL);
-      g_signal_connect (inhibit, "handle-query-end-response", G_CALLBACK (handle_query_end_response), NULL);
-
-      g_signal_connect (screensaver, "active-changed", G_CALLBACK (global_active_changed_cb), NULL);
-      org_gnome_screen_saver_call_get_active_sync (screensaver, &active, NULL, NULL);
-      g_object_set_data (G_OBJECT (screensaver), "active", GINT_TO_POINTER (active));
-
-      g_debug ("Using org.gnome.SessionManager for inhibit");
-      g_debug ("Using org.gnome.Screensaver for screensaver state");
-
-      if (org_gnome_session_manager_call_register_client_sync (sessionmanager,
-                                                               "org.freedesktop.portal",
-                                                               "",
-                                                               &client_path,
-                                                               NULL,
-                                                               NULL))
+      if (owner2)
         {
-          client = g_dbus_proxy_new_sync (bus, 0,
-                                          NULL,
-                                          "org.gnome.SessionManager",
-                                          client_path,
-                                          "org.gnome.SessionManager.ClientPrivate",
-                                          NULL,
-                                          NULL);
-                                          
-          owner3 = g_dbus_proxy_get_name_owner (client);
-          if (owner3)
-            {
-              g_signal_connect (client, "g-signal", G_CALLBACK (client_proxy_signal), NULL);
+          g_autofree char *client_path = NULL;
+          g_autofree char *owner3 = NULL;
 
-              g_debug ("Using org.gnome.SessionManager for session state");
+          g_signal_connect (inhibit, "handle-inhibit", G_CALLBACK (handle_inhibit_gnome), NULL);
+          g_signal_connect (inhibit, "handle-create-monitor", G_CALLBACK (handle_create_monitor), NULL);
+          g_signal_connect (inhibit, "handle-query-end-response", G_CALLBACK (handle_query_end_response), NULL);
+
+          g_signal_connect (screensaver, "active-changed", G_CALLBACK (global_active_changed_cb), NULL);
+          org_gnome_screen_saver_call_get_active_sync (screensaver, &active, NULL, NULL);
+          g_object_set_data (G_OBJECT (screensaver), "active", GINT_TO_POINTER (active));
+
+          g_debug ("Using org.gnome.SessionManager for inhibit");
+          g_debug ("Using org.gnome.Screensaver for screensaver state");
+
+          if (org_gnome_session_manager_call_register_client_sync (sessionmanager,
+                                                                   "org.freedesktop.portal",
+                                                                   "",
+                                                                   &client_path,
+                                                                   NULL,
+                                                                   NULL))
+            {
+              client = g_dbus_proxy_new_sync (bus, 0,
+                                              NULL,
+                                              "org.gnome.SessionManager",
+                                              client_path,
+                                              "org.gnome.SessionManager.ClientPrivate",
+                                              NULL,
+                                              NULL);
+
+              owner3 = g_dbus_proxy_get_name_owner (client);
+              if (owner3)
+                {
+                  g_signal_connect (client, "g-signal", G_CALLBACK (client_proxy_signal), NULL);
+
+                  g_debug ("Using org.gnome.SessionManager for session state");
+                }
             }
+        }
+      else
+        {
+          g_clear_object (&sessionmanager);
+          g_clear_object (&screensaver);
         }
     }
   else
     {
       g_clear_object (&sessionmanager);
-      g_clear_object (&screensaver);
+    }
 
+  if (!screensaver)
+    {
       g_signal_connect (inhibit, "handle-inhibit", G_CALLBACK (handle_inhibit_fdo), NULL);
       g_signal_connect (inhibit, "handle-create-monitor", G_CALLBACK (handle_create_monitor), NULL);
 
@@ -642,7 +652,6 @@ inhibit_init (GDBusConnection *bus,
       g_debug ("Using org.freedesktop.ScreenSaver for inhibit");
       g_debug ("Using org.freedesktop.ScreenSaver for screensaver state");
     }
-
 
   if (!g_dbus_interface_skeleton_export (inhibit, bus, "/org/freedesktop/portal/desktop", error))
     return FALSE;
