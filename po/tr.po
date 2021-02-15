@@ -4,27 +4,32 @@
 #
 # Muhammet Kara <muhammetk@gnome.org>, 2017, 2018.
 # Sabri Ünal <libreajans@gmail.com>, 2019-2020.
-# Emin Tufan Çetin <etcetin@gmail.com>, 2020.
+# Emin Tufan Çetin <etcetin@gmail.com>, 2020-2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2020-09-14 14:09-0400\n"
-"PO-Revision-Date: 2020-03-09 11:10+0300\n"
-"Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
+"POT-Creation-Date: 2020-09-15 03:43+0000\n"
+"PO-Revision-Date: 2021-02-15 18:24+0300\n"
+"Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.4.2\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
 msgstr "Portal"
+
+#. TRANSLATORS: Don't translate this text (this is icon name)
+#: data/xdg-desktop-portal-gtk.desktop.in.in:6
+msgid "applications-system-symbolic"
+msgstr "applications-system-symbolic"
 
 #: src/access.c:271
 msgid "Deny Access"
@@ -40,7 +45,7 @@ msgstr "Resim Seç"
 
 #: src/accountdialog.c:179 src/wallpaperdialog.ui:18
 msgid "Cancel"
-msgstr "İptal"
+msgstr "İptal Et"
 
 #: src/accountdialog.c:180
 msgid "Select"
@@ -80,7 +85,7 @@ msgstr "_Paylaş"
 
 #: src/accountdialog.ui:148
 msgid "Make changes before sharing the information"
-msgstr "Bilgileri paylaşmadan önce değişiklik yapın"
+msgstr "Bilgileri paylaşmadan önce değişiklik yap"
 
 #: src/appchooserdialog.c:229
 msgid "Failed to start Software"
@@ -101,13 +106,13 @@ msgid ""
 "No apps installed that can open “%s”. You can find more applications in "
 "Software"
 msgstr ""
-"“%s” dosyasını açabilen hiçbir uygulama yüklenmedi. Daha çok uygulamayı "
-"Yazılımlar’da bulabilirsiniz."
+"“%s” dosyasını açabilen uygulama kurulmadı. Daha çok uygulamayı "
+"Yazılımlar’da bulabilirsiniz"
 
 #: src/appchooserdialog.c:412
 msgid "No suitable app installed. You can find more applications in Software."
 msgstr ""
-"Kullanılabilir uygulama yüklenmedi. Daha çok uygulamayı Yazılımlar’da "
+"Kullanılabilir uygulama kurulmadı. Daha çok uygulamayı Yazılımlar’da "
 "bulabilirsiniz."
 
 #: src/appchooserdialog.ui:10
@@ -129,7 +134,7 @@ msgstr "Yazılımlar’da Daha Çoğunu _Bul"
 #: src/background.c:215 src/background.c:308
 #, c-format
 msgid "“%s” is running in the background"
-msgstr "“%s” arkaplanda çalışıyor"
+msgstr "“%s” arka planda çalışıyor"
 
 #: src/background.c:217
 msgid ""
@@ -138,9 +143,9 @@ msgid ""
 "\n"
 "Note that forcing an application to quit might cause data loss."
 msgstr ""
-"Bu geçerli nedenden kaynaklanıyor olabilir, ancak uygulama neden sunmadı.\n"
+"Bu geçerli nedenden kaynaklanabilir ancak uygulama neden sunmadı.\n"
 "\n"
-"Uygulamayı çıkmaya zorlamak veri kaybına neden olabilir."
+"Uygulamayı çıkmaya zorlamak veri yitimine neden olabilir."
 
 #: src/background.c:220
 msgid "Force quit"
@@ -152,16 +157,15 @@ msgstr "İzin ver"
 
 #: src/background.c:306
 msgid "Background activity"
-msgstr "Arkaplan etkinliği"
+msgstr "Arka plan etkinliği"
 
 #: src/background.c:314
 msgid "Find out more"
 msgstr "Daha çoğunu keşfet"
 
 #: src/filechooser.c:462
-#, fuzzy
 msgid "_Select"
-msgstr "Seç"
+msgstr "_Seç"
 
 #: src/filechooser.c:464
 msgid "_Save"
@@ -173,7 +177,7 @@ msgstr "Dosyaları salt okunur aç"
 
 #: src/remotedesktopdialog.c:188
 msgid "Pointer"
-msgstr "İşaretçi"
+msgstr "İmleç"
 
 #: src/remotedesktopdialog.c:191
 msgid "Keyboard"
@@ -186,11 +190,11 @@ msgstr "Dokunmatik ekran"
 #: src/remotedesktopdialog.c:307
 #, c-format
 msgid "Select devices to share with %s"
-msgstr "%s ile paylaşılacak cihazları seçin"
+msgstr "%s ile paylaşılacak aygıtları seç"
 
 #: src/remotedesktopdialog.c:312
 msgid "Select devices to share with the requesting application"
-msgstr "İstekte bulunan uygulama ile paylaşılacak cihazları seçin"
+msgstr "İstekte bulunan uygulama ile paylaşılacak aygıtları seç"
 
 #: src/remotedesktopdialog.ui:12
 msgid "Remote desktop"
@@ -203,20 +207,20 @@ msgstr "Ekran Paylaşımı"
 #: src/screencastwidget.c:483
 #, c-format
 msgid "Select monitor to share with %s"
-msgstr "%s ile paylaşılacak monitörü seçin"
+msgstr "%s ile paylaşılacak monitörü seç"
 
 #: src/screencastwidget.c:485
 #, c-format
 msgid "Select window to share with %s"
-msgstr "%s ile paylaşılacak pencereyi seçin"
+msgstr "%s ile paylaşılacak pencereyi seç"
 
 #: src/screencastwidget.c:490
 msgid "Select monitor to share with the requesting application"
-msgstr "İstekte bulunan uygulama ile paylaşılacak monitörü seçin"
+msgstr "İstekte bulunan uygulama ile paylaşılacak monitörü seç"
 
 #: src/screencastwidget.c:491
 msgid "Select window to share with the requesting application"
-msgstr "İstekte bulunan uygulama ile paylaşılacak pencereyi seçin"
+msgstr "İstekte bulunan uygulama ile paylaşılacak pencereyi seç"
 
 #: src/screencastwidget.ui:100
 msgid "Single Window"
@@ -241,7 +245,7 @@ msgstr "Ekran Görüntüsü"
 
 #: src/screenshotdialog.ui:30
 msgid "_Options…"
-msgstr "Se_çenekler…"
+msgstr "_Seçenekler…"
 
 #: src/screenshotdialog.ui:55
 msgid "Take _Screenshot"
@@ -277,11 +281,11 @@ msgstr "Etkiler"
 
 #: src/screenshotdialog.ui:192
 msgid "Include _pointer"
-msgstr "_Belirteçi dahil et"
+msgstr "_İmleci içer"
 
 #: src/screenshotdialog.ui:201
 msgid "Include the window _border"
-msgstr "Pencere _kenarlığını dahil et"
+msgstr "Pencere _kenarlığını içer"
 
 #: src/settings.c:186
 msgid "Requested setting not found"
@@ -303,10 +307,6 @@ msgstr "Resim dosyası yüklenirken hata oluştu"
 msgid "Activities"
 msgstr "Etkinlikler"
 
-#~ msgid "applications-system-symbolic"
-#~ msgstr "applications-system-symbolic"
-
-#, c-format
 #~ msgid "%s is running in the background."
 #~ msgstr "%s arkaplanda çalışıyor."
 
