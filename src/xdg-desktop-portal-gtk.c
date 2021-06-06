@@ -66,7 +66,9 @@
 #include "background.h"
 #endif
 
+#ifdef BUILD_SETTINGS
 #include "settings.h"
+#endif
 
 #ifdef BUILD_WALLPAPER
 #include "wallpaper.h"
@@ -205,11 +207,13 @@ on_bus_acquired (GDBusConnection *connection,
     }
 #endif
 
+#ifdef BUILD_SETTINGS
   if (!settings_init (connection, &error))
     {
       g_warning ("error: %s\n", error->message);
       g_clear_error (&error);
     }
+#endif
 
 #ifdef BUILD_WALLPAPER
   if (!wallpaper_init (connection, &error))

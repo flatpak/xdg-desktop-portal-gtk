@@ -23,10 +23,16 @@ if BUILD_BACKGROUND
         BACKGROUND_IFACE=$(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Background.xml
 endif
 
+if BUILD_SETTINGS
+        SETTINGS_IFACE=$(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Settings.xml
+endif
+
 if BUILD_BACKGROUND
         SHELL_INTROSPECT_IFACE=$(top_srcdir)/data/org.gnome.Shell.Introspect.xml
 else
+if BUILD_SETTINGS
         SHELL_INTROSPECT_IFACE=$(top_srcdir)/data/org.gnome.Shell.Introspect.xml
+endif
 endif
 
 $(dbus_built_sources): src/Makefile.am.inc
@@ -46,12 +52,12 @@ $(dbus_built_sources): src/Makefile.am.inc
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Account.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Email.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Lockdown.xml \
-	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Settings.xml \
 	 $(WALLPAPER_IFACE) \
          $(SCREENSHOT_IFACE) \
          $(SCREENCAST_IFACE) \
          $(REMOTE_DESKTOP_IFACE) \
          $(BACKGROUND_IFACE) \
+         $(SETTINGS_IFACE) \
 	$(NULL)
 
 shell_built_sources = src/shell-dbus.c src/shell-dbus.h
@@ -138,10 +144,6 @@ xdg_desktop_portal_gtk_SOURCES = \
 	src/externalwindow.c			\
 	src/lockdown.c				\
 	src/lockdown.h				\
-        src/fc-monitor.c                        \
-        src/fc-monitor.h                        \
-        src/settings.c                          \
-        src/settings.h                          \
 	$(NULL)
 
 if BUILD_WALLPAPER
@@ -190,16 +192,27 @@ xdg_desktop_portal_gtk_SOURCES += \
 	$(NULL)
 endif
 
+if BUILD_SETTINGS
+xdg_desktop_portal_gtk_SOURCES += \
+        src/fc-monitor.c                        \
+        src/fc-monitor.h                        \
+        src/settings.c                          \
+        src/settings.h                          \
+	$(NULL)
+endif
+
 if BUILD_BACKGROUND
 xdg_desktop_portal_gtk_SOURCES += \
 	src/shellintrospect.c			\
 	src/shellintrospect.h			\
 	$(NULL)
 else
+if BUILD_SETTINGS
 xdg_desktop_portal_gtk_SOURCES += \
 	src/shellintrospect.c			\
 	src/shellintrospect.h			\
 	$(NULL)
+endif
 endif
 
 nodist_xdg_desktop_portal_gtk_SOURCES = \
@@ -222,8 +235,8 @@ xdg_desktop_portal_gtk_SOURCES += \
 	$(NULL)
 endif
 
-xdg_desktop_portal_gtk_LDADD = $(BASE_LIBS) $(GTK_LIBS) $(GTK_X11_LIBS) $(WALLPAPER_LIBS)
-xdg_desktop_portal_gtk_CFLAGS = $(BASE_CFLAGS) $(GTK_CFLAGS) $(GTK_X11_CFLAGS) $(WALLPAPER_CFLAGS)
+xdg_desktop_portal_gtk_LDADD = $(BASE_LIBS) $(GTK_LIBS) $(GTK_X11_LIBS) $(WALLPAPER_LIBS) $(SETTINGS_LIBS)
+xdg_desktop_portal_gtk_CFLAGS = $(BASE_CFLAGS) $(GTK_CFLAGS) $(GTK_X11_CFLAGS) $(WALLPAPER_CFLAGS) $(SETTINGS_CFLAGS)
 xdg_desktop_portal_gtk_CPPFLAGS = \
 	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"        \
 	-DLOCALEDIR=\"$(localedir)\"                    \

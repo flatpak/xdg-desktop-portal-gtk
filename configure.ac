@@ -90,7 +90,16 @@ if test x$enable_background = xyes; then
 fi
 AM_CONDITIONAL([BUILD_BACKGROUND],[test "$enable_background" = "yes"])
 
-PKG_CHECK_MODULES(GTK, [xdg-desktop-portal >= 1.5 glib-2.0 >= 2.44 gio-unix-2.0 gtk+-3.0 >= 3.14 gtk+-unix-print-3.0 fontconfig gsettings-desktop-schemas])
+AC_ARG_ENABLE(settings,
+              [AS_HELP_STRING([--enable-settings],[Build settings portal. Needs dconf])],
+              enable_settings=$enableval, enable_settings=yes)
+if test x$enable_settings = xyes; then
+    PKG_CHECK_MODULES(SETTINGS, [fontconfig gsettings-desktop-schemas])
+    AC_DEFINE([BUILD_SETTINGS], [1], [Define to enable settings portal])
+fi
+AM_CONDITIONAL([BUILD_SETTINGS],[test "$enable_settings" = "yes"])
+
+PKG_CHECK_MODULES(GTK, [xdg-desktop-portal >= 1.5 glib-2.0 >= 2.44 gio-unix-2.0 gtk+-3.0 >= 3.14 gtk+-unix-print-3.0])
 AC_SUBST(GTK_CFLAGS)
 AC_SUBST(GTK_LIBS)
 
