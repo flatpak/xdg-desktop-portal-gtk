@@ -99,6 +99,14 @@ if test x$enable_settings = xyes; then
 fi
 AM_CONDITIONAL([BUILD_SETTINGS],[test "$enable_settings" = "yes"])
 
+AC_ARG_ENABLE(appchooser,
+              [AS_HELP_STRING([--enable-appchooser],[Build appchooser portal.])],
+              enable_appchooser=$enableval, enable_appchooser=yes)
+if test x$enable_appchooser = xyes; then
+    AC_DEFINE([BUILD_APPCHOOSER], [1], [Define to enable appchooser portal])
+fi
+AM_CONDITIONAL([BUILD_APPCHOOSER],[test "$enable_appchooser" = "yes"])
+
 PKG_CHECK_MODULES(GTK, [xdg-desktop-portal >= 1.5 glib-2.0 >= 2.44 gio-unix-2.0 gtk+-3.0 >= 3.14 gtk+-unix-print-3.0])
 AC_SUBST(GTK_CFLAGS)
 AC_SUBST(GTK_LIBS)

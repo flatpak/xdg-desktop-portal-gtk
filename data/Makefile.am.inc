@@ -19,6 +19,10 @@ if BUILD_SETTINGS
 settings_iface = org.freedesktop.impl.portal.Settings;
 endif
 
+if BUILD_APPCHOOSER
+appchooser_iface = org.freedesktop.impl.portal.AppChooser;
+endif
+
 %.portal: data/%.portal.in config.log
 	$(AM_V_GEN) $(SED) -e "s|\@wallpaper_iface\@|$(wallpaper_iface)|" \
 			   -e "s|\@screenshot_iface\@|$(screenshot_iface)|" \
@@ -26,6 +30,7 @@ endif
 			   -e "s|\@remotedesktop_iface\@|$(remotedesktop_iface)|" \
 			   -e "s|\@background_iface\@|$(background_iface)|" \
 			   -e "s|\@settings_iface\@|$(settings_iface)|" \
+			   -e "s|\@appchooser_iface\@|$(appchooser_iface)|" \
 			   $< > $@
 
 portaldir = $(datadir)/xdg-desktop-portal/portals

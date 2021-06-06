@@ -35,6 +35,10 @@ if BUILD_SETTINGS
 endif
 endif
 
+if BUILD_APPCHOOSER
+        APPCHOOSER_IFACE=$(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.AppChooser.xml
+endif
+
 $(dbus_built_sources): src/Makefile.am.inc
 	$(AM_V_GEN) $(GDBUS_CODEGEN)			\
 	--interface-prefix org.freedesktop.impl.portal.	\
@@ -44,7 +48,6 @@ $(dbus_built_sources): src/Makefile.am.inc
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Request.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Session.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.FileChooser.xml \
-	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.AppChooser.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Print.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Notification.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Inhibit.xml \
@@ -58,6 +61,7 @@ $(dbus_built_sources): src/Makefile.am.inc
          $(REMOTE_DESKTOP_IFACE) \
          $(BACKGROUND_IFACE) \
          $(SETTINGS_IFACE) \
+         $(APPCHOOSER_IFACE) \
 	$(NULL)
 
 shell_built_sources = src/shell-dbus.c src/shell-dbus.h
@@ -116,18 +120,12 @@ xdg_desktop_portal_gtk_SOURCES = \
 	src/session.h	        		\
 	src/filechooser.h			\
 	src/filechooser.c			\
-	src/appchooser.h			\
-	src/appchooser.c			\
 	src/notification.h			\
 	src/notification.c			\
 	src/fdonotification.h			\
 	src/fdonotification.c			\
 	src/inhibit.h			        \
 	src/inhibit.c			        \
-	src/appchooserrow.h			\
-	src/appchooserrow.c			\
-	src/appchooserdialog.h		        \
-	src/appchooserdialog.c		        \
 	src/print.h				\
 	src/print.c				\
 	src/access.h				\
@@ -213,6 +211,17 @@ xdg_desktop_portal_gtk_SOURCES += \
 	src/shellintrospect.h			\
 	$(NULL)
 endif
+endif
+
+if BUILD_APPCHOOSER
+xdg_desktop_portal_gtk_SOURCES += \
+	src/appchooser.h			\
+	src/appchooser.c			\
+	src/appchooserrow.h			\
+	src/appchooserrow.c			\
+	src/appchooserdialog.h		        \
+	src/appchooserdialog.c		        \
+	$(NULL)
 endif
 
 nodist_xdg_desktop_portal_gtk_SOURCES = \

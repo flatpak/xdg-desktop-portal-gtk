@@ -42,7 +42,11 @@
 
 #include "request.h"
 #include "filechooser.h"
+
+#ifdef BUILD_APPCHOOSER
 #include "appchooser.h"
+#endif
+
 #include "print.h"
 
 #ifdef BUILD_SCREENSHOT
@@ -129,11 +133,13 @@ on_bus_acquired (GDBusConnection *connection,
       g_clear_error (&error);
     }
 
+#ifdef BUILD_APPCHOOSER
   if (!app_chooser_init (connection, &error))
     {
       g_warning ("error: %s\n", error->message);
       g_clear_error (&error);
     }
+#endif
 
   if (!print_init (connection, &error))
     {
