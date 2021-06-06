@@ -11,11 +11,16 @@ screencast_iface = org.freedesktop.impl.portal.ScreenCast;
 remotedesktop_iface = org.freedesktop.impl.portal.RemoteDesktop;
 endif
 
+if BUILD_BACKGROUND
+background_iface = org.freedesktop.impl.portal.Background;
+endif
+
 %.portal: data/%.portal.in config.log
 	$(AM_V_GEN) $(SED) -e "s|\@wallpaper_iface\@|$(wallpaper_iface)|" \
 			   -e "s|\@screenshot_iface\@|$(screenshot_iface)|" \
 			   -e "s|\@screencast_iface\@|$(screencast_iface)|" \
 			   -e "s|\@remotedesktop_iface\@|$(remotedesktop_iface)|" \
+			   -e "s|\@background_iface\@|$(background_iface)|" \
 			   $< > $@
 
 portaldir = $(datadir)/xdg-desktop-portal/portals

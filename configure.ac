@@ -82,6 +82,14 @@ if test x$enable_screencast = xyes; then
 fi
 AM_CONDITIONAL([BUILD_SCREENCAST],[test "$enable_screencast" = "yes"])
 
+AC_ARG_ENABLE(background,
+              [AS_HELP_STRING([--enable-background],[Build background portal. Needs gnome-shell])],
+              enable_background=$enableval, enable_background=yes)
+if test x$enable_background = xyes; then
+    AC_DEFINE([BUILD_BACKGROUND], [1], [Define to enable background portal])
+fi
+AM_CONDITIONAL([BUILD_BACKGROUND],[test "$enable_background" = "yes"])
+
 PKG_CHECK_MODULES(GTK, [xdg-desktop-portal >= 1.5 glib-2.0 >= 2.44 gio-unix-2.0 gtk+-3.0 >= 3.14 gtk+-unix-print-3.0 fontconfig gsettings-desktop-schemas])
 AC_SUBST(GTK_CFLAGS)
 AC_SUBST(GTK_LIBS)

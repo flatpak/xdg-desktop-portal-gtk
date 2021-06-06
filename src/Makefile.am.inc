@@ -19,6 +19,16 @@ if BUILD_SCREENCAST
         MUTTER_DISPLAYCONFIG_IFACE=$(top_srcdir)/data/org.gnome.Mutter.DisplayConfig.xml
 endif
 
+if BUILD_BACKGROUND
+        BACKGROUND_IFACE=$(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Background.xml
+endif
+
+if BUILD_BACKGROUND
+        SHELL_INTROSPECT_IFACE=$(top_srcdir)/data/org.gnome.Shell.Introspect.xml
+else
+        SHELL_INTROSPECT_IFACE=$(top_srcdir)/data/org.gnome.Shell.Introspect.xml
+endif
+
 $(dbus_built_sources): src/Makefile.am.inc
 	$(AM_V_GEN) $(GDBUS_CODEGEN)			\
 	--interface-prefix org.freedesktop.impl.portal.	\
@@ -36,12 +46,12 @@ $(dbus_built_sources): src/Makefile.am.inc
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Account.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Email.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Lockdown.xml \
-	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Background.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Settings.xml \
 	 $(WALLPAPER_IFACE) \
          $(SCREENSHOT_IFACE) \
          $(SCREENCAST_IFACE) \
          $(REMOTE_DESKTOP_IFACE) \
+         $(BACKGROUND_IFACE) \
 	$(NULL)
 
 shell_built_sources = src/shell-dbus.c src/shell-dbus.h
@@ -51,7 +61,6 @@ CLEANFILES += $(shell_built_sources)
 $(shell_built_sources): src/Makefile.am.inc
 	$(AM_V_GEN) $(GDBUS_CODEGEN)			                \
 	--generate-c-code src/shell-dbus	                        \
-	$(top_srcdir)/data/org.gnome.Shell.Introspect.xml	        \
 	$(top_srcdir)/data/org.gtk.Notifications.xml			\
 	$(top_srcdir)/data/org.gnome.SessionManager.xml		        \
 	$(top_srcdir)/data/org.gnome.ScreenSaver.xml			\
@@ -62,6 +71,7 @@ $(shell_built_sources): src/Makefile.am.inc
         $(MUTTER_SCREENCAST_IFACE)                                      \
         $(MUTTER_REMOTE_DESKTOP_IFACE)                                  \
         $(MUTTER_DISPLAYCONFIG_IFACE)                                   \
+        $(SHELL_INTROSPECT_IFACE)                                       \
 	$(NULL)
 
 resource_files = $(shell $(GLIB_COMPILE_RESOURCES) --sourcedir=$(top_srcdir)/src --generate-dependencies $(top_srcdir)/src/xdg-desktop-portal-gtk.gresource.xml)
@@ -126,12 +136,8 @@ xdg_desktop_portal_gtk_SOURCES = \
         src/gtkbackports.c                      \
 	src/externalwindow.h			\
 	src/externalwindow.c			\
-	src/shellintrospect.c			\
-	src/shellintrospect.h			\
 	src/lockdown.c				\
 	src/lockdown.h				\
-        src/background.c                        \
-        src/background.h                        \
         src/fc-monitor.c                        \
         src/fc-monitor.h                        \
         src/settings.c                          \
@@ -174,6 +180,25 @@ xdg_desktop_portal_gtk_SOURCES += \
 	src/remotedesktopdialog.h		\
 	src/displaystatetracker.c		\
 	src/displaystatetracker.h		\
+	$(NULL)
+endif
+
+if BUILD_BACKGROUND
+xdg_desktop_portal_gtk_SOURCES += \
+        src/background.c                        \
+        src/background.h                        \
+	$(NULL)
+endif
+
+if BUILD_BACKGROUND
+xdg_desktop_portal_gtk_SOURCES += \
+	src/shellintrospect.c			\
+	src/shellintrospect.h			\
+	$(NULL)
+else
+xdg_desktop_portal_gtk_SOURCES += \
+	src/shellintrospect.c			\
+	src/shellintrospect.h			\
 	$(NULL)
 endif
 
