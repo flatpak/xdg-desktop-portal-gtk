@@ -74,6 +74,14 @@ if test x$enable_screenshot = xyes; then
 fi
 AM_CONDITIONAL([BUILD_SCREENSHOT],[test "$enable_screenshot" = "yes"])
 
+AC_ARG_ENABLE(screencast,
+              [AS_HELP_STRING([--enable-screencast],[Build screencast and remote desktop portals. Needs mutter])],
+              enable_screencast=$enableval, enable_screencast=yes)
+if test x$enable_screencast = xyes; then
+    AC_DEFINE([BUILD_SCREENCAST], [1], [Define to enable screencast portal])
+fi
+AM_CONDITIONAL([BUILD_SCREENCAST],[test "$enable_screencast" = "yes"])
+
 PKG_CHECK_MODULES(GTK, [xdg-desktop-portal >= 1.5 glib-2.0 >= 2.44 gio-unix-2.0 gtk+-3.0 >= 3.14 gtk+-unix-print-3.0 fontconfig gsettings-desktop-schemas])
 AC_SUBST(GTK_CFLAGS)
 AC_SUBST(GTK_LIBS)

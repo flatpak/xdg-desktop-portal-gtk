@@ -11,6 +11,14 @@ if BUILD_SCREENSHOT
         SHELL_SCREENSHOT_IFACE=$(top_srcdir)/data/org.gnome.Shell.Screenshot.xml
 endif
 
+if BUILD_SCREENCAST
+        SCREENCAST_IFACE=$(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.ScreenCast.xml
+        REMOTE_DESKTOP_IFACE=$(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.RemoteDesktop.xml
+        MUTTER_SCREENCAST_IFACE=$(top_srcdir)/data/org.gnome.Mutter.ScreenCast.xml
+        MUTTER_REMOTE_DESKTOP_IFACE=$(top_srcdir)/data/org.gnome.Mutter.RemoteDesktop.xml
+        MUTTER_DISPLAYCONFIG_IFACE=$(top_srcdir)/data/org.gnome.Mutter.DisplayConfig.xml
+endif
+
 $(dbus_built_sources): src/Makefile.am.inc
 	$(AM_V_GEN) $(GDBUS_CODEGEN)			\
 	--interface-prefix org.freedesktop.impl.portal.	\
@@ -27,13 +35,13 @@ $(dbus_built_sources): src/Makefile.am.inc
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Access.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Account.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Email.xml \
-	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.ScreenCast.xml \
-	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.RemoteDesktop.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Lockdown.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Background.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Settings.xml \
 	 $(WALLPAPER_IFACE) \
          $(SCREENSHOT_IFACE) \
+         $(SCREENCAST_IFACE) \
+         $(REMOTE_DESKTOP_IFACE) \
 	$(NULL)
 
 shell_built_sources = src/shell-dbus.c src/shell-dbus.h
@@ -43,9 +51,6 @@ CLEANFILES += $(shell_built_sources)
 $(shell_built_sources): src/Makefile.am.inc
 	$(AM_V_GEN) $(GDBUS_CODEGEN)			                \
 	--generate-c-code src/shell-dbus	                        \
-	$(top_srcdir)/data/org.gnome.Mutter.DisplayConfig.xml	        \
-	$(top_srcdir)/data/org.gnome.Mutter.ScreenCast.xml	        \
-	$(top_srcdir)/data/org.gnome.Mutter.RemoteDesktop.xml	        \
 	$(top_srcdir)/data/org.gnome.Shell.Introspect.xml	        \
 	$(top_srcdir)/data/org.gtk.Notifications.xml			\
 	$(top_srcdir)/data/org.gnome.SessionManager.xml		        \
@@ -54,6 +59,9 @@ $(shell_built_sources): src/Makefile.am.inc
 	$(top_srcdir)/data/org.freedesktop.Accounts.xml		        \
 	$(top_srcdir)/data/org.freedesktop.Accounts.User.xml            \
         $(SHELL_SCREENSHOT_IFACE)                                       \
+        $(MUTTER_SCREENCAST_IFACE)                                      \
+        $(MUTTER_REMOTE_DESKTOP_IFACE)                                  \
+        $(MUTTER_DISPLAYCONFIG_IFACE)                                   \
 	$(NULL)
 
 resource_files = $(shell $(GLIB_COMPILE_RESOURCES) --sourcedir=$(top_srcdir)/src --generate-dependencies $(top_srcdir)/src/xdg-desktop-portal-gtk.gresource.xml)
@@ -118,20 +126,6 @@ xdg_desktop_portal_gtk_SOURCES = \
         src/gtkbackports.c                      \
 	src/externalwindow.h			\
 	src/externalwindow.c			\
-	src/screencast.c			\
-	src/screencast.h			\
-	src/screencastwidget.c			\
-	src/screencastwidget.h			\
-	src/screencastdialog.c			\
-	src/screencastdialog.h			\
-	src/gnomescreencast.c			\
-	src/gnomescreencast.h			\
-	src/remotedesktop.c			\
-	src/remotedesktop.h			\
-	src/remotedesktopdialog.c		\
-	src/remotedesktopdialog.h		\
-	src/displaystatetracker.c		\
-	src/displaystatetracker.h		\
 	src/shellintrospect.c			\
 	src/shellintrospect.h			\
 	src/lockdown.c				\
@@ -161,6 +155,25 @@ xdg_desktop_portal_gtk_SOURCES += \
 	src/screenshot.c			\
 	src/screenshotdialog.h		        \
 	src/screenshotdialog.c		        \
+	$(NULL)
+endif
+
+if BUILD_SCREENCAST
+xdg_desktop_portal_gtk_SOURCES += \
+	src/screencast.c			\
+	src/screencast.h			\
+	src/screencastwidget.c			\
+	src/screencastwidget.h			\
+	src/screencastdialog.c			\
+	src/screencastdialog.h			\
+	src/gnomescreencast.c			\
+	src/gnomescreencast.h			\
+	src/remotedesktop.c			\
+	src/remotedesktop.h			\
+	src/remotedesktopdialog.c		\
+	src/remotedesktopdialog.h		\
+	src/displaystatetracker.c		\
+	src/displaystatetracker.h		\
 	$(NULL)
 endif
 

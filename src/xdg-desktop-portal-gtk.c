@@ -54,8 +54,12 @@
 #include "access.h"
 #include "account.h"
 #include "email.h"
+
+#ifdef BUILD_SCREENCAST
 #include "screencast.h"
 #include "remotedesktop.h"
+#endif
+
 #include "lockdown.h"
 #include "background.h"
 #include "settings.h"
@@ -169,6 +173,7 @@ on_bus_acquired (GDBusConnection *connection,
       g_clear_error (&error);
     }
 
+#ifdef BUILD_SCREENCAST
   if (!screen_cast_init (connection, &error))
     {
       g_warning ("error: %s\n", error->message);
@@ -180,6 +185,7 @@ on_bus_acquired (GDBusConnection *connection,
       g_warning ("error: %s\n", error->message);
       g_clear_error (&error);
     }
+#endif
 
   if (!lockdown_init (connection, &error))
     {

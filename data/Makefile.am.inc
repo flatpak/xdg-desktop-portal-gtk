@@ -6,9 +6,16 @@ if BUILD_SCREENSHOT
 screenshot_iface = org.freedesktop.impl.portal.Screenshot;
 endif
 
+if BUILD_SCREENCAST
+screencast_iface = org.freedesktop.impl.portal.ScreenCast;
+remotedesktop_iface = org.freedesktop.impl.portal.RemoteDesktop;
+endif
+
 %.portal: data/%.portal.in config.log
 	$(AM_V_GEN) $(SED) -e "s|\@wallpaper_iface\@|$(wallpaper_iface)|" \
 			   -e "s|\@screenshot_iface\@|$(screenshot_iface)|" \
+			   -e "s|\@screencast_iface\@|$(screencast_iface)|" \
+			   -e "s|\@remotedesktop_iface\@|$(remotedesktop_iface)|" \
 			   $< > $@
 
 portaldir = $(datadir)/xdg-desktop-portal/portals
