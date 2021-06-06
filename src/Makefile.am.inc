@@ -2,6 +2,10 @@ dbus_built_sources = src/xdg-desktop-portal-dbus.c src/xdg-desktop-portal-dbus.h
 BUILT_SOURCES += $(dbus_built_sources)
 CLEANFILES += $(dbus_built_sources)
 
+if BUILD_WALLPAPER
+        WALLPAPER_IFACE=$(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Wallpaper.xml
+endif
+
 $(dbus_built_sources): src/Makefile.am.inc
 	$(AM_V_GEN) $(GDBUS_CODEGEN)			\
 	--interface-prefix org.freedesktop.impl.portal.	\
@@ -24,7 +28,7 @@ $(dbus_built_sources): src/Makefile.am.inc
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Lockdown.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Background.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Settings.xml \
-	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Wallpaper.xml \
+	 $(WALLPAPER_IFACE) \
 	$(NULL)
 
 shell_built_sources = src/shell-dbus.c src/shell-dbus.h
@@ -137,6 +141,10 @@ xdg_desktop_portal_gtk_SOURCES = \
         src/fc-monitor.h                        \
         src/settings.c                          \
         src/settings.h                          \
+	$(NULL)
+
+if BUILD_WALLPAPER
+xdg_desktop_portal_gtk_SOURCES += \
 	src/wallpaperdialog.c				\
 	src/wallpaperdialog.h				\
 	src/wallpaperpreview.c				\
@@ -144,6 +152,7 @@ xdg_desktop_portal_gtk_SOURCES = \
 	src/wallpaper.c				\
 	src/wallpaper.h				\
 	$(NULL)
+endif
 
 nodist_xdg_desktop_portal_gtk_SOURCES = \
 	src/resources.c				\
@@ -165,8 +174,8 @@ xdg_desktop_portal_gtk_SOURCES += \
 	$(NULL)
 endif
 
-xdg_desktop_portal_gtk_LDADD = $(BASE_LIBS) $(GTK_LIBS) $(GTK_X11_LIBS)
-xdg_desktop_portal_gtk_CFLAGS = $(BASE_CFLAGS) $(GTK_CFLAGS) $(GTK_X11_CFLAGS)
+xdg_desktop_portal_gtk_LDADD = $(BASE_LIBS) $(GTK_LIBS) $(GTK_X11_LIBS) $(WALLPAPER_LIBS)
+xdg_desktop_portal_gtk_CFLAGS = $(BASE_CFLAGS) $(GTK_CFLAGS) $(GTK_X11_CFLAGS) $(WALLPAPER_CFLAGS)
 xdg_desktop_portal_gtk_CPPFLAGS = \
 	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"        \
 	-DLOCALEDIR=\"$(localedir)\"                    \

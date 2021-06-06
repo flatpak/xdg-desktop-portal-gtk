@@ -55,7 +55,10 @@
 #include "lockdown.h"
 #include "background.h"
 #include "settings.h"
+
+#ifdef BUILD_WALLPAPER
 #include "wallpaper.h"
+#endif
 
 
 static GMainLoop *loop = NULL;
@@ -190,11 +193,13 @@ on_bus_acquired (GDBusConnection *connection,
       g_clear_error (&error);
     }
 
+#ifdef BUILD_WALLPAPER
   if (!wallpaper_init (connection, &error))
     {
       g_warning ("error: %s\n", error->message);
       g_clear_error (&error);
     }
+#endif
 }
 
 static void

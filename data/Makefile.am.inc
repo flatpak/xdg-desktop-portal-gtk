@@ -1,5 +1,13 @@
+if BUILD_WALLPAPER
+wallpaper_iface = org.freedesktop.impl.portal.Wallpaper;
+endif
+
+%.portal: data/%.portal.in config.log
+	$(AM_V_GEN) $(SED) -e "s|\@wallpaper_iface\@|$(wallpaper_iface)|" $< > $@
+
 portaldir = $(datadir)/xdg-desktop-portal/portals
-dist_portal_DATA = data/gtk.portal
+portal_in_files = data/gtk.portal.in
+portal_DATA = gtk.portal
 
 %.service: data/%.service.in config.log
 	$(AM_V_GEN) $(SED) -e "s|\@libexecdir\@|$(libexecdir)|" $< > $@
@@ -27,11 +35,13 @@ desktop_in_files = xdg-desktop-portal-gtk.desktop.in
 desktop_DATA = xdg-desktop-portal-gtk.desktop
 
 CLEANFILES += \
+	$(portal_DATA)		\
 	$(desktop_in_files)	\
 	$(desktop_DATA)		\
 	$(NULL)
 
 EXTRA_DIST += \
+	$(portal_in_files)			\
 	$(dbus_service_in_files)                \
         $(systemduserunit_in_files)             \
         $(desktop_in_in_files)                  \

@@ -57,7 +57,16 @@ AC_SUBST([DBUS_INTERFACES_DIR], [`$PKG_CONFIG --variable=interfaces_dir dbus-1`]
 AC_SUBST([GDBUS_CODEGEN], [`$PKG_CONFIG --variable gdbus_codegen gio-2.0`])
 AC_SUBST([GLIB_COMPILE_RESOURCES], [`$PKG_CONFIG --variable glib_compile_resources gio-2.0`])
 
-PKG_CHECK_MODULES(GTK, [xdg-desktop-portal >= 1.5 glib-2.0 >= 2.44 gio-unix-2.0 gtk+-3.0 >= 3.14 gtk+-unix-print-3.0 fontconfig gnome-desktop-3.0 gsettings-desktop-schemas])
+AC_ARG_ENABLE(wallpaper,
+              [AS_HELP_STRING([--enable-wallpaper],[Build wallpaper portal. Needs gnome-desktop])],
+              enable_wallpaper=$enableval, enable_wallpaper=yes)
+if test x$enable_wallpaper = xyes; then
+    PKG_CHECK_MODULES(WALLPAPER, [gnome-desktop-3.0])
+    AC_DEFINE([BUILD_WALLPAPER], [1], [Define to enable wallpaper portal])
+fi
+AM_CONDITIONAL([BUILD_WALLPAPER],[test "$enable_wallpaper" = "yes"])
+
+PKG_CHECK_MODULES(GTK, [xdg-desktop-portal >= 1.5 glib-2.0 >= 2.44 gio-unix-2.0 gtk+-3.0 >= 3.14 gtk+-unix-print-3.0 fontconfig gsettings-desktop-schemas])
 AC_SUBST(GTK_CFLAGS)
 AC_SUBST(GTK_LIBS)
 
