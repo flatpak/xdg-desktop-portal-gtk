@@ -2,8 +2,14 @@ if BUILD_WALLPAPER
 wallpaper_iface = org.freedesktop.impl.portal.Wallpaper;
 endif
 
+if BUILD_SCREENSHOT
+screenshot_iface = org.freedesktop.impl.portal.Screenshot;
+endif
+
 %.portal: data/%.portal.in config.log
-	$(AM_V_GEN) $(SED) -e "s|\@wallpaper_iface\@|$(wallpaper_iface)|" $< > $@
+	$(AM_V_GEN) $(SED) -e "s|\@wallpaper_iface\@|$(wallpaper_iface)|" \
+			   -e "s|\@screenshot_iface\@|$(screenshot_iface)|" \
+			   $< > $@
 
 portaldir = $(datadir)/xdg-desktop-portal/portals
 portal_in_files = data/gtk.portal.in

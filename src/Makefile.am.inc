@@ -6,6 +6,11 @@ if BUILD_WALLPAPER
         WALLPAPER_IFACE=$(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Wallpaper.xml
 endif
 
+if BUILD_SCREENSHOT
+        SCREENSHOT_IFACE=$(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Screenshot.xml
+        SHELL_SCREENSHOT_IFACE=$(top_srcdir)/data/org.gnome.Shell.Screenshot.xml
+endif
+
 $(dbus_built_sources): src/Makefile.am.inc
 	$(AM_V_GEN) $(GDBUS_CODEGEN)			\
 	--interface-prefix org.freedesktop.impl.portal.	\
@@ -17,7 +22,6 @@ $(dbus_built_sources): src/Makefile.am.inc
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.FileChooser.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.AppChooser.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Print.xml \
-	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Screenshot.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Notification.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Inhibit.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Access.xml \
@@ -29,6 +33,7 @@ $(dbus_built_sources): src/Makefile.am.inc
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Background.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Settings.xml \
 	 $(WALLPAPER_IFACE) \
+         $(SCREENSHOT_IFACE) \
 	$(NULL)
 
 shell_built_sources = src/shell-dbus.c src/shell-dbus.h
@@ -41,7 +46,6 @@ $(shell_built_sources): src/Makefile.am.inc
 	$(top_srcdir)/data/org.gnome.Mutter.DisplayConfig.xml	        \
 	$(top_srcdir)/data/org.gnome.Mutter.ScreenCast.xml	        \
 	$(top_srcdir)/data/org.gnome.Mutter.RemoteDesktop.xml	        \
-	$(top_srcdir)/data/org.gnome.Shell.Screenshot.xml	        \
 	$(top_srcdir)/data/org.gnome.Shell.Introspect.xml	        \
 	$(top_srcdir)/data/org.gtk.Notifications.xml			\
 	$(top_srcdir)/data/org.gnome.SessionManager.xml		        \
@@ -49,6 +53,7 @@ $(shell_built_sources): src/Makefile.am.inc
 	$(top_srcdir)/data/org.freedesktop.ScreenSaver.xml		\
 	$(top_srcdir)/data/org.freedesktop.Accounts.xml		        \
 	$(top_srcdir)/data/org.freedesktop.Accounts.User.xml            \
+        $(SHELL_SCREENSHOT_IFACE)                                       \
 	$(NULL)
 
 resource_files = $(shell $(GLIB_COMPILE_RESOURCES) --sourcedir=$(top_srcdir)/src --generate-dependencies $(top_srcdir)/src/xdg-desktop-portal-gtk.gresource.xml)
@@ -99,10 +104,6 @@ xdg_desktop_portal_gtk_SOURCES = \
 	src/appchooserrow.c			\
 	src/appchooserdialog.h		        \
 	src/appchooserdialog.c		        \
-	src/screenshot.h			\
-	src/screenshot.c			\
-	src/screenshotdialog.h		        \
-	src/screenshotdialog.c		        \
 	src/print.h				\
 	src/print.c				\
 	src/access.h				\
@@ -151,6 +152,15 @@ xdg_desktop_portal_gtk_SOURCES += \
 	src/wallpaperpreview.h				\
 	src/wallpaper.c				\
 	src/wallpaper.h				\
+	$(NULL)
+endif
+
+if BUILD_SCREENSHOT
+xdg_desktop_portal_gtk_SOURCES += \
+	src/screenshot.h			\
+	src/screenshot.c			\
+	src/screenshotdialog.h		        \
+	src/screenshotdialog.c		        \
 	$(NULL)
 endif
 

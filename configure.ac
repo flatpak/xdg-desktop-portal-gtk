@@ -66,6 +66,14 @@ if test x$enable_wallpaper = xyes; then
 fi
 AM_CONDITIONAL([BUILD_WALLPAPER],[test "$enable_wallpaper" = "yes"])
 
+AC_ARG_ENABLE(screenshot,
+              [AS_HELP_STRING([--enable-screenshot],[Build screenshot portal. Needs gnome-shell])],
+              enable_screenshot=$enableval, enable_screenshot=yes)
+if test x$enable_screenshot = xyes; then
+    AC_DEFINE([BUILD_SCREENSHOT], [1], [Define to enable screenshot portal])
+fi
+AM_CONDITIONAL([BUILD_SCREENSHOT],[test "$enable_screenshot" = "yes"])
+
 PKG_CHECK_MODULES(GTK, [xdg-desktop-portal >= 1.5 glib-2.0 >= 2.44 gio-unix-2.0 gtk+-3.0 >= 3.14 gtk+-unix-print-3.0 fontconfig gsettings-desktop-schemas])
 AC_SUBST(GTK_CFLAGS)
 AC_SUBST(GTK_LIBS)

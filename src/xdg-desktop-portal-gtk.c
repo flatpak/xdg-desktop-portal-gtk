@@ -44,7 +44,11 @@
 #include "filechooser.h"
 #include "appchooser.h"
 #include "print.h"
+
+#ifdef BUILD_SCREENSHOT
 #include "screenshot.h"
+#endif
+
 #include "notification.h"
 #include "inhibit.h"
 #include "access.h"
@@ -127,11 +131,13 @@ on_bus_acquired (GDBusConnection *connection,
       g_clear_error (&error);
     }
 
+#ifdef BUILD_SCREENSHOT
   if (!screenshot_init (connection, &error))
     {
       g_warning ("error: %s\n", error->message);
       g_clear_error (&error);
     }
+#endif
 
   if (!notification_init (connection, &error))
     {
