@@ -64,7 +64,9 @@
 #include "remotedesktop.h"
 #endif
 
+#ifdef BUILD_LOCKDOWN
 #include "lockdown.h"
+#endif
 
 #ifdef BUILD_BACKGROUND
 #include "background.h"
@@ -199,11 +201,13 @@ on_bus_acquired (GDBusConnection *connection,
     }
 #endif
 
+#ifdef BUILD_LOCKDOWN
   if (!lockdown_init (connection, &error))
     {
       g_warning ("error: %s\n", error->message);
       g_clear_error (&error);
     }
+#endif
 
 #ifdef BUILD_BACKGROUND
   if (!background_init (connection, &error))

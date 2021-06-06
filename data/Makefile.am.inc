@@ -23,6 +23,10 @@ if BUILD_APPCHOOSER
 appchooser_iface = org.freedesktop.impl.portal.AppChooser;
 endif
 
+if BUILD_LOCKDOWN
+lockdown_iface = org.freedesktop.impl.portal.Lockdown;
+endif
+
 %.portal: data/%.portal.in config.log
 	$(AM_V_GEN) $(SED) -e "s|\@wallpaper_iface\@|$(wallpaper_iface)|" \
 			   -e "s|\@screenshot_iface\@|$(screenshot_iface)|" \
@@ -31,6 +35,7 @@ endif
 			   -e "s|\@background_iface\@|$(background_iface)|" \
 			   -e "s|\@settings_iface\@|$(settings_iface)|" \
 			   -e "s|\@appchooser_iface\@|$(appchooser_iface)|" \
+			   -e "s|\@lockdown_iface\@|$(lockdown_iface)|" \
 			   $< > $@
 
 portaldir = $(datadir)/xdg-desktop-portal/portals

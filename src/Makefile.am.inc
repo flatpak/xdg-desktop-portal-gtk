@@ -39,6 +39,10 @@ if BUILD_APPCHOOSER
         APPCHOOSER_IFACE=$(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.AppChooser.xml
 endif
 
+if BUILD_LOCKDOWN
+        LOCKDOWN_IFACE=$(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Lockdown.xml
+endif
+
 $(dbus_built_sources): src/Makefile.am.inc
 	$(AM_V_GEN) $(GDBUS_CODEGEN)			\
 	--interface-prefix org.freedesktop.impl.portal.	\
@@ -54,7 +58,6 @@ $(dbus_built_sources): src/Makefile.am.inc
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Access.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Account.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Email.xml \
-	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Lockdown.xml \
 	 $(WALLPAPER_IFACE) \
          $(SCREENSHOT_IFACE) \
          $(SCREENCAST_IFACE) \
@@ -62,6 +65,7 @@ $(dbus_built_sources): src/Makefile.am.inc
          $(BACKGROUND_IFACE) \
          $(SETTINGS_IFACE) \
          $(APPCHOOSER_IFACE) \
+         $(LOCKDOWN_IFACE) \
 	$(NULL)
 
 shell_built_sources = src/shell-dbus.c src/shell-dbus.h
@@ -140,8 +144,6 @@ xdg_desktop_portal_gtk_SOURCES = \
         src/gtkbackports.c                      \
 	src/externalwindow.h			\
 	src/externalwindow.c			\
-	src/lockdown.c				\
-	src/lockdown.h				\
 	$(NULL)
 
 if BUILD_WALLPAPER
@@ -221,6 +223,13 @@ xdg_desktop_portal_gtk_SOURCES += \
 	src/appchooserrow.c			\
 	src/appchooserdialog.h		        \
 	src/appchooserdialog.c		        \
+	$(NULL)
+endif
+
+if BUILD_LOCKDOWN
+xdg_desktop_portal_gtk_SOURCES += \
+	src/lockdown.c				\
+	src/lockdown.h				\
 	$(NULL)
 endif
 

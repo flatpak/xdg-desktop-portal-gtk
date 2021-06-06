@@ -107,6 +107,14 @@ if test x$enable_appchooser = xyes; then
 fi
 AM_CONDITIONAL([BUILD_APPCHOOSER],[test "$enable_appchooser" = "yes"])
 
+AC_ARG_ENABLE(lockdown,
+              [AS_HELP_STRING([--enable-lockdown],[Build lockdown portal.])],
+              enable_lockdown=$enableval, enable_lockdown=yes)
+if test x$enable_lockdown = xyes; then
+    AC_DEFINE([BUILD_LOCKDOWN], [1], [Define to enable lockdown portal])
+fi
+AM_CONDITIONAL([BUILD_LOCKDOWN],[test "$enable_lockdown" = "yes"])
+
 PKG_CHECK_MODULES(GTK, [xdg-desktop-portal >= 1.5 glib-2.0 >= 2.44 gio-unix-2.0 gtk+-3.0 >= 3.14 gtk+-unix-print-3.0])
 AC_SUBST(GTK_CFLAGS)
 AC_SUBST(GTK_LIBS)
