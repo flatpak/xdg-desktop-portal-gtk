@@ -83,6 +83,7 @@ create_window_widget (Window *window)
   if (icon == NULL)
     icon = g_themed_icon_new ("application-x-executable");
   window_image = gtk_image_new_from_gicon (icon, GTK_ICON_SIZE_DND);
+  gtk_image_set_pixel_size (GTK_IMAGE (window_image), 32);
   gtk_widget_set_margin_start (window_image, 12);
   gtk_widget_set_margin_end (window_image, 12);
   gtk_widget_show (window_image);
