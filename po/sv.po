@@ -1,36 +1,42 @@
 # Swedish translation for xdg-desktop-portal-gtk.
-# Copyright © 2016 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
+# Copyright © 2016-2020 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
 # This file is distributed under the same license as the xdg-desktop-portal-gtk package.
 # Sebastian Rasmussen <sebras@gmail.com>, 2016.
 # Josef Andersson <l10nl18nsweja@gmail.com>, 2017, 2019.
+# Anders Jonsson <anders.jonsson@norsjovallen.se>, 2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2020-09-14 14:09-0400\n"
-"PO-Revision-Date: 2019-01-17 14:10+0100\n"
-"Last-Translator: Josef Andersson <l10nl18nsweja@gmail.com>\n"
+"POT-Creation-Date: 2020-09-15 03:43+0000\n"
+"PO-Revision-Date: 2020-09-20 00:57+0200\n"
+"Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.1.1\n"
+"X-Generator: Poedit 2.4.1\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
 msgstr "Portal"
 
+#. TRANSLATORS: Don't translate this text (this is icon name)
+#: data/xdg-desktop-portal-gtk.desktop.in.in:6
+msgid "applications-system-symbolic"
+msgstr "applications-system-symbolic"
+
 #: src/access.c:271
 msgid "Deny Access"
-msgstr "Neka tillgång"
+msgstr "Neka åtkomst"
 
 #: src/access.c:274
 msgid "Grant Access"
-msgstr "Bevilja tillgång"
+msgstr "Bevilja åtkomst"
 
 #: src/accountdialog.c:176
 msgid "Select an Image"
@@ -85,14 +91,13 @@ msgid "Failed to start Software"
 msgstr "Misslyckades med att starta Programvara"
 
 #: src/appchooserdialog.c:385
-#, fuzzy, c-format
+#, c-format
 msgid "Choose an application to open the file “%s”."
-msgstr "Det går inte att hitta ett program som kan öppna ”%s”."
+msgstr "Välj ett program för att öppna filen ”%s”."
 
 #: src/appchooserdialog.c:390
-#, fuzzy
 msgid "Choose an application."
-msgstr "Välj program"
+msgstr "Välj ett program."
 
 #: src/appchooserdialog.c:407
 #, c-format
@@ -100,15 +105,18 @@ msgid ""
 "No apps installed that can open “%s”. You can find more applications in "
 "Software"
 msgstr ""
+"Inga program som kan öppna ”%s” finns installerade. Du kan hitta fler "
+"program i Programvara"
 
 #: src/appchooserdialog.c:412
 msgid "No suitable app installed. You can find more applications in Software."
 msgstr ""
+"Inget lämpligt program finns installerat. Du kan hitta fler program i "
+"Programvara."
 
 #: src/appchooserdialog.ui:10
-#, fuzzy
 msgid "Open With…"
-msgstr "Öppna med"
+msgstr "Öppna med…"
 
 #: src/appchooserdialog.ui:23 src/filechooser.c:462
 msgid "_Open"
@@ -116,17 +124,16 @@ msgstr "_Öppna"
 
 #: src/appchooserdialog.ui:115
 msgid "No Apps available"
-msgstr ""
+msgstr "Inga program tillgängliga"
 
 #: src/appchooserdialog.ui:159
-#, fuzzy
 msgid "_Find More in Software"
-msgstr "Misslyckades med att starta Programvara"
+msgstr "_Hitta fler i Programvara"
 
 #: src/background.c:215 src/background.c:308
 #, c-format
 msgid "“%s” is running in the background"
-msgstr ""
+msgstr "”%s” körs i bakgrunden"
 
 #: src/background.c:217
 msgid ""
@@ -135,22 +142,26 @@ msgid ""
 "\n"
 "Note that forcing an application to quit might cause data loss."
 msgstr ""
+"Det kan finnas en giltig orsak för detta, men programmet har inte "
+"tillhandahållit någon.\n"
+"\n"
+"Observera att tvinga ett program att avsluta kan orsaka dataförlust."
 
 #: src/background.c:220
 msgid "Force quit"
-msgstr ""
+msgstr "Tvinga avslut"
 
 #: src/background.c:221
 msgid "Allow"
-msgstr ""
+msgstr "Tillåt"
 
 #: src/background.c:306
 msgid "Background activity"
-msgstr ""
+msgstr "Bakgrundsaktivitet"
 
 #: src/background.c:314
 msgid "Find out more"
-msgstr ""
+msgstr "Lär dig mer"
 
 #: src/filechooser.c:462
 msgid "_Select"
@@ -162,7 +173,7 @@ msgstr "_Spara"
 
 #: src/filechooser.c:641
 msgid "Open files read-only"
-msgstr ""
+msgstr "Öppna filer som skrivskyddade"
 
 #: src/remotedesktopdialog.c:188
 msgid "Pointer"
@@ -190,9 +201,8 @@ msgid "Remote desktop"
 msgstr "Fjärrskrivbord"
 
 #: src/screencastdialog.ui:12
-#, fuzzy
 msgid "Screen Share"
-msgstr "Skärmbild"
+msgstr "Skärmdelning"
 
 #: src/screencastwidget.c:483
 #, c-format
@@ -200,26 +210,25 @@ msgid "Select monitor to share with %s"
 msgstr "Välj bildskärm att dela med %s"
 
 #: src/screencastwidget.c:485
-#, fuzzy, c-format
+#, c-format
 msgid "Select window to share with %s"
-msgstr "Välj bildskärm att dela med %s"
+msgstr "Välj fönster att dela med %s"
 
 #: src/screencastwidget.c:490
 msgid "Select monitor to share with the requesting application"
 msgstr "Välj vilken bildskärm du vill dela med programmet"
 
 #: src/screencastwidget.c:491
-#, fuzzy
 msgid "Select window to share with the requesting application"
-msgstr "Välj vilken bildskärm du vill dela med programmet"
+msgstr "Välj vilket fönster du vill dela med programmet"
 
 #: src/screencastwidget.ui:100
 msgid "Single Window"
-msgstr ""
+msgstr "Ett fönster"
 
 #: src/screencastwidget.ui:176
 msgid "Entire Screen"
-msgstr ""
+msgstr "Hela skärmen"
 
 #: src/screenshotdialog.c:442
 #, c-format
@@ -280,29 +289,24 @@ msgstr "Inkludera fönster_ramen"
 
 #: src/settings.c:186
 msgid "Requested setting not found"
-msgstr ""
+msgstr "Begärd inställning hittades inte"
 
 #: src/wallpaperdialog.ui:13
 msgid "Set Background"
-msgstr ""
+msgstr "Ställ in bakgrund"
 
 #: src/wallpaperdialog.ui:26
-#, fuzzy
 msgid "Set"
-msgstr "Välj"
+msgstr "Ställ in"
 
 #: src/wallpaperdialog.ui:57
 msgid "Failed to load image file"
-msgstr ""
+msgstr "Misslyckades med att läsa in bildfil"
 
 #: src/wallpaperpreview.ui:57
 msgid "Activities"
-msgstr ""
+msgstr "Aktiviteter"
 
-#~ msgid "applications-system-symbolic"
-#~ msgstr "applications-system-symbolic"
-
-#, c-format
 #~ msgid ""
 #~ "Select an application to open “%s”. More applications are available in <a "
 #~ "href='software'>Software.</a>"
