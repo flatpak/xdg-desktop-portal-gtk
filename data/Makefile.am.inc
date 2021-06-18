@@ -1,5 +1,46 @@
+if BUILD_WALLPAPER
+wallpaper_iface = org.freedesktop.impl.portal.Wallpaper;
+endif
+
+if BUILD_SCREENSHOT
+screenshot_iface = org.freedesktop.impl.portal.Screenshot;
+endif
+
+if BUILD_SCREENCAST
+screencast_iface = org.freedesktop.impl.portal.ScreenCast;
+remotedesktop_iface = org.freedesktop.impl.portal.RemoteDesktop;
+endif
+
+if BUILD_BACKGROUND
+background_iface = org.freedesktop.impl.portal.Background;
+endif
+
+if BUILD_SETTINGS
+settings_iface = org.freedesktop.impl.portal.Settings;
+endif
+
+if BUILD_APPCHOOSER
+appchooser_iface = org.freedesktop.impl.portal.AppChooser;
+endif
+
+if BUILD_LOCKDOWN
+lockdown_iface = org.freedesktop.impl.portal.Lockdown;
+endif
+
+%.portal: data/%.portal.in config.log
+	$(AM_V_GEN) $(SED) -e "s|\@wallpaper_iface\@|$(wallpaper_iface)|" \
+			   -e "s|\@screenshot_iface\@|$(screenshot_iface)|" \
+			   -e "s|\@screencast_iface\@|$(screencast_iface)|" \
+			   -e "s|\@remotedesktop_iface\@|$(remotedesktop_iface)|" \
+			   -e "s|\@background_iface\@|$(background_iface)|" \
+			   -e "s|\@settings_iface\@|$(settings_iface)|" \
+			   -e "s|\@appchooser_iface\@|$(appchooser_iface)|" \
+			   -e "s|\@lockdown_iface\@|$(lockdown_iface)|" \
+			   $< > $@
+
 portaldir = $(datadir)/xdg-desktop-portal/portals
-dist_portal_DATA = data/gtk.portal
+portal_in_files = data/gtk.portal.in
+portal_DATA = gtk.portal
 
 %.service: data/%.service.in config.log
 	$(AM_V_GEN) $(SED) -e "s|\@libexecdir\@|$(libexecdir)|" $< > $@
@@ -27,11 +68,13 @@ desktop_in_files = xdg-desktop-portal-gtk.desktop.in
 desktop_DATA = xdg-desktop-portal-gtk.desktop
 
 CLEANFILES += \
+	$(portal_DATA)		\
 	$(desktop_in_files)	\
 	$(desktop_DATA)		\
 	$(NULL)
 
 EXTRA_DIST += \
+	$(portal_in_files)			\
 	$(dbus_service_in_files)                \
         $(systemduserunit_in_files)             \
         $(desktop_in_in_files)                  \
