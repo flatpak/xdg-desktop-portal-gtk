@@ -1,15 +1,15 @@
 # Slovak translation for xdg-desktop-portal-gtk.
 # Copyright (C) 2016 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
 # This file is distributed under the same license as the xdg-desktop-portal-gtk package.
-# Dušan Kazik <prescott66@gmail.com>, 2016-2017.
+# Dušan Kazik <prescott66@gmail.com>, 2016-2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2020-09-14 14:09-0400\n"
-"PO-Revision-Date: 2020-01-31 07:57+0100\n"
+"POT-Creation-Date: 2020-09-15 03:43+0000\n"
+"PO-Revision-Date: 2020-09-22 14:20+0200\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
@@ -17,11 +17,16 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.4.1\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
 msgstr "Portál"
+
+#. TRANSLATORS: Don't translate this text (this is icon name)
+#: data/xdg-desktop-portal-gtk.desktop.in.in:6
+msgid "applications-system-symbolic"
+msgstr ""
 
 #: src/access.c:271
 msgid "Deny Access"
@@ -158,9 +163,8 @@ msgid "Find out more"
 msgstr "Zistiť viac"
 
 #: src/filechooser.c:462
-#, fuzzy
 msgid "_Select"
-msgstr "Vybrať"
+msgstr "Vy_brať"
 
 #: src/filechooser.c:464
 msgid "_Save"
@@ -301,16 +305,3 @@ msgstr "Zlyhalo načítanie súboru s obrázkom"
 #: src/wallpaperpreview.ui:57
 msgid "Activities"
 msgstr "Aktivity"
-
-#~ msgid "applications-system-symbolic"
-#~ msgstr "applications-system-symbolic"
-
-#, c-format
-#~ msgid "%s is running in the background."
-#~ msgstr "Aplikácia %s je spustená na pozadí."
-
-#~ msgid "Set Lock Screen"
-#~ msgstr "Nastavenie uzamknutej obrazovky"
-
-#~ msgid "Set Background & Lock Screen"
-#~ msgstr "Nastavenie pozadia a uzamknutej obrazovky"
