@@ -60,7 +60,7 @@ lockdown_init (GDBusConnection *bus,
   if (g_settings_schema_has_key (schema, "disable-camera"))
     g_settings_bind (privacy, "disable-camera", helper, "disable-camera", G_SETTINGS_BIND_DEFAULT);
   if (g_settings_schema_has_key (schema, "disable-microphone"))
-    g_settings_bind (privacy, "disable-microphone", helper, "disable-sound-output", G_SETTINGS_BIND_DEFAULT);
+    g_settings_bind (privacy, "disable-microphone", helper, "disable-microphone", G_SETTINGS_BIND_DEFAULT);
   if (g_settings_schema_has_key (schema, "disable-sound-output"))
     g_settings_bind (privacy, "disable-sound-output", helper, "disable-sound-output", G_SETTINGS_BIND_DEFAULT);
 
