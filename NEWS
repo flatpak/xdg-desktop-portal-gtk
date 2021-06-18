@@ -1,3 +1,16 @@
+Changes in git
+================
+
+- Make portal backends with GNOME dependencies optional. Use
+  --disable-wallpaper to build without the wallpaper backend
+  --disable-screenshot to build without the screenshot backend
+  --disable-screencast to build without the screencast and remoting
+  backends
+  --disable-background to build without the background backend
+  --disable-settings to build without the settings backend
+  --disable-appchooser to build without the appchooser backend
+- Translation updates
+
 Changes in 1.8.0
 ================
 
