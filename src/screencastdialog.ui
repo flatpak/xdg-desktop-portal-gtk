@@ -16,6 +16,7 @@
             <property name="label" translatable="yes">_Cancel</property>
             <property name="use_underline">1</property>
             <signal name="clicked" handler="button_clicked"/>
+            <accelerator key="Escape" signal="activate"/>
           </object>
           <packing>
             <property name="pack-type">start</property>
