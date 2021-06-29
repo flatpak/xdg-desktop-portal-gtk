@@ -651,6 +651,7 @@ handle_open (XdpImplFileChooser *object,
     }
 
   gtk_widget_show (dialog);
+  gtk_window_present (GTK_WINDOW (dialog));
 
   if (external_parent)
     external_window_set_parent_of (external_parent,
