@@ -1,0 +1,346 @@
+# Hindi translation for xdg-desktop-portal-gtk.
+# Copyright (C) 2021 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
+# This file is distributed under the same license as the xdg-desktop-portal-gtk package.
+# Dmitry <dmitrydmitry761@gmail.com>, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xdg-desktop-portal-gtk master\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
+"issues\n"
+"POT-Creation-Date: 2021-09-09 19:47-0400\n"
+"PO-Revision-Date: 2021-09-09 19:47+0300\n"
+"Last-Translator: Dmitry <dmitrydmitry761@gmail.com>\n"
+"Language-Team: Hindi <gnome-cyr@gnome.org>\n"
+"Language: hi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.3\n"
+
+#: data/xdg-desktop-portal-gtk.desktop.in.in:4
+msgid "Portal"
+msgstr "द्वार"
+
+#: src/access.c:271
+msgid "Deny Access"
+msgstr "पहुँच को अस्वीकार"
+
+#: src/access.c:274
+msgid "Grant Access"
+msgstr "अनुदान पहुँच"
+
+#: src/accountdialog.c:176
+msgid "Select an Image"
+msgstr "एक छवि चुनें"
+
+#: src/accountdialog.c:179 src/wallpaperdialog.ui:18
+msgid "Cancel"
+msgstr "रद्द करें"
+
+#: src/accountdialog.c:180
+msgid "Select"
+msgstr "चुनते हैं"
+
+#: src/accountdialog.c:181
+msgid "Clear"
+msgstr "साफ़"
+
+#: src/accountdialog.c:195
+msgid "Images"
+msgstr "इमेजिस"
+
+#: src/accountdialog.c:272
+#, c-format
+msgid "Share your personal information with %s?"
+msgstr "के साथ अपनी व्यक्तिगत जानकारी साझा करें %s?"
+
+#: src/accountdialog.c:275
+msgid "Share your personal information with the requesting application?"
+msgstr "अनुरोध करने वाले आवेदन के साथ अपनी व्यक्तिगत जानकारी साझा करें?"
+
+#: src/accountdialog.ui:10
+msgid "Share Details"
+msgstr "विवरण साझा करें"
+
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:467
+#: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
+#: src/screenshotdialog.ui:14
+msgid "_Cancel"
+msgstr "_रद्द करें"
+
+#: src/accountdialog.ui:22 src/remotedesktopdialog.ui:28
+#: src/screencastdialog.ui:28 src/screenshotdialog.ui:38
+msgid "_Share"
+msgstr "_साझा करना"
+
+#: src/accountdialog.ui:148
+msgid "Make changes before sharing the information"
+msgstr "जानकारी साझा करने से पहले बदलाव करें"
+
+#: src/appchooserdialog.c:229
+msgid "Failed to start Software"
+msgstr "सॉफ़्टवेयर प्रारंभ करने में विफल"
+
+#: src/appchooserdialog.c:385
+#, fuzzy, c-format
+msgid "Choose an application to open the file “%s”."
+msgstr "फ़ाइल खोलने के लिए एक एप्लिकेशन चुनें “%s”।"
+
+#: src/appchooserdialog.c:390
+msgid "Choose an application."
+msgstr "एक आवेदन चुनें।"
+
+#: src/appchooserdialog.c:407
+#, c-format
+msgid ""
+"No apps installed that can open “%s”. You can find more applications in "
+"Software"
+msgstr ""
+कोई भी ऐप इंस्टॉल नहीं है जो "%s" खोल सकता है। आप और अधिक एप्लिकेशन पा सकते हैं "
+"सॉफ्टवेयर"
+
+#: src/appchooserdialog.c:412
+msgid "No suitable app installed. You can find more applications in Software."
+msgstr "कोई उपयुक्त ऐप इंस्टॉल नहीं है। आप सॉफ़्टवेयर में अधिक एप्लिकेशन पा सकते हैं।"
+
+#: src/appchooserdialog.ui:10
+#, fuzzy
+msgid "Open With…"
+msgstr "के साथ खोलें…"
+
+#: src/appchooserdialog.ui:23 src/filechooser.c:462
+msgid "_Open"
+msgstr "_खुला"
+
+#: src/appchooserdialog.ui:115
+msgid "No Apps available"
+msgstr "कोई ऐप उपलब्ध नहीं है"
+
+#: src/appchooserdialog.ui:159
+#, fuzzy
+msgid "_Find More in Software"
+msgstr "_सॉफ्टवेयर में और खोजें"
+
+#: src/background.c:215 src/background.c:308
+#, fuzzy, c-format
+msgid "“%s” is running in the background"
+msgstr "%s बैकग्राउंड में चल रहा है।"
+
+#: src/background.c:217
+msgid ""
+"This might be for a legitimate reason, but the application has not provided "
+"one.\n"
+"\n"
+"Note that forcing an application to quit might cause data loss."
+msgstr "यह एक वैध कारण के लिए हो सकता है, लेकिन आवेदन प्रदान नहीं किया गया है"
+"एक।\n"
+"\n"
+"ध्यान दें कि किसी एप्लिकेशन को छोड़ने के लिए मजबूर करने से डेटा हानि हो सकती है।"
+
+#: src/background.c:220
+msgid "Force quit"
+msgstr "जबरदस्ती छोड़ना"
+
+#: src/background.c:221
+msgid "Allow"
+msgstr "परमिट"
+
+#: src/background.c:306
+msgid "Background activity"
+msgstr "पृष्ठभूमि गतिविधि"
+
+#: src/background.c:314
+msgid "Find out more"
+msgstr "ज्यादा सीखने के लिए"
+
+#: src/filechooser.c:462
+#, fuzzy
+msgid "_Select"
+msgstr "_चुनते हैं"
+
+#: src/filechooser.c:464
+msgid "_Save"
+msgstr "_सहेजें"
+
+#: src/filechooser.c:641
+msgid "Open files read-only"
+msgstr "केवल पढ़ने के लिए फ़ाइलें खोलें"
+
+#: src/remotedesktopdialog.c:188
+msgid "Pointer"
+msgstr "सूचक"
+
+#: src/remotedesktopdialog.c:191
+msgid "Keyboard"
+msgstr "कीबोर्ड"
+
+#: src/remotedesktopdialog.c:194
+msgid "Touch screen"
+msgstr "टच स्क्रीन"
+
+#: src/remotedesktopdialog.c:307
+#, c-format
+msgid "Select devices to share with %s"
+msgstr "उन उपकरणों का चयन करें जिनके साथ आप साझा करना चाहते हैं %s"
+
+#: src/remotedesktopdialog.c:312
+msgid "Select devices to share with the requesting application"
+msgstr "अनुरोध करने वाले एप्लिकेशन के साथ साझा करने के लिए उपकरणों का चयन करें"
+
+#: src/remotedesktopdialog.ui:12
+msgid "Remote desktop"
+msgstr "रिमोट डेस्कटॉप"
+
+#: src/screencastdialog.ui:12
+#, fuzzy
+msgid "Screen Share"
+msgstr "स्क्रीन शेयर"
+
+#: src/screencastwidget.c:483
+#, c-format
+msgid "Select monitor to share with %s"
+msgstr "साझा करने के लिए मॉनिटर का चयन करें %s"
+
+#: src/screencastwidget.c:485
+#, fuzzy, c-format
+msgid "Select window to share with %s"
+msgstr "साझा करने के लिए विंडो चुनें %s"
+
+#: src/screencastwidget.c:490
+msgid "Select monitor to share with the requesting application"
+msgstr "अनुरोध करने वाले एप्लिकेशन के साथ साझा करने के लिए मॉनिटर का चयन करें"
+
+#: src/screencastwidget.c:491
+#, fuzzy
+msgid "Select window to share with the requesting application"
+msgstr "अनुरोध करने वाले आवेदन के साथ साझा करने के लिए विंडो का चयन करें"
+
+#: src/screencastwidget.ui:100
+msgid "Single Window"
+msgstr "सिंगल विंडो"
+
+#: src/screencastwidget.ui:176
+msgid "Entire Screen"
+msgstr "पूरी स्क्रीन"
+
+#: src/screenshotdialog.c:442
+#, c-format
+msgid "Share this screenshot with %s?"
+msgstr "इस स्क्रीनशॉट के साथ साझा करें %s?"
+
+#: src/screenshotdialog.c:446
+msgid "Share this screenshot with the requesting application?"
+msgstr "अनुरोध करने वाले ऐप्लिकेशन के साथ यह स्क्रीनशॉट साझा करें?"
+
+#: src/screenshotdialog.ui:10
+msgid "Screenshot"
+msgstr "स्क्रीनशॉट"
+
+#: src/screenshotdialog.ui:30
+msgid "_Options…"
+msgstr "_विकल्प…"
+
+#: src/screenshotdialog.ui:55
+msgid "Take _Screenshot"
+msgstr "स्क्रीनशॉट _लीजिए"
+
+#: src/screenshotdialog.ui:111
+msgid "Take Screenshot"
+msgstr "स्क्रीनशॉट लीजिए"
+
+#: src/screenshotdialog.ui:122
+msgid "Grab the whole sc_reen"
+msgstr "पूरी स्क्रीन को पकड़ो"
+
+#: src/screenshotdialog.ui:133
+msgid "Grab the current _window"
+msgstr "वर्तमान _विंडो को पकड़ो"
+
+#: src/screenshotdialog.ui:144
+msgid "Select _area to grab"
+msgstr "हथियाने के लिए _क्षेत्र चुनें"
+
+#: src/screenshotdialog.ui:158
+msgid "Grab after a _delay of"
+msgstr "_देरी के बाद कब्जा"
+
+#: src/screenshotdialog.ui:171
+msgid "seconds"
+msgstr "सेकंड"
+
+#: src/screenshotdialog.ui:181
+msgid "Effects"
+msgstr "प्रभाव"
+
+
+#: src/screenshotdialog.ui:192
+msgid "Include _pointer"
+msgstr "सूचक शामिल करें"
+
+#: src/screenshotdialog.ui:201
+msgid "Include the window _border"
+msgstr "विंडो बॉर्डर शामिल करें"
+
+#: src/settings.c:186
+msgid "Requested setting not found"
+msgstr "अनुरोधित सेटिंग नहीं मिली"
+
+#: src/wallpaperdialog.ui:13
+#, fuzzy
+msgid "Set Background"
+msgstr "बैकग्राउंड सेट"
+
+#: src/wallpaperdialog.ui:26
+#, fuzzy
+msgid "Set"
+msgstr "सेट"
+
+#: src/wallpaperdialog.ui:57
+msgid "Failed to load image file"
+msgstr "छवि फ़ाइल लोड करने में विफल"
+
+#: src/wallpaperpreview.ui:57
+msgid "Activities"
+msgstr "गतिविधियां"
+
+#~ msgid "applications-system-symbolic"
+#~ msgstr "अनुप्रयोग-प्रणाली-प्रतीकात्मक"
+
+#, c-format
+#~ msgid "%s is running in the background."
+#~ msgstr "%s पृष्ठभूमि में काम करता है।"
+
+#, c-format
+#~ msgid ""
+#~ "Select an application to open “%s”. More applications are available in <a "
+#~ "href='software'>Software.</a>"
+#~ msgstr ""
+#~ "खोलने के लिए एक आवेदन का चयन करें "%s". अधिक एप्लिकेशन उपलब्ध हैं <a "
+#~ "href='software'>Software.</a>"
+
+#~ msgid ""
+#~ "Select an application. More applications are available in <a "
+#~ "href='software'>Software.</a>"
+#~ msgstr ""
+#~ "एक आवेदन का चयन करें। <a "में अधिक एप्लिकेशन उपलब्ध हैं"
+#~ "href=href='software'>Software.</a>"
+
+#~ msgid "Unable to find a suitable application."
+#~ msgstr "एक उपयुक्त आवेदन खोजने में असमर्थ।"
+
+#~ msgid "No Applications Found"
+#~ msgstr "कोई ऐप नहीं मिला"
+
+#~ msgid "Find Compatible Applications in Software"
+#~ msgstr "सॉफ्टवेयर में संगत एप्लिकेशन खोजें"
+
+#~ msgid "Forbid"
+#~ msgstr "निषेध"
+
+#~ msgid "Ignore"
+#~ msgstr "उपेक्षा"
+
+#~ msgid "Screen casting"
+#~ msgstr "स्क्रीन कास्टिंग"
