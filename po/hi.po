@@ -84,7 +84,7 @@ msgid "Failed to start Software"
 msgstr "सॉफ़्टवेयर प्रारंभ करने में विफल"
 
 #: src/appchooserdialog.c:385
-#, fuzzy, c-format
+#, c-format
 msgid "Choose an application to open the file “%s”."
 msgstr "फ़ाइल खोलने के लिए एक एप्लिकेशन चुनें “%s”।"
 
@@ -106,7 +106,6 @@ msgid "No suitable app installed. You can find more applications in Software."
 msgstr "कोई उपयुक्त ऐप इंस्टॉल नहीं है। आप सॉफ़्टवेयर में अधिक एप्लिकेशन पा सकते हैं।"
 
 #: src/appchooserdialog.ui:10
-#, fuzzy
 msgid "Open With…"
 msgstr "के साथ खोलें…"
 
@@ -119,12 +118,11 @@ msgid "No Apps available"
 msgstr "कोई ऐप उपलब्ध नहीं है"
 
 #: src/appchooserdialog.ui:159
-#, fuzzy
 msgid "_Find More in Software"
 msgstr "_सॉफ्टवेयर में और खोजें"
 
 #: src/background.c:215 src/background.c:308
-#, fuzzy, c-format
+#, c-format
 msgid "“%s” is running in the background"
 msgstr "%s बैकग्राउंड में चल रहा है।"
 
@@ -156,7 +154,6 @@ msgid "Find out more"
 msgstr "ज्यादा सीखने के लिए"
 
 #: src/filechooser.c:462
-#, fuzzy
 msgid "_Select"
 msgstr "_चुनते हैं"
 
@@ -194,7 +191,6 @@ msgid "Remote desktop"
 msgstr "रिमोट डेस्कटॉप"
 
 #: src/screencastdialog.ui:12
-#, fuzzy
 msgid "Screen Share"
 msgstr "स्क्रीन शेयर"
 
@@ -204,7 +200,7 @@ msgid "Select monitor to share with %s"
 msgstr "साझा करने के लिए मॉनिटर का चयन करें %s"
 
 #: src/screencastwidget.c:485
-#, fuzzy, c-format
+#, c-format
 msgid "Select window to share with %s"
 msgstr "साझा करने के लिए विंडो चुनें %s"
 
@@ -213,7 +209,6 @@ msgid "Select monitor to share with the requesting application"
 msgstr "अनुरोध करने वाले एप्लिकेशन के साथ साझा करने के लिए मॉनिटर का चयन करें"
 
 #: src/screencastwidget.c:491
-#, fuzzy
 msgid "Select window to share with the requesting application"
 msgstr "अनुरोध करने वाले आवेदन के साथ साझा करने के लिए विंडो का चयन करें"
 
@@ -288,12 +283,10 @@ msgid "Requested setting not found"
 msgstr "अनुरोधित सेटिंग नहीं मिली"
 
 #: src/wallpaperdialog.ui:13
-#, fuzzy
 msgid "Set Background"
 msgstr "बैकग्राउंड सेट"
 
 #: src/wallpaperdialog.ui:26
-#, fuzzy
 msgid "Set"
 msgstr "सेट"
 
