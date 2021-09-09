@@ -269,7 +269,6 @@ msgstr "सेकंड"
 msgid "Effects"
 msgstr "प्रभाव"
 
-
 #: src/screenshotdialog.ui:192
 msgid "Include _pointer"
 msgstr "सूचक शामिल करें"
