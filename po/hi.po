@@ -98,7 +98,7 @@ msgid ""
 "No apps installed that can open “%s”. You can find more applications in "
 "Software"
 msgstr ""
-कोई भी ऐप इंस्टॉल नहीं है जो “%s”। खोल सकता है। आप और अधिक एप्लिकेशन पा सकते हैं "
+"कोई भी ऐप इंस्टॉल नहीं है जो “%s”। खोल सकता है। आप और अधिक एप्लिकेशन पा सकते हैं "
 "सॉफ्टवेयर"
 
 #: src/appchooserdialog.c:412
