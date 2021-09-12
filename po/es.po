@@ -1,24 +1,25 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Spanish translation for xdg-desktop-portal-gtk.
+# Copyright (C) 2021 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
+# This file is distributed under the same license as the xdg-desktop-portal-gtk package.
 # Mario Sanchez Prada <mario@endlessm.com>, 2016.
+# Adolfo Jayme Barrientos <fitojb@ubuntu.com>, 2018.
+# Óscar Fernández Díaz <oscfdezdz@tuta.io>, 2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2020-09-14 14:09-0400\n"
-"PO-Revision-Date: 2018-02-19 05:21-0600\n"
-"Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
+"POT-Creation-Date: 2021-09-12 15:33+0200\n"
+"PO-Revision-Date: 2021-09-12 15:54+0200\n"
+"Last-Translator: Óscar Fernández Díaz <oscfdezdz@tuta.io>\n"
 "Language-Team: Spanish; Castilian <>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 3.0\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
@@ -86,13 +87,13 @@ msgid "Failed to start Software"
 msgstr "No se pudo iniciar Software"
 
 #: src/appchooserdialog.c:385
-#, fuzzy, c-format
+#, c-format
 msgid "Choose an application to open the file “%s”."
-msgstr "No se encontró ninguna aplicación capaz de abrir «%s»."
+msgstr "Elija una aplicación para abrir el archivo “%s”."
 
 #: src/appchooserdialog.c:390
 msgid "Choose an application."
-msgstr ""
+msgstr "Elija una aplicación."
 
 #: src/appchooserdialog.c:407
 #, c-format
@@ -100,15 +101,18 @@ msgid ""
 "No apps installed that can open “%s”. You can find more applications in "
 "Software"
 msgstr ""
+"No hay aplicaciones instaladas que puedan abrir “%s”. Puede encontrar más "
+"aplicaciones en Software"
 
 #: src/appchooserdialog.c:412
 msgid "No suitable app installed. You can find more applications in Software."
 msgstr ""
+"No hay ninguna aplicación adecuada instalada. Puedes encontrar más "
+"aplicaciones en Software."
 
 #: src/appchooserdialog.ui:10
-#, fuzzy
 msgid "Open With…"
-msgstr "Abrir con"
+msgstr "Abrir con…"
 
 #: src/appchooserdialog.ui:23 src/filechooser.c:462
 msgid "_Open"
@@ -116,17 +120,16 @@ msgstr "_Abrir"
 
 #: src/appchooserdialog.ui:115
 msgid "No Apps available"
-msgstr ""
+msgstr "No hay aplicaciones disponibles"
 
 #: src/appchooserdialog.ui:159
-#, fuzzy
 msgid "_Find More in Software"
-msgstr "No se pudo iniciar Software"
+msgstr "_Encontrar más en Software"
 
 #: src/background.c:215 src/background.c:308
 #, c-format
 msgid "“%s” is running in the background"
-msgstr ""
+msgstr "“%s” se está ejecutando en segundo plano"
 
 #: src/background.c:217
 msgid ""
@@ -135,35 +138,39 @@ msgid ""
 "\n"
 "Note that forcing an application to quit might cause data loss."
 msgstr ""
+"Esto podría ser por una razón legítima, pero la aplicación no ha "
+"proporcionado una.\n"
+"\n"
+"Tenga en cuenta que forzar el cierre de una aplicación puede causar la "
+"pérdida de datos."
 
 #: src/background.c:220
 msgid "Force quit"
-msgstr ""
+msgstr "Forzar la salida"
 
 #: src/background.c:221
 msgid "Allow"
-msgstr ""
+msgstr "Permitir"
 
 #: src/background.c:306
 msgid "Background activity"
-msgstr ""
+msgstr "Actividad en segundo plano"
 
 #: src/background.c:314
 msgid "Find out more"
-msgstr ""
+msgstr "Saber más"
 
 #: src/filechooser.c:462
-#, fuzzy
 msgid "_Select"
-msgstr "Seleccionar"
+msgstr "_Seleccionar"
 
 #: src/filechooser.c:464
 msgid "_Save"
-msgstr ""
+msgstr "_Guardar"
 
 #: src/filechooser.c:641
 msgid "Open files read-only"
-msgstr ""
+msgstr "Abrir archivos de sólo lectura"
 
 #: src/remotedesktopdialog.c:188
 msgid "Pointer"
@@ -178,52 +185,49 @@ msgid "Touch screen"
 msgstr "Pantalla táctil"
 
 #: src/remotedesktopdialog.c:307
-#, fuzzy, c-format
+#, c-format
 msgid "Select devices to share with %s"
-msgstr "Seleccione qué compartir con %s"
+msgstr "Seleccione qué dispositivos compartir con %s"
 
 #: src/remotedesktopdialog.c:312
-#, fuzzy
 msgid "Select devices to share with the requesting application"
-msgstr "Seleccione qué compartir con la aplicación solicitante"
+msgstr "Seleccione qué dispositivos compartir con la aplicación solicitante"
 
 #: src/remotedesktopdialog.ui:12
 msgid "Remote desktop"
 msgstr "Escritorio remoto"
 
 #: src/screencastdialog.ui:12
-#, fuzzy
 msgid "Screen Share"
-msgstr "Captura de pantalla"
+msgstr "Compartir pantalla"
 
-#: src/screencastwidget.c:483
+#: src/screencastwidget.c:484
 #, c-format
 msgid "Select monitor to share with %s"
 msgstr "Seleccione el monitor que quiera compartir con %s"
 
-#: src/screencastwidget.c:485
-#, fuzzy, c-format
+#: src/screencastwidget.c:486
+#, c-format
 msgid "Select window to share with %s"
-msgstr "Seleccione el monitor que quiera compartir con %s"
+msgstr "Seleccione la ventana que quiera compartir con %s"
 
-#: src/screencastwidget.c:490
+#: src/screencastwidget.c:491
 msgid "Select monitor to share with the requesting application"
 msgstr ""
 "Seleccione el monitor que quiera compartir con la aplicación solicitante"
 
-#: src/screencastwidget.c:491
-#, fuzzy
+#: src/screencastwidget.c:492
 msgid "Select window to share with the requesting application"
 msgstr ""
-"Seleccione el monitor que quiera compartir con la aplicación solicitante"
+"Seleccione la ventana que quiera compartir con la aplicación solicitante"
 
 #: src/screencastwidget.ui:100
 msgid "Single Window"
-msgstr ""
+msgstr "Ventana única"
 
 #: src/screencastwidget.ui:176
 msgid "Entire Screen"
-msgstr ""
+msgstr "Toda la pantalla"
 
 #: src/screenshotdialog.c:442
 #, c-format
@@ -245,7 +249,7 @@ msgstr "_Opciones…"
 
 #: src/screenshotdialog.ui:55
 msgid "Take _Screenshot"
-msgstr "_Capturar la pantalla"
+msgstr "Capturar la panta_lla"
 
 #: src/screenshotdialog.ui:111
 msgid "Take Screenshot"
@@ -285,24 +289,23 @@ msgstr "Incluir el _borde de la ventana"
 
 #: src/settings.c:186
 msgid "Requested setting not found"
-msgstr ""
+msgstr "No se ha encontrado la configuración solicitada"
 
 #: src/wallpaperdialog.ui:13
 msgid "Set Background"
-msgstr ""
+msgstr "Establecer el fondo"
 
 #: src/wallpaperdialog.ui:26
-#, fuzzy
 msgid "Set"
-msgstr "Seleccionar"
+msgstr "Establecer"
 
 #: src/wallpaperdialog.ui:57
 msgid "Failed to load image file"
-msgstr ""
+msgstr "Fallo al cargar el archivo de imagen"
 
 #: src/wallpaperpreview.ui:57
 msgid "Activities"
-msgstr ""
+msgstr "Actividades"
 
 #~ msgid "applications-system-symbolic"
 #~ msgstr "applications-system-symbolic"
