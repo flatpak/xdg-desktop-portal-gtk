@@ -1,0 +1,302 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Copyright © 2016 Red Hat
+# This file is distributed under the same license as the xdg-desktop-portal-gtk package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xdg-desktop-portal-gtk 1.8.0\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
+"issues\n"
+"POT-Creation-Date: 2021-07-17 13:30+0200\n"
+"PO-Revision-Date: 2021-07-17 17:58+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: nl\n"
+
+#: data/xdg-desktop-portal-gtk.desktop.in.in:4
+msgid "Portal"
+msgstr "Portaal"
+
+#: src/access.c:271
+msgid "Deny Access"
+msgstr "Toegang weigeren"
+
+#: src/access.c:274
+msgid "Grant Access"
+msgstr "Toegang verlenen"
+
+#: src/accountdialog.c:176
+msgid "Select an Image"
+msgstr "Kies een afbeelding"
+
+#: src/accountdialog.c:179 src/wallpaperdialog.ui:18
+msgid "Cancel"
+msgstr "Annuleren"
+
+#: src/accountdialog.c:180
+msgid "Select"
+msgstr "Kiezen"
+
+#: src/accountdialog.c:181
+msgid "Clear"
+msgstr "Wissen"
+
+#: src/accountdialog.c:195
+msgid "Images"
+msgstr "Afbeeldingen"
+
+#: src/accountdialog.c:272
+#, c-format
+msgid "Share your personal information with %s?"
+msgstr "Wilt u persoonlijke gegevens delen met %s?"
+
+#: src/accountdialog.c:275
+msgid "Share your personal information with the requesting application?"
+msgstr "Wilt u persoonlijke gegevens delen met de toepassing in kwestie?"
+
+#: src/accountdialog.ui:10
+msgid "Share Details"
+msgstr "Gegevens delen"
+
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:467
+#: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
+#: src/screenshotdialog.ui:14
+msgid "_Cancel"
+msgstr "_Annuleren"
+
+#: src/accountdialog.ui:22 src/remotedesktopdialog.ui:28
+#: src/screencastdialog.ui:28 src/screenshotdialog.ui:38
+msgid "_Share"
+msgstr "_Delen"
+
+#: src/accountdialog.ui:148
+msgid "Make changes before sharing the information"
+msgstr "Maak aanpassingen alvorens te delen"
+
+#: src/appchooserdialog.c:229
+msgid "Failed to start Software"
+msgstr "GNOME Software kan niet worden gestart"
+
+#: src/appchooserdialog.c:385
+#, c-format
+msgid "Choose an application to open the file “%s”."
+msgstr "Kies een toepassing om ‘%s’ mee te openen."
+
+#: src/appchooserdialog.c:390
+msgid "Choose an application."
+msgstr "Kies een toepassing."
+
+#: src/appchooserdialog.c:407
+#, c-format
+msgid ""
+"No apps installed that can open “%s”. You can find more applications in "
+"Software"
+msgstr ""
+"Er zijn geen toepassingen geïnstalleerd die ‘%s’ kunnen openen. Open GNOME "
+"Software om een toepassing te zoeken."
+
+#: src/appchooserdialog.c:412
+msgid "No suitable app installed. You can find more applications in Software."
+msgstr ""
+"Er zijn geen geschikte toepassingen geïnstalleerd. Open GNOME Software om "
+"een toepassing te zoeken."
+
+#: src/appchooserdialog.ui:10
+msgid "Open With…"
+msgstr "Openen met…"
+
+#: src/appchooserdialog.ui:23 src/filechooser.c:462
+msgid "_Open"
+msgstr "_Openen"
+
+#: src/appchooserdialog.ui:115
+msgid "No Apps available"
+msgstr "Er zijn geen toepassingen beschikbaar"
+
+#: src/appchooserdialog.ui:159
+msgid "_Find More in Software"
+msgstr "Zoeken in GNOME So_ftware"
+
+#: src/background.c:215 src/background.c:308
+#, c-format
+msgid "“%s” is running in the background"
+msgstr "‘%s’ wordt uitgevoerd op de achtergrond"
+
+#: src/background.c:217
+msgid ""
+"This might be for a legitimate reason, but the application has not provided "
+"one.\n"
+"\n"
+"Note that forcing an application to quit might cause data loss."
+msgstr ""
+"De reden hiervoor kan legitiem zijn, maar de toepassing heeft geen reden "
+"opgegeven.\n"
+"\n"
+"Let op: het gedwongen afsluiten van een toepassing kan leiden tot "
+"gegevensverlies!"
+
+#: src/background.c:220
+msgid "Force quit"
+msgstr "Gedwongen afsluiten"
+
+#: src/background.c:221
+msgid "Allow"
+msgstr "Toestaan"
+
+#: src/background.c:306
+msgid "Background activity"
+msgstr "Achtergrondactiviteit"
+
+#: src/background.c:314
+msgid "Find out more"
+msgstr "Meer informatie"
+
+#: src/filechooser.c:462
+msgid "_Select"
+msgstr "_Kiezen"
+
+#: src/filechooser.c:464
+msgid "_Save"
+msgstr "Op_slaan"
+
+#: src/filechooser.c:641
+msgid "Open files read-only"
+msgstr "Bestanden openen als alleen-lezen"
+
+#: src/remotedesktopdialog.c:188
+msgid "Pointer"
+msgstr "Cursor"
+
+#: src/remotedesktopdialog.c:191
+msgid "Keyboard"
+msgstr "Toetsenbord"
+
+#: src/remotedesktopdialog.c:194
+msgid "Touch screen"
+msgstr "Touchscreen"
+
+#: src/remotedesktopdialog.c:307
+#, c-format
+msgid "Select devices to share with %s"
+msgstr "Kies de apparaten die u wilt delen met %s"
+
+#: src/remotedesktopdialog.c:312
+msgid "Select devices to share with the requesting application"
+msgstr "Kies de apparaten die u wilt delen met de toepassing in kwestie"
+
+#: src/remotedesktopdialog.ui:12
+msgid "Remote desktop"
+msgstr "Extern bureaublad"
+
+#: src/screencastdialog.ui:12
+msgid "Screen Share"
+msgstr "Schermdeling"
+
+#: src/screencastwidget.c:484
+#, c-format
+msgid "Select monitor to share with %s"
+msgstr "Kies het beeldscherm dat u wilt delen met %s"
+
+#: src/screencastwidget.c:486
+#, c-format
+msgid "Select window to share with %s"
+msgstr "Kies het venster dat u wilt delen met %s"
+
+#: src/screencastwidget.c:491
+msgid "Select monitor to share with the requesting application"
+msgstr "Kies het beeldscherm dat u wilt delen met de toepassing in kwestie"
+
+#: src/screencastwidget.c:492
+msgid "Select window to share with the requesting application"
+msgstr "Kies het venster dat u wilt delen met de toepassing in kwestie"
+
+#: src/screencastwidget.ui:100
+msgid "Single Window"
+msgstr "Venster"
+
+#: src/screencastwidget.ui:176
+msgid "Entire Screen"
+msgstr "Gehele scherm"
+
+#: src/screenshotdialog.c:442
+#, c-format
+msgid "Share this screenshot with %s?"
+msgstr "Wilt u deze schermfoto delen met %s?"
+
+#: src/screenshotdialog.c:446
+msgid "Share this screenshot with the requesting application?"
+msgstr "Wilt u deze schermfoto delen met de toepassing in kwestie?"
+
+#: src/screenshotdialog.ui:10
+msgid "Screenshot"
+msgstr "Schermfoto"
+
+#: src/screenshotdialog.ui:30
+msgid "_Options…"
+msgstr "_Opties…"
+
+#: src/screenshotdialog.ui:55
+msgid "Take _Screenshot"
+msgstr "_Schermfoto maken"
+
+#: src/screenshotdialog.ui:111
+msgid "Take Screenshot"
+msgstr "Schermfoto maken"
+
+#: src/screenshotdialog.ui:122
+msgid "Grab the whole sc_reen"
+msgstr "Gehele sche_rm vastleggen"
+
+#: src/screenshotdialog.ui:133
+msgid "Grab the current _window"
+msgstr "Huidige venster _vastleggen"
+
+#: src/screenshotdialog.ui:144
+msgid "Select _area to grab"
+msgstr "V_astleggebied selecteren"
+
+#: src/screenshotdialog.ui:158
+msgid "Grab after a _delay of"
+msgstr "Vastleggen na een wachttij_d van"
+
+#: src/screenshotdialog.ui:171
+msgid "seconds"
+msgstr "seconden"
+
+#: src/screenshotdialog.ui:181
+msgid "Effects"
+msgstr "Effecten"
+
+#: src/screenshotdialog.ui:192
+msgid "Include _pointer"
+msgstr "Cursor _tonen"
+
+#: src/screenshotdialog.ui:201
+msgid "Include the window _border"
+msgstr "Vensterrand t_onen"
+
+#: src/settings.c:186
+msgid "Requested setting not found"
+msgstr "De opgevraagde instelling bestaat niet"
+
+#: src/wallpaperdialog.ui:13
+msgid "Set Background"
+msgstr "Achtergrond instellen"
+
+#: src/wallpaperdialog.ui:26
+msgid "Set"
+msgstr "Instellen"
+
+#: src/wallpaperdialog.ui:57
+msgid "Failed to load image file"
+msgstr "Het bestand kan niet worden geladen"
+
+#: src/wallpaperpreview.ui:57
+msgid "Activities"
+msgstr "Activiteiten"
