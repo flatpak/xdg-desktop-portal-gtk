@@ -1,15 +1,15 @@
 # Brazilian Portuguese translation for xdg-desktop-portal-gtk.
-# Copyright (C) 2020 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
+# Copyright (C) 2021 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
 # This file is distributed under the same license as the xdg-desktop-portal-gtk package.
-# Rafael Fontenelle <rafaelff@gnome.org>, 2016-2020.
+# Rafael Fontenelle <rafaelff@gnome.org>, 2016-2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2020-09-14 14:09-0400\n"
-"PO-Revision-Date: 2020-01-24 08:53-0300\n"
+"POT-Creation-Date: 2021-07-22 15:47+0000\n"
+"PO-Revision-Date: 2021-07-22 21:42-0300\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
@@ -17,11 +17,16 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
-"X-Generator: Gtranslator 3.32.0\n"
+"X-Generator: Gtranslator 40.0\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
 msgstr "Portal"
+
+#. TRANSLATORS: Don't translate this text (this is icon name)
+#: data/xdg-desktop-portal-gtk.desktop.in.in:6
+msgid "applications-system-symbolic"
+msgstr "applications-system-symbolic"
 
 #: src/access.c:271
 msgid "Deny Access"
@@ -198,21 +203,21 @@ msgstr "Área de trabalho remota"
 msgid "Screen Share"
 msgstr "Compartilhamento de tela"
 
-#: src/screencastwidget.c:483
+#: src/screencastwidget.c:484
 #, c-format
 msgid "Select monitor to share with %s"
 msgstr "Selecione o monitor para compartilhar com %s"
 
-#: src/screencastwidget.c:485
+#: src/screencastwidget.c:486
 #, c-format
 msgid "Select window to share with %s"
 msgstr "Selecione a janela para compartilhar com %s"
 
-#: src/screencastwidget.c:490
+#: src/screencastwidget.c:491
 msgid "Select monitor to share with the requesting application"
 msgstr "Selecione o monitor para compartilhar com aplicativo requisitante"
 
-#: src/screencastwidget.c:491
+#: src/screencastwidget.c:492
 msgid "Select window to share with the requesting application"
 msgstr "Selecione a janela para compartilhar com aplicativo requisitante"
 
@@ -301,10 +306,6 @@ msgstr "Falha ao carregar o arquivo de imagem"
 msgid "Activities"
 msgstr "Atividades"
 
-#~ msgid "applications-system-symbolic"
-#~ msgstr "applications-system-symbolic"
-
-#, c-format
 #~ msgid "%s is running in the background."
 #~ msgstr "%s está em execução em segundo plano."
 
