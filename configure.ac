@@ -57,54 +57,48 @@ AC_SUBST([DBUS_INTERFACES_DIR], [`$PKG_CONFIG --variable=interfaces_dir dbus-1`]
 AC_SUBST([GDBUS_CODEGEN], [`$PKG_CONFIG --variable gdbus_codegen gio-2.0`])
 AC_SUBST([GLIB_COMPILE_RESOURCES], [`$PKG_CONFIG --variable glib_compile_resources gio-2.0`])
 
-AC_ARG_ENABLE(wallpaper,
-              [AS_HELP_STRING([--enable-wallpaper],[Build wallpaper portal. Needs gnome-desktop])],
-              enable_wallpaper=$enableval, enable_wallpaper=yes)
-if test x$enable_wallpaper = xyes; then
+AC_ARG_ENABLE([wallpaper],
+              [AS_HELP_STRING([--enable-wallpaper],[Build wallpaper portal. Needs gnome-desktop])])
+AS_IF([test "x$enable_wallpaper" = "xyes"], [
     PKG_CHECK_MODULES(WALLPAPER, [gnome-desktop-3.0])
     AC_DEFINE([BUILD_WALLPAPER], [1], [Define to enable wallpaper portal])
-fi
+])
 AM_CONDITIONAL([BUILD_WALLPAPER],[test "$enable_wallpaper" = "yes"])
 
-AC_ARG_ENABLE(screenshot,
-              [AS_HELP_STRING([--enable-screenshot],[Build screenshot portal. Needs gnome-shell])],
-              enable_screenshot=$enableval, enable_screenshot=yes)
-if test x$enable_screenshot = xyes; then
+AC_ARG_ENABLE([screenshot],
+              [AS_HELP_STRING([--enable-screenshot],[Build screenshot portal. Needs gnome-shell])])
+AS_IF([test "x$enable_screenshot" = "xyes"], [
     AC_DEFINE([BUILD_SCREENSHOT], [1], [Define to enable screenshot portal])
-fi
+])
 AM_CONDITIONAL([BUILD_SCREENSHOT],[test "$enable_screenshot" = "yes"])
 
-AC_ARG_ENABLE(screencast,
-              [AS_HELP_STRING([--enable-screencast],[Build screencast and remote desktop portals. Needs mutter])],
-              enable_screencast=$enableval, enable_screencast=yes)
-if test x$enable_screencast = xyes; then
+AC_ARG_ENABLE([screencast],
+              [AS_HELP_STRING([--enable-screencast],[Build screencast and remote desktop portals. Needs mutter])])
+AS_IF([test "x$enable_screencast" = "xyes"], [
     AC_DEFINE([BUILD_SCREENCAST], [1], [Define to enable screencast portal])
-fi
+])
 AM_CONDITIONAL([BUILD_SCREENCAST],[test "$enable_screencast" = "yes"])
 
-AC_ARG_ENABLE(background,
-              [AS_HELP_STRING([--enable-background],[Build background portal. Needs gnome-shell])],
-              enable_background=$enableval, enable_background=yes)
-if test x$enable_background = xyes; then
+AC_ARG_ENABLE([background],
+              [AS_HELP_STRING([--enable-background],[Build background portal. Needs gnome-shell])])
+AS_IF([test "x$enable_background" = "xyes"], [
     AC_DEFINE([BUILD_BACKGROUND], [1], [Define to enable background portal])
-fi
+])
 AM_CONDITIONAL([BUILD_BACKGROUND],[test "$enable_background" = "yes"])
 
-AC_ARG_ENABLE(settings,
-              [AS_HELP_STRING([--enable-settings],[Build settings portal. Needs dconf])],
-              enable_settings=$enableval, enable_settings=yes)
-if test x$enable_settings = xyes; then
+AC_ARG_ENABLE([settings],
+              [AS_HELP_STRING([--enable-settings],[Build settings portal. Needs dconf])])
+AS_IF([test "x$enable_settings" = "xyes"], [
     PKG_CHECK_MODULES(SETTINGS, [fontconfig gsettings-desktop-schemas])
     AC_DEFINE([BUILD_SETTINGS], [1], [Define to enable settings portal])
-fi
+])
 AM_CONDITIONAL([BUILD_SETTINGS],[test "$enable_settings" = "yes"])
 
-AC_ARG_ENABLE(appchooser,
-              [AS_HELP_STRING([--enable-appchooser],[Build appchooser portal.])],
-              enable_appchooser=$enableval, enable_appchooser=yes)
-if test x$enable_appchooser = xyes; then
+AC_ARG_ENABLE([appchooser],
+              [AS_HELP_STRING([--enable-appchooser],[Build appchooser portal.])])
+AS_IF([test "x$enable_appchooser" = "xyes"], [
     AC_DEFINE([BUILD_APPCHOOSER], [1], [Define to enable appchooser portal])
-fi
+])
 AM_CONDITIONAL([BUILD_APPCHOOSER],[test "$enable_appchooser" = "yes"])
 
 AC_ARG_ENABLE(lockdown,
