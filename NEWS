@@ -1,14 +1,17 @@
-Changes in git
-================
+Changes in 1.10.0
+=================
 
-- Make portal backends with GNOME dependencies optional. Use
-  --disable-wallpaper to build without the wallpaper backend
-  --disable-screenshot to build without the screenshot backend
-  --disable-screencast to build without the screencast and remoting
-  backends
-  --disable-background to build without the background backend
-  --disable-settings to build without the settings backend
-  --disable-appchooser to build without the appchooser backend
+- filechooser: Fix a focus issue
+- inhibit: Autostart org.gnome.ScreenSaver
+- screencast: Force window icon size
+- Make portal backends with GNOME dependencies optional and
+  disable them by default. Use xdg-desktop-portal-gnome, or use
+  --enable-wallpaper to build with the wallpaper backend
+  --enable-screenshot to build with the screenshot backend
+  --enable-screencast to build with screencast/remoting backends
+  --enable-background to build with the background backend
+  --enable-settings to build with the settings backend
+  --enable-appchooser to build with the appchooser backend
 - Translation updates
 
 Changes in 1.8.0
