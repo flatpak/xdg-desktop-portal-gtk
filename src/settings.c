@@ -89,6 +89,20 @@ namespace_matches (const char         *namespace,
   return FALSE;
 }
 
+static GVariant *
+get_color_scheme (void)
+{
+  SettingsBundle *bundle = g_hash_table_lookup (settings, "org.gnome.desktop.interface");
+  int color_scheme;
+
+  if (!g_settings_schema_has_key (bundle->schema, "color-scheme"))
+    return g_variant_new_uint32 (0); /* No preference */
+
+  color_scheme = g_settings_get_enum (bundle->settings, "color-scheme");
+
+  return g_variant_new_uint32 (color_scheme);
+}
+
 static gboolean
 settings_handle_read_all (XdpImplSettings       *object,
                           GDBusMethodInvocation *invocation,
@@ -136,6 +150,16 @@ settings_handle_read_all (XdpImplSettings       *object,
       g_variant_builder_add (builder, "{s@a{sv}}", "org.gnome.fontconfig", g_variant_dict_end (&dict));
     }
 
+  if (namespace_matches ("org.freedesktop.appearance", arg_namespaces))
+    {
+      GVariantDict dict;
+
+      g_variant_dict_init (&dict, NULL);
+      g_variant_dict_insert_value (&dict, "color-scheme", get_color_scheme ());
+
+      g_variant_builder_add (builder, "{s@a{sv}}", "org.freedesktop.appearance", g_variant_dict_end (&dict));
+    }
+
   g_variant_builder_close (builder);
 
   g_dbus_method_invocation_return_value (invocation, g_variant_builder_end (builder));
@@ -160,6 +184,13 @@ settings_handle_read (XdpImplSettings       *object,
                                                  g_variant_new ("(v)", g_variant_new_int32 (fontconfig_serial)));
           return TRUE;
         }
+    }
+  else if (strcmp (arg_namespace, "org.freedesktop.appearance") == 0 &&
+           strcmp (arg_key, "color-scheme") == 0)
+    {
+      g_dbus_method_invocation_return_value (invocation,
+                                             g_variant_new ("(v)", get_color_scheme ()));
+      return TRUE;
     }
   else if (strcmp (arg_namespace, "org.gnome.desktop.interface") == 0 &&
            strcmp (arg_key, "enable-animations") == 0)
@@ -225,6 +256,12 @@ on_settings_changed (GSettings             *settings,
     xdp_impl_settings_emit_setting_changed (user_data->self,
                                             user_data->namespace, key,
                                             g_variant_new ("v", new_value));
+
+  if (strcmp (user_data->namespace, "org.gnome.desktop.interface") == 0 &&
+      strcmp (key, "color-scheme") == 0)
+    xdp_impl_settings_emit_setting_changed (user_data->self,
+                                            "org.freedesktop.appearance", key,
+                                            g_variant_new ("v", get_color_scheme ()));
 }
 
 static void
