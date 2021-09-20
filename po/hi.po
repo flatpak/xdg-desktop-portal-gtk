@@ -317,7 +317,7 @@ msgstr "गतिविधियां"
 #~ "href='software'>Software.</a>"
 #~ msgstr ""
 #~ "एक आवेदन का चयन करें। में अधिक एप्लिकेशन उपलब्ध हैं <a "
-#~ "href=href='software'>सॉफ्टवेयर।</a>"
+#~ "href='software'>सॉफ्टवेयर।</a>"
 
 #~ msgid "Unable to find a suitable application."
 #~ msgstr "एक उपयुक्त आवेदन खोजने में असमर्थ।"
