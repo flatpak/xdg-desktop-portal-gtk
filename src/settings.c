@@ -276,6 +276,7 @@ init_settings_table (XdpImplSettings *settings,
     "org.gnome.desktop.wm.preferences",
     "org.gnome.settings-daemon.plugins.xsettings",
     "org.gnome.desktop.a11y",
+    "org.gnome.desktop.a11y.interface",
     "org.gnome.desktop.input-sources",
   };
   size_t i;
