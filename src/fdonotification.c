@@ -245,7 +245,7 @@ call_notify (GDBusConnection *connection,
         button = g_variant_get_child_value (buttons, i);
         g_variant_lookup (button, "label", "&s", &label);
         g_variant_lookup (button, "action", "&s", &action);
-        target = g_variant_lookup_value (button, "target", G_VARIANT_TYPE_VARIANT);
+        target = g_variant_lookup_value (button, "target", NULL);
         detailed_name = g_action_print_detailed_name (action, target);
 
         /* Actions named 'default' collide with libnotify's naming of the
