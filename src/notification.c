@@ -108,10 +108,13 @@ activate_action (GDBusConnection *connection,
                  gpointer data)
 {
   g_autofree char *object_path = NULL;
-  GVariantBuilder pdata;
+  GVariantBuilder pdata, parms;
 
   object_path = app_path_for_id (app_id);
   g_variant_builder_init (&pdata, G_VARIANT_TYPE_VARDICT);
+  g_variant_builder_init (&parms, G_VARIANT_TYPE ("av"));
+  if (parameter)
+    g_variant_builder_add (&parms, "v", parameter);
 
   if (name && g_str_has_prefix (name, "app."))
     {
@@ -120,9 +123,9 @@ activate_action (GDBusConnection *connection,
                               object_path,
                               "org.freedesktop.Application",
                               "ActivateAction",
-                              g_variant_new ("(sav@a{sv})",
+                              g_variant_new ("(s@av@a{sv})",
                                              name + 4,
-                                             parameter,
+                                             g_variant_builder_end (&parms),
                                              g_variant_builder_end (&pdata)),
                               NULL,
                               G_DBUS_CALL_FLAGS_NONE,
@@ -131,7 +134,6 @@ activate_action (GDBusConnection *connection,
   else
     {
       g_autoptr(GVariant) ret = NULL;
-      GVariantBuilder parms;
 
       g_dbus_connection_call (connection,
                               app_id,
@@ -143,10 +145,6 @@ activate_action (GDBusConnection *connection,
                               NULL,
                               G_DBUS_CALL_FLAGS_NONE,
                               -1, NULL, NULL, NULL);
-
-      g_variant_builder_init (&parms, G_VARIANT_TYPE ("av"));
-      if (parameter)
-        g_variant_builder_add (&parms, "v", parameter);
 
       g_dbus_connection_emit_signal (connection,
                                      NULL,
