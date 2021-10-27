@@ -571,7 +571,7 @@ handle_open (XdpImplFileChooser *object,
           /* We are trying to select the default filter from the list of
            * filters. We want to naively take filter and pass it to
            * gtk_file_chooser_set_filter(), but it's not good enough
-           * because GTK+ just compares filters by pointer value, so the
+           * because GTK just compares filters by pointer value, so the
            * pointer itself has to match. We'll use the heuristic that
            * if two filters have the same name, they must be the same
            * unless the application is very dumb.

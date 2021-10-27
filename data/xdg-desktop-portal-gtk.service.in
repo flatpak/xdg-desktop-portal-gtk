@@ -1,5 +1,5 @@
 [Unit]
-Description=Portal service (GTK+/GNOME implementation)
+Description=Portal service (GTK/GNOME implementation)
 
 [Service]
 Type=dbus
