@@ -87,19 +87,19 @@ AS_IF([test "x$enable_background" = "xyes"], [
 AM_CONDITIONAL([BUILD_BACKGROUND],[test "$enable_background" = "yes"])
 
 AC_ARG_ENABLE([settings],
-              [AS_HELP_STRING([--enable-settings],[Build settings portal. Needs dconf])])
-AS_IF([test "x$enable_settings" = "xyes"], [
+              [AS_HELP_STRING([--disable-settings],[Disable the settings portal, which needs dconf])])
+AS_IF([test "x$enable_settings" != "xno"], [
     PKG_CHECK_MODULES(SETTINGS, [fontconfig gsettings-desktop-schemas])
     AC_DEFINE([BUILD_SETTINGS], [1], [Define to enable settings portal])
 ])
-AM_CONDITIONAL([BUILD_SETTINGS],[test "$enable_settings" = "yes"])
+AM_CONDITIONAL([BUILD_SETTINGS],[test "$enable_settings" != "no"])
 
 AC_ARG_ENABLE([appchooser],
-              [AS_HELP_STRING([--enable-appchooser],[Build appchooser portal.])])
-AS_IF([test "x$enable_appchooser" = "xyes"], [
+              [AS_HELP_STRING([--disable-appchooser],[Disable the appchooser portal.])])
+AS_IF([test "x$enable_appchooser" != "xno"], [
     AC_DEFINE([BUILD_APPCHOOSER], [1], [Define to enable appchooser portal])
 ])
-AM_CONDITIONAL([BUILD_APPCHOOSER],[test "$enable_appchooser" = "yes"])
+AM_CONDITIONAL([BUILD_APPCHOOSER],[test "$enable_appchooser" != "no"])
 
 AC_ARG_ENABLE(lockdown,
               [AS_HELP_STRING([--enable-lockdown],[Build lockdown portal.])],
