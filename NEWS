@@ -1,3 +1,12 @@
+Changes in 1.12.0, 21-12-2021
+=============================
+
+- settings: Provide org.freedesktop.appearance.color-scheme key
+- settings: Handle org.gnome.desktop.a11y.interface schema
+- notification: Handle actions with targets properly
+- Enable settings and appchooser portals by default
+- Translation updates
+
 Changes in 1.10.0
 =================
 
