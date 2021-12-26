@@ -3,25 +3,33 @@
 # This file is distributed under the same license as the xdg-desktop-portal-gtk package.
 # Mingye Wang <arthur2e5@aosc.xyz>, 2016.
 # 王滋涵 Zephyr Waitzman <i@wi24rd.ml>, 2019.
+# lumingzh <lumingzh@qq.com>, 2020.
+# Dingzhong Chen <wsxy162@gmail.com>, 2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2020-09-14 14:09-0400\n"
-"PO-Revision-Date: 2019-05-03 01:13+0800\n"
-"Last-Translator: 王滋涵 Zephyr Waitzman <i@wi24rd.ml>\n"
-"Language-Team: Chinese (China) <i18n-zh@googlegroups.com>\n"
+"POT-Creation-Date: 2021-09-22 03:41+0000\n"
+"PO-Revision-Date: 2020-10-09 00:25+0800\n"
+"Last-Translator: Dingzhong Chen <wsxy162@gmail.com>\n"
+"Language-Team: Chinese - China <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Gtranslator 3.36.0\n"
+"Plural-Forms: nplurals=1; plural=0\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
 msgstr "门户"
+
+#. TRANSLATORS: Don't translate this text (this is icon name)
+#: data/xdg-desktop-portal-gtk.desktop.in.in:6
+msgid "applications-system-symbolic"
+msgstr "applications-system-symbolic"
 
 #: src/access.c:271
 msgid "Deny Access"
@@ -54,11 +62,11 @@ msgstr "图像"
 #: src/accountdialog.c:272
 #, c-format
 msgid "Share your personal information with %s?"
-msgstr "与 %s 共享您的个人信息？"
+msgstr "与 %s 共享您的个人信息吗？"
 
 #: src/accountdialog.c:275
 msgid "Share your personal information with the requesting application?"
-msgstr "与请求应用申请共享您的个人信息？"
+msgstr "与正在请求的应用共享您的个人信息吗？"
 
 #: src/accountdialog.ui:10
 msgid "Share Details"
@@ -84,30 +92,28 @@ msgid "Failed to start Software"
 msgstr "无法启动软件"
 
 #: src/appchooserdialog.c:385
-#, fuzzy, c-format
+#, c-format
 msgid "Choose an application to open the file “%s”."
-msgstr "找不到可以打开 “%s” 的应用。"
+msgstr "选择一个应用程序来打开文件“%s”。"
 
 #: src/appchooserdialog.c:390
-#, fuzzy
 msgid "Choose an application."
-msgstr "选择应用程序"
+msgstr "选择一个应用程序。"
 
 #: src/appchooserdialog.c:407
 #, c-format
 msgid ""
 "No apps installed that can open “%s”. You can find more applications in "
 "Software"
-msgstr ""
+msgstr "没有安装可以打开“%s”的应用。您可以在“软件”中查找更多应用程序。"
 
 #: src/appchooserdialog.c:412
 msgid "No suitable app installed. You can find more applications in Software."
-msgstr ""
+msgstr "没有安装合适的应用。您可以在“软件”中查找更多应用程序。"
 
 #: src/appchooserdialog.ui:10
-#, fuzzy
 msgid "Open With…"
-msgstr "打开方式"
+msgstr "打开方式…"
 
 #: src/appchooserdialog.ui:23 src/filechooser.c:462
 msgid "_Open"
@@ -115,17 +121,16 @@ msgstr "打开(_O)"
 
 #: src/appchooserdialog.ui:115
 msgid "No Apps available"
-msgstr ""
+msgstr "无可用应用"
 
 #: src/appchooserdialog.ui:159
-#, fuzzy
 msgid "_Find More in Software"
-msgstr "无法启动软件"
+msgstr "在 软件 中查找更多(_F)"
 
 #: src/background.c:215 src/background.c:308
 #, c-format
 msgid "“%s” is running in the background"
-msgstr ""
+msgstr "“%s”正在后台运行"
 
 #: src/background.c:217
 msgid ""
@@ -134,22 +139,24 @@ msgid ""
 "\n"
 "Note that forcing an application to quit might cause data loss."
 msgstr ""
+"这可能有合理的原因，但该应用程序并未提供。\n"
+"请注意强制应用程序退出可能导致数据丢失。"
 
 #: src/background.c:220
 msgid "Force quit"
-msgstr ""
+msgstr "强制退出"
 
 #: src/background.c:221
 msgid "Allow"
-msgstr ""
+msgstr "允许"
 
 #: src/background.c:306
 msgid "Background activity"
-msgstr ""
+msgstr "后台活动"
 
 #: src/background.c:314
 msgid "Find out more"
-msgstr ""
+msgstr "查找更多"
 
 #: src/filechooser.c:462
 msgid "_Select"
@@ -161,7 +168,7 @@ msgstr "保存(_S)"
 
 #: src/filechooser.c:641
 msgid "Open files read-only"
-msgstr ""
+msgstr "以只读方式打开文件"
 
 #: src/remotedesktopdialog.c:188
 msgid "Pointer"
@@ -182,43 +189,41 @@ msgstr "选择要与 %s 共享的设备"
 
 #: src/remotedesktopdialog.c:312
 msgid "Select devices to share with the requesting application"
-msgstr "选择要与请求应用程序共享的设备"
+msgstr "选择要与正在请求的应用程序共享的设备"
 
 #: src/remotedesktopdialog.ui:12
 msgid "Remote desktop"
 msgstr "远程桌面"
 
 #: src/screencastdialog.ui:12
-#, fuzzy
 msgid "Screen Share"
-msgstr "截屏"
+msgstr "共享屏幕"
 
-#: src/screencastwidget.c:483
+#: src/screencastwidget.c:484
 #, c-format
 msgid "Select monitor to share with %s"
 msgstr "选择与 %s 共享的监视器"
 
-#: src/screencastwidget.c:485
-#, fuzzy, c-format
+#: src/screencastwidget.c:486
+#, c-format
 msgid "Select window to share with %s"
-msgstr "选择与 %s 共享的监视器"
-
-#: src/screencastwidget.c:490
-msgid "Select monitor to share with the requesting application"
-msgstr "选择与请求应用共享的监视器"
+msgstr "选择与 %s 共享的窗口"
 
 #: src/screencastwidget.c:491
-#, fuzzy
+msgid "Select monitor to share with the requesting application"
+msgstr "选择与正在请求的应用共享的监视器"
+
+#: src/screencastwidget.c:492
 msgid "Select window to share with the requesting application"
-msgstr "选择与请求应用共享的监视器"
+msgstr "选择与正在请求的应用共享的窗口"
 
 #: src/screencastwidget.ui:100
 msgid "Single Window"
-msgstr ""
+msgstr "单个窗口"
 
 #: src/screencastwidget.ui:176
 msgid "Entire Screen"
-msgstr ""
+msgstr "整个屏幕"
 
 #: src/screenshotdialog.c:442
 #, c-format
@@ -235,11 +240,11 @@ msgstr "截屏"
 
 #: src/screenshotdialog.ui:30
 msgid "_Options…"
-msgstr "选项(_O)"
+msgstr "选项(_O)…"
 
 #: src/screenshotdialog.ui:55
 msgid "Take _Screenshot"
-msgstr "截图"
+msgstr "截图(_S)"
 
 #: src/screenshotdialog.ui:111
 msgid "Take Screenshot"
@@ -277,31 +282,26 @@ msgstr "包含指针(_P)"
 msgid "Include the window _border"
 msgstr "包含窗口边框(_B)"
 
-#: src/settings.c:186
+#: src/settings.c:217
 msgid "Requested setting not found"
-msgstr ""
+msgstr "未找到请求的设置"
 
 #: src/wallpaperdialog.ui:13
 msgid "Set Background"
-msgstr ""
+msgstr "设置背景"
 
 #: src/wallpaperdialog.ui:26
-#, fuzzy
 msgid "Set"
-msgstr "选择"
+msgstr "设置"
 
 #: src/wallpaperdialog.ui:57
 msgid "Failed to load image file"
-msgstr ""
+msgstr "加载图像文件失败"
 
 #: src/wallpaperpreview.ui:57
 msgid "Activities"
-msgstr ""
+msgstr "活动"
 
-#~ msgid "applications-system-symbolic"
-#~ msgstr "applications-system-symbolic"
-
-#, c-format
 #~ msgid ""
 #~ "Select an application to open “%s”. More applications are available in <a "
 #~ "href='software'>Software.</a>"
