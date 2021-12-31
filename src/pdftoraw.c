@@ -65,9 +65,9 @@ pdf_page_raw_get (PopplerDocument *doc,
 {
     cairo_surface_t *s = NULL;
     cairo_t *cr = NULL;
-    unsigned char *data = NULL;
+    g_autofree unsigned char *data = NULL;
     PopplerPage *page = NULL;
-    GdkPixbuf *pix = NULL;
+    g_autoptr(GdkPixbuf) *pix = NULL;
     double width = 0;
     double height = 0;
     int w = 0;
@@ -89,6 +89,9 @@ pdf_page_raw_get (PopplerDocument *doc,
     g_object_unref(page);
     data = gdk_pixbuf_get_pixels (pix);
     fwrite(data, 1, (w * h * 4), stdout);
+    cairo_destroy(cr);
+    if(s)
+      cairo_surface_destroy(s);
     return data;
 }
 
