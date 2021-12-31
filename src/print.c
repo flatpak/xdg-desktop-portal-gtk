@@ -43,6 +43,10 @@
 
 #include "gtkbackports.h"
 
+// 1 inch = 72 points
+#define PTS 72.0
+
+// Resolution for the printer, 150 my choice
 #define DPI 150.0
 
 typedef enum {
@@ -286,7 +290,7 @@ pdf_get_actions_page (char        *filename,
    default:
        return 0;
   }
-  process = g_subprocess_new(G_SUBPROCESS_FLAGS_STDOUT_PIPE, NULL, "/usr/libexec/pdftoraw", option1, option2, NULL);
+  process = g_subprocess_new(G_SUBPROCESS_FLAGS_STDOUT_PIPE, NULL, LIBEXECDIR  "/pdftoraw", option1, option2, NULL);
 
   if (process)
   {
@@ -317,7 +321,7 @@ pdf_get_data_page (char *filename,
 
   option1 = g_strconcat ("--file=", filename, NULL);
   option2 = g_strdup_printf ("--raw=%d", page);
-  process = g_subprocess_new(G_SUBPROCESS_FLAGS_STDOUT_PIPE, NULL, "/usr/libexec/pdftoraw", option1, option2, NULL);
+  process = g_subprocess_new(G_SUBPROCESS_FLAGS_STDOUT_PIPE, NULL, LIBEXECDIR "/pdftoraw", option1, option2, NULL);
 
   if (process)
   {
@@ -364,7 +368,7 @@ pdf_draw_page(GtkPrintOperation *op,
     if (data)
     {
       GdkPixbuf *pix = gdk_pixbuf_new_from_data (data, GDK_COLORSPACE_RGB, TRUE, 8, width, height, stride, NULL, g_free);
-      cairo_scale(cr, (72.0 / DPI), (72.0 / DPI));
+      cairo_scale(cr, (PTS / DPI), (PTS / DPI));
       gdk_cairo_set_source_pixbuf(cr, pix, 0, 0);
       cairo_paint(cr);
       cairo_fill (cr);

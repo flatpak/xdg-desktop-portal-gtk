@@ -294,6 +294,7 @@ pdftoraw_SOURCES = \
 pdftoraw_LDADD = $(BASE_LIBS) $(POPPLER_LIBS) -lm
 pdftoraw_CFLAGS = $(BASE_CFLAGS) $(POPPLER_CFLAGS)
 pdftoraw_CPPFLAGS = \
-	-I$(top_srcdir)/src				\
+	-I$(top_srcdir)/src			\
 	-I$(top_builddir)/src			\
+	-DLIBEXECDIR=\"$(libexecdir)\"          \
 	$(NULL)
