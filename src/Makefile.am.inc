@@ -261,6 +261,7 @@ xdg_desktop_portal_gtk_CPPFLAGS = \
 	-DLOCALEDIR=\"$(localedir)\"                    \
 	-I$(top_srcdir)/src				\
 	-I$(top_builddir)/src				\
+	-DLIBEXECDIR=\"$(libexecdir)\"                  \
 	$(NULL)
 
 noinst_PROGRAMS = \
@@ -296,5 +297,4 @@ pdftoraw_CFLAGS = $(BASE_CFLAGS) $(POPPLER_CFLAGS)
 pdftoraw_CPPFLAGS = \
 	-I$(top_srcdir)/src			\
 	-I$(top_builddir)/src			\
-	-DLIBEXECDIR=\"$(libexecdir)\"          \
 	$(NULL)
