@@ -24,6 +24,11 @@
 #include <poppler.h>
 #include <gdk/gdk.h>
 
+
+// 1 inch = 72 points
+#define PTS 72.0
+
+// Resolution for the printer, 150 my choice
 #define DPI 150.0
 
 static struct option long_options[] = {
@@ -38,8 +43,10 @@ static struct option long_options[] = {
 };
 
 static void
-print_usage(void) {
+print_usage (void)
+{
     printf("Usage:\tpdftoraw  --filename=<filename>  --raw=<num-page>\n");
+    printf("\tpdftoraw  --filename=<filename>  --test\n");
     printf("\tpdftoraw  --filename=<filename>  --pages\n");
     printf("\tpdftoraw  --filename=<filename>  --width=<num-page>\n");
     printf("\tpdftoraw  --filename=<filename>  --height=<num-page>\n");
@@ -47,33 +54,34 @@ print_usage(void) {
 }
 
 static int
-pdf_number_pages_get(PopplerDocument *doc)
+pdf_number_pages_get (PopplerDocument *doc)
 {
     return poppler_document_get_n_pages(doc);
 }
 
 static unsigned char*
-pdf_page_raw_get(PopplerDocument *doc,
+pdf_page_raw_get (PopplerDocument *doc,
                  int page_nr)
 {
     cairo_surface_t *s = NULL;
     cairo_t *cr = NULL;
     unsigned char *data = NULL;
+    PopplerPage *page = NULL;
     GdkPixbuf *pix = NULL;
     double width = 0;
     double height = 0;
     int w = 0;
     int h = 0;
 
-    PopplerPage *page = poppler_document_get_page(doc, page_nr);
+    page = poppler_document_get_page(doc, page_nr);
     poppler_page_get_size(page, &width, &height);
-    width = DPI * width / 72.0;
-    height = DPI * height / 72.0;
+    width = DPI * width / PTS;
+    height = DPI * height / PTS;
     w = (int)ceil(width);
     h = (int)ceil(height);
     s = cairo_image_surface_create(CAIRO_FORMAT_ARGB32, w, h);
     cr = cairo_create(s);
-    cairo_scale (cr, DPI/72.0, DPI/72.0);
+    cairo_scale (cr, DPI / PTS, DPI / PTS);
     cairo_save (cr);
     poppler_page_render_for_printing(page, cr);
     cairo_restore (cr);
@@ -85,7 +93,7 @@ pdf_page_raw_get(PopplerDocument *doc,
 }
 
 static int
-pdf_page_width_get(PopplerDocument *doc,
+pdf_page_width_get (PopplerDocument *doc,
                    int page_nr)
 {
     double width = 0;
@@ -93,14 +101,14 @@ pdf_page_width_get(PopplerDocument *doc,
 
     PopplerPage *page = poppler_document_get_page(doc, page_nr);
     poppler_page_get_size(page, &width, NULL);
-    width = DPI * width / 72.0;
+    width = DPI * width / PTS;
     w = (int)ceil(width);
     g_object_unref(page);
     return w;
 }
 
 static int
-pdf_page_height_get(PopplerDocument *doc,
+pdf_page_height_get (PopplerDocument *doc,
                     int page_nr)
 {
     double height = 0;
@@ -108,14 +116,14 @@ pdf_page_height_get(PopplerDocument *doc,
 
     PopplerPage *page = poppler_document_get_page(doc, page_nr);
     poppler_page_get_size(page, NULL, &height);
-    height = DPI * height / 72.0;
+    height = DPI * height / PTS;
     h = (int)ceil(height);
     g_object_unref(page);
     return h;
 }
 
 int
-main(int argc, char **argv)
+main (int argc, char **argv)
 {
     PopplerDocument *doc = NULL;
     GError *err = NULL;
@@ -127,8 +135,10 @@ main(int argc, char **argv)
     int test = 0, raw = 0, npages = 0, width = 0, height = 0;
 
     while ((opt = getopt_long(argc, argv,"f:tpw:W:r:h",
-                   long_options, &long_index )) != -1) {
-        switch (opt) {
+                   long_options, &long_index )) != -1)
+    {
+        switch (opt)
+       	{
              case 'f' :
                  filename = strdup(optarg);
                  break;
@@ -151,7 +161,8 @@ main(int argc, char **argv)
                  exit(EXIT_FAILURE);
         }
     }
-    if (filename == NULL) {
+    if (filename == NULL)
+    {
         print_usage();
         exit(EXIT_FAILURE);
     }
@@ -164,22 +175,28 @@ main(int argc, char **argv)
        exit(EXIT_FAILURE);
     }
 
-    if (test == 1) {
+    if (test == 1)
+    {
         printf("1");
     }
-    else if (raw == 1) {
+    else if (raw == 1)
+    {
         pdf_page_raw_get(doc, page);
     }
-    else if (npages == 1) {
+    else if (npages == 1)
+    {
         printf("%d", pdf_number_pages_get(doc));
     }
-    else if (width == 1) {
+    else if (width == 1)
+    {
         printf("%d", pdf_page_width_get(doc, page));
     }
-    else if (height == 1) {
+    else if (height == 1)
+    {
         printf("%d", pdf_page_height_get(doc, page));
     }
-    else {
+    else
+    {
         print_usage();
         exit(EXIT_FAILURE);
     }
