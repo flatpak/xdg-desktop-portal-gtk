@@ -352,7 +352,6 @@ pdf_draw_page(GtkPrintOperation *op,
               char              *filename)
 {
     cairo_t *cr = NULL;
-    cairo_surface_t *surface = NULL;
     int width = 0, height = 0;
     unsigned char *data = NULL;
     int stride = 0;
@@ -364,12 +363,11 @@ pdf_draw_page(GtkPrintOperation *op,
     data = pdf_get_data_page (filename, width, height, page_nr);
     if (data)
     {
-      GdkPixbuf *pix = gdk_pixbuf_new_from_data (data, GDK_COLORSPACE_RGB, TRUE, 8, width, height, stride, NULL, g_free);
+      g_autoptr(GdkPixbuf) pix = gdk_pixbuf_new_from_data (data, GDK_COLORSPACE_RGB, TRUE, 8, width, height, stride, NULL, g_free);
       cairo_scale(cr, (PTS / DPI), (PTS / DPI));
       gdk_cairo_set_source_pixbuf(cr, pix, 0, 0);
       cairo_paint(cr);
       cairo_fill (cr);
-      cairo_surface_destroy (surface);
     }
 }
 
@@ -393,8 +391,8 @@ print_pdf(int                    fd,
   char *filename = NULL;
   g_autoptr(GUnixInputStream) istream = NULL;
   g_autoptr(GUnixOutputStream) ostream = NULL;
-  GtkPrintSettings *settings = NULL;
-  GtkPrintOperation *print = NULL;
+  g_autoptr(GtkPrintSettings) settings = NULL;
+  g_autoptr(GtkPrintOperation) print = NULL;
   GError *err = NULL;
   GVariantBuilder opt_builder;
   int fd2;
@@ -429,8 +427,6 @@ print_pdf(int                    fd,
   gtk_print_operation_set_print_settings(print, settings);
 
   gtk_print_operation_run(print, GTK_PRINT_OPERATION_ACTION_PRINT, NULL, &err);
-  g_object_unref (print);
-  g_object_unref (settings);
   g_variant_builder_init (&opt_builder, G_VARIANT_TYPE_VARDICT);
   xdp_impl_print_complete_print (object,
                                  invocation,
