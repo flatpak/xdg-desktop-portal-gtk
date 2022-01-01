@@ -39,7 +39,7 @@ static int opt_width = -1;
 static int opt_height = -1;
 
 static GOptionEntry entries[] = {
-  { "file", 'f', 0, G_OPTION_ARG_STRING, &filename, "PDF file path", NULL },
+  { "file", 'f', 0, G_OPTION_ARG_FILENAME, &filename, "PDF file path", NULL },
   { "test", 't', 0, G_OPTION_ARG_NONE, &opt_test, "Test if the file is a PDF file", NULL },
   { "pages", 'p', 0, G_OPTION_ARG_NONE, &opt_pages, "Returns the number of pages in the PDF file", NULL },
   { "width", 'w', 0, G_OPTION_ARG_INT, &opt_width, "Give the size of the page provided in arguments", NULL},
