@@ -264,20 +264,20 @@ pdf_get_actions_page (char        *filename,
                       PDF_ACTIONS  act,
                       int          page)
 {
-  GSubprocess *process;
+  g_autoptr(GSubprocess) process = NULL;
   GInputStream *stream;
-  GPtrArray *args = g_ptr_array_new_full(8, g_free);
+  g_autoptr(GPtrArray) args = g_ptr_array_new_full(8, g_free);
   char buffer[50] = { 0 };
 
-  g_ptr_array_add(args, LIBEXECDIR "/pdftoraw");
-  g_ptr_array_add(args, g_strconcat ("--file=", filename, NULL));
+  g_ptr_array_add(args, g_strdup_printf("%s", LIBEXECDIR "/xdg-desktop-portal-gtk-utils/pdftoraw"));
+  g_ptr_array_add(args, g_strdup_printf("--file=%s", filename));
   switch(act)
   {
     case PDF_TEST :
-       g_ptr_array_add(args, "--test");
+       g_ptr_array_add(args, g_strdup("--test"));
        break;
     case PDF_NUM_PAGES :
-       g_ptr_array_add(args, "--pages");
+       g_ptr_array_add(args, g_strdup("--pages"));
        break;
     case PDF_WIDTH :
        g_ptr_array_add(args, g_strdup_printf ("--width=%d", page));
@@ -310,15 +310,15 @@ pdf_get_data_page (char *filename,
                    int   h,
                    int   page)
 {
-  GSubprocess *process;
+  g_autoptr(GSubprocess) process = NULL;
   GInputStream *stream;
   unsigned char *data = NULL;
-  GPtrArray *args = g_ptr_array_new_full(8, g_free);
+  g_autoptr(GPtrArray) args = g_ptr_array_new_full(8, g_free);
   int read = 0;
   gsize total_read = 0;
 
-  g_ptr_array_add(args, LIBEXECDIR "/pdftoraw");
-  g_ptr_array_add(args, g_strconcat ("--file=", filename, NULL));
+  g_ptr_array_add(args, g_strdup_printf("%s", LIBEXECDIR "/xdg-desktop-portal-gtk-utils/pdftoraw"));
+  g_ptr_array_add(args, g_strdup_printf ("--file=%s", filename));
   g_ptr_array_add(args, g_strdup_printf ("--raw=%d", page));
   process = g_subprocess_newv((const gchar * const *)args->pdata, G_SUBPROCESS_FLAGS_STDOUT_PIPE, NULL);
 
@@ -327,8 +327,9 @@ pdf_get_data_page (char *filename,
     stream = g_subprocess_get_stdout_pipe(process);
     if (stream)
     {
-      data = (unsigned char *) g_malloc( w * h * 4);
-      while ((read = g_input_stream_read(stream, data + total_read, 1024, NULL, NULL)) > 0)
+      size_t max_size = w * h * 4;
+      data = (unsigned char *) g_malloc(max_size);
+      while ((read = g_input_stream_read(stream, data + total_read, 1024, NULL, NULL)) > 0 && max_size < total_read)
       {
          total_read += read;
       }
@@ -412,6 +413,7 @@ print_pdf(int                    fd,
        return FALSE;
   if (pdf_get_actions_page (filename, PDF_TEST, -1) == 0)
   {
+    g_free (filename);
     unlink(filename);
     return FALSE;
   }

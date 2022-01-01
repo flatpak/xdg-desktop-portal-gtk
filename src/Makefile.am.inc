@@ -112,7 +112,6 @@ EXTRA_DIST += \
 
 libexec_PROGRAMS = \
 	xdg-desktop-portal-gtk \
-	pdftoraw \
 	$(NULL)
 
 xdg_desktop_portal_gtk_SOURCES = \
@@ -292,6 +291,10 @@ pdftoraw_SOURCES = \
 	src/pdftoraw.c \
 	$(NULL)
 
+pdftorawdir = $(libexecdir)/xdg-desktop-portal-gtk-utils
+pdftoraw_PROGRAMS = \
+	pdftoraw \
+	$(NULL)
 pdftoraw_LDADD = $(BASE_LIBS) $(POPPLER_LIBS) -lm
 pdftoraw_CFLAGS = $(BASE_CFLAGS) $(POPPLER_CFLAGS)
 pdftoraw_CPPFLAGS = \

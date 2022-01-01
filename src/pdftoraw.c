@@ -48,17 +48,6 @@ static GOptionEntry entries[] = {
   { NULL }
 };
 
-static void
-print_usage (void)
-{
-    printf("Usage:\tpdftoraw  --filename=<filename>  --raw=<num-page>\n");
-    printf("\tpdftoraw  --filename=<filename>  --test\n");
-    printf("\tpdftoraw  --filename=<filename>  --pages\n");
-    printf("\tpdftoraw  --filename=<filename>  --width=<num-page>\n");
-    printf("\tpdftoraw  --filename=<filename>  --height=<num-page>\n");
-    printf("\tpdftoraw  --help\n");
-}
-
 static int
 pdf_number_pages_get (PopplerDocument *doc)
 {
@@ -81,7 +70,10 @@ pdf_page_raw_get (PopplerDocument *doc,
 
     page = poppler_document_get_page(doc, page_nr);
     if (page == NULL)
+    {
+       g_error("failure poppler_document_get_page");
        return;
+    }
     poppler_page_get_size(page, &width, &height);
     width = DPI * width / PTS;
     height = DPI * height / PTS;
@@ -89,11 +81,15 @@ pdf_page_raw_get (PopplerDocument *doc,
     h = (int)ceil(height);
     s = cairo_image_surface_create(CAIRO_FORMAT_ARGB32, w, h);
     if (s == NULL)
+    {
+       g_error("failure cairo_image_surface_create");
        return;
+    }
     cr = cairo_create(s);
     if (cr == NULL)
     {
        cairo_surface_destroy (s);
+       g_error("failure cairo_create");
        return;
     }
     cairo_scale (cr, DPI / PTS, DPI / PTS);
@@ -168,14 +164,18 @@ main (int argc, char **argv)
 
     if (filename == NULL)
     {
+        g_printerr ("%s", g_option_context_get_help (context, TRUE, NULL));
+        g_option_context_free(context);
         exit(EXIT_FAILURE);
     }
     in = g_file_new_for_path(filename);
     doc = poppler_document_new_from_gfile(in, NULL, NULL, &err);
     if (err)
     {
-       g_error_free(err);
-       exit(EXIT_FAILURE);
+        g_error_free(err);
+        g_printerr ("%s", g_option_context_get_help (context, TRUE, NULL));
+        g_option_context_free(context);
+        exit(EXIT_FAILURE);
     }
 
     if (opt_test)
@@ -200,10 +200,12 @@ main (int argc, char **argv)
     }
     else
     {
-        print_usage();
+        g_printerr ("%s", g_option_context_get_help (context, TRUE, NULL));
+        g_option_context_free(context);
         exit(EXIT_FAILURE);
     }
     g_object_unref(doc);
+    g_option_context_free(context);
     return 0;
 }
 
