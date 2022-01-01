@@ -389,23 +389,23 @@ print_pdf(int                    fd,
           GDBusMethodInvocation *invocation)
 {
   char *filename = NULL;
-  g_autoptr(GUnixInputStream) istream = NULL;
-  g_autoptr(GUnixOutputStream) ostream = NULL;
+  g_autoptr(GInputStream) istream = NULL;
+  g_autoptr(GOutputStream) ostream = NULL;
   g_autoptr(GtkPrintSettings) settings = NULL;
   g_autoptr(GtkPrintOperation) print = NULL;
   GError *err = NULL;
   GVariantBuilder opt_builder;
   int fd2;
 
-  istream = (GUnixInputStream *)g_unix_input_stream_new (fd, FALSE);
+  istream = g_unix_input_stream_new (fd, FALSE);
 
   if ((fd2 = g_file_open_tmp (PACKAGE_NAME "XXXXXX", &filename, &err)) == -1)
     return FALSE;
 
-  ostream = (GUnixOutputStream *)g_unix_output_stream_new (fd2, TRUE);
+  ostream = g_unix_output_stream_new (fd2, TRUE);
 
-  if (g_output_stream_splice (G_OUTPUT_STREAM (ostream),
-                              G_INPUT_STREAM (istream),
+  if (g_output_stream_splice (ostream,
+                              istream,
                               G_OUTPUT_STREAM_SPLICE_NONE,
                               NULL,
                               &err) == -1)
