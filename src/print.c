@@ -296,7 +296,7 @@ pdf_get_actions_page (char        *filename,
     stream = g_subprocess_get_stdout_pipe (process);
     if (stream)
     {
-      g_input_stream_read (stream, buffer, sizeof(buffer), NULL, NULL);
+      g_input_stream_read (stream, buffer, sizeof (buffer), NULL, NULL);
       if (buffer[0])
         return atoi (buffer);
     }
@@ -423,9 +423,9 @@ print_pdf(int                    fd,
   gtk_print_operation_set_unit (print, GTK_UNIT_POINTS);
   gtk_print_operation_set_embed_page_setup (print, TRUE);
   settings = gtk_print_settings_new ();
-  g_signal_connect (print, "begin-print", G_CALLBACK(pdf_begin_print), filename);
-  g_signal_connect (print, "draw-page", G_CALLBACK(pdf_draw_page), filename);
-  g_signal_connect (print, "end-print", G_CALLBACK(pdf_end_print), filename);
+  g_signal_connect (print, "begin-print", G_CALLBACK (pdf_begin_print), filename);
+  g_signal_connect (print, "draw-page", G_CALLBACK (pdf_draw_page), filename);
+  g_signal_connect (print, "end-print", G_CALLBACK (pdf_end_print), filename);
   gtk_print_operation_set_print_settings (print, settings);
 
   gtk_print_operation_run (print, GTK_PRINT_OPERATION_ACTION_PRINT, NULL, &err);

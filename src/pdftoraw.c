@@ -31,6 +31,9 @@
 // Resolution for the printer, 150 my choice
 #define DPI 150.0
 
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (PopplerDocument, g_object_unref);
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (PopplerPage, g_object_unref);
+
 static gchar *filename = "";
 static gboolean opt_test = FALSE;
 static gboolean opt_pages = FALSE;
@@ -61,8 +64,8 @@ pdf_page_raw_get (PopplerDocument *doc,
     cairo_surface_t *s = NULL;
     cairo_t *cr = NULL;
     unsigned char *data = NULL;
-    PopplerPage *page = NULL;
-    g_autoptr(GdkPixbuf) pix = NULL;
+    g_autoptr (PopplerPage) page = NULL;
+    g_autoptr (GdkPixbuf) pix = NULL;
     double width = 0;
     double height = 0;
     int w = 0;
@@ -108,7 +111,7 @@ static int
 pdf_page_width_get (PopplerDocument *doc,
                    int page_nr)
 {
-    PopplerPage *page = NULL;
+    g_autoptr (PopplerPage) page = NULL;
     double width = 0;
     int w = 0;
 
@@ -126,7 +129,7 @@ static int
 pdf_page_height_get (PopplerDocument *doc,
                     int page_nr)
 {
-    PopplerPage *page = NULL;
+    g_autoptr (PopplerPage) page = NULL;
     double height = 0;
     int h = 0;
 
@@ -143,7 +146,7 @@ pdf_page_height_get (PopplerDocument *doc,
 int
 main (int argc, char **argv)
 {
-    PopplerDocument *doc = NULL;
+    g_autoptr (PopplerDocument) doc = NULL;
     GError *err = NULL;
     g_autoptr (GFile) in = NULL;
 
@@ -204,7 +207,6 @@ main (int argc, char **argv)
         g_option_context_free (context);
         exit (EXIT_FAILURE);
     }
-    g_object_unref (doc);
     g_option_context_free (context);
     return 0;
 }
