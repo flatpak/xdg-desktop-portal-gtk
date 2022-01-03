@@ -51,7 +51,7 @@ static GOptionEntry entries[] = {
 static int
 pdf_number_pages_get (PopplerDocument *doc)
 {
-    return poppler_document_get_n_pages(doc);
+    return poppler_document_get_n_pages (doc);
 }
 
 static void
@@ -68,40 +68,40 @@ pdf_page_raw_get (PopplerDocument *doc,
     int w = 0;
     int h = 0;
 
-    page = poppler_document_get_page(doc, page_nr);
+    page = poppler_document_get_page (doc, page_nr);
     if (page == NULL)
     {
        g_error("failure poppler_document_get_page");
        return;
     }
-    poppler_page_get_size(page, &width, &height);
+    poppler_page_get_size (page, &width, &height);
     width = DPI * width / PTS;
     height = DPI * height / PTS;
     w = (int)ceil(width);
     h = (int)ceil(height);
-    s = cairo_image_surface_create(CAIRO_FORMAT_ARGB32, w, h);
+    s = cairo_image_surface_create (CAIRO_FORMAT_ARGB32, w, h);
     if (s == NULL)
     {
-       g_error("failure cairo_image_surface_create");
+       g_error ("failure cairo_image_surface_create");
        return;
     }
-    cr = cairo_create(s);
+    cr = cairo_create (s);
     if (cr == NULL)
     {
        cairo_surface_destroy (s);
-       g_error("failure cairo_create");
+       g_error ("failure cairo_create");
        return;
     }
     cairo_scale (cr, DPI / PTS, DPI / PTS);
     cairo_save (cr);
-    poppler_page_render_for_printing(page, cr);
+    poppler_page_render_for_printing (page, cr);
     cairo_restore (cr);
-    g_object_unref(page);
-    pix = gdk_pixbuf_get_from_surface(s, 0, 0, w, h);
+    g_object_unref (page);
+    pix = gdk_pixbuf_get_from_surface (s, 0, 0, w, h);
     cairo_surface_destroy (s);
     data = gdk_pixbuf_get_pixels (pix);
-    fwrite(data, 1, (w * h * 4), stdout);
-    cairo_destroy(cr);
+    fwrite (data, 1, (w * h * 4), stdout);
+    cairo_destroy (cr);
 }
 
 static int
@@ -112,13 +112,13 @@ pdf_page_width_get (PopplerDocument *doc,
     double width = 0;
     int w = 0;
 
-    page = poppler_document_get_page(doc, page_nr);
+    page = poppler_document_get_page (doc, page_nr);
     if (page == NULL)
        return -1;
-    poppler_page_get_size(page, &width, NULL);
-    g_object_unref(page);
+    poppler_page_get_size (page, &width, NULL);
+    g_object_unref (page);
     width = DPI * width / PTS;
-    w = (int)ceil(width);
+    w = (int)ceil (width);
     return w;
 }
 
@@ -130,13 +130,13 @@ pdf_page_height_get (PopplerDocument *doc,
     double height = 0;
     int h = 0;
 
-    page = poppler_document_get_page(doc, page_nr);
+    page = poppler_document_get_page (doc, page_nr);
     if (page == NULL)
        return -1;
-    poppler_page_get_size(page, NULL, &height);
-    g_object_unref(page);
+    poppler_page_get_size (page, NULL, &height);
+    g_object_unref (page);
     height = DPI * height / PTS;
-    h = (int)ceil(height);
+    h = (int)ceil (height);
     return h;
 }
 
@@ -145,7 +145,7 @@ main (int argc, char **argv)
 {
     PopplerDocument *doc = NULL;
     GError *err = NULL;
-    g_autoptr(GFile) in = NULL;
+    g_autoptr (GFile) in = NULL;
 
     GOptionContext *context;
 
@@ -158,54 +158,54 @@ main (int argc, char **argv)
       g_printerr ("Try \"%s --help\" for more information.",
                   g_get_prgname ());
       g_printerr ("\n");
-      exit(EXIT_FAILURE);
+      exit (EXIT_FAILURE);
       return 1;
     }
 
     if (filename == NULL)
     {
         g_printerr ("%s", g_option_context_get_help (context, TRUE, NULL));
-        g_option_context_free(context);
-        exit(EXIT_FAILURE);
+        g_option_context_free (context);
+        exit (EXIT_FAILURE);
     }
-    in = g_file_new_for_path(filename);
-    doc = poppler_document_new_from_gfile(in, NULL, NULL, &err);
+    in = g_file_new_for_path (filename);
+    doc = poppler_document_new_from_gfile (in, NULL, NULL, &err);
     if (err)
     {
-        g_error_free(err);
+        g_error_free (err);
         g_printerr ("%s", g_option_context_get_help (context, TRUE, NULL));
-        g_option_context_free(context);
-        exit(EXIT_FAILURE);
+        g_option_context_free (context);
+        exit (EXIT_FAILURE);
     }
 
     if (opt_test)
     {
-        printf("1");
+        printf ("1");
     }
     else if (opt_raw > -1)
     {
-        pdf_page_raw_get(doc, opt_raw);
+        pdf_page_raw_get (doc, opt_raw);
     }
     else if (opt_pages)
     {
-        printf("%d", pdf_number_pages_get(doc));
+        printf ("%d", pdf_number_pages_get (doc));
     }
     else if (opt_width > -1)
     {
-        printf("%d", pdf_page_width_get(doc, opt_width));
+        printf ("%d", pdf_page_width_get (doc, opt_width));
     }
     else if (opt_height > -1)
     {
-        printf("%d", pdf_page_height_get(doc, opt_height));
+        printf ("%d", pdf_page_height_get (doc, opt_height));
     }
     else
     {
         g_printerr ("%s", g_option_context_get_help (context, TRUE, NULL));
-        g_option_context_free(context);
-        exit(EXIT_FAILURE);
+        g_option_context_free (context);
+        exit (EXIT_FAILURE);
     }
-    g_object_unref(doc);
-    g_option_context_free(context);
+    g_object_unref (doc);
+    g_option_context_free (context);
     return 0;
 }
 

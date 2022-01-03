@@ -264,41 +264,41 @@ pdf_get_actions_page (char        *filename,
                       PDF_ACTIONS  act,
                       int          page)
 {
-  g_autoptr(GSubprocess) process = NULL;
+  g_autoptr (GSubprocess) process = NULL;
   GInputStream *stream;
-  g_autoptr(GPtrArray) args = g_ptr_array_new_full(8, g_free);
+  g_autoptr(GPtrArray) args = g_ptr_array_new_full (8, g_free);
   char buffer[50] = { 0 };
 
-  g_ptr_array_add(args, g_strdup_printf("%s", LIBEXECDIR "/xdg-desktop-portal-gtk-utils/pdftoraw"));
-  g_ptr_array_add(args, g_strdup_printf("--file=%s", filename));
-  switch(act)
+  g_ptr_array_add (args, g_strdup_printf ("%s", LIBEXECDIR "/xdg-desktop-portal-gtk-utils/pdftoraw"));
+  g_ptr_array_add (args, g_strdup_printf ("--file=%s", filename));
+  switch (act)
   {
     case PDF_TEST :
-       g_ptr_array_add(args, g_strdup("--test"));
+       g_ptr_array_add (args, g_strdup ("--test"));
        break;
     case PDF_NUM_PAGES :
-       g_ptr_array_add(args, g_strdup("--pages"));
+       g_ptr_array_add (args, g_strdup ("--pages"));
        break;
     case PDF_WIDTH :
-       g_ptr_array_add(args, g_strdup_printf ("--width=%d", page));
+       g_ptr_array_add (args, g_strdup_printf ("--width=%d", page));
        break;
     case PDF_HEIGHT :
-       g_ptr_array_add(args, g_strdup_printf ("--height=%d", page));
+       g_ptr_array_add (args, g_strdup_printf ("--height=%d", page));
        break;
    default:
        return 0;
   }
 
-  process = g_subprocess_newv((const gchar * const *)args->pdata, G_SUBPROCESS_FLAGS_STDOUT_PIPE, NULL);
+  process = g_subprocess_newv ((const gchar * const *)args->pdata, G_SUBPROCESS_FLAGS_STDOUT_PIPE, NULL);
 
   if (process)
   {
-    stream = g_subprocess_get_stdout_pipe(process);
+    stream = g_subprocess_get_stdout_pipe (process);
     if (stream)
     {
-      g_input_stream_read(stream, buffer, sizeof(buffer), NULL, NULL);
+      g_input_stream_read (stream, buffer, sizeof(buffer), NULL, NULL);
       if (buffer[0])
-        return atoi(buffer);
+        return atoi (buffer);
     }
   }
   return 0;
@@ -310,26 +310,26 @@ pdf_get_data_page (char *filename,
                    int   h,
                    int   page)
 {
-  g_autoptr(GSubprocess) process = NULL;
+  g_autoptr (GSubprocess) process = NULL;
   GInputStream *stream;
   unsigned char *data = NULL;
-  g_autoptr(GPtrArray) args = g_ptr_array_new_full(8, g_free);
+  g_autoptr (GPtrArray) args = g_ptr_array_new_full (8, g_free);
   int read = 0;
   gsize total_read = 0;
 
-  g_ptr_array_add(args, g_strdup_printf("%s", LIBEXECDIR "/xdg-desktop-portal-gtk-utils/pdftoraw"));
-  g_ptr_array_add(args, g_strdup_printf ("--file=%s", filename));
-  g_ptr_array_add(args, g_strdup_printf ("--raw=%d", page));
-  process = g_subprocess_newv((const gchar * const *)args->pdata, G_SUBPROCESS_FLAGS_STDOUT_PIPE, NULL);
+  g_ptr_array_add (args, g_strdup_printf ("%s", LIBEXECDIR "/xdg-desktop-portal-gtk-utils/pdftoraw"));
+  g_ptr_array_add (args, g_strdup_printf ("--file=%s", filename));
+  g_ptr_array_add (args, g_strdup_printf ("--raw=%d", page));
+  process = g_subprocess_newv ((const gchar * const *)args->pdata, G_SUBPROCESS_FLAGS_STDOUT_PIPE, NULL);
 
   if (process)
   {
-    stream = g_subprocess_get_stdout_pipe(process);
+    stream = g_subprocess_get_stdout_pipe (process);
     if (stream)
     {
       size_t max_size = w * h * 4;
-      data = (unsigned char *) g_malloc(max_size);
-      while ((read = g_input_stream_read(stream, data + total_read, 1024, NULL, NULL)) > 0 && max_size < total_read)
+      data = (unsigned char *) g_malloc (max_size);
+      while ((read = g_input_stream_read (stream, data + total_read, 1024, NULL, NULL)) > 0 && max_size < total_read)
       {
          total_read += read;
       }
@@ -339,11 +339,11 @@ pdf_get_data_page (char *filename,
 }
 
 static void
-pdf_begin_print(GtkPrintOperation *op,
-                GtkPrintContext   *ctx,
-                char              *filename)
+pdf_begin_print (GtkPrintOperation *op,
+                 GtkPrintContext   *ctx,
+                 char              *filename)
 {
-    gtk_print_operation_set_n_pages(op, pdf_get_actions_page(filename, PDF_NUM_PAGES, 0));
+    gtk_print_operation_set_n_pages (op, pdf_get_actions_page (filename, PDF_NUM_PAGES, 0));
 }
 
 static void
@@ -359,15 +359,15 @@ pdf_draw_page(GtkPrintOperation *op,
 
     width = pdf_get_actions_page (filename, PDF_WIDTH, page_nr);
     height = pdf_get_actions_page (filename, PDF_HEIGHT, page_nr);
-    cr = gtk_print_context_get_cairo_context(ctx);
+    cr = gtk_print_context_get_cairo_context (ctx);
     stride = cairo_format_stride_for_width (CAIRO_FORMAT_ARGB32, width);
     data = pdf_get_data_page (filename, width, height, page_nr);
     if (data)
     {
-      g_autoptr(GdkPixbuf) pix = gdk_pixbuf_new_from_data (data, GDK_COLORSPACE_RGB, TRUE, 8, width, height, stride, NULL, g_free);
-      cairo_scale(cr, (PTS / DPI), (PTS / DPI));
-      gdk_cairo_set_source_pixbuf(cr, pix, 0, 0);
-      cairo_paint(cr);
+      g_autoptr (GdkPixbuf) pix = gdk_pixbuf_new_from_data (data, GDK_COLORSPACE_RGB, TRUE, 8, width, height, stride, NULL, g_free);
+      cairo_scale (cr, (PTS / DPI), (PTS / DPI));
+      gdk_cairo_set_source_pixbuf (cr, pix, 0, 0);
+      cairo_paint (cr);
       cairo_fill (cr);
     }
 }
@@ -390,10 +390,10 @@ print_pdf(int                    fd,
           GDBusMethodInvocation *invocation)
 {
   char *filename = NULL;
-  g_autoptr(GInputStream) istream = NULL;
-  g_autoptr(GOutputStream) ostream = NULL;
-  g_autoptr(GtkPrintSettings) settings = NULL;
-  g_autoptr(GtkPrintOperation) print = NULL;
+  g_autoptr (GInputStream) istream = NULL;
+  g_autoptr (GOutputStream) ostream = NULL;
+  g_autoptr (GtkPrintSettings) settings = NULL;
+  g_autoptr (GtkPrintOperation) print = NULL;
   GError *err = NULL;
   GVariantBuilder opt_builder;
   int fd2;
@@ -414,21 +414,21 @@ print_pdf(int                    fd,
   if (pdf_get_actions_page (filename, PDF_TEST, -1) == 0)
   {
     g_free (filename);
-    unlink(filename);
+    unlink (filename);
     return FALSE;
   }
 
-  print = gtk_print_operation_new();
+  print = gtk_print_operation_new ();
   gtk_print_operation_set_use_full_page (print, TRUE);
   gtk_print_operation_set_unit (print, GTK_UNIT_POINTS);
   gtk_print_operation_set_embed_page_setup (print, TRUE);
-  settings = gtk_print_settings_new();
-  g_signal_connect(print, "begin-print", G_CALLBACK(pdf_begin_print), filename);
-  g_signal_connect(print, "draw-page", G_CALLBACK(pdf_draw_page), filename);
-  g_signal_connect(print, "end-print", G_CALLBACK(pdf_end_print), filename);
-  gtk_print_operation_set_print_settings(print, settings);
+  settings = gtk_print_settings_new ();
+  g_signal_connect (print, "begin-print", G_CALLBACK(pdf_begin_print), filename);
+  g_signal_connect (print, "draw-page", G_CALLBACK(pdf_draw_page), filename);
+  g_signal_connect (print, "end-print", G_CALLBACK(pdf_end_print), filename);
+  gtk_print_operation_set_print_settings (print, settings);
 
-  gtk_print_operation_run(print, GTK_PRINT_OPERATION_ACTION_PRINT, NULL, &err);
+  gtk_print_operation_run (print, GTK_PRINT_OPERATION_ACTION_PRINT, NULL, &err);
   g_variant_builder_init (&opt_builder, G_VARIANT_TYPE_VARDICT);
   xdp_impl_print_complete_print (object,
                                  invocation,
@@ -669,7 +669,7 @@ handle_print (XdpImplPrint *object,
                                      g_variant_builder_end (&opt_builder));
       return TRUE;
     }
-  else if (print_pdf(fd, object, invocation) == FALSE)
+  else if (print_pdf (fd, object, invocation) == FALSE)
     {
       sender = g_dbus_method_invocation_get_sender (invocation);
       request = request_new (sender, arg_app_id, arg_handle);
