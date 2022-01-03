@@ -144,7 +144,7 @@ int
 main (int argc, char **argv)
 {
     g_autoptr (PopplerDocument) doc = NULL;
-    GError *err = NULL;
+    g_autoptr(GError) err = NULL;
     g_autoptr (GFile) in = NULL;
 
     GOptionContext *context;
