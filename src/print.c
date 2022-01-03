@@ -267,6 +267,7 @@ pdf_get_actions_page (char        *filename,
   g_autoptr (GSubprocess) process = NULL;
   GInputStream *stream;
   g_autoptr(GPtrArray) args = g_ptr_array_new_full (8, g_free);
+  g_autoptr (GError) err = NULL;
   char buffer[50] = { 0 };
 
   g_ptr_array_add (args, g_strdup_printf ("%s", LIBEXECDIR "/xdg-desktop-portal-gtk-utils/pdftoraw"));
@@ -288,6 +289,7 @@ pdf_get_actions_page (char        *filename,
    default:
        return 0;
   }
+  g_ptr_array_add (args, NULL);
 
   process = g_subprocess_newv ((const gchar * const *)args->pdata, G_SUBPROCESS_FLAGS_STDOUT_PIPE, NULL);
 
@@ -316,10 +318,12 @@ pdf_get_data_page (char *filename,
   g_autoptr (GPtrArray) args = g_ptr_array_new_full (8, g_free);
   int read = 0;
   gsize total_read = 0;
+  g_autoptr (GError) err = NULL;
 
   g_ptr_array_add (args, g_strdup_printf ("%s", LIBEXECDIR "/xdg-desktop-portal-gtk-utils/pdftoraw"));
   g_ptr_array_add (args, g_strdup_printf ("--file=%s", filename));
   g_ptr_array_add (args, g_strdup_printf ("--raw=%d", page));
+  g_ptr_array_add (args, NULL);
   process = g_subprocess_newv ((const gchar * const *)args->pdata, G_SUBPROCESS_FLAGS_STDOUT_PIPE, NULL);
 
   if (process)
@@ -329,7 +333,7 @@ pdf_get_data_page (char *filename,
     {
       size_t max_size = w * h * 4;
       data = (unsigned char *) g_malloc (max_size);
-      while ((read = g_input_stream_read (stream, data + total_read, 1024, NULL, NULL)) > 0 && max_size < total_read)
+      while ((read = g_input_stream_read (stream, data + total_read, 1024, NULL, NULL)) > 0 && max_size > total_read)
       {
          total_read += read;
       }

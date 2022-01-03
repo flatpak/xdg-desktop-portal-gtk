@@ -99,7 +99,6 @@ pdf_page_raw_get (PopplerDocument *doc,
     cairo_save (cr);
     poppler_page_render_for_printing (page, cr);
     cairo_restore (cr);
-    g_object_unref (page);
     pix = gdk_pixbuf_get_from_surface (s, 0, 0, w, h);
     cairo_surface_destroy (s);
     data = gdk_pixbuf_get_pixels (pix);
@@ -119,7 +118,6 @@ pdf_page_width_get (PopplerDocument *doc,
     if (page == NULL)
        return -1;
     poppler_page_get_size (page, &width, NULL);
-    g_object_unref (page);
     width = DPI * width / PTS;
     w = (int)ceil (width);
     return w;
@@ -137,7 +135,6 @@ pdf_page_height_get (PopplerDocument *doc,
     if (page == NULL)
        return -1;
     poppler_page_get_size (page, NULL, &height);
-    g_object_unref (page);
     height = DPI * height / PTS;
     h = (int)ceil (height);
     return h;
