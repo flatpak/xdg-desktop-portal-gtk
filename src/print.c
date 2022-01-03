@@ -333,7 +333,7 @@ pdf_get_data_page (char *filename,
     {
       size_t max_size = w * h * 4;
       int buff_size = 1024;
-      int to_be_read = 0
+      int to_be_read = 0;
       data = (unsigned char *) g_malloc (max_size);
       while (max_size > total_read && (read = g_input_stream_read (stream, data + total_read, buff_size, NULL, NULL)))
       {
