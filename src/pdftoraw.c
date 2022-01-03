@@ -146,7 +146,6 @@ main (int argc, char **argv)
     g_autoptr (PopplerDocument) doc = NULL;
     g_autoptr(GError) err = NULL;
     g_autoptr (GFile) in = NULL;
-
     GOptionContext *context;
 
     context = g_option_context_new ("- PDF utility for portal backends");
