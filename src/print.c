@@ -46,7 +46,7 @@
 // 1 inch = 72 points
 #define PTS 72.0
 
-// Resolution for the printer, 150 my choice
+// 150 is a reasonable resolution for consumer printing
 #define DPI 150.0
 
 typedef enum {
@@ -414,11 +414,16 @@ print_pdf(int                    fd,
                               G_OUTPUT_STREAM_SPLICE_NONE,
                               NULL,
                               &err) == -1)
-       return FALSE;
+  {
+    unlink (filename);
+    g_free (filename);
+    return FALSE;
+  }
+
   if (pdf_get_actions_page (filename, PDF_TEST, -1) == 0)
   {
-    g_free (filename);
     unlink (filename);
+    g_free (filename);
     return FALSE;
   }
 

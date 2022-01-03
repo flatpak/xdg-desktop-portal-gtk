@@ -146,7 +146,8 @@ main (int argc, char **argv)
     g_autoptr (PopplerDocument) doc = NULL;
     g_autoptr(GError) err = NULL;
     g_autoptr (GFile) in = NULL;
-    GOptionContext *context;
+    g_autoptr (GOptionContext) context = NULL;
+    g_autofree char *help = NULL;
 
     context = g_option_context_new ("- PDF utility for portal backends");
     g_option_context_add_main_entries (context, entries, NULL);
@@ -163,17 +164,16 @@ main (int argc, char **argv)
 
     if (filename == NULL)
     {
-        g_printerr ("%s", g_option_context_get_help (context, TRUE, NULL));
-        g_option_context_free (context);
+	help = g_option_context_get_help (context, TRUE, NULL);
+        g_printerr ("%s", help);
         exit (EXIT_FAILURE);
     }
     in = g_file_new_for_path (filename);
     doc = poppler_document_new_from_gfile (in, NULL, NULL, &err);
     if (err)
     {
-        g_error_free (err);
-        g_printerr ("%s", g_option_context_get_help (context, TRUE, NULL));
-        g_option_context_free (context);
+	help = g_option_context_get_help (context, TRUE, NULL);
+        g_printerr ("%s", help);
         exit (EXIT_FAILURE);
     }
 
@@ -199,11 +199,10 @@ main (int argc, char **argv)
     }
     else
     {
-        g_printerr ("%s", g_option_context_get_help (context, TRUE, NULL));
-        g_option_context_free (context);
+	help = g_option_context_get_help (context, TRUE, NULL);
+        g_printerr ("%s", help);
         exit (EXIT_FAILURE);
     }
-    g_option_context_free (context);
     return 0;
 }
 
