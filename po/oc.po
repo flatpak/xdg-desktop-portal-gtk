@@ -1,0 +1,305 @@
+# Occitan translation for xdg-desktop-portal-gtk.
+# Copyright (C) 2022 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
+# This file is distributed under the same license as the xdg-desktop-portal-gtk package.
+# Quentin PAGÈS <pages_quentin@hotmail.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xdg-desktop-portal-gtk master\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
+"issues\n"
+"POT-Creation-Date: 2022-01-13 15:48+0000\n"
+"PO-Revision-Date: 2022-01-13 19:22+0100\n"
+"Language-Team: Occitan <totenoc@gmail.com>\n"
+"Language: oc\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: Quentin PAGÈS\n"
+"X-Generator: Poedit 3.0\n"
+
+#: data/xdg-desktop-portal-gtk.desktop.in.in:4
+msgid "Portal"
+msgstr "Portal"
+
+#. TRANSLATORS: Don't translate this text (this is icon name)
+#: data/xdg-desktop-portal-gtk.desktop.in.in:6
+msgid "applications-system-symbolic"
+msgstr "applications-system-symbolic"
+
+#: src/access.c:271
+msgid "Deny Access"
+msgstr "Refusar l'accès"
+
+#: src/access.c:274
+msgid "Grant Access"
+msgstr "Acordar l'accès"
+
+#: src/accountdialog.c:176
+msgid "Select an Image"
+msgstr "Seleccionar un imatge"
+
+#: src/accountdialog.c:179 src/wallpaperdialog.ui:18
+msgid "Cancel"
+msgstr "Anullar"
+
+#: src/accountdialog.c:180
+msgid "Select"
+msgstr "Causir"
+
+#: src/accountdialog.c:181
+msgid "Clear"
+msgstr "Escafar"
+
+#: src/accountdialog.c:195
+msgid "Images"
+msgstr "Imatges"
+
+#: src/accountdialog.c:272
+#, c-format
+msgid "Share your personal information with %s?"
+msgstr "Partejar vòstras informacions personalas amb %s ?"
+
+#: src/accountdialog.c:275
+msgid "Share your personal information with the requesting application?"
+msgstr ""
+"Partejar vòstras informacions personalas amb l’aplicacion requerenta ?"
+
+#: src/accountdialog.ui:10
+msgid "Share Details"
+msgstr "Partejar los detalhs"
+
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:467
+#: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
+#: src/screenshotdialog.ui:14
+msgid "_Cancel"
+msgstr "A_nullar"
+
+#: src/accountdialog.ui:22 src/remotedesktopdialog.ui:28
+#: src/screencastdialog.ui:28 src/screenshotdialog.ui:38
+msgid "_Share"
+msgstr "_Partejar"
+
+#: src/accountdialog.ui:148
+msgid "Make changes before sharing the information"
+msgstr "Realizar modificacions abans lo partiment d’entresenhas"
+
+#: src/appchooserdialog.c:229
+msgid "Failed to start Software"
+msgstr "Fracàs del lançament de Logicial"
+
+#: src/appchooserdialog.c:385
+#, c-format
+msgid "Choose an application to open the file “%s”."
+msgstr "Causissètz una aplicacion per dobrir lo fichièr « %s »."
+
+#: src/appchooserdialog.c:390
+msgid "Choose an application."
+msgstr "Causir una aplicacion."
+
+#: src/appchooserdialog.c:407
+#, c-format
+msgid ""
+"No apps installed that can open “%s”. You can find more applications in "
+"Software"
+msgstr ""
+"Cap d’aplicacion pas installada per dobrir « %s ». Podètz trobar mai "
+"d’aplicacions dins la logitèca."
+
+#: src/appchooserdialog.c:412
+msgid "No suitable app installed. You can find more applications in Software."
+msgstr ""
+"Cap d’aplicacion adeqüada pas installada. Podètz trapar mai d’aplicacions "
+"dins la logitèca."
+
+#: src/appchooserdialog.ui:10
+msgid "Open With…"
+msgstr "Dobrir amb…"
+
+#: src/appchooserdialog.ui:23 src/filechooser.c:462
+msgid "_Open"
+msgstr "_Dobrir"
+
+#: src/appchooserdialog.ui:115
+msgid "No Apps available"
+msgstr "Cap d’aplicacion pas disponibla"
+
+#: src/appchooserdialog.ui:159
+msgid "_Find More in Software"
+msgstr "_Ne trobar mai dins Logicial"
+
+#: src/background.c:215 src/background.c:308
+#, c-format
+msgid "“%s” is running in the background"
+msgstr "« %s » s’executa en rèireplan"
+
+#: src/background.c:217
+msgid ""
+"This might be for a legitimate reason, but the application has not provided "
+"one.\n"
+"\n"
+"Note that forcing an application to quit might cause data loss."
+msgstr ""
+"I a benlèu una rason legitima mas l'aplicacion n’a pas provesida.\n"
+"\n"
+"Notatz que forçar una aplicacion a quitar pòt menar a una pèrda de donada."
+
+#: src/background.c:220
+msgid "Force quit"
+msgstr "Forçar a quitar"
+
+#: src/background.c:221
+msgid "Allow"
+msgstr "Autorizar"
+
+#: src/background.c:306
+msgid "Background activity"
+msgstr "Activitat en rèireplan"
+
+#: src/background.c:314
+msgid "Find out more"
+msgstr "Ne saber mai"
+
+#: src/filechooser.c:462
+msgid "_Select"
+msgstr "_Causir"
+
+#: src/filechooser.c:464
+msgid "_Save"
+msgstr "_Enregistrar"
+
+#: src/filechooser.c:641
+msgid "Open files read-only"
+msgstr "Dobrir los fichièrs en lectura sola"
+
+#: src/remotedesktopdialog.c:188
+msgid "Pointer"
+msgstr "Puntador"
+
+#: src/remotedesktopdialog.c:191
+msgid "Keyboard"
+msgstr "Clavièr"
+
+#: src/remotedesktopdialog.c:194
+msgid "Touch screen"
+msgstr "Ecran tactil"
+
+#: src/remotedesktopdialog.c:307
+#, c-format
+msgid "Select devices to share with %s"
+msgstr "Seleccionar los aparelhs de partejar amb %s"
+
+#: src/remotedesktopdialog.c:312
+msgid "Select devices to share with the requesting application"
+msgstr "Seleccionar los aparelhs de partejar amb l’aplicacion requerenta"
+
+#: src/remotedesktopdialog.ui:12
+msgid "Remote desktop"
+msgstr "Burèu distant"
+
+#: src/screencastdialog.ui:12
+msgid "Screen Share"
+msgstr "Partiment d’ecran"
+
+#: src/screencastwidget.c:484
+#, c-format
+msgid "Select monitor to share with %s"
+msgstr "Seleccionatz lo monitor de partejar amb %s"
+
+#: src/screencastwidget.c:486
+#, c-format
+msgid "Select window to share with %s"
+msgstr "Seleccionatz la fenèstra de partejar amb %s"
+
+#: src/screencastwidget.c:491
+msgid "Select monitor to share with the requesting application"
+msgstr "Seleccionar lo monitor de partejar amb l’aplicacion requerenta"
+
+#: src/screencastwidget.c:492
+msgid "Select window to share with the requesting application"
+msgstr "Seleccionar la fenèstra de partejar amb l’aplicacion requerenta"
+
+#: src/screencastwidget.ui:100
+msgid "Single Window"
+msgstr "Fenèstra sola"
+
+#: src/screencastwidget.ui:176
+msgid "Entire Screen"
+msgstr "Ecran entièr"
+
+#: src/screenshotdialog.c:442
+#, c-format
+msgid "Share this screenshot with %s?"
+msgstr "Partejar aquesta captura d’ecran amb %s ?"
+
+#: src/screenshotdialog.c:446
+msgid "Share this screenshot with the requesting application?"
+msgstr "Partejar aquesta captura d’ecran amb l’aplicacion demandada ?"
+
+#: src/screenshotdialog.ui:10
+msgid "Screenshot"
+msgstr "Captura d'ecran"
+
+#: src/screenshotdialog.ui:30
+msgid "_Options…"
+msgstr "_Opcions…"
+
+#: src/screenshotdialog.ui:55
+msgid "Take _Screenshot"
+msgstr "Prendre una _captura d'ecran"
+
+#: src/screenshotdialog.ui:111
+msgid "Take Screenshot"
+msgstr "Prene una captura d’ecran"
+
+#: src/screenshotdialog.ui:122
+msgid "Grab the whole sc_reen"
+msgstr "Capturar l'ensemble de l'ec_ran"
+
+#: src/screenshotdialog.ui:133
+msgid "Grab the current _window"
+msgstr "Capturar la _fenèstra actuala"
+
+#: src/screenshotdialog.ui:144
+msgid "Select _area to grab"
+msgstr "Seleccionar la _zòna de capturar"
+
+#: src/screenshotdialog.ui:158
+msgid "Grab after a _delay of"
+msgstr "Capturar _aprèp un relambi de"
+
+#: src/screenshotdialog.ui:171
+msgid "seconds"
+msgstr "milisegondas"
+
+#: src/screenshotdialog.ui:181
+msgid "Effects"
+msgstr "Efèits"
+
+#: src/screenshotdialog.ui:192
+msgid "Include _pointer"
+msgstr "Inclure lo _puntador"
+
+#: src/screenshotdialog.ui:201
+msgid "Include the window _border"
+msgstr "_Inclure la bordadura de la fenèstra"
+
+#: src/settings.c:217
+msgid "Requested setting not found"
+msgstr "Paramètre demandat pas trobat"
+
+#: src/wallpaperdialog.ui:13
+msgid "Set Background"
+msgstr "Definir lo rèireplan"
+
+#: src/wallpaperdialog.ui:26
+msgid "Set"
+msgstr "Definir"
+
+#: src/wallpaperdialog.ui:57
+msgid "Failed to load image file"
+msgstr "Fracàs del cargament del fichièr imatge"
+
+#: src/wallpaperpreview.ui:57
+msgid "Activities"
+msgstr "Activitats"
