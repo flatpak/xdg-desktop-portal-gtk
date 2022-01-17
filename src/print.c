@@ -43,6 +43,7 @@
 
 #include "gtkbackports.h"
 
+#ifdef BUILD_POPPLER 
 // 1 inch = 72 points
 #define PTS 72.0
 
@@ -55,6 +56,7 @@ typedef enum {
    PDF_WIDTH,
    PDF_HEIGHT
 } PDF_ACTIONS;
+#endif 
 
 typedef struct {
   char *app_id;
@@ -259,6 +261,7 @@ out:
   return retval;
 }
 
+#ifdef BUILD_POPPLER 
 static int
 pdf_get_actions_page (char        *filename,
                       PDF_ACTIONS  act,
@@ -452,6 +455,7 @@ print_pdf(int                    fd,
                                  g_variant_builder_end (&opt_builder));
   return TRUE;
 }
+#endif
 
 static gboolean
 print_file (int fd,
@@ -684,7 +688,10 @@ handle_print (XdpImplPrint *object,
                                      g_variant_builder_end (&opt_builder));
       return TRUE;
     }
-  else if (print_pdf (fd, object, invocation) == FALSE)
+  else
+#ifdef BUILD_POPPLER 
+  if (print_pdf (fd, object, invocation) == FALSE)
+#endif
     {
       sender = g_dbus_method_invocation_get_sender (invocation);
       request = request_new (sender, arg_app_id, arg_handle);

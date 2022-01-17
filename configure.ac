@@ -109,13 +109,19 @@ if test x$enable_lockdown = xyes; then
 fi
 AM_CONDITIONAL([BUILD_LOCKDOWN],[test "$enable_lockdown" = "yes"])
 
+AC_ARG_ENABLE([poppler],
+              [AS_HELP_STRING([--enable-poppler],[Build pdftoraw portal. Needs libpoppler-glib])])
+AS_IF([test "x$enable_poppler" = "xyes"], [
+    PKG_CHECK_MODULES(POPPLER, [ gtk+-3.0 >= 3.14 gio-unix-2.0 poppler >= 0.16.7 poppler-glib >= 0.16.7 ])
+    AC_SUBST(POPPLER_CFLAGS)
+    AC_SUBST(POPPLER_LIBS)
+    AC_DEFINE([BUILD_POPPLER], [1], [Define to enable pdftoraw portal])
+])
+AM_CONDITIONAL([BUILD_POPPLER],[test "$enable_poppler" = "yes"])
+
 PKG_CHECK_MODULES(GTK, [xdg-desktop-portal >= 1.5 glib-2.0 >= 2.44 gio-unix-2.0 gtk+-3.0 >= 3.14 gtk+-unix-print-3.0])
 AC_SUBST(GTK_CFLAGS)
 AC_SUBST(GTK_LIBS)
-
-PKG_CHECK_MODULES(POPPLER, [ gtk+-3.0 >= 3.14 gio-unix-2.0 poppler >= 0.16.7 poppler-glib >= 0.16.7 ])
-AC_SUBST(POPPLER_CFLAGS)
-AC_SUBST(POPPLER_LIBS)
 
 PKG_CHECK_MODULES(GTK_X11, gtk+-x11-3.0,
 		  have_gtk_x11=yes, have_gtk_x11=no)

@@ -287,6 +287,7 @@ nodist_testappchooser_SOURCES = \
 	src/resources.c				\
 	$(NULL)
 
+if BUILD_POPPLER
 pdftoraw_SOURCES = \
 	src/pdftoraw.c \
 	$(NULL)
@@ -301,3 +302,4 @@ pdftoraw_CPPFLAGS = \
 	-I$(top_srcdir)/src			\
 	-I$(top_builddir)/src			\
 	$(NULL)
+endif
