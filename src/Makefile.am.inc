@@ -260,6 +260,7 @@ xdg_desktop_portal_gtk_CPPFLAGS = \
 	-DLOCALEDIR=\"$(localedir)\"                    \
 	-I$(top_srcdir)/src				\
 	-I$(top_builddir)/src				\
+	-DLIBEXECDIR=\"$(libexecdir)\"                  \
 	$(NULL)
 
 noinst_PROGRAMS = \
@@ -285,3 +286,20 @@ testappchooser_SOURCES = \
 nodist_testappchooser_SOURCES = \
 	src/resources.c				\
 	$(NULL)
+
+if BUILD_POPPLER
+pdftoraw_SOURCES = \
+	src/pdftoraw.c \
+	$(NULL)
+
+pdftorawdir = $(libexecdir)/xdg-desktop-portal-gtk-utils
+pdftoraw_PROGRAMS = \
+	pdftoraw \
+	$(NULL)
+pdftoraw_LDADD = $(BASE_LIBS) $(POPPLER_LIBS) -lm
+pdftoraw_CFLAGS = $(BASE_CFLAGS) $(POPPLER_CFLAGS)
+pdftoraw_CPPFLAGS = \
+	-I$(top_srcdir)/src			\
+	-I$(top_builddir)/src			\
+	$(NULL)
+endif

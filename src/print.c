@@ -23,6 +23,7 @@
 #include "config.h"
 
 #include <string.h>
+#include <stdlib.h>
 
 #include <gtk/gtk.h>
 #include <gtk/gtkunixprint.h>
@@ -41,6 +42,21 @@
 #include "externalwindow.h"
 
 #include "gtkbackports.h"
+
+#ifdef BUILD_POPPLER 
+// 1 inch = 72 points
+#define PTS 72.0
+
+// 150 is a reasonable resolution for consumer printing
+#define DPI 150.0
+
+typedef enum {
+   PDF_TEST = 0,
+   PDF_NUM_PAGES,
+   PDF_WIDTH,
+   PDF_HEIGHT
+} PDF_ACTIONS;
+#endif 
 
 typedef struct {
   char *app_id;
@@ -244,6 +260,202 @@ out:
 
   return retval;
 }
+
+#ifdef BUILD_POPPLER 
+static int
+pdf_get_actions_page (char        *filename,
+                      PDF_ACTIONS  act,
+                      int          page)
+{
+  g_autoptr (GSubprocess) process = NULL;
+  GInputStream *stream;
+  g_autoptr(GPtrArray) args = g_ptr_array_new_full (8, g_free);
+  g_autoptr (GError) err = NULL;
+  char buffer[50] = { 0 };
+
+  g_ptr_array_add (args, g_strdup_printf ("%s", LIBEXECDIR "/xdg-desktop-portal-gtk-utils/pdftoraw"));
+  g_ptr_array_add (args, g_strdup_printf ("--file=%s", filename));
+  switch (act)
+  {
+    case PDF_TEST :
+       g_ptr_array_add (args, g_strdup ("--test"));
+       break;
+    case PDF_NUM_PAGES :
+       g_ptr_array_add (args, g_strdup ("--pages"));
+       break;
+    case PDF_WIDTH :
+       g_ptr_array_add (args, g_strdup_printf ("--width=%d", page));
+       break;
+    case PDF_HEIGHT :
+       g_ptr_array_add (args, g_strdup_printf ("--height=%d", page));
+       break;
+   default:
+       return 0;
+  }
+  g_ptr_array_add (args, NULL);
+
+  process = g_subprocess_newv ((const gchar * const *)args->pdata, G_SUBPROCESS_FLAGS_STDOUT_PIPE, NULL);
+
+  if (process)
+  {
+    stream = g_subprocess_get_stdout_pipe (process);
+    if (stream)
+    {
+      g_input_stream_read (stream, buffer, sizeof (buffer), NULL, NULL);
+      if (buffer[0])
+        return atoi (buffer);
+    }
+  }
+  return 0;
+}
+
+static unsigned char *
+pdf_get_data_page (char *filename,
+                   int   w,
+                   int   h,
+                   int   page)
+{
+  g_autoptr (GSubprocess) process = NULL;
+  GInputStream *stream;
+  unsigned char *data = NULL;
+  g_autoptr (GPtrArray) args = g_ptr_array_new_full (8, g_free);
+  int read = 0;
+  gsize total_read = 0;
+  g_autoptr (GError) err = NULL;
+
+  g_ptr_array_add (args, g_strdup_printf ("%s", LIBEXECDIR "/xdg-desktop-portal-gtk-utils/pdftoraw"));
+  g_ptr_array_add (args, g_strdup_printf ("--file=%s", filename));
+  g_ptr_array_add (args, g_strdup_printf ("--raw=%d", page));
+  g_ptr_array_add (args, NULL);
+  process = g_subprocess_newv ((const gchar * const *)args->pdata, G_SUBPROCESS_FLAGS_STDOUT_PIPE, NULL);
+
+  if (process)
+  {
+    stream = g_subprocess_get_stdout_pipe (process);
+    if (stream)
+    {
+      size_t max_size = w * h * 4;
+      int buff_size = 1024;
+      int to_be_read = 0;
+      data = (unsigned char *) g_malloc (max_size);
+      while (max_size > total_read && (read = g_input_stream_read (stream, data + total_read, buff_size, NULL, NULL)))
+      {
+         total_read += read;
+         to_be_read = max_size - total_read;
+
+	 if (to_be_read < buff_size)
+	    buff_size = to_be_read;
+      }
+    }
+  }
+  return data;
+}
+
+static void
+pdf_begin_print (GtkPrintOperation *op,
+                 GtkPrintContext   *ctx,
+                 char              *filename)
+{
+    gtk_print_operation_set_n_pages (op, pdf_get_actions_page (filename, PDF_NUM_PAGES, 0));
+}
+
+static void
+pdf_draw_page(GtkPrintOperation *op,
+              GtkPrintContext   *ctx,
+              gint               page_nr,
+              char              *filename)
+{
+    cairo_t *cr = NULL;
+    int width = 0, height = 0;
+    unsigned char *data = NULL;
+    int stride = 0;
+
+    width = pdf_get_actions_page (filename, PDF_WIDTH, page_nr);
+    height = pdf_get_actions_page (filename, PDF_HEIGHT, page_nr);
+    cr = gtk_print_context_get_cairo_context (ctx);
+    stride = cairo_format_stride_for_width (CAIRO_FORMAT_ARGB32, width);
+    data = pdf_get_data_page (filename, width, height, page_nr);
+    if (data)
+    {
+      g_autoptr (GdkPixbuf) pix = gdk_pixbuf_new_from_data (data, GDK_COLORSPACE_RGB, TRUE, 8, width, height, stride, NULL, g_free);
+      cairo_scale (cr, (PTS / DPI), (PTS / DPI));
+      gdk_cairo_set_source_pixbuf (cr, pix, 0, 0);
+      cairo_paint (cr);
+      cairo_fill (cr);
+    }
+}
+
+static void
+pdf_end_print (GtkPrintOperation *operation,
+               GtkPrintContext   *context,
+               char              *filename)
+{
+  if (filename)
+  {
+    unlink (filename);
+    g_free (filename);
+  }
+}
+
+static gboolean
+print_pdf(int                    fd,
+          XdpImplPrint         *object,
+          GDBusMethodInvocation *invocation)
+{
+  char *filename = NULL;
+  g_autoptr (GInputStream) istream = NULL;
+  g_autoptr (GOutputStream) ostream = NULL;
+  g_autoptr (GtkPrintSettings) settings = NULL;
+  g_autoptr (GtkPrintOperation) print = NULL;
+  GError *err = NULL;
+  GVariantBuilder opt_builder;
+  int fd2;
+
+  istream = g_unix_input_stream_new (fd, FALSE);
+
+  if ((fd2 = g_file_open_tmp (PACKAGE_NAME "XXXXXX", &filename, &err)) == -1)
+    return FALSE;
+
+  ostream = g_unix_output_stream_new (fd2, TRUE);
+
+  if (g_output_stream_splice (ostream,
+                              istream,
+                              G_OUTPUT_STREAM_SPLICE_NONE,
+                              NULL,
+                              &err) == -1)
+  {
+    unlink (filename);
+    g_free (filename);
+    return FALSE;
+  }
+
+  if (pdf_get_actions_page (filename, PDF_TEST, -1) == 0)
+  {
+    unlink (filename);
+    g_free (filename);
+    return FALSE;
+  }
+
+  print = gtk_print_operation_new ();
+  gtk_print_operation_set_use_full_page (print, TRUE);
+  gtk_print_operation_set_unit (print, GTK_UNIT_POINTS);
+  gtk_print_operation_set_embed_page_setup (print, TRUE);
+  settings = gtk_print_settings_new ();
+  g_signal_connect (print, "begin-print", G_CALLBACK (pdf_begin_print), filename);
+  g_signal_connect (print, "draw-page", G_CALLBACK (pdf_draw_page), filename);
+  g_signal_connect (print, "end-print", G_CALLBACK (pdf_end_print), filename);
+  gtk_print_operation_set_print_settings (print, settings);
+
+  gtk_print_operation_run (print, GTK_PRINT_OPERATION_ACTION_PRINT, NULL, &err);
+  g_variant_builder_init (&opt_builder, G_VARIANT_TYPE_VARDICT);
+  xdp_impl_print_complete_print (object,
+                                 invocation,
+                                 NULL,
+                                 0,
+                                 g_variant_builder_end (&opt_builder));
+  return TRUE;
+}
+#endif
 
 static gboolean
 print_file (int fd,
@@ -476,66 +688,70 @@ handle_print (XdpImplPrint *object,
                                      g_variant_builder_end (&opt_builder));
       return TRUE;
     }
-
-  sender = g_dbus_method_invocation_get_sender (invocation);
-  request = request_new (sender, arg_app_id, arg_handle);
-
-  if (arg_parent_window)
-    {
-      external_parent = create_external_window_from_handle (arg_parent_window);
-      if (!external_parent)
-        g_warning ("Failed to associate portal window with parent window %s",
-                   arg_parent_window);
-    }
-
-  if (external_parent)
-    display = external_window_get_display (external_parent);
   else
-    display = gdk_display_get_default ();
-  screen = gdk_display_get_default_screen (display);
+#ifdef BUILD_POPPLER 
+  if (print_pdf (fd, object, invocation) == FALSE)
+#endif
+    {
+      sender = g_dbus_method_invocation_get_sender (invocation);
+      request = request_new (sender, arg_app_id, arg_handle);
 
-  fake_parent = g_object_new (GTK_TYPE_WINDOW,
-                              "type", GTK_WINDOW_TOPLEVEL,
-                              "screen", screen,
-                              NULL);
-  g_object_ref_sink (fake_parent);
+      if (arg_parent_window)
+        {
+           external_parent = create_external_window_from_handle (arg_parent_window);
+           if (!external_parent)
+              g_warning ("Failed to associate portal window with parent window %s",
+                          arg_parent_window);
+        }
 
-  if (!g_variant_lookup (arg_options, "modal", "b", &modal))
-    modal = TRUE;
+      if (external_parent)
+           display = external_window_get_display (external_parent);
+      else
+           display = gdk_display_get_default ();
+      screen = gdk_display_get_default_screen (display);
 
-  dialog = gtk_print_unix_dialog_new (arg_title, NULL);
-  gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (fake_parent));
-  gtk_window_set_modal (GTK_WINDOW (dialog), modal);
-  gtk_print_unix_dialog_set_manual_capabilities (GTK_PRINT_UNIX_DIALOG (dialog),
-                                                 can_preview () ? GTK_PRINT_CAPABILITY_PREVIEW : 0 |
-						 GTK_PRINT_CAPABILITY_PAGE_SET |
-						 GTK_PRINT_CAPABILITY_COPIES |
-						 GTK_PRINT_CAPABILITY_COLLATE |
-						 GTK_PRINT_CAPABILITY_REVERSE |
-						 GTK_PRINT_CAPABILITY_SCALE |
-						 GTK_PRINT_CAPABILITY_NUMBER_UP
-						 );
-  handle = g_new0 (PrintDialogHandle, 1);
-  handle->impl = object;
-  handle->invocation = invocation;
-  handle->request = g_object_ref (request);
-  handle->dialog = g_object_ref (dialog);
-  handle->external_parent = external_parent;
-  handle->fd = fd;
+      fake_parent = g_object_new (GTK_TYPE_WINDOW,
+                                  "type", GTK_WINDOW_TOPLEVEL,
+                                  "screen", screen,
+                                  NULL);
+      g_object_ref_sink (fake_parent);
 
-  g_signal_connect (request, "handle-close", G_CALLBACK (handle_close), handle);
+      if (!g_variant_lookup (arg_options, "modal", "b", &modal))
+        modal = TRUE;
 
-  g_signal_connect (dialog, "response", G_CALLBACK (handle_print_response), handle);
+      dialog = gtk_print_unix_dialog_new (arg_title, NULL);
+      gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (fake_parent));
+      gtk_window_set_modal (GTK_WINDOW (dialog), modal);
+      gtk_print_unix_dialog_set_manual_capabilities (GTK_PRINT_UNIX_DIALOG (dialog),
+                                                     can_preview () ? GTK_PRINT_CAPABILITY_PREVIEW : 0 |
+       						     GTK_PRINT_CAPABILITY_PAGE_SET |
+						     GTK_PRINT_CAPABILITY_COPIES |
+						     GTK_PRINT_CAPABILITY_COLLATE |
+						     GTK_PRINT_CAPABILITY_REVERSE |
+						     GTK_PRINT_CAPABILITY_SCALE |
+						     GTK_PRINT_CAPABILITY_NUMBER_UP
+						     );
+      handle = g_new0 (PrintDialogHandle, 1);
+      handle->impl = object;
+      handle->invocation = invocation;
+      handle->request = g_object_ref (request);
+      handle->dialog = g_object_ref (dialog);
+      handle->external_parent = external_parent;
+      handle->fd = fd;
 
-  gtk_widget_realize (dialog);
+      g_signal_connect (request, "handle-close", G_CALLBACK (handle_close), handle);
 
-  if (external_parent)
-    external_window_set_parent_of (external_parent, gtk_widget_get_window (dialog));
+      g_signal_connect (dialog, "response", G_CALLBACK (handle_print_response), handle);
 
-  request_export (request, g_dbus_method_invocation_get_connection (invocation));
+      gtk_widget_realize (dialog);
 
-  gtk_widget_show (dialog);
+      if (external_parent)
+        external_window_set_parent_of (external_parent, gtk_widget_get_window (dialog));
 
+      request_export (request, g_dbus_method_invocation_get_connection (invocation));
+
+      gtk_widget_show (dialog);
+    }
   return TRUE;
 }
 
