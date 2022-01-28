@@ -58,6 +58,7 @@ $(dbus_built_sources): src/Makefile.am.inc
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Access.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Account.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Email.xml \
+	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.DynamicLauncher.xml \
 	 $(WALLPAPER_IFACE) \
          $(SCREENSHOT_IFACE) \
          $(SCREENCAST_IFACE) \
@@ -144,6 +145,8 @@ xdg_desktop_portal_gtk_SOURCES = \
         src/gtkbackports.c                      \
 	src/externalwindow.h			\
 	src/externalwindow.c			\
+	src/dynamic-launcher.h			\
+	src/dynamic-launcher.c			\
 	$(NULL)
 
 if BUILD_WALLPAPER
