@@ -48,6 +48,7 @@
 #endif
 
 #include "print.h"
+#include "dynamic-launcher.h"
 
 #ifdef BUILD_SCREENSHOT
 #include "screenshot.h"
@@ -182,6 +183,12 @@ on_bus_acquired (GDBusConnection *connection,
     }
 
   if (!email_init (connection, &error))
+    {
+      g_warning ("error: %s\n", error->message);
+      g_clear_error (&error);
+    }
+
+  if (!dynamic_launcher_init (connection, &error))
     {
       g_warning ("error: %s\n", error->message);
       g_clear_error (&error);
