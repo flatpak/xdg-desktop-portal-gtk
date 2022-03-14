@@ -15,6 +15,18 @@ jobs:
           apt-get update
           apt-get upgrade -y
           apt-get build-dep -y xdg-desktop-portal-gtk
+          apt-get build-dep -y xdg-desktop-portal
+          apt-get install -y git libfuse3-dev
+
+      # Build from git so we can test against the newest portals
+      - name: Build xdg-desktop-portal dependency
+        run: |
+          git clone -b 1.14.0 https://github.com/flatpak/xdg-desktop-portal.git ./xdg-desktop-portal
+          cd ./xdg-desktop-portal
+          ./autogen.sh --sysconfdir=/etc --disable-dependency-tracking --disable-libportal
+          make -j $(getconf _NPROCESSORS_ONLN)
+          make install
+          cd ..
 
       - uses: actions/checkout@v2
 
