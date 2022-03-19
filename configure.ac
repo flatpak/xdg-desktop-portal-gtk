@@ -109,7 +109,7 @@ if test x$enable_lockdown = xyes; then
 fi
 AM_CONDITIONAL([BUILD_LOCKDOWN],[test "$enable_lockdown" = "yes"])
 
-PKG_CHECK_MODULES(GTK, [xdg-desktop-portal >= 1.5 glib-2.0 >= 2.44 gio-unix-2.0 gtk+-3.0 >= 3.14 gtk+-unix-print-3.0])
+PKG_CHECK_MODULES(GTK, [xdg-desktop-portal >= 1.14.0 glib-2.0 >= 2.44 gio-unix-2.0 gtk+-3.0 >= 3.14 gtk+-unix-print-3.0])
 AC_SUBST(GTK_CFLAGS)
 AC_SUBST(GTK_LIBS)
 
