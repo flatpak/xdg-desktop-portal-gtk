@@ -1,3 +1,11 @@
+Changes in 1.14.0, 18-03-2022
+=============================
+
+- Add an implementation of the dynamic launcher portal
+- notification: Fix activation of default action with target
+- New translations: oc, pt
+- Translation updates
+
 Changes in 1.12.0, 21-12-2021
 =============================
 
