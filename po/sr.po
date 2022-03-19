@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2020-09-14 14:09-0400\n"
+"POT-Creation-Date: 2022-03-18 21:06-0700\n"
 "PO-Revision-Date: 2016-09-14 12:56+0200\n"
 "Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: српски <gnome-sr@googlegroups.org>\n"
@@ -196,22 +196,22 @@ msgstr ""
 msgid "Screen Share"
 msgstr "Снимак екрана"
 
-#: src/screencastwidget.c:483
+#: src/screencastwidget.c:484
 #, c-format
 msgid "Select monitor to share with %s"
 msgstr ""
 
-#: src/screencastwidget.c:485
+#: src/screencastwidget.c:486
 #, c-format
 msgid "Select window to share with %s"
 msgstr ""
 
-#: src/screencastwidget.c:490
+#: src/screencastwidget.c:491
 #, fuzzy
 msgid "Select monitor to share with the requesting application"
 msgstr "Да поделим овај снимак екрана са програмом који то захтева?"
 
-#: src/screencastwidget.c:491
+#: src/screencastwidget.c:492
 #, fuzzy
 msgid "Select window to share with the requesting application"
 msgstr "Да поделим овај снимак екрана са програмом који то захтева?"
@@ -283,7 +283,7 @@ msgstr ""
 msgid "Include the window _border"
 msgstr ""
 
-#: src/settings.c:186
+#: src/settings.c:217
 msgid "Requested setting not found"
 msgstr ""
 

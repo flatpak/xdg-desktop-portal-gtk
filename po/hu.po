@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2020-09-14 14:09-0400\n"
+"POT-Creation-Date: 2022-03-18 21:06-0700\n"
 "PO-Revision-Date: 2019-02-12 21:07+0100\n"
 "Last-Translator: Balázs Úr <ur.balazs at fsf dot hu>\n"
 "Language-Team: Hungarian <gnome-hu-list at gnome dot org>\n"
@@ -194,21 +194,21 @@ msgstr "Távoli asztal"
 msgid "Screen Share"
 msgstr "Képernyőkép"
 
-#: src/screencastwidget.c:483
+#: src/screencastwidget.c:484
 #, c-format
 msgid "Select monitor to share with %s"
 msgstr "Válasszon monitort az ezzel történő megosztáshoz: %s"
 
-#: src/screencastwidget.c:485
+#: src/screencastwidget.c:486
 #, fuzzy, c-format
 msgid "Select window to share with %s"
 msgstr "Válasszon monitort az ezzel történő megosztáshoz: %s"
 
-#: src/screencastwidget.c:490
+#: src/screencastwidget.c:491
 msgid "Select monitor to share with the requesting application"
 msgstr "Válasszon monitort a kérő alkalmazással történő megosztáshoz"
 
-#: src/screencastwidget.c:491
+#: src/screencastwidget.c:492
 #, fuzzy
 msgid "Select window to share with the requesting application"
 msgstr "Válasszon monitort a kérő alkalmazással történő megosztáshoz"
@@ -278,7 +278,7 @@ msgstr "_Mutató felvétele"
 msgid "Include the window _border"
 msgstr "Az ablak _szegélyét is tartalmazza"
 
-#: src/settings.c:186
+#: src/settings.c:217
 msgid "Requested setting not found"
 msgstr ""
 

@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk 1.8.0\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2021-07-17 13:30+0200\n"
+"POT-Creation-Date: 2022-03-18 21:06-0700\n"
 "PO-Revision-Date: 2021-07-17 17:58+0200\n"
+"Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: \n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.0\n"
-"Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: nl\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
@@ -281,7 +281,7 @@ msgstr "Cursor _tonen"
 msgid "Include the window _border"
 msgstr "Vensterrand t_onen"
 
-#: src/settings.c:186
+#: src/settings.c:217
 msgid "Requested setting not found"
 msgstr "De opgevraagde instelling bestaat niet"
 

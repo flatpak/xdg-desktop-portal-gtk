@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2020-09-15 03:43+0000\n"
+"POT-Creation-Date: 2022-03-18 21:06-0700\n"
 "PO-Revision-Date: 2020-09-22 14:20+0200\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
@@ -22,11 +22,6 @@ msgstr ""
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
 msgstr "Portál"
-
-#. TRANSLATORS: Don't translate this text (this is icon name)
-#: data/xdg-desktop-portal-gtk.desktop.in.in:6
-msgid "applications-system-symbolic"
-msgstr ""
 
 #: src/access.c:271
 msgid "Deny Access"
@@ -203,21 +198,21 @@ msgstr "Vzdialená plocha"
 msgid "Screen Share"
 msgstr "Sprístupnenie obrazovky"
 
-#: src/screencastwidget.c:483
+#: src/screencastwidget.c:484
 #, c-format
 msgid "Select monitor to share with %s"
 msgstr "Vyberte monitor, ktorý sprístupniť aplikácii %s"
 
-#: src/screencastwidget.c:485
+#: src/screencastwidget.c:486
 #, c-format
 msgid "Select window to share with %s"
 msgstr "Vyberte okno, ktoré sprístupniť aplikácii %s"
 
-#: src/screencastwidget.c:490
+#: src/screencastwidget.c:491
 msgid "Select monitor to share with the requesting application"
 msgstr "Vyberte monitor, ktorý sprístupniť požadovanej aplikácii"
 
-#: src/screencastwidget.c:491
+#: src/screencastwidget.c:492
 msgid "Select window to share with the requesting application"
 msgstr "Vyberte okno, ktoré sprístupniť požadovanej aplikácii"
 
@@ -286,7 +281,7 @@ msgstr "Zahrnúť k_urzor"
 msgid "Include the window _border"
 msgstr "Zahrnúť ok_raj okna"
 
-#: src/settings.c:186
+#: src/settings.c:217
 msgid "Requested setting not found"
 msgstr "Požadované nastavenie sa nenašlo"
 

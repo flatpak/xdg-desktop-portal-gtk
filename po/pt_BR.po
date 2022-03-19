@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2021-07-22 15:47+0000\n"
+"POT-Creation-Date: 2022-03-18 21:06-0700\n"
 "PO-Revision-Date: 2021-07-22 21:42-0300\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
@@ -22,11 +22,6 @@ msgstr ""
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
 msgstr "Portal"
-
-#. TRANSLATORS: Don't translate this text (this is icon name)
-#: data/xdg-desktop-portal-gtk.desktop.in.in:6
-msgid "applications-system-symbolic"
-msgstr "applications-system-symbolic"
 
 #: src/access.c:271
 msgid "Deny Access"
@@ -286,7 +281,7 @@ msgstr "Incluir cu_rsor"
 msgid "Include the window _border"
 msgstr "Incluir a _borda da janela"
 
-#: src/settings.c:186
+#: src/settings.c:217
 msgid "Requested setting not found"
 msgstr "Configuração solicitada não foi encontrada"
 
@@ -305,6 +300,9 @@ msgstr "Falha ao carregar o arquivo de imagem"
 #: src/wallpaperpreview.ui:57
 msgid "Activities"
 msgstr "Atividades"
+
+#~ msgid "applications-system-symbolic"
+#~ msgstr "applications-system-symbolic"
 
 #~ msgid "%s is running in the background."
 #~ msgstr "%s está em execução em segundo plano."

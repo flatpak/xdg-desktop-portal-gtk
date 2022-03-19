@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2022-01-20 03:38+0000\n"
+"POT-Creation-Date: 2022-03-18 21:06-0700\n"
 "PO-Revision-Date: 2022-01-20 09:45-0300\n"
 "Last-Translator: Juliano de Souza Camargo <julianosc@protonmail.com>\n"
 "Language-Team: Portuguese < https://l10n.gnome.org/teams/pt/>\n"
@@ -27,11 +27,6 @@ msgstr ""
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
 msgstr "Portal"
-
-#. TRANSLATORS: Don't translate this text (this is icon name)
-#: data/xdg-desktop-portal-gtk.desktop.in.in:6
-msgid "applications-system-symbolic"
-msgstr "applications-system-symbolic"
 
 #: src/access.c:271
 msgid "Deny Access"
@@ -309,3 +304,6 @@ msgstr "Falha ao carregar o ficheiro de imagem"
 #: src/wallpaperpreview.ui:57
 msgid "Activities"
 msgstr "Atividades"
+
+#~ msgid "applications-system-symbolic"
+#~ msgstr "applications-system-symbolic"

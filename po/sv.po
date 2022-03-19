@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2020-09-15 03:43+0000\n"
+"POT-Creation-Date: 2022-03-18 21:06-0700\n"
 "PO-Revision-Date: 2020-09-20 00:57+0200\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
@@ -24,11 +24,6 @@ msgstr ""
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
 msgstr "Portal"
-
-#. TRANSLATORS: Don't translate this text (this is icon name)
-#: data/xdg-desktop-portal-gtk.desktop.in.in:6
-msgid "applications-system-symbolic"
-msgstr "applications-system-symbolic"
 
 #: src/access.c:271
 msgid "Deny Access"
@@ -204,21 +199,21 @@ msgstr "Fjärrskrivbord"
 msgid "Screen Share"
 msgstr "Skärmdelning"
 
-#: src/screencastwidget.c:483
+#: src/screencastwidget.c:484
 #, c-format
 msgid "Select monitor to share with %s"
 msgstr "Välj bildskärm att dela med %s"
 
-#: src/screencastwidget.c:485
+#: src/screencastwidget.c:486
 #, c-format
 msgid "Select window to share with %s"
 msgstr "Välj fönster att dela med %s"
 
-#: src/screencastwidget.c:490
+#: src/screencastwidget.c:491
 msgid "Select monitor to share with the requesting application"
 msgstr "Välj vilken bildskärm du vill dela med programmet"
 
-#: src/screencastwidget.c:491
+#: src/screencastwidget.c:492
 msgid "Select window to share with the requesting application"
 msgstr "Välj vilket fönster du vill dela med programmet"
 
@@ -287,7 +282,7 @@ msgstr "Inkludera _pekare"
 msgid "Include the window _border"
 msgstr "Inkludera fönster_ramen"
 
-#: src/settings.c:186
+#: src/settings.c:217
 msgid "Requested setting not found"
 msgstr "Begärd inställning hittades inte"
 
@@ -306,6 +301,9 @@ msgstr "Misslyckades med att läsa in bildfil"
 #: src/wallpaperpreview.ui:57
 msgid "Activities"
 msgstr "Aktiviteter"
+
+#~ msgid "applications-system-symbolic"
+#~ msgstr "applications-system-symbolic"
 
 #~ msgid ""
 #~ "Select an application to open “%s”. More applications are available in <a "
