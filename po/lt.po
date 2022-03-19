@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2020-09-14 14:09-0400\n"
+"POT-Creation-Date: 2022-03-18 21:06-0700\n"
 "PO-Revision-Date: 2020-03-07 20:21+0200\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian <gnome-lt@lists.akl.lt>\n"
@@ -200,21 +200,21 @@ msgstr "Nuotolinis darbalaukis"
 msgid "Screen Share"
 msgstr "Ekrano bendrinimas"
 
-#: src/screencastwidget.c:483
+#: src/screencastwidget.c:484
 #, c-format
 msgid "Select monitor to share with %s"
 msgstr "Pasirinkti vaizduoklį, kurį bendrinti su %s"
 
-#: src/screencastwidget.c:485
+#: src/screencastwidget.c:486
 #, c-format
 msgid "Select window to share with %s"
 msgstr "Pasirinkti langą, kurį bendrinti su %s"
 
-#: src/screencastwidget.c:490
+#: src/screencastwidget.c:491
 msgid "Select monitor to share with the requesting application"
 msgstr "Pasirinkti vaizduoklį, kurį bendrinti su prašančia programa"
 
-#: src/screencastwidget.c:491
+#: src/screencastwidget.c:492
 msgid "Select window to share with the requesting application"
 msgstr "Pasirinkti langą, kurį bendrinti su prašančia programa"
 
@@ -283,7 +283,7 @@ msgstr "Įtraukti _rodyklę"
 msgid "Include the window _border"
 msgstr "Įtraukti lango rė_melį"
 
-#: src/settings.c:186
+#: src/settings.c:217
 msgid "Requested setting not found"
 msgstr "Užklaustas nustatymas nerastas"
 

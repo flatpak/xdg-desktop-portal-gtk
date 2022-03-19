@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2020-09-14 14:09-0400\n"
+"POT-Creation-Date: 2022-03-18 21:06-0700\n"
 "PO-Revision-Date: 2019-08-24 23:53+0100\n"
 "Last-Translator: Zander Brown <zbrown@gnome.org>\n"
 "Language-Team: English - United Kingdom <en_GB@li.org>\n"
@@ -193,21 +193,21 @@ msgstr "Remote desktop"
 msgid "Screen Share"
 msgstr "Screenshot"
 
-#: src/screencastwidget.c:483
+#: src/screencastwidget.c:484
 #, c-format
 msgid "Select monitor to share with %s"
 msgstr "Select monitor to share with %s"
 
-#: src/screencastwidget.c:485
+#: src/screencastwidget.c:486
 #, fuzzy, c-format
 msgid "Select window to share with %s"
 msgstr "Select monitor to share with %s"
 
-#: src/screencastwidget.c:490
+#: src/screencastwidget.c:491
 msgid "Select monitor to share with the requesting application"
 msgstr "Select monitor to share with the requesting application"
 
-#: src/screencastwidget.c:491
+#: src/screencastwidget.c:492
 #, fuzzy
 msgid "Select window to share with the requesting application"
 msgstr "Select monitor to share with the requesting application"
@@ -277,7 +277,7 @@ msgstr "Include _pointer"
 msgid "Include the window _border"
 msgstr "Include the window _border"
 
-#: src/settings.c:186
+#: src/settings.c:217
 msgid "Requested setting not found"
 msgstr ""
 

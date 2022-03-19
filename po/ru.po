@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2020-09-14 14:09-0400\n"
+"POT-Creation-Date: 2022-03-18 21:06-0700\n"
 "PO-Revision-Date: 2020-04-04 06:22+0300\n"
 "Last-Translator: Артемий Судаков <finziyr@yandex.ru>\n"
 "Language-Team: Русский <gnome-cyr@gnome.org>\n"
@@ -198,21 +198,21 @@ msgstr "Удаленный рабочий стол"
 msgid "Screen Share"
 msgstr "Доступ к экрану"
 
-#: src/screencastwidget.c:483
+#: src/screencastwidget.c:484
 #, c-format
 msgid "Select monitor to share with %s"
 msgstr "Выберите монитор, чтобы поделиться с %s"
 
-#: src/screencastwidget.c:485
+#: src/screencastwidget.c:486
 #, c-format
 msgid "Select window to share with %s"
 msgstr "Выберите окно, чтобы поделиться им с %s"
 
-#: src/screencastwidget.c:490
+#: src/screencastwidget.c:491
 msgid "Select monitor to share with the requesting application"
 msgstr "Выберите монитор, чтобы поделиться им с запрашивающим приложением"
 
-#: src/screencastwidget.c:491
+#: src/screencastwidget.c:492
 msgid "Select window to share with the requesting application"
 msgstr "Выберите окно, чтобы поделиться им с запрашивающим приложением"
 
@@ -281,7 +281,7 @@ msgstr "Включить _указатель"
 msgid "Include the window _border"
 msgstr "Включить _границу окна"
 
-#: src/settings.c:186
+#: src/settings.c:217
 msgid "Requested setting not found"
 msgstr "Запрашиваемая настройка не найдена"
 

@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2021-12-04 03:47+0000\n"
+"POT-Creation-Date: 2022-03-18 21:06-0700\n"
 "PO-Revision-Date: 2021-12-05 10:47+0100\n"
 "Last-Translator: leo <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español; Castellano <gnome-es-list@gnome.org>\n"
@@ -24,11 +24,6 @@ msgstr ""
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
 msgstr "Portal"
-
-#. TRANSLATORS: Don't translate this text (this is icon name)
-#: data/xdg-desktop-portal-gtk.desktop.in.in:6
-msgid "applications-system-symbolic"
-msgstr "applications-system-symbolic"
 
 #: src/access.c:271
 msgid "Deny Access"
@@ -311,6 +306,9 @@ msgstr "Fallo al cargar el archivo de imagen"
 #: src/wallpaperpreview.ui:57
 msgid "Activities"
 msgstr "Actividades"
+
+#~ msgid "applications-system-symbolic"
+#~ msgstr "applications-system-symbolic"
 
 #~ msgid ""
 #~ "Select an application to open “%s”. More applications are available in <a "

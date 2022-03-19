@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2020-09-14 14:09-0400\n"
+"POT-Creation-Date: 2022-03-18 21:06-0700\n"
 "PO-Revision-Date: 2020-05-21 16:14+0700\n"
 "Last-Translator: Kukuh Syafaat <kukuhsyafaat@gnome.org>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
@@ -196,21 +196,21 @@ msgstr "Destop jauh"
 msgid "Screen Share"
 msgstr "Berbagi Layar"
 
-#: src/screencastwidget.c:483
+#: src/screencastwidget.c:484
 #, c-format
 msgid "Select monitor to share with %s"
 msgstr "Pilih monitor untuk berbagi dengan %s"
 
-#: src/screencastwidget.c:485
+#: src/screencastwidget.c:486
 #, c-format
 msgid "Select window to share with %s"
 msgstr "Pilih jendela untuk dibagikan dengan %s"
 
-#: src/screencastwidget.c:490
+#: src/screencastwidget.c:491
 msgid "Select monitor to share with the requesting application"
 msgstr "Pilih monitor untuk berbagi dengan aplikasi yang meminta"
 
-#: src/screencastwidget.c:491
+#: src/screencastwidget.c:492
 msgid "Select window to share with the requesting application"
 msgstr "Pilih jendela untuk dibagikan dengan aplikasi yang meminta"
 
@@ -279,7 +279,7 @@ msgstr "Sertakan _penunjuk"
 msgid "Include the window _border"
 msgstr "Sertakan _bingkai jendela"
 
-#: src/settings.c:186
+#: src/settings.c:217
 msgid "Requested setting not found"
 msgstr "Pengaturan yang diminta tidak ditemukan"
 

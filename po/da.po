@@ -5,9 +5,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk\n"
-"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-"
-"gtk/issues\n"
-"POT-Creation-Date: 2020-09-14 14:09-0400\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
+"issues\n"
+"POT-Creation-Date: 2022-03-18 21:06-0700\n"
 "PO-Revision-Date: 2020-10-12 01:17+0200\n"
 "Last-Translator: scootergrisen\n"
 "Language-Team: Danish\n"
@@ -195,21 +195,21 @@ msgstr "Fjernskrivebord"
 msgid "Screen Share"
 msgstr "Skærmdeling"
 
-#: src/screencastwidget.c:483
+#: src/screencastwidget.c:484
 #, c-format
 msgid "Select monitor to share with %s"
 msgstr "Vælg skærm som skal deles med %s"
 
-#: src/screencastwidget.c:485
+#: src/screencastwidget.c:486
 #, c-format
 msgid "Select window to share with %s"
 msgstr "Vælg vindue som skal deles med %s"
 
-#: src/screencastwidget.c:490
+#: src/screencastwidget.c:491
 msgid "Select monitor to share with the requesting application"
 msgstr "Vælg skærm som skal deles med det anmodede program"
 
-#: src/screencastwidget.c:491
+#: src/screencastwidget.c:492
 msgid "Select window to share with the requesting application"
 msgstr "Vælg vindue som skal deles med det anmodede program"
 
@@ -278,7 +278,7 @@ msgstr "Medtag _markør"
 msgid "Include the window _border"
 msgstr "Medtag vinduets _kant"
 
-#: src/settings.c:186
+#: src/settings.c:217
 msgid "Requested setting not found"
 msgstr "Anmodede indstilling ikke fundet"
 

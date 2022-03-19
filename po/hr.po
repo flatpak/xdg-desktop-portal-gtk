@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2020-09-14 14:09-0400\n"
+"POT-Creation-Date: 2022-03-18 21:06-0700\n"
 "PO-Revision-Date: 2020-04-27 07:43+0200\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: \n"
@@ -194,21 +194,21 @@ msgstr "Udaljena radna površina"
 msgid "Screen Share"
 msgstr "Dijeljenje ekrana"
 
-#: src/screencastwidget.c:483
+#: src/screencastwidget.c:484
 #, c-format
 msgid "Select monitor to share with %s"
 msgstr "Odaberi monitor za dijeljenje s %s"
 
-#: src/screencastwidget.c:485
+#: src/screencastwidget.c:486
 #, c-format
 msgid "Select window to share with %s"
 msgstr "Odaberi prozor za dijeljenje s %s"
 
-#: src/screencastwidget.c:490
+#: src/screencastwidget.c:491
 msgid "Select monitor to share with the requesting application"
 msgstr "Odaberi monitor za dijeljenje s programom koji ga zahtijeva"
 
-#: src/screencastwidget.c:491
+#: src/screencastwidget.c:492
 msgid "Select window to share with the requesting application"
 msgstr "Odaberi prozor za dijeljenje s programom koji ga zahtijeva"
 
@@ -277,7 +277,7 @@ msgstr "Snimi s _pokazivačem"
 msgid "Include the window _border"
 msgstr "Snimi s _okvirom prozora"
 
-#: src/settings.c:186
+#: src/settings.c:217
 msgid "Requested setting not found"
 msgstr "Zatražena postavka nije nađena"
 
