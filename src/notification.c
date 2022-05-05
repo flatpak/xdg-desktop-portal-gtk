@@ -29,6 +29,8 @@
  */
 static OrgGtkNotifications *gtk_notifications;
 
+static guint notification_impl_version = 1;
+
 static void
 notification_added (GObject      *source,
                     GAsyncResult *result,
@@ -103,6 +105,7 @@ activate_action (GDBusConnection *connection,
                  const char *app_id,
                  const char *id,
                  const char *name,
+                 const char *activation_token,
                  GVariant *parameter,
                  gpointer data)
 {
@@ -114,6 +117,12 @@ activate_action (GDBusConnection *connection,
   g_variant_builder_init (&parms, G_VARIANT_TYPE ("av"));
   if (parameter)
     g_variant_builder_add (&parms, "v", parameter);
+
+  if (activation_token)
+    {
+      g_variant_builder_add (&pdata, "{sv}", "desktop-startup-id",
+                             g_variant_new_string (activation_token));
+    }
 
   if (name && g_str_has_prefix (name, "app."))
     {
@@ -132,6 +141,9 @@ activate_action (GDBusConnection *connection,
     }
   else
     {
+      GVariant *invoked_parameters = NULL;
+      const char *signal_name;
+
       g_dbus_connection_call (connection,
                               app_id,
                               object_path,
@@ -143,15 +155,38 @@ activate_action (GDBusConnection *connection,
                               G_DBUS_CALL_FLAGS_NONE,
                               -1, NULL, NULL, NULL);
 
+      if (notification_impl_version >= 2)
+        {
+          g_variant_builder_clear (&pdata);
+          g_variant_builder_init (&pdata, G_VARIANT_TYPE_VARDICT);
+
+          if (activation_token)
+            {
+              g_variant_builder_add (&pdata, "{sv}", "activation_token",
+                                     g_variant_new_string (activation_token));
+            }
+
+          signal_name = "ActionInvoked2";
+          invoked_parameters = g_variant_new ("(sss@a{sv}@av)",
+                                              app_id, id, name,
+                                              g_variant_builder_end (&pdata),
+                                              g_variant_builder_end (&parms));
+        }
+      else
+        {
+          invoked_parameters = g_variant_new ("(sss@av)",
+                                              app_id, id, name,
+                                              g_variant_builder_end (&parms));
+        }
+
       g_dbus_connection_emit_signal (connection,
                                      NULL,
                                      "/org/freedesktop/portal/desktop",
                                      "org.freedesktop.impl.portal.Notification",
                                      "ActionInvoked",
-                                     g_variant_new ("(sss@av)",
-                                                    app_id, id, name,
-                                                    g_variant_builder_end (&parms)),
+                                     invoked_parameters,
                                      NULL);
+
     }
 }
 
@@ -245,11 +280,31 @@ handle_remove_notification (XdpImplNotification *object,
   return TRUE;
 }
 
+static void
+check_notification_impl_version (void)
+{
+  guint activate_signal;
+  GSignalQuery activate_signal_query = {0};
+
+  activate_signal = g_signal_lookup ("action-invoked",
+                                     XDP_IMPL_TYPE_NOTIFICATION_SKELETON);
+
+  if (activate_signal)
+    {
+      g_signal_query (activate_signal, &activate_signal_query);
+
+      if (activate_signal_query.n_params == 5)
+        notification_impl_version = 2;
+    }
+}
+
 gboolean
 notification_init (GDBusConnection *bus,
                    GError **error)
 {
   GDBusInterfaceSkeleton *helper;
+
+  check_notification_impl_version ();
 
   gtk_notifications = org_gtk_notifications_proxy_new_sync (bus,
                                                             G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
