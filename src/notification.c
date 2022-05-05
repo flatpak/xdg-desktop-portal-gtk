@@ -35,7 +35,6 @@ notification_added (GObject      *source,
                     gpointer      data)
 {
   g_autoptr(GError) error = NULL;
-  g_autoptr(GVariant) reply = NULL;
 
   if (!org_gtk_notifications_call_add_notification_finish (gtk_notifications, result, &error))
     g_warning ("Error from gnome-shell: %s", error->message);
@@ -133,8 +132,6 @@ activate_action (GDBusConnection *connection,
     }
   else
     {
-      g_autoptr(GVariant) ret = NULL;
-
       g_dbus_connection_call (connection,
                               app_id,
                               object_path,
