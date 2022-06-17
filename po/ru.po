@@ -3,22 +3,24 @@
 # This file is distributed under the same license as the xdg-desktop-portal-gtk package.
 # Andrew Sazonow <sazonow1980.@gmail.com>, 2019.
 # Артемий Судаков <finziyr@yandex.ru>, 2020.
+# Ivan Molodetskikh <yalterz@gmail.com>, 2022.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2022-03-18 21:06-0700\n"
-"PO-Revision-Date: 2020-04-04 06:22+0300\n"
-"Last-Translator: Артемий Судаков <finziyr@yandex.ru>\n"
-"Language-Team: Русский <gnome-cyr@gnome.org>\n"
+"POT-Creation-Date: 2022-06-17 03:30+0000\n"
+"PO-Revision-Date: 2022-06-17 14:20+0300\n"
+"Last-Translator: Aleksandr Melman <Alexmelman88@gmail.com>\n"
+"Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
@@ -30,11 +32,11 @@ msgstr "Запретить доступ"
 
 #: src/access.c:274
 msgid "Grant Access"
-msgstr "Предоставление доступа"
+msgstr "Предоставить доступ"
 
 #: src/accountdialog.c:176
 msgid "Select an Image"
-msgstr "Выберите изображение"
+msgstr "Выбрать изображение"
 
 #: src/accountdialog.c:179 src/wallpaperdialog.ui:18
 msgid "Cancel"
@@ -55,15 +57,15 @@ msgstr "Изображения"
 #: src/accountdialog.c:272
 #, c-format
 msgid "Share your personal information with %s?"
-msgstr "Поделитесь своей личной информацией с %s?"
+msgstr "Дать «%s» доступ к своей личной информации?"
 
 #: src/accountdialog.c:275
 msgid "Share your personal information with the requesting application?"
-msgstr "Поделитесь своей личной информацией с запрашивающим приложением?"
+msgstr "Дать запрашивающему приложению доступ к своей личной информации?"
 
 #: src/accountdialog.ui:10
 msgid "Share Details"
-msgstr "Поделиться подробностями"
+msgstr "Подробности"
 
 #: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:467
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
@@ -74,7 +76,7 @@ msgstr "_Отменить"
 #: src/accountdialog.ui:22 src/remotedesktopdialog.ui:28
 #: src/screencastdialog.ui:28 src/screenshotdialog.ui:38
 msgid "_Share"
-msgstr "_Поделиться"
+msgstr "_Дать доступ"
 
 #: src/accountdialog.ui:148
 msgid "Make changes before sharing the information"
@@ -82,12 +84,12 @@ msgstr "Внесите изменения, прежде чем делиться 
 
 #: src/appchooserdialog.c:229
 msgid "Failed to start Software"
-msgstr "Не удалось запустить программное обеспечение"
+msgstr "Не удалось запустить Центр приложений"
 
 #: src/appchooserdialog.c:385
 #, c-format
 msgid "Choose an application to open the file “%s”."
-msgstr "Выберите приложение для открытия “%s”."
+msgstr "Выберите приложение для открытия «%s»."
 
 #: src/appchooserdialog.c:390
 msgid "Choose an application."
@@ -99,14 +101,14 @@ msgid ""
 "No apps installed that can open “%s”. You can find more applications in "
 "Software"
 msgstr ""
-"Не установлено приложение, которое может открыть\"%s\". Вы можете найти "
-"больше программ в центре приложений."
+"Нет установленных приложений, способных открыть «%s». Вы можете найти больше "
+"приложений в Центре приложений"
 
 #: src/appchooserdialog.c:412
 msgid "No suitable app installed. You can find more applications in Software."
 msgstr ""
-"Подходящее приложение не установлено. Вы можете найти больше программ в "
-"центре приложений."
+"Не найдено подходящее установленное приложение. Вы можете найти больше "
+"приложений в Центре приложений."
 
 #: src/appchooserdialog.ui:10
 msgid "Open With…"
@@ -118,16 +120,16 @@ msgstr "_Открыть"
 
 #: src/appchooserdialog.ui:115
 msgid "No Apps available"
-msgstr "Доступные приложения отсутствуют"
+msgstr "Нет доступных приложений"
 
 #: src/appchooserdialog.ui:159
 msgid "_Find More in Software"
-msgstr "_Найти в центре приложений"
+msgstr "_Найти в Центре приложений"
 
 #: src/background.c:215 src/background.c:308
 #, c-format
 msgid "“%s” is running in the background"
-msgstr "\"%s\" работает в фоне"
+msgstr "«%s» работает в фоне"
 
 #: src/background.c:217
 msgid ""
@@ -136,14 +138,14 @@ msgid ""
 "\n"
 "Note that forcing an application to quit might cause data loss."
 msgstr ""
-"Это могло случиться по уважительной причине, но приложение не предоставило.\n"
+"Возможно, так и должно быть, но приложение не предоставило явной причины.\n"
 "\n"
 "Обратите внимание, что принудительное завершение приложения может привести к "
 "потере данных."
 
 #: src/background.c:220
 msgid "Force quit"
-msgstr "Принудительный выход"
+msgstr "Завершить принудительно"
 
 #: src/background.c:221
 msgid "Allow"
@@ -171,7 +173,7 @@ msgstr "Открыть файлы в режиме только для чтени
 
 #: src/remotedesktopdialog.c:188
 msgid "Pointer"
-msgstr "Указатель"
+msgstr "Курсор мыши"
 
 #: src/remotedesktopdialog.c:191
 msgid "Keyboard"
@@ -184,15 +186,16 @@ msgstr "Сенсорный экран"
 #: src/remotedesktopdialog.c:307
 #, c-format
 msgid "Select devices to share with %s"
-msgstr "Выберите устройства для обмена %s"
+msgstr "Выберите устройства для совместного использования с %s"
 
 #: src/remotedesktopdialog.c:312
 msgid "Select devices to share with the requesting application"
-msgstr "Выберите устройства, чтобы поделиться с запрашивающим приложением"
+msgstr ""
+"Выберите устройства для совместного использования с запрашивающим приложением"
 
 #: src/remotedesktopdialog.ui:12
 msgid "Remote desktop"
-msgstr "Удаленный рабочий стол"
+msgstr "Удалённый рабочий стол"
 
 #: src/screencastdialog.ui:12
 msgid "Screen Share"
@@ -201,24 +204,24 @@ msgstr "Доступ к экрану"
 #: src/screencastwidget.c:484
 #, c-format
 msgid "Select monitor to share with %s"
-msgstr "Выберите монитор, чтобы поделиться с %s"
+msgstr "Выберите монитор, который сможет записывать «%s»"
 
 #: src/screencastwidget.c:486
 #, c-format
 msgid "Select window to share with %s"
-msgstr "Выберите окно, чтобы поделиться им с %s"
+msgstr "Выберите окно, которое сможет записывать «%s»"
 
 #: src/screencastwidget.c:491
 msgid "Select monitor to share with the requesting application"
-msgstr "Выберите монитор, чтобы поделиться им с запрашивающим приложением"
+msgstr "Выберите монитор, который сможет записывать запрашивающее приложение"
 
 #: src/screencastwidget.c:492
 msgid "Select window to share with the requesting application"
-msgstr "Выберите окно, чтобы поделиться им с запрашивающим приложением"
+msgstr "Выберите окно, которое сможет записывать запрашивающее приложение"
 
 #: src/screencastwidget.ui:100
 msgid "Single Window"
-msgstr "Одиночное окно"
+msgstr "Одно окно"
 
 #: src/screencastwidget.ui:176
 msgid "Entire Screen"
@@ -227,47 +230,47 @@ msgstr "Весь экран"
 #: src/screenshotdialog.c:442
 #, c-format
 msgid "Share this screenshot with %s?"
-msgstr "Поделиться этим снимком экрана с %s?"
+msgstr "Дать «%s» доступ к этому снимку экрана?"
 
 #: src/screenshotdialog.c:446
 msgid "Share this screenshot with the requesting application?"
-msgstr "Поделиться этим снимком экрана с запрашивающим приложением?"
+msgstr "Дать запрашивающему приложению доступ к этому снимку экрана?"
 
 #: src/screenshotdialog.ui:10
 msgid "Screenshot"
-msgstr "Скриншот"
+msgstr "Снимок экрана"
 
 #: src/screenshotdialog.ui:30
 msgid "_Options…"
-msgstr "_Опции…"
+msgstr "_Варианты…"
 
 #: src/screenshotdialog.ui:55
 msgid "Take _Screenshot"
-msgstr "Сделать _скриншот"
+msgstr "Сделать _снимок"
 
 #: src/screenshotdialog.ui:111
 msgid "Take Screenshot"
-msgstr "Сделать скриншот"
+msgstr "Сделать снимок"
 
 #: src/screenshotdialog.ui:122
 msgid "Grab the whole sc_reen"
-msgstr "Хватай весь ск_рин"
+msgstr "Снимок всего эк_рана"
 
 #: src/screenshotdialog.ui:133
 msgid "Grab the current _window"
-msgstr "Захватить текущее _окно"
+msgstr "Снимок текущего о_кна"
 
 #: src/screenshotdialog.ui:144
 msgid "Select _area to grab"
-msgstr "Выберите _область для захвата"
+msgstr "Выбрать _область для снимка"
 
 #: src/screenshotdialog.ui:158
 msgid "Grab after a _delay of"
-msgstr "Захватить после _задержки"
+msgstr "_Задержка перед снимком"
 
 #: src/screenshotdialog.ui:171
 msgid "seconds"
-msgstr "Секунд"
+msgstr "секунды"
 
 #: src/screenshotdialog.ui:181
 msgid "Effects"
@@ -275,19 +278,20 @@ msgstr "Эффекты"
 
 #: src/screenshotdialog.ui:192
 msgid "Include _pointer"
-msgstr "Включить _указатель"
+msgstr "Показать курсор _мыши"
 
 #: src/screenshotdialog.ui:201
 msgid "Include the window _border"
-msgstr "Включить _границу окна"
+msgstr "Показать _границу окна"
 
 #: src/settings.c:217
 msgid "Requested setting not found"
 msgstr "Запрашиваемая настройка не найдена"
 
+# В текущей версии диалога ширина по умолчанию достаточно маленькая, поэтому длинная фраза не влезает без многоточия.
 #: src/wallpaperdialog.ui:13
 msgid "Set Background"
-msgstr "Установить фоном рабочего стола"
+msgstr "Установить как фон"
 
 #: src/wallpaperdialog.ui:26
 msgid "Set"
@@ -301,42 +305,26 @@ msgstr "Не удалось загрузить изображение"
 msgid "Activities"
 msgstr "Обзор"
 
-# should not be translated
-#~ msgid "applications-system-symbolic"
-#~ msgstr "applications-system-symbolic"
+#~ msgid "Name"
+#~ msgstr "Имя"
 
-#, c-format
-#~ msgid "%s is running in the background."
-#~ msgstr "%s работает в фоне."
+#~ msgid "Username"
+#~ msgstr "Имя пользователя"
 
-#~ msgid "Set Lock Screen"
-#~ msgstr "Установить фоном экрана блокировки"
+#~ msgid "Create Web Application"
+#~ msgstr "Создать веб-приложение"
 
-#~ msgid "Set Background & Lock Screen"
-#~ msgstr "Установить фоном рабочего стола и экрана блокировки"
+#~ msgid "Create Application"
+#~ msgstr "Создать приложение"
 
-#~ msgid ""
-#~ "Select an application to open “%s”. More applications are available in <a "
-#~ "href='software'>Software.</a>"
-#~ msgstr ""
-#~ "Выберите приложение, чтобы открыть “%s”. Больше приложений доступно в <a "
-#~ "href='software'>Программное обеспечение.</a>"
+#~ msgid "C_reate"
+#~ msgstr "С_оздать"
 
-#~ msgid ""
-#~ "Select an application. More applications are available in <a "
-#~ "href='software'>Software.</a>"
-#~ msgstr ""
-#~ "Выберите приложение. Больше приложений доступно в <a "
-#~ "href='software'>Программное обеспечение.</a>"
+#~ msgid "Allow remote interaction"
+#~ msgstr "Разрешить удалённое взаимодействие"
 
-#~ msgid "Unable to find a suitable application."
-#~ msgstr "Невозможно найти подходящее приложение."
+#~ msgid "Virtual monitor"
+#~ msgstr "Виртуальный монитор"
 
-#~ msgid "No Applications Found"
-#~ msgstr "Приложения не найдены"
-
-#~ msgid "Find Compatible Applications in Software"
-#~ msgstr "Найти совместимые приложения в программном обеспечении"
-
-#~ msgid "Screen casting"
-#~ msgstr "Кастинг экрана"
+#~ msgid "Remember this selection"
+#~ msgstr "Запомнить этот выбор"
