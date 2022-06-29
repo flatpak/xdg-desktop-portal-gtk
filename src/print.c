@@ -263,7 +263,7 @@ print_file (int fd,
   g_autofree char *app_desktop_fullname = NULL;
   g_autoptr (GDesktopAppInfo) app_info = NULL;
   // ensures the app_name won't be NULL even if the app_id.desktop file doesn't exist
-  g_autofree char *app_name = g_strdup (app_id);
+  g_autofree char *app_name = NULL;
 
   if (!g_str_has_suffix (app_id, ".desktop"))
     {
@@ -279,6 +279,9 @@ print_file (int fd,
     {
       app_name = g_desktop_app_info_get_locale_string (app_info, "Name");
     }
+
+  if (app_name == NULL)
+    app_name = g_strdup (app_id);
 
   title = g_strdup_printf ("Document from %s", app_name);
 
