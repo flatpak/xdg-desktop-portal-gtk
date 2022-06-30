@@ -119,7 +119,7 @@ on_image_loaded_cb (GObject *source_object,
   WallpaperDialog *self = data;
   GFileIOStream *stream = NULL;
   GFile *image_file = G_FILE (source_object);
-  GFile *tmp = g_file_new_tmp ("XXXXXX", &stream, NULL);
+  g_autoptr(GFile) tmp = g_file_new_tmp ("XXXXXX", &stream, NULL);
   g_autoptr(GError) error = NULL;
   gchar *contents = NULL;
   gsize length = 0;
