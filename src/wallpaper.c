@@ -196,7 +196,7 @@ handle_set_wallpaper_uri (XdpImplWallpaper *object,
 
   if (!show_preview)
     {
-      set_wallpaper (handle, g_strdup (arg_uri));
+      set_wallpaper (handle, arg_uri);
       goto out;
     }
 
