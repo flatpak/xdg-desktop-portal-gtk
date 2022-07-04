@@ -105,13 +105,17 @@ on_file_copy_cb (GObject *source_object,
     }
 
   destination = g_file_new_for_path (handle->picture_uri);
-  g_file_replace_contents (destination,
-                           contents,
-                           length,
-                           NULL, FALSE,
-                           G_FILE_CREATE_REPLACE_DESTINATION,
-                           NULL, NULL,
-                           &error);
+  if (!g_file_replace_contents (destination,
+                                contents,
+                                length,
+                                NULL, FALSE,
+                                G_FILE_CREATE_REPLACE_DESTINATION,
+                                NULL, NULL,
+                                &error))
+    {
+      g_warning ("Failed to store image as '%s': %s", handle->picture_uri, error->message);
+      goto out;
+    }
 
   if (set_gsettings (BACKGROUND_SCHEMA, handle->picture_uri))
     handle->response = 0;
