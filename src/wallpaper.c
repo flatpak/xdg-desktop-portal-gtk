@@ -90,7 +90,6 @@ on_file_copy_cb (GObject *source_object,
   GFile *picture_file = G_FILE (source_object);
   g_autoptr(GError) error = NULL;
   g_autofree gchar *uri = NULL;
-  g_autofree gchar *dest_path = NULL;
   gchar *contents = NULL;
   gsize length = 0;
 
