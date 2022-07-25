@@ -1,0 +1,297 @@
+# Hebrew translation for xdg-desktop-portal-gtk.
+# Copyright (C) 2022 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
+# This file is distributed under the same license as the xdg-desktop-portal-gtk package.
+# Yosef Or Boczko <yoseforb@gmail.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xdg-desktop-portal-gtk main\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
+"issues\n"
+"POT-Creation-Date: 2022-07-25 15:29+0000\n"
+"PO-Revision-Date: 2022-07-25 22:07+0300\n"
+"Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
+"Language-Team: Hebrew <yoseforb@gmail.com>\n"
+"Language: he\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"X-Generator: Gtranslator 40.0\n"
+
+#: data/xdg-desktop-portal-gtk.desktop.in.in:4
+msgid "Portal"
+msgstr "שער"
+
+#: src/access.c:271
+msgid "Deny Access"
+msgstr "מניעת גישה"
+
+#: src/access.c:274
+msgid "Grant Access"
+msgstr "הענקת גישה"
+
+#: src/accountdialog.c:176
+msgid "Select an Image"
+msgstr "בחירת תמונה"
+
+#: src/accountdialog.c:179 src/wallpaperdialog.ui:18
+msgid "Cancel"
+msgstr "ביטול"
+
+#: src/accountdialog.c:180
+msgid "Select"
+msgstr "בחירה"
+
+#: src/accountdialog.c:181
+msgid "Clear"
+msgstr "ניקוי"
+
+#: src/accountdialog.c:195
+msgid "Images"
+msgstr "תמונות"
+
+#: src/accountdialog.c:272
+#, c-format
+msgid "Share your personal information with %s?"
+msgstr "לשתף את המידע האישי שלך עם %s?"
+
+#: src/accountdialog.c:275
+msgid "Share your personal information with the requesting application?"
+msgstr "לשתף את המידע האישי שלך עם היישומים הדורשים זאת?"
+
+#: src/accountdialog.ui:10
+msgid "Share Details"
+msgstr "שיתוף פרטים"
+
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:467
+#: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
+#: src/screenshotdialog.ui:14
+msgid "_Cancel"
+msgstr "_ביטול"
+
+#: src/accountdialog.ui:22 src/remotedesktopdialog.ui:28
+#: src/screencastdialog.ui:28 src/screenshotdialog.ui:38
+msgid "_Share"
+msgstr "_שיתוף"
+
+#: src/accountdialog.ui:148
+msgid "Make changes before sharing the information"
+msgstr "ביצוע שינויים לפני שיתוף המידע"
+
+#: src/appchooserdialog.c:229
+msgid "Failed to start Software"
+msgstr "הפעלת תכנה נכשלה"
+
+#: src/appchooserdialog.c:385
+#, c-format
+msgid "Choose an application to open the file “%s”."
+msgstr "נא לבחור יישום לפתיחת הקובץ „%s”."
+
+#: src/appchooserdialog.c:390
+msgid "Choose an application."
+msgstr "בחירת יישום."
+
+#: src/appchooserdialog.c:407
+#, c-format
+msgid ""
+"No apps installed that can open “%s”. You can find more applications in "
+"Software"
+msgstr ""
+"לא מותקנים יישומים שיכולים לפתוח „%s”. ניתן למצוא יישומים נוספים דרך תכנה"
+
+#: src/appchooserdialog.c:412
+msgid "No suitable app installed. You can find more applications in Software."
+msgstr "לא מותקן יישום מתאים. ניתן למצוא יישומים נוספים בתכנה."
+
+#: src/appchooserdialog.ui:10
+msgid "Open With…"
+msgstr "פתיחה באמצעות…"
+
+#: src/appchooserdialog.ui:23 src/filechooser.c:462
+msgid "_Open"
+msgstr "_פתיחה"
+
+#: src/appchooserdialog.ui:115
+msgid "No Apps available"
+msgstr "אין יישומים זמינים"
+
+#: src/appchooserdialog.ui:159
+msgid "_Find More in Software"
+msgstr "_איתור נוספים בתכנה"
+
+#: src/background.c:215 src/background.c:308
+#, c-format
+msgid "“%s” is running in the background"
+msgstr "‫„%s” פועל ברקע"
+
+#: src/background.c:217
+msgid ""
+"This might be for a legitimate reason, but the application has not provided "
+"one.\n"
+"\n"
+"Note that forcing an application to quit might cause data loss."
+msgstr ""
+"יכול להיות שישנה סיבה מוצדקת לכך, אך זו לא סופקה על ידי היישום.\n"
+"‬\n"
+"‫‫יש לשים לב שאילוץ יציאה מהיישום עשויה להוביל לאבדן נתונים."
+
+#: src/background.c:220
+msgid "Force quit"
+msgstr "אילוץ יציאה"
+
+#: src/background.c:221
+msgid "Allow"
+msgstr "לאפשר"
+
+#: src/background.c:306
+msgid "Background activity"
+msgstr "פעילות רקע"
+
+#: src/background.c:314
+msgid "Find out more"
+msgstr "למצוא עוד"
+
+#: src/filechooser.c:462
+msgid "_Select"
+msgstr "_בחירה"
+
+#: src/filechooser.c:464
+msgid "_Save"
+msgstr "_שמירה"
+
+#: src/filechooser.c:641
+msgid "Open files read-only"
+msgstr "פתיחת קבצים לקריאה בלבד"
+
+#: src/remotedesktopdialog.c:188
+msgid "Pointer"
+msgstr "סמן"
+
+#: src/remotedesktopdialog.c:191
+msgid "Keyboard"
+msgstr "מקלדת"
+
+#: src/remotedesktopdialog.c:194
+msgid "Touch screen"
+msgstr "מסך מגע"
+
+#: src/remotedesktopdialog.c:307
+#, c-format
+msgid "Select devices to share with %s"
+msgstr "נא לבחור התקנים לשיתוף עם %s"
+
+#: src/remotedesktopdialog.c:312
+msgid "Select devices to share with the requesting application"
+msgstr "נא לבחור התקנים לשיתוף עם היישום שביקש"
+
+#: src/remotedesktopdialog.ui:12
+msgid "Remote desktop"
+msgstr "שולחן עבודה מרוחק"
+
+#: src/screencastdialog.ui:12
+msgid "Screen Share"
+msgstr "שיתוף מסך"
+
+#: src/screencastwidget.c:487
+#, c-format
+msgid "Select monitor to share with %s"
+msgstr "נא לבחור מסך לשיתוף עם %s"
+
+#: src/screencastwidget.c:489
+#, c-format
+msgid "Select window to share with %s"
+msgstr "נא לבחור חלון לשיתוף עם %s"
+
+#: src/screencastwidget.c:494
+msgid "Select monitor to share with the requesting application"
+msgstr "נא לבחור מסך לשיתוף עם היישום שביקש"
+
+#: src/screencastwidget.c:495
+msgid "Select window to share with the requesting application"
+msgstr "נא לבחור חלון לשיתוף עם היישום שביקש"
+
+#: src/screencastwidget.ui:100
+msgid "Single Window"
+msgstr "חלון בודד"
+
+#: src/screencastwidget.ui:176
+msgid "Entire Screen"
+msgstr "כל המסך"
+
+#: src/screenshotdialog.c:442
+#, c-format
+msgid "Share this screenshot with %s?"
+msgstr "לשתף את הצילום הזה עם %s?"
+
+#: src/screenshotdialog.c:446
+msgid "Share this screenshot with the requesting application?"
+msgstr "לשתף את צילום המסך הזה עם היישום שביקש?"
+
+#: src/screenshotdialog.ui:10
+msgid "Screenshot"
+msgstr "צילום מסך"
+
+#: src/screenshotdialog.ui:30
+msgid "_Options…"
+msgstr "_אפשרויות…"
+
+#: src/screenshotdialog.ui:55
+msgid "Take _Screenshot"
+msgstr "_צילום המסך"
+
+#: src/screenshotdialog.ui:111
+msgid "Take Screenshot"
+msgstr "צילום המסך"
+
+#: src/screenshotdialog.ui:122
+msgid "Grab the whole sc_reen"
+msgstr "צילום המסך _כולו"
+
+#: src/screenshotdialog.ui:133
+msgid "Grab the current _window"
+msgstr "צילום המסך ה_נוכחי"
+
+#: src/screenshotdialog.ui:144
+msgid "Select _area to grab"
+msgstr "בחירת _אזור לצילום"
+
+#: src/screenshotdialog.ui:158
+msgid "Grab after a _delay of"
+msgstr "לצלם לאחר ה_שהיה של"
+
+#: src/screenshotdialog.ui:171
+msgid "seconds"
+msgstr "שניות"
+
+#: src/screenshotdialog.ui:181
+msgid "Effects"
+msgstr "אפקטים"
+
+#: src/screenshotdialog.ui:192
+msgid "Include _pointer"
+msgstr "_כולל הסמן"
+
+#: src/screenshotdialog.ui:201
+msgid "Include the window _border"
+msgstr "כולל _גבולות החלון"
+
+#: src/settings.c:217
+msgid "Requested setting not found"
+msgstr "ההגדרה המבוקשת לא נמצאה"
+
+#: src/wallpaperdialog.ui:13
+msgid "Set Background"
+msgstr "הגדרת רקע"
+
+#: src/wallpaperdialog.ui:26
+msgid "Set"
+msgstr "הגדרה"
+
+#: src/wallpaperdialog.ui:57
+msgid "Failed to load image file"
+msgstr "טעינת קובץ התמונה נכשלה"
+
+#: src/wallpaperpreview.ui:57
+msgid "Activities"
+msgstr "פעילויות"
