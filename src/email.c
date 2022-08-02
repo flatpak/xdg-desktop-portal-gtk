@@ -47,11 +47,14 @@ compose_mail_mailto (GAppInfo       *info,
 
   sep = "?";
 
-  for (i = 0; addrs[i]; i++)
+  if (addrs)
     {
-      if (i > 0)
-        g_string_append (url, ",");
-      g_string_append_printf (url, "%s", addrs[i]);
+    for (i = 0; addrs[i]; i++)
+      {
+        if (i > 0)
+          g_string_append (url, ",");
+        g_string_append_printf (url, "%s", addrs[i]);
+      }
     }
 
   if (cc)
