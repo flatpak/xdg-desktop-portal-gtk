@@ -5,9 +5,9 @@ env:
 
 jobs:
   test:
-    name: Ubuntu 21.04 build
+    name: Ubuntu 22.04 build
     runs-on: ubuntu-latest
-    container: ubuntu:21.04
+    container: ubuntu:22.04
     steps:
       - name: Install dependencies
         run: |
