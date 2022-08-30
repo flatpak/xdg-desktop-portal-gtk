@@ -596,7 +596,12 @@ handle_open (XdpImplFileChooser *object,
     }
   g_slist_free_full (filters, g_object_unref);
 
-  if (strcmp (method_name, "SaveFile") == 0)
+  if (strcmp (method_name, "OpenFile") == 0)
+    {
+      if (g_variant_lookup (arg_options, "current_folder", "^&ay", &path))
+        gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dialog), path);
+    }
+  else if (strcmp (method_name, "SaveFile") == 0)
     {
       if (g_variant_lookup (arg_options, "current_name", "&s", &current_name))
         gtk_file_chooser_set_current_name (GTK_FILE_CHOOSER (dialog), current_name);
