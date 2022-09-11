@@ -483,7 +483,7 @@ screen_cast_widget_set_app_id (ScreenCastWidget *widget,
       if (info)
         display_name = g_app_info_get_display_name (info);
       else
-        display_name = app_id
+        display_name = app_id;
       monitor_heading = g_strdup_printf (_("Select monitor to share with %s"),
                                          display_name);
       window_heading = g_strdup_printf (_("Select window to share with %s"),
