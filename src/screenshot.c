@@ -317,6 +317,19 @@ screenshot_init (GDBusConnection *bus,
   if (shell == NULL)
     return FALSE;
 
+  /* Only newer versions of the Screenshot impl have a version property */
+  if (g_object_class_find_property (G_OBJECT_GET_CLASS (helper), "version")) {
+    GDBusInterfaceInfo *shell_iface_info;
+
+    /* Older forks of GNOME Shell (e.g. MATE & Cinnamon) don't provide the
+     * PickColor method, so return version 1 in this case */
+    shell_iface_info = g_dbus_interface_get_info (G_DBUS_INTERFACE (shell));
+    if (g_dbus_interface_info_lookup_method (shell_iface_info, "PickColor"))
+      g_object_set (helper, "version", 2, NULL);
+    else
+      g_object_set (helper, "version", 1, NULL);
+  }
+
   g_debug ("providing %s", g_dbus_interface_skeleton_get_info (helper)->name);
 
   return TRUE;
