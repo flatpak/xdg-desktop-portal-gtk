@@ -163,15 +163,18 @@ handle_add_notification_fdo (XdpImplNotification *object,
                              GDBusMethodInvocation *invocation,
                              const gchar *arg_app_id,
                              const gchar *arg_id,
+                             const gchar *desktop_id,
                              GVariant *arg_notification)
 {
   GDBusConnection *connection;
 
-  g_debug ("handle add-notification from %s using the freedesktop implementation", arg_app_id);
+  g_debug ("handle add-notification from %s using the freedesktop implementation",
+           desktop_id ? desktop_id : arg_app_id);
 
   connection = g_dbus_method_invocation_get_connection (invocation);
 
-  fdo_add_notification (connection, arg_app_id, arg_id, arg_notification, activate_action, NULL);
+  fdo_add_notification (connection, arg_app_id, arg_id, desktop_id,
+                        arg_notification, activate_action, NULL);
 
   xdp_impl_notification_complete_add_notification (object, invocation);
 }
@@ -220,6 +223,39 @@ has_unprefixed_action (GVariant *notification)
   return FALSE;
 }
 
+static GVariant *
+parse_private_notifications_parameters (GVariant    *notification,
+                                        const char **out_desktop_id)
+{
+  GVariantBuilder n;
+  int i;
+
+  g_assert (out_desktop_id != NULL);
+
+  if (!g_variant_lookup (notification, "desktop-id", "&s", out_desktop_id))
+    {
+      *out_desktop_id = NULL;
+      return g_variant_ref_sink (notification);
+    }
+
+  g_variant_builder_init (&n, G_VARIANT_TYPE_VARDICT);
+
+  for (i = 0; i < g_variant_n_children (notification); i++)
+    {
+      const char *key;
+      g_autoptr(GVariant) value = NULL;
+
+      g_variant_get_child (notification, i, "{&sv}", &key, &value);
+
+      if (g_str_equal (key, "desktop-id"))
+        continue;
+
+      g_variant_builder_add (&n, "{sv}", key, value);
+    }
+
+  return g_variant_ref_sink (g_variant_builder_end (&n));
+}
+
 static gboolean
 handle_add_notification (XdpImplNotification *object,
                          GDBusMethodInvocation *invocation,
@@ -227,18 +263,27 @@ handle_add_notification (XdpImplNotification *object,
                          const gchar *arg_id,
                          GVariant *arg_notification)
 {
+  g_autoptr (GVariant) notification = NULL;
   g_autofree char *name_owner = NULL;
+  const char *desktop_id = NULL;
 
   if (gtk_notifications)
     name_owner = g_dbus_proxy_get_name_owner (G_DBUS_PROXY (gtk_notifications));
 
+  notification = parse_private_notifications_parameters (arg_notification,
+                                                         &desktop_id);
+
+  if (g_strcmp0 (desktop_id, arg_app_id) == 0)
+    desktop_id = NULL;
+
   if (gtk_notifications == NULL ||
       name_owner == NULL ||
       !g_application_id_is_valid (arg_app_id) ||
-      has_unprefixed_action (arg_notification))
-    handle_add_notification_fdo (object, invocation, arg_app_id, arg_id, arg_notification);
+      (desktop_id && !g_application_id_is_valid (desktop_id)) ||
+      has_unprefixed_action (notification))
+    handle_add_notification_fdo (object, invocation, arg_app_id, arg_id, desktop_id, notification);
   else
-    handle_add_notification_gtk (object, invocation, arg_app_id, arg_id, arg_notification);
+    handle_add_notification_gtk (object, invocation, desktop_id ? desktop_id : arg_app_id, arg_id, notification);
 
   return TRUE;
 }

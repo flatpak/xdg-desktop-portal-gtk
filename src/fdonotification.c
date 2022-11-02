@@ -34,6 +34,7 @@ typedef struct
 {
   char *app_id;
   char *id;
+  char *desktop_id;
   guint32 notify_id;
   char *default_action;
   GVariant *default_action_target;
@@ -48,6 +49,7 @@ fdo_notification_free (gpointer data)
 
   g_free (n->app_id);
   g_free (n->id);
+  g_free (n->desktop_id);
   g_free (n->default_action);
   if (n->default_action_target)
     g_variant_unref (n->default_action_target);
@@ -264,7 +266,8 @@ call_notify (GDBusConnection *connection,
       }
 
   g_variant_builder_init (&hints_builder, G_VARIANT_TYPE ("a{sv}"));
-  g_variant_builder_add (&hints_builder, "{sv}", "desktop-entry", g_variant_new_string (fdo->app_id));
+  g_variant_builder_add (&hints_builder, "{sv}", "desktop-entry",
+                         g_variant_new_string (fdo->desktop_id ? fdo->desktop_id : fdo->app_id));
   if (g_variant_lookup (notification, "priority", "&s", &priority))
     urgency = urgency_from_priority (priority);
   else
@@ -400,6 +403,7 @@ void
 fdo_add_notification (GDBusConnection *connection,
                       const char *app_id,
                       const char *id,
+                      const char *desktop_id,
                       GVariant *notification,
                       ActivateAction activate_action,
                       gpointer data)
@@ -412,6 +416,7 @@ fdo_add_notification (GDBusConnection *connection,
       n = g_slice_new0 (FdoNotification);
       n->app_id = g_strdup (app_id);
       n->id = g_strdup (id);
+      n->desktop_id = g_strdup (desktop_id);
       n->notify_id = 0;
       n->activate_action = activate_action;
       n->data = data;
