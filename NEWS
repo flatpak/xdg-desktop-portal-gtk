@@ -1,3 +1,16 @@
+Changes in 1.14.1, 2022-11-29
+=============================
+
+- printing, wallpaper: Fix some memory leaks
+- printing: Consistently include .desktop in the fallback app name
+- screencast: Fall back to desktop ID if we don't know the app name
+- appchooser: Fix a use-after-free
+- wallpaper: Handle errors storing images in the cache
+- email: Fix a crash if no addresses are provided
+- notification: Fix notifications for apps with no ID not appearing
+- screenshot: Report whether PickColor is implemented, if possible
+  (this requires a sufficiently new xdg-desktop-portal at runtime)
+
 Changes in 1.14.0, 2022-03-18
 =============================
 
