@@ -1,4 +1,4 @@
-Changes in 1.14.0, 18-03-2022
+Changes in 1.14.0, 2022-03-18
 =============================
 
 - Add an implementation of the dynamic launcher portal
@@ -6,7 +6,7 @@ Changes in 1.14.0, 18-03-2022
 - New translations: oc, pt
 - Translation updates
 
-Changes in 1.12.0, 21-12-2021
+Changes in 1.12.0, 2021-12-21
 =============================
 
 - settings: Provide org.freedesktop.appearance.color-scheme key
