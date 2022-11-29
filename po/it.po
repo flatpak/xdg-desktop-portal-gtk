@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2022-03-18 21:06-0700\n"
+"POT-Creation-Date: 2022-11-29 13:45+0000\n"
 "PO-Revision-Date: 2020-08-06 08:43+0200\n"
 "Last-Translator: Milo Casagrande <milo@milo.name>\n"
 "Language-Team: Italian <gnome-it-list@gnome.org>\n"
@@ -201,22 +201,22 @@ msgstr "Desktop remoto"
 msgid "Screen Share"
 msgstr "Condivisione dello schermo"
 
-#: src/screencastwidget.c:484
+#: src/screencastwidget.c:487
 #, c-format
 msgid "Select monitor to share with %s"
 msgstr "Selezionare la schermata da condividere con %s"
 
-#: src/screencastwidget.c:486
+#: src/screencastwidget.c:489
 #, c-format
 msgid "Select window to share with %s"
 msgstr "Selezionare la finestra da condividere con %s"
 
-#: src/screencastwidget.c:491
+#: src/screencastwidget.c:494
 msgid "Select monitor to share with the requesting application"
 msgstr ""
 "Selezionare la schermata da condividere con l'applicazione che la richiede"
 
-#: src/screencastwidget.c:492
+#: src/screencastwidget.c:495
 msgid "Select window to share with the requesting application"
 msgstr ""
 "Selezionare la finestra da condividere con l'applicazione che la richiede"

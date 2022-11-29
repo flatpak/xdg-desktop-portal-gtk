@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2022-03-18 21:06-0700\n"
+"POT-Creation-Date: 2022-11-29 13:45+0000\n"
 "PO-Revision-Date: 2017-03-02 11:43+0100\n"
 "Last-Translator: Claude Paroz <claude@2xlibre.net>\n"
 "Language-Team: French <gnomefr@traduc.org>\n"
@@ -193,22 +193,22 @@ msgstr ""
 msgid "Screen Share"
 msgstr "Capture d'écran"
 
-#: src/screencastwidget.c:484
+#: src/screencastwidget.c:487
 #, c-format
 msgid "Select monitor to share with %s"
 msgstr ""
 
-#: src/screencastwidget.c:486
+#: src/screencastwidget.c:489
 #, c-format
 msgid "Select window to share with %s"
 msgstr ""
 
-#: src/screencastwidget.c:491
+#: src/screencastwidget.c:494
 #, fuzzy
 msgid "Select monitor to share with the requesting application"
 msgstr "Partager la capture d'écran avec l'application qui le demande ?"
 
-#: src/screencastwidget.c:492
+#: src/screencastwidget.c:495
 #, fuzzy
 msgid "Select window to share with the requesting application"
 msgstr "Partager la capture d'écran avec l'application qui le demande ?"
