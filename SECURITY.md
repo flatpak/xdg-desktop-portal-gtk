@@ -8,7 +8,8 @@ In stable branches and released packages, this table is likely to be outdated;
 please check
 [the latest version](https://github.com/flatpak/xdg-desktop-portal-gtk/blob/master/SECURITY.md).
 
-| Version  | Supported          | Status
-| -------- | ------------------ | -------------------------------------------------------------- |
-| 1.8.x    | :white_check_mark: | Stable branch, recommended for use in distributions            |
-| <= 1.7.x | :x:                | Older branches, no longer supported                            |
+| Version   | Supported          | Status
+| --------- | ------------------ | -------------------------------------------------------------- |
+| 1.15.x    | :hammer:           | Development branch, releases may include non-security changes  |
+| 1.14.x    | :white_check_mark: | Stable branch, recommended for use in distributions            |
+| <= 1.13.x | :x:                | Older branches, no longer supported                            |
