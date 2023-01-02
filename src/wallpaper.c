@@ -103,7 +103,7 @@ on_file_copy_cb (GObject *source_object,
       goto out;
     }
 
-  destination = g_file_new_for_path (handle->picture_uri);
+  destination = g_file_new_for_uri (handle->picture_uri);
   if (!g_file_replace_contents (destination,
                                 contents,
                                 length,
@@ -130,8 +130,16 @@ set_wallpaper (WallpaperDialogHandle *handle,
                const gchar *uri)
 {
   g_autoptr(GFile) source = NULL;
+  g_autoptr(GError) error = NULL;
+  g_autrofree gchar *path = NULL;
 
-  handle->picture_uri = g_build_filename (g_get_user_config_dir (), "background", NULL);
+  path = g_build_filename (g_get_user_config_dir (), "background", NULL);
+  handle->picture_uri = g_filename_to_uri (path, NULL, &error);
+  if (error)
+    {
+      g_warning ("Failed to construct wallpaper uri: %s", error->message);
+      return;
+    }
 
   source = g_file_new_for_uri (uri);
   g_file_load_contents_async (source,
