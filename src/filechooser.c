@@ -364,10 +364,11 @@ handle_close (XdpImplRequest *object,
                                                handle->invocation,
                                                2,
                                                g_variant_builder_end (&opt_builder));
-  file_dialog_handle_close (handle);
 
   if (handle->request->exported)
     request_unexport (handle->request);
+
+  file_dialog_handle_close (handle);
 
   xdp_impl_request_complete_close (object, invocation);
 
