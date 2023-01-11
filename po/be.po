@@ -1,0 +1,334 @@
+# Belarusian translation for xdg-desktop-portal-gtk.
+# Copyright (C) 2023 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
+# This file is distributed under the same license as the xdg-desktop-portal-gtk package.
+# Yuras Shumovich <shumovichy@gmail.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xdg-desktop-portal-gtk main\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
+"issues\n"
+"POT-Creation-Date: 2023-01-03 15:31+0000\n"
+"PO-Revision-Date: 2023-01-03 23:22+0300\n"
+"Last-Translator: Yuras Shumovich <shumovichy@gmail.com>\n"
+"Language-Team: Belarusian <i18n-bel-gnome@googlegroups.com>\n"
+"Language: be\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 3.2.2\n"
+
+#: data/xdg-desktop-portal-gtk.desktop.in.in:4
+msgid "Portal"
+msgstr "Партал"
+
+#: src/access.c:271
+msgid "Deny Access"
+msgstr "Забараніць доступ"
+
+#: src/access.c:274
+msgid "Grant Access"
+msgstr "Дазволіць доступ"
+
+#: src/accountdialog.c:176
+msgid "Select an Image"
+msgstr "Выберыце выяву"
+
+#: src/accountdialog.c:179 src/wallpaperdialog.ui:18
+msgid "Cancel"
+msgstr "Скасаваць"
+
+#: src/accountdialog.c:180
+msgid "Select"
+msgstr "Выбраць"
+
+#: src/accountdialog.c:181
+msgid "Clear"
+msgstr "Ачысціць"
+
+#: src/accountdialog.c:195
+msgid "Images"
+msgstr "Выявы"
+
+#: src/accountdialog.c:272
+#, c-format
+msgid "Share your personal information with %s?"
+msgstr "Даць доступ да персанальнай інфармацыі для %s?"
+
+#: src/accountdialog.c:275
+msgid "Share your personal information with the requesting application?"
+msgstr "Даць доступ да персанальнай інфармацыі для праграмы?"
+
+#: src/accountdialog.ui:10
+msgid "Share Details"
+msgstr "Падрабязнасці"
+
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:467
+#: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
+#: src/screenshotdialog.ui:14
+msgid "_Cancel"
+msgstr "_Скасаваць"
+
+#: src/accountdialog.ui:22 src/remotedesktopdialog.ui:28
+#: src/screencastdialog.ui:28 src/screenshotdialog.ui:38
+msgid "_Share"
+msgstr "_Даць доступ"
+
+#: src/accountdialog.ui:148
+msgid "Make changes before sharing the information"
+msgstr "Унясіце змены, перш чым даць доступ да інфармацыі"
+
+#: src/appchooserdialog.c:229
+msgid "Failed to start Software"
+msgstr "Не ўдалося запусціць кіраўнік праграмнага забеспячэнне"
+
+#: src/appchooserdialog.c:385
+#, c-format
+msgid "Choose an application to open the file “%s”."
+msgstr "Выберыце праграму, каб адкрыць файл «%s»."
+
+#: src/appchooserdialog.c:390
+msgid "Choose an application."
+msgstr "Выберыце праграму."
+
+#: src/appchooserdialog.c:407
+#, c-format
+msgid ""
+"No apps installed that can open “%s”. You can find more applications in "
+"Software"
+msgstr ""
+"Не ўсталявана праграмы, якая можа адкрываць «%s». Больш праграм можна "
+"знайсці ў кіраўніку праграмнага забеспячэння"
+
+#: src/appchooserdialog.c:412
+msgid "No suitable app installed. You can find more applications in Software."
+msgstr ""
+"Не ўсталявана адпаведнай праграмы. Больш праграм можна знайсці ў кіраўніку "
+"праграмнага забеспячэння."
+
+#: src/appchooserdialog.ui:10
+msgid "Open With…"
+msgstr "Адкрыць праз…"
+
+#: src/appchooserdialog.ui:23 src/filechooser.c:462
+msgid "_Open"
+msgstr "_Адкрыць"
+
+#: src/appchooserdialog.ui:115
+msgid "No Apps available"
+msgstr "Няма даступных праграм"
+
+#: src/appchooserdialog.ui:159
+msgid "_Find More in Software"
+msgstr "_Шукаць у кіраўніку праграмнага забеспячэнне"
+
+#: src/background.c:215 src/background.c:308
+#, c-format
+msgid "“%s” is running in the background"
+msgstr "«%s» выконваецца ў фонавым рэжыме"
+
+#: src/background.c:217
+msgid ""
+"This might be for a legitimate reason, but the application has not provided "
+"one.\n"
+"\n"
+"Note that forcing an application to quit might cause data loss."
+msgstr ""
+"Гэта можа мець аб'ектыўную прычыну, але праграма яе не ўказала.\n"
+"\n"
+"Звярніце ўвагу, што прымусовае завяршэнне працы праграмы можа прывесці да "
+"страты даныя."
+
+#: src/background.c:220
+msgid "Force quit"
+msgstr "Прымусова завяршыць"
+
+#: src/background.c:221
+msgid "Allow"
+msgstr "Дазволіць"
+
+#: src/background.c:306
+msgid "Background activity"
+msgstr "Фонавая актыўнасць"
+
+#: src/background.c:314
+msgid "Find out more"
+msgstr "Даведацца больш"
+
+#: src/filechooser.c:462
+msgid "_Select"
+msgstr "_Выбраць"
+
+#: src/filechooser.c:464
+msgid "_Save"
+msgstr "_Захаваць"
+
+#: src/filechooser.c:641
+msgid "Open files read-only"
+msgstr "Адкрыць файлы ў рэжыме толькі для чытання"
+
+#: src/remotedesktopdialog.c:188
+msgid "Pointer"
+msgstr "Указальнік"
+
+#: src/remotedesktopdialog.c:191
+msgid "Keyboard"
+msgstr "Клавіятура"
+
+#: src/remotedesktopdialog.c:194
+msgid "Touch screen"
+msgstr "Сэнсарны экран"
+
+#: src/remotedesktopdialog.c:307
+#, c-format
+msgid "Select devices to share with %s"
+msgstr "Выберыце прылады, да якіх будзе доступ у %s"
+
+#: src/remotedesktopdialog.c:312
+msgid "Select devices to share with the requesting application"
+msgstr "Выберыце прылады, да якіх будзе доступ у праграмы"
+
+#: src/remotedesktopdialog.ui:12
+msgid "Remote desktop"
+msgstr "Аддалены працоўны стол"
+
+#: src/screencastdialog.ui:12
+msgid "Screen Share"
+msgstr "Доступ да экрана"
+
+#: src/screencastwidget.c:487
+#, c-format
+msgid "Select monitor to share with %s"
+msgstr "Выберыце манітор, да якога будзе доступ у %s"
+
+#: src/screencastwidget.c:489
+#, c-format
+msgid "Select window to share with %s"
+msgstr "Выберыце акно, да якога будзе доступ у %s"
+
+#: src/screencastwidget.c:494
+msgid "Select monitor to share with the requesting application"
+msgstr "Выберыце манітор, да якога будзе доступ у праграмы"
+
+#: src/screencastwidget.c:495
+msgid "Select window to share with the requesting application"
+msgstr "Выберыце акно, да якога будзе доступ у праграмы"
+
+#: src/screencastwidget.ui:100
+msgid "Single Window"
+msgstr "Асобнае акно"
+
+#: src/screencastwidget.ui:176
+msgid "Entire Screen"
+msgstr "Увесь экран"
+
+#: src/screenshotdialog.c:442
+#, c-format
+msgid "Share this screenshot with %s?"
+msgstr "Даць доступ да здымкаў для %s?"
+
+#: src/screenshotdialog.c:446
+msgid "Share this screenshot with the requesting application?"
+msgstr "Даць доступ да здымкаў для праграмы?"
+
+#: src/screenshotdialog.ui:10
+msgid "Screenshot"
+msgstr "Здымак экрана"
+
+#: src/screenshotdialog.ui:30
+msgid "_Options…"
+msgstr "_Параметры…"
+
+#: src/screenshotdialog.ui:55
+msgid "Take _Screenshot"
+msgstr "Зрабіць _здымак экрана"
+
+#: src/screenshotdialog.ui:111
+msgid "Take Screenshot"
+msgstr "Зрабіць здымак экрана"
+
+#: src/screenshotdialog.ui:122
+msgid "Grab the whole sc_reen"
+msgstr "Здымка ўсяго _экрана"
+
+#: src/screenshotdialog.ui:133
+msgid "Grab the current _window"
+msgstr "Здымка бягучага _акна"
+
+#: src/screenshotdialog.ui:144
+msgid "Select _area to grab"
+msgstr "Вылучыце _вобласць здымкі"
+
+#: src/screenshotdialog.ui:158
+msgid "Grab after a _delay of"
+msgstr "Затрымка перад _здымкай"
+
+#: src/screenshotdialog.ui:171
+msgid "seconds"
+msgstr "секунд"
+
+#: src/screenshotdialog.ui:181
+msgid "Effects"
+msgstr "Эфекты"
+
+#: src/screenshotdialog.ui:192
+msgid "Include _pointer"
+msgstr "Улучыць _указальнік мышы"
+
+#: src/screenshotdialog.ui:201
+msgid "Include the window _border"
+msgstr "Улучыць _мяжу акна"
+
+#: src/settings.c:217
+msgid "Requested setting not found"
+msgstr "Запытаная налада не знойдзена"
+
+#: src/wallpaperdialog.ui:13
+msgid "Set Background"
+msgstr "Задаць як фон"
+
+#: src/wallpaperdialog.ui:26
+msgid "Set"
+msgstr "Задаць"
+
+#: src/wallpaperdialog.ui:57
+msgid "Failed to load image file"
+msgstr "Не ўдалося загрузіць выяву"
+
+#: src/wallpaperpreview.ui:57
+msgid "Activities"
+msgstr "Дзейнасць"
+
+#, c-format
+#~ msgid "Share your personal information with %1$s? %2$s"
+#~ msgstr "Даць доступ да персанальнай інфармацыі для %1$s? %2$s"
+
+#, c-format
+#~ msgid "Share your personal information with the requesting application? %s"
+#~ msgstr "Даць доступ да персанальнай інфармацыі для праграмы? %s"
+
+#~ msgid "Name"
+#~ msgstr "Імя"
+
+#~ msgid "Username"
+#~ msgstr "Імя карыстальніка"
+
+#~ msgid "Create Web Application"
+#~ msgstr "Стварыць вэб-праграму"
+
+#~ msgid "Create Application"
+#~ msgstr "Стварыць праграму"
+
+#~ msgid "C_reate"
+#~ msgstr "С_тварыць"
+
+#~ msgid "Allow remote interaction"
+#~ msgstr "Дазволіць аддаленае ўзаемадзеянне"
+
+#~ msgid "Virtual monitor"
+#~ msgstr "Віртуальны манітор"
+
+#~ msgid "Remember this selection"
+#~ msgstr "Запомніць гэты выбар"
