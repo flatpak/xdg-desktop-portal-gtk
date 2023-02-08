@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2022-11-29 13:45+0000\n"
-"PO-Revision-Date: 2020-01-06 00:15+0100\n"
+"POT-Creation-Date: 2022-11-30 03:33+0000\n"
+"PO-Revision-Date: 2023-02-08 21:12+0100\n"
 "Last-Translator: Fran Diéguez <frandieguez@gnome.org>\n"
 "Language-Team: Galician\n"
 "Language: gl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
@@ -157,9 +157,8 @@ msgid "Find out more"
 msgstr "Saber máis"
 
 #: src/filechooser.c:462
-#, fuzzy
 msgid "_Select"
-msgstr "Seleccionar"
+msgstr "_Seleccionar"
 
 #: src/filechooser.c:464
 msgid "_Save"
