@@ -1,16 +1,16 @@
 # Polish translation for xdg-desktop-portal-gtk.
-# Copyright © 2016-2020 the xdg-desktop-portal-gtk authors.
+# Copyright © 2016-2023 the xdg-desktop-portal-gtk authors.
 # This file is distributed under the same license as the xdg-desktop-portal-gtk package.
-# Piotr Drąg <piotrdrag@gmail.com>, 2016-2020.
-# Aviary.pl <community-poland@mozilla.org>, 2016-2020.
+# Piotr Drąg <piotrdrag@gmail.com>, 2016-2023.
+# Aviary.pl <community-poland@mozilla.org>, 2016-2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2022-11-29 13:45+0000\n"
-"PO-Revision-Date: 2020-03-29 12:44+0200\n"
+"POT-Creation-Date: 2023-03-04 13:38+0000\n"
+"PO-Revision-Date: 2023-03-04 14:40+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
@@ -65,7 +65,8 @@ msgstr "Udostępnić informacje o użytkowniku proszącemu o to programowi?"
 msgid "Share Details"
 msgstr "Udostępnianie informacji"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:467
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:14
+#: src/dynamic-launcher.c:267 src/filechooser.c:468
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
@@ -112,7 +113,7 @@ msgstr ""
 msgid "Open With…"
 msgstr "Otwarcie za pomocą…"
 
-#: src/appchooserdialog.ui:23 src/filechooser.c:462
+#: src/appchooserdialog.ui:23 src/filechooser.c:463
 msgid "_Open"
 msgstr "_Otwórz"
 
@@ -157,15 +158,27 @@ msgstr "Działanie w tle"
 msgid "Find out more"
 msgstr "Więcej informacji"
 
-#: src/filechooser.c:462
+#: src/dynamic-launcher.c:259
+msgid "Create Web Application"
+msgstr "Utworzenie programu WWW"
+
+#: src/dynamic-launcher.c:261
+msgid "Create Application"
+msgstr "Utworzenie programu"
+
+#: src/dynamic-launcher.c:269
+msgid "C_reate"
+msgstr "_Utwórz"
+
+#: src/filechooser.c:463
 msgid "_Select"
 msgstr "_Wybierz"
 
-#: src/filechooser.c:464
+#: src/filechooser.c:465
 msgid "_Save"
 msgstr "_Zapisz"
 
-#: src/filechooser.c:641
+#: src/filechooser.c:642
 msgid "Open files read-only"
 msgstr "Otwarcie plików tylko do odczytu"
 
@@ -300,16 +313,3 @@ msgstr "Wczytanie pliku obrazu się nie powiodło"
 #: src/wallpaperpreview.ui:57
 msgid "Activities"
 msgstr "Podgląd"
-
-#~ msgid "applications-system-symbolic"
-#~ msgstr "applications-system-symbolic"
-
-#, c-format
-#~ msgid "%s is running in the background."
-#~ msgstr "Program „%s” działa w tle."
-
-#~ msgid "Set Lock Screen"
-#~ msgstr "Ustawienie ekranu blokowania"
-
-#~ msgid "Set Background & Lock Screen"
-#~ msgstr "Ustawienie tła i ekranu blokowania"
