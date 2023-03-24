@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2022-11-29 13:45+0000\n"
-"PO-Revision-Date: 2022-06-17 14:20+0300\n"
+"POT-Creation-Date: 2023-03-04 13:38+0000\n"
+"PO-Revision-Date: 2023-03-24 16:45+0300\n"
 "Last-Translator: Aleksandr Melman <Alexmelman88@gmail.com>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
@@ -67,7 +67,8 @@ msgstr "Дать запрашивающему приложению доступ 
 msgid "Share Details"
 msgstr "Подробности"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:467
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:14
+#: src/dynamic-launcher.c:267 src/filechooser.c:468
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
@@ -114,7 +115,7 @@ msgstr ""
 msgid "Open With…"
 msgstr "Открыть с помощью…"
 
-#: src/appchooserdialog.ui:23 src/filechooser.c:462
+#: src/appchooserdialog.ui:23 src/filechooser.c:463
 msgid "_Open"
 msgstr "_Открыть"
 
@@ -159,15 +160,27 @@ msgstr "Фоновая активность"
 msgid "Find out more"
 msgstr "Узнать больше"
 
-#: src/filechooser.c:462
+#: src/dynamic-launcher.c:259
+msgid "Create Web Application"
+msgstr "Создать веб-приложение"
+
+#: src/dynamic-launcher.c:261
+msgid "Create Application"
+msgstr "Создать приложение"
+
+#: src/dynamic-launcher.c:269
+msgid "C_reate"
+msgstr "С_оздать"
+
+#: src/filechooser.c:463
 msgid "_Select"
 msgstr "_Выбрать"
 
-#: src/filechooser.c:464
+#: src/filechooser.c:465
 msgid "_Save"
 msgstr "_Сохранить"
 
-#: src/filechooser.c:641
+#: src/filechooser.c:642
 msgid "Open files read-only"
 msgstr "Открыть файлы в режиме только для чтения"
 
@@ -246,11 +259,11 @@ msgstr "_Варианты…"
 
 #: src/screenshotdialog.ui:55
 msgid "Take _Screenshot"
-msgstr "Сделать _снимок"
+msgstr "Сделать _снимок экрана"
 
 #: src/screenshotdialog.ui:111
 msgid "Take Screenshot"
-msgstr "Сделать снимок"
+msgstr "Сделать снимок экрана"
 
 #: src/screenshotdialog.ui:122
 msgid "Grab the whole sc_reen"
@@ -310,15 +323,6 @@ msgstr "Обзор"
 
 #~ msgid "Username"
 #~ msgstr "Имя пользователя"
-
-#~ msgid "Create Web Application"
-#~ msgstr "Создать веб-приложение"
-
-#~ msgid "Create Application"
-#~ msgstr "Создать приложение"
-
-#~ msgid "C_reate"
-#~ msgstr "С_оздать"
 
 #~ msgid "Allow remote interaction"
 #~ msgstr "Разрешить удалённое взаимодействие"
