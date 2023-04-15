@@ -206,7 +206,8 @@ response_received (GtkDialog *dialog,
 }
 
 static void
-show_permission_dialog (BackgroundHandle *handle)
+show_permission_dialog (BackgroundHandle *handle,
+                        const char       *activation_token)
 {
   GtkWidget *dialog;
   GtkWidget *button;
@@ -229,6 +230,7 @@ show_permission_dialog (BackgroundHandle *handle)
 
   handle->dialog = dialog;
 
+  gtk_window_set_startup_id (GTK_WINDOW (dialog), activation_token);
   gtk_window_present (GTK_WINDOW (dialog));
 }
 
@@ -237,6 +239,7 @@ activate_action (GDBusConnection *connection,
                  const char *app_id,
                  const char *id,
                  const char *name,
+                 const char *activation_token,
                  GVariant *parameter,
                  gpointer data)
 {
@@ -245,7 +248,7 @@ activate_action (GDBusConnection *connection,
   if (g_str_equal (name, "show"))
     {
       g_debug ("Show background permissions for %s", handle->request->app_id);
-      show_permission_dialog (handle);
+      show_permission_dialog (handle, activation_token);
     }
   else
     {

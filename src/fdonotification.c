@@ -35,6 +35,7 @@ typedef struct
   char *app_id;
   char *id;
   guint32 notify_id;
+  char *activation_token;
   char *default_action;
   GVariant *default_action_target;
   ActivateAction activate_action;
@@ -48,6 +49,7 @@ fdo_notification_free (gpointer data)
 
   g_free (n->app_id);
   g_free (n->id);
+  g_free (n->activation_token);
   g_free (n->default_action);
   if (n->default_action_target)
     g_variant_unref (n->default_action_target);
@@ -98,12 +100,18 @@ notify_signal (GDBusConnection *connection,
 {
   guint32 id = 0;
   const char *action = NULL;
+  const char *activation_token = NULL;
   FdoNotification *n;
 
   if (g_str_equal (signal_name, "NotificationClosed") &&
       g_variant_is_of_type (parameters, G_VARIANT_TYPE ("(uu)")))
     {
       g_variant_get (parameters, "(uu)", &id, NULL);
+    }
+  else if (g_str_equal (signal_name, "ActivationToken") &&
+           g_variant_is_of_type (parameters, G_VARIANT_TYPE ("(us)")))
+    {
+      g_variant_get (parameters, "(u&s)", &id, &activation_token);
     }
   else if (g_str_equal (signal_name, "ActionInvoked") &&
            g_variant_is_of_type (parameters, G_VARIANT_TYPE ("(us)")))
@@ -117,6 +125,13 @@ notify_signal (GDBusConnection *connection,
   if (n == NULL)
     return;
 
+  if (activation_token)
+    {
+      g_clear_pointer (&n->activation_token, g_free);
+      n->activation_token = g_strdup (activation_token);
+      return;
+    }
+
   if (action)
     {
       if (g_str_equal (action, "default"))
@@ -125,6 +140,7 @@ notify_signal (GDBusConnection *connection,
                               n->app_id,
                               n->id,
                               n->default_action,
+                              n->activation_token,
                               n->default_action_target,
                               n->data);
         }
@@ -139,6 +155,7 @@ notify_signal (GDBusConnection *connection,
                                   n->app_id,
                                   n->id,
                                   name,
+                                  n->activation_token,
                                   target,
                                   n->data);
               g_free (name);
@@ -421,6 +438,7 @@ fdo_add_notification (GDBusConnection *connection,
       /* Only clear default action. All other fields are still valid */
       g_clear_pointer (&n->default_action, g_free);
       g_clear_pointer (&n->default_action_target, g_variant_unref);
+      g_clear_pointer (&n->activation_token, g_free);
     }
 
   g_variant_lookup (notification, "default-action", "s", &n->default_action);

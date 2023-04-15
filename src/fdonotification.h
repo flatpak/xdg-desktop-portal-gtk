@@ -26,6 +26,7 @@ typedef void (*ActivateAction) (GDBusConnection *connection,
                                 const char *app_id,
                                 const char *id,
                                 const char *name,
+                                const char *activation_token,
                                 GVariant *parameter,
                                 gpointer data);
 
