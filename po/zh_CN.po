@@ -3,23 +3,23 @@
 # This file is distributed under the same license as the xdg-desktop-portal-gtk package.
 # Mingye Wang <arthur2e5@aosc.xyz>, 2016.
 # 王滋涵 Zephyr Waitzman <i@wi24rd.ml>, 2019.
-# lumingzh <lumingzh@qq.com>, 2020.
 # Dingzhong Chen <wsxy162@gmail.com>, 2020.
+# lumingzh <lumingzh@qq.com>, 2020-2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2022-11-29 13:45+0000\n"
-"PO-Revision-Date: 2020-10-09 00:25+0800\n"
-"Last-Translator: Dingzhong Chen <wsxy162@gmail.com>\n"
+"POT-Creation-Date: 2023-03-04 13:38+0000\n"
+"PO-Revision-Date: 2023-05-27 09:50+0800\n"
+"Last-Translator: lumingzh <lumingzh@qq.com>\n"
 "Language-Team: Chinese - China <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Gtranslator 3.36.0\n"
+"X-Generator: Gtranslator 42.0\n"
 "Plural-Forms: nplurals=1; plural=0\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
@@ -67,7 +67,8 @@ msgstr "与正在请求的应用共享您的个人信息吗？"
 msgid "Share Details"
 msgstr "分享详情"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:467
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:14
+#: src/dynamic-launcher.c:267 src/filechooser.c:468
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
@@ -110,7 +111,7 @@ msgstr "没有安装合适的应用。您可以在“软件”中查找更多应
 msgid "Open With…"
 msgstr "打开方式…"
 
-#: src/appchooserdialog.ui:23 src/filechooser.c:462
+#: src/appchooserdialog.ui:23 src/filechooser.c:463
 msgid "_Open"
 msgstr "打开(_O)"
 
@@ -153,15 +154,27 @@ msgstr "后台活动"
 msgid "Find out more"
 msgstr "查找更多"
 
-#: src/filechooser.c:462
+#: src/dynamic-launcher.c:259
+msgid "Create Web Application"
+msgstr "创建网页应用程序"
+
+#: src/dynamic-launcher.c:261
+msgid "Create Application"
+msgstr "创建应用程序"
+
+#: src/dynamic-launcher.c:269
+msgid "C_reate"
+msgstr "创建(_R)"
+
+#: src/filechooser.c:463
 msgid "_Select"
 msgstr "选择(_S)"
 
-#: src/filechooser.c:464
+#: src/filechooser.c:465
 msgid "_Save"
 msgstr "保存(_S)"
 
-#: src/filechooser.c:641
+#: src/filechooser.c:642
 msgid "Open files read-only"
 msgstr "以只读方式打开文件"
 
