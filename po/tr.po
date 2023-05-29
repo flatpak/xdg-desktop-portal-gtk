@@ -44,7 +44,7 @@ msgstr "İptal Et"
 
 #: src/accountdialog.c:180
 msgid "Select"
-msgstr "Seç"
+msgstr "Seç"
 
 #: src/accountdialog.c:181
 msgid "Clear"
@@ -173,7 +173,7 @@ msgstr "_Oluştur"
 
 #: src/filechooser.c:463
 msgid "_Select"
-msgstr "_Seç"
+msgstr "_Seç"
 
 #: src/filechooser.c:465
 msgid "_Save"
