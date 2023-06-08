@@ -1,0 +1,313 @@
+# Catalan translation for xdg-desktop-portal-gtk.
+# Copyright (C) 2021 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
+# This file is distributed under the same license as the xdg-desktop-portal-gtk package.
+# maite <maite.guix@gmail.com>, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xdg-desktop-portal-gtk master\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/issues\n"
+"POT-Creation-Date: 2023-02-21 03:33+0000\n"
+"PO-Revision-Date: 2021-11-10 17:35+0100\n"
+"Last-Translator: maite guix <maite.guix@me.com>\n"
+"Language-Team: Catalan <gnome@llistes.softcatala.org>\n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+
+#: data/xdg-desktop-portal-gtk.desktop.in.in:4
+msgid "Portal"
+msgstr "Portal"
+
+#: src/access.c:271
+msgid "Deny Access"
+msgstr "Denega l'accés"
+
+#: src/access.c:274
+msgid "Grant Access"
+msgstr "Permet l'accés"
+
+#: src/accountdialog.c:176
+msgid "Select an Image"
+msgstr "Seleccioneu una imatge"
+
+#: src/accountdialog.c:179 src/wallpaperdialog.ui:18
+msgid "Cancel"
+msgstr "Cancel·la"
+
+#: src/accountdialog.c:180
+msgid "Select"
+msgstr "Selecciona"
+
+#: src/accountdialog.c:181
+msgid "Clear"
+msgstr "Neteja"
+
+#: src/accountdialog.c:195
+msgid "Images"
+msgstr "Imatges"
+
+#: src/accountdialog.c:272
+#, c-format
+msgid "Share your personal information with %s?"
+msgstr "Voleu compartir informació personal amb %s?"
+
+#: src/accountdialog.c:275
+msgid "Share your personal information with the requesting application?"
+msgstr "Voleu compartir informació personal amb l'aplicació sol·licitant?"
+
+#: src/accountdialog.ui:10
+msgid "Share Details"
+msgstr "Comparteix detalls"
+
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:14
+#: src/dynamic-launcher.c:267 src/filechooser.c:468
+#: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
+#: src/screenshotdialog.ui:14
+msgid "_Cancel"
+msgstr "_Cancel·la"
+
+#: src/accountdialog.ui:22 src/remotedesktopdialog.ui:28
+#: src/screencastdialog.ui:28 src/screenshotdialog.ui:38
+msgid "_Share"
+msgstr "_Comparteix"
+
+#: src/accountdialog.ui:148
+msgid "Make changes before sharing the information"
+msgstr "Fer canvis abans de compartir la informació"
+
+#: src/appchooserdialog.c:229
+msgid "Failed to start Software"
+msgstr "Ha fallat en iniciar el programari"
+
+#: src/appchooserdialog.c:385
+#, c-format
+msgid "Choose an application to open the file “%s”."
+msgstr "Trieu una aplicació per a obrir el fitxer «%s»."
+
+#: src/appchooserdialog.c:390
+msgid "Choose an application."
+msgstr "Trieu una aplicació."
+
+#: src/appchooserdialog.c:407
+#, c-format
+msgid ""
+"No apps installed that can open “%s”. You can find more applications in "
+"Software"
+msgstr ""
+"No hi ha cap app instal·lada que pugui obrir «%s». Podeu trobar més "
+"aplicacions a Programari"
+
+#: src/appchooserdialog.c:412
+msgid "No suitable app installed. You can find more applications in Software."
+msgstr ""
+"No s'ha instal·lat cap app adequada. Podeu trobar més aplicacions al "
+"Programari."
+
+#: src/appchooserdialog.ui:10
+msgid "Open With…"
+msgstr "Obre amb…"
+
+#: src/appchooserdialog.ui:23 src/filechooser.c:463
+msgid "_Open"
+msgstr "_Obre"
+
+#: src/appchooserdialog.ui:115
+msgid "No Apps available"
+msgstr "No hi ha cap app disponible"
+
+#: src/appchooserdialog.ui:159
+msgid "_Find More in Software"
+msgstr "_Cerca més a Programari"
+
+#: src/background.c:215 src/background.c:308
+#, c-format
+msgid "“%s” is running in the background"
+msgstr "«%s» s'està executant en segon pla"
+
+#: src/background.c:217
+msgid ""
+"This might be for a legitimate reason, but the application has not provided one.\n"
+"\n"
+"Note that forcing an application to quit might cause data loss."
+msgstr ""
+"Això pot ser una raó legítima, però l'aplicació no ha proporcionat cap.\n"
+"\n"
+"Tingueu en compte que forçar la sortida d'una aplicació pot causar la pèrdua de dades."
+
+#: src/background.c:220
+msgid "Force quit"
+msgstr "Força la sortida"
+
+#: src/background.c:221
+msgid "Allow"
+msgstr "Permet"
+
+#: src/background.c:306
+msgid "Background activity"
+msgstr "Activitat en segon pla"
+
+#: src/background.c:314
+msgid "Find out more"
+msgstr "Troba'n més"
+
+#: src/dynamic-launcher.c:259
+msgid "Create Web Application"
+msgstr "Crea una aplicació web"
+
+#: src/dynamic-launcher.c:261
+msgid "Create Application"
+msgstr "Crea una aplicació"
+
+#: src/dynamic-launcher.c:269
+msgid "C_reate"
+msgstr "C_rea"
+
+#: src/filechooser.c:463
+msgid "_Select"
+msgstr "_Selecciona"
+
+#: src/filechooser.c:465
+msgid "_Save"
+msgstr "De_sa"
+
+#: src/filechooser.c:642
+msgid "Open files read-only"
+msgstr "Obre fitxers de només lectura"
+
+#: src/remotedesktopdialog.c:188
+msgid "Pointer"
+msgstr "Punter"
+
+#: src/remotedesktopdialog.c:191
+msgid "Keyboard"
+msgstr "Teclat"
+
+#: src/remotedesktopdialog.c:194
+msgid "Touch screen"
+msgstr "Pantalla tàctil"
+
+#: src/remotedesktopdialog.c:307
+#, c-format
+msgid "Select devices to share with %s"
+msgstr "Seleccioneu els dispositius a compartir amb %s"
+
+#: src/remotedesktopdialog.c:312
+msgid "Select devices to share with the requesting application"
+msgstr "Seleccioneu els dispositius a compartir amb l'aplicació sol·licitant"
+
+#: src/remotedesktopdialog.ui:12
+msgid "Remote desktop"
+msgstr "Escriptori remot"
+
+#: src/screencastdialog.ui:12
+msgid "Screen Share"
+msgstr "Compartició de pantalla"
+
+#: src/screencastwidget.c:487
+#, c-format
+msgid "Select monitor to share with %s"
+msgstr "Seleccioneu el monitor que voleu compartir amb %s"
+
+#: src/screencastwidget.c:489
+#, c-format
+msgid "Select window to share with %s"
+msgstr "Seleccioneu la finestra a compartir amb %s"
+
+#: src/screencastwidget.c:494
+msgid "Select monitor to share with the requesting application"
+msgstr ""
+"Seleccioneu el monitor que voleu compartir amb l'aplicació sol·licitant"
+
+#: src/screencastwidget.c:495
+msgid "Select window to share with the requesting application"
+msgstr ""
+"Seleccioneu la finestra que voleu compartir amb l'aplicació sol·licitant"
+
+#: src/screencastwidget.ui:100
+msgid "Single Window"
+msgstr "Una sola finestra"
+
+#: src/screencastwidget.ui:176
+msgid "Entire Screen"
+msgstr "Tota la pantalla"
+
+#: src/screenshotdialog.c:442
+#, c-format
+msgid "Share this screenshot with %s?"
+msgstr "Voleu compartir aquesta captura de pantalla amb %s?"
+
+#: src/screenshotdialog.c:446
+msgid "Share this screenshot with the requesting application?"
+msgstr ""
+"Voleu compartir aquesta captura de pantalla amb l'aplicació sol·licitant?"
+
+#: src/screenshotdialog.ui:10
+msgid "Screenshot"
+msgstr "Captura de pantalla"
+
+#: src/screenshotdialog.ui:30
+msgid "_Options…"
+msgstr "_Opcions…"
+
+#: src/screenshotdialog.ui:55
+msgid "Take _Screenshot"
+msgstr "_Fes una captura de pantalla"
+
+#: src/screenshotdialog.ui:111
+msgid "Take Screenshot"
+msgstr "Fes una captura de pantalla"
+
+#: src/screenshotdialog.ui:122
+msgid "Grab the whole sc_reen"
+msgstr "_Captura tota la pantalla"
+
+#: src/screenshotdialog.ui:133
+msgid "Grab the current _window"
+msgstr "C_aptura la finestra actual"
+
+#: src/screenshotdialog.ui:144
+msgid "Select _area to grab"
+msgstr "_Selecciona l'àrea a capturar"
+
+#: src/screenshotdialog.ui:158
+msgid "Grab after a _delay of"
+msgstr "_Captura després d'un retard de"
+
+#: src/screenshotdialog.ui:171
+msgid "seconds"
+msgstr "segons"
+
+#: src/screenshotdialog.ui:181
+msgid "Effects"
+msgstr "Efectes"
+
+#: src/screenshotdialog.ui:192
+msgid "Include _pointer"
+msgstr "_Inclou el punter"
+
+#: src/screenshotdialog.ui:201
+msgid "Include the window _border"
+msgstr "In_clou la vora de la finestra"
+
+#: src/settings.c:217
+msgid "Requested setting not found"
+msgstr "No s'ha trobat la configuració sol·licitada"
+
+#: src/wallpaperdialog.ui:13
+msgid "Set Background"
+msgstr "Estableix el fons"
+
+#: src/wallpaperdialog.ui:26
+msgid "Set"
+msgstr "Estableix"
+
+#: src/wallpaperdialog.ui:57
+msgid "Failed to load image file"
+msgstr "No s'ha pogut carregar la imatge"
+
+#: src/wallpaperpreview.ui:57
+msgid "Activities"
+msgstr "Activitats"
