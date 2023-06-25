@@ -2,6 +2,7 @@
 # Copyright (C) 2022 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
 # This file is distributed under the same license as the xdg-desktop-portal-gtk package.
 # Juliano de Souza Camargo <julianosc@protonmail.com>, 2022.
+# Hugo Carvalho <hugokarvalho@hotmail.com>, 2023.
 #
 msgid ""
 msgstr ""
@@ -9,20 +10,20 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
 "POT-Creation-Date: 2022-11-29 13:45+0000\n"
-"PO-Revision-Date: 2022-01-20 09:45-0300\n"
-"Last-Translator: Juliano de Souza Camargo <julianosc@protonmail.com>\n"
+"PO-Revision-Date: 2023-06-25 16:03+0100\n"
+"Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese < https://l10n.gnome.org/teams/pt/>\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-DL-Team: pt\n"
 "X-DL-Module: xdg-desktop-portal-gtk\n"
 "X-DL-Branch: master\n"
 "X-DL-Domain: po\n"
 "X-DL-State: None\n"
-"X-Generator: Gtranslator 40.0\n"
+"X-Generator: Poedit 3.3.1\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
@@ -63,7 +64,7 @@ msgstr "Partilhar sua informação pessoal com %s?"
 
 #: src/accountdialog.c:275
 msgid "Share your personal information with the requesting application?"
-msgstr "Partilhar sua informação pessoal com a aplicação requerente?"
+msgstr "Partilhar a sua informação pessoal com a aplicação requerente?"
 
 #: src/accountdialog.ui:10
 msgid "Share Details"
@@ -86,7 +87,7 @@ msgstr "Fazer alterações antes de partilhar informação"
 
 #: src/appchooserdialog.c:229
 msgid "Failed to start Software"
-msgstr "Falha ao iniciar o Aplicações"
+msgstr "Falha ao iniciar o Software"
 
 #: src/appchooserdialog.c:385
 #, c-format
@@ -104,13 +105,13 @@ msgid ""
 "Software"
 msgstr ""
 "Nenhuma aplicação instalada que possa abrir “%s”. Pode encontrar mais "
-"aplicações em Aplicações"
+"aplicações em Software"
 
 #: src/appchooserdialog.c:412
 msgid "No suitable app installed. You can find more applications in Software."
 msgstr ""
 "Nenhuma aplicação adequada instalada. Pode encontrar mais aplicações em "
-"Aplicações."
+"Software."
 
 #: src/appchooserdialog.ui:10
 msgid "Open With…"
@@ -126,7 +127,7 @@ msgstr "Sem aplicações disponíveis"
 
 #: src/appchooserdialog.ui:159
 msgid "_Find More in Software"
-msgstr "_Encontrar mais em Aplicações"
+msgstr "_Encontrar mais em Software"
 
 #: src/background.c:215 src/background.c:308
 #, c-format
