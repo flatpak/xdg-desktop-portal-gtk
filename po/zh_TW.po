@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2022-03-18 21:06-0700\n"
+"POT-Creation-Date: 2022-11-29 13:45+0000\n"
 "PO-Revision-Date: 2018-10-10 12:22+0800\n"
 "Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) <chinese-l10n@googlegroups.com>\n"
@@ -192,21 +192,21 @@ msgstr "遠端桌面"
 msgid "Screen Share"
 msgstr "畫面快照"
 
-#: src/screencastwidget.c:484
+#: src/screencastwidget.c:487
 #, c-format
 msgid "Select monitor to share with %s"
 msgstr "選取您想要和 %s 分享的螢幕"
 
-#: src/screencastwidget.c:486
+#: src/screencastwidget.c:489
 #, fuzzy, c-format
 msgid "Select window to share with %s"
 msgstr "選取您想和 %s 分享的項目"
 
-#: src/screencastwidget.c:491
+#: src/screencastwidget.c:494
 msgid "Select monitor to share with the requesting application"
 msgstr "選取您想和請求程式分享的螢幕"
 
-#: src/screencastwidget.c:492
+#: src/screencastwidget.c:495
 #, fuzzy
 msgid "Select window to share with the requesting application"
 msgstr "選取您想和請求程式分享的項目"

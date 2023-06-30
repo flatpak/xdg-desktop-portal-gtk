@@ -1,9 +1,9 @@
 # Turkish translation for xdg-desktop-portal-gtk.
-# Copyright (C) 2017-2019 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
+# Copyright (C) 2017-2023 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
 # This file is distributed under the same license as the xdg-desktop-portal-gtk package.
 #
 # Muhammet Kara <muhammetk@gnome.org>, 2017, 2018.
-# Sabri Ünal <libreajans@gmail.com>, 2019-2020.
+# Sabri Ünal <libreajans@gmail.com>, 2019-2020, 2023.
 # Emin Tufan Çetin <etcetin@gmail.com>, 2020-2021.
 #
 msgid ""
@@ -11,16 +11,16 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2022-03-18 21:06-0700\n"
-"PO-Revision-Date: 2021-02-15 18:24+0300\n"
-"Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>\n"
+"POT-Creation-Date: 2023-02-27 15:33+0000\n"
+"PO-Revision-Date: 2023-02-27 21:49+0300\n"
+"Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.1.1\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
@@ -67,7 +67,8 @@ msgstr "Kişisel bilgileriniz, istekte bulunan uygulamayla paylaşılsın mı?"
 msgid "Share Details"
 msgstr "Ayrıntıları Paylaş"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:467
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:14
+#: src/dynamic-launcher.c:267 src/filechooser.c:468
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
@@ -114,7 +115,7 @@ msgstr ""
 msgid "Open With…"
 msgstr "Birlikte Aç…"
 
-#: src/appchooserdialog.ui:23 src/filechooser.c:462
+#: src/appchooserdialog.ui:23 src/filechooser.c:463
 msgid "_Open"
 msgstr "_Aç"
 
@@ -158,15 +159,27 @@ msgstr "Arka plan etkinliği"
 msgid "Find out more"
 msgstr "Daha çoğunu keşfet"
 
-#: src/filechooser.c:462
+#: src/dynamic-launcher.c:259
+msgid "Create Web Application"
+msgstr "Web Uygulaması Oluştur"
+
+#: src/dynamic-launcher.c:261
+msgid "Create Application"
+msgstr "Uygulama Oluştur"
+
+#: src/dynamic-launcher.c:269
+msgid "C_reate"
+msgstr "_Oluştur"
+
+#: src/filechooser.c:463
 msgid "_Select"
 msgstr "_Seç"
 
-#: src/filechooser.c:464
+#: src/filechooser.c:465
 msgid "_Save"
 msgstr "_Kaydet"
 
-#: src/filechooser.c:641
+#: src/filechooser.c:642
 msgid "Open files read-only"
 msgstr "Dosyaları salt okunur aç"
 
@@ -199,21 +212,21 @@ msgstr "Uzak masaüstü"
 msgid "Screen Share"
 msgstr "Ekran Paylaşımı"
 
-#: src/screencastwidget.c:484
+#: src/screencastwidget.c:487
 #, c-format
 msgid "Select monitor to share with %s"
 msgstr "%s ile paylaşılacak monitörü seç"
 
-#: src/screencastwidget.c:486
+#: src/screencastwidget.c:489
 #, c-format
 msgid "Select window to share with %s"
 msgstr "%s ile paylaşılacak pencereyi seç"
 
-#: src/screencastwidget.c:491
+#: src/screencastwidget.c:494
 msgid "Select monitor to share with the requesting application"
 msgstr "İstekte bulunan uygulama ile paylaşılacak monitörü seç"
 
-#: src/screencastwidget.c:492
+#: src/screencastwidget.c:495
 msgid "Select window to share with the requesting application"
 msgstr "İstekte bulunan uygulama ile paylaşılacak pencereyi seç"
 
@@ -301,47 +314,3 @@ msgstr "Resim dosyası yüklenirken hata oluştu"
 #: src/wallpaperpreview.ui:57
 msgid "Activities"
 msgstr "Etkinlikler"
-
-#~ msgid "applications-system-symbolic"
-#~ msgstr "applications-system-symbolic"
-
-#~ msgid "%s is running in the background."
-#~ msgstr "%s arkaplanda çalışıyor."
-
-#~ msgid "Set Lock Screen"
-#~ msgstr "Kilit Ekranı Belirle"
-
-#~ msgid "Set Background & Lock Screen"
-#~ msgstr "Arka Plan ve Kilit Ekranı Belirle"
-
-#~ msgid ""
-#~ "Select an application to open “%s”. More applications are available in <a "
-#~ "href='software'>Software.</a>"
-#~ msgstr ""
-#~ "“%s”i açmak için bir uygulama seçin. <a href='software'>Yazılımlar</a>'da "
-#~ "daha fazla uygulama bulabilirsiniz."
-
-#~ msgid ""
-#~ "Select an application. More applications are available in <a "
-#~ "href='software'>Software.</a>"
-#~ msgstr ""
-#~ "Bir uygulama seçin. <a href='software'>Yazılımlar</a>'da daha fazla "
-#~ "uygulama bulabilirsiniz."
-
-#~ msgid "Unable to find a suitable application."
-#~ msgstr "Uygun bir uygulama bulunamadı."
-
-#~ msgid "No Applications Found"
-#~ msgstr "Hiçbir Uygulama Bulunamadı"
-
-#~ msgid "Find Compatible Applications in Software"
-#~ msgstr "Uyumlu Uygulamaları Yazılımlar'da Bul"
-
-#~ msgid "Forbid"
-#~ msgstr "Yasakla"
-
-#~ msgid "Ignore"
-#~ msgstr "Yoksay"
-
-#~ msgid "Screen casting"
-#~ msgstr "Ekran yayını"

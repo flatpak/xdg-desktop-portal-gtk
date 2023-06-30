@@ -1,15 +1,15 @@
 # Hungarian translation for xdg-desktop-portal-gtk.
-# Copyright (C) 2016, 2017, 2018, 2019 Free Software Foundation, Inc.
+# Copyright (C) 2016, 2017, 2018, 2019, 2022 Free Software Foundation, Inc.
 # This file is distributed under the same license as the xdg-sesktop-portal-gtk package.
 #
-# Balázs Úr <ur.balazs at fsf dot hu>, 2016, 2017, 2018, 2019.
+# Balázs Úr <ur.balazs at fsf dot hu>, 2016, 2017, 2018, 2019, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2022-03-18 21:06-0700\n"
-"PO-Revision-Date: 2019-02-12 21:07+0100\n"
+"POT-Creation-Date: 2022-11-29 13:45+0000\n"
+"PO-Revision-Date: 2022-09-21 23:08+0200\n"
 "Last-Translator: Balázs Úr <ur.balazs at fsf dot hu>\n"
 "Language-Team: Hungarian <gnome-hu-list at gnome dot org>\n"
 "Language: hu\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 2.0\n"
+"X-Generator: Lokalize 19.12.3\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
@@ -81,17 +81,16 @@ msgstr "Megváltoztatás az információk megosztása előtt"
 
 #: src/appchooserdialog.c:229
 msgid "Failed to start Software"
-msgstr "Nem sikerült elindítani a Szoftvereket"
+msgstr "Nem sikerült elindítani a Szoftvert"
 
 #: src/appchooserdialog.c:385
-#, fuzzy, c-format
+#, c-format
 msgid "Choose an application to open the file “%s”."
-msgstr ""
-"Nem sikerült olyan alkalmazást találni, amely képes a(z) „%s” megnyitására."
+msgstr "Válasszon egy alkalmazást a(z) „%s” fájl megnyitásához."
 
 #: src/appchooserdialog.c:390
 msgid "Choose an application."
-msgstr ""
+msgstr "Válasszon egy alkalmazást."
 
 #: src/appchooserdialog.c:407
 #, c-format
@@ -99,33 +98,35 @@ msgid ""
 "No apps installed that can open “%s”. You can find more applications in "
 "Software"
 msgstr ""
+"Nincsenek olyan alkalmazások telepítve, amelyek meg tudják nyitni a(z) „%s” "
+"fájlt. További alkalmazásokat találhat a Szoftverben"
 
 #: src/appchooserdialog.c:412
 msgid "No suitable app installed. You can find more applications in Software."
 msgstr ""
+"Nincs megfelelő alkalmazás telepítve. További alkalmazásokat találhat a "
+"Szoftverben."
 
 #: src/appchooserdialog.ui:10
-#, fuzzy
 msgid "Open With…"
-msgstr "Megnyitás ezzel"
+msgstr "Megnyitás ezzel…"
 
 #: src/appchooserdialog.ui:23 src/filechooser.c:462
 msgid "_Open"
-msgstr "Meg_nyitás"
+msgstr "_Megnyitás"
 
 #: src/appchooserdialog.ui:115
 msgid "No Apps available"
-msgstr ""
+msgstr "Nem érhetők el alkalmazások"
 
 #: src/appchooserdialog.ui:159
-#, fuzzy
 msgid "_Find More in Software"
-msgstr "Nem sikerült elindítani a Szoftvereket"
+msgstr "_Továbbiak keresése a Szoftverben"
 
 #: src/background.c:215 src/background.c:308
 #, c-format
 msgid "“%s” is running in the background"
-msgstr ""
+msgstr "A(z) „%s” a háttérben fut"
 
 #: src/background.c:217
 msgid ""
@@ -134,27 +135,30 @@ msgid ""
 "\n"
 "Note that forcing an application to quit might cause data loss."
 msgstr ""
+"Ez jogos okból is lehet, de az alkalmazás nem adott meg egyet sem.\n"
+"\n"
+"Vegye figyelembe, hogy az alkalmazás kilépésre kényszerítése adatvesztést "
+"okozhat."
 
 #: src/background.c:220
 msgid "Force quit"
-msgstr ""
+msgstr "Erőltetett kilépés"
 
 #: src/background.c:221
 msgid "Allow"
-msgstr ""
+msgstr "Engedélyezés"
 
 #: src/background.c:306
 msgid "Background activity"
-msgstr ""
+msgstr "Háttérbeli tevékenység"
 
 #: src/background.c:314
 msgid "Find out more"
-msgstr ""
+msgstr "Tudjon meg többet"
 
 #: src/filechooser.c:462
-#, fuzzy
 msgid "_Select"
-msgstr "Kiválasztás"
+msgstr "_Kiválasztás"
 
 #: src/filechooser.c:464
 msgid "_Save"
@@ -190,36 +194,34 @@ msgid "Remote desktop"
 msgstr "Távoli asztal"
 
 #: src/screencastdialog.ui:12
-#, fuzzy
 msgid "Screen Share"
-msgstr "Képernyőkép"
+msgstr "Képernyőmegosztás"
 
-#: src/screencastwidget.c:484
+#: src/screencastwidget.c:487
 #, c-format
 msgid "Select monitor to share with %s"
-msgstr "Válasszon monitort az ezzel történő megosztáshoz: %s"
+msgstr "Válasszon képernyőt az ezzel történő megosztáshoz: %s"
 
-#: src/screencastwidget.c:486
-#, fuzzy, c-format
+#: src/screencastwidget.c:489
+#, c-format
 msgid "Select window to share with %s"
-msgstr "Válasszon monitort az ezzel történő megosztáshoz: %s"
+msgstr "Válasszon ablakot az ezzel történő megosztáshoz: %s"
 
-#: src/screencastwidget.c:491
+#: src/screencastwidget.c:494
 msgid "Select monitor to share with the requesting application"
-msgstr "Válasszon monitort a kérő alkalmazással történő megosztáshoz"
+msgstr "Válasszon képernyőt a kérő alkalmazással történő megosztáshoz"
 
-#: src/screencastwidget.c:492
-#, fuzzy
+#: src/screencastwidget.c:495
 msgid "Select window to share with the requesting application"
-msgstr "Válasszon monitort a kérő alkalmazással történő megosztáshoz"
+msgstr "Válasszon ablakot a kérő alkalmazással történő megosztáshoz"
 
 #: src/screencastwidget.ui:100
 msgid "Single Window"
-msgstr ""
+msgstr "Egyetlen ablak"
 
 #: src/screencastwidget.ui:176
 msgid "Entire Screen"
-msgstr ""
+msgstr "Teljes képernyő"
 
 #: src/screenshotdialog.c:442
 #, c-format
@@ -280,51 +282,20 @@ msgstr "Az ablak _szegélyét is tartalmazza"
 
 #: src/settings.c:217
 msgid "Requested setting not found"
-msgstr ""
+msgstr "A kért beállítás nem található"
 
 #: src/wallpaperdialog.ui:13
 msgid "Set Background"
-msgstr ""
+msgstr "Háttérkép beállítása"
 
 #: src/wallpaperdialog.ui:26
-#, fuzzy
 msgid "Set"
-msgstr "Kiválasztás"
+msgstr "Beállítás"
 
 #: src/wallpaperdialog.ui:57
 msgid "Failed to load image file"
-msgstr ""
+msgstr "A képfájl betöltése sikertelen"
 
 #: src/wallpaperpreview.ui:57
 msgid "Activities"
-msgstr ""
-
-#~ msgid "applications-system-symbolic"
-#~ msgstr "applications-system-symbolic"
-
-#, c-format
-#~ msgid ""
-#~ "Select an application to open “%s”. More applications are available in <a "
-#~ "href='software'>Software.</a>"
-#~ msgstr ""
-#~ "Válasszon egy alkalmazást a(z) „%s” megnyitásához. További alkalmazások "
-#~ "érhetők el a <a href='software'>Szoftverekben.</a>"
-
-#~ msgid ""
-#~ "Select an application. More applications are available in <a "
-#~ "href='software'>Software.</a>"
-#~ msgstr ""
-#~ "Válasszon egy alkalmazást. További alkalmazások érhetők el a <a "
-#~ "href='software'>Szoftverekben.</a>"
-
-#~ msgid "Unable to find a suitable application."
-#~ msgstr "Nem sikerült megfelelő alkalmazást találni."
-
-#~ msgid "No Applications Found"
-#~ msgstr "Nem találhatók alkalmazások"
-
-#~ msgid "Find Compatible Applications in Software"
-#~ msgstr "Kompatibilis alkalmazások keresése a Szoftverekben"
-
-#~ msgid "Screen casting"
-#~ msgstr "Képernyőfelvétel"
+msgstr "Tevékenységek"

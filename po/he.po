@@ -1,97 +1,96 @@
-# Croatian translation for xdg-desktop-portal-gtk.
-# Copyright (C) 2016 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
+# Hebrew translation for xdg-desktop-portal-gtk.
+# Copyright (C) 2022 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
 # This file is distributed under the same license as the xdg-desktop-portal-gtk package.
-# Milo Ivir <mail@milotype.de>, 2020.
+# Yosef Or Boczko <yoseforb@gmail.com>, 2022.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: xdg-desktop-portal-gtk master\n"
+"Project-Id-Version: xdg-desktop-portal-gtk main\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
 "POT-Creation-Date: 2022-11-29 13:45+0000\n"
-"PO-Revision-Date: 2020-04-27 07:43+0200\n"
-"Last-Translator: Milo Ivir <mail@milotype.de>\n"
-"Language-Team: \n"
-"Language: hr\n"
+"PO-Revision-Date: 2022-07-25 22:07+0300\n"
+"Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
+"Language-Team: Hebrew <yoseforb@gmail.com>\n"
+"Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"X-Generator: Gtranslator 40.0\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
-msgstr "Portal"
+msgstr "שער"
 
 #: src/access.c:271
 msgid "Deny Access"
-msgstr "Zabrani pristup"
+msgstr "מניעת גישה"
 
 #: src/access.c:274
 msgid "Grant Access"
-msgstr "Dozvoli pristup"
+msgstr "הענקת גישה"
 
 #: src/accountdialog.c:176
 msgid "Select an Image"
-msgstr "Odaberi sliku"
+msgstr "בחירת תמונה"
 
 #: src/accountdialog.c:179 src/wallpaperdialog.ui:18
 msgid "Cancel"
-msgstr "Odustani"
+msgstr "ביטול"
 
 #: src/accountdialog.c:180
 msgid "Select"
-msgstr "Odaberi"
+msgstr "בחירה"
 
 #: src/accountdialog.c:181
 msgid "Clear"
-msgstr "Izbriši"
+msgstr "ניקוי"
 
 #: src/accountdialog.c:195
 msgid "Images"
-msgstr "Slike"
+msgstr "תמונות"
 
 #: src/accountdialog.c:272
 #, c-format
 msgid "Share your personal information with %s?"
-msgstr "Osobne podatke dijeliti s %s?"
+msgstr "לשתף את המידע האישי שלך עם %s?"
 
 #: src/accountdialog.c:275
 msgid "Share your personal information with the requesting application?"
-msgstr "Osobne podatke dijeliti s programom koji ih zahtijeva?"
+msgstr "לשתף את המידע האישי שלך עם היישומים הדורשים זאת?"
 
 #: src/accountdialog.ui:10
 msgid "Share Details"
-msgstr "Dijeli detalje"
+msgstr "שיתוף פרטים"
 
 #: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:467
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
-msgstr "_Odustani"
+msgstr "_ביטול"
 
 #: src/accountdialog.ui:22 src/remotedesktopdialog.ui:28
 #: src/screencastdialog.ui:28 src/screenshotdialog.ui:38
 msgid "_Share"
-msgstr "_Dijeli"
+msgstr "_שיתוף"
 
 #: src/accountdialog.ui:148
 msgid "Make changes before sharing the information"
-msgstr "Izradi promjene prije dijeljenja podataka"
+msgstr "ביצוע שינויים לפני שיתוף המידע"
 
 #: src/appchooserdialog.c:229
 msgid "Failed to start Software"
-msgstr "Neuspjelo pokretanje Softvera"
+msgstr "הפעלת תכנה נכשלה"
 
 #: src/appchooserdialog.c:385
 #, c-format
 msgid "Choose an application to open the file “%s”."
-msgstr "Odaberi program za otvaranje datoteke „%s”."
+msgstr "נא לבחור יישום לפתיחת הקובץ „%s”."
 
 #: src/appchooserdialog.c:390
 msgid "Choose an application."
-msgstr "Odaberi program."
+msgstr "בחירת יישום."
 
 #: src/appchooserdialog.c:407
 #, c-format
@@ -99,32 +98,32 @@ msgid ""
 "No apps installed that can open “%s”. You can find more applications in "
 "Software"
 msgstr ""
-"Nema programa za otvaranje datoteke „%s”. Nađi daljnje programe u Softveru"
+"לא מותקנים יישומים שיכולים לפתוח „%s”. ניתן למצוא יישומים נוספים דרך תכנה"
 
 #: src/appchooserdialog.c:412
 msgid "No suitable app installed. You can find more applications in Software."
-msgstr "Nema odgovarajućeg programa. Nađi daljnje programe u Softveru."
+msgstr "לא מותקן יישום מתאים. ניתן למצוא יישומים נוספים בתכנה."
 
 #: src/appchooserdialog.ui:10
 msgid "Open With…"
-msgstr "Otvori s …"
+msgstr "פתיחה באמצעות…"
 
 #: src/appchooserdialog.ui:23 src/filechooser.c:462
 msgid "_Open"
-msgstr "_Otvori"
+msgstr "_פתיחה"
 
 #: src/appchooserdialog.ui:115
 msgid "No Apps available"
-msgstr "Nema programa"
+msgstr "אין יישומים זמינים"
 
 #: src/appchooserdialog.ui:159
 msgid "_Find More in Software"
-msgstr "_Nađi daljnje u Softveru"
+msgstr "_איתור נוספים בתכנה"
 
 #: src/background.c:215 src/background.c:308
 #, c-format
 msgid "“%s” is running in the background"
-msgstr "„%s” radi u pozadini"
+msgstr "‫„%s” פועל ברקע"
 
 #: src/background.c:217
 msgid ""
@@ -133,179 +132,166 @@ msgid ""
 "\n"
 "Note that forcing an application to quit might cause data loss."
 msgstr ""
-"Ovo može biti iz opravdanog razloga, ali program ga nije naveo.\n"
-"\n"
-"Napomena: prisilno zatvaranje programa može prouzročiti gubitak podataka."
+"יכול להיות שישנה סיבה מוצדקת לכך, אך זו לא סופקה על ידי היישום.\n"
+"‬\n"
+"‫‫יש לשים לב שאילוץ יציאה מהיישום עשויה להוביל לאבדן נתונים."
 
 #: src/background.c:220
 msgid "Force quit"
-msgstr "Prisilno zatvori"
+msgstr "אילוץ יציאה"
 
 #: src/background.c:221
 msgid "Allow"
-msgstr "Dozvoli"
+msgstr "לאפשר"
 
 #: src/background.c:306
 msgid "Background activity"
-msgstr "Radnje u pozadini"
+msgstr "פעילות רקע"
 
 #: src/background.c:314
 msgid "Find out more"
-msgstr "Saznaj više"
+msgstr "למצוא עוד"
 
 #: src/filechooser.c:462
 msgid "_Select"
-msgstr "_Odaberi"
+msgstr "_בחירה"
 
 #: src/filechooser.c:464
 msgid "_Save"
-msgstr "_Spremi"
+msgstr "_שמירה"
 
 #: src/filechooser.c:641
 msgid "Open files read-only"
-msgstr "Otvori datoteke u zaštićenom stanju"
+msgstr "פתיחת קבצים לקריאה בלבד"
 
 #: src/remotedesktopdialog.c:188
 msgid "Pointer"
-msgstr "Pokazivač"
+msgstr "סמן"
 
 #: src/remotedesktopdialog.c:191
 msgid "Keyboard"
-msgstr "Tipkovnica"
+msgstr "מקלדת"
 
 #: src/remotedesktopdialog.c:194
 msgid "Touch screen"
-msgstr "Ekran na dodir"
+msgstr "מסך מגע"
 
 #: src/remotedesktopdialog.c:307
 #, c-format
 msgid "Select devices to share with %s"
-msgstr "Odaberi uređaje za dijeljenje s %s"
+msgstr "נא לבחור התקנים לשיתוף עם %s"
 
 #: src/remotedesktopdialog.c:312
 msgid "Select devices to share with the requesting application"
-msgstr "Odaberi uređaje za dijeljenje s programom koji ih zahtijeva"
+msgstr "נא לבחור התקנים לשיתוף עם היישום שביקש"
 
 #: src/remotedesktopdialog.ui:12
 msgid "Remote desktop"
-msgstr "Udaljena radna površina"
+msgstr "שולחן עבודה מרוחק"
 
 #: src/screencastdialog.ui:12
 msgid "Screen Share"
-msgstr "Dijeljenje ekrana"
+msgstr "שיתוף מסך"
 
 #: src/screencastwidget.c:487
 #, c-format
 msgid "Select monitor to share with %s"
-msgstr "Odaberi monitor za dijeljenje s %s"
+msgstr "נא לבחור מסך לשיתוף עם %s"
 
 #: src/screencastwidget.c:489
 #, c-format
 msgid "Select window to share with %s"
-msgstr "Odaberi prozor za dijeljenje s %s"
+msgstr "נא לבחור חלון לשיתוף עם %s"
 
 #: src/screencastwidget.c:494
 msgid "Select monitor to share with the requesting application"
-msgstr "Odaberi monitor za dijeljenje s programom koji ga zahtijeva"
+msgstr "נא לבחור מסך לשיתוף עם היישום שביקש"
 
 #: src/screencastwidget.c:495
 msgid "Select window to share with the requesting application"
-msgstr "Odaberi prozor za dijeljenje s programom koji ga zahtijeva"
+msgstr "נא לבחור חלון לשיתוף עם היישום שביקש"
 
 #: src/screencastwidget.ui:100
 msgid "Single Window"
-msgstr "Jedan prozor"
+msgstr "חלון בודד"
 
 #: src/screencastwidget.ui:176
 msgid "Entire Screen"
-msgstr "Cijeli ekran"
+msgstr "כל המסך"
 
 #: src/screenshotdialog.c:442
 #, c-format
 msgid "Share this screenshot with %s?"
-msgstr "Ovu snimku ekrana dijeliti s %s?"
+msgstr "לשתף את הצילום הזה עם %s?"
 
 #: src/screenshotdialog.c:446
 msgid "Share this screenshot with the requesting application?"
-msgstr "Ovu snimku ekrana dijeliti s programom koji je zahtijeva?"
+msgstr "לשתף את צילום המסך הזה עם היישום שביקש?"
 
 #: src/screenshotdialog.ui:10
 msgid "Screenshot"
-msgstr "Snimka ekrana"
+msgstr "צילום מסך"
 
 #: src/screenshotdialog.ui:30
 msgid "_Options…"
-msgstr "_Opcije …"
+msgstr "_אפשרויות…"
 
 #: src/screenshotdialog.ui:55
 msgid "Take _Screenshot"
-msgstr "_Snimi ekran"
+msgstr "_צילום המסך"
 
 #: src/screenshotdialog.ui:111
 msgid "Take Screenshot"
-msgstr "Snimi ekran"
+msgstr "צילום המסך"
 
 #: src/screenshotdialog.ui:122
 msgid "Grab the whole sc_reen"
-msgstr "Snimi cijeli ek_ran"
+msgstr "צילום המסך _כולו"
 
 #: src/screenshotdialog.ui:133
 msgid "Grab the current _window"
-msgstr "Snimi trenutačni pro_zor"
+msgstr "צילום המסך ה_נוכחי"
 
 #: src/screenshotdialog.ui:144
 msgid "Select _area to grab"
-msgstr "Od_aberi područje za snimku"
+msgstr "בחירת _אזור לצילום"
 
 #: src/screenshotdialog.ui:158
 msgid "Grab after a _delay of"
-msgstr "Snimi s kašnjenjem o_d"
+msgstr "לצלם לאחר ה_שהיה של"
 
 #: src/screenshotdialog.ui:171
 msgid "seconds"
-msgstr "s"
+msgstr "שניות"
 
 #: src/screenshotdialog.ui:181
 msgid "Effects"
-msgstr "Efekti"
+msgstr "אפקטים"
 
 #: src/screenshotdialog.ui:192
 msgid "Include _pointer"
-msgstr "Snimi s _pokazivačem"
+msgstr "_כולל הסמן"
 
 #: src/screenshotdialog.ui:201
 msgid "Include the window _border"
-msgstr "Snimi s _okvirom prozora"
+msgstr "כולל _גבולות החלון"
 
 #: src/settings.c:217
 msgid "Requested setting not found"
-msgstr "Zatražena postavka nije nađena"
+msgstr "ההגדרה המבוקשת לא נמצאה"
 
 #: src/wallpaperdialog.ui:13
 msgid "Set Background"
-msgstr "Postavi pozadinu"
+msgstr "הגדרת רקע"
 
 #: src/wallpaperdialog.ui:26
 msgid "Set"
-msgstr "Postavi"
+msgstr "הגדרה"
 
 #: src/wallpaperdialog.ui:57
 msgid "Failed to load image file"
-msgstr "Neuspjelo učitavanje slike"
+msgstr "טעינת קובץ התמונה נכשלה"
 
 #: src/wallpaperpreview.ui:57
 msgid "Activities"
-msgstr "Radnje"
-
-#~ msgid "applications-system-symbolic"
-#~ msgstr "applications-system-symbolic"
-
-#, c-format
-#~ msgid "%s is running in the background."
-#~ msgstr "„%s” radi u pozadini."
-
-#~ msgid "Set Lock Screen"
-#~ msgstr "Postavi zaključani erkan"
-
-#~ msgid "Set Background & Lock Screen"
-#~ msgstr "Postavi pozadinu i zaključani erkan"
+msgstr "פעילויות"

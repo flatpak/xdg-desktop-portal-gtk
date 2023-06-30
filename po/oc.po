@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2022-03-18 21:06-0700\n"
+"POT-Creation-Date: 2022-11-29 13:45+0000\n"
 "PO-Revision-Date: 2022-01-13 19:22+0100\n"
 "Last-Translator: Quentin PAGÈS\n"
 "Language-Team: Occitan <totenoc@gmail.com>\n"
@@ -195,21 +195,21 @@ msgstr "Burèu distant"
 msgid "Screen Share"
 msgstr "Partiment d’ecran"
 
-#: src/screencastwidget.c:484
+#: src/screencastwidget.c:487
 #, c-format
 msgid "Select monitor to share with %s"
 msgstr "Seleccionatz lo monitor de partejar amb %s"
 
-#: src/screencastwidget.c:486
+#: src/screencastwidget.c:489
 #, c-format
 msgid "Select window to share with %s"
 msgstr "Seleccionatz la fenèstra de partejar amb %s"
 
-#: src/screencastwidget.c:491
+#: src/screencastwidget.c:494
 msgid "Select monitor to share with the requesting application"
 msgstr "Seleccionar lo monitor de partejar amb l’aplicacion requerenta"
 
-#: src/screencastwidget.c:492
+#: src/screencastwidget.c:495
 msgid "Select window to share with the requesting application"
 msgstr "Seleccionar la fenèstra de partejar amb l’aplicacion requerenta"
 

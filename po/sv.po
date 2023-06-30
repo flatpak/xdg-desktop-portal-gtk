@@ -1,17 +1,17 @@
 # Swedish translation for xdg-desktop-portal-gtk.
-# Copyright © 2016-2020 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
+# Copyright © 2016-2023 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
 # This file is distributed under the same license as the xdg-desktop-portal-gtk package.
 # Sebastian Rasmussen <sebras@gmail.com>, 2016.
 # Josef Andersson <l10nl18nsweja@gmail.com>, 2017, 2019.
-# Anders Jonsson <anders.jonsson@norsjovallen.se>, 2020.
+# Anders Jonsson <anders.jonsson@norsjovallen.se>, 2020, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2022-03-18 21:06-0700\n"
-"PO-Revision-Date: 2020-09-20 00:57+0200\n"
+"POT-Creation-Date: 2023-02-21 03:33+0000\n"
+"PO-Revision-Date: 2023-02-21 11:25+0100\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.4.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
@@ -66,7 +66,8 @@ msgstr "Dela din personliga information med programmet som begär den?"
 msgid "Share Details"
 msgstr "Dela detaljer"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:467
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:14
+#: src/dynamic-launcher.c:267 src/filechooser.c:468
 #: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
 #: src/screenshotdialog.ui:14
 msgid "_Cancel"
@@ -113,7 +114,7 @@ msgstr ""
 msgid "Open With…"
 msgstr "Öppna med…"
 
-#: src/appchooserdialog.ui:23 src/filechooser.c:462
+#: src/appchooserdialog.ui:23 src/filechooser.c:463
 msgid "_Open"
 msgstr "_Öppna"
 
@@ -158,15 +159,27 @@ msgstr "Bakgrundsaktivitet"
 msgid "Find out more"
 msgstr "Lär dig mer"
 
-#: src/filechooser.c:462
+#: src/dynamic-launcher.c:259
+msgid "Create Web Application"
+msgstr "Skapa webbapplikation"
+
+#: src/dynamic-launcher.c:261
+msgid "Create Application"
+msgstr "Skapa program"
+
+#: src/dynamic-launcher.c:269
+msgid "C_reate"
+msgstr "S_kapa"
+
+#: src/filechooser.c:463
 msgid "_Select"
 msgstr "_Välj"
 
-#: src/filechooser.c:464
+#: src/filechooser.c:465
 msgid "_Save"
 msgstr "_Spara"
 
-#: src/filechooser.c:641
+#: src/filechooser.c:642
 msgid "Open files read-only"
 msgstr "Öppna filer som skrivskyddade"
 
@@ -199,21 +212,21 @@ msgstr "Fjärrskrivbord"
 msgid "Screen Share"
 msgstr "Skärmdelning"
 
-#: src/screencastwidget.c:484
+#: src/screencastwidget.c:487
 #, c-format
 msgid "Select monitor to share with %s"
 msgstr "Välj bildskärm att dela med %s"
 
-#: src/screencastwidget.c:486
+#: src/screencastwidget.c:489
 #, c-format
 msgid "Select window to share with %s"
 msgstr "Välj fönster att dela med %s"
 
-#: src/screencastwidget.c:491
+#: src/screencastwidget.c:494
 msgid "Select monitor to share with the requesting application"
 msgstr "Välj vilken bildskärm du vill dela med programmet"
 
-#: src/screencastwidget.c:492
+#: src/screencastwidget.c:495
 msgid "Select window to share with the requesting application"
 msgstr "Välj vilket fönster du vill dela med programmet"
 
@@ -302,9 +315,6 @@ msgstr "Misslyckades med att läsa in bildfil"
 msgid "Activities"
 msgstr "Aktiviteter"
 
-#~ msgid "applications-system-symbolic"
-#~ msgstr "applications-system-symbolic"
-
 #~ msgid ""
 #~ "Select an application to open “%s”. More applications are available in <a "
 #~ "href='software'>Software.</a>"
@@ -330,7 +340,3 @@ msgstr "Aktiviteter"
 
 #~ msgid "Screen casting"
 #~ msgstr "Skärminspelning"
-
-#, fuzzy
-#~ msgid "No applications found"
-#~ msgstr "Välj program"

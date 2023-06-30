@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2022-03-18 21:06-0700\n"
+"POT-Creation-Date: 2022-11-29 13:45+0000\n"
 "PO-Revision-Date: 2020-03-07 20:21+0200\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian <gnome-lt@lists.akl.lt>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
-"%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"(n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 2.3\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
@@ -200,21 +200,21 @@ msgstr "Nuotolinis darbalaukis"
 msgid "Screen Share"
 msgstr "Ekrano bendrinimas"
 
-#: src/screencastwidget.c:484
+#: src/screencastwidget.c:487
 #, c-format
 msgid "Select monitor to share with %s"
 msgstr "Pasirinkti vaizduoklį, kurį bendrinti su %s"
 
-#: src/screencastwidget.c:486
+#: src/screencastwidget.c:489
 #, c-format
 msgid "Select window to share with %s"
 msgstr "Pasirinkti langą, kurį bendrinti su %s"
 
-#: src/screencastwidget.c:491
+#: src/screencastwidget.c:494
 msgid "Select monitor to share with the requesting application"
 msgstr "Pasirinkti vaizduoklį, kurį bendrinti su prašančia programa"
 
-#: src/screencastwidget.c:492
+#: src/screencastwidget.c:495
 msgid "Select window to share with the requesting application"
 msgstr "Pasirinkti langą, kurį bendrinti su prašančia programa"
 

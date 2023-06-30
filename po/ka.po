@@ -1,0 +1,302 @@
+# xdg-desktop-portal-gtk translation to Georgian.
+# Copyright (C) 2022 Copyright © 2016 Red Hat
+# This file is distributed under the same license as the xdg-desktop-portal-gtk package.
+# Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xdg-desktop-portal-gtk 1.14.0\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
+"issues\n"
+"POT-Creation-Date: 2022-11-29 13:45+0000\n"
+"PO-Revision-Date: 2022-10-29 06:00+0200\n"
+"Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
+"Language-Team: Georgian <(nothing)>\n"
+"Language: ka\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.2\n"
+
+#: data/xdg-desktop-portal-gtk.desktop.in.in:4
+msgid "Portal"
+msgstr "პორტალი"
+
+#: src/access.c:271
+msgid "Deny Access"
+msgstr "წვდომის უარყოფა"
+
+#: src/access.c:274
+msgid "Grant Access"
+msgstr "წვდომის მინიჭება"
+
+#: src/accountdialog.c:176
+msgid "Select an Image"
+msgstr "მონიშნეთ გამოსახულება"
+
+#: src/accountdialog.c:179 src/wallpaperdialog.ui:18
+msgid "Cancel"
+msgstr "გაუქმება"
+
+#: src/accountdialog.c:180
+msgid "Select"
+msgstr "აირჩიეთ"
+
+#: src/accountdialog.c:181
+msgid "Clear"
+msgstr "გაწმენდა"
+
+#: src/accountdialog.c:195
+msgid "Images"
+msgstr "გამოსახულებები"
+
+#: src/accountdialog.c:272
+#, c-format
+msgid "Share your personal information with %s?"
+msgstr "გავუზიაროთ თქვენი პირადი ინფორმაცია %s -ს?"
+
+#: src/accountdialog.c:275
+msgid "Share your personal information with the requesting application?"
+msgstr "გავუზიარო თქვენი პირადი ინფორმაცია მომთხოვნ აპლიკაციას?"
+
+#: src/accountdialog.ui:10
+msgid "Share Details"
+msgstr "დეტალების გაზიარება"
+
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:467
+#: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
+#: src/screenshotdialog.ui:14
+msgid "_Cancel"
+msgstr "_გაუქმება"
+
+#: src/accountdialog.ui:22 src/remotedesktopdialog.ui:28
+#: src/screencastdialog.ui:28 src/screenshotdialog.ui:38
+msgid "_Share"
+msgstr "_გაზიარება"
+
+#: src/accountdialog.ui:148
+msgid "Make changes before sharing the information"
+msgstr "შეცვალეთ ინფორმაციის გაზიარებამდე"
+
+#: src/appchooserdialog.c:229
+msgid "Failed to start Software"
+msgstr "პროგრამის გაშვების შეცდომა"
+
+#: src/appchooserdialog.c:385
+#, c-format
+msgid "Choose an application to open the file “%s”."
+msgstr "აირჩიეთ \"%s\" ფაილის გასახნელი აპლიკაცია."
+
+#: src/appchooserdialog.c:390
+msgid "Choose an application."
+msgstr "აირჩიეთ აპლიკაცია."
+
+#: src/appchooserdialog.c:407
+#, c-format
+msgid ""
+"No apps installed that can open “%s”. You can find more applications in "
+"Software"
+msgstr ""
+"დაყენებული პროგრამებიდან %s-ის გახსნა არც ერთს არ შეუძლია. დააყენეთ მეტი "
+"პროგრამა"
+
+#: src/appchooserdialog.c:412
+msgid "No suitable app installed. You can find more applications in Software."
+msgstr ""
+"შესაბამისი აპლიკაცია დაყენებული არაა. მეტი აპლიკაციების პოვნა პროგრამებში "
+"შეგიძლიათ."
+
+#: src/appchooserdialog.ui:10
+msgid "Open With…"
+msgstr "გამხსნელი პროგრამა…"
+
+#: src/appchooserdialog.ui:23 src/filechooser.c:462
+msgid "_Open"
+msgstr "_გახსნა"
+
+#: src/appchooserdialog.ui:115
+msgid "No Apps available"
+msgstr "აპები მიუწვდომელია"
+
+#: src/appchooserdialog.ui:159
+msgid "_Find More in Software"
+msgstr "_მეტის პროგრამის პოვნა"
+
+#: src/background.c:215 src/background.c:308
+#, c-format
+msgid "“%s” is running in the background"
+msgstr "\"%s\" ფონურადაა გაშვებული"
+
+#: src/background.c:217
+msgid ""
+"This might be for a legitimate reason, but the application has not provided "
+"one.\n"
+"\n"
+"Note that forcing an application to quit might cause data loss."
+msgstr ""
+"ეს შეიძლება კანონიერი მიზეზიც კი იყოს, მაგრამ აპლიკაციას ეს გათვალისწინებული "
+"არ აქვს.\n"
+"\n"
+"გაითვალისწინეთ, რომ აპლიკაციის ძალით დახურვამ შეიძლება მონაცემების კარგვაც "
+"გამოიწვიოს."
+
+#: src/background.c:220
+msgid "Force quit"
+msgstr "ძალით გასვლა"
+
+#: src/background.c:221
+msgid "Allow"
+msgstr "დაშვება"
+
+#: src/background.c:306
+msgid "Background activity"
+msgstr "ფონური აქტივობა"
+
+#: src/background.c:314
+msgid "Find out more"
+msgstr "მეტის გაგება"
+
+#: src/filechooser.c:462
+msgid "_Select"
+msgstr "_არჩევა"
+
+#: src/filechooser.c:464
+msgid "_Save"
+msgstr "_შენახვა"
+
+#: src/filechooser.c:641
+msgid "Open files read-only"
+msgstr "ფაილის მხოლოდ-წაკითხვად რეჟიმში გახსნა"
+
+#: src/remotedesktopdialog.c:188
+msgid "Pointer"
+msgstr "კურსორი"
+
+#: src/remotedesktopdialog.c:191
+msgid "Keyboard"
+msgstr "კლავიატურა"
+
+#: src/remotedesktopdialog.c:194
+msgid "Touch screen"
+msgstr "სენსორული ეკრანი"
+
+#: src/remotedesktopdialog.c:307
+#, c-format
+msgid "Select devices to share with %s"
+msgstr "აირჩიეთ %s-სთან გასაზიარებელი მოწყობილობები"
+
+#: src/remotedesktopdialog.c:312
+msgid "Select devices to share with the requesting application"
+msgstr "აირჩიეთ მომთხოვნი აპლიკაციისთვის გასაზიარებელი მოწყობილობები"
+
+#: src/remotedesktopdialog.ui:12
+msgid "Remote desktop"
+msgstr "დაშორებული სამუშაო მაგიდა"
+
+#: src/screencastdialog.ui:12
+msgid "Screen Share"
+msgstr "ეკრანის გაზიარება"
+
+#: src/screencastwidget.c:487
+#, c-format
+msgid "Select monitor to share with %s"
+msgstr "აირჩიეთ %s-სთან გასაზიარებელი ეკრანი"
+
+#: src/screencastwidget.c:489
+#, c-format
+msgid "Select window to share with %s"
+msgstr "აირჩიეთ %s-სთან გასაზიარებელი ფანჯარა"
+
+#: src/screencastwidget.c:494
+msgid "Select monitor to share with the requesting application"
+msgstr "აირჩიეთ მომთხოვნი აპლიკაციისთვის გასაზიარებელი ეკრანი"
+
+#: src/screencastwidget.c:495
+msgid "Select window to share with the requesting application"
+msgstr "აირჩიეთ მომთხოვნი აპლიკაციისთვის გასაზიარებელი აპლიკაცია"
+
+#: src/screencastwidget.ui:100
+msgid "Single Window"
+msgstr "ერთი ფანჯარა"
+
+#: src/screencastwidget.ui:176
+msgid "Entire Screen"
+msgstr "მთელ ეკრანზე"
+
+#: src/screenshotdialog.c:442
+#, c-format
+msgid "Share this screenshot with %s?"
+msgstr "გავუზიარო ეკრანის ანაბეჭდი %s-ს?"
+
+#: src/screenshotdialog.c:446
+msgid "Share this screenshot with the requesting application?"
+msgstr "გავუზიარო ეკრანის ანაბეჭდი მომთხოვნ აპლიკაციას?"
+
+#: src/screenshotdialog.ui:10
+msgid "Screenshot"
+msgstr "ეკრანის ანაბეჭდი"
+
+#: src/screenshotdialog.ui:30
+msgid "_Options…"
+msgstr "_მორგება…"
+
+#: src/screenshotdialog.ui:55
+msgid "Take _Screenshot"
+msgstr "ეკრანის ანაბეჭდის გადაღება"
+
+#: src/screenshotdialog.ui:111
+msgid "Take Screenshot"
+msgstr "ეკრანის ანაბეჭდის გადაღება"
+
+#: src/screenshotdialog.ui:122
+msgid "Grab the whole sc_reen"
+msgstr "მთლიანი _ეკრანის დათრევა"
+
+#: src/screenshotdialog.ui:133
+msgid "Grab the current _window"
+msgstr "_მიმდინარე ფანჯრის დათრევა"
+
+#: src/screenshotdialog.ui:144
+msgid "Select _area to grab"
+msgstr "მონიშნეთ დასათრევი ადგილი"
+
+#: src/screenshotdialog.ui:158
+msgid "Grab after a _delay of"
+msgstr "დათრევის _პაუზა"
+
+#: src/screenshotdialog.ui:171
+msgid "seconds"
+msgstr "წამები"
+
+#: src/screenshotdialog.ui:181
+msgid "Effects"
+msgstr "ეფექტები"
+
+#: src/screenshotdialog.ui:192
+msgid "Include _pointer"
+msgstr "გამოჩნდება კურსორიც"
+
+#: src/screenshotdialog.ui:201
+msgid "Include the window _border"
+msgstr "ფანჯრის _ჩარჩოც გამოჩნდება"
+
+#: src/settings.c:217
+msgid "Requested setting not found"
+msgstr "მოთხოვნილი პარამეტრი ვერ მოიძებნა"
+
+#: src/wallpaperdialog.ui:13
+msgid "Set Background"
+msgstr "ფონის დაყენება"
+
+#: src/wallpaperdialog.ui:26
+msgid "Set"
+msgstr "დაყენება"
+
+#: src/wallpaperdialog.ui:57
+msgid "Failed to load image file"
+msgstr "გამოსახულების ფაილის ჩატვირთვის შეცდომა"
+
+#: src/wallpaperpreview.ui:57
+msgid "Activities"
+msgstr "ქმედებები"
