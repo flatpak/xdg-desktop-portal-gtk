@@ -6,33 +6,12 @@ if BUILD_WALLPAPER
         WALLPAPER_IFACE=$(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Wallpaper.xml
 endif
 
-if BUILD_SCREENSHOT
-        SCREENSHOT_IFACE=$(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Screenshot.xml
-        SHELL_SCREENSHOT_IFACE=$(top_srcdir)/data/org.gnome.Shell.Screenshot.xml
-endif
-
-if BUILD_SCREENCAST
-        SCREENCAST_IFACE=$(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.ScreenCast.xml
-        REMOTE_DESKTOP_IFACE=$(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.RemoteDesktop.xml
-        MUTTER_SCREENCAST_IFACE=$(top_srcdir)/data/org.gnome.Mutter.ScreenCast.xml
-        MUTTER_REMOTE_DESKTOP_IFACE=$(top_srcdir)/data/org.gnome.Mutter.RemoteDesktop.xml
-        MUTTER_DISPLAYCONFIG_IFACE=$(top_srcdir)/data/org.gnome.Mutter.DisplayConfig.xml
-endif
-
-if BUILD_BACKGROUND
-        BACKGROUND_IFACE=$(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Background.xml
-endif
-
 if BUILD_SETTINGS
         SETTINGS_IFACE=$(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Settings.xml
 endif
 
-if BUILD_BACKGROUND
-        SHELL_INTROSPECT_IFACE=$(top_srcdir)/data/org.gnome.Shell.Introspect.xml
-else
 if BUILD_SETTINGS
         SHELL_INTROSPECT_IFACE=$(top_srcdir)/data/org.gnome.Shell.Introspect.xml
-endif
 endif
 
 if BUILD_APPCHOOSER
@@ -60,9 +39,6 @@ $(dbus_built_sources): src/Makefile.am.inc
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.Email.xml \
 	 $(DESKTOP_PORTAL_INTERFACES_DIR)/org.freedesktop.impl.portal.DynamicLauncher.xml \
 	 $(WALLPAPER_IFACE) \
-         $(SCREENSHOT_IFACE) \
-         $(SCREENCAST_IFACE) \
-         $(REMOTE_DESKTOP_IFACE) \
          $(BACKGROUND_IFACE) \
          $(SETTINGS_IFACE) \
          $(APPCHOOSER_IFACE) \
@@ -82,11 +58,6 @@ $(shell_built_sources): src/Makefile.am.inc
 	$(top_srcdir)/data/org.freedesktop.ScreenSaver.xml		\
 	$(top_srcdir)/data/org.freedesktop.Accounts.xml		        \
 	$(top_srcdir)/data/org.freedesktop.Accounts.User.xml            \
-        $(SHELL_SCREENSHOT_IFACE)                                       \
-        $(MUTTER_SCREENCAST_IFACE)                                      \
-        $(MUTTER_REMOTE_DESKTOP_IFACE)                                  \
-        $(MUTTER_DISPLAYCONFIG_IFACE)                                   \
-        $(SHELL_INTROSPECT_IFACE)                                       \
 	$(NULL)
 
 resource_files = $(shell $(GLIB_COMPILE_RESOURCES) --sourcedir=$(top_srcdir)/src --generate-dependencies $(top_srcdir)/src/xdg-desktop-portal-gtk.gresource.xml)
@@ -100,12 +71,7 @@ EXTRA_DIST += \
 	src/xdg-desktop-portal-gtk.gresource.xml	\
         src/appchooserdialog.ui                         \
         src/appchooserrow.ui                            \
-        src/screenshotdialog.ui                         \
-        src/screenshotdialog.css                        \
         src/accountdialog.ui                            \
-        src/screencastwidget.ui                         \
-        src/screencastdialog.ui                         \
-        src/remotedesktopdialog.ui                      \
         src/wallpaperdialog.ui                          \
         src/wallpaperpreview.ui                         \
         src/wallpaperpreview.css                        \
@@ -160,41 +126,6 @@ xdg_desktop_portal_gtk_SOURCES += \
 	$(NULL)
 endif
 
-if BUILD_SCREENSHOT
-xdg_desktop_portal_gtk_SOURCES += \
-	src/screenshot.h			\
-	src/screenshot.c			\
-	src/screenshotdialog.h		        \
-	src/screenshotdialog.c		        \
-	$(NULL)
-endif
-
-if BUILD_SCREENCAST
-xdg_desktop_portal_gtk_SOURCES += \
-	src/screencast.c			\
-	src/screencast.h			\
-	src/screencastwidget.c			\
-	src/screencastwidget.h			\
-	src/screencastdialog.c			\
-	src/screencastdialog.h			\
-	src/gnomescreencast.c			\
-	src/gnomescreencast.h			\
-	src/remotedesktop.c			\
-	src/remotedesktop.h			\
-	src/remotedesktopdialog.c		\
-	src/remotedesktopdialog.h		\
-	src/displaystatetracker.c		\
-	src/displaystatetracker.h		\
-	$(NULL)
-endif
-
-if BUILD_BACKGROUND
-xdg_desktop_portal_gtk_SOURCES += \
-        src/background.c                        \
-        src/background.h                        \
-	$(NULL)
-endif
-
 if BUILD_SETTINGS
 xdg_desktop_portal_gtk_SOURCES += \
         src/fc-monitor.c                        \
@@ -202,20 +133,6 @@ xdg_desktop_portal_gtk_SOURCES += \
         src/settings.c                          \
         src/settings.h                          \
 	$(NULL)
-endif
-
-if BUILD_BACKGROUND
-xdg_desktop_portal_gtk_SOURCES += \
-	src/shellintrospect.c			\
-	src/shellintrospect.h			\
-	$(NULL)
-else
-if BUILD_SETTINGS
-xdg_desktop_portal_gtk_SOURCES += \
-	src/shellintrospect.c			\
-	src/shellintrospect.h			\
-	$(NULL)
-endif
 endif
 
 if BUILD_APPCHOOSER

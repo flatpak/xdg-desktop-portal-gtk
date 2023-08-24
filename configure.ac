@@ -65,27 +65,6 @@ AS_IF([test "x$enable_wallpaper" = "xyes"], [
 ])
 AM_CONDITIONAL([BUILD_WALLPAPER],[test "$enable_wallpaper" = "yes"])
 
-AC_ARG_ENABLE([screenshot],
-              [AS_HELP_STRING([--enable-screenshot],[Build screenshot portal. Needs gnome-shell])])
-AS_IF([test "x$enable_screenshot" = "xyes"], [
-    AC_DEFINE([BUILD_SCREENSHOT], [1], [Define to enable screenshot portal])
-])
-AM_CONDITIONAL([BUILD_SCREENSHOT],[test "$enable_screenshot" = "yes"])
-
-AC_ARG_ENABLE([screencast],
-              [AS_HELP_STRING([--enable-screencast],[Build screencast and remote desktop portals. Needs mutter])])
-AS_IF([test "x$enable_screencast" = "xyes"], [
-    AC_DEFINE([BUILD_SCREENCAST], [1], [Define to enable screencast portal])
-])
-AM_CONDITIONAL([BUILD_SCREENCAST],[test "$enable_screencast" = "yes"])
-
-AC_ARG_ENABLE([background],
-              [AS_HELP_STRING([--enable-background],[Build background portal. Needs gnome-shell])])
-AS_IF([test "x$enable_background" = "xyes"], [
-    AC_DEFINE([BUILD_BACKGROUND], [1], [Define to enable background portal])
-])
-AM_CONDITIONAL([BUILD_BACKGROUND],[test "$enable_background" = "yes"])
-
 AC_ARG_ENABLE([settings],
               [AS_HELP_STRING([--disable-settings],[Disable the settings portal, which needs dconf])])
 AS_IF([test "x$enable_settings" != "xno"], [
