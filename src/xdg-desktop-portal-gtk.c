@@ -50,27 +50,14 @@
 #include "print.h"
 #include "dynamic-launcher.h"
 
-#ifdef BUILD_SCREENSHOT
-#include "screenshot.h"
-#endif
-
 #include "notification.h"
 #include "inhibit.h"
 #include "access.h"
 #include "account.h"
 #include "email.h"
 
-#ifdef BUILD_SCREENCAST
-#include "screencast.h"
-#include "remotedesktop.h"
-#endif
-
 #ifdef BUILD_LOCKDOWN
 #include "lockdown.h"
-#endif
-
-#ifdef BUILD_BACKGROUND
-#include "background.h"
 #endif
 
 #ifdef BUILD_SETTINGS
@@ -150,14 +137,6 @@ on_bus_acquired (GDBusConnection *connection,
       g_clear_error (&error);
     }
 
-#ifdef BUILD_SCREENSHOT
-  if (!screenshot_init (connection, &error))
-    {
-      g_warning ("error: %s\n", error->message);
-      g_clear_error (&error);
-    }
-#endif
-
   if (!notification_init (connection, &error))
     {
       g_warning ("error: %s\n", error->message);
@@ -194,30 +173,8 @@ on_bus_acquired (GDBusConnection *connection,
       g_clear_error (&error);
     }
 
-#ifdef BUILD_SCREENCAST
-  if (!screen_cast_init (connection, &error))
-    {
-      g_warning ("error: %s\n", error->message);
-      g_clear_error (&error);
-    }
-
-  if (!remote_desktop_init (connection, &error))
-    {
-      g_warning ("error: %s\n", error->message);
-      g_clear_error (&error);
-    }
-#endif
-
 #ifdef BUILD_LOCKDOWN
   if (!lockdown_init (connection, &error))
-    {
-      g_warning ("error: %s\n", error->message);
-      g_clear_error (&error);
-    }
-#endif
-
-#ifdef BUILD_BACKGROUND
-  if (!background_init (connection, &error))
     {
       g_warning ("error: %s\n", error->message);
       g_clear_error (&error);
