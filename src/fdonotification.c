@@ -415,6 +415,8 @@ fdo_add_notification (GDBusConnection *connection,
       n->notify_id = 0;
       n->activate_action = activate_action;
       n->data = data;
+
+      fdo_notifications = g_slist_prepend (fdo_notifications, n);
     }
   else
     {
@@ -425,8 +427,6 @@ fdo_add_notification (GDBusConnection *connection,
 
   g_variant_lookup (notification, "default-action", "s", &n->default_action);
   n->default_action_target = g_variant_lookup_value (notification, "default-action-target", NULL);
-
-  fdo_notifications = g_slist_prepend (fdo_notifications, n);
 
   call_notify (connection, n, notification);
 }
