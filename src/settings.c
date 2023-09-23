@@ -270,6 +270,7 @@ init_settings_table (XdpImplSettings *settings,
   static const char * const schemas[] = {
     "org.gnome.desktop.a11y",
     "org.gnome.desktop.a11y.interface",
+    "org.gnome.desktop.calendar",
     "org.gnome.desktop.input-sources",
     "org.gnome.desktop.interface",
     "org.gnome.desktop.privacy",
