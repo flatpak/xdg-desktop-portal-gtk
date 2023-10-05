@@ -4,22 +4,23 @@
 # Christian Kirbach <Christian.Kirbach@gmail.com>, 2016, 2018.
 # Mario Blättermann <mario.blaettermann@gmail.com>, 2018.
 # Ettore Atalan <atalanttore@gmail.com>, 2022.
+# Jürgen Benvenuti <gastornis@posteo.org>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2022-11-29 13:45+0000\n"
-"PO-Revision-Date: 2022-08-14 22:08+0200\n"
-"Last-Translator: Ettore Atalan <atalanttore@gmail.com>\n"
+"POT-Creation-Date: 2023-09-12 15:31+0000\n"
+"PO-Revision-Date: 2023-09-12 20:10+0200\n"
+"Last-Translator: Jürgen Benvenuti <gastornis@posteo.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.3.1\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
@@ -35,7 +36,7 @@ msgstr "Zugriff gewähren"
 
 #: src/accountdialog.c:176
 msgid "Select an Image"
-msgstr "Bild auswählen"
+msgstr "Ein Bild auswählen"
 
 #: src/accountdialog.c:179 src/wallpaperdialog.ui:18
 msgid "Cancel"
@@ -67,14 +68,12 @@ msgstr ""
 msgid "Share Details"
 msgstr "Details freigeben"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:467
-#: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
-#: src/screenshotdialog.ui:14
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:14
+#: src/dynamic-launcher.c:267 src/filechooser.c:468
 msgid "_Cancel"
 msgstr "Abbre_chen"
 
-#: src/accountdialog.ui:22 src/remotedesktopdialog.ui:28
-#: src/screencastdialog.ui:28 src/screenshotdialog.ui:38
+#: src/accountdialog.ui:22
 msgid "_Share"
 msgstr "_Teilen"
 
@@ -89,11 +88,11 @@ msgstr "Software konnte nicht gestartet werden"
 #: src/appchooserdialog.c:385
 #, c-format
 msgid "Choose an application to open the file “%s”."
-msgstr "Wählen Sie eine Anwendung zum Öffnen der Datei »%s« aus."
+msgstr "Wählen Sie eine Anwendung zum Öffnen der Datei »%s«."
 
 #: src/appchooserdialog.c:390
 msgid "Choose an application."
-msgstr "Anwendung auswählen."
+msgstr "Eine Anwendung wählen."
 
 #: src/appchooserdialog.c:407
 #, c-format
@@ -114,7 +113,7 @@ msgstr ""
 msgid "Open With…"
 msgstr "Öffnen mit …"
 
-#: src/appchooserdialog.ui:23 src/filechooser.c:462
+#: src/appchooserdialog.ui:23 src/filechooser.c:463
 msgid "_Open"
 msgstr "_Öffnen"
 
@@ -126,169 +125,31 @@ msgstr "Keine Anwendungen verfügbar"
 msgid "_Find More in Software"
 msgstr "_Finden Sie mehr in Software"
 
-#: src/background.c:215 src/background.c:308
-#, c-format
-msgid "“%s” is running in the background"
-msgstr "»%s« läuft im Hintergrund"
+#: src/dynamic-launcher.c:259
+msgid "Create Web Application"
+msgstr "Web-Anwendung erstellen"
 
-#: src/background.c:217
-msgid ""
-"This might be for a legitimate reason, but the application has not provided "
-"one.\n"
-"\n"
-"Note that forcing an application to quit might cause data loss."
-msgstr ""
-"Dies könnte einen legitimen Grund haben, aber die Anwendung hat keinen "
-"solchen angegeben.\n"
-"\n"
-"Beachten Sie, dass das erzwungene Beenden einer Anwendung zu Datenverlust "
-"führen kann."
+#: src/dynamic-launcher.c:261
+msgid "Create Application"
+msgstr "Anwendung erstellen"
 
-#: src/background.c:220
-msgid "Force quit"
-msgstr "Beenden erzwingen"
+#: src/dynamic-launcher.c:269
+msgid "C_reate"
+msgstr "E_rstellen"
 
-#: src/background.c:221
-msgid "Allow"
-msgstr "Erlauben"
-
-#: src/background.c:306
-msgid "Background activity"
-msgstr "Hintergrundaktivität"
-
-#: src/background.c:314
-msgid "Find out more"
-msgstr "Mehr dazu erfahren"
-
-#: src/filechooser.c:462
+#: src/filechooser.c:463
 msgid "_Select"
 msgstr "Au_swählen"
 
-#: src/filechooser.c:464
+#: src/filechooser.c:465
 msgid "_Save"
 msgstr "_Speichern"
 
-#: src/filechooser.c:641
+#: src/filechooser.c:647
 msgid "Open files read-only"
 msgstr "Dateien schreibgeschützt öffnen"
 
-#: src/remotedesktopdialog.c:188
-msgid "Pointer"
-msgstr "Zeiger"
-
-#: src/remotedesktopdialog.c:191
-msgid "Keyboard"
-msgstr "Tastatur"
-
-#: src/remotedesktopdialog.c:194
-msgid "Touch screen"
-msgstr "Tastbildschirm"
-
-#: src/remotedesktopdialog.c:307
-#, c-format
-msgid "Select devices to share with %s"
-msgstr "Geräte auswählen, die mit %s geteilt werden sollen"
-
-#: src/remotedesktopdialog.c:312
-msgid "Select devices to share with the requesting application"
-msgstr ""
-"Geräte auswählen, die mit der anfragenden Anwendung geteilt werden sollen"
-
-#: src/remotedesktopdialog.ui:12
-msgid "Remote desktop"
-msgstr "Entfernter Bildschirm"
-
-#: src/screencastdialog.ui:12
-msgid "Screen Share"
-msgstr "Bildschirm teilen"
-
-#: src/screencastwidget.c:487
-#, c-format
-msgid "Select monitor to share with %s"
-msgstr "Bildschirm auswählen, der mit %s geteilt werden soll"
-
-#: src/screencastwidget.c:489
-#, c-format
-msgid "Select window to share with %s"
-msgstr "Fenster auswählen, das mit %s geteilt werden soll"
-
-#: src/screencastwidget.c:494
-msgid "Select monitor to share with the requesting application"
-msgstr ""
-"Bildschirm auswählen, der mit der anfragenden Anwendung geteilt werden soll"
-
-#: src/screencastwidget.c:495
-msgid "Select window to share with the requesting application"
-msgstr ""
-"Fenster auswählen, das mit der anfordernden Anwendung geteilt werden soll"
-
-#: src/screencastwidget.ui:100
-msgid "Single Window"
-msgstr "Einzelnes Fenster"
-
-#: src/screencastwidget.ui:176
-msgid "Entire Screen"
-msgstr "Gesamter Bildschirm"
-
-#: src/screenshotdialog.c:442
-#, c-format
-msgid "Share this screenshot with %s?"
-msgstr "Soll dieses Bildschirmfoto mit %s geteilt werden?"
-
-#: src/screenshotdialog.c:446
-msgid "Share this screenshot with the requesting application?"
-msgstr ""
-"Soll dieses Bildschirmfoto mit der anfragenden Anwendung geteilt werden?"
-
-#: src/screenshotdialog.ui:10
-msgid "Screenshot"
-msgstr "Bildschirmfoto"
-
-#: src/screenshotdialog.ui:30
-msgid "_Options…"
-msgstr "_Optionen …"
-
-#: src/screenshotdialog.ui:55
-msgid "Take _Screenshot"
-msgstr "Bild_schirmfoto aufnehmen"
-
-#: src/screenshotdialog.ui:111
-msgid "Take Screenshot"
-msgstr "Bildschirmfoto aufnehmen"
-
-#: src/screenshotdialog.ui:122
-msgid "Grab the whole sc_reen"
-msgstr "Gesamten _Bildschirm aufnehmen"
-
-#: src/screenshotdialog.ui:133
-msgid "Grab the current _window"
-msgstr "Aktuelles _Fenster aufnehmen"
-
-#: src/screenshotdialog.ui:144
-msgid "Select _area to grab"
-msgstr "Aufnahmebereich _auswählen"
-
-#: src/screenshotdialog.ui:158
-msgid "Grab after a _delay of"
-msgstr "Bildschirmfoto _verzögert aufnehmen nach"
-
-#: src/screenshotdialog.ui:171
-msgid "seconds"
-msgstr "Sekunden"
-
-#: src/screenshotdialog.ui:181
-msgid "Effects"
-msgstr "Effekte"
-
-#: src/screenshotdialog.ui:192
-msgid "Include _pointer"
-msgstr "_Zeiger einbeziehen"
-
-#: src/screenshotdialog.ui:201
-msgid "Include the window _border"
-msgstr "Fensterrahmen ein_beziehen"
-
-#: src/settings.c:217
+#: src/settings.c:216
 msgid "Requested setting not found"
 msgstr "Angeforderte Einstellung nicht gefunden"
 
@@ -307,6 +168,124 @@ msgstr "Bilddatei konnte nicht geladen werden"
 #: src/wallpaperpreview.ui:57
 msgid "Activities"
 msgstr "Aktivitäten"
+
+#, c-format
+#~ msgid "“%s” is running in the background"
+#~ msgstr "»%s« läuft im Hintergrund"
+
+#~ msgid ""
+#~ "This might be for a legitimate reason, but the application has not "
+#~ "provided one.\n"
+#~ "\n"
+#~ "Note that forcing an application to quit might cause data loss."
+#~ msgstr ""
+#~ "Dies könnte einen legitimen Grund haben, aber die Anwendung hat keinen "
+#~ "solchen angegeben.\n"
+#~ "\n"
+#~ "Beachten Sie, dass das erzwungene Beenden einer Anwendung zu Datenverlust "
+#~ "führen kann."
+
+#~ msgid "Force quit"
+#~ msgstr "Beenden erzwingen"
+
+#~ msgid "Allow"
+#~ msgstr "Erlauben"
+
+#~ msgid "Background activity"
+#~ msgstr "Hintergrundaktivität"
+
+#~ msgid "Find out more"
+#~ msgstr "Mehr dazu erfahren"
+
+#~ msgid "Pointer"
+#~ msgstr "Zeiger"
+
+#~ msgid "Keyboard"
+#~ msgstr "Tastatur"
+
+#~ msgid "Touch screen"
+#~ msgstr "Tastbildschirm"
+
+#, c-format
+#~ msgid "Select devices to share with %s"
+#~ msgstr "Geräte auswählen, die mit %s geteilt werden sollen"
+
+#~ msgid "Select devices to share with the requesting application"
+#~ msgstr ""
+#~ "Geräte auswählen, die mit der anfragenden Anwendung geteilt werden sollen"
+
+#~ msgid "Remote desktop"
+#~ msgstr "Entfernter Bildschirm"
+
+#~ msgid "Screen Share"
+#~ msgstr "Bildschirm teilen"
+
+#, c-format
+#~ msgid "Select monitor to share with %s"
+#~ msgstr "Bildschirm auswählen, der mit %s geteilt werden soll"
+
+#, c-format
+#~ msgid "Select window to share with %s"
+#~ msgstr "Fenster auswählen, das mit %s geteilt werden soll"
+
+#~ msgid "Select monitor to share with the requesting application"
+#~ msgstr ""
+#~ "Bildschirm auswählen, der mit der anfragenden Anwendung geteilt werden "
+#~ "soll"
+
+#~ msgid "Select window to share with the requesting application"
+#~ msgstr ""
+#~ "Fenster auswählen, das mit der anfordernden Anwendung geteilt werden soll"
+
+#~ msgid "Single Window"
+#~ msgstr "Einzelnes Fenster"
+
+#~ msgid "Entire Screen"
+#~ msgstr "Gesamter Bildschirm"
+
+#, c-format
+#~ msgid "Share this screenshot with %s?"
+#~ msgstr "Soll dieses Bildschirmfoto mit %s geteilt werden?"
+
+#~ msgid "Share this screenshot with the requesting application?"
+#~ msgstr ""
+#~ "Soll dieses Bildschirmfoto mit der anfragenden Anwendung geteilt werden?"
+
+#~ msgid "Screenshot"
+#~ msgstr "Bildschirmfoto"
+
+#~ msgid "_Options…"
+#~ msgstr "_Optionen …"
+
+#~ msgid "Take _Screenshot"
+#~ msgstr "Bild_schirmfoto aufnehmen"
+
+#~ msgid "Take Screenshot"
+#~ msgstr "Bildschirmfoto aufnehmen"
+
+#~ msgid "Grab the whole sc_reen"
+#~ msgstr "Gesamten _Bildschirm aufnehmen"
+
+#~ msgid "Grab the current _window"
+#~ msgstr "Aktuelles _Fenster aufnehmen"
+
+#~ msgid "Select _area to grab"
+#~ msgstr "Aufnahmebereich _auswählen"
+
+#~ msgid "Grab after a _delay of"
+#~ msgstr "Bildschirmfoto _verzögert aufnehmen nach"
+
+#~ msgid "seconds"
+#~ msgstr "Sekunden"
+
+#~ msgid "Effects"
+#~ msgstr "Effekte"
+
+#~ msgid "Include _pointer"
+#~ msgstr "_Zeiger einbeziehen"
+
+#~ msgid "Include the window _border"
+#~ msgstr "Fensterrahmen ein_beziehen"
 
 # soll nicht übersetzt werden
 #~ msgid "applications-system-symbolic"
