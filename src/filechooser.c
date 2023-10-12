@@ -557,7 +557,7 @@ handle_open (XdpImplFileChooser *object,
       g_autoptr (GtkFileFilter) filter = NULL;
       const char *current_filter_name;
 
-      filter = gtk_file_filter_new_from_gvariant (current_filter);
+      filter = g_object_ref_sink (gtk_file_filter_new_from_gvariant (current_filter));
       current_filter_name = gtk_file_filter_get_name (filter);
 
       if (!filters)
