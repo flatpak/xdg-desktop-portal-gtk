@@ -1,3 +1,10 @@
+Changes in 1.15.0, 2023-10-17
+=============================
+
+- Remove most use of GNOME private API
+- settings: Handle org.gnome.desktop.calendar schema
+- filechooser: Fix crash using file filters
+
 Changes in 1.14.1, 2022-11-29
 =============================
 
