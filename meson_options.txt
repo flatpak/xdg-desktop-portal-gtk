@@ -1,0 +1,30 @@
+option('dbus-service-dir',
+       type: 'string',
+       value: '',
+       description: 'directory for dbus service files (default: PREFIX/share/dbus-1/services)')
+option('systemd-user-unit-dir',
+       type: 'string',
+       value: '',
+       description: 'directory for systemd user service files (default: PREFIX/lib/systemd/user)')
+option('datarootdir',
+        type: 'string',
+        value: '',
+        description: 'Define the datarootdir for the pkgconf file')
+
+# Features
+option('wallpaper',
+       type: 'feature',
+       value: 'auto',
+       description: 'Enable Wallpaper portal (requires: gnome-desktop)')
+option('settings',
+       type: 'feature',
+       value: 'auto',
+       description: 'Enable Settings portal (requires: fontconfig, gsettings-desktop-schemas)')
+option('appchooser',
+       type: 'feature',
+       value: 'auto',
+       description: 'Enable AppChooser portal')
+option('lockdown',
+       type: 'feature',
+       value: 'auto',
+       description: 'Enable Lockdown portal')
