@@ -131,7 +131,7 @@ set_wallpaper (WallpaperDialogHandle *handle,
 {
   g_autoptr(GFile) source = NULL;
   g_autoptr(GError) error = NULL;
-  g_autrofree gchar *path = NULL;
+  g_autofree gchar *path = NULL;
 
   path = g_build_filename (g_get_user_config_dir (), "background", NULL);
   handle->picture_uri = g_filename_to_uri (path, NULL, &error);
