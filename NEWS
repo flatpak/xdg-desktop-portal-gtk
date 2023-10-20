@@ -1,3 +1,20 @@
+Changes in 1.15.0, 2023-10-20
+=============================
+
+- Switch to the Meson build system, and drop Autotools
+- Drop most use of private GNOME API; the following portal interfaces
+  have been removed:
+    - org.freedesktop.impl.portal.Screenshot
+    - org.freedesktop.impl.portal.ScreenCast
+    - org.freedesktop.impl.portal.RemoteDesktop
+    - org.freedesktop.impl.portsl.Background
+- Do not add duplicate notifications
+- Expose the org.gnome.desktop.calendar settings
+- Fix type for org.gnome.desktop.background.picture-uri setting
+- Support current_folder in org.freedesktop.impl.portal.FileChooser
+- Update list of translatable files
+- Translation updates
+
 Changes in 1.14.1, 2022-11-29
 =============================
 
