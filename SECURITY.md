@@ -9,7 +9,7 @@ please check
 [the latest version](https://github.com/flatpak/xdg-desktop-portal-gtk/blob/master/SECURITY.md).
 
 | Version   | Supported          | Status
-| --------- | ------------------ | -------------------------------------------------------------- |
-| 1.15.x    | :hammer:           | Development branch, releases may include non-security changes  |
-| 1.14.x    | :white_check_mark: | Stable branch, recommended for use in distributions            |
-| <= 1.13.x | :x:                | Older branches, no longer supported                            |
+| --------- | ------------------ | ----------------------------------------------------------- |
+| 1.15.x    | :white_check_mark: | Current stable branch, recommended for use in distributions |
+| 1.14.x    | :white_check_mark: | Old stable branch, will received only security fixes        |
+| <= 1.13.x | :x:                | Older branches, no longer supported                         |
