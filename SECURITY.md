@@ -11,5 +11,5 @@ please check
 | Version   | Supported          | Status
 | --------- | ------------------ | ----------------------------------------------------------- |
 | 1.15.x    | :white_check_mark: | Current stable branch, recommended for use in distributions |
-| 1.14.x    | :white_check_mark: | Old stable branch, will received only security fixes        |
+| 1.14.x    | :white_check_mark: | Old stable branch, will receive only security fixes         |
 | <= 1.13.x | :x:                | Older branches, no longer supported                         |
