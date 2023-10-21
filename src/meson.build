@@ -16,6 +16,10 @@ portal_sources = files(
   'dynamic-launcher.c',
 )
 
+portal_c_args = [
+  '-DLOCALEDIR="@0@"'.format(localedir),
+]
+
 if get_option('wallpaper').allowed()
   portal_deps += dependency('gnome-desktop-3.0')
   portal_sources += files(
@@ -23,6 +27,7 @@ if get_option('wallpaper').allowed()
     'wallpaperpreview.c',
     'wallpaperdialog.c',
   )
+  portal_c_args += '-DBUILD_WALLPAPER'
 endif
 
 if get_option('settings').allowed()
@@ -34,6 +39,7 @@ if get_option('settings').allowed()
     'fc-monitor.c',
     'settings.c',
   )
+  portal_c_args += '-DBUILD_SETTINGS'
 endif
 
 if get_option('appchooser').allowed()
@@ -42,10 +48,12 @@ if get_option('appchooser').allowed()
     'appchooserrow.c',
     'appchooserdialog.c',
   )
+  portal_c_args += '-DBUILD_APPCHOOSER'
 endif
 
 if get_option('lockdown').allowed()
   portal_sources += files('lockdown.c')
+  portal_c_args += '-DBUILD_LOCKDOWN'
 endif
 
 if gtkx11_dep.found()
@@ -95,9 +103,7 @@ executable('xdg-desktop-portal-gtk',
     gtkx11_dep,
     gtkwayland_dep,
   ],
-  c_args: [
-    '-DLOCALEDIR="@0@"'.format(localedir),
-  ],
+  c_args: portal_c_args,
   include_directories: [root_inc],
   install: true,
   install_dir: libexecdir,
