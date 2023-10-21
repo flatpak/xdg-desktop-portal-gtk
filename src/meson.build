@@ -23,6 +23,7 @@ if get_option('wallpaper').allowed()
     'wallpaperpreview.c',
     'wallpaperdialog.c',
   )
+  add_global_arguments('-DBUILD_WALLPAPER', language: 'c')
 endif
 
 if get_option('settings').allowed()
@@ -34,6 +35,7 @@ if get_option('settings').allowed()
     'fc-monitor.c',
     'settings.c',
   )
+  add_global_arguments('-DBUILD_SETTINGS', language: 'c')
 endif
 
 if get_option('appchooser').allowed()
@@ -42,10 +44,12 @@ if get_option('appchooser').allowed()
     'appchooserrow.c',
     'appchooserdialog.c',
   )
+  add_global_arguments('-DBUILD_APPCHOOSER', language: 'c')
 endif
 
 if get_option('lockdown').allowed()
   portal_sources += files('lockdown.c')
+  add_global_arguments('-DBUILD_LOCKDOWN', language: 'c')
 endif
 
 if gtkx11_dep.found()
