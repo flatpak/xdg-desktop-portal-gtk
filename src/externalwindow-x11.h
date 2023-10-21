@@ -31,5 +31,5 @@
 typedef struct _ExternalWindowX11 ExternalWindowX11;
 typedef struct _ExternalWindowX11Class ExternalWindowX11Class;
 
-GType external_window_get_type (void);
+GType external_window_x11_get_type (void);
 ExternalWindowX11 *external_window_x11_new (const char *handle_str);
