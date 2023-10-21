@@ -50,7 +50,7 @@ request_skeleton_iface_init (XdpImplRequestIface *iface)
 }
 
 static void
-request_init (Request *request)
+request_init (Request *self G_GNUC_UNUSED)
 {
 }
 

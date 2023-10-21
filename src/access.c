@@ -110,12 +110,9 @@ send_response (AccessDialogHandle *handle)
 }
 
 static void
-access_dialog_response (GtkWidget *widget,
-                        int response,
-                        gpointer user_data)
+access_dialog_response (AccessDialogHandle *handle,
+                        int response)
 {
-  AccessDialogHandle *handle = user_data;
-
   switch (response)
     {
     default:
@@ -138,9 +135,8 @@ access_dialog_response (GtkWidget *widget,
 }
 
 static gboolean
-handle_close (XdpImplRequest *object,
-              GDBusMethodInvocation *invocation,
-              AccessDialogHandle *handle)
+handle_close (AccessDialogHandle *handle,
+              GDBusMethodInvocation *invocation G_GNUC_UNUSED)
 {
   GVariantBuilder opt_builder;
 
@@ -181,7 +177,7 @@ add_choice (GtkWidget *box,
     {
       GtkWidget *label;
       GtkWidget *group = NULL;
-      int i;
+      gsize i;
 
       label = gtk_label_new (name);
       gtk_widget_show (label);
@@ -315,7 +311,7 @@ handle_access_dialog (XdpImplAccess *object,
 
   if (choices)
     {
-      int i;
+      gsize i;
 
       choice_table = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
       for (i = 0; i < g_variant_n_children (choices); i++)
@@ -359,9 +355,9 @@ G_GNUC_END_IGNORE_DEPRECATIONS
   handle->external_parent = external_parent;
   handle->choices = choice_table;
 
-  g_signal_connect (request, "handle-close", G_CALLBACK (handle_close), handle);
+  g_signal_connect_swapped (request, "handle-close", G_CALLBACK (handle_close), handle);
 
-  g_signal_connect (dialog, "response", G_CALLBACK (access_dialog_response), handle);
+  g_signal_connect_swapped (dialog, "response", G_CALLBACK (access_dialog_response), handle);
 
   gtk_widget_realize (dialog);
 

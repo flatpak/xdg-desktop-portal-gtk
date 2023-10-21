@@ -58,7 +58,7 @@ struct _WallpaperPreviewClass {
 G_DEFINE_TYPE (WallpaperPreview, wallpaper_preview, GTK_TYPE_BOX)
 
 static gboolean
-on_preview_draw_cb (GtkWidget *widget,
+on_preview_draw_cb (GtkWidget *widget G_GNUC_UNUSED,
                     cairo_t   *cr,
                     WallpaperPreview *self)
 {

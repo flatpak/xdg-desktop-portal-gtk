@@ -84,10 +84,10 @@ static GOptionEntry entries[] = {
 };
 
 static void
-message_handler (const gchar *log_domain,
+message_handler (const gchar *log_domain G_GNUC_UNUSED,
                  GLogLevelFlags log_level,
                  const gchar *message,
-                 gpointer user_data)
+                 gpointer user_data G_GNUC_UNUSED)
 {
   /* Make this look like normal console output */
   if (log_level & G_LOG_LEVEL_DEBUG)
@@ -112,8 +112,8 @@ printerr_handler (const gchar *string)
 
 static void
 on_bus_acquired (GDBusConnection *connection,
-                 const gchar     *name,
-                 gpointer         user_data)
+                 const gchar     *name G_GNUC_UNUSED,
+                 gpointer         user_data G_GNUC_UNUSED)
 {
   GError *error = NULL;
 
@@ -199,18 +199,19 @@ on_bus_acquired (GDBusConnection *connection,
 }
 
 static void
-on_name_acquired (GDBusConnection *connection,
-                  const gchar     *name,
-                  gpointer         user_data)
+on_name_acquired (GDBusConnection *connection G_GNUC_UNUSED,
+                  const gchar     *name G_GNUC_UNUSED,
+                  gpointer         user_data G_GNUC_UNUSED)
 {
   g_debug ("org.freedesktop.impl.portal.desktop.gtk acquired");
 }
 
 static void
-on_name_lost (GDBusConnection *connection,
-              const gchar     *name,
-              gpointer         user_data)
+on_name_lost (GDBusConnection *connection G_GNUC_UNUSED,
+              const gchar     *name G_GNUC_UNUSED,
+              gpointer         user_data G_GNUC_UNUSED)
 {
+  g_debug ("org.freedesktop.impl.portal.desktop.gtk lost");
   g_main_loop_quit (loop);
 }
 

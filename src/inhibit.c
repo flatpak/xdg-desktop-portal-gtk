@@ -38,9 +38,9 @@ static gboolean screensaver_active = FALSE;
 static guint query_end_timeout;
 
 static void
-uninhibit_done_gnome (GObject *source,
+uninhibit_done_gnome (GObject *source G_GNUC_UNUSED,
                       GAsyncResult *result,
-                      gpointer data)
+                      gpointer data G_GNUC_UNUSED)
 {
   g_autoptr(GError) error = NULL;
 
@@ -51,7 +51,7 @@ uninhibit_done_gnome (GObject *source,
 static gboolean
 handle_close_gnome (XdpImplRequest *object,
                     GDBusMethodInvocation *invocation,
-                    gpointer data)
+                    gpointer data G_GNUC_UNUSED)
 {
   Request *request = (Request *)object;
   guint cookie;
@@ -74,7 +74,7 @@ handle_close_gnome (XdpImplRequest *object,
 }
 
 static void
-inhibit_done_gnome (GObject *source,
+inhibit_done_gnome (GObject *source G_GNUC_UNUSED,
                     GAsyncResult *result,
                     gpointer data)
 {
@@ -99,7 +99,7 @@ handle_inhibit_gnome (XdpImplInhibit *object,
                       GDBusMethodInvocation *invocation,
                       const gchar *arg_handle,
                       const gchar *arg_app_id,
-                      const gchar *arg_window,
+                      const gchar *arg_window G_GNUC_UNUSED,
                       guint arg_flags,
                       GVariant *arg_options)
 {
@@ -185,7 +185,7 @@ stop_waiting_for_query_end_response (gboolean send_response)
 }
 
 static gboolean
-query_end_response (gpointer data)
+query_end_response (gpointer data G_GNUC_UNUSED)
 {
   g_debug ("1 second wait is over");
 
@@ -226,10 +226,10 @@ maybe_send_quit_response (void)
 
 static void
 client_proxy_signal (GDBusProxy  *proxy,
-                     const gchar *sender_name,
+                     const gchar *sender_name G_GNUC_UNUSED,
                      const gchar *signal_name,
-                     GVariant    *parameters,
-                     gpointer     user_data)
+                     GVariant    *parameters G_GNUC_UNUSED,
+                     gpointer     user_data G_GNUC_UNUSED)
 {
   if (g_str_equal (signal_name, "QueryEndSession"))
     {
@@ -260,9 +260,9 @@ client_proxy_signal (GDBusProxy  *proxy,
 static OrgFreedesktopScreenSaver *fdo_screensaver;
 
 static void
-uninhibit_done_fdo (GObject *source,
+uninhibit_done_fdo (GObject *source G_GNUC_UNUSED,
                     GAsyncResult *result,
-                    gpointer data)
+                    gpointer data G_GNUC_UNUSED)
 {
   g_autoptr(GError) error = NULL;
 
@@ -275,7 +275,7 @@ uninhibit_done_fdo (GObject *source,
 static gboolean
 handle_close_fdo (XdpImplRequest *object,
                   GDBusMethodInvocation *invocation,
-                  gpointer data)
+                  gpointer data G_GNUC_UNUSED)
 {
   Request *request = (Request *)object;
   guint cookie;
@@ -302,7 +302,7 @@ handle_close_fdo (XdpImplRequest *object,
 }
 
 static void
-inhibit_done_fdo (GObject *source,
+inhibit_done_fdo (GObject *source G_GNUC_UNUSED,
                   GAsyncResult *result,
                   gpointer data)
 {
@@ -334,7 +334,7 @@ handle_inhibit_fdo (XdpImplInhibit *object,
                     GDBusMethodInvocation *invocation,
                     const gchar *arg_handle,
                     const gchar *arg_app_id,
-                    const gchar *arg_window,
+                    const gchar *arg_window G_GNUC_UNUSED,
                     guint arg_flags,
                     GVariant *arg_options)
 {
@@ -457,7 +457,7 @@ inhibit_session_finalize (GObject *object)
 }
 
 static void
-inhibit_session_init (InhibitSession *inhibit_session)
+inhibit_session_init (InhibitSession *self G_GNUC_UNUSED)
 {
 }
 
@@ -475,7 +475,7 @@ inhibit_session_class_init (InhibitSessionClass *klass)
 }
 
 static InhibitSession *
-inhibit_session_new (const char *app_id,
+inhibit_session_new (const char *app_id G_GNUC_UNUSED,
                      const char *session_handle)
 {
   InhibitSession *inhibit_session;
@@ -494,10 +494,10 @@ inhibit_session_new (const char *app_id,
 static gboolean
 handle_create_monitor (XdpImplInhibit *object,
                        GDBusMethodInvocation *invocation,
-                       const char *arg_handle,
+                       const char *arg_handle G_GNUC_UNUSED,
                        const char *arg_session_handle,
                        const char *arg_app_id,
-                       const char *arg_window)
+                       const char *arg_window G_GNUC_UNUSED)
 {
   g_autoptr(GError) error = NULL;
   int response;
@@ -544,7 +544,7 @@ handle_query_end_response (XdpImplInhibit *object,
 }
 
 static void
-global_active_changed_cb (GObject *object,
+global_active_changed_cb (GObject *object G_GNUC_UNUSED,
                           gboolean active)
 {
   g_debug ("Screensaver %s", active  ? "active" : "inactive");

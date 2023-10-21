@@ -103,10 +103,10 @@ get_color_scheme (void)
 }
 
 static gboolean
-settings_handle_read_all (XdpImplSettings       *object,
+settings_handle_read_all (XdpImplSettings       *object G_GNUC_UNUSED,
                           GDBusMethodInvocation *invocation,
                           const char * const    *arg_namespaces,
-                          gpointer               data)
+                          gpointer               data G_GNUC_UNUSED)
 {
   g_autoptr(GVariantBuilder) builder = g_variant_builder_new (G_VARIANT_TYPE ("(a{sa{sv}})"));
   GHashTableIter iter;
@@ -167,11 +167,11 @@ settings_handle_read_all (XdpImplSettings       *object,
 }
 
 static gboolean
-settings_handle_read (XdpImplSettings       *object,
+settings_handle_read (XdpImplSettings       *object G_GNUC_UNUSED,
                       GDBusMethodInvocation *invocation,
                       const char            *arg_namespace,
                       const char            *arg_key,
-                      gpointer               data)
+                      gpointer               data G_GNUC_UNUSED)
 {
   g_debug ("Read %s %s", arg_namespace, arg_key);
 
@@ -235,7 +235,7 @@ changed_signal_user_data_new (XdpImplSettings *settings,
 
 static void
 changed_signal_user_data_destroy (gpointer  data,
-                                  GClosure *closure)
+                                  GClosure *closure G_GNUC_UNUSED)
 {
   g_free (data);
 }
@@ -306,7 +306,7 @@ init_settings_table (XdpImplSettings *settings,
 }
 
 static void
-fontconfig_changed (FcMonitor       *monitor,
+fontconfig_changed (FcMonitor       *monitor G_GNUC_UNUSED,
                     XdpImplSettings *impl)
 {
   const char *namespace = "org.gnome.fontconfig";

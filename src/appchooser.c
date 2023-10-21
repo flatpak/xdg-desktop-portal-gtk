@@ -228,7 +228,7 @@ handle_choose_application (XdpImplAppChooser *object,
 }
 
 static gboolean
-handle_update_choices (XdpImplAppChooser *object,
+handle_update_choices (XdpImplAppChooser *object G_GNUC_UNUSED,
                        GDBusMethodInvocation *invocation,
                        const char *arg_handle,
                        const char **choices)

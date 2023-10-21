@@ -166,7 +166,7 @@ session_constructed (GObject *object)
 }
 
 static void
-session_init (Session *session)
+session_init (Session *session G_GNUC_UNUSED)
 {
 }
 

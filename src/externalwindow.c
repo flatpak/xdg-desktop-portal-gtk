@@ -139,7 +139,7 @@ external_window_get_property (GObject    *object,
 }
 
 static void
-external_window_init (ExternalWindow *external_window)
+external_window_init (ExternalWindow *self G_GNUC_UNUSED)
 {
 }
 

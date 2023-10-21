@@ -124,7 +124,7 @@ handle_compose_email (XdpImplEmail *object,
                       GDBusMethodInvocation *invocation,
                       const char *arg_handle,
                       const char *arg_app_id,
-                      const char *arg_parent_window,
+                      const char *arg_parent_window G_GNUC_UNUSED,
                       GVariant *arg_options)
 {
   g_autoptr(Request) request = NULL;
