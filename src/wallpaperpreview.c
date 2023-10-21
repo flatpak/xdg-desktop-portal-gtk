@@ -207,7 +207,7 @@ wallpaper_preview_class_init (WallpaperPreviewClass *klass)
 }
 
 WallpaperPreview *
-wallpaper_preview_new ()
+wallpaper_preview_new (void)
 {
   return g_object_new (wallpaper_preview_get_type (), NULL);
 }
