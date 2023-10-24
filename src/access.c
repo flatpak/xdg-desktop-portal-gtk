@@ -2,6 +2,8 @@
 
 #include "config.h"
 
+#include "access.h"
+
 #include <errno.h>
 #include <locale.h>
 #include <string.h>
@@ -298,8 +300,8 @@ handle_access_dialog (XdpImplAccess *object,
                                    0,
                                    GTK_MESSAGE_QUESTION,
                                    GTK_BUTTONS_NONE,
-                                   arg_title,
-                                   NULL);
+                                   "%s",
+                                   arg_title);
   gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (fake_parent));
   gtk_window_set_modal (GTK_WINDOW (dialog), modal);
   gtk_dialog_add_button (GTK_DIALOG (dialog), deny_label, GTK_RESPONSE_CANCEL);
