@@ -92,6 +92,39 @@ portal_built_sources += gnome.gdbus_codegen('shell-dbus',
   ],
 )
 
+# Add more warnings
+cc = meson.get_compiler('c')
+portal_c_args += cc.get_supported_arguments([
+  # We are building GLib code; see toolchain requirements
+  '-fno-strict-aliasing',
+
+  # GResource strings can be arbitrarily long
+  '-Wno-overlength-strings',
+
+  '-Wformat=2',
+  '-Wformat-non-literal',
+  '-Wformat-security',
+  '-Wignored-qualifiers',
+  '-Wimplicit-function-declaration',
+  '-Wmisleading-indentation',
+  '-Wmissing-format-attribute',
+  '-Wmissing-include-dirs',
+  '-Wmissing-noreturn',
+  '-Wnested-externs',
+  '-Wpointer-arith',
+  '-Wshadow',
+  '-Wstrict-prototypes',
+  '-Wswitch-default',
+  '-Wswitch-enum',
+  '-Wundef',
+  '-Wempty-body',
+  '-Winit-self',
+  '-Wmissing-declarations',
+  '-Wmissing-prototypes',
+  '-Wredundant-decls',
+  '-Wwrite-strings',
+])
+
 executable('xdg-desktop-portal-gtk',
   sources: [
     'xdg-desktop-portal-gtk.c',
