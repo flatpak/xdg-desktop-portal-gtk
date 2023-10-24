@@ -45,11 +45,11 @@ typedef struct {
 
 static SettingsBundle *
 settings_bundle_new (GSettingsSchema *schema,
-                     GSettings       *settings)
+                     GSettings       *setting)
 {
   SettingsBundle *bundle = g_new (SettingsBundle, 1);
   bundle->schema = schema;
-  bundle->settings = settings;
+  bundle->settings = setting;
   return bundle;
 }
 
@@ -224,11 +224,11 @@ typedef struct {
 } ChangedSignalUserData;
 
 static ChangedSignalUserData *
-changed_signal_user_data_new (XdpImplSettings *settings,
+changed_signal_user_data_new (XdpImplSettings *self,
                               const char      *namespace)
 {
   ChangedSignalUserData *data = g_new (ChangedSignalUserData, 1);
-  data->self = settings;
+  data->self = self;
   data->namespace = namespace;
   return data;
 }
@@ -241,11 +241,11 @@ changed_signal_user_data_destroy (gpointer  data,
 }
 
 static void
-on_settings_changed (GSettings             *settings,
+on_settings_changed (GSettings             *setting,
                      const char            *key,
                      ChangedSignalUserData *user_data)
 {
-  g_autoptr (GVariant) new_value = g_settings_get_value (settings, key);
+  g_autoptr (GVariant) new_value = g_settings_get_value (setting, key);
 
   g_debug ("Emitting changed for %s %s", user_data->namespace, key);
   if (strcmp (user_data->namespace, "org.gnome.desktop.interface") == 0 &&
@@ -264,7 +264,7 @@ on_settings_changed (GSettings             *settings,
 }
 
 static void
-init_settings_table (XdpImplSettings *settings,
+init_settings_table (XdpImplSettings *self,
                      GHashTable      *table)
 {
   static const char * const schemas[] = {
@@ -298,8 +298,8 @@ init_settings_table (XdpImplSettings *settings,
 
       setting = g_settings_new (schema_name);
       bundle = settings_bundle_new (schema, setting);
-      g_signal_connect_data (setting, "changed", G_CALLBACK(on_settings_changed),
-                             changed_signal_user_data_new (settings, schema_name),
+      g_signal_connect_data (setting, "changed", G_CALLBACK (on_settings_changed),
+                             changed_signal_user_data_new (self, schema_name),
                              changed_signal_user_data_destroy, 0);
       g_hash_table_insert (table, (char*)schema_name, bundle);
     }

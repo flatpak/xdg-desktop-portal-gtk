@@ -134,7 +134,7 @@ handle_inhibit_gnome (XdpImplInhibit *object,
 }
 
 static void
-send_quit_response (GDBusProxy  *client,
+send_quit_response (GDBusProxy  *_client G_GNUC_UNUSED,
                     gboolean     will_quit,
                     const gchar *reason)
 {
