@@ -233,6 +233,9 @@ stuff_changed (GFileMonitor *monitor G_GNUC_UNUSED,
         case UPDATE_RESTART:
                 g_debug ("Got %-38s for %s: waiting on fontconfig update", event_name, path);
                 break;
+
+        default:
+                g_assert_not_reached ();
         }
 
 	g_free (path);
