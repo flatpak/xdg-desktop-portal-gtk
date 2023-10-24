@@ -118,9 +118,9 @@ add_recent_entry (const char *app_id,
    */
   data.display_name = NULL;
   data.description = NULL;
-  data.mime_type = "application/octet-stream";
-  data.app_name = (char *)app_id;
-  data.app_exec = "gio open %u";
+  data.mime_type = (char *) "application/octet-stream";
+  data.app_name = (char *) app_id;
+  data.app_exec = (char *) "gio open %u";
   data.groups = NULL;
   data.is_private = FALSE;
 

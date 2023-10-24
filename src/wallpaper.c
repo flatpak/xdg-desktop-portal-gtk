@@ -69,8 +69,8 @@ send_response (WallpaperDialogHandle *handle)
 }
 
 static gboolean
-set_gsettings (gchar *schema,
-               gchar *uri)
+set_gsettings (const gchar *schema,
+               const gchar *uri)
 {
   g_autoptr(GSettings) settings = NULL;
 
