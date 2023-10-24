@@ -55,7 +55,7 @@ fdo_notification_free (gpointer data)
   g_slice_free (FdoNotification, n);
 }
 
-FdoNotification *
+static FdoNotification *
 fdo_find_notification (const char *app_id,
                        const char *id)
 {
@@ -72,7 +72,7 @@ fdo_find_notification (const char *app_id,
   return NULL;
 }
 
-FdoNotification *
+static FdoNotification *
 fdo_find_notification_by_notify_id (guint32 id)
 {
   GSList *l;
