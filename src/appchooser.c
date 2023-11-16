@@ -256,6 +256,30 @@ handle_update_choices (XdpImplAppChooser *object,
   return TRUE;
 }
 
+static gboolean
+handle_scheme_supported (XdpImplAppChooser *object,
+                         GDBusMethodInvocation *invocation,
+                         const char *arg_scheme)
+{
+  if (arg_scheme == NULL || *arg_scheme == '\0') {
+    g_dbus_method_invocation_return_error (invocation,
+                                           XDG_DESKTOP_PORTAL_ERROR,
+                                           XDG_DESKTOP_PORTAL_ERROR_INVALID_ARGUMENT,
+                                           "Scheme not specified");
+    return TRUE;
+  }
+
+
+  GAppInfo* app_info = g_app_info_get_default_for_uri_scheme (arg_scheme);
+
+  g_debug ("Handler for scheme: %s%s found.", arg_scheme, app_info ? "" : " not");
+
+  g_dbus_method_invocation_return_value (invocation, 
+                                         g_variant_new ("(b)", app_info != NULL));
+
+  return TRUE;
+}
+
 gboolean
 app_chooser_init (GDBusConnection *bus,
                   GError **error)
@@ -266,6 +290,7 @@ app_chooser_init (GDBusConnection *bus,
 
   g_signal_connect (helper, "handle-choose-application", G_CALLBACK (handle_choose_application), NULL);
   g_signal_connect (helper, "handle-update-choices", G_CALLBACK (handle_update_choices), NULL);
+  g_signal_connect (helper, "handle-scheme-supported", G_CALLBACK (handle_scheme_supported), NULL);
 
   if (!g_dbus_interface_skeleton_export (helper,
                                          bus,
