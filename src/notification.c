@@ -227,8 +227,10 @@ handle_add_notification (XdpImplNotification *object,
                          const gchar *arg_id,
                          GVariant *arg_notification)
 {
-  if (gtk_notifications == NULL ||
-      g_dbus_proxy_get_name_owner (G_DBUS_PROXY (gtk_notifications)) == NULL ||
+  g_autofree char* owner = gtk_notifications != NULL ?
+    g_dbus_proxy_get_name_owner (G_DBUS_PROXY (gtk_notifications)) :
+    NULL;
+  if (owner == NULL ||
       !g_application_id_is_valid (arg_app_id) ||
       has_unprefixed_action (arg_notification))
     handle_add_notification_fdo (object, invocation, arg_app_id, arg_id, arg_notification);
