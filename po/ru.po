@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2023-03-04 13:38+0000\n"
-"PO-Revision-Date: 2023-03-24 16:45+0300\n"
+"POT-Creation-Date: 2023-09-01 03:33+0000\n"
+"PO-Revision-Date: 2023-12-22 22:56+0300\n"
 "Last-Translator: Aleksandr Melman <Alexmelman88@gmail.com>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.4.1\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
@@ -28,7 +28,7 @@ msgstr "Портал"
 
 #: src/access.c:271
 msgid "Deny Access"
-msgstr "Запретить доступ"
+msgstr "Отказать в доступе"
 
 #: src/access.c:274
 msgid "Grant Access"
@@ -57,11 +57,11 @@ msgstr "Изображения"
 #: src/accountdialog.c:272
 #, c-format
 msgid "Share your personal information with %s?"
-msgstr "Дать «%s» доступ к своей личной информации?"
+msgstr "Дать приложению «%s» доступ к вашей личной информации?"
 
 #: src/accountdialog.c:275
 msgid "Share your personal information with the requesting application?"
-msgstr "Дать запрашивающему приложению доступ к своей личной информации?"
+msgstr "Дать запрашивающему приложению доступ к вашей личной информации?"
 
 #: src/accountdialog.ui:10
 msgid "Share Details"
@@ -69,13 +69,10 @@ msgstr "Подробности"
 
 #: src/accountdialog.ui:14 src/appchooserdialog.ui:14
 #: src/dynamic-launcher.c:267 src/filechooser.c:468
-#: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
-#: src/screenshotdialog.ui:14
 msgid "_Cancel"
 msgstr "_Отменить"
 
-#: src/accountdialog.ui:22 src/remotedesktopdialog.ui:28
-#: src/screencastdialog.ui:28 src/screenshotdialog.ui:38
+#: src/accountdialog.ui:22
 msgid "_Share"
 msgstr "_Дать доступ"
 
@@ -127,39 +124,6 @@ msgstr "Нет доступных приложений"
 msgid "_Find More in Software"
 msgstr "_Найти в Центре приложений"
 
-#: src/background.c:215 src/background.c:308
-#, c-format
-msgid "“%s” is running in the background"
-msgstr "«%s» работает в фоне"
-
-#: src/background.c:217
-msgid ""
-"This might be for a legitimate reason, but the application has not provided "
-"one.\n"
-"\n"
-"Note that forcing an application to quit might cause data loss."
-msgstr ""
-"Возможно, так и должно быть, но приложение не предоставило явной причины.\n"
-"\n"
-"Обратите внимание, что принудительное завершение приложения может привести к "
-"потере данных."
-
-#: src/background.c:220
-msgid "Force quit"
-msgstr "Завершить принудительно"
-
-#: src/background.c:221
-msgid "Allow"
-msgstr "Разрешить"
-
-#: src/background.c:306
-msgid "Background activity"
-msgstr "Фоновая активность"
-
-#: src/background.c:314
-msgid "Find out more"
-msgstr "Узнать больше"
-
 #: src/dynamic-launcher.c:259
 msgid "Create Web Application"
 msgstr "Создать веб-приложение"
@@ -180,124 +144,11 @@ msgstr "_Выбрать"
 msgid "_Save"
 msgstr "_Сохранить"
 
-#: src/filechooser.c:642
+#: src/filechooser.c:647
 msgid "Open files read-only"
-msgstr "Открыть файлы в режиме только для чтения"
+msgstr "Открыть файлы только для чтения"
 
-#: src/remotedesktopdialog.c:188
-msgid "Pointer"
-msgstr "Курсор мыши"
-
-#: src/remotedesktopdialog.c:191
-msgid "Keyboard"
-msgstr "Клавиатура"
-
-#: src/remotedesktopdialog.c:194
-msgid "Touch screen"
-msgstr "Сенсорный экран"
-
-#: src/remotedesktopdialog.c:307
-#, c-format
-msgid "Select devices to share with %s"
-msgstr "Выберите устройства для совместного использования с %s"
-
-#: src/remotedesktopdialog.c:312
-msgid "Select devices to share with the requesting application"
-msgstr ""
-"Выберите устройства для совместного использования с запрашивающим приложением"
-
-#: src/remotedesktopdialog.ui:12
-msgid "Remote desktop"
-msgstr "Удалённый рабочий стол"
-
-#: src/screencastdialog.ui:12
-msgid "Screen Share"
-msgstr "Доступ к экрану"
-
-#: src/screencastwidget.c:487
-#, c-format
-msgid "Select monitor to share with %s"
-msgstr "Выберите монитор, который сможет записывать «%s»"
-
-#: src/screencastwidget.c:489
-#, c-format
-msgid "Select window to share with %s"
-msgstr "Выберите окно, которое сможет записывать «%s»"
-
-#: src/screencastwidget.c:494
-msgid "Select monitor to share with the requesting application"
-msgstr "Выберите монитор, который сможет записывать запрашивающее приложение"
-
-#: src/screencastwidget.c:495
-msgid "Select window to share with the requesting application"
-msgstr "Выберите окно, которое сможет записывать запрашивающее приложение"
-
-#: src/screencastwidget.ui:100
-msgid "Single Window"
-msgstr "Одно окно"
-
-#: src/screencastwidget.ui:176
-msgid "Entire Screen"
-msgstr "Весь экран"
-
-#: src/screenshotdialog.c:442
-#, c-format
-msgid "Share this screenshot with %s?"
-msgstr "Дать «%s» доступ к этому снимку экрана?"
-
-#: src/screenshotdialog.c:446
-msgid "Share this screenshot with the requesting application?"
-msgstr "Дать запрашивающему приложению доступ к этому снимку экрана?"
-
-#: src/screenshotdialog.ui:10
-msgid "Screenshot"
-msgstr "Снимок экрана"
-
-#: src/screenshotdialog.ui:30
-msgid "_Options…"
-msgstr "_Варианты…"
-
-#: src/screenshotdialog.ui:55
-msgid "Take _Screenshot"
-msgstr "Сделать _снимок экрана"
-
-#: src/screenshotdialog.ui:111
-msgid "Take Screenshot"
-msgstr "Сделать снимок экрана"
-
-#: src/screenshotdialog.ui:122
-msgid "Grab the whole sc_reen"
-msgstr "Снимок всего эк_рана"
-
-#: src/screenshotdialog.ui:133
-msgid "Grab the current _window"
-msgstr "Снимок текущего о_кна"
-
-#: src/screenshotdialog.ui:144
-msgid "Select _area to grab"
-msgstr "Выбрать _область для снимка"
-
-#: src/screenshotdialog.ui:158
-msgid "Grab after a _delay of"
-msgstr "_Задержка перед снимком"
-
-#: src/screenshotdialog.ui:171
-msgid "seconds"
-msgstr "секунды"
-
-#: src/screenshotdialog.ui:181
-msgid "Effects"
-msgstr "Эффекты"
-
-#: src/screenshotdialog.ui:192
-msgid "Include _pointer"
-msgstr "Показать курсор _мыши"
-
-#: src/screenshotdialog.ui:201
-msgid "Include the window _border"
-msgstr "Показать _границу окна"
-
-#: src/settings.c:217
+#: src/settings.c:216
 msgid "Requested setting not found"
 msgstr "Запрашиваемая настройка не найдена"
 
@@ -312,11 +163,127 @@ msgstr "Установить"
 
 #: src/wallpaperdialog.ui:57
 msgid "Failed to load image file"
-msgstr "Не удалось загрузить изображение"
+msgstr "Не удалось загрузить файл изображения"
 
 #: src/wallpaperpreview.ui:57
 msgid "Activities"
 msgstr "Обзор"
+
+#, c-format
+#~ msgid "“%s” is running in the background"
+#~ msgstr "Приложение «%s» работает в фоне"
+
+#~ msgid ""
+#~ "This might be for a legitimate reason, but the application has not "
+#~ "provided one.\n"
+#~ "\n"
+#~ "Note that forcing an application to quit might cause data loss."
+#~ msgstr ""
+#~ "Возможно, так и должно быть, но приложение не предоставило явной "
+#~ "причины.\n"
+#~ "\n"
+#~ "Обратите внимание, что принудительное завершение приложения может "
+#~ "привести к потере данных."
+
+#~ msgid "Force quit"
+#~ msgstr "Завершить принудительно"
+
+#~ msgid "Allow"
+#~ msgstr "Разрешить"
+
+#~ msgid "Background activity"
+#~ msgstr "Фоновая активность"
+
+#~ msgid "Find out more"
+#~ msgstr "Узнать больше"
+
+#~ msgid "Pointer"
+#~ msgstr "Курсор мыши"
+
+#~ msgid "Keyboard"
+#~ msgstr "Клавиатура"
+
+#~ msgid "Touch screen"
+#~ msgstr "Сенсорный экран"
+
+#, c-format
+#~ msgid "Select devices to share with %s"
+#~ msgstr "Выберите устройства для совместного использования с «%s»"
+
+#~ msgid "Select devices to share with the requesting application"
+#~ msgstr ""
+#~ "Выберите устройства для совместного использования с запрашивающим "
+#~ "приложением"
+
+#~ msgid "Remote desktop"
+#~ msgstr "Удалённый рабочий стол"
+
+#~ msgid "Screen Share"
+#~ msgstr "Доступ к экрану"
+
+#, c-format
+#~ msgid "Select monitor to share with %s"
+#~ msgstr "Выберите монитор, который сможет записывать «%s»"
+
+#, c-format
+#~ msgid "Select window to share with %s"
+#~ msgstr "Выберите окно, которое сможет записывать «%s»"
+
+#~ msgid "Select monitor to share with the requesting application"
+#~ msgstr ""
+#~ "Выберите монитор, который сможет записывать запрашивающее приложение"
+
+#~ msgid "Select window to share with the requesting application"
+#~ msgstr "Выберите окно, которое сможет записывать запрашивающее приложение"
+
+#~ msgid "Single Window"
+#~ msgstr "Одно окно"
+
+#~ msgid "Entire Screen"
+#~ msgstr "Весь экран"
+
+#, c-format
+#~ msgid "Share this screenshot with %s?"
+#~ msgstr "Дать приложению «%s» доступ к этому снимку экрана?"
+
+#~ msgid "Share this screenshot with the requesting application?"
+#~ msgstr "Дать запрашивающему приложению доступ к этому снимку экрана?"
+
+#~ msgid "Screenshot"
+#~ msgstr "Снимок экрана"
+
+#~ msgid "_Options…"
+#~ msgstr "_Варианты…"
+
+#~ msgid "Take _Screenshot"
+#~ msgstr "Сделать _снимок экрана"
+
+#~ msgid "Take Screenshot"
+#~ msgstr "Сделать снимок экрана"
+
+#~ msgid "Grab the whole sc_reen"
+#~ msgstr "Снимок всего эк_рана"
+
+#~ msgid "Grab the current _window"
+#~ msgstr "Снимок текущего о_кна"
+
+#~ msgid "Select _area to grab"
+#~ msgstr "Выбрать _область для снимка"
+
+#~ msgid "Grab after a _delay of"
+#~ msgstr "_Задержка перед снимком"
+
+#~ msgid "seconds"
+#~ msgstr "сек"
+
+#~ msgid "Effects"
+#~ msgstr "Эффекты"
+
+#~ msgid "Include _pointer"
+#~ msgstr "Показать курсор _мыши"
+
+#~ msgid "Include the window _border"
+#~ msgstr "Показать _границу окна"
 
 #~ msgid "Name"
 #~ msgstr "Имя"
