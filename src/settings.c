@@ -1,5 +1,6 @@
 /*
  * Copyright © 2018 Igalia S.L.
+ * Copyright © 2024 GNOME Foundation Inc.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -16,6 +17,7 @@
  *
  * Authors:
  *       Patrick Griffis <pgriffis@igalia.com>
+ *       Hubert Figuière <hub@figuiere.net>
  */
 
 #include "config.h"
@@ -102,6 +104,18 @@ get_color_scheme (void)
   return g_variant_new_uint32 (color_scheme);
 }
 
+static GVariant *
+get_contrast_value ()
+{
+  SettingsBundle *bundle = g_hash_table_lookup (settings, "org.gnome.desktop.a11y.interface");
+  gboolean hc = FALSE;
+
+  if (bundle && g_settings_schema_has_key (bundle->schema, "high-contrast"))
+    hc = g_settings_get_boolean (bundle->settings, "high-contrast");
+
+  return g_variant_new_uint32 (hc ? 1 : 0);
+}
+
 static gboolean
 settings_handle_read_all (XdpImplSettings       *object,
                           GDBusMethodInvocation *invocation,
@@ -155,6 +169,7 @@ settings_handle_read_all (XdpImplSettings       *object,
 
       g_variant_dict_init (&dict, NULL);
       g_variant_dict_insert_value (&dict, "color-scheme", get_color_scheme ());
+      g_variant_dict_insert_value (&dict, "contrast", get_contrast_value ());
 
       g_variant_builder_add (builder, "{s@a{sv}}", "org.freedesktop.appearance", g_variant_dict_end (&dict));
     }
@@ -184,12 +199,20 @@ settings_handle_read (XdpImplSettings       *object,
           return TRUE;
         }
     }
-  else if (strcmp (arg_namespace, "org.freedesktop.appearance") == 0 &&
-           strcmp (arg_key, "color-scheme") == 0)
+  else if (strcmp (arg_namespace, "org.freedesktop.appearance") == 0)
     {
-      g_dbus_method_invocation_return_value (invocation,
-                                             g_variant_new ("(v)", get_color_scheme ()));
-      return TRUE;
+      if (strcmp (arg_key, "color-scheme") == 0)
+        {
+	  g_dbus_method_invocation_return_value (invocation,
+						 g_variant_new ("(v)", get_color_scheme ()));
+	  return TRUE;
+	}
+      else if (strcmp (arg_key, "contrast") == 0)
+        {
+	  g_dbus_method_invocation_return_value (invocation,
+						 g_variant_new ("(v)", get_contrast_value ()));
+	  return TRUE;
+	}
     }
   else if (strcmp (arg_namespace, "org.gnome.desktop.interface") == 0 &&
            strcmp (arg_key, "enable-animations") == 0)
@@ -261,6 +284,16 @@ on_settings_changed (GSettings             *settings,
     xdp_impl_settings_emit_setting_changed (user_data->self,
                                             "org.freedesktop.appearance", key,
                                             g_variant_new ("v", get_color_scheme ()));
+  if (strcmp (user_data->namespace, "org.gnome.desktop.a11y.interface") == 0 &&
+      strcmp (key, "high-contrast") == 0 &&
+      g_variant_is_of_type (new_value, G_VARIANT_TYPE_BOOLEAN))
+    {
+      gboolean hc = g_variant_get_boolean (new_value);
+      xdp_impl_settings_emit_setting_changed (user_data->self,
+					      "org.freedesktop.appearance",
+					      "contrast",
+					      g_variant_new ("v", g_variant_new_uint32 (hc ? 1 : 0)));
+    }
 }
 
 static void
