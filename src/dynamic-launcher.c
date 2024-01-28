@@ -137,12 +137,9 @@ send_prepare_install_response (InstallDialogHandle *handle)
 }
 
 static void
-handle_prepare_install_response (GtkDialog *dialog,
-                                 gint       response,
-                                 gpointer   data)
+handle_prepare_install_response (InstallDialogHandle *handle,
+                                 int response)
 {
-  InstallDialogHandle *handle = data;
-
   switch (response)
     {
     default:
@@ -329,7 +326,7 @@ handle_prepare_install (XdpImplDynamicLauncher *object,
 
   g_signal_connect (request, "handle-close", G_CALLBACK (handle_close), handle);
 
-  g_signal_connect (dialog, "response", G_CALLBACK (handle_prepare_install_response), handle);
+  g_signal_connect_swapped (dialog, "response", G_CALLBACK (handle_prepare_install_response), handle);
 
   gtk_widget_realize (dialog);
 
@@ -352,7 +349,7 @@ static gboolean
 handle_request_install_token (XdpImplDynamicLauncher *object,
                               GDBusMethodInvocation  *invocation,
                               const char             *arg_app_id,
-                              GVariant               *arg_options)
+                              GVariant               *arg_options G_GNUC_UNUSED)
 {
   /* Generally these should be allowed in each desktop specific x-d-p backend,
    * but add them here as well as a fallback.

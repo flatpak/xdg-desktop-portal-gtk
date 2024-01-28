@@ -102,7 +102,7 @@ external_window_wayland_dispose (GObject *object)
 }
 
 static void
-external_window_wayland_init (ExternalWindowWayland *external_window_wayland)
+external_window_wayland_init (ExternalWindowWayland *self G_GNUC_UNUSED)
 {
 }
 

@@ -2,8 +2,7 @@
 #include "appchooserdialog.h"
 
 static void
-close_cb (AppChooserDialog *dialog,
-          gpointer   data)
+close_cb (AppChooserDialog *dialog)
 {
         GAppInfo *info;
 

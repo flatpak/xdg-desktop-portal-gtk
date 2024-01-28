@@ -6,6 +6,7 @@
 typedef struct _AccountDialog AccountDialog;
 typedef struct _AccountDialogClass AccountDialogClass;
 
+GType account_dialog_get_type (void);
 AccountDialog * account_dialog_new (const char *app_id,
                                     const char *user_name,
                                     const char *real_name,

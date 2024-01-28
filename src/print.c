@@ -332,11 +332,9 @@ print_file (int fd,
 }
 
 static void
-handle_print_response (GtkDialog *dialog,
-                       gint response,
-                       gpointer data)
+handle_print_response (PrintDialogHandle *handle,
+                       gint response)
 {
-  PrintDialogHandle *handle = data;
   g_autoptr(GError) error = NULL;
   gboolean preview = FALSE;
 
@@ -529,7 +527,7 @@ handle_print (XdpImplPrint *object,
 
   g_signal_connect (request, "handle-close", G_CALLBACK (handle_close), handle);
 
-  g_signal_connect (dialog, "response", G_CALLBACK (handle_print_response), handle);
+  g_signal_connect_swapped (dialog, "response", G_CALLBACK (handle_print_response), handle);
 
   gtk_widget_realize (dialog);
 
@@ -569,11 +567,9 @@ send_prepare_print_response (PrintDialogHandle *handle)
 }
 
 static void
-handle_prepare_print_response (GtkDialog *dialog,
-                               gint response,
-                               gpointer data)
+handle_prepare_print_response (PrintDialogHandle *handle,
+                               gint response)
 {
-  PrintDialogHandle *handle = data;
   gboolean preview = FALSE;
 
   switch (response)
@@ -689,7 +685,7 @@ handle_prepare_print (XdpImplPrint *object,
 
   g_signal_connect (request, "handle-close", G_CALLBACK (handle_close), handle);
 
-  g_signal_connect (dialog, "response", G_CALLBACK (handle_prepare_print_response), handle);
+  g_signal_connect_swapped (dialog, "response", G_CALLBACK (handle_prepare_print_response), handle);
 
   gtk_widget_realize (dialog);
 

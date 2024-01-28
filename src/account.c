@@ -84,15 +84,12 @@ send_response (AccountDialogHandle *handle)
 }
 
 static void
-account_dialog_done (GtkWidget *widget,
+account_dialog_done (AccountDialogHandle *handle,
                      int response,
                      const char *user_name,
                      const char *real_name,
-                     const char *icon_file,
-                     gpointer user_data)
+                     const char *icon_file)
 {
-  AccountDialogHandle *handle = user_data;
-
   g_clear_pointer (&handle->user_name, g_free);
   g_clear_pointer (&handle->real_name, g_free);
   g_clear_pointer (&handle->icon_uri, g_free);
@@ -123,9 +120,8 @@ account_dialog_done (GtkWidget *widget,
 }
 
 static gboolean
-handle_close (XdpImplRequest *object,
-              GDBusMethodInvocation *invocation,
-              AccountDialogHandle *handle)
+handle_close (AccountDialogHandle *handle,
+              GDBusMethodInvocation *invocation G_GNUC_UNUSED)
 {
   GVariantBuilder opt_builder;
 
@@ -206,9 +202,9 @@ handle_get_user_information (XdpImplAccount *object,
   handle->real_name = g_strdup (real_name);
   handle->icon_uri = g_filename_to_uri (icon_file, NULL, NULL);
 
-  g_signal_connect (request, "handle-close", G_CALLBACK (handle_close), handle);
+  g_signal_connect_swapped (request, "handle-close", G_CALLBACK (handle_close), handle);
 
-  g_signal_connect (dialog, "done", G_CALLBACK (account_dialog_done), handle);
+  g_signal_connect_swapped (dialog, "done", G_CALLBACK (account_dialog_done), handle);
 
   gtk_widget_realize (dialog);
 

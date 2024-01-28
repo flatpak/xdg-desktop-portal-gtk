@@ -47,11 +47,11 @@ typedef struct {
 
 static SettingsBundle *
 settings_bundle_new (GSettingsSchema *schema,
-                     GSettings       *settings)
+                     GSettings       *setting)
 {
   SettingsBundle *bundle = g_new (SettingsBundle, 1);
   bundle->schema = schema;
-  bundle->settings = settings;
+  bundle->settings = setting;
   return bundle;
 }
 
@@ -117,10 +117,10 @@ get_contrast_value ()
 }
 
 static gboolean
-settings_handle_read_all (XdpImplSettings       *object,
+settings_handle_read_all (XdpImplSettings       *object G_GNUC_UNUSED,
                           GDBusMethodInvocation *invocation,
                           const char * const    *arg_namespaces,
-                          gpointer               data)
+                          gpointer               data G_GNUC_UNUSED)
 {
   g_autoptr(GVariantBuilder) builder = g_variant_builder_new (G_VARIANT_TYPE ("(a{sa{sv}})"));
   GHashTableIter iter;
@@ -182,11 +182,11 @@ settings_handle_read_all (XdpImplSettings       *object,
 }
 
 static gboolean
-settings_handle_read (XdpImplSettings       *object,
+settings_handle_read (XdpImplSettings       *object G_GNUC_UNUSED,
                       GDBusMethodInvocation *invocation,
                       const char            *arg_namespace,
                       const char            *arg_key,
-                      gpointer               data)
+                      gpointer               data G_GNUC_UNUSED)
 {
   g_debug ("Read %s %s", arg_namespace, arg_key);
 
@@ -247,28 +247,28 @@ typedef struct {
 } ChangedSignalUserData;
 
 static ChangedSignalUserData *
-changed_signal_user_data_new (XdpImplSettings *settings,
+changed_signal_user_data_new (XdpImplSettings *self,
                               const char      *namespace)
 {
   ChangedSignalUserData *data = g_new (ChangedSignalUserData, 1);
-  data->self = settings;
+  data->self = self;
   data->namespace = namespace;
   return data;
 }
 
 static void
 changed_signal_user_data_destroy (gpointer  data,
-                                  GClosure *closure)
+                                  GClosure *closure G_GNUC_UNUSED)
 {
   g_free (data);
 }
 
 static void
-on_settings_changed (GSettings             *settings,
+on_settings_changed (GSettings             *setting,
                      const char            *key,
                      ChangedSignalUserData *user_data)
 {
-  g_autoptr (GVariant) new_value = g_settings_get_value (settings, key);
+  g_autoptr (GVariant) new_value = g_settings_get_value (setting, key);
 
   g_debug ("Emitting changed for %s %s", user_data->namespace, key);
   if (strcmp (user_data->namespace, "org.gnome.desktop.interface") == 0 &&
@@ -297,7 +297,7 @@ on_settings_changed (GSettings             *settings,
 }
 
 static void
-init_settings_table (XdpImplSettings *settings,
+init_settings_table (XdpImplSettings *self,
                      GHashTable      *table)
 {
   static const char * const schemas[] = {
@@ -331,15 +331,15 @@ init_settings_table (XdpImplSettings *settings,
 
       setting = g_settings_new (schema_name);
       bundle = settings_bundle_new (schema, setting);
-      g_signal_connect_data (setting, "changed", G_CALLBACK(on_settings_changed),
-                             changed_signal_user_data_new (settings, schema_name),
+      g_signal_connect_data (setting, "changed", G_CALLBACK (on_settings_changed),
+                             changed_signal_user_data_new (self, schema_name),
                              changed_signal_user_data_destroy, 0);
       g_hash_table_insert (table, (char*)schema_name, bundle);
     }
 }
 
 static void
-fontconfig_changed (FcMonitor       *monitor,
+fontconfig_changed (FcMonitor       *monitor G_GNUC_UNUSED,
                     XdpImplSettings *impl)
 {
   const char *namespace = "org.gnome.fontconfig";

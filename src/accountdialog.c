@@ -58,7 +58,8 @@ account_dialog_finalize (GObject *object)
 }
 
 static gboolean
-account_dialog_delete_event (GtkWidget *dialog, GdkEventAny *event)
+account_dialog_delete_event (GtkWidget *dialog,
+                             GdkEventAny *event G_GNUC_UNUSED)
 {
   gtk_widget_hide (dialog);
 

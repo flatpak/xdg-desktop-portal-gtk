@@ -118,9 +118,9 @@ add_recent_entry (const char *app_id,
    */
   data.display_name = NULL;
   data.description = NULL;
-  data.mime_type = "application/octet-stream";
-  data.app_name = (char *)app_id;
-  data.app_exec = "gio open %u";
+  data.mime_type = (char *) "application/octet-stream";
+  data.app_name = (char *) app_id;
+  data.app_exec = (char *) "gio open %u";
   data.groups = NULL;
   data.is_private = FALSE;
 
@@ -290,7 +290,6 @@ deserialize_choice (GVariant *choice,
   const char *label;
   const char *selected;
   GVariant *choices;
-  int i;
 
   g_variant_get (choice, "(&s&s@a(ss)&s)", &choice_id, &label, &choices, &selected);
 
@@ -298,6 +297,7 @@ deserialize_choice (GVariant *choice,
     {
       GtkWidget *box;
       GtkWidget *combo;
+      gsize i;
 
       box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
       gtk_container_add (GTK_CONTAINER (box), gtk_label_new (label));
@@ -522,11 +522,12 @@ handle_open (XdpImplFileChooser *object,
   choices = g_variant_lookup_value (arg_options, "choices", G_VARIANT_TYPE ("a(ssa(ss)s)"));
   if (choices)
     {
-      int i;
       GtkWidget *box;
+      gsize i;
 
       box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
       gtk_widget_show (box);
+
       for (i = 0; i < g_variant_n_children (choices); i++)
         {
           GVariant *value = g_variant_get_child_value (choices, i);

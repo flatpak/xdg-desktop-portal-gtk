@@ -120,7 +120,7 @@ external_window_x11_dispose (GObject *object)
 }
 
 static void
-external_window_x11_init (ExternalWindowX11 *external_window_x11)
+external_window_x11_init (ExternalWindowX11 *self G_GNUC_UNUSED)
 {
 }
 

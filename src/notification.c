@@ -30,9 +30,9 @@
 static OrgGtkNotifications *gtk_notifications;
 
 static void
-notification_added (GObject      *source,
+notification_added (GObject      *source G_GNUC_UNUSED,
                     GAsyncResult *result,
-                    gpointer      data)
+                    gpointer      data G_GNUC_UNUSED)
 {
   g_autoptr(GError) error = NULL;
   g_autoptr(GVariant) reply = NULL;
@@ -105,7 +105,7 @@ activate_action (GDBusConnection *connection,
                  const char *id,
                  const char *name,
                  GVariant *parameter,
-                 gpointer data)
+                 gpointer data G_GNUC_UNUSED)
 {
   g_autofree char *object_path = NULL;
   GVariantBuilder pdata, parms;
@@ -199,7 +199,7 @@ has_unprefixed_action (GVariant *notification)
 {
   const char *action;
   g_autoptr(GVariant) buttons = NULL;
-  int i;
+  gsize i;
 
   if (g_variant_lookup (notification, "default-action", "&s", &action) &&
       !g_str_has_prefix (action, "app."))
@@ -207,15 +207,17 @@ has_unprefixed_action (GVariant *notification)
 
   buttons = g_variant_lookup_value (notification, "buttons", G_VARIANT_TYPE("aa{sv}"));
   if (buttons)
-    for (i = 0; i < g_variant_n_children (buttons); i++)
-      {
-        g_autoptr(GVariant) button = NULL;
+    {
+      for (i = 0; i < g_variant_n_children (buttons); i++)
+        {
+          g_autoptr(GVariant) button = NULL;
 
-        button = g_variant_get_child_value (buttons, i);
-        if (g_variant_lookup (button, "action", "&s", &action) &&
-            !g_str_has_prefix (action, "app."))
-          return TRUE;
-      }
+          button = g_variant_get_child_value (buttons, i);
+          if (g_variant_lookup (button, "action", "&s", &action) &&
+              !g_str_has_prefix (action, "app."))
+            return TRUE;
+        }
+    }
 
   return FALSE;
 }

@@ -76,7 +76,7 @@ G_DEFINE_TYPE (AppChooserDialog, app_chooser_dialog, GTK_TYPE_WINDOW)
 static void
 update_header (GtkListBoxRow *row,
                GtkListBoxRow *before,
-               gpointer       data)
+               gpointer       data G_GNUC_UNUSED)
 {
   if (before != NULL &&
       gtk_list_box_row_get_header (row) == NULL)
@@ -125,7 +125,7 @@ close_dialog (AppChooserDialog *dialog,
 static void
 show_more (AppChooserDialog *dialog)
 {
-  int i;
+  guint i;
 
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (dialog->scrolled_window),
                                   GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
@@ -147,9 +147,8 @@ show_more (AppChooserDialog *dialog)
 }
 
 static void
-row_activated (GtkListBox *list,
-               GtkWidget *row,
-               AppChooserDialog *dialog)
+row_activated (AppChooserDialog *dialog,
+               GtkWidget *row)
 {
   GAppInfo *info = NULL;
 
@@ -165,24 +164,21 @@ row_activated (GtkListBox *list,
 }
 
 static void
-row_selected (GtkListBox *list,
-              GtkWidget *row,
-              AppChooserDialog *dialog)
+row_selected (AppChooserDialog *dialog,
+              GtkWidget *row)
 {
   gtk_widget_set_sensitive (dialog->open_button, TRUE);
   dialog->selected_row = row;
 }
 
 static void
-cancel_clicked (GtkWidget *button,
-                AppChooserDialog *dialog)
+cancel_clicked (AppChooserDialog *dialog)
 {
   close_dialog (dialog, NULL);
 }
 
 static void
-open_clicked (GtkWidget *button,
-              AppChooserDialog *dialog)
+open_clicked (AppChooserDialog *dialog)
 {
   GAppInfo *info = NULL;
 
@@ -230,14 +226,14 @@ launch_software (AppChooserDialog *dialog)
 }
 
 static void
-find_in_software (GtkWidget *button,
-                  AppChooserDialog *dialog)
+find_in_software (AppChooserDialog *dialog)
 {
   launch_software (dialog);
 }
 
 static gboolean
-app_chooser_delete_event (GtkWidget *dialog, GdkEventAny *event)
+app_chooser_delete_event (GtkWidget *dialog,
+                          GdkEventAny *event G_GNUC_UNUSED)
 {
   close_dialog (APP_CHOOSER_DIALOG (dialog), NULL);
 
@@ -319,7 +315,7 @@ static void
 ensure_default_in_initial_list (const char **choices,
                                 const char  *default_id)
 {
-  int i;
+  guint i;
   guint n_choices;
 
   if (default_id == NULL)
@@ -350,11 +346,10 @@ ensure_default_in_initial_list (const char **choices,
 }
 
 static void
-more_pressed (GtkGestureMultiPress *gesture,
+more_pressed (AppChooserDialog *dialog,
               int n_press,
-              double x,
-              double y,
-              AppChooserDialog *dialog)
+              double x G_GNUC_UNUSED,
+              double y)
 {
   if (n_press != 1)
     return;
@@ -370,8 +365,8 @@ app_chooser_dialog_new (const char **choices,
                         const char *location)
 {
   AppChooserDialog *dialog;
-  int n_choices;
-  int i;
+  guint n_choices;
+  guint i;
   g_autofree char *short_location = shorten_location (location);
 
   dialog = g_object_new (app_chooser_dialog_get_type (), NULL);
@@ -446,7 +441,7 @@ app_chooser_dialog_new (const char **choices,
           gtk_event_controller_set_propagation_phase (GTK_EVENT_CONTROLLER (gesture), GTK_PHASE_BUBBLE);
           gtk_gesture_single_set_button (GTK_GESTURE_SINGLE (gesture), GDK_BUTTON_PRIMARY);
 
-          g_signal_connect (gesture, "pressed", G_CALLBACK (more_pressed), dialog);
+          g_signal_connect_swapped (gesture, "pressed", G_CALLBACK (more_pressed), dialog);
 
           gtk_list_box_row_set_selectable (GTK_LIST_BOX_ROW (row), FALSE);
           image = gtk_image_new_from_icon_name ("view-more-symbolic", GTK_ICON_SIZE_BUTTON);
@@ -467,7 +462,7 @@ void
 app_chooser_dialog_update_choices (AppChooserDialog  *dialog,
                                    const char       **choices)
 {
-  int i;
+  guint i;
   GPtrArray *new_choices;
 
   new_choices = g_ptr_array_new ();

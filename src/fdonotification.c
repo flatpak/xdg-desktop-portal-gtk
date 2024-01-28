@@ -55,7 +55,7 @@ fdo_notification_free (gpointer data)
   g_slice_free (FdoNotification, n);
 }
 
-FdoNotification *
+static FdoNotification *
 fdo_find_notification (const char *app_id,
                        const char *id)
 {
@@ -72,7 +72,7 @@ fdo_find_notification (const char *app_id,
   return NULL;
 }
 
-FdoNotification *
+static FdoNotification *
 fdo_find_notification_by_notify_id (guint32 id)
 {
   GSList *l;
@@ -89,12 +89,12 @@ fdo_find_notification_by_notify_id (guint32 id)
 
 static void
 notify_signal (GDBusConnection *connection,
-               const char *sender_name,
-               const char *object_path,
-               const char *interface_name,
+               const char *sender_name G_GNUC_UNUSED,
+               const char *object_path G_GNUC_UNUSED,
+               const char *interface_name G_GNUC_UNUSED,
                const char *signal_name,
                GVariant *parameters,
-               gpointer user_data)
+               gpointer user_data G_GNUC_UNUSED)
 {
   guint32 id = 0;
   const char *action = NULL;

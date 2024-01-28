@@ -146,7 +146,7 @@ on_image_loaded_cb (GObject *source_object,
 
 WallpaperDialog *
 wallpaper_dialog_new (const gchar *picture_uri,
-                      const gchar *app_id)
+                      const gchar *app_id G_GNUC_UNUSED)
 {
   WallpaperDialog *self;
   g_autoptr(GFile) image_file = g_file_new_for_uri (picture_uri);
