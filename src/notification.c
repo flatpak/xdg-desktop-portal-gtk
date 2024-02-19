@@ -105,6 +105,7 @@ activate_action (GDBusConnection *connection,
                  const char *id,
                  const char *name,
                  GVariant *parameter,
+                 const char *activation_token,
                  gpointer data)
 {
   g_autofree char *object_path = NULL;
@@ -115,6 +116,16 @@ activate_action (GDBusConnection *connection,
   g_variant_builder_init (&parms, G_VARIANT_TYPE ("av"));
   if (parameter)
     g_variant_builder_add (&parms, "v", parameter);
+
+  if (activation_token)
+    {
+      /* Used by  `GTK` < 4.10 */
+      g_variant_builder_add (&pdata, "{sv}",
+                             "desktop-startup-id", g_variant_new_string (activation_token));
+      /* Used by `GTK` and `QT` */
+      g_variant_builder_add (&pdata, "{sv}",
+                             "activation-token", g_variant_new_string (activation_token));
+    }
 
   if (name && g_str_has_prefix (name, "app."))
     {
