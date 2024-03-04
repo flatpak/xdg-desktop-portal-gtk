@@ -157,6 +157,17 @@ activate_action (GDBusConnection *connection,
                               G_DBUS_CALL_FLAGS_NONE,
                               -1, NULL, NULL, NULL);
 
+      /* The application may not implement the `org.freedesktop.Application`, so
+       * also add the platform data containing the activation-token
+       * to the `ActionInvoked` signal */
+      if (activation_token)
+        {
+          g_variant_builder_init (&pdata, G_VARIANT_TYPE_VARDICT);
+          g_variant_builder_add (&pdata, "{sv}",
+                                 "activation-token", g_variant_new_string (activation_token));
+          g_variant_builder_add (&parms, "v", g_variant_builder_end (&pdata));
+        }
+
       g_dbus_connection_emit_signal (connection,
                                      NULL,
                                      "/org/freedesktop/portal/desktop",
