@@ -38,6 +38,7 @@ typedef struct
   char *default_action;
   GVariant *default_action_target;
   ActivateAction activate_action;
+  char *activation_token;
   gpointer data;
 } FdoNotification;
 
@@ -49,6 +50,7 @@ fdo_notification_free (gpointer data)
   g_free (n->app_id);
   g_free (n->id);
   g_free (n->default_action);
+  g_free (n->activation_token);
   if (n->default_action_target)
     g_variant_unref (n->default_action_target);
 
@@ -98,6 +100,7 @@ notify_signal (GDBusConnection *connection,
 {
   guint32 id = 0;
   const char *action = NULL;
+  const char *activation_token = NULL;
   FdoNotification *n;
 
   if (g_str_equal (signal_name, "NotificationClosed") &&
@@ -110,12 +113,24 @@ notify_signal (GDBusConnection *connection,
     {
       g_variant_get (parameters, "(u&s)", &id, &action);
     }
+  else if (g_str_equal (signal_name, "ActivationToken") &&
+           g_variant_is_of_type (parameters, G_VARIANT_TYPE ("(us)")))
+    {
+      g_variant_get (parameters, "(u&s)", &id, &activation_token);
+    }
   else
     return;
 
   n = fdo_find_notification_by_notify_id (id);
   if (n == NULL)
     return;
+
+  if (activation_token)
+    {
+      g_clear_pointer (&n->activation_token, g_free);
+      n->activation_token = g_strdup (activation_token);
+      return;
+    }
 
   if (action)
     {
@@ -126,6 +141,7 @@ notify_signal (GDBusConnection *connection,
                               n->id,
                               n->default_action,
                               n->default_action_target,
+                              n->activation_token,
                               n->data);
         }
       else
@@ -140,6 +156,7 @@ notify_signal (GDBusConnection *connection,
                                   n->id,
                                   name,
                                   target,
+                                  n->activation_token,
                                   n->data);
               g_free (name);
               if (target)
@@ -414,6 +431,7 @@ fdo_add_notification (GDBusConnection *connection,
       n->id = g_strdup (id);
       n->notify_id = 0;
       n->activate_action = activate_action;
+      n->activation_token = NULL;
       n->data = data;
 
       fdo_notifications = g_slist_prepend (fdo_notifications, n);
