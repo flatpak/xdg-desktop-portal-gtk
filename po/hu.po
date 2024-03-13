@@ -3,21 +3,23 @@
 # This file is distributed under the same license as the xdg-sesktop-portal-gtk package.
 #
 # Balázs Úr <ur.balazs at fsf dot hu>, 2016, 2017, 2018, 2019, 2022.
+# Dévényi Benedek <rdbende@proton.me>, 2024.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
 "POT-Creation-Date: 2022-11-29 13:45+0000\n"
-"PO-Revision-Date: 2022-09-21 23:08+0200\n"
-"Last-Translator: Balázs Úr <ur.balazs at fsf dot hu>\n"
-"Language-Team: Hungarian <gnome-hu-list at gnome dot org>\n"
+"PO-Revision-Date: 2024-03-09 18:19+0100\n"
+"Last-Translator: Dévényi Benedek <rdbende@proton.me>\n"
+"Language-Team: Hungarian <>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 19.12.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"X-Generator: Gtranslator 45.3\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
@@ -33,7 +35,7 @@ msgstr "Hozzáférés megadása"
 
 #: src/accountdialog.c:176
 msgid "Select an Image"
-msgstr "Válasszon lemezképet"
+msgstr "Válasszon képet"
 
 #: src/accountdialog.c:179 src/wallpaperdialog.ui:18
 msgid "Cancel"
@@ -49,7 +51,7 @@ msgstr "Törlés"
 
 #: src/accountdialog.c:195
 msgid "Images"
-msgstr "Lemezképek"
+msgstr "Képek"
 
 #: src/accountdialog.c:272
 #, c-format
