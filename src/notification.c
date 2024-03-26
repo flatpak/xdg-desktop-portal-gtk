@@ -251,6 +251,30 @@ handle_remove_notification (XdpImplNotification *object,
   return TRUE;
 }
 
+GVariant *
+build_supported_options ()
+{
+    const char *supported_button_purposes[] = { "", NULL };
+    const char *supported_action_purposes[] = { "", NULL };
+    const char *supported_content_types[] = { "", NULL };
+    GVariantBuilder builder;
+
+    g_variant_builder_init (&builder, G_VARIANT_TYPE_VARDICT);
+    g_variant_builder_open (&builder, G_VARIANT_TYPE ("{sv}"));
+
+    g_variant_builder_add (&builder, "{sv}", "button-purposes",
+                                             g_variant_new_variant (g_variant_new_strv (supported_button_purposes, -1)));
+
+    g_variant_builder_add (&builder, "{sv}", "action-purposes",
+                                             g_variant_new_variant (g_variant_new_strv (supported_action_purposes, -1)));
+
+    g_variant_builder_add (&builder, "{sv}", "content-type",
+                                             g_variant_new_variant (g_variant_new_strv (supported_content_types, -1)));
+
+    g_variant_builder_close (&builder);
+    return g_variant_builder_end (&builder);
+}
+
 gboolean
 notification_init (GDBusConnection *bus,
                    GError **error)
@@ -265,6 +289,9 @@ notification_init (GDBusConnection *bus,
                                                             NULL);
 
   helper = G_DBUS_INTERFACE_SKELETON (xdp_impl_notification_skeleton_new ());
+
+  xdp_impl_notification_set_supported_options (XDP_IMPL_NOTIFICATION (helper),
+                                                build_supported_options ());
 
   g_signal_connect (helper, "handle-add-notification", G_CALLBACK (handle_add_notification), NULL);
   g_signal_connect (helper, "handle-remove-notification", G_CALLBACK (handle_remove_notification), NULL);
