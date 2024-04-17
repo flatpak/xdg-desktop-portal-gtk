@@ -29,5 +29,11 @@
       <arg type="s" name="app_id" direction="in"/>
       <arg type="s" name="id" direction="in"/>
     </method>
+    <signal name="ActionInvoked">
+      <arg name="app_id" type="s"/>
+      <arg name="id" type="s"/>
+      <arg name="action" type="s"/>
+      <arg name="parameter" type="av"/>
+    </signal>
   </interface>
 </node>

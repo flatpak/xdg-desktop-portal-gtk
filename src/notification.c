@@ -217,47 +217,33 @@ handle_remove_notification_fdo (XdpImplNotification *object,
 }
 
 static gboolean
-has_unprefixed_action (GVariant *notification)
-{
-  const char *action;
-  g_autoptr(GVariant) buttons = NULL;
-  int i;
-
-  if (g_variant_lookup (notification, "default-action", "&s", &action) &&
-      !g_str_has_prefix (action, "app."))
-    return TRUE;
-
-  buttons = g_variant_lookup_value (notification, "buttons", G_VARIANT_TYPE("aa{sv}"));
-  if (buttons)
-    for (i = 0; i < g_variant_n_children (buttons); i++)
-      {
-        g_autoptr(GVariant) button = NULL;
-
-        button = g_variant_get_child_value (buttons, i);
-        if (g_variant_lookup (button, "action", "&s", &action) &&
-            !g_str_has_prefix (action, "app."))
-          return TRUE;
-      }
-
-  return FALSE;
-}
-
-static gboolean
 handle_add_notification (XdpImplNotification *object,
                          GDBusMethodInvocation *invocation,
                          const gchar *arg_app_id,
                          const gchar *arg_id,
                          GVariant *arg_notification)
 {
+  const char *desktop_file_id = NULL;
+  g_autofree char *no_dot_desktop = NULL;
   g_autofree char* owner = gtk_notifications != NULL ?
     g_dbus_proxy_get_name_owner (G_DBUS_PROXY (gtk_notifications)) :
     NULL;
-  if (owner == NULL ||
-      !g_application_id_is_valid (arg_app_id) ||
-      has_unprefixed_action (arg_notification))
-    handle_add_notification_fdo (object, invocation, arg_app_id, arg_id, arg_notification);
+
+  if (g_variant_lookup (arg_notification, "desktop-file-id", "&s", &desktop_file_id))
+    no_dot_desktop = g_strndup (desktop_file_id, strlen(desktop_file_id) - strlen (".desktop"));
+
+  if (owner == NULL)
+    handle_add_notification_fdo (object,
+                                 invocation,
+                                 no_dot_desktop ? no_dot_desktop : arg_app_id,
+                                 arg_id,
+                                 arg_notification);
   else
-    handle_add_notification_gtk (object, invocation, arg_app_id, arg_id, arg_notification);
+    handle_add_notification_gtk (object,
+                                 invocation,
+                                 no_dot_desktop ? no_dot_desktop : arg_app_id,
+                                 arg_id,
+                                 arg_notification);
 
   return TRUE;
 }
@@ -271,6 +257,74 @@ handle_remove_notification (XdpImplNotification *object,
   if (!handle_remove_notification_fdo (object, invocation, arg_app_id, arg_id))
     handle_remove_notification_gtk (object, invocation, arg_app_id, arg_id);
   return TRUE;
+}
+
+static void
+handle_gtk_action_invoked (OrgGtkNotifications *object,
+                           const gchar         *arg_app_id,
+                           const gchar         *arg_notification_id,
+                           const gchar         *arg_name,
+                           GVariant            *arg_parameter)
+{
+  GDBusConnection *connection = NULL;
+  g_autofree char *object_path = NULL;
+  gboolean hasTarget = FALSE;
+  g_autoptr(GVariant) arg_pdata = NULL;
+  g_autoptr(GVariant) activation_token = NULL;
+  GVariantBuilder pdata, parms;
+
+  g_print ("Stuff %s %s %s %s\n", arg_app_id, arg_notification_id, arg_name, g_variant_print (arg_parameter, TRUE));
+
+  connection = g_dbus_proxy_get_connection (G_DBUS_PROXY (object));
+  object_path = app_path_for_id (arg_app_id);
+  g_variant_builder_init (&pdata, G_VARIANT_TYPE_VARDICT);
+  g_variant_builder_init (&parms, G_VARIANT_TYPE ("av"));
+
+  hasTarget = g_variant_n_children (arg_parameter) >= 2;
+
+  if (hasTarget)
+    {
+      g_autoptr(GVariant) target = NULL;
+
+      target = g_variant_get_child_value (arg_parameter, 0);
+      g_variant_builder_add_value (&parms, target);
+    }
+
+  arg_pdata = g_variant_get_child_value (arg_parameter, hasTarget ? 1 : 0);
+  activation_token = g_variant_lookup_value (arg_pdata, "activation-token", G_VARIANT_TYPE_STRING);
+
+  if (activation_token)
+    {
+      /* Used by  `GTK` < 4.10 */
+      g_variant_builder_add (&pdata, "{sv}",
+                             "desktop-startup-id", activation_token);
+      /* Used by `GTK` and `QT` */
+      g_variant_builder_add (&pdata, "{sv}",
+                             "activation-token", activation_token);
+    }
+
+  g_dbus_connection_call (connection,
+                          arg_app_id,
+                          object_path,
+                          "org.freedesktop.Application",
+                          "Activate",
+                          g_variant_new ("(@a{sv})",
+                                         g_variant_builder_end (&pdata)),
+                          NULL,
+                          G_DBUS_CALL_FLAGS_NONE,
+                          -1, NULL, NULL, NULL);
+
+  g_dbus_connection_emit_signal (connection,
+                                 NULL,
+                                 "/org/freedesktop/portal/desktop",
+                                 "org.freedesktop.impl.portal.Notification",
+                                 "ActionInvoked",
+                                 g_variant_new ("(sss@av)",
+                                                arg_app_id,
+                                                arg_notification_id,
+                                                arg_name,
+                                                arg_parameter),
+                                 NULL);
 }
 
 GVariant *
@@ -309,6 +363,8 @@ notification_init (GDBusConnection *bus,
                                                             "/org/gtk/Notifications",
                                                             NULL,
                                                             NULL);
+
+  g_signal_connect (gtk_notifications, "action-invoked", G_CALLBACK (handle_gtk_action_invoked), NULL);
 
   helper = G_DBUS_INTERFACE_SKELETON (xdp_impl_notification_skeleton_new ());
 
