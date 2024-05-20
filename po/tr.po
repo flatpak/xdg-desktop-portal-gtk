@@ -12,19 +12,19 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
 "POT-Creation-Date: 2023-02-27 15:33+0000\n"
-"PO-Revision-Date: 2023-02-27 21:49+0300\n"
-"Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
+"PO-Revision-Date: 2024-04-01 16:20+0300\n"
+"Last-Translator: Sabri Ünal <yakushabb@gmail.com>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
-msgstr "Portal"
+msgstr "Kapı"
 
 #: src/access.c:271
 msgid "Deny Access"
@@ -40,7 +40,7 @@ msgstr "Resim Seç"
 
 #: src/accountdialog.c:179 src/wallpaperdialog.ui:18
 msgid "Cancel"
-msgstr "İptal Et"
+msgstr "İptal"
 
 #: src/accountdialog.c:180
 msgid "Select"
@@ -289,7 +289,7 @@ msgstr "Etkiler"
 
 #: src/screenshotdialog.ui:192
 msgid "Include _pointer"
-msgstr "_İmleci içer"
+msgstr "İ_mleci içer"
 
 #: src/screenshotdialog.ui:201
 msgid "Include the window _border"
