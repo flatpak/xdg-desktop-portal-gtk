@@ -1,0 +1,164 @@
+# Japanese translations for xdg-desktop-portal-gtk package.
+# Copyright (C) 2024 THE xdg-desktop-portal-gtk'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the xdg-desktop-portal-gtk package.
+# Ryo Nakano <ryonakaknock3@gmail.com>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xdg-desktop-portal-gtk\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-06-08 19:50+0900\n"
+"PO-Revision-Date: 2024-06-08 20:45+0900\n"
+"Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
+"Language-Team: none\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: data/xdg-desktop-portal-gtk.desktop.in.in:4
+msgid "Portal"
+msgstr "ポータル"
+
+#: src/access.c:271
+msgid "Deny Access"
+msgstr "アクセスを拒否"
+
+#: src/access.c:274
+msgid "Grant Access"
+msgstr "アクセスを許可"
+
+#: src/accountdialog.c:176
+msgid "Select an Image"
+msgstr "画像を選択"
+
+#: src/accountdialog.c:179 src/wallpaperdialog.ui:18
+msgid "Cancel"
+msgstr "キャンセル"
+
+#: src/accountdialog.c:180
+msgid "Select"
+msgstr "選択"
+
+#: src/accountdialog.c:181
+msgid "Clear"
+msgstr "クリア"
+
+#: src/accountdialog.c:195
+msgid "Images"
+msgstr "画像"
+
+#: src/accountdialog.c:272
+#, c-format
+msgid "Share your personal information with %s?"
+msgstr "あなたの個人情報を %s で共有しますか?"
+
+#: src/accountdialog.c:275
+msgid "Share your personal information with the requesting application?"
+msgstr "あなたの個人情報を、要求しているアプリケーションで共有しますか?"
+
+#: src/accountdialog.ui:10
+msgid "Share Details"
+msgstr "共有の詳細"
+
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:14
+#: src/dynamic-launcher.c:267 src/filechooser.c:468
+msgid "_Cancel"
+msgstr "キャンセル(_C)"
+
+#: src/accountdialog.ui:22
+msgid "_Share"
+msgstr "共有(_S)"
+
+#: src/accountdialog.ui:148
+msgid "Make changes before sharing the information"
+msgstr "情報の共有前に変更を加える"
+
+#: src/appchooserdialog.c:229
+msgid "Failed to start Software"
+msgstr "“ソフトウェア”の起動に失敗しました"
+
+#: src/appchooserdialog.c:385
+#, c-format
+msgid "Choose an application to open the file “%s”."
+msgstr "“%s”を開くアプリケーションを選択してください。"
+
+#: src/appchooserdialog.c:390
+msgid "Choose an application."
+msgstr "アプリケーションを選択してください。"
+
+#: src/appchooserdialog.c:407
+#, c-format
+msgid ""
+"No apps installed that can open “%s”. You can find more applications in "
+"Software"
+msgstr ""
+"“%s”を開くことができるアプリがインストールされていません。“ソフトウェア”でア"
+"プリを探してください。"
+
+#: src/appchooserdialog.c:412
+msgid "No suitable app installed. You can find more applications in Software."
+msgstr ""
+"適切なアプリがインストールされていません。“ソフトウェア”でアプリを探してくだ"
+"さい。"
+
+#: src/appchooserdialog.ui:10
+msgid "Open With…"
+msgstr "次で開く…"
+
+#: src/appchooserdialog.ui:23 src/filechooser.c:463
+msgid "_Open"
+msgstr "開く(_O)"
+
+#: src/appchooserdialog.ui:115
+msgid "No Apps available"
+msgstr "利用可能なアプリなし"
+
+#: src/appchooserdialog.ui:159
+msgid "_Find More in Software"
+msgstr "“ソフトウェア”で探す(_F)"
+
+#: src/dynamic-launcher.c:259
+msgid "Create Web Application"
+msgstr "Web アプリケーションを作成"
+
+#: src/dynamic-launcher.c:261
+msgid "Create Application"
+msgstr "アプリケーションを作成"
+
+#: src/dynamic-launcher.c:269
+msgid "C_reate"
+msgstr "作成(_R)"
+
+#: src/filechooser.c:463
+msgid "_Select"
+msgstr "選択(_S)"
+
+#: src/filechooser.c:465
+msgid "_Save"
+msgstr "保存(_S)"
+
+#: src/filechooser.c:647
+msgid "Open files read-only"
+msgstr "読み取り専用でファイルを開く"
+
+#: src/settings.c:239
+msgid "Requested setting not found"
+msgstr "要求された設定が見つかりませんでした"
+
+#: src/wallpaperdialog.ui:13
+msgid "Set Background"
+msgstr "背景を設定"
+
+#: src/wallpaperdialog.ui:26
+msgid "Set"
+msgstr "設定"
+
+#: src/wallpaperdialog.ui:57
+msgid "Failed to load image file"
+msgstr "画像ファイルの読み込みに失敗しました"
+
+#: src/wallpaperpreview.ui:57
+msgid "Activities"
+msgstr "アクティビティ"
