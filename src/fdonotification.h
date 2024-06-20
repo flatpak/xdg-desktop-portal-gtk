@@ -27,6 +27,7 @@ typedef void (*ActivateAction) (GDBusConnection *connection,
                                 const char *id,
                                 const char *name,
                                 GVariant *parameter,
+                                const char *activation_token,
                                 gpointer data);
 
 void fdo_add_notification (GDBusConnection *connection,
