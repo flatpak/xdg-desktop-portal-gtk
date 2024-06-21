@@ -17,8 +17,6 @@ fdo_dbus_interfaces = files(
   'org.freedesktop.Accounts.User.xml',
 )
 
-gtk_dbus_interfaces = files('org.gtk.Notifications.xml')
-
 gnome_dbus_interfaces = files(
   'org.gnome.SessionManager.xml',
   'org.gnome.ScreenSaver.xml',
