@@ -86,7 +86,6 @@ portal_built_sources += gnome.gdbus_codegen('xdg-desktop-portal-dbus',
 
 portal_built_sources += gnome.gdbus_codegen('shell-dbus',
   sources: [
-    gtk_dbus_interfaces,
     fdo_dbus_interfaces,
     gnome_dbus_interfaces,
   ],
