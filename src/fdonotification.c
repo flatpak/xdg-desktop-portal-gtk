@@ -178,7 +178,9 @@ urgency_from_priority (const char *priority)
     return 0;
   else if (strcmp (priority, "normal") == 0)
     return 1;
-  else
+  else if (strcmp (priority, "high") == 0)
+    return 1;
+  else  // critical
     return 2;
 }
 
