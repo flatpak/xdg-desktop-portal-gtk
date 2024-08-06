@@ -1,0 +1,170 @@
+# Slovenian translation for xdg-desktop-portal-gtk.
+# Copyright (C) 2024 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
+# This file is distributed under the same license as the xdg-desktop-portal-gtk package.
+#
+# Martin <miles@filmsi.net>,  2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xdg-desktop-portal-gtk main\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
+"issues\n"
+"POT-Creation-Date: 2024-07-28 03:32+0000\n"
+"PO-Revision-Date: 2024-07-28 15:35+0200\n"
+"Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups."
+"com>\n"
+"Language: sl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
+"n%100==4 ? 3 : 0);\n"
+"Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
+"X-Generator: Poedit 2.2.1\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: data/xdg-desktop-portal-gtk.desktop.in.in:4
+msgid "Portal"
+msgstr "Portal"
+
+#: src/access.c:271
+msgid "Deny Access"
+msgstr "Zavrni dostop"
+
+#: src/access.c:274
+msgid "Grant Access"
+msgstr "Dovoli dostop"
+
+#: src/accountdialog.c:176
+msgid "Select an Image"
+msgstr "Izberite sliko"
+
+#: src/accountdialog.c:179 src/wallpaperdialog.ui:18
+msgid "Cancel"
+msgstr "Prekliči"
+
+#: src/accountdialog.c:180
+msgid "Select"
+msgstr "Izberi"
+
+#: src/accountdialog.c:181
+msgid "Clear"
+msgstr "Počisti"
+
+#: src/accountdialog.c:195
+msgid "Images"
+msgstr "Slike"
+
+#: src/accountdialog.c:272
+#, c-format
+msgid "Share your personal information with %s?"
+msgstr "Želie deliti svoje osebne podatke s/z %s?"
+
+#: src/accountdialog.c:275
+msgid "Share your personal information with the requesting application?"
+msgstr "Želite deliti svoje osebne podatke s programom, ki to zahteva?"
+
+#: src/accountdialog.ui:10
+msgid "Share Details"
+msgstr "Deli podrobnosti"
+
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:14
+#: src/dynamic-launcher.c:267 src/filechooser.c:468
+msgid "_Cancel"
+msgstr "Pre_kliči"
+
+#: src/accountdialog.ui:22
+msgid "_Share"
+msgstr "_Deli"
+
+#: src/accountdialog.ui:148
+msgid "Make changes before sharing the information"
+msgstr "Opravi spremembe pred skupno rabo informacij"
+
+#: src/appchooserdialog.c:229
+msgid "Failed to start Software"
+msgstr "Zagon Programske opreme ni uspel"
+
+#: src/appchooserdialog.c:385
+#, c-format
+msgid "Choose an application to open the file “%s”."
+msgstr "Izberite program, da odprete datoteko »%s«."
+
+#: src/appchooserdialog.c:390
+msgid "Choose an application."
+msgstr "Izberite program."
+
+#: src/appchooserdialog.c:407
+#, c-format
+msgid ""
+"No apps installed that can open “%s”. You can find more applications in "
+"Software"
+msgstr ""
+"Ni nameščenih programov, ki bi lahko odprli »%s«. Več programov lahko "
+"najdete v Programski opremi"
+
+#: src/appchooserdialog.c:412
+msgid "No suitable app installed. You can find more applications in Software."
+msgstr ""
+"Primeren program ni nameščen. Več programov najdete v razdelku Programska "
+"oprema."
+
+#: src/appchooserdialog.ui:10
+msgid "Open With…"
+msgstr "Odpri z …"
+
+#: src/appchooserdialog.ui:23 src/filechooser.c:463
+msgid "_Open"
+msgstr "_Odpri"
+
+#: src/appchooserdialog.ui:115
+msgid "No Apps available"
+msgstr "Noben program ni na voljo"
+
+#: src/appchooserdialog.ui:159
+msgid "_Find More in Software"
+msgstr "_Najdi več v Programski opremi"
+
+#: src/dynamic-launcher.c:259
+msgid "Create Web Application"
+msgstr "Ustvari spletni program"
+
+#: src/dynamic-launcher.c:261
+msgid "Create Application"
+msgstr "Ustvari program"
+
+#: src/dynamic-launcher.c:269
+msgid "C_reate"
+msgstr "Ustva_ri"
+
+#: src/filechooser.c:463
+msgid "_Select"
+msgstr "_Izberi"
+
+#: src/filechooser.c:465
+msgid "_Save"
+msgstr "_Shrani"
+
+#: src/filechooser.c:647
+msgid "Open files read-only"
+msgstr "Odpri datoteke samo za branje"
+
+#: src/settings.c:239
+msgid "Requested setting not found"
+msgstr "Zahtevane nastavitve ni bilo mogoče najti"
+
+#: src/wallpaperdialog.ui:13
+msgid "Set Background"
+msgstr "Nastavi ozadje"
+
+#: src/wallpaperdialog.ui:26
+msgid "Set"
+msgstr "Določi"
+
+#: src/wallpaperdialog.ui:57
+msgid "Failed to load image file"
+msgstr "Ni bilo mogoče naložiti slikovne datoteke"
+
+#: src/wallpaperpreview.ui:57
+msgid "Activities"
+msgstr "Dejavnosti"
