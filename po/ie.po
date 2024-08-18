@@ -1,0 +1,166 @@
+# Interlingue translation for xdg-desktop-portal-gtk.
+# Copyright (C) 2024 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
+# This file is distributed under the same license as the xdg-desktop-portal-gtk package.
+# Olga Smirnova <mistresssilvara@hotmail.com>,  2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xdg-desktop-portal-gtk main\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
+"issues\n"
+"POT-Creation-Date: 2024-08-17 15:32+0000\n"
+"PO-Revision-Date: 2024-08-18 08:06+0700\n"
+"Last-Translator: OIS <mistresssilvara@hotmail.com>\n"
+"Language-Team: Interlingue\n"
+"Language: ie\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Gtranslator 46.1\n"
+
+#: data/xdg-desktop-portal-gtk.desktop.in.in:4
+msgid "Portal"
+msgstr "Portale"
+
+#: src/access.c:271
+msgid "Deny Access"
+msgstr "Refusar li accesse"
+
+#: src/access.c:274
+msgid "Grant Access"
+msgstr "Permisser li accesse"
+
+#: src/accountdialog.c:176
+msgid "Select an Image"
+msgstr "Selecter un image"
+
+#: src/accountdialog.c:179 src/wallpaperdialog.ui:18
+msgid "Cancel"
+msgstr "Anullar"
+
+#: src/accountdialog.c:180
+msgid "Select"
+msgstr "Selecter"
+
+#: src/accountdialog.c:181
+msgid "Clear"
+msgstr "Vacuar"
+
+#: src/accountdialog.c:195
+msgid "Images"
+msgstr "Images"
+
+#: src/accountdialog.c:272
+#, c-format
+msgid "Share your personal information with %s?"
+msgstr "Esque partir vor personal information con %s?"
+
+#: src/accountdialog.c:275
+msgid "Share your personal information with the requesting application?"
+msgstr "Esque partir vor personal information con li demandant application?"
+
+#: src/accountdialog.ui:10
+msgid "Share Details"
+msgstr "Detallies de partite"
+
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:14
+#: src/dynamic-launcher.c:267 src/filechooser.c:468
+msgid "_Cancel"
+msgstr "A_nullar"
+
+#: src/accountdialog.ui:22
+msgid "_Share"
+msgstr "_Partir"
+
+#: src/accountdialog.ui:148
+msgid "Make changes before sharing the information"
+msgstr "Far modificationes ante que partir li information"
+
+#: src/appchooserdialog.c:229
+msgid "Failed to start Software"
+msgstr "Ne successat lansar li Programmarium"
+
+#: src/appchooserdialog.c:385
+#, c-format
+msgid "Choose an application to open the file “%s”."
+msgstr "Selecte un application por aperter li file «%s»."
+
+#: src/appchooserdialog.c:390
+msgid "Choose an application."
+msgstr "Selecte un application."
+
+#: src/appchooserdialog.c:407
+#, c-format
+msgid ""
+"No apps installed that can open “%s”. You can find more applications in "
+"Software"
+msgstr ""
+"Null applicationes quel posse aperter «%s» es installat. On posse trovar "
+"additional applicationes in li Programmarium."
+
+#: src/appchooserdialog.c:412
+msgid "No suitable app installed. You can find more applications in Software."
+msgstr ""
+"Null convenent applicationes es installat. On posse trovar additional "
+"applicationes in li Programmarium."
+
+#: src/appchooserdialog.ui:10
+msgid "Open With…"
+msgstr "Aperter per…"
+
+#: src/appchooserdialog.ui:23 src/filechooser.c:463
+msgid "_Open"
+msgstr "_Aperter"
+
+#: src/appchooserdialog.ui:115
+msgid "No Apps available"
+msgstr "Null applicationes disponibil"
+
+#: src/appchooserdialog.ui:159
+msgid "_Find More in Software"
+msgstr "_Trovar plu in li Programmarium"
+
+#: src/dynamic-launcher.c:259
+msgid "Create Web Application"
+msgstr "Crear un application web"
+
+#: src/dynamic-launcher.c:261
+msgid "Create Application"
+msgstr "Crear un application"
+
+#: src/dynamic-launcher.c:269
+msgid "C_reate"
+msgstr "C_rear"
+
+#: src/filechooser.c:463
+msgid "_Select"
+msgstr "_Selecter"
+
+#: src/filechooser.c:465
+msgid "_Save"
+msgstr "_Gardar"
+
+#: src/filechooser.c:647
+msgid "Open files read-only"
+msgstr "Aperter files solmen por letion"
+
+#: src/settings.c:239
+msgid "Requested setting not found"
+msgstr "Un besonat parametre ne esset trovat"
+
+#: src/wallpaperdialog.ui:13
+msgid "Set Background"
+msgstr "Assignar quam li funde"
+
+#: src/wallpaperdialog.ui:26
+msgid "Set"
+msgstr "Assignar"
+
+#: src/wallpaperdialog.ui:57
+msgid "Failed to load image file"
+msgstr "Ne successat cargar li file de image"
+
+#: src/wallpaperpreview.ui:57
+msgid "Activities"
+msgstr "Activitás"
