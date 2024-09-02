@@ -1,5 +1,6 @@
 [Unit]
 Description=Portal service (GTK/GNOME implementation)
+After=graphical-session.target
 
 [Service]
 Type=dbus
