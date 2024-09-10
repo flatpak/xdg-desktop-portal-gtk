@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2022-11-29 13:45+0000\n"
-"PO-Revision-Date: 2019-08-24 23:53+0100\n"
-"Last-Translator: Zander Brown <zbrown@gnome.org>\n"
+"POT-Creation-Date: 2024-04-11 03:33+0000\n"
+"PO-Revision-Date: 2024-04-11 13:10+0100\n"
+"Last-Translator: Andi Chandler <andi@gowling.com>\n"
 "Language-Team: English - United Kingdom <en_GB@li.org>\n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Gtranslator 3.32.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
@@ -64,14 +64,12 @@ msgstr "Share your personal information with the requesting application?"
 msgid "Share Details"
 msgstr "Share Details"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:467
-#: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
-#: src/screenshotdialog.ui:14
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:14
+#: src/dynamic-launcher.c:267 src/filechooser.c:468
 msgid "_Cancel"
 msgstr "_Cancel"
 
-#: src/accountdialog.ui:22 src/remotedesktopdialog.ui:28
-#: src/screencastdialog.ui:28 src/screenshotdialog.ui:38
+#: src/accountdialog.ui:22
 msgid "_Share"
 msgstr "_Share"
 
@@ -84,13 +82,13 @@ msgid "Failed to start Software"
 msgstr "Failed to start Software"
 
 #: src/appchooserdialog.c:385
-#, fuzzy, c-format
+#, c-format
 msgid "Choose an application to open the file “%s”."
-msgstr "Unable to find an application that is able to open “%s”."
+msgstr "Choose an application to open the file “%s”."
 
 #: src/appchooserdialog.c:390
 msgid "Choose an application."
-msgstr ""
+msgstr "Choose an application."
 
 #: src/appchooserdialog.c:407
 #, c-format
@@ -98,206 +96,163 @@ msgid ""
 "No apps installed that can open “%s”. You can find more applications in "
 "Software"
 msgstr ""
+"No apps installed that can open “%s”. You can find more applications in "
+"Software"
 
 #: src/appchooserdialog.c:412
 msgid "No suitable app installed. You can find more applications in Software."
-msgstr ""
+msgstr "No suitable app installed. You can find more applications in Software."
 
 #: src/appchooserdialog.ui:10
-#, fuzzy
 msgid "Open With…"
-msgstr "Open With"
+msgstr "Open With…"
 
-#: src/appchooserdialog.ui:23 src/filechooser.c:462
+#: src/appchooserdialog.ui:23 src/filechooser.c:463
 msgid "_Open"
 msgstr "_Open"
 
 #: src/appchooserdialog.ui:115
 msgid "No Apps available"
-msgstr ""
+msgstr "No Apps available"
 
 #: src/appchooserdialog.ui:159
-#, fuzzy
 msgid "_Find More in Software"
-msgstr "Failed to start Software"
+msgstr "_Find More in Software"
 
-#: src/background.c:215 src/background.c:308
-#, fuzzy, c-format
-msgid "“%s” is running in the background"
-msgstr "%s is running in the background."
+#: src/dynamic-launcher.c:259
+msgid "Create Web Application"
+msgstr "Create Web Application"
 
-#: src/background.c:217
-msgid ""
-"This might be for a legitimate reason, but the application has not provided "
-"one.\n"
-"\n"
-"Note that forcing an application to quit might cause data loss."
-msgstr ""
+#: src/dynamic-launcher.c:261
+msgid "Create Application"
+msgstr "Create Application"
 
-#: src/background.c:220
-msgid "Force quit"
-msgstr ""
+#: src/dynamic-launcher.c:269
+msgid "C_reate"
+msgstr "C_reate"
 
-#: src/background.c:221
-msgid "Allow"
-msgstr "Allow"
-
-#: src/background.c:306
-msgid "Background activity"
-msgstr "Background activity"
-
-#: src/background.c:314
-msgid "Find out more"
-msgstr ""
-
-#: src/filechooser.c:462
-#, fuzzy
+#: src/filechooser.c:463
 msgid "_Select"
-msgstr "Select"
+msgstr "_Select"
 
-#: src/filechooser.c:464
+#: src/filechooser.c:465
 msgid "_Save"
 msgstr "_Save"
 
-#: src/filechooser.c:641
+#: src/filechooser.c:647
 msgid "Open files read-only"
 msgstr "Open files read-only"
 
-#: src/remotedesktopdialog.c:188
-msgid "Pointer"
-msgstr "Pointer"
-
-#: src/remotedesktopdialog.c:191
-msgid "Keyboard"
-msgstr "Keyboard"
-
-#: src/remotedesktopdialog.c:194
-msgid "Touch screen"
-msgstr "Touch screen"
-
-#: src/remotedesktopdialog.c:307
-#, c-format
-msgid "Select devices to share with %s"
-msgstr "Select devices to share with %s"
-
-#: src/remotedesktopdialog.c:312
-msgid "Select devices to share with the requesting application"
-msgstr "Select devices to share with the requesting application"
-
-#: src/remotedesktopdialog.ui:12
-msgid "Remote desktop"
-msgstr "Remote desktop"
-
-#: src/screencastdialog.ui:12
-#, fuzzy
-msgid "Screen Share"
-msgstr "Screenshot"
-
-#: src/screencastwidget.c:487
-#, c-format
-msgid "Select monitor to share with %s"
-msgstr "Select monitor to share with %s"
-
-#: src/screencastwidget.c:489
-#, fuzzy, c-format
-msgid "Select window to share with %s"
-msgstr "Select monitor to share with %s"
-
-#: src/screencastwidget.c:494
-msgid "Select monitor to share with the requesting application"
-msgstr "Select monitor to share with the requesting application"
-
-#: src/screencastwidget.c:495
-#, fuzzy
-msgid "Select window to share with the requesting application"
-msgstr "Select monitor to share with the requesting application"
-
-#: src/screencastwidget.ui:100
-msgid "Single Window"
-msgstr ""
-
-#: src/screencastwidget.ui:176
-msgid "Entire Screen"
-msgstr ""
-
-#: src/screenshotdialog.c:442
-#, c-format
-msgid "Share this screenshot with %s?"
-msgstr "Share this screenshot with %s?"
-
-#: src/screenshotdialog.c:446
-msgid "Share this screenshot with the requesting application?"
-msgstr "Share this screenshot with the requesting application?"
-
-#: src/screenshotdialog.ui:10
-msgid "Screenshot"
-msgstr "Screenshot"
-
-#: src/screenshotdialog.ui:30
-msgid "_Options…"
-msgstr "_Options…"
-
-#: src/screenshotdialog.ui:55
-msgid "Take _Screenshot"
-msgstr "Take _Screenshot"
-
-#: src/screenshotdialog.ui:111
-msgid "Take Screenshot"
-msgstr "Take Screenshot"
-
-#: src/screenshotdialog.ui:122
-msgid "Grab the whole sc_reen"
-msgstr "Grab the whole sc_reen"
-
-#: src/screenshotdialog.ui:133
-msgid "Grab the current _window"
-msgstr "Grab the current _window"
-
-#: src/screenshotdialog.ui:144
-msgid "Select _area to grab"
-msgstr "Select _area to grab"
-
-#: src/screenshotdialog.ui:158
-msgid "Grab after a _delay of"
-msgstr "Grab after a _delay of"
-
-#: src/screenshotdialog.ui:171
-msgid "seconds"
-msgstr "seconds"
-
-#: src/screenshotdialog.ui:181
-msgid "Effects"
-msgstr "Effects"
-
-#: src/screenshotdialog.ui:192
-msgid "Include _pointer"
-msgstr "Include _pointer"
-
-#: src/screenshotdialog.ui:201
-msgid "Include the window _border"
-msgstr "Include the window _border"
-
-#: src/settings.c:217
+#: src/settings.c:239
 msgid "Requested setting not found"
-msgstr ""
+msgstr "Requested setting not found"
 
 #: src/wallpaperdialog.ui:13
-#, fuzzy
 msgid "Set Background"
-msgstr "Background activity"
+msgstr "Set Background"
 
 #: src/wallpaperdialog.ui:26
-#, fuzzy
 msgid "Set"
-msgstr "Select"
+msgstr "Set"
 
 #: src/wallpaperdialog.ui:57
 msgid "Failed to load image file"
-msgstr ""
+msgstr "Failed to load image file"
 
 #: src/wallpaperpreview.ui:57
 msgid "Activities"
-msgstr ""
+msgstr "Activities"
+
+#, fuzzy, c-format
+#~ msgid "“%s” is running in the background"
+#~ msgstr "%s is running in the background."
+
+#~ msgid "Allow"
+#~ msgstr "Allow"
+
+#~ msgid "Background activity"
+#~ msgstr "Background activity"
+
+#~ msgid "Pointer"
+#~ msgstr "Pointer"
+
+#~ msgid "Keyboard"
+#~ msgstr "Keyboard"
+
+#~ msgid "Touch screen"
+#~ msgstr "Touch screen"
+
+#, c-format
+#~ msgid "Select devices to share with %s"
+#~ msgstr "Select devices to share with %s"
+
+#~ msgid "Select devices to share with the requesting application"
+#~ msgstr "Select devices to share with the requesting application"
+
+#~ msgid "Remote desktop"
+#~ msgstr "Remote desktop"
+
+#, fuzzy
+#~ msgid "Screen Share"
+#~ msgstr "Screenshot"
+
+#, c-format
+#~ msgid "Select monitor to share with %s"
+#~ msgstr "Select monitor to share with %s"
+
+#, fuzzy, c-format
+#~ msgid "Select window to share with %s"
+#~ msgstr "Select monitor to share with %s"
+
+#~ msgid "Select monitor to share with the requesting application"
+#~ msgstr "Select monitor to share with the requesting application"
+
+#, fuzzy
+#~ msgid "Select window to share with the requesting application"
+#~ msgstr "Select monitor to share with the requesting application"
+
+#, c-format
+#~ msgid "Share this screenshot with %s?"
+#~ msgstr "Share this screenshot with %s?"
+
+#~ msgid "Share this screenshot with the requesting application?"
+#~ msgstr "Share this screenshot with the requesting application?"
+
+#~ msgid "Screenshot"
+#~ msgstr "Screenshot"
+
+#~ msgid "_Options…"
+#~ msgstr "_Options…"
+
+#~ msgid "Take _Screenshot"
+#~ msgstr "Take _Screenshot"
+
+#~ msgid "Take Screenshot"
+#~ msgstr "Take Screenshot"
+
+#~ msgid "Grab the whole sc_reen"
+#~ msgstr "Grab the whole sc_reen"
+
+#~ msgid "Grab the current _window"
+#~ msgstr "Grab the current _window"
+
+#~ msgid "Select _area to grab"
+#~ msgstr "Select _area to grab"
+
+#~ msgid "Grab after a _delay of"
+#~ msgstr "Grab after a _delay of"
+
+#~ msgid "seconds"
+#~ msgstr "seconds"
+
+#~ msgid "Effects"
+#~ msgstr "Effects"
+
+#~ msgid "Include _pointer"
+#~ msgstr "Include _pointer"
+
+#~ msgid "Include the window _border"
+#~ msgstr "Include the window _border"
 
 #~ msgid "applications-system-symbolic"
 #~ msgstr "applications-system-symbolic"
@@ -323,9 +278,6 @@ msgstr ""
 
 #~ msgid "Unable to find a suitable application."
 #~ msgstr "Unable to find a suitable application."
-
-#~ msgid "No Applications Found"
-#~ msgstr "No Applications Found"
 
 #~ msgid "Find Compatible Applications in Software"
 #~ msgstr "Find Compatible Applications in Software"
