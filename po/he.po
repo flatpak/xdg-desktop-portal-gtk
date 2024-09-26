@@ -1,15 +1,15 @@
 # Hebrew translation for xdg-desktop-portal-gtk.
 # Copyright (C) 2022 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
 # This file is distributed under the same license as the xdg-desktop-portal-gtk package.
-# Yosef Or Boczko <yoseforb@gmail.com>, 2022.
+# Yosef Or Boczko <yoseforb@gmail.com>, 2022-2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk main\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2022-11-29 13:45+0000\n"
-"PO-Revision-Date: 2022-07-25 22:07+0300\n"
+"POT-Creation-Date: 2023-09-01 03:33+0000\n"
+"PO-Revision-Date: 2024-09-26 13:11+0300\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: Hebrew <yoseforb@gmail.com>\n"
 "Language: he\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"X-Generator: Gtranslator 40.0\n"
+"X-Generator: Gtranslator 46.1\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
@@ -64,14 +64,12 @@ msgstr "לשתף את המידע האישי שלך עם היישומים הדו�
 msgid "Share Details"
 msgstr "שיתוף פרטים"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:467
-#: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
-#: src/screenshotdialog.ui:14
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:14
+#: src/dynamic-launcher.c:267 src/filechooser.c:468
 msgid "_Cancel"
 msgstr "_ביטול"
 
-#: src/accountdialog.ui:22 src/remotedesktopdialog.ui:28
-#: src/screencastdialog.ui:28 src/screenshotdialog.ui:38
+#: src/accountdialog.ui:22
 msgid "_Share"
 msgstr "_שיתוף"
 
@@ -108,7 +106,7 @@ msgstr "לא מותקן יישום מתאים. ניתן למצוא יישומי�
 msgid "Open With…"
 msgstr "פתיחה באמצעות…"
 
-#: src/appchooserdialog.ui:23 src/filechooser.c:462
+#: src/appchooserdialog.ui:23 src/filechooser.c:463
 msgid "_Open"
 msgstr "_פתיחה"
 
@@ -120,163 +118,31 @@ msgstr "אין יישומים זמינים"
 msgid "_Find More in Software"
 msgstr "_איתור נוספים בתכנה"
 
-#: src/background.c:215 src/background.c:308
-#, c-format
-msgid "“%s” is running in the background"
-msgstr "‫„%s” פועל ברקע"
+#: src/dynamic-launcher.c:259
+msgid "Create Web Application"
+msgstr "יצירת יישום רשת"
 
-#: src/background.c:217
-msgid ""
-"This might be for a legitimate reason, but the application has not provided "
-"one.\n"
-"\n"
-"Note that forcing an application to quit might cause data loss."
-msgstr ""
-"יכול להיות שישנה סיבה מוצדקת לכך, אך זו לא סופקה על ידי היישום.\n"
-"‬\n"
-"‫‫יש לשים לב שאילוץ יציאה מהיישום עשויה להוביל לאבדן נתונים."
+#: src/dynamic-launcher.c:261
+msgid "Create Application"
+msgstr "יצירת יישום"
 
-#: src/background.c:220
-msgid "Force quit"
-msgstr "אילוץ יציאה"
+#: src/dynamic-launcher.c:269
+msgid "C_reate"
+msgstr "י_צירה"
 
-#: src/background.c:221
-msgid "Allow"
-msgstr "לאפשר"
-
-#: src/background.c:306
-msgid "Background activity"
-msgstr "פעילות רקע"
-
-#: src/background.c:314
-msgid "Find out more"
-msgstr "למצוא עוד"
-
-#: src/filechooser.c:462
+#: src/filechooser.c:463
 msgid "_Select"
 msgstr "_בחירה"
 
-#: src/filechooser.c:464
+#: src/filechooser.c:465
 msgid "_Save"
 msgstr "_שמירה"
 
-#: src/filechooser.c:641
+#: src/filechooser.c:647
 msgid "Open files read-only"
 msgstr "פתיחת קבצים לקריאה בלבד"
 
-#: src/remotedesktopdialog.c:188
-msgid "Pointer"
-msgstr "סמן"
-
-#: src/remotedesktopdialog.c:191
-msgid "Keyboard"
-msgstr "מקלדת"
-
-#: src/remotedesktopdialog.c:194
-msgid "Touch screen"
-msgstr "מסך מגע"
-
-#: src/remotedesktopdialog.c:307
-#, c-format
-msgid "Select devices to share with %s"
-msgstr "נא לבחור התקנים לשיתוף עם %s"
-
-#: src/remotedesktopdialog.c:312
-msgid "Select devices to share with the requesting application"
-msgstr "נא לבחור התקנים לשיתוף עם היישום שביקש"
-
-#: src/remotedesktopdialog.ui:12
-msgid "Remote desktop"
-msgstr "שולחן עבודה מרוחק"
-
-#: src/screencastdialog.ui:12
-msgid "Screen Share"
-msgstr "שיתוף מסך"
-
-#: src/screencastwidget.c:487
-#, c-format
-msgid "Select monitor to share with %s"
-msgstr "נא לבחור מסך לשיתוף עם %s"
-
-#: src/screencastwidget.c:489
-#, c-format
-msgid "Select window to share with %s"
-msgstr "נא לבחור חלון לשיתוף עם %s"
-
-#: src/screencastwidget.c:494
-msgid "Select monitor to share with the requesting application"
-msgstr "נא לבחור מסך לשיתוף עם היישום שביקש"
-
-#: src/screencastwidget.c:495
-msgid "Select window to share with the requesting application"
-msgstr "נא לבחור חלון לשיתוף עם היישום שביקש"
-
-#: src/screencastwidget.ui:100
-msgid "Single Window"
-msgstr "חלון בודד"
-
-#: src/screencastwidget.ui:176
-msgid "Entire Screen"
-msgstr "כל המסך"
-
-#: src/screenshotdialog.c:442
-#, c-format
-msgid "Share this screenshot with %s?"
-msgstr "לשתף את הצילום הזה עם %s?"
-
-#: src/screenshotdialog.c:446
-msgid "Share this screenshot with the requesting application?"
-msgstr "לשתף את צילום המסך הזה עם היישום שביקש?"
-
-#: src/screenshotdialog.ui:10
-msgid "Screenshot"
-msgstr "צילום מסך"
-
-#: src/screenshotdialog.ui:30
-msgid "_Options…"
-msgstr "_אפשרויות…"
-
-#: src/screenshotdialog.ui:55
-msgid "Take _Screenshot"
-msgstr "_צילום המסך"
-
-#: src/screenshotdialog.ui:111
-msgid "Take Screenshot"
-msgstr "צילום המסך"
-
-#: src/screenshotdialog.ui:122
-msgid "Grab the whole sc_reen"
-msgstr "צילום המסך _כולו"
-
-#: src/screenshotdialog.ui:133
-msgid "Grab the current _window"
-msgstr "צילום המסך ה_נוכחי"
-
-#: src/screenshotdialog.ui:144
-msgid "Select _area to grab"
-msgstr "בחירת _אזור לצילום"
-
-#: src/screenshotdialog.ui:158
-msgid "Grab after a _delay of"
-msgstr "לצלם לאחר ה_שהיה של"
-
-#: src/screenshotdialog.ui:171
-msgid "seconds"
-msgstr "שניות"
-
-#: src/screenshotdialog.ui:181
-msgid "Effects"
-msgstr "אפקטים"
-
-#: src/screenshotdialog.ui:192
-msgid "Include _pointer"
-msgstr "_כולל הסמן"
-
-#: src/screenshotdialog.ui:201
-msgid "Include the window _border"
-msgstr "כולל _גבולות החלון"
-
-#: src/settings.c:217
+#: src/settings.c:216
 msgid "Requested setting not found"
 msgstr "ההגדרה המבוקשת לא נמצאה"
 
@@ -295,3 +161,114 @@ msgstr "טעינת קובץ התמונה נכשלה"
 #: src/wallpaperpreview.ui:57
 msgid "Activities"
 msgstr "פעילויות"
+
+#, c-format
+#~ msgid "“%s” is running in the background"
+#~ msgstr "‫„%s” פועל ברקע"
+
+#~ msgid ""
+#~ "This might be for a legitimate reason, but the application has not "
+#~ "provided one.\n"
+#~ "\n"
+#~ "Note that forcing an application to quit might cause data loss."
+#~ msgstr ""
+#~ "יכול להיות שישנה סיבה מוצדקת לכך, אך זו לא סופקה על ידי היישום.\n"
+#~ "‬\n"
+#~ "‫‫יש לשים לב שאילוץ יציאה מהיישום עשויה להוביל לאבדן נתונים."
+
+#~ msgid "Force quit"
+#~ msgstr "אילוץ יציאה"
+
+#~ msgid "Allow"
+#~ msgstr "לאפשר"
+
+#~ msgid "Background activity"
+#~ msgstr "פעילות רקע"
+
+#~ msgid "Find out more"
+#~ msgstr "למצוא עוד"
+
+#~ msgid "Pointer"
+#~ msgstr "סמן"
+
+#~ msgid "Keyboard"
+#~ msgstr "מקלדת"
+
+#~ msgid "Touch screen"
+#~ msgstr "מסך מגע"
+
+#, c-format
+#~ msgid "Select devices to share with %s"
+#~ msgstr "נא לבחור התקנים לשיתוף עם %s"
+
+#~ msgid "Select devices to share with the requesting application"
+#~ msgstr "נא לבחור התקנים לשיתוף עם היישום שביקש"
+
+#~ msgid "Remote desktop"
+#~ msgstr "שולחן עבודה מרוחק"
+
+#~ msgid "Screen Share"
+#~ msgstr "שיתוף מסך"
+
+#, c-format
+#~ msgid "Select monitor to share with %s"
+#~ msgstr "נא לבחור מסך לשיתוף עם %s"
+
+#, c-format
+#~ msgid "Select window to share with %s"
+#~ msgstr "נא לבחור חלון לשיתוף עם %s"
+
+#~ msgid "Select monitor to share with the requesting application"
+#~ msgstr "נא לבחור מסך לשיתוף עם היישום שביקש"
+
+#~ msgid "Select window to share with the requesting application"
+#~ msgstr "נא לבחור חלון לשיתוף עם היישום שביקש"
+
+#~ msgid "Single Window"
+#~ msgstr "חלון בודד"
+
+#~ msgid "Entire Screen"
+#~ msgstr "כל המסך"
+
+#, c-format
+#~ msgid "Share this screenshot with %s?"
+#~ msgstr "לשתף את הצילום הזה עם %s?"
+
+#~ msgid "Share this screenshot with the requesting application?"
+#~ msgstr "לשתף את צילום המסך הזה עם היישום שביקש?"
+
+#~ msgid "Screenshot"
+#~ msgstr "צילום מסך"
+
+#~ msgid "_Options…"
+#~ msgstr "_אפשרויות…"
+
+#~ msgid "Take _Screenshot"
+#~ msgstr "_צילום המסך"
+
+#~ msgid "Take Screenshot"
+#~ msgstr "צילום המסך"
+
+#~ msgid "Grab the whole sc_reen"
+#~ msgstr "צילום המסך _כולו"
+
+#~ msgid "Grab the current _window"
+#~ msgstr "צילום המסך ה_נוכחי"
+
+#~ msgid "Select _area to grab"
+#~ msgstr "בחירת _אזור לצילום"
+
+#~ msgid "Grab after a _delay of"
+#~ msgstr "לצלם לאחר ה_שהיה של"
+
+#~ msgid "seconds"
+#~ msgstr "שניות"
+
+#~ msgid "Effects"
+#~ msgstr "אפקטים"
+
+#~ msgid "Include _pointer"
+#~ msgstr "_כולל הסמן"
+
+#~ msgid "Include the window _border"
+#~ msgstr "כולל _גבולות החלון"
