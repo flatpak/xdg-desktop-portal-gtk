@@ -1,0 +1,167 @@
+# Romanian translation for xdg-desktop-portal-gtk.
+# Copyright (C) 2024 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
+# This file is distributed under the same license as the xdg-desktop-portal-gtk package.
+# Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>,  2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xdg-desktop-portal-gtk main\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
+"issues\n"
+"POT-Creation-Date: 2024-10-13 03:34+0000\n"
+"PO-Revision-Date: 2024-10-12 10:34+0200\n"
+"Last-Translator: Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>\n"
+"Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
+"20)) ? 1 : 2);;\n"
+"X-Generator: Poedit 3.4.3\n"
+
+#: data/xdg-desktop-portal-gtk.desktop.in.in:4
+msgid "Portal"
+msgstr "Portal"
+
+#: src/access.c:271
+msgid "Deny Access"
+msgstr "Refuză accesul"
+
+#: src/access.c:274
+msgid "Grant Access"
+msgstr "Acordă accesul"
+
+#: src/accountdialog.c:176
+msgid "Select an Image"
+msgstr "Selectează o imagine"
+
+#: src/accountdialog.c:179 src/wallpaperdialog.ui:18
+msgid "Cancel"
+msgstr "Anulează"
+
+#: src/accountdialog.c:180
+msgid "Select"
+msgstr "Selectează"
+
+#: src/accountdialog.c:181
+msgid "Clear"
+msgstr "Șterge"
+
+#: src/accountdialog.c:195
+msgid "Images"
+msgstr "Imagini"
+
+#: src/accountdialog.c:272
+#, c-format
+msgid "Share your personal information with %s?"
+msgstr "Partajați informațiile dvs. personale cu %s?"
+
+#: src/accountdialog.c:275
+msgid "Share your personal information with the requesting application?"
+msgstr "Partajați informațiile dvs. personale cu aplicația care le solicită?"
+
+#: src/accountdialog.ui:10
+msgid "Share Details"
+msgstr "Partajare detalii"
+
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:14
+#: src/dynamic-launcher.c:267 src/filechooser.c:468
+msgid "_Cancel"
+msgstr "_Anulare"
+
+#: src/accountdialog.ui:22
+msgid "_Share"
+msgstr "_Partajare"
+
+#: src/accountdialog.ui:148
+msgid "Make changes before sharing the information"
+msgstr "Faceți modificări înainte de a partaja informațiile"
+
+#: src/appchooserdialog.c:229
+msgid "Failed to start Software"
+msgstr "Eșec la lansarea programului «Aplicații»"
+
+#: src/appchooserdialog.c:385
+#, c-format
+msgid "Choose an application to open the file “%s”."
+msgstr "Alegeți o aplicație pentru a deschide fișierul „%s”."
+
+#: src/appchooserdialog.c:390
+msgid "Choose an application."
+msgstr "Alegeți o aplicație."
+
+#: src/appchooserdialog.c:407
+#, c-format
+msgid ""
+"No apps installed that can open “%s”. You can find more applications in "
+"Software"
+msgstr ""
+"Nu sunt instalate aplicații care pot deschide „%s”. Puteți găsi mai multe "
+"aplicații recomandate în «Aplicații»"
+
+#: src/appchooserdialog.c:412
+msgid "No suitable app installed. You can find more applications in Software."
+msgstr ""
+"Nu sunt instalate aplicații care pot deschide „%s”. Puteți găsi mai multe "
+"aplicații în «Aplicații»."
+
+#: src/appchooserdialog.ui:10
+msgid "Open With…"
+msgstr "Deschide cu…"
+
+#: src/appchooserdialog.ui:23 src/filechooser.c:463
+msgid "_Open"
+msgstr "_Deschide"
+
+#: src/appchooserdialog.ui:115
+msgid "No Apps available"
+msgstr "Nu există aplicații disponibile"
+
+#: src/appchooserdialog.ui:159
+msgid "_Find More in Software"
+msgstr "_Găsiți mai multe în «Aplicații»"
+
+#: src/dynamic-launcher.c:259
+msgid "Create Web Application"
+msgstr "Creează o aplicație web"
+
+#: src/dynamic-launcher.c:261
+msgid "Create Application"
+msgstr "Creează o aplicație"
+
+#: src/dynamic-launcher.c:269
+msgid "C_reate"
+msgstr "C_reează"
+
+#: src/filechooser.c:463
+msgid "_Select"
+msgstr "_Selectează"
+
+#: src/filechooser.c:465
+msgid "_Save"
+msgstr "_Salvează"
+
+#: src/filechooser.c:647
+msgid "Open files read-only"
+msgstr "Deschide fișiere numai-pentru-citire"
+
+#: src/settings.c:239
+msgid "Requested setting not found"
+msgstr "Configurația solicitată nu a fost găsită"
+
+#: src/wallpaperdialog.ui:13
+msgid "Set Background"
+msgstr "Stabilește fundalul"
+
+#: src/wallpaperdialog.ui:26
+msgid "Set"
+msgstr "Stabilește"
+
+#: src/wallpaperdialog.ui:57
+msgid "Failed to load image file"
+msgstr "Încărcarea fișierului imagine a eșuat"
+
+#: src/wallpaperpreview.ui:57
+msgid "Activities"
+msgstr "Activități"
