@@ -2,15 +2,15 @@
 # Copyright (C) 2022 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
 # This file is distributed under the same license as the xdg-desktop-portal-gtk package.
 # Juliano de Souza Camargo <julianosc@protonmail.com>, 2022.
-# Hugo Carvalho <hugokarvalho@hotmail.com>, 2023.
+# Hugo Carvalho <hugokarvalho@hotmail.com>, 2023, 2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: xdg-desktop-portal-gtk master\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2022-11-29 13:45+0000\n"
-"PO-Revision-Date: 2023-06-25 16:03+0100\n"
+"POT-Creation-Date: 2024-10-16 03:33+0000\n"
+"PO-Revision-Date: 2024-10-16 13:33+0100\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese < https://l10n.gnome.org/teams/pt/>\n"
 "Language: pt\n"
@@ -23,7 +23,7 @@ msgstr ""
 "X-DL-Branch: master\n"
 "X-DL-Domain: po\n"
 "X-DL-State: None\n"
-"X-Generator: Poedit 3.3.1\n"
+"X-Generator: Poedit 3.5\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
@@ -70,14 +70,12 @@ msgstr "Partilhar a sua informação pessoal com a aplicação requerente?"
 msgid "Share Details"
 msgstr "Partilhar detalhes"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:467
-#: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
-#: src/screenshotdialog.ui:14
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:14
+#: src/dynamic-launcher.c:267 src/filechooser.c:468
 msgid "_Cancel"
 msgstr "_Cancelar"
 
-#: src/accountdialog.ui:22 src/remotedesktopdialog.ui:28
-#: src/screencastdialog.ui:28 src/screenshotdialog.ui:38
+#: src/accountdialog.ui:22
 msgid "_Share"
 msgstr "_Partilhar"
 
@@ -117,7 +115,7 @@ msgstr ""
 msgid "Open With…"
 msgstr "Abrir com…"
 
-#: src/appchooserdialog.ui:23 src/filechooser.c:462
+#: src/appchooserdialog.ui:23 src/filechooser.c:463
 msgid "_Open"
 msgstr "_Abrir"
 
@@ -129,164 +127,31 @@ msgstr "Sem aplicações disponíveis"
 msgid "_Find More in Software"
 msgstr "_Encontrar mais em Software"
 
-#: src/background.c:215 src/background.c:308
-#, c-format
-msgid "“%s” is running in the background"
-msgstr "“%s” está a correr em segundo plano"
+#: src/dynamic-launcher.c:259
+msgid "Create Web Application"
+msgstr "Criar aplicação Web"
 
-#: src/background.c:217
-msgid ""
-"This might be for a legitimate reason, but the application has not provided "
-"one.\n"
-"\n"
-"Note that forcing an application to quit might cause data loss."
-msgstr ""
-"Este pode ser por um motivo legítimo, mas a aplicação não forneceu um.\n"
-"\n"
-"Note-se que forçar o encerramento de uma aplicação pode causar perda de "
-"dados."
+#: src/dynamic-launcher.c:261
+msgid "Create Application"
+msgstr "Criar aplicação"
 
-#: src/background.c:220
-msgid "Force quit"
-msgstr "Forçar o encerramento"
+#: src/dynamic-launcher.c:269
+msgid "C_reate"
+msgstr "C_riar"
 
-#: src/background.c:221
-msgid "Allow"
-msgstr "Permitir"
-
-#: src/background.c:306
-msgid "Background activity"
-msgstr "Atividade em segundo plano"
-
-#: src/background.c:314
-msgid "Find out more"
-msgstr "Saiba mais"
-
-#: src/filechooser.c:462
+#: src/filechooser.c:463
 msgid "_Select"
 msgstr "_Selecionar"
 
-#: src/filechooser.c:464
+#: src/filechooser.c:465
 msgid "_Save"
 msgstr "_Gravar"
 
-#: src/filechooser.c:641
+#: src/filechooser.c:647
 msgid "Open files read-only"
 msgstr "Abrir ficheiros apenas de leitura"
 
-#: src/remotedesktopdialog.c:188
-msgid "Pointer"
-msgstr "Ponteiro"
-
-#: src/remotedesktopdialog.c:191
-msgid "Keyboard"
-msgstr "Teclado"
-
-#: src/remotedesktopdialog.c:194
-msgid "Touch screen"
-msgstr "Ecrã tátil"
-
-#: src/remotedesktopdialog.c:307
-#, c-format
-msgid "Select devices to share with %s"
-msgstr "Selecionar dispositivos para partilhar com %s"
-
-#: src/remotedesktopdialog.c:312
-msgid "Select devices to share with the requesting application"
-msgstr "Selecionar dispositivos a partilhar com a aplicação requerente"
-
-#: src/remotedesktopdialog.ui:12
-msgid "Remote desktop"
-msgstr "Área de trabalho remota"
-
-#: src/screencastdialog.ui:12
-msgid "Screen Share"
-msgstr "Partilha de ecrã"
-
-#: src/screencastwidget.c:487
-#, c-format
-msgid "Select monitor to share with %s"
-msgstr "Selecionar o monitor a partilhar com %s"
-
-#: src/screencastwidget.c:489
-#, c-format
-msgid "Select window to share with %s"
-msgstr "Selecionar a janela a partilhar com %s"
-
-#: src/screencastwidget.c:494
-msgid "Select monitor to share with the requesting application"
-msgstr "Selecionar o monitor a partilhar com a aplicação requerente"
-
-#: src/screencastwidget.c:495
-msgid "Select window to share with the requesting application"
-msgstr "Selecionar a janela a partilhar com a aplicação requerente"
-
-#: src/screencastwidget.ui:100
-msgid "Single Window"
-msgstr "Janela individual"
-
-#: src/screencastwidget.ui:176
-msgid "Entire Screen"
-msgstr "Ecrã inteiro"
-
-#: src/screenshotdialog.c:442
-#, c-format
-msgid "Share this screenshot with %s?"
-msgstr "Partilhar esta captura de ecrã com %s?"
-
-#: src/screenshotdialog.c:446
-msgid "Share this screenshot with the requesting application?"
-msgstr "Partilhar esta captura de ecrã com a aplicação requerente?"
-
-#: src/screenshotdialog.ui:10
-msgid "Screenshot"
-msgstr "Captura de ecrã"
-
-#: src/screenshotdialog.ui:30
-msgid "_Options…"
-msgstr "_Opções…"
-
-#: src/screenshotdialog.ui:55
-msgid "Take _Screenshot"
-msgstr "Capturar _ecrã"
-
-#: src/screenshotdialog.ui:111
-msgid "Take Screenshot"
-msgstr "Capturar ecrã"
-
-#: src/screenshotdialog.ui:122
-msgid "Grab the whole sc_reen"
-msgstr "Capturar o ecrã _inteiro"
-
-#: src/screenshotdialog.ui:133
-msgid "Grab the current _window"
-msgstr "Capturar a janela at_ual"
-
-#: src/screenshotdialog.ui:144
-msgid "Select _area to grab"
-msgstr "Selecion_ar a área a capturar"
-
-#: src/screenshotdialog.ui:158
-msgid "Grab after a _delay of"
-msgstr "Capturar após um atraso _de"
-
-#: src/screenshotdialog.ui:171
-msgid "seconds"
-msgstr "segundos"
-
-#: src/screenshotdialog.ui:181
-msgid "Effects"
-msgstr "Efeitos"
-
-#: src/screenshotdialog.ui:192
-msgid "Include _pointer"
-msgstr "Incluir cu_rsor"
-
-#: src/screenshotdialog.ui:201
-msgid "Include the window _border"
-msgstr "Incluir o con_torno da janela"
-
-#: src/settings.c:217
+#: src/settings.c:239
 msgid "Requested setting not found"
 msgstr "Definição solicitada não encontrada"
 
@@ -305,6 +170,118 @@ msgstr "Falha ao carregar o ficheiro de imagem"
 #: src/wallpaperpreview.ui:57
 msgid "Activities"
 msgstr "Atividades"
+
+#, c-format
+#~ msgid "“%s” is running in the background"
+#~ msgstr "“%s” está a correr em segundo plano"
+
+#~ msgid ""
+#~ "This might be for a legitimate reason, but the application has not "
+#~ "provided one.\n"
+#~ "\n"
+#~ "Note that forcing an application to quit might cause data loss."
+#~ msgstr ""
+#~ "Este pode ser por um motivo legítimo, mas a aplicação não forneceu um.\n"
+#~ "\n"
+#~ "Note-se que forçar o encerramento de uma aplicação pode causar perda de "
+#~ "dados."
+
+#~ msgid "Force quit"
+#~ msgstr "Forçar o encerramento"
+
+#~ msgid "Allow"
+#~ msgstr "Permitir"
+
+#~ msgid "Background activity"
+#~ msgstr "Atividade em segundo plano"
+
+#~ msgid "Find out more"
+#~ msgstr "Saiba mais"
+
+#~ msgid "Pointer"
+#~ msgstr "Ponteiro"
+
+#~ msgid "Keyboard"
+#~ msgstr "Teclado"
+
+#~ msgid "Touch screen"
+#~ msgstr "Ecrã tátil"
+
+#, c-format
+#~ msgid "Select devices to share with %s"
+#~ msgstr "Selecionar dispositivos para partilhar com %s"
+
+#~ msgid "Select devices to share with the requesting application"
+#~ msgstr "Selecionar dispositivos a partilhar com a aplicação requerente"
+
+#~ msgid "Remote desktop"
+#~ msgstr "Área de trabalho remota"
+
+#~ msgid "Screen Share"
+#~ msgstr "Partilha de ecrã"
+
+#, c-format
+#~ msgid "Select monitor to share with %s"
+#~ msgstr "Selecionar o monitor a partilhar com %s"
+
+#, c-format
+#~ msgid "Select window to share with %s"
+#~ msgstr "Selecionar a janela a partilhar com %s"
+
+#~ msgid "Select monitor to share with the requesting application"
+#~ msgstr "Selecionar o monitor a partilhar com a aplicação requerente"
+
+#~ msgid "Select window to share with the requesting application"
+#~ msgstr "Selecionar a janela a partilhar com a aplicação requerente"
+
+#~ msgid "Single Window"
+#~ msgstr "Janela individual"
+
+#~ msgid "Entire Screen"
+#~ msgstr "Ecrã inteiro"
+
+#, c-format
+#~ msgid "Share this screenshot with %s?"
+#~ msgstr "Partilhar esta captura de ecrã com %s?"
+
+#~ msgid "Share this screenshot with the requesting application?"
+#~ msgstr "Partilhar esta captura de ecrã com a aplicação requerente?"
+
+#~ msgid "Screenshot"
+#~ msgstr "Captura de ecrã"
+
+#~ msgid "_Options…"
+#~ msgstr "_Opções…"
+
+#~ msgid "Take _Screenshot"
+#~ msgstr "Capturar _ecrã"
+
+#~ msgid "Take Screenshot"
+#~ msgstr "Capturar ecrã"
+
+#~ msgid "Grab the whole sc_reen"
+#~ msgstr "Capturar o ecrã _inteiro"
+
+#~ msgid "Grab the current _window"
+#~ msgstr "Capturar a janela at_ual"
+
+#~ msgid "Select _area to grab"
+#~ msgstr "Selecion_ar a área a capturar"
+
+#~ msgid "Grab after a _delay of"
+#~ msgstr "Capturar após um atraso _de"
+
+#~ msgid "seconds"
+#~ msgstr "segundos"
+
+#~ msgid "Effects"
+#~ msgstr "Efeitos"
+
+#~ msgid "Include _pointer"
+#~ msgstr "Incluir cu_rsor"
+
+#~ msgid "Include the window _border"
+#~ msgstr "Incluir o con_torno da janela"
 
 #~ msgid "applications-system-symbolic"
 #~ msgstr "applications-system-symbolic"
