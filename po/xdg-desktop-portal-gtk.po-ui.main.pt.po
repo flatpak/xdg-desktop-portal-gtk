@@ -1,0 +1,287 @@
+# Portuguese translation for xdg-desktop-portal-gtk.
+# Copyright (C) 2022 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
+# This file is distributed under the same license as the xdg-desktop-portal-gtk package.
+# Juliano de Souza Camargo <julianosc@protonmail.com>, 2022.
+# Hugo Carvalho <hugokarvalho@hotmail.com>, 2023, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xdg-desktop-portal-gtk master\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
+"issues\n"
+"POT-Creation-Date: 2023-09-01 03:33+0000\n"
+"PO-Revision-Date: 2024-10-16 13:22+0100\n"
+"Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
+"Language-Team: Portuguese < https://l10n.gnome.org/teams/pt/>\n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-DL-Team: pt\n"
+"X-DL-Module: xdg-desktop-portal-gtk\n"
+"X-DL-Branch: master\n"
+"X-DL-Domain: po\n"
+"X-DL-State: None\n"
+"X-Generator: Poedit 3.5\n"
+
+#: data/xdg-desktop-portal-gtk.desktop.in.in:4
+msgid "Portal"
+msgstr "Portal"
+
+#: src/access.c:271
+msgid "Deny Access"
+msgstr "Negar acesso"
+
+#: src/access.c:274
+msgid "Grant Access"
+msgstr "Conceder acesso"
+
+#: src/accountdialog.c:176
+msgid "Select an Image"
+msgstr "Selecionar uma imagem"
+
+#: src/accountdialog.c:179 src/wallpaperdialog.ui:18
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: src/accountdialog.c:180
+msgid "Select"
+msgstr "Selecionar"
+
+#: src/accountdialog.c:181
+msgid "Clear"
+msgstr "Limpar"
+
+#: src/accountdialog.c:195
+msgid "Images"
+msgstr "Imagens"
+
+#: src/accountdialog.c:272
+#, c-format
+msgid "Share your personal information with %s?"
+msgstr "Partilhar sua informação pessoal com %s?"
+
+#: src/accountdialog.c:275
+msgid "Share your personal information with the requesting application?"
+msgstr "Partilhar a sua informação pessoal com a aplicação requerente?"
+
+#: src/accountdialog.ui:10
+msgid "Share Details"
+msgstr "Partilhar detalhes"
+
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:14
+#: src/dynamic-launcher.c:267 src/filechooser.c:468
+msgid "_Cancel"
+msgstr "_Cancelar"
+
+#: src/accountdialog.ui:22
+msgid "_Share"
+msgstr "_Partilhar"
+
+#: src/accountdialog.ui:148
+msgid "Make changes before sharing the information"
+msgstr "Fazer alterações antes de partilhar informação"
+
+#: src/appchooserdialog.c:229
+msgid "Failed to start Software"
+msgstr "Falha ao iniciar o Software"
+
+#: src/appchooserdialog.c:385
+#, c-format
+msgid "Choose an application to open the file “%s”."
+msgstr "Escolha uma aplicação para abrir o ficheiro “%s”."
+
+#: src/appchooserdialog.c:390
+msgid "Choose an application."
+msgstr "Escolha uma aplicação."
+
+#: src/appchooserdialog.c:407
+#, c-format
+msgid ""
+"No apps installed that can open “%s”. You can find more applications in "
+"Software"
+msgstr ""
+"Nenhuma aplicação instalada que possa abrir “%s”. Pode encontrar mais "
+"aplicações em Software"
+
+#: src/appchooserdialog.c:412
+msgid "No suitable app installed. You can find more applications in Software."
+msgstr ""
+"Nenhuma aplicação adequada instalada. Pode encontrar mais aplicações em "
+"Software."
+
+#: src/appchooserdialog.ui:10
+msgid "Open With…"
+msgstr "Abrir com…"
+
+#: src/appchooserdialog.ui:23 src/filechooser.c:463
+msgid "_Open"
+msgstr "_Abrir"
+
+#: src/appchooserdialog.ui:115
+msgid "No Apps available"
+msgstr "Sem aplicações disponíveis"
+
+#: src/appchooserdialog.ui:159
+msgid "_Find More in Software"
+msgstr "_Encontrar mais em Software"
+
+#: src/dynamic-launcher.c:259
+msgid "Create Web Application"
+msgstr "Criar aplicação Web"
+
+#: src/dynamic-launcher.c:261
+msgid "Create Application"
+msgstr "Criar aplicação"
+
+#: src/dynamic-launcher.c:269
+msgid "C_reate"
+msgstr "C_riar"
+
+#: src/filechooser.c:463
+msgid "_Select"
+msgstr "_Selecionar"
+
+#: src/filechooser.c:465
+msgid "_Save"
+msgstr "_Gravar"
+
+#: src/filechooser.c:647
+msgid "Open files read-only"
+msgstr "Abrir ficheiros apenas de leitura"
+
+#: src/settings.c:216
+msgid "Requested setting not found"
+msgstr "Definição solicitada não encontrada"
+
+#: src/wallpaperdialog.ui:13
+msgid "Set Background"
+msgstr "Definir fundo"
+
+#: src/wallpaperdialog.ui:26
+msgid "Set"
+msgstr "Definir"
+
+#: src/wallpaperdialog.ui:57
+msgid "Failed to load image file"
+msgstr "Falha ao carregar o ficheiro de imagem"
+
+#: src/wallpaperpreview.ui:57
+msgid "Activities"
+msgstr "Atividades"
+
+#, c-format
+#~ msgid "“%s” is running in the background"
+#~ msgstr "“%s” está a correr em segundo plano"
+
+#~ msgid ""
+#~ "This might be for a legitimate reason, but the application has not "
+#~ "provided one.\n"
+#~ "\n"
+#~ "Note that forcing an application to quit might cause data loss."
+#~ msgstr ""
+#~ "Este pode ser por um motivo legítimo, mas a aplicação não forneceu um.\n"
+#~ "\n"
+#~ "Note-se que forçar o encerramento de uma aplicação pode causar perda de "
+#~ "dados."
+
+#~ msgid "Force quit"
+#~ msgstr "Forçar o encerramento"
+
+#~ msgid "Allow"
+#~ msgstr "Permitir"
+
+#~ msgid "Background activity"
+#~ msgstr "Atividade em segundo plano"
+
+#~ msgid "Find out more"
+#~ msgstr "Saiba mais"
+
+#~ msgid "Pointer"
+#~ msgstr "Ponteiro"
+
+#~ msgid "Keyboard"
+#~ msgstr "Teclado"
+
+#~ msgid "Touch screen"
+#~ msgstr "Ecrã tátil"
+
+#, c-format
+#~ msgid "Select devices to share with %s"
+#~ msgstr "Selecionar dispositivos para partilhar com %s"
+
+#~ msgid "Select devices to share with the requesting application"
+#~ msgstr "Selecionar dispositivos a partilhar com a aplicação requerente"
+
+#~ msgid "Remote desktop"
+#~ msgstr "Área de trabalho remota"
+
+#~ msgid "Screen Share"
+#~ msgstr "Partilha de ecrã"
+
+#, c-format
+#~ msgid "Select monitor to share with %s"
+#~ msgstr "Selecionar o monitor a partilhar com %s"
+
+#, c-format
+#~ msgid "Select window to share with %s"
+#~ msgstr "Selecionar a janela a partilhar com %s"
+
+#~ msgid "Select monitor to share with the requesting application"
+#~ msgstr "Selecionar o monitor a partilhar com a aplicação requerente"
+
+#~ msgid "Select window to share with the requesting application"
+#~ msgstr "Selecionar a janela a partilhar com a aplicação requerente"
+
+#~ msgid "Single Window"
+#~ msgstr "Janela individual"
+
+#~ msgid "Entire Screen"
+#~ msgstr "Ecrã inteiro"
+
+#, c-format
+#~ msgid "Share this screenshot with %s?"
+#~ msgstr "Partilhar esta captura de ecrã com %s?"
+
+#~ msgid "Share this screenshot with the requesting application?"
+#~ msgstr "Partilhar esta captura de ecrã com a aplicação requerente?"
+
+#~ msgid "Screenshot"
+#~ msgstr "Captura de ecrã"
+
+#~ msgid "_Options…"
+#~ msgstr "_Opções…"
+
+#~ msgid "Take _Screenshot"
+#~ msgstr "Capturar _ecrã"
+
+#~ msgid "Take Screenshot"
+#~ msgstr "Capturar ecrã"
+
+#~ msgid "Grab the whole sc_reen"
+#~ msgstr "Capturar o ecrã _inteiro"
+
+#~ msgid "Grab the current _window"
+#~ msgstr "Capturar a janela at_ual"
+
+#~ msgid "Select _area to grab"
+#~ msgstr "Selecion_ar a área a capturar"
+
+#~ msgid "Grab after a _delay of"
+#~ msgstr "Capturar após um atraso _de"
+
+#~ msgid "seconds"
+#~ msgstr "segundos"
+
+#~ msgid "Effects"
+#~ msgstr "Efeitos"
+
+#~ msgid "Include _pointer"
+#~ msgstr "Incluir cu_rsor"
+
+#~ msgid "Include the window _border"
+#~ msgstr "Incluir o con_torno da janela"
+
+#~ msgid "applications-system-symbolic"
+#~ msgstr "applications-system-symbolic"
