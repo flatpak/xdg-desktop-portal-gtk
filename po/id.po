@@ -2,21 +2,22 @@
 # Copyright (C) 2017 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
 # This file is distributed under the same license as the xdg-desktop-portal-gtk package.
 # Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2017-2020.
+# Andika Triwidada <andika@gmail.com>, 2024.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: xdg-desktop-portal-gtk master\n"
+"Project-Id-Version: xdg-desktop-portal-gtk main\n"
 "Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
 "issues\n"
-"POT-Creation-Date: 2022-11-29 13:45+0000\n"
-"PO-Revision-Date: 2020-05-21 16:14+0700\n"
+"POT-Creation-Date: 2023-09-01 03:33+0000\n"
+"PO-Revision-Date: 2024-10-31 18:42+0700\n"
 "Last-Translator: Kukuh Syafaat <kukuhsyafaat@gnome.org>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3.1\n"
+"X-Generator: Poedit 3.5\n"
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:4
 msgid "Portal"
@@ -63,14 +64,12 @@ msgstr "Bagikan informasi pribadi Anda dengan aplikasi yang meminta?"
 msgid "Share Details"
 msgstr "Bagikan Detail"
 
-#: src/accountdialog.ui:14 src/appchooserdialog.ui:14 src/filechooser.c:467
-#: src/remotedesktopdialog.ui:16 src/screencastdialog.ui:16
-#: src/screenshotdialog.ui:14
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:14
+#: src/dynamic-launcher.c:267 src/filechooser.c:468
 msgid "_Cancel"
 msgstr "Ba_tal"
 
-#: src/accountdialog.ui:22 src/remotedesktopdialog.ui:28
-#: src/screencastdialog.ui:28 src/screenshotdialog.ui:38
+#: src/accountdialog.ui:22
 msgid "_Share"
 msgstr "_Bagikan"
 
@@ -110,7 +109,7 @@ msgstr ""
 msgid "Open With…"
 msgstr "Buka Dengan…"
 
-#: src/appchooserdialog.ui:23 src/filechooser.c:462
+#: src/appchooserdialog.ui:23 src/filechooser.c:463
 msgid "_Open"
 msgstr "B_uka"
 
@@ -122,164 +121,31 @@ msgstr "Tidak ada Aplikasi yang tersedia"
 msgid "_Find More in Software"
 msgstr "T_emukan Lebih Banyak dalam Perangkat Lunak"
 
-#: src/background.c:215 src/background.c:308
-#, c-format
-msgid "“%s” is running in the background"
-msgstr "\"%s\" sedang berjalan di latar belakang"
+#: src/dynamic-launcher.c:259
+msgid "Create Web Application"
+msgstr "Buat Aplikasi Web"
 
-#: src/background.c:217
-msgid ""
-"This might be for a legitimate reason, but the application has not provided "
-"one.\n"
-"\n"
-"Note that forcing an application to quit might cause data loss."
-msgstr ""
-"Ini mungkin karena alasan yang sah, tetapi aplikasi belum menyediakannya.\n"
-"\n"
-"Perhatikan bahwa memaksa aplikasi untuk berhenti dapat menyebabkan "
-"kehilangan data."
+#: src/dynamic-launcher.c:261
+msgid "Create Application"
+msgstr "Buat Aplikasi"
 
-#: src/background.c:220
-msgid "Force quit"
-msgstr "Keluar paksa"
+#: src/dynamic-launcher.c:269
+msgid "C_reate"
+msgstr "_Buat"
 
-#: src/background.c:221
-msgid "Allow"
-msgstr "Izinkan"
-
-#: src/background.c:306
-msgid "Background activity"
-msgstr "Aktivitas latar belakang"
-
-#: src/background.c:314
-msgid "Find out more"
-msgstr "Temukan lebih banyak lagi"
-
-#: src/filechooser.c:462
+#: src/filechooser.c:463
 msgid "_Select"
 msgstr "_Pilih"
 
-#: src/filechooser.c:464
+#: src/filechooser.c:465
 msgid "_Save"
 msgstr "_Simpan"
 
-#: src/filechooser.c:641
+#: src/filechooser.c:647
 msgid "Open files read-only"
 msgstr "Buka berkas hanya-baca"
 
-#: src/remotedesktopdialog.c:188
-msgid "Pointer"
-msgstr "Penunjuk"
-
-#: src/remotedesktopdialog.c:191
-msgid "Keyboard"
-msgstr "Papan Tik"
-
-#: src/remotedesktopdialog.c:194
-msgid "Touch screen"
-msgstr "Layar sentuh"
-
-#: src/remotedesktopdialog.c:307
-#, c-format
-msgid "Select devices to share with %s"
-msgstr "Pilih perangkat yang akan dibagikan dengan %s"
-
-#: src/remotedesktopdialog.c:312
-msgid "Select devices to share with the requesting application"
-msgstr "Pilih perangkat yang akan dibagikan dengan aplikasi yang meminta"
-
-#: src/remotedesktopdialog.ui:12
-msgid "Remote desktop"
-msgstr "Destop jauh"
-
-#: src/screencastdialog.ui:12
-msgid "Screen Share"
-msgstr "Berbagi Layar"
-
-#: src/screencastwidget.c:487
-#, c-format
-msgid "Select monitor to share with %s"
-msgstr "Pilih monitor untuk berbagi dengan %s"
-
-#: src/screencastwidget.c:489
-#, c-format
-msgid "Select window to share with %s"
-msgstr "Pilih jendela untuk dibagikan dengan %s"
-
-#: src/screencastwidget.c:494
-msgid "Select monitor to share with the requesting application"
-msgstr "Pilih monitor untuk berbagi dengan aplikasi yang meminta"
-
-#: src/screencastwidget.c:495
-msgid "Select window to share with the requesting application"
-msgstr "Pilih jendela untuk dibagikan dengan aplikasi yang meminta"
-
-#: src/screencastwidget.ui:100
-msgid "Single Window"
-msgstr "Jendela Tunggal"
-
-#: src/screencastwidget.ui:176
-msgid "Entire Screen"
-msgstr "Keseluruhan Layar"
-
-#: src/screenshotdialog.c:442
-#, c-format
-msgid "Share this screenshot with %s?"
-msgstr "Bagikan cuplikan layar ini dengan %s?"
-
-#: src/screenshotdialog.c:446
-msgid "Share this screenshot with the requesting application?"
-msgstr "Bagikan cuplikan layar ini dengan aplikasi yang meminta?"
-
-#: src/screenshotdialog.ui:10
-msgid "Screenshot"
-msgstr "Cuplikan layar"
-
-#: src/screenshotdialog.ui:30
-msgid "_Options…"
-msgstr "_Opsi…"
-
-#: src/screenshotdialog.ui:55
-msgid "Take _Screenshot"
-msgstr "Ambil _Cuplikan Layar"
-
-#: src/screenshotdialog.ui:111
-msgid "Take Screenshot"
-msgstr "Ambil Cuplikan Layar"
-
-#: src/screenshotdialog.ui:122
-msgid "Grab the whole sc_reen"
-msgstr "Cuplik seluruh laya_r"
-
-#: src/screenshotdialog.ui:133
-msgid "Grab the current _window"
-msgstr "_Cuplik jendela yang aktif"
-
-#: src/screenshotdialog.ui:144
-msgid "Select _area to grab"
-msgstr "Pilih wil_ayah tertentu"
-
-#: src/screenshotdialog.ui:158
-msgid "Grab after a _delay of"
-msgstr "Ambil setelah tun_daan"
-
-#: src/screenshotdialog.ui:171
-msgid "seconds"
-msgstr "detik"
-
-#: src/screenshotdialog.ui:181
-msgid "Effects"
-msgstr "Efek"
-
-#: src/screenshotdialog.ui:192
-msgid "Include _pointer"
-msgstr "Sertakan _penunjuk"
-
-#: src/screenshotdialog.ui:201
-msgid "Include the window _border"
-msgstr "Sertakan _bingkai jendela"
-
-#: src/settings.c:217
+#: src/settings.c:216
 msgid "Requested setting not found"
 msgstr "Pengaturan yang diminta tidak ditemukan"
 
@@ -298,48 +164,3 @@ msgstr "Gagal memuat berkas gambar"
 #: src/wallpaperpreview.ui:57
 msgid "Activities"
 msgstr "Aktivitas"
-
-#~ msgid "applications-system-symbolic"
-#~ msgstr "applications-system-symbolic"
-
-#, c-format
-#~ msgid "%s is running in the background."
-#~ msgstr "%s sedang berjalan di latar belakang."
-
-#~ msgid "Set Lock Screen"
-#~ msgstr "Atur Layar Kunci"
-
-#~ msgid "Set Background & Lock Screen"
-#~ msgstr "Atur Latar Belakang dan Layar Kunci"
-
-#~ msgid ""
-#~ "Select an application to open “%s”. More applications are available in <a "
-#~ "href='software'>Software.</a>"
-#~ msgstr ""
-#~ "Pilih aplikasi untuk membuka “%s”. Aplikasi lainnya tersedia di <a "
-#~ "href='software'>Perangkat Lunak.</a>"
-
-#~ msgid ""
-#~ "Select an application. More applications are available in <a "
-#~ "href='software'>Software.</a>"
-#~ msgstr ""
-#~ "Pilih sebuah aplikasi. Aplikasi lainnya tersedia di <a "
-#~ "href='software'>Perangkat Lunak.</a>"
-
-#~ msgid "Unable to find a suitable application."
-#~ msgstr "Tidak dapat menemukan aplikasi yang sesuai."
-
-#~ msgid "No Applications Found"
-#~ msgstr "Tidak Ada Aplikasi yang Ditemukan"
-
-#~ msgid "Find Compatible Applications in Software"
-#~ msgstr "Temukan Aplikasi yang Kompatibel di Perangkat Lunak"
-
-#~ msgid "Forbid"
-#~ msgstr "Melarang"
-
-#~ msgid "Ignore"
-#~ msgstr "Abaikan"
-
-#~ msgid "Screen casting"
-#~ msgstr "Screen casting"
