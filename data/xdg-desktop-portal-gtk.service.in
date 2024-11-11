@@ -6,3 +6,4 @@ After=graphical-session.target
 Type=dbus
 BusName=org.freedesktop.impl.portal.desktop.gtk
 ExecStart=@libexecdir@/xdg-desktop-portal-gtk
+Slice=session.slice
