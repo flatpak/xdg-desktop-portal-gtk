@@ -1,3 +1,15 @@
+Changes in 1.15.2, 2025-01-09
+=============================
+
+- Plug memory leak in the notification portal backend
+- Implement the contrast setting
+- Set correct platform data for notification activation
+- Drop use of private GNOME Shell notification API
+- Depend on the graphical-session target
+- Ensure proper shutdown target
+- Build against xdg-desktop-portal >= 1.19.1
+- Translation updates
+
 Changes in 1.15.1, 2023-10-21
 =============================
 
