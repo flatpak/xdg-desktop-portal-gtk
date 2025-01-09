@@ -1,7 +1,7 @@
 project(
   'xdg-desktop-portal-gtk',
   'c',
-  version: '1.15.2',
+  version: '1.15.3',
   meson_version: '>= 0.61.2',
   license: 'LGPL-2.1-or-later',
   default_options: ['warning_level=2'],
