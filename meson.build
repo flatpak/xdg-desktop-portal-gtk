@@ -47,11 +47,11 @@ config_h.set_quoted('PACKAGE_NAME', meson.project_name())
 config_h.set_quoted('PACKAGE_VERSION', meson.project_version())
 config_h.set_quoted('PACKAGE_STRING', '@0@ @1@'.format(meson.project_name(), meson.project_version()))
 
-xdp_dep = dependency('xdg-desktop-portal')
+xdp_dep = dependency('xdg-desktop-portal', version: '>=1.14.0')
 desktop_portal_interfaces_dir = xdp_dep.get_variable(pkgconfig: 'interfaces_dir')
 
 portal_deps = [
-  dependency('xdg-desktop-portal', version: '>=1.14.0'),
+  xdp_dep,
   dependency('glib-2.0', version: '>=2.44'),
   dependency('gio-unix-2.0'),
   dependency('gtk+-3.0', version: '>=3.14'),
