@@ -50,6 +50,10 @@ config_h.set_quoted('PACKAGE_STRING', '@0@ @1@'.format(meson.project_name(), mes
 xdp_dep = dependency('xdg-desktop-portal', version: '>=1.14.0')
 desktop_portal_interfaces_dir = xdp_dep.get_variable(pkgconfig: 'interfaces_dir')
 
+if xdp_dep.version().version_compare('>= 1.19.1')
+  config_h.set('HAVE_XDP_1_19_1', 1)
+endif
+
 portal_deps = [
   xdp_dep,
   dependency('glib-2.0', version: '>=2.44'),
