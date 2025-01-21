@@ -38,9 +38,11 @@ static FcMonitor *fontconfig_monitor;
 static int fontconfig_serial;
 static gboolean enable_animations;
 static gboolean always_show_scrollbars;
+static gboolean enable_status_shapes;
 
 static void sync_animations_enabled (XdpImplSettings *impl);
 static void sync_always_show_scrollbars (XdpImplSettings *impl);
+static void sync_status_shapes (XdpImplSettings *impl);
 
 typedef struct {
   char *namespace;
@@ -147,6 +149,17 @@ get_always_show_scrollbars () {
   return g_variant_new_boolean (permanent_scrollbars);
 }
 
+static GVariant *
+get_status_shapes () {
+  SettingsBundle *bundle = g_hash_table_lookup (settings, "org.gnome.desktop.a11y.interface");
+  gboolean status_shapes = FALSE;
+
+  if (bundle && g_settings_schema_has_key (bundle->schema, "show-status-shapes"))
+      status_shapes = g_settings_get_boolean (bundle->settings, "show-status-shapes");
+
+  return g_variant_new_boolean (status_shapes);
+}
+
 static gboolean
 settings_handle_read_all (XdpImplSettings       *object,
                           GDBusMethodInvocation *invocation,
@@ -203,6 +216,7 @@ settings_handle_read_all (XdpImplSettings       *object,
       g_variant_dict_insert_value (&dict, "contrast", get_contrast_value ());
       g_variant_dict_insert_value (&dict, "animation-scale", get_reduced_animation ());
       g_variant_dict_insert_value (&dict, "always-show-scrollbars", get_always_show_scrollbars ());
+      g_variant_dict_insert_value (&dict, "status-shapes", get_status_shapes ());
 
       g_variant_builder_add (builder, "{s@a{sv}}", "org.freedesktop.appearance", g_variant_dict_end (&dict));
     }
@@ -256,6 +270,12 @@ settings_handle_read (XdpImplSettings       *object,
         {
           g_dbus_method_invocation_return_value (invocation,
                                                  g_variant_new ("(v)", get_always_show_scrollbars ()));
+          return TRUE;
+        }
+      else if (strcmp (arg_key, "status-shapes") == 0)
+        {
+          g_dbus_method_invocation_return_value (invocation,
+                                                 g_variant_new ("(v)", get_status_shapes ()));
           return TRUE;
         }
     }
@@ -322,6 +342,9 @@ on_settings_changed (GSettings             *settings,
   else if (strcmp (user_data->namespace, "org.gnome.desktop.interface") == 0 &&
       strcmp (key, "overlay-scrolling") == 0)
     sync_always_show_scrollbars (user_data->self);
+  else if (strcmp (user_data->namespace, "org.gnome.desktop.a11y.interface") == 0 &&
+           strcmp (key, "show-status-shapes") == 0)
+    sync_status_shapes (user_data->self);
   else
     xdp_impl_settings_emit_setting_changed (user_data->self,
                                             user_data->namespace, key,
@@ -476,6 +499,40 @@ sync_always_show_scrollbars (XdpImplSettings *impl)
   set_always_show_scrollbars (impl, new_always_show_scrollbars);
 }
 
+static void
+set_status_shapes (XdpImplSettings *impl,
+                   gboolean         new_use_status_shapes)
+{
+  const NKBContainer namespace_and_keys[2] =
+    {{"org.gnome.desktop.a11y.interface", "show-status-shapes", TRUE},
+     {"org.freedesktop.appearance", "status-shapes", TRUE}};
+  GVariant *use_status_shapes_variant;
+
+  if (enable_status_shapes == new_use_status_shapes)
+    return;
+
+  enable_status_shapes = new_use_status_shapes;
+  for (int i = 0; i < 2; i++)
+  {
+    use_status_shapes_variant = g_variant_new ("v", g_variant_new_boolean (new_use_status_shapes));
+    xdp_impl_settings_emit_setting_changed (impl,
+                                          namespace_and_keys[i].namespace,
+                                          namespace_and_keys[i].key,
+                                          use_status_shapes_variant);
+  }
+}
+
+static void
+sync_status_shapes (XdpImplSettings *impl)
+{
+  SettingsBundle *bundle = g_hash_table_lookup (settings, "org.gnome.desktop.a11y.interface");
+  gboolean new_use_status_shapes;
+
+  new_use_status_shapes = g_settings_get_boolean (bundle->settings, "show-status-shapes");
+
+  set_status_shapes (impl, new_use_status_shapes);
+}
+
 gboolean
 settings_init (GDBusConnection  *bus,
                GError          **error)
@@ -496,6 +553,8 @@ settings_init (GDBusConnection  *bus,
   fc_monitor_start (fontconfig_monitor);
 
   sync_animations_enabled (XDP_IMPL_SETTINGS (helper));
+  sync_always_show_scrollbars (XDP_IMPL_SETTINGS (helper));
+  sync_status_shapes (XDP_IMPL_SETTINGS (helper));
 
   if (!g_dbus_interface_skeleton_export (helper,
                                          bus,
