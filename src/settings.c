@@ -37,8 +37,10 @@ static GHashTable *settings;
 static FcMonitor *fontconfig_monitor;
 static int fontconfig_serial;
 static gboolean enable_animations;
+static gboolean always_show_scrollbars;
 
 static void sync_animations_enabled (XdpImplSettings *impl);
+static void sync_always_show_scrollbars (XdpImplSettings *impl);
 
 typedef struct {
   char *namespace;
@@ -134,6 +136,17 @@ get_reduced_animation ()
   return g_variant_new_boolean (reduced_animation);
 }
 
+static GVariant *
+get_always_show_scrollbars () {
+  SettingsBundle *bundle = g_hash_table_lookup (settings, "org.gnome.desktop.interface");
+  gboolean permanent_scrollbars = FALSE;
+
+  if (bundle && g_settings_schema_has_key (bundle->schema, "overlay-scrolling"))
+      permanent_scrollbars = !g_settings_get_boolean (bundle->settings, "overlay-scrolling");
+
+  return g_variant_new_boolean (permanent_scrollbars);
+}
+
 static gboolean
 settings_handle_read_all (XdpImplSettings       *object,
                           GDBusMethodInvocation *invocation,
@@ -189,6 +202,7 @@ settings_handle_read_all (XdpImplSettings       *object,
       g_variant_dict_insert_value (&dict, "color-scheme", get_color_scheme ());
       g_variant_dict_insert_value (&dict, "contrast", get_contrast_value ());
       g_variant_dict_insert_value (&dict, "animation-scale", get_reduced_animation ());
+      g_variant_dict_insert_value (&dict, "always-show-scrollbars", get_always_show_scrollbars ());
 
       g_variant_builder_add (builder, "{s@a{sv}}", "org.freedesktop.appearance", g_variant_dict_end (&dict));
     }
@@ -236,6 +250,12 @@ settings_handle_read (XdpImplSettings       *object,
         {
           g_dbus_method_invocation_return_value (invocation,
                                                  g_variant_new ("(v)", get_reduced_animation ()));
+          return TRUE;
+        }
+      else if (strcmp (arg_key, "always-show-scrollbars") == 0)
+        {
+          g_dbus_method_invocation_return_value (invocation,
+                                                 g_variant_new ("(v)", get_always_show_scrollbars ()));
           return TRUE;
         }
     }
@@ -299,6 +319,9 @@ on_settings_changed (GSettings             *settings,
   if (strcmp (user_data->namespace, "org.gnome.desktop.interface") == 0 &&
       strcmp (key, "enable-animations") == 0)
     sync_animations_enabled (user_data->self);
+  else if (strcmp (user_data->namespace, "org.gnome.desktop.interface") == 0 &&
+      strcmp (key, "overlay-scrolling") == 0)
+    sync_always_show_scrollbars (user_data->self);
   else
     xdp_impl_settings_emit_setting_changed (user_data->self,
                                             user_data->namespace, key,
@@ -416,6 +439,41 @@ sync_animations_enabled (XdpImplSettings *impl)
   new_enable_animations = g_settings_get_boolean (bundle->settings, "enable-animations");
 
   set_enable_animations (impl, new_enable_animations);
+}
+
+static void
+set_always_show_scrollbars (XdpImplSettings *impl,
+                            gboolean         new_always_show_scrollbars)
+{
+  const NKBContainer namespace_and_keys[2] =
+    {{"org.gnome.desktop.interface", "overlay-scrolling", TRUE},
+     {"org.freedesktop.appearance", "always-show-scrollbars", FALSE}};
+  GVariant *always_show_scrollbars_variant;
+
+  if (always_show_scrollbars == new_always_show_scrollbars)
+    return;
+
+  always_show_scrollbars = new_always_show_scrollbars;
+  for (int i = 0; i < 2; i++)
+  {
+    always_show_scrollbars_variant =
+      g_variant_new ("v", g_variant_new_boolean (new_always_show_scrollbars == namespace_and_keys[i].use_default));
+    xdp_impl_settings_emit_setting_changed (impl,
+                                            namespace_and_keys[i].namespace,
+                                            namespace_and_keys[i].key,
+                                            always_show_scrollbars_variant);
+  }
+}
+
+static void
+sync_always_show_scrollbars (XdpImplSettings *impl)
+{
+  SettingsBundle *bundle = g_hash_table_lookup (settings, "org.gnome.desktop.interface");
+  gboolean new_always_show_scrollbars;
+
+  new_always_show_scrollbars = g_settings_get_boolean (bundle->settings, "overlay-scrolling");
+
+  set_always_show_scrollbars (impl, new_always_show_scrollbars);
 }
 
 gboolean
