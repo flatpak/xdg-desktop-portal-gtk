@@ -114,6 +114,9 @@ activate_action (GDBusConnection *connection,
 static gboolean
 handle_add_notification (XdpImplNotification *object,
                          GDBusMethodInvocation *invocation,
+#ifdef HAVE_XDP_1_19_1
+                         GUnixFDList *fds G_GNUC_UNUSED,
+#endif
                          const gchar *arg_app_id,
                          const gchar *arg_id,
                          GVariant *arg_notification)
