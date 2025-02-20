@@ -74,7 +74,7 @@ send_response (AccessDialogHandle *handle)
       const char *key;
       GtkWidget *widget;
 
-      g_variant_builder_init (&choice_builder, G_VARIANT_TYPE_VARDICT);
+      g_variant_builder_init (&choice_builder, G_VARIANT_TYPE ("a(ss)"));
       g_hash_table_iter_init (&iter, handle->choices);
       while (g_hash_table_iter_next (&iter, (gpointer *)&key, (gpointer *)&widget))
         {
@@ -86,7 +86,7 @@ send_response (AccessDialogHandle *handle)
                 continue;
 
               str = g_strsplit (key, ":", -1);
-              g_variant_builder_add (&choice_builder, "{sv}", str[0], g_variant_new_string (str[1]));
+              g_variant_builder_add (&choice_builder, "(ss)", str[0], str[1]);
               g_strfreev (str);
             }
           else if (GTK_IS_CHECK_BUTTON (widget))
@@ -94,7 +94,7 @@ send_response (AccessDialogHandle *handle)
               gboolean active;
 
               active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
-              g_variant_builder_add (&choice_builder, "{sv}", key, g_variant_new_string (active ? "true" : "false"));
+              g_variant_builder_add (&choice_builder, "(ss)", key, active ? "true" : "false");
             }
         }
 
