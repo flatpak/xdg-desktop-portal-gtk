@@ -355,7 +355,8 @@ call_notify (GDBusConnection *connection,
   if (icon_name == NULL)
     icon_name = g_strdup ("");
 
-  if (!g_variant_lookup (notification, "body", "&s", &body))
+  if (!g_variant_lookup (notification, "markup-body", "&s", &body) &&
+      (!g_variant_lookup (notification, "body", "&s", &body)))
     body = "";
   if (!g_variant_lookup (notification, "title", "&s", &title))
     title= "";
