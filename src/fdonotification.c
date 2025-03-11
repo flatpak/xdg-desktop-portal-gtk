@@ -233,6 +233,7 @@ call_notify (GDBusConnection *connection,
   const char *dummy;
   g_autoptr(GVariant) buttons = NULL;
   const char *priority;
+  g_autoptr (GVariant) hints_value = NULL;
 
   if (fdo_notify_subscription == 0)
     {
@@ -361,6 +362,13 @@ call_notify (GDBusConnection *connection,
 
   if (g_variant_lookup (notification, "category", "&s", &category))
     g_variant_builder_add (&hints_builder, "{sv}", "category", g_variant_new_string (category));
+
+  if (g_variant_lookup (notification, "display-hint", "@as", &hints_value))
+    {
+      const char * const *display_hints = g_variant_get_strv (hints_value, NULL);
+      if (display_hints && g_strv_contains ((const char *const *)display_hints, "transient"))
+	g_variant_builder_add (&hints_builder, "{sv}", "transient", g_variant_new_boolean (TRUE));
+    }
 
   g_dbus_connection_call (connection,
                           "org.freedesktop.Notifications",
