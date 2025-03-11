@@ -227,6 +227,7 @@ call_notify (GDBusConnection *connection,
   GVariant *icon;
   const char *body;
   const char *title;
+  const char *category;
   g_autofree char *icon_name = NULL;
   guchar urgency;
   const char *dummy;
@@ -358,6 +359,9 @@ call_notify (GDBusConnection *connection,
   if (!g_variant_lookup (notification, "title", "&s", &title))
     title= "";
 
+  if (g_variant_lookup (notification, "category", "&s", &category))
+    g_variant_builder_add (&hints_builder, "{sv}", "category", g_variant_new_string (category));
+
   g_dbus_connection_call (connection,
                           "org.freedesktop.Notifications",
                           "/org/freedesktop/Notifications",
@@ -450,4 +454,3 @@ fdo_add_notification (GDBusConnection *connection,
 
   call_notify (connection, n, notification);
 }
-
