@@ -1,0 +1,59 @@
+env:
+  IMAGE_TAG: 20250321-1
+
+on:
+  workflow_call:
+    outputs:
+      image:
+        description: "The build image"
+        value: ${{ jobs.build-container.outputs.image }}
+      image_options:
+        description: "The options to use with the image"
+        value: --device /dev/fuse --cap-add SYS_ADMIN --security-opt apparmor:unconfined --privileged
+
+jobs:
+  build-container:
+    name: Create build container
+    runs-on: ubuntu-latest
+
+    outputs:
+      image: ${{ steps.check.outputs.image }}
+
+    steps:
+      - name: Login to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+
+      - name: Check if image already exists on GHCR
+        id: check
+        run: |
+          ACTOR="${{ github.actor }}"
+          OWNER="${{ github.repository_owner }}"
+          image_actor="ghcr.io/${ACTOR,,}/xdg-desktop-portal-gtk:${{ env.IMAGE_TAG }}"
+          image_owner="ghcr.io/${OWNER,,}/xdg-desktop-portal-gtk:${{ env.IMAGE_TAG }}"
+
+          if docker manifest inspect "${image_owner}" >/dev/null ; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "image=${image_owner}" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          if docker manifest inspect "${image_actor}" >/dev/null ; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "image=${image_actor}" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "exists=false" >> "$GITHUB_OUTPUT"
+          echo "image=${image_owner}" >> "$GITHUB_OUTPUT"
+
+      - name: Build and push
+        if: ${{ steps.check.outputs.exists == 'false' }}
+        uses: docker/build-push-action@v5
+        with:
+          push: true
+          file: .github/workflows/Containerfile
+          tags: ${{ steps.check.outputs.image }}

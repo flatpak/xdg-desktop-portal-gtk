@@ -1,0 +1,56 @@
+# This Containerfile builds the image that we use in all github workflows.
+# When this file is changed, or one needs to rebuild the image for another
+# reason, bump the `IMAGE_TAG` in the container.yml workflow.
+
+FROM ubuntu:latest
+
+RUN apt update
+RUN apt upgrade -y
+
+# Install dependencies
+RUN apt install -y --no-install-recommends \
+    gcc clang \
+    ca-certificates \
+    desktop-file-utils \
+    fuse3 \
+    gettext \
+    git \
+    gtk-doc-tools \
+    jq \
+    libcap2-bin \
+    libflatpak-dev \
+    libfontconfig1-dev \
+    libfuse3-dev \
+    libgdk-pixbuf-2.0-dev \
+    librsvg2-2 \
+    librsvg2-common \
+    libgstreamer-plugins-base1.0-dev \
+    gstreamer1.0-plugins-good \
+    libgstreamer-plugins-good1.0-dev \
+    gstreamer1.0-tools \
+    libgeoclue-2-dev \
+    libglib2.0-dev \
+    libgudev-1.0-dev \
+    libjson-glib-dev \
+    libpipewire-0.3-dev \
+    libsystemd-dev \
+    llvm \
+    libclang-rt-18-dev \
+    shared-mime-info \
+    libglib2.0-dev \
+    libgtk-3-dev \
+    gsettings-desktop-schemas-dev \
+    libgnome-desktop-3-dev \
+    dbus-user-session \
+    dbus-x11
+
+# Install meson
+RUN apt install -y --no-install-recommends meson
+
+# Install latest xdg-desktop-portal
+RUN git clone -b 1.20.0 https://github.com/flatpak/xdg-desktop-portal.git ./xdg-desktop-portal && \
+    cd ./xdg-desktop-portal && \
+    meson setup -Dsysconfdir=/etc -Dprefix=/usr -Dtests=disabled _build . && \
+    meson compile -C _build && \
+    meson install -C _build && \
+    cd ..
