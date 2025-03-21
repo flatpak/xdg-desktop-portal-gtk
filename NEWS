@@ -1,3 +1,10 @@
+Changes in 1.15.3
+=================
+Released: 2025-03-21
+
+- Fix build against newer xdg-desktop-portal
+- Fix return value for the access portal
+
 Changes in 1.15.2
 =================
 Released: 2025-01-09
