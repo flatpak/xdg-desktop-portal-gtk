@@ -120,11 +120,10 @@ access_dialog_response (GtkWidget *widget,
     {
     default:
       g_warning ("Unexpected response: %d", response);
-      /* Fall through */
-    case GTK_RESPONSE_DELETE_EVENT:
       handle->response = 2;
       break;
 
+    case GTK_RESPONSE_DELETE_EVENT:
     case GTK_RESPONSE_CANCEL:
       handle->response = 1;
       break;

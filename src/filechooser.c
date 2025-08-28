@@ -226,13 +226,12 @@ file_chooser_response (GtkWidget *widget,
     {
     default:
       g_warning ("Unexpected response: %d", response);
-      /* Fall through */
-    case GTK_RESPONSE_DELETE_EVENT:
       handle->response = 2;
       handle->filter = NULL;
       handle->uris = NULL;
       break;
 
+    case GTK_RESPONSE_DELETE_EVENT:
     case GTK_RESPONSE_CANCEL:
       handle->response = 1;
       handle->filter = NULL;
