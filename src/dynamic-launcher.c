@@ -177,6 +177,7 @@ handle_prepare_install (XdpImplDynamicLauncher *object,
                         GVariant               *arg_icon_v,
                         GVariant               *arg_options)
 {
+  g_autoptr(GtkWindowGroup) window_group = NULL;
   g_autoptr(Request) request = NULL;
   const char *sender;
   GdkDisplay *display;
@@ -323,6 +324,9 @@ handle_prepare_install (XdpImplDynamicLauncher *object,
     }
 
   gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+
+  window_group = gtk_window_group_new ();
+  gtk_window_group_add_window (window_group, GTK_WINDOW (dialog));
 
   handle->dialog = g_object_ref (dialog);
   handle->entry = entry;

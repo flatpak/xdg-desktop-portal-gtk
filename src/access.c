@@ -241,6 +241,7 @@ handle_access_dialog (XdpImplAccess *object,
                       const char *arg_body,
                       GVariant *arg_options)
 {
+  g_autoptr(GtkWindowGroup) window_group = NULL;
   g_autoptr(Request) request = NULL;
   const char *sender;
   AccessDialogHandle *handle;
@@ -350,6 +351,9 @@ G_GNUC_END_IGNORE_DEPRECATIONS
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
   gtk_message_dialog_set_image (GTK_MESSAGE_DIALOG (dialog), image);
 G_GNUC_END_IGNORE_DEPRECATIONS
+
+  window_group = gtk_window_group_new ();
+  gtk_window_group_add_window (window_group, GTK_WINDOW (dialog));
 
   handle = g_new0 (AccessDialogHandle, 1);
   handle->impl = object;
