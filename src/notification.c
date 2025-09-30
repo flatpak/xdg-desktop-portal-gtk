@@ -48,7 +48,7 @@ activate_action (GDBusConnection *connection,
                  const char *name,
                  GVariant *parameter,
                  const char *activation_token,
-                 gpointer data)
+                 gpointer data G_GNUC_UNUSED)
 {
   g_autofree char *object_path = NULL;
   GVariantBuilder pdata, parms;
@@ -56,8 +56,6 @@ activate_action (GDBusConnection *connection,
   object_path = app_path_for_id (app_id);
   g_variant_builder_init (&pdata, G_VARIANT_TYPE_VARDICT);
   g_variant_builder_init (&parms, G_VARIANT_TYPE ("av"));
-  if (parameter)
-    g_variant_builder_add (&parms, "v", parameter);
 
   if (activation_token)
     {
@@ -71,6 +69,9 @@ activate_action (GDBusConnection *connection,
 
   if (name && g_str_has_prefix (name, "app."))
     {
+      if (parameter)
+        g_variant_builder_add (&parms, "v", parameter);
+
       g_dbus_connection_call (connection,
                               app_id,
                               object_path,
@@ -87,17 +88,35 @@ activate_action (GDBusConnection *connection,
   else
     {
       g_autoptr(GVariant) ret = NULL;
+      g_autoptr(GVariant) platform_data = NULL;
+
+      platform_data = g_variant_ref_sink (g_variant_builder_end (&pdata));
 
       g_dbus_connection_call (connection,
                               app_id,
                               object_path,
                               "org.freedesktop.Application",
                               "Activate",
-                              g_variant_new ("(@a{sv})",
-                                             g_variant_builder_end (&pdata)),
+                              g_variant_new ("(@a{sv})", platform_data),
                               NULL,
                               G_DBUS_CALL_FLAGS_NONE,
                               -1, NULL, NULL, NULL);
+
+      if (activation_token)
+        {
+          if (parameter)
+            {
+              g_variant_builder_add (&parms, "v", parameter);
+            }
+          else
+            {
+              /* Fallback to an empty array if no parameter is unset. */
+              g_variant_builder_add (&parms, "v", g_variant_new_array (
+                                     G_VARIANT_TYPE_VARIANT, NULL, 0));
+            }
+
+          g_variant_builder_add (&parms, "v", platform_data);
+        }
 
       g_dbus_connection_emit_signal (connection,
                                      NULL,
