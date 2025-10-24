@@ -148,6 +148,7 @@ handle_choose_application (XdpImplAppChooser *object,
                            const char **choices,
                            GVariant *arg_options)
 {
+  g_autoptr(GtkWindowGroup) window_group = NULL;
   g_autoptr(Request) request = NULL;
   GtkWidget *dialog;
   AppDialogHandle *handle;
@@ -197,8 +198,10 @@ handle_choose_application (XdpImplAppChooser *object,
 
   dialog = GTK_WIDGET (app_chooser_dialog_new (choices, latest_chosen_id, content_type, location));
   gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (fake_parent));
-
   gtk_window_set_modal (GTK_WINDOW (dialog), modal);
+
+  window_group = gtk_window_group_new ();
+  gtk_window_group_add_window (window_group, GTK_WINDOW (dialog));
 
   handle = g_new0 (AppDialogHandle, 1);
   handle->impl = object;
