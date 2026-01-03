@@ -225,6 +225,7 @@ call_notify (GDBusConnection *connection,
   guint i;
   GVariantBuilder hints_builder;
   GVariant *icon;
+  GVariant *sound;
   const char *body;
   const char *title;
   g_autofree char *icon_name = NULL;
@@ -352,6 +353,40 @@ call_notify (GDBusConnection *connection,
 
   if (icon_name == NULL)
     icon_name = g_strdup ("");
+
+
+
+  sound = g_variant_lookup_value (notification, "sound", NULL);
+
+  if (sound)
+    {
+      const char *key;
+      g_autoptr(GVariant) value = NULL;
+
+      g_variant_get (sound, "(&sv)", &key, &value);
+
+      if (strcmp (key, "themed") == 0)
+        {
+          g_autofree const gchar** sound_names = NULL;
+
+          sound_names = g_variant_get_strv (value, NULL);
+          /* Take first name from the possible themed sounds */
+          g_variant_builder_add (&hints_builder, "{sv}", "sound-name",
+                                 g_variant_new_string (sound_names[0]));
+        }
+      else if (strcmp (key, "bytes") == 0)
+        {
+          // FIXME: this should be part of the specs, maybe we can even add a
+          // sound property in the same format as the sound property in xdg-portal
+          g_variant_builder_add (&hints_builder, "{sv}", "x-gnome-sound-data", value);
+        }
+      else if (strcmp (key, "file") == 0)
+        {
+          g_variant_builder_add (&hints_builder, "{sv}", "sound-file", value);
+        }
+    }
+
+    g_variant_builder_add (&hints_builder, "{sv}", "sound", sound);
 
   if (!g_variant_lookup (notification, "body", "&s", &body))
     body = "";
