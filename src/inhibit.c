@@ -593,7 +593,7 @@ inhibit_init (GDBusConnection *bus,
 
           g_signal_connect (screensaver, "active-changed", G_CALLBACK (global_active_changed_cb), NULL);
           org_gnome_screen_saver_call_get_active_sync (screensaver, &active, NULL, NULL);
-          g_object_set_data (G_OBJECT (screensaver), "active", GINT_TO_POINTER (active));
+          screensaver_active = active;
 
           g_debug ("Using org.gnome.SessionManager for inhibit");
           g_debug ("Using org.gnome.Screensaver for screensaver state");
@@ -647,7 +647,7 @@ inhibit_init (GDBusConnection *bus,
 
       g_signal_connect (fdo_screensaver, "active-changed", G_CALLBACK (global_active_changed_cb), NULL);
       org_freedesktop_screen_saver_call_get_active_sync (fdo_screensaver, &active, NULL, NULL);
-      g_object_set_data (G_OBJECT (fdo_screensaver), "active", GINT_TO_POINTER (active));
+      screensaver_active = active;
 
       g_debug ("Using org.freedesktop.ScreenSaver for inhibit");
       g_debug ("Using org.freedesktop.ScreenSaver for screensaver state");
