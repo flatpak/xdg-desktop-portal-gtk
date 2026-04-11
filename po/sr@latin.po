@@ -1,8 +1,8 @@
 # Serbian translation for xdg-desktop-portal-gtk.
 # Copyright (C) 2016 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
 # This file is distributed under the same license as the xdg-desktop-portal-gtk package.
-# Мирослав Николић <miroslavnikolic@rocketmail.com>, 2016.
-# Марко Костић <marko.m.kostic@gmail.com>, 2026
+# Miroslav Nikolić <miroslavnikolic@rocketmail.com>, 2016.
+# Marko Kostić <marko.m.kostic@gmail.com>, 2026
 #
 msgid ""
 msgstr ""
@@ -11,8 +11,8 @@ msgstr ""
 "issues\n"
 "POT-Creation-Date: 2025-10-24 14:33+0000\n"
 "PO-Revision-Date: 2026-04-11 13:02+0200\n"
-"Last-Translator: Марко Костић <marko.m.kostic@gmail.com>\n"
-"Language-Team: српски <gnome-sr@googlegroups.org>\n"
+"Last-Translator: Marko Kostić <marko.m.kostic@gmail.com>\n"
+"Language-Team: srpski <gnome-sr@googlegroups.org>\n"
 "Language: sr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,75 +23,75 @@ msgstr ""
 
 #: data/xdg-desktop-portal-gtk.desktop.in.in:3
 msgid "Portal"
-msgstr "Портал"
+msgstr "Portal"
 
 #: src/access.c:270
 msgid "Deny Access"
-msgstr "Забрани приступ"
+msgstr "Zabrani pristup"
 
 #: src/access.c:273
 msgid "Grant Access"
-msgstr "Дозволи приступ"
+msgstr "Dozvoli pristup"
 
 #: src/accountdialog.c:176
 msgid "Select an Image"
-msgstr "Изаберите слику"
+msgstr "Izaberite sliku"
 
 #: src/accountdialog.c:179 src/wallpaperdialog.ui:18
 msgid "Cancel"
-msgstr "Одустани"
+msgstr "Odustani"
 
 #: src/accountdialog.c:180
 msgid "Select"
-msgstr "Изабери"
+msgstr "Izaberi"
 
 #: src/accountdialog.c:181
 msgid "Clear"
-msgstr "Очисти"
+msgstr "Očisti"
 
 #: src/accountdialog.c:195
 msgid "Images"
-msgstr "Слике"
+msgstr "Slike"
 
 #: src/accountdialog.c:272
 #, c-format
 msgid "Share your personal information with %s?"
-msgstr "Желите ли да поделите своје личне податке са %s?"
+msgstr "Želite li da podelite svoje lične podatke sa %s?"
 
 #: src/accountdialog.c:275
 msgid "Share your personal information with the requesting application?"
 msgstr ""
-"Желите ли да поделите своје личне податке са програмом који их потражује?"
+"Želite li da podelite svoje lične podatke sa programom koji ih potražuje?"
 
 #: src/accountdialog.ui:10
 msgid "Share Details"
-msgstr "Подели појединости"
+msgstr "Podeli pojedinosti"
 
 #: src/accountdialog.ui:14 src/appchooserdialog.ui:14
 #: src/dynamic-launcher.c:266 src/filechooser.c:467
 msgid "_Cancel"
-msgstr "От_кажи"
+msgstr "Ot_kaži"
 
 #: src/accountdialog.ui:22
 msgid "_Share"
-msgstr "_Дели"
+msgstr "_Deli"
 
 #: src/accountdialog.ui:148
 msgid "Make changes before sharing the information"
-msgstr "Измените податке пре дељења"
+msgstr "Izmenite podatke pre deljenja"
 
 #: src/appchooserdialog.c:229
 msgid "Failed to start Software"
-msgstr "Не могу да покренем Програме"
+msgstr "Ne mogu da pokrenem Programe"
 
 #: src/appchooserdialog.c:385
 #, c-format
 msgid "Choose an application to open the file “%s”."
-msgstr "Изаберите програм за отварање датотеке „%s“."
+msgstr "Izaberite program za otvaranje datoteke „%s“."
 
 #: src/appchooserdialog.c:390
 msgid "Choose an application."
-msgstr "Изаберите програм."
+msgstr "Izaberite program."
 
 #: src/appchooserdialog.c:407
 #, c-format
@@ -99,71 +99,71 @@ msgid ""
 "No apps installed that can open “%s”. You can find more applications in "
 "Software"
 msgstr ""
-"Није инсталиран ниједан програм који може да отвори „%s“. Можете пронаћи још "
-"програма у Програмима"
+"Nije instaliran nijedan program koji može da otvori „%s“. Možete pronaći još "
+"programa u Programima"
 
 #: src/appchooserdialog.c:412
 msgid "No suitable app installed. You can find more applications in Software."
 msgstr ""
-"Није инсталиран одговарајући програм. Можете пронаћи још програма у "
-"Програмима."
+"Nije instaliran odgovarajući program. Možete pronaći još programa u "
+"Programima."
 
 #: src/appchooserdialog.ui:10
 msgid "Open With…"
-msgstr "Отвори помоћу…"
+msgstr "Otvori pomoću…"
 
 #: src/appchooserdialog.ui:23 src/filechooser.c:462
 msgid "_Open"
-msgstr "_Отвори"
+msgstr "_Otvori"
 
 #: src/appchooserdialog.ui:115
 msgid "No Apps available"
-msgstr "Нема доступних програма"
+msgstr "Nema dostupnih programa"
 
 #: src/appchooserdialog.ui:159
 msgid "_Find More in Software"
-msgstr "_Нађи више у Програмима"
+msgstr "_Nađi više u Programima"
 
 #: src/dynamic-launcher.c:258
 msgid "Create Web Application"
-msgstr "Направи веб програм"
+msgstr "Napravi veb program"
 
 #: src/dynamic-launcher.c:260
 msgid "Create Application"
-msgstr "Направи програм"
+msgstr "Napravi program"
 
 #: src/dynamic-launcher.c:268
 msgid "C_reate"
-msgstr "_Направи"
+msgstr "_Napravi"
 
 #: src/filechooser.c:462
 msgid "_Select"
-msgstr "_Изабери"
+msgstr "_Izaberi"
 
 #: src/filechooser.c:464
 msgid "_Save"
-msgstr "_Сачувај"
+msgstr "_Sačuvaj"
 
 #: src/filechooser.c:646
 msgid "Open files read-only"
-msgstr "Отвори датотеке само за читање"
+msgstr "Otvori datoteke samo za čitanje"
 
 #: src/settings.c:239
 msgid "Requested setting not found"
-msgstr "Затражено подешавање није нађено"
+msgstr "Zatraženo podešavanje nije nađeno"
 
 #: src/wallpaperdialog.ui:13
 msgid "Set Background"
-msgstr "Подеси позадину"
+msgstr "Podesi pozadinu"
 
 #: src/wallpaperdialog.ui:26
 msgid "Set"
-msgstr "Постави"
+msgstr "Postavi"
 
 #: src/wallpaperdialog.ui:57
 msgid "Failed to load image file"
-msgstr "Не могу да учитам датотеку са сликом"
+msgstr "Ne mogu da učitam datoteku sa slikom"
 
 #: src/wallpaperpreview.ui:57
 msgid "Activities"
-msgstr "Активности"
+msgstr "Aktivnosti"
