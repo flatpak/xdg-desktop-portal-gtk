@@ -56,6 +56,11 @@ if get_option('lockdown').allowed()
   portal_c_args += '-DBUILD_LOCKDOWN'
 endif
 
+if usb_enabled
+  portal_sources += files('usb.c', 'usbdialog.c')
+  portal_c_args += '-DBUILD_USB'
+endif
+
 if gtkx11_dep.found()
   portal_sources += files('externalwindow-x11.c')
 endif

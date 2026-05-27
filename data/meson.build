@@ -52,6 +52,13 @@ else
   gtk_portal.set('lockdown_iface', '')
 endif
 
+if usb_enabled
+  portal_dbus_interfaces += desktop_portal_interfaces_dir / 'org.freedesktop.impl.portal.Usb.xml'
+  gtk_portal.set('usb_iface', 'org.freedesktop.impl.portal.Usb;')
+else
+  gtk_portal.set('usb_iface', '')
+endif
+
 configure_file(
   input: 'gtk.portal.in',
   output: 'gtk.portal',

@@ -8,6 +8,8 @@ src/appchooserdialog.ui
 src/dynamic-launcher.c
 src/filechooser.c
 src/settings.c
+src/usbdialog.c
+src/usbdialog.ui
 src/wallpaperdialog.c
 src/wallpaperdialog.ui
 src/wallpaperpreview.ui

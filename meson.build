@@ -54,6 +54,16 @@ if xdp_dep.version().version_compare('>= 1.19.1')
   config_h.set('HAVE_XDP_1_19_1', 1)
 endif
 
+usb_opt = get_option('usb')
+have_xdp_for_usb = xdp_dep.version().version_compare('>= 1.19.1')
+
+if usb_opt.enabled() and not have_xdp_for_usb
+  error('-Dusb=enabled requires xdg-desktop-portal >= 1.19.1 (found @0@)'
+        .format(xdp_dep.version()))
+endif
+
+usb_enabled = usb_opt.allowed() and have_xdp_for_usb
+
 portal_deps = [
   xdp_dep,
   dependency('glib-2.0', version: '>=2.44'),
@@ -95,6 +105,7 @@ summary({
     'Settings': get_option('settings'),
     'AppChooser': get_option('appchooser'),
     'Lockdown': get_option('lockdown'),
+    'USB': usb_enabled,
   },
   bool_yn: true,
   section: 'Portals',
