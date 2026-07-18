@@ -45,14 +45,24 @@ G_DEFINE_TYPE (ExternalWindowWayland, external_window_wayland,
 static GdkDisplay *
 get_wayland_display (void)
 {
+  GdkDisplay *default_display;
+
   if (wayland_display)
     return wayland_display;
 
-  gdk_set_allowed_backends ("wayland");
-  wayland_display = gdk_display_open (NULL);
-  gdk_set_allowed_backends (NULL);
-  if (!wayland_display)
-    g_warning ("Failed to open Wayland display");
+  default_display = gdk_display_get_default ();
+  if (GDK_IS_WAYLAND_DISPLAY (default_display))
+    {
+      wayland_display = default_display;
+    }
+  else
+    {
+      gdk_set_allowed_backends ("wayland");
+      wayland_display = gdk_display_open (NULL);
+      gdk_set_allowed_backends (NULL);
+      if (!wayland_display)
+        g_warning ("Failed to open Wayland display");
+    }
 
   return wayland_display;
 }
