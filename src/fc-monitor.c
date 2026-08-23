@@ -29,6 +29,16 @@
 #define TIMEOUT_MILLISECONDS 1000
 
 static void
+cancel_and_unref_monitor (gpointer data)
+{
+        GFileMonitor *monitor = data;
+
+        /* Cancel before drop so inotify does not dispatch a freed closure. */
+        g_file_monitor_cancel (monitor);
+        g_object_unref (monitor);
+}
+
+static void
 fontconfig_cache_update_thread (GTask *task,
                                 gpointer source_object G_GNUC_UNUSED,
                                 gpointer task_data G_GNUC_UNUSED,
@@ -149,7 +159,7 @@ fc_monitor_start (FcMonitor *self)
         g_return_if_fail (FC_IS_MONITOR (self));
         g_return_if_fail (self->monitors == NULL);
 
-        self->monitors = g_ptr_array_new_with_free_func (g_object_unref);
+        self->monitors = g_ptr_array_new_with_free_func (cancel_and_unref_monitor);
 
         monitor_files (self, FcConfigGetConfigFiles (NULL));
         monitor_files (self, FcConfigGetFontDirs (NULL));
@@ -171,18 +181,35 @@ monitor_files (FcMonitor *self,
         while ((str = (const char *) FcStrListNext (list))) {
                 GFile *file;
                 GFileMonitor *monitor;
+                GError *error = NULL;
 
                 file = g_file_new_for_path (str);
 
+                /* g_file_monitor() on a missing path watches the parent
+                 * directory. Session start writes heavily to parents such as
+                 * ~/.local/share, which races GFileMonitor setup and can
+                 * SIGSEGV in g_file_monitor_source_dispatch.
+                 */
+                if (!g_file_query_exists (file, NULL)) {
+                        g_debug ("Not monitoring missing path %s", str);
+                        g_object_unref (file);
+                        continue;
+                }
+
                 g_debug ("Monitoring %s", str);
-                monitor = g_file_monitor (file, G_FILE_MONITOR_NONE, NULL, NULL);
+                monitor = g_file_monitor (file, G_FILE_MONITOR_NONE, NULL, &error);
 
                 g_object_unref (file);
 
-                if (!monitor)
+                if (!monitor) {
+                        g_debug ("Failed to monitor %s: %s", str,
+                                 error ? error->message : "unknown error");
+                        g_clear_error (&error);
                         continue;
+                }
 
-                g_signal_connect (monitor, "changed", G_CALLBACK (stuff_changed), self);
+                g_signal_connect_object (monitor, "changed",
+                                         G_CALLBACK (stuff_changed), self, 0);
 
                 g_ptr_array_add (self->monitors, monitor);
         }
