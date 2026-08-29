@@ -28,7 +28,7 @@
 typedef struct _WallpaperDialog WallpaperDialog;
 typedef struct _WallpaperDialogClass WallpaperDialogClass;
 
-GType             wallpaper_dialog_get_type (void) G_GNUC_CONST;
+GType             wallpaper_dialog_get_type (void);
 
 WallpaperDialog * wallpaper_dialog_new (const char *picture_uri,
                                         const char *app_id);
