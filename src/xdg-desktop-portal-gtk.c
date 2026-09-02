@@ -68,6 +68,10 @@
 #include "wallpaper.h"
 #endif
 
+#ifdef BUILD_USB
+#include "usb.h"
+#endif
+
 
 static GMainLoop *loop = NULL;
 static GHashTable *outstanding_handles = NULL;
@@ -191,6 +195,14 @@ on_bus_acquired (GDBusConnection *connection,
 
 #ifdef BUILD_WALLPAPER
   if (!wallpaper_init (connection, &error))
+    {
+      g_warning ("error: %s\n", error->message);
+      g_clear_error (&error);
+    }
+#endif
+
+#ifdef BUILD_USB
+  if (!usb_init (connection, &error))
     {
       g_warning ("error: %s\n", error->message);
       g_clear_error (&error);
