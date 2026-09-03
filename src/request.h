@@ -41,7 +41,7 @@ struct _RequestClass
   XdpImplRequestSkeletonClass parent_class;
 };
 
-GType request_get_type (void) G_GNUC_CONST;
+GType request_get_type (void);
 
 G_DEFINE_AUTOPTR_CLEANUP_FUNC (Request, g_object_unref)
 
