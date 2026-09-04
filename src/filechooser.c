@@ -406,6 +406,7 @@ handle_open (XdpImplFileChooser *object,
              const char *arg_title,
              GVariant *arg_options)
 {
+  g_autoptr(GtkWindowGroup) window_group = NULL;
   g_autoptr(Request) request = NULL;
   const gchar *method_name;
   const gchar *sender;
@@ -502,6 +503,9 @@ handle_open (XdpImplFileChooser *object,
   gtk_file_chooser_set_preview_widget_active (GTK_FILE_CHOOSER (dialog), FALSE);
   gtk_file_chooser_set_use_preview_label (GTK_FILE_CHOOSER (dialog), FALSE);
   g_signal_connect (dialog, "update-preview", G_CALLBACK (update_preview_cb), preview);
+
+  window_group = gtk_window_group_new ();
+  gtk_window_group_add_window (window_group, GTK_WINDOW (dialog));
 
   handle = g_new0 (FileDialogHandle, 1);
   handle->impl = object;
