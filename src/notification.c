@@ -164,6 +164,10 @@ notification_init (GDBusConnection *bus,
   g_signal_connect (helper, "handle-add-notification", G_CALLBACK (handle_add_notification), NULL);
   g_signal_connect (helper, "handle-remove-notification", G_CALLBACK (handle_remove_notification), NULL);
 
+#ifdef HAVE_XDP_1_19_1
+  xdp_impl_notification_set_version (XDP_IMPL_NOTIFICATION (helper), 2);
+#endif
+
   if (!g_dbus_interface_skeleton_export (helper,
                                          bus,
                                          DESKTOP_PORTAL_OBJECT_PATH,
