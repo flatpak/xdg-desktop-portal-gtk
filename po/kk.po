@@ -1,0 +1,166 @@
+# Kazakh translation for xdg-desktop-portal-gtk.
+# Copyright (C) 2026 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
+# This file is distributed under the same license as the xdg-desktop-portal-gtk package.
+# Baurzhan Muftakhidinov <baurthefirst@gmail.com>,  2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xdg-desktop-portal-gtk main\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
+"issues\n"
+"POT-Creation-Date: 2025-10-24 14:33+0000\n"
+"PO-Revision-Date: 2026-02-16 06:41+0500\n"
+"Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
+"Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
+"Language: kk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.8\n"
+
+#: data/xdg-desktop-portal-gtk.desktop.in.in:3
+msgid "Portal"
+msgstr "Портал"
+
+#: src/access.c:270
+msgid "Deny Access"
+msgstr "Қол жеткізуге рұқсат бермеу"
+
+#: src/access.c:273
+msgid "Grant Access"
+msgstr "Қол жеткізуге рұқсат беру"
+
+#: src/accountdialog.c:176
+msgid "Select an Image"
+msgstr "Суретті таңдау"
+
+#: src/accountdialog.c:179 src/wallpaperdialog.ui:18
+msgid "Cancel"
+msgstr "Бас тарту"
+
+#: src/accountdialog.c:180
+msgid "Select"
+msgstr "Таңдау"
+
+#: src/accountdialog.c:181
+msgid "Clear"
+msgstr "Тазалау"
+
+#: src/accountdialog.c:195
+msgid "Images"
+msgstr "Суреттер"
+
+#: src/accountdialog.c:272
+#, c-format
+msgid "Share your personal information with %s?"
+msgstr "Жеке ақпаратыңызды %s-мен бөлісу керек пе?"
+
+#: src/accountdialog.c:275
+msgid "Share your personal information with the requesting application?"
+msgstr "Жеке ақпаратыңызды сұрау жасаған қолданбамен бөлісу керек пе?"
+
+#: src/accountdialog.ui:10
+msgid "Share Details"
+msgstr "Мәліметтермен бөлісу"
+
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:14
+#: src/dynamic-launcher.c:266 src/filechooser.c:467
+msgid "_Cancel"
+msgstr "Ба_с тарту"
+
+#: src/accountdialog.ui:22
+msgid "_Share"
+msgstr "_Бөлісу"
+
+#: src/accountdialog.ui:148
+msgid "Make changes before sharing the information"
+msgstr "Ақпаратпен бөліспес бұрын өзгерістер енгізу"
+
+#: src/appchooserdialog.c:229
+msgid "Failed to start Software"
+msgstr "Бағдарламалық қамтаманы іске қосу сәтсіз аяқталды"
+
+#: src/appchooserdialog.c:385
+#, c-format
+msgid "Choose an application to open the file “%s”."
+msgstr "“%s” файлын ашу үшін қолданбаны таңдаңыз."
+
+#: src/appchooserdialog.c:390
+msgid "Choose an application."
+msgstr "Қолданбаны таңдаңыз."
+
+#: src/appchooserdialog.c:407
+#, c-format
+msgid ""
+"No apps installed that can open “%s”. You can find more applications in "
+"Software"
+msgstr ""
+"“%s” файлын аша алатын қолданбалар орнатылмаған. Басқа қолданбаларды "
+"Бағдарламалық қамтамадан таба аласыз"
+
+#: src/appchooserdialog.c:412
+msgid "No suitable app installed. You can find more applications in Software."
+msgstr ""
+"Сәйкес қолданба орнатылмаған. Басқа қолданбаларды Бағдарламалық қамтамадан "
+"таба аласыз."
+
+#: src/appchooserdialog.ui:10
+msgid "Open With…"
+msgstr "Көмегімен ашу…"
+
+#: src/appchooserdialog.ui:23 src/filechooser.c:462
+msgid "_Open"
+msgstr "_Ашу"
+
+#: src/appchooserdialog.ui:115
+msgid "No Apps available"
+msgstr "Қолданбалар қолжетімді емес"
+
+#: src/appchooserdialog.ui:159
+msgid "_Find More in Software"
+msgstr "Бағдарламалық қамтамадан көбірек _табу"
+
+#: src/dynamic-launcher.c:258
+msgid "Create Web Application"
+msgstr "Веб-қолданбаны жасау"
+
+#: src/dynamic-launcher.c:260
+msgid "Create Application"
+msgstr "Қолданбаны жасау"
+
+#: src/dynamic-launcher.c:268
+msgid "C_reate"
+msgstr "_Жасау"
+
+#: src/filechooser.c:462
+msgid "_Select"
+msgstr "_Таңдау"
+
+#: src/filechooser.c:464
+msgid "_Save"
+msgstr "_Сақтау"
+
+#: src/filechooser.c:646
+msgid "Open files read-only"
+msgstr "Файлдарды тек оқу үшін ашу"
+
+#: src/settings.c:239
+msgid "Requested setting not found"
+msgstr "Сұралған баптау табылмады"
+
+#: src/wallpaperdialog.ui:13
+msgid "Set Background"
+msgstr "Фонды орнату"
+
+#: src/wallpaperdialog.ui:26
+msgid "Set"
+msgstr "Орнату"
+
+#: src/wallpaperdialog.ui:57
+msgid "Failed to load image file"
+msgstr "Сурет файлын жүктеу сәтсіз аяқталды"
+
+#: src/wallpaperpreview.ui:57
+msgid "Activities"
+msgstr "Іс-әрекеттер"
