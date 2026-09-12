@@ -226,6 +226,7 @@ launch_software (AppChooserDialog *dialog)
 
   process = g_subprocess_new (0, &error, "gnome-software", option, NULL);
   if (!process)
+    /* Translators: Here, Software is GNOME Software, not software as a program. */
     show_error_dialog (_("Failed to start Software"), error->message, GTK_WINDOW (dialog));
 }
 
@@ -404,11 +405,13 @@ app_chooser_dialog_new (const char **choices,
         {
           g_autofree char *label = NULL;
 
+          /* Translators: Here, Software is GNOME Software, not software as a program. */
           label = g_strdup_printf (_("No apps installed that can open “%s”. You can find more applications in Software"), short_location);
           gtk_label_set_label (GTK_LABEL (dialog->empty_label), label);
         }
       else
         {
+          /* Translators: Here, Software is GNOME Software, not software as a program. */
           gtk_label_set_label (GTK_LABEL (dialog->empty_label), _("No suitable app installed. You can find more applications in Software."));
         }
     }
