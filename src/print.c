@@ -175,16 +175,44 @@ print_dialog_handle_close (PrintDialogHandle *handle)
 }
 
 static gboolean
+has_flatpak (const char *app_id,
+             const char *branch)
+{
+  int status;
+
+  if (!g_spawn_sync (NULL,
+                     (char **)(const char *[]) { "/usr/bin/flatpak", "info", app_id, branch, NULL },
+                     NULL,
+                     G_SPAWN_DEFAULT,
+                     NULL, NULL,
+                     NULL, NULL,
+                     &status,
+                     NULL))
+    return FALSE;
+
+  return g_spawn_check_wait_status (status, NULL);
+}
+
+static gboolean
+has_program (const char *name)
+{
+  g_autofree char *cmd = NULL;
+
+  cmd = g_find_program_in_path (name);
+  return cmd != NULL;
+}
+
+static gboolean
 can_preview (void)
 {
-  g_autofree char *path = NULL;
-
-  path = g_find_program_in_path ("evince-previewer");
-
-  if (path)
+  if (has_flatpak ("org.gnome.Papers", "stable"))
+    return TRUE;
+  else if (has_program ("papers-previewer"))
+    return TRUE;
+  else if (has_program ("evince-previewer"))
     return TRUE;
 
-  g_warning ("evince-previewer not found, disabling print preview");
+  g_warning ("No previewer found, disabling print preview");
 
   return FALSE;
 }
@@ -264,7 +292,14 @@ launch_preview (const char *filename,
   if (data)
     g_file_set_contents (settings_filename, data, data_len, NULL);
 
-  cmd = g_strdup_printf ("evince-previewer --unlink-tempfile --print-settings %s %s", settings_filename, filename);
+  if (has_flatpak ("org.gnome.Papers", "stable"))
+    cmd = g_strdup_printf ("flatpak run --command=papers-previewer --file-forwarding org.gnome.Papers --print-settings @@ %s %s @@", settings_filename, filename);
+  else if (has_program ("papers-previewer"))
+    cmd = g_strdup_printf ("papers-previewer --unlink-tempfile --print-settings %s %s", settings_filename, filename);
+  else if (has_program ("evince-previewer"))
+    cmd = g_strdup_printf ("evince-previewer --unlink-tempfile --print-settings %s %s", settings_filename, filename);
+  else
+    goto out;
 
   g_debug ("launching %s", cmd);
 
