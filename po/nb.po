@@ -1,0 +1,160 @@
+# Norwegian Bokmål translation for xdg-desktop-portal-gtk.
+# Copyright (C) 2026 xdg-desktop-portal-gtk's COPYRIGHT HOLDER
+# This file is distributed under the same license as the xdg-desktop-portal-gtk package.
+# Kjartan Maraas <kmaraas@gnome.org>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xdg-desktop-portal-gtk main\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/issues\n"
+"POT-Creation-Date: 2025-10-24 14:33+0000\n"
+"PO-Revision-Date: 2026-09-20 07:50+0200\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Norwegian Bokmål <nb@li.org>\n"
+"Language: nb\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: data/xdg-desktop-portal-gtk.desktop.in.in:3
+msgid "Portal"
+msgstr "Portal"
+
+#: src/access.c:270
+msgid "Deny Access"
+msgstr "Avvis tilgang"
+
+#: src/access.c:273
+msgid "Grant Access"
+msgstr "Gi tilgang"
+
+#: src/accountdialog.c:176
+msgid "Select an Image"
+msgstr "Velg et bilde"
+
+#: src/accountdialog.c:179 src/wallpaperdialog.ui:18
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: src/accountdialog.c:180
+msgid "Select"
+msgstr "Velg"
+
+#: src/accountdialog.c:181
+msgid "Clear"
+msgstr "Tøm"
+
+#: src/accountdialog.c:195
+msgid "Images"
+msgstr "Bilder"
+
+#: src/accountdialog.c:272
+#, c-format
+msgid "Share your personal information with %s?"
+msgstr "Del din personlige informasjon med %s?"
+
+#: src/accountdialog.c:275
+msgid "Share your personal information with the requesting application?"
+msgstr "Del din personlige informasjon med denne applikasjonen?"
+
+#: src/accountdialog.ui:10
+msgid "Share Details"
+msgstr "Del detaljer"
+
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:14
+#: src/dynamic-launcher.c:266 src/filechooser.c:467
+msgid "_Cancel"
+msgstr "A_vbryt"
+
+#: src/accountdialog.ui:22
+msgid "_Share"
+msgstr "_Del"
+
+#: src/accountdialog.ui:148
+msgid "Make changes before sharing the information"
+msgstr "Gjør endringer før du deler informasjonen"
+
+#: src/appchooserdialog.c:229
+msgid "Failed to start Software"
+msgstr "Klarte ikke å starte Programvare"
+
+#: src/appchooserdialog.c:385
+#, c-format
+msgid "Choose an application to open the file “%s”."
+msgstr "Velg en applikasjon til å åpne filen «%s» med."
+
+#: src/appchooserdialog.c:390
+msgid "Choose an application."
+msgstr "Velg et program."
+
+#: src/appchooserdialog.c:407
+#, c-format
+msgid ""
+"No apps installed that can open “%s”. You can find more applications in "
+"Software"
+msgstr "Ingen apper installert som kan åpne «%s». Du kan finne flere applikasjoner i Programvare"
+
+#: src/appchooserdialog.c:412
+msgid "No suitable app installed. You can find more applications in Software."
+msgstr "Ingen passende app installert. Du kan finne flere applikasjoner i Programvare."
+
+#: src/appchooserdialog.ui:10
+msgid "Open With…"
+msgstr "Åpne med …"
+
+#: src/appchooserdialog.ui:23 src/filechooser.c:462
+msgid "_Open"
+msgstr "Å_pne"
+
+#: src/appchooserdialog.ui:115
+msgid "No Apps available"
+msgstr "Ingen apper tilgjengelig"
+
+#: src/appchooserdialog.ui:159
+msgid "_Find More in Software"
+msgstr "_Finn mer i Programvare"
+
+#: src/dynamic-launcher.c:258
+msgid "Create Web Application"
+msgstr "Lag nettapplikasjon"
+
+#: src/dynamic-launcher.c:260
+msgid "Create Application"
+msgstr "Lag applikasjon"
+
+#: src/dynamic-launcher.c:268
+msgid "C_reate"
+msgstr "_Opprett"
+
+#: src/filechooser.c:462
+msgid "_Select"
+msgstr "_Velg"
+
+#: src/filechooser.c:464
+msgid "_Save"
+msgstr "_Lagre"
+
+#: src/filechooser.c:646
+msgid "Open files read-only"
+msgstr "Åpne filer i lesemodus"
+
+#: src/settings.c:239
+msgid "Requested setting not found"
+msgstr "Fant ikke innstillingen du ba om"
+
+#: src/wallpaperdialog.ui:13
+msgid "Set Background"
+msgstr "Sett bakgrunn"
+
+#: src/wallpaperdialog.ui:26
+msgid "Set"
+msgstr "Sett"
+
+#: src/wallpaperdialog.ui:57
+msgid "Failed to load image file"
+msgstr "Klarte ikke å laste bildefil"
+
+#: src/wallpaperpreview.ui:57
+msgid "Activities"
+msgstr "Aktiviteter"
