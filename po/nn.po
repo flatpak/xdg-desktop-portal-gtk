@@ -1,0 +1,165 @@
+# Norwegian Nynorsk translation for xdg-desktop-portal-gtk.
+# SPDX-License-Identifier: LGPL-2.1-or-later
+# SPDX-FileCopyrightText: Copyright © the xdg-desktop-portal-gtk contributors
+# Roy-Magne Mo <rmo@sunnmore.net>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xdg-desktop-portal-gtk main\n"
+"Report-Msgid-Bugs-To: https://github.com/flatpak/xdg-desktop-portal-gtk/"
+"issues\n"
+"POT-Creation-Date: 2025-10-24 14:33+0000\n"
+"PO-Revision-Date: 2026-09-29 12:00+0200\n"
+"Last-Translator: Roy-Magne Mo <rmo@sunnmore.net>\n"
+"Language-Team: Norwegian Nynorsk <nn@li.org>\n"
+"Language: nn\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+
+#: data/xdg-desktop-portal-gtk.desktop.in.in:3
+msgid "Portal"
+msgstr "Portal"
+
+#: src/access.c:270
+msgid "Deny Access"
+msgstr "Avslå tilgang"
+
+#: src/access.c:273
+msgid "Grant Access"
+msgstr "Gje tilgang"
+
+#: src/accountdialog.c:176
+msgid "Select an Image"
+msgstr "Vel eit bilete"
+
+#: src/accountdialog.c:179 src/wallpaperdialog.ui:18
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: src/accountdialog.c:180
+msgid "Select"
+msgstr "Vel"
+
+#: src/accountdialog.c:181
+msgid "Clear"
+msgstr "Tøm"
+
+#: src/accountdialog.c:195
+msgid "Images"
+msgstr "Bilete"
+
+#: src/accountdialog.c:272
+#, c-format
+msgid "Share your personal information with %s?"
+msgstr "Del personopplysningane dine med %s?"
+
+#: src/accountdialog.c:275
+msgid "Share your personal information with the requesting application?"
+msgstr "Vil du dele personopplysningane dine med appen som spør?"
+
+#: src/accountdialog.ui:10
+msgid "Share Details"
+msgstr "Del opplysningar"
+
+#: src/accountdialog.ui:14 src/appchooserdialog.ui:14
+#: src/dynamic-launcher.c:266 src/filechooser.c:467
+msgid "_Cancel"
+msgstr "_Avbryt"
+
+#: src/accountdialog.ui:22
+msgid "_Share"
+msgstr "_Del"
+
+#: src/accountdialog.ui:148
+msgid "Make changes before sharing the information"
+msgstr "Gjer endringar før du deler informasjonen"
+
+#: src/appchooserdialog.c:229
+msgid "Failed to start Software"
+msgstr "Klarte ikkje starte Programvare"
+
+#: src/appchooserdialog.c:385
+#, c-format
+msgid "Choose an application to open the file “%s”."
+msgstr "Vel ein app for å opne fila «%s»."
+
+#: src/appchooserdialog.c:390
+msgid "Choose an application."
+msgstr "Vel ein app."
+
+#: src/appchooserdialog.c:407
+#, c-format
+msgid ""
+"No apps installed that can open “%s”. You can find more applications in "
+"Software"
+msgstr ""
+"Ingen installerte appar kan opne «%s». Du kan finne fleire appar i "
+"Programvare"
+
+#: src/appchooserdialog.c:412
+msgid "No suitable app installed. You can find more applications in Software."
+msgstr ""
+"Ingen eigna app er installert. Du kan finne fleire appar i Programvare."
+
+#: src/appchooserdialog.ui:10
+msgid "Open With…"
+msgstr "Opne med …"
+
+#: src/appchooserdialog.ui:23 src/filechooser.c:462
+msgid "_Open"
+msgstr "_Opne"
+
+#: src/appchooserdialog.ui:115
+msgid "No Apps available"
+msgstr "Ingen appar er tilgjengelege"
+
+#: src/appchooserdialog.ui:159
+msgid "_Find More in Software"
+msgstr "_Finn fleire i Programvare"
+
+#: src/dynamic-launcher.c:258
+msgid "Create Web Application"
+msgstr "Lag nettapp"
+
+#: src/dynamic-launcher.c:260
+msgid "Create Application"
+msgstr "Lag app"
+
+#: src/dynamic-launcher.c:268
+msgid "C_reate"
+msgstr "_Opprett"
+
+#: src/filechooser.c:462
+msgid "_Select"
+msgstr "_Vel"
+
+#: src/filechooser.c:464
+msgid "_Save"
+msgstr "_Lagre"
+
+#: src/filechooser.c:646
+msgid "Open files read-only"
+msgstr "Opne filer skriveverna"
+
+#: src/settings.c:239
+msgid "Requested setting not found"
+msgstr "Fann ikkje den førespurde innstillinga"
+
+#: src/wallpaperdialog.ui:13
+msgid "Set Background"
+msgstr "Set bakgrunn"
+
+#: src/wallpaperdialog.ui:26
+msgid "Set"
+msgstr "Set"
+
+#: src/wallpaperdialog.ui:57
+msgid "Failed to load image file"
+msgstr "Klarte ikkje laste inn biletfila"
+
+#: src/wallpaperpreview.ui:57
+msgid "Activities"
+msgstr "Aktivitetar"
