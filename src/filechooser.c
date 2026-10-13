@@ -382,7 +382,10 @@ update_preview_cb (GtkFileChooser *file_chooser, gpointer data)
   g_autoptr(GdkPixbuf) pixbuf = NULL;
 
   filename = gtk_file_chooser_get_preview_filename (file_chooser);
-  if (filename)
+
+  /* Only load regular files: opening a FIFO blocks the main loop until a
+   * writer appears, and devices or sockets have nothing to preview. */
+  if (filename && g_file_test (filename, G_FILE_TEST_IS_REGULAR))
     pixbuf = gdk_pixbuf_new_from_file_at_size (filename, 128, 128, NULL);
 
   if (pixbuf)
