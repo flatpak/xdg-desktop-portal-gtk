@@ -120,11 +120,12 @@ Click to open one of these files. You might double check this list in Thunderbir
                 <property name="halign">start</property>
                 <property name="margin">0</property>
                 <property name="label" translatable="yes">Info:
-    This dialog box appears because an application or website is attempting to compose a new email
+    This dialog box appears because an application is attempting to compose a new email
     and wants to attach your private files in the message. These files may contain private or sensitive information:
     Some examples: "your-secret-file.txt" , "~/.ssh/id_rsa" , login-data, passwords or sensible system informationen.
     You should therefore check what is being sent. You can click on the file to open it.
-    To be absolutely sure, you should also double-check the file list in Thunderbird.</property>
+    To be absolutely sure, you should also double-check the file list in Thunderbird.
+    This dialog appears only when using email program Thunderbird. Others have own conspicuous warnings built in.</property>
               </object>
             </child>
             <child>
@@ -138,24 +139,6 @@ Click to open one of these files. You might double check this list in Thunderbir
                 <signal name="clicked" handler="info_details_button_clicked"/>
               </object>
             </child>
-
-            <child>
-              <object class="GtkLabel" id="info_text2">
-                <property name="visible">0</property>
-                <property name="xalign">1</property>
-                <property name="valign">start</property>
-                <property name="halign">start</property>
-                <property name="label" translatable="yes">More technical details:
-    This dialog appears only when using email program Thunderbird.
-    The technical reason for this is, that the request is processed via the mailto: protocol.
-    It is impossible to determine which application or website is making the request.
-    Therefore, it is unclear whether the request is trustworthy.
-    Thunderbird was manually integrated to be compatible with this technical implementation
-    (it does not normally support file attachments via mailto:). That is why this dialog box was added.
-    Other email programs already have their own conspicuous warnings built in.</property>
-              </object>
-            </child>
-
           </object>
         </child>
         <child>

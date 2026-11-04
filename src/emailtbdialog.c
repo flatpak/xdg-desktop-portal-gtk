@@ -14,9 +14,7 @@ struct _EmailTbDialog {
 
   GtkWidget *heading;
   GtkWidget *info_box;
-  GtkWidget *info_text2;
   GtkWidget *info_button;
-  GtkWidget *info_details_button;
   GtkWidget *yes_button;
   GtkWidget *yes_again_button;
   GtkWidget *yes_again_box;
@@ -138,16 +136,6 @@ info_button_clicked (GtkWidget *button,
 }
 
 static void
-info_details_button_clicked (GtkWidget *button,
-                             EmailTbDialog *dialog)
-{
-  if (gtk_widget_get_visible (GTK_WIDGET (dialog->info_text2)) == TRUE)
-    gtk_widget_set_visible (GTK_WIDGET (dialog->info_text2), FALSE);
-  else
-    gtk_widget_set_visible (GTK_WIDGET (dialog->info_text2), TRUE);
-}
-
-static void
 email_tb_dialog_class_init (EmailTbDialogClass *class)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (class);
@@ -171,14 +159,11 @@ email_tb_dialog_class_init (EmailTbDialogClass *class)
   gtk_widget_class_bind_template_child (widget_class, EmailTbDialog, no_button);
   gtk_widget_class_bind_template_child (widget_class, EmailTbDialog, heading);
   gtk_widget_class_bind_template_child (widget_class, EmailTbDialog, info_box);
-  gtk_widget_class_bind_template_child (widget_class, EmailTbDialog, info_text2);
   gtk_widget_class_bind_template_child (widget_class, EmailTbDialog, info_button);
-  gtk_widget_class_bind_template_child (widget_class, EmailTbDialog, info_details_button);
   gtk_widget_class_bind_template_child (widget_class, EmailTbDialog, list_files);
 
   gtk_widget_class_bind_template_callback (widget_class, main_buttons_clicked);
   gtk_widget_class_bind_template_callback (widget_class, info_button_clicked);
-  gtk_widget_class_bind_template_callback (widget_class, info_details_button_clicked);
 }
 
 static gboolean file_item_linkbutton_press_event_clbk (GtkWidget *widget, GdkEvent *event)
