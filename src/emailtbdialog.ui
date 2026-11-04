@@ -128,17 +128,6 @@ Click to open one of these files. You might double check this list in Thunderbir
     This dialog appears only when using email program Thunderbird. Others have own conspicuous warnings built in.</property>
               </object>
             </child>
-            <child>
-              <object class="GtkToggleButton" id="info_details_button">
-                <property name="visible">1</property>
-                <property name="label" translatable="yes">_More technical details</property>
-                <property name="margin">0</property>
-                <property name="margin-top">5</property>
-                <property name="use-underline">1</property>
-                <property name="tooltip-text" translatable="yes">Show or hide help more technical detail information</property>
-                <signal name="clicked" handler="info_details_button_clicked"/>
-              </object>
-            </child>
           </object>
         </child>
         <child>
