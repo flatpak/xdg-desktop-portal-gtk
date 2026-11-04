@@ -6,6 +6,8 @@ src/accountdialog.ui
 src/appchooserdialog.c
 src/appchooserdialog.ui
 src/dynamic-launcher.c
+src/emailtbdialog.c
+src/emailtbdialog.ui
 src/filechooser.c
 src/settings.c
 src/wallpaperdialog.c

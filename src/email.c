@@ -19,6 +19,8 @@
 #include "shell-dbus.h"
 
 #include "email.h"
+#include "emailtb.h"
+#include "emailtbdialog.h"
 #include "request.h"
 #include "utils.h"
 
@@ -98,7 +100,7 @@ compose_mail_mailto (GAppInfo       *info,
   return success;
 }
 
-static gboolean
+gboolean
 compose_mail (const char * const *addrs,
               const char * const *cc,
               const char * const *bcc,
@@ -108,6 +110,9 @@ compose_mail (const char * const *addrs,
               GError     **error)
 {
   g_autoptr(GAppInfo) info = NULL;
+  const char *commandline;
+  const char *no_att[1] = { NULL };
+  gboolean is_thunderbird = FALSE;
 
   info = g_app_info_get_default_for_uri_scheme ("mailto");
   if (info == NULL)
@@ -116,7 +121,21 @@ compose_mail (const char * const *addrs,
       return FALSE;
     }
 
-  return compose_mail_mailto (info, addrs, cc, bcc, subject, body, attachments, error);
+  commandline = g_app_info_get_commandline (info);
+  if (strstr (commandline, "thunderbird") )
+    is_thunderbird = TRUE;
+
+  if (is_thunderbird && attachments != no_att)
+    {
+      if (compose_mail_thunderbird (info, (const char * const *)addrs, cc, bcc, subject, body, attachments, error))
+        return TRUE;
+    }
+  else
+    {
+      if (compose_mail_mailto (info, (const char * const *)addrs, cc, bcc, subject, body, attachments, error))
+        return TRUE;
+    }
+  return FALSE;
 }
 
 static gboolean
@@ -129,18 +148,30 @@ handle_compose_email (XdpImplEmail *object,
 {
   g_autoptr(Request) request = NULL;
   const char *sender;
+  GVariantBuilder opt_builder;
+  guint response = 0;
   g_autoptr(GError) error = NULL;
   const char *address = NULL;
   const char *subject = NULL;
   const char *body = NULL;
   const char *no_att[1] = { NULL };
   const char **attachments = no_att;
-  guint response = 0;
-  GVariantBuilder opt_builder;
   const char * const *addresses = NULL;
   const char * const *cc = NULL;
   const char * const *bcc = NULL;
   g_auto(GStrv) addrs = NULL;
+
+  g_autoptr(GAppInfo) info = NULL;
+  gboolean is_thunderbird = FALSE;
+  const char *commandline;
+
+  info = g_app_info_get_default_for_uri_scheme ("mailto");
+  if (info != NULL)
+    {
+      commandline = g_app_info_get_commandline (info);
+      if (strstr (commandline, "thunderbird") )
+        is_thunderbird = TRUE;
+    }
 
   sender = g_dbus_method_invocation_get_sender (invocation);
 
@@ -163,10 +194,9 @@ handle_compose_email (XdpImplEmail *object,
           addrs[0] = g_strdup (address);
           memcpy (addrs + 1, addresses, sizeof (char *) * (len + 1));
         }
-        
       else
         {
-          addrs = g_new (char *, 2); 
+          addrs = g_new (char *, 2);
           addrs[0] = g_strdup (address);
           addrs[1] = NULL;
         }
@@ -174,14 +204,26 @@ handle_compose_email (XdpImplEmail *object,
   else
     addrs = g_strdupv ((char **)addresses);
 
-  if (!compose_mail ((const char * const *)addrs, cc, bcc, subject, body, attachments, NULL))
-    response = 2;
+  commandline = g_app_info_get_commandline (info);
+  if (strstr (commandline, "thunderbird") )
+    is_thunderbird = TRUE;
 
-  g_variant_builder_init (&opt_builder, G_VARIANT_TYPE_VARDICT);
-  xdp_impl_email_complete_compose_email (object,
-                                         invocation,
-                                         response,
-                                         g_variant_builder_end (&opt_builder));
+  if (attachments != no_att && is_thunderbird )
+    return handle_compose_email_tb (object, invocation, arg_handle, arg_app_id, arg_parent_window, arg_options,
+                                    (const char * const *)addrs, cc, bcc, subject, body, attachments);
+  else
+    {
+      if (!compose_mail_mailto (info, (const char * const *)addrs, cc, bcc, subject, body, attachments, NULL))
+        response = 2;
+
+      g_variant_builder_init (&opt_builder, G_VARIANT_TYPE_VARDICT);
+      xdp_impl_email_complete_compose_email (object,
+                                             invocation,
+                                             response,
+                                             g_variant_builder_end (&opt_builder));
+
+      return TRUE;
+    }
 
   return TRUE;
 }
