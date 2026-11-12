@@ -116,6 +116,85 @@ get_contrast_value ()
   return g_variant_new_uint32 (hc ? 1 : 0);
 }
 
+static void
+check_button_existence (GHashTable   *found_entries,
+                        GStrv         entries,
+                        GStrvBuilder *entry_builder)
+{
+  for (int i = 0; entries[i] != NULL; i++)
+    {
+      g_autofree gchar *str = g_strstrip (g_strdup (entries[i]));
+
+      // Don't bother with empty strings
+      if (str[0] == '\0')
+          continue;
+
+      if (g_hash_table_add (found_entries, g_strdup (str)))
+        g_strv_builder_take (entry_builder, g_steal_pointer (&str));
+    }
+}
+
+static void
+validate_button_placement (GStrv *leading,
+                           GStrv *trailing)
+{
+  g_autoptr (GHashTable) found_entries =
+    g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
+  g_autoptr (GStrvBuilder) leading_builder = g_strv_builder_new ();
+  g_autoptr (GStrvBuilder) trailing_builder = g_strv_builder_new ();
+
+  check_button_existence (found_entries, *leading, leading_builder);
+  check_button_existence (found_entries, *trailing, trailing_builder);
+
+  g_clear_pointer (leading, g_strfreev);
+  g_clear_pointer (trailing, g_strfreev);
+
+  *leading = g_strv_builder_end (leading_builder);
+  *trailing = g_strv_builder_end (trailing_builder);
+}
+
+static GVariant *
+get_button_placement_value (void)
+{
+  SettingsBundle *bundle = g_hash_table_lookup (settings, "org.gnome.desktop.wm.preferences");
+  g_auto (GStrv) leading_button_layout = NULL;
+  g_auto (GStrv) trailing_button_layout = NULL;
+
+  if (bundle && g_settings_schema_has_key (bundle->schema, "button-layout"))
+    {
+      g_autofree gchar *value =
+        g_settings_get_string (bundle->settings, "button-layout");
+      g_auto(GStrv) button_layout = g_strsplit (value, ":", -1);
+      guint button_layout_len = g_strv_length (button_layout);
+
+      if (button_layout_len > 0)
+        {
+          leading_button_layout = g_strsplit (button_layout[0], ",", -1);
+
+          if (button_layout_len >= 2)
+            trailing_button_layout = g_strsplit (button_layout[button_layout_len-1], ",", -1);
+          else
+            trailing_button_layout = g_new0 (gchar *, 1);
+        }
+      else // button_layout_len == 0
+        {
+          leading_button_layout = g_new0 (gchar *, 1);
+          trailing_button_layout = g_new0 (gchar *, 1);
+        }
+    }
+  else // key wasn't available for some reason
+    {
+      leading_button_layout = g_new0 (gchar *, 1);
+      trailing_button_layout = g_new0 (gchar *, 1);
+    }
+
+  validate_button_placement (&leading_button_layout, &trailing_button_layout);
+
+  return g_variant_new ("(^as^as)",
+                        leading_button_layout,
+                        trailing_button_layout);
+}
+
 static gboolean
 settings_handle_read_all (XdpImplSettings       *object,
                           GDBusMethodInvocation *invocation,
@@ -170,6 +249,7 @@ settings_handle_read_all (XdpImplSettings       *object,
       g_variant_dict_init (&dict, NULL);
       g_variant_dict_insert_value (&dict, "color-scheme", get_color_scheme ());
       g_variant_dict_insert_value (&dict, "contrast", get_contrast_value ());
+      g_variant_dict_insert_value (&dict, "button-placement", get_button_placement_value ());
 
       g_variant_builder_add (builder, "{s@a{sv}}", "org.freedesktop.appearance", g_variant_dict_end (&dict));
     }
@@ -213,6 +293,12 @@ settings_handle_read (XdpImplSettings       *object,
 						 g_variant_new ("(v)", get_contrast_value ()));
 	  return TRUE;
 	}
+      else if (strcmp (arg_key, "button-placement") == 0)
+        {
+          g_dbus_method_invocation_return_value (invocation,
+                                                 g_variant_new ("(v)", get_button_placement_value ()));
+          return TRUE;
+        }
     }
   else if (strcmp (arg_namespace, "org.gnome.desktop.interface") == 0 &&
            strcmp (arg_key, "enable-animations") == 0)
@@ -294,6 +380,13 @@ on_settings_changed (GSettings             *settings,
 					      "contrast",
 					      g_variant_new ("v", g_variant_new_uint32 (hc ? 1 : 0)));
     }
+
+  if (strcmp (user_data->namespace, "org.gnome.desktop.wm.preferences") == 0 &&
+      strcmp (key, "button-layout") == 0)
+    xdp_impl_settings_emit_setting_changed (user_data->self,
+                                            "org.freedesktop.appearance",
+                                            "button-placement",
+                                            g_variant_new_variant (get_button_placement_value ()));
 }
 
 static void
