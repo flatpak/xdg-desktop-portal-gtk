@@ -486,8 +486,6 @@ inhibit_session_new (const char *app_id,
                                   "id", session_handle,
                                   NULL);
 
-  active_sessions = g_list_prepend (active_sessions, inhibit_session);
-
   return inhibit_session;
 }
 
@@ -513,6 +511,7 @@ handle_create_monitor (XdpImplInhibit *object,
       goto out;
     }
 
+  active_sessions = g_list_prepend (active_sessions, session);
   response = 0;
 
 out:
